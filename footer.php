@@ -15,7 +15,10 @@
 ?>
 
 <footer class="site-footer">
-  <div class="container">            
+  <div class="container">
+  	
+    <?php dynamic_sidebar('footer-w1');?>
+  	         
 	<p><?php echo $copyright; ?></p>
 	<small><?php echo $madein; ?></small>
 	<a class="goTop btn btn-sm" href="#top"><span class="fa fa-chevron-up"></span>Up</a>	

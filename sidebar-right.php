@@ -6,9 +6,9 @@
  *
  * @package ekiline
  */
-if (!is_active_sidebar( 'sidebar-1')) return;
+if (!is_active_sidebar( 'sidebar-2')) return;
 ?>
 
-<aside id="secondary" class="widget-area">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside><!-- #secondary -->
+<aside id="third" class="widget-area">
+	<?php dynamic_sidebar( 'sidebar-2' ); ?>
+</aside><!-- #third -->
