@@ -12,11 +12,26 @@
  * @package ekiline
  * 
  */ 
+//Variables index.
+
+function mainCols($tag){
+	$cssMain = 'row m-0';
+	if( is_active_sidebar( 'sidebar-1') || is_active_sidebar( 'sidebar-2') ){
+		if ($tag == 'open'){
+			echo '<div id="mainContainer" class="'.$cssMain.'">';
+		} elseif ($tag == 'close'){
+			echo '</div><!-- #mainContainer -->';
+		}	
+	}	 
+}
+
 get_header(); ?>
 
 <?php dynamic_sidebar( 'toppage-w1' );?>				
 
-<main id="primary" class="w-50">
+<?php mainCols('open'); ?>
+
+<main id="primary" class="col-md-8 order-md-2">
 
 <?php dynamic_sidebar( 'content-w1' );?>				
 
@@ -51,5 +66,7 @@ get_header(); ?>
 <?php get_sidebar(); ?>
 
 <?php get_sidebar('right'); ?>	
+
+<?php mainCols('close'); ?>
 
 <?php get_footer(); ?>
