@@ -9,6 +9,6 @@
 if (!is_active_sidebar( 'sidebar-2')) return;
 ?>
 
-<aside id="third" class="widget-area col-md-2 order-md-3">
+<aside id="third" class="widget-area<?php orderCols('right');?>">
 	<?php dynamic_sidebar( 'sidebar-2' ); ?>
 </aside><!-- #third -->

@@ -13,16 +13,38 @@
  * 
  */ 
 //Variables index.
-
 function mainCols($tag){
-	$cssMain = 'row m-0';
 	if( is_active_sidebar( 'sidebar-1') || is_active_sidebar( 'sidebar-2') ){
 		if ($tag == 'open'){
-			echo '<div id="mainContainer" class="'.$cssMain.'">';
+			echo '<div id="maincolumns" class="'.orderCols('row').'">';
 		} elseif ($tag == 'close'){
 			echo '</div><!-- #mainContainer -->';
 		}	
 	}	 
+}
+function orderCols($css){
+// orden de columnas.	
+	$cssRow = 'row m-0';
+	$cssMain = 'col-md-8 order-md-2';
+	$cssLeft = ' col-md-2 order-md-1';
+	$cssRight = ' col-md-2 order-md-3';	
+// aparicion de columnas
+if( is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2') ){
+	$cssMain = 'col-md-9 order-md-2';
+	$cssLeft = ' col-md-3 order-md-1';
+}
+if( !is_active_sidebar( 'sidebar-1') && is_active_sidebar( 'sidebar-2') ){
+	$cssMain = 'col-md-9';
+	$cssRight = ' col-md-3';	
+}
+if( !is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2') ){
+	$cssMain = 'no-sidebars';
+}
+// imprimir
+	if ($css == 'row') return $cssRow;
+	if ($css == 'main') echo $cssMain;
+	if ($css == 'left') echo $cssLeft;
+	if ($css == 'right') echo $cssRight;
 }
 
 get_header(); ?>
@@ -31,7 +53,7 @@ get_header(); ?>
 
 <?php mainCols('open'); ?>
 
-<main id="primary" class="col-md-8 order-md-2">
+<main id="primary" class="<?php orderCols('main');?>">
 
 <?php dynamic_sidebar( 'content-w1' );?>				
 
