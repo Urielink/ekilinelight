@@ -14,8 +14,6 @@
  */ 
 get_header(); ?>
 
-<?php dynamic_sidebar( 'toppage-w1' );?>				
-
 <?php mainCols('open'); ?>
 
 <main id="primary" class="<?php orderCols('main');?>">

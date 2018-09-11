@@ -20,3 +20,7 @@
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class();?>>
+
+<?php dynamic_sidebar( 'toppage-w1' );?>				
+		
+<?php ekilineNavbar();?> 

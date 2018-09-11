@@ -184,16 +184,16 @@ function ekiline_scripts() {
 	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri() );	        
 	wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/assets/css/fontawesome-all.min.css', array(), '5.0.6', 'all' ); 
     // wp_enqueue_style( 'google-font', $gfont, array(), '0.0.0', 'all' );         
-    // if( !is_admin() ){
-        // wp_dequeue_script('jquery');
-        // wp_dequeue_script('jquery-core');
-        // wp_dequeue_script('jquery-migrate');
-        // wp_enqueue_script('jquery', false, array(), false, true);
-        // wp_enqueue_script('jquery-core', false, array(), false, true);
-        // wp_enqueue_script('jquery-migrate', false, array(), false, true);          
-     // }        	
-	// wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1', true  );
- 	// wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4', true  );
+    if( !is_admin() ){
+        wp_dequeue_script('jquery');
+        wp_dequeue_script('jquery-core');
+        wp_dequeue_script('jquery-migrate');
+        wp_enqueue_script('jquery', false, array(), false, true);
+        wp_enqueue_script('jquery-core', false, array(), false, true);
+        wp_enqueue_script('jquery-migrate', false, array(), false, true);          
+     }        	
+	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1', true  );
+ 	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4', true  );
     // wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716', true  );
     // wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226', true  );
 	// wp_enqueue_script( 'ie10-vpbugwkrnd', get_template_directory_uri() . '/assets/js/ie10-viewport-bug-workaround.min.js' );
@@ -208,6 +208,13 @@ function ekiline_scripts() {
 	}			
 }
 add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
+
+/**
+ * Customizer additions.
+ */
+require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/themeNavbars.php';
+require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';
 
 
 /**
