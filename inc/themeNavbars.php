@@ -98,7 +98,7 @@ function ekilineNavbar($navPosition){
 		if ( $styles >= '5'){
 			 $expand = ' '; 
 			 $dataToggle = 'modal';
-			 $dataTarget = 'navModal';
+			 $dataTarget = $glNavPos.'NavModal';
 		}
 
 		// Clases reunidas para <nav>
@@ -162,15 +162,16 @@ function ekilineNavbar($navPosition){
 function ekiline_modalMenuBottom(){
 	global $glNavPos;
 	/*tipos de animacion: .zoom, .newspaper, .move-horizontal, .move-from-bottom, .unfold-3d, .zoom-out, .left-aside, .right-aside */
+	$modalId = $glNavPos.'NavModal';
 	$modalCss = '';
 	switch ( get_theme_mod('ekiline_'.$glNavPos.'menuStyles') ) {
-	    case 5 : $modalCss = 'modal fade'; break;
-	    case 6 : $modalCss = 'modal fade move-from-bottom'; break;
-	    case 7 : $modalCss = 'modal fade left-aside'; break;
-	    case 8 : $modalCss = 'modal fade right-aside'; break;
+	    case 5 : $modalCss = 'modal fade modal-nav'; break;
+	    case 6 : $modalCss = 'modal fade move-from-bottom modal-nav'; break;
+	    case 7 : $modalCss = 'modal fade left-aside modal-nav'; break;
+	    case 8 : $modalCss = 'modal fade right-aside modal-nav'; break;
 	}?>
 	
-<div id="navModal" class="<?php echo $modalCss;?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
+<div id="<?php echo $modalId;?>" class="<?php echo $modalCss;?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

@@ -186,11 +186,11 @@ video#bgvid{transition:1s opacity;}
 .modal.right-aside.fade .modal-dialog{right:-320px;-webkit-transition:opacity 0.3s linear,right 0.3s ease-out;-moz-transition:opacity 0.3s linear,right 0.3s ease-out;-o-transition:opacity 0.3s linear,right 0.3s ease-out;transition:opacity 0.3s linear,right 0.3s ease-out;}
 .modal.right-aside.fade.show .modal-dialog{right:0;}
 /* Modal con nav || Modal with nav*/
-#navModal .navbar-nav{text-align:center;}
-#navModal .navbar-nav .dropdown-menu.show{position:static !important;margin-top:0;border:0;padding:0px;-ms-transform:inherit !important;-webkit-transform:inherit !important;transform:inherit !important;}
-#navModal .navbar-nav .dropdown-menu.show > li > a{padding:10px 15px 10px 15px;text-align:center;}
-#navModal.modal.move-from-bottom .modal-dialog{position:fixed;left:0;right:0;bottom:0;margin:0px auto;height:80%;}
-#navModal.modal.move-from-bottom .modal-content{height:100%;overflow-y:auto;}
+.modal-nav .navbar-nav{text-align:center;}
+.modal-nav .navbar-nav .dropdown-menu.show{position:static !important;margin-top:0;border:0;padding:0px;-ms-transform:inherit !important;-webkit-transform:inherit !important;transform:inherit !important;}
+.modal-nav .navbar-nav .dropdown-menu.show > li > a{padding:10px 15px 10px 15px;text-align:center;}
+.modal-nav.modal.move-from-bottom .modal-dialog{position:fixed;left:0;right:0;bottom:0;margin:0px auto;height:80%;}
+.modal-nav.modal.move-from-bottom .modal-content{height:100%;overflow-y:auto;}
 
 /*Modal boton fullsize*/
 .modal-dialog .resize{padding:1.2rem 1rem;margin:-1rem;cursor:pointer;background-color:transparent;border:0;font-size:1.2rem;line-height:1;color:#000;text-shadow:0 1px 0 #fff;opacity:.5;position:absolute;right:3.4rem;}
@@ -280,7 +280,7 @@ video#bgvid{transition:1s opacity;}
  .carousel-multiple.x2 .carousel-inner .active.carousel-item-right,.carousel-multiple.x3 .carousel-inner .active.carousel-item-right,.carousel-multiple.x4 .carousel-inner .active.carousel-item-right,.carousel-multiple.x6 .carousel-inner .active.carousel-item-right{-webkit-transform:translate3d(100%,0,0);-moz-transform:translate3d(100%,0,0);-ms-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0);} 
  .col-sm-1a5,.col-xs-1a5,.col-sm-1a7,.col-xs-1a7,.col-sm-1a8,.col-xs-1a8,.col-sm-1a9,.col-xs-1a9{width:100%;*width:100%;}
 /* Modal con nav || Modal with nav */
- #navModal .modal-dialog{width:90%;}
+ .modal-nav .modal-dialog{width:90%;}
 /* En caso de toggle sidebars || If uses toggle sidebars */
  .toggle-sidebars.left-on.active-sidebar-left #content #secondary{margin-left:0px;left:0px;width:100%;min-width:50%;}
  .toggle-sidebars.left-on.active-sidebar-left #content{padding-left:0%;}   
