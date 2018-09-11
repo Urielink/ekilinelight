@@ -15,7 +15,7 @@
 
 <article id="<?php echo $itemId; ?>" <?php post_class();?>>
 	
-	<?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+	<?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
 	
     <?php if ( has_post_thumbnail() ) { ?>
         <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">

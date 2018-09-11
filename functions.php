@@ -212,6 +212,39 @@ add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 
 /**
  * Theming: 
+ * Orden de columnas, semantica. // Columns and order
+ **/
+function mainCols($tag){
+	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
+	if ($tag == 'open'){ echo '<div id="maincolumns" class="row m-0">';
+	} elseif ($tag == 'close'){ echo '</div><!-- #maincolumns -->'; }
+}
+function orderCols($css){
+	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
+// sidebars.
+	$sbL = is_active_sidebar( 'sidebar-1');
+	$sbR = is_active_sidebar( 'sidebar-2');
+// orden de columnas.	
+	$cssMain = 'col-md-6 col-lg-8 order-md-2';
+	$cssLeft = ' col-md-3 col-lg-2 order-md-1';
+	$cssRight = ' col-md-3 col-lg-2 order-md-3';	
+// aparicion de columnas
+	if( $sbL && !$sbR ){
+		$cssMain = 'col-md-9 order-md-2';
+		$cssLeft = ' col-md-3 order-md-1';
+	} elseif ( !$sbL && $sbR ){
+		$cssMain = 'col-md-9';
+		$cssRight = ' col-md-3';	
+	}
+// imprimir
+	if ($css == 'main') echo $cssMain;
+	if ($css == 'left') echo $cssLeft;
+	if ($css == 'right') echo $cssRight;
+}
+ 
+ 
+/**
+ * Theming: 
  * Paginacion para listados
  * Paginate links
  * @link https://codex.wordpress.org/Function_Reference/paginate_links
