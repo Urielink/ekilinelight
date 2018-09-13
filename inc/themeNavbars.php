@@ -38,9 +38,6 @@ function logoTheme() {
 function ekilineNavbar($navPosition){
 
 	if ( !has_nav_menu( $navPosition ) ) return; 
-
-	global $glNavPos;
-	$glNavPos = $navPosition;
 		
 		// invertir color (class css)
         $inverseMenu = 'navbar-light bg-light ';
@@ -53,12 +50,12 @@ function ekilineNavbar($navPosition){
 		$modalCss = '';
 		// variables para boton modal
 		$dataToggle = 'collapse';
-		$dataTarget = $glNavPos.'NavMenu';				
+		$dataTarget = $navPosition.'NavMenu';				
 		$expand = 'navbar-expand-md ';
 						
 		// Variables por cada tipo de menu: configurcion y distribucion de menu	    						
-		$actions = get_theme_mod('ekiline_'.$glNavPos.'menuSettings');
-		$styles = get_theme_mod('ekiline_'.$glNavPos.'menuStyles'); 
+		$actions = get_theme_mod('ekiline_'.$navPosition.'menuSettings');
+		$styles = get_theme_mod('ekiline_'.$navPosition.'menuStyles'); 
 		
 		//Clases css por configuración de menu
 		if ($actions == '0') {
@@ -98,17 +95,17 @@ function ekilineNavbar($navPosition){
 		if ( $styles >= '5'){
 			 $expand = ' '; 
 			 $dataToggle = 'modal';
-			 $dataTarget = $glNavPos.'NavModal';
+			 $dataTarget = $navPosition.'NavModal';
 		}
 
 		// Clases reunidas para <nav>
-		$navClassCss = 'navbar '. $inverseMenu . $glNavPos . '-navbar ' . $expand . $navAction;
+		$navClassCss = 'navbar '. $inverseMenu . $navPosition . '-navbar ' . $expand . $navAction;
 		// Clases reunidas para .navbar-collapse
 		$collapseCss = 'collapse navbar-collapse ' . $navHelper;
 
 ?>
 
-			<nav id="<?php echo $glNavPos;?>SiteNavigation"  class="<?php echo $navClassCss;?>">
+			<nav id="<?php echo $navPosition;?>SiteNavigation"  class="<?php echo $navClassCss;?>">
 			
 		    	<div class="container<?php echo $headNav; ?>">
 		
@@ -118,39 +115,39 @@ function ekilineNavbar($navPosition){
 		      			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 		            </button>
 		            
-		            <?php if ( $styles <= '4'){ ?> 
+	            <?php if ( $styles <= '4'){ ?> 
 
 			        <div id="<?php echo $dataTarget;?>" class="<?php echo $collapseCss;?>">
 
 					<?php if ( get_bloginfo( 'description' ) ) { ?> 
 						<span class="navbar-text d-none d-md-block"><?php echo get_bloginfo( 'description' ); ?></span> 
 					<?php } ?>
-
-
+					
 			    	        <?php wp_nav_menu( array(
-			        	                'menu'              => $glNavPos,
-			        	                'theme_location'    => $glNavPos,
+			        	                'menu'              => $navPosition,
+			        	                'theme_location'    => $navPosition,
 			        	                'depth'             => 2,
 			        	                'container'         => '',
 		                                'container_class'   => '',
 		                                'container_id'      => '',
 			        	                'menu_class'        => 'navbar-nav' . $navAlign,
-			        	                'menu_id'           => $glNavPos . 'MenuLinks',
+			        	                'menu_id'           => $navPosition . 'MenuLinks',
 			                            'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
 			        	                'walker'            => new WP_Bootstrap_Navwalker()
 			    	                ) ); ?>
 		        	
 			        </div>
 			       		            	
-		            <?php } else {
-		            	add_action( 'wp_footer', 'ekiline_modalMenuBottom', 0 );						
-		            }?>
+	            <?php } ?>
 
 
 		    	</div><!-- .container --> 
 		    	
-			</nav><!-- .site-navigation -->        
-
+			</nav><!-- .site-navigation -->       
+			
+	            <?php if ( $styles >= '5'){
+		            	ekiline_modalMenuBottom($navPosition);
+	            }?>
 	<?php 
 
 }
@@ -158,13 +155,11 @@ function ekilineNavbar($navPosition){
 /*
  * Fragmento para crear un menu con madal
  */
-
-function ekiline_modalMenuBottom(){
-	global $glNavPos;
+function ekiline_modalMenuBottom($navPosition){
 	/*tipos de animacion: .zoom, .newspaper, .move-horizontal, .move-from-bottom, .unfold-3d, .zoom-out, .left-aside, .right-aside */
-	$modalId = $glNavPos.'NavModal';
+	$modalId = $navPosition.'NavModal';
 	$modalCss = '';
-	switch ( get_theme_mod('ekiline_'.$glNavPos.'menuStyles') ) {
+	switch ( get_theme_mod('ekiline_'.$navPosition.'menuStyles') ) {
 	    case 5 : $modalCss = 'modal fade modal-nav'; break;
 	    case 6 : $modalCss = 'modal fade move-from-bottom modal-nav'; break;
 	    case 7 : $modalCss = 'modal fade left-aside modal-nav'; break;
@@ -182,8 +177,8 @@ function ekiline_modalMenuBottom(){
       </div>
 
     <?php wp_nav_menu( array(
-                'menu'              => $glNavPos,
-                'theme_location'    => $glNavPos,
+                'menu'              => $navPosition,
+                'theme_location'    => $navPosition,
                 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'modal-body',
@@ -199,8 +194,8 @@ function ekiline_modalMenuBottom(){
       </div>
     </div>
   </div>
-</div>
+</div><!-- #<?php echo $modalId;?> -->
 
 <?php }
-//add_action( 'wp_footer', 'ekiline_modalMenuBottom', 0 );
+// add_action( 'wp_footer', 'ekiline_modalMenuBottom', 0, 1 );
 
