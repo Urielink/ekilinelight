@@ -223,26 +223,29 @@ require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';
  **/
 function mainCols($tag){
 	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
-	if ($tag == 'open'){ echo '<div id="maincolumns" class="row m-0">';
+	if ($tag == 'open'){ echo '<div id="maincolumns" class="row mx-0 container mx-auto px-0">';
 	} elseif ($tag == 'close'){ echo '</div><!-- #maincolumns -->'; }
 }
 function orderCols($css){
-	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
-// sidebars.
-	$sbL = is_active_sidebar( 'sidebar-1');
-	$sbR = is_active_sidebar( 'sidebar-2');
-// orden de columnas.	
-	$cssMain = 'col-md-6 col-lg-8 order-md-2';
-	$cssLeft = ' col-md-3 col-lg-2 order-md-1';
-	$cssRight = ' col-md-3 col-lg-2 order-md-3';	
-// aparicion de columnas
-	if( $sbL && !$sbR ){
-		$cssMain = 'col-md-9 order-md-2';
-		$cssLeft = ' col-md-3 order-md-1';
-	} elseif ( !$sbL && $sbR ){
-		$cssMain = 'col-md-9';
-		$cssRight = ' col-md-3';	
-	}
+	// if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
+	$cssMain = 'container';
+	if (is_active_sidebar( 'sidebar-1') || is_active_sidebar( 'sidebar-2')) {
+	// sidebars.
+		$sbL = is_active_sidebar( 'sidebar-1');
+		$sbR = is_active_sidebar( 'sidebar-2');
+	// orden de columnas.	
+		$cssMain = 'col-md-6 col-lg-8 order-md-2';
+		$cssLeft = ' col-md-3 col-lg-2 order-md-1';
+		$cssRight = ' col-md-3 col-lg-2 order-md-3';	
+	// aparicion de columnas
+		if( $sbL && !$sbR ){
+			$cssMain = 'col-md-9 order-md-2';
+			$cssLeft = ' col-md-3 order-md-1';
+		} elseif ( !$sbL && $sbR ){
+			$cssMain = 'col-md-9';
+			$cssRight = ' col-md-3';	
+		}
+	}	
 // imprimir
 	if ($css == 'main') echo $cssMain;
 	if ($css == 'left') echo $cssLeft;
