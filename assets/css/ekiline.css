@@ -273,6 +273,10 @@ video#bgvid{transition:1s opacity;}
 /* En caso de toggle sidebars || If uses toggle sidebars 
  #page-content-wrapper,.toggle-sidebars.left-on #primary{width:inherit;}
  #page-content-wrapper,.toggle-sidebars.right-on #primary{width:inherit;}*/
+/*Offcanvas*/
+.offcanvas{position:fixed;top:48px;bottom:0;left:100%;width:100%;padding-right:1rem;padding-left:1rem;overflow-y:auto;visibility:hidden;transition-timing-function:ease-in-out;transition-duration:.2s;transition-property:left,visibility;}
+.offcanvas.collapsing{height:auto;}
+.offcanvas.show{left:0;visibility:visible;}
 /* Carrusel extendido || Carousel extended */
  .carousel-multiple .carousel-item > *:nth-child(n+2){display:none;}
  .carousel-multiple .carousel-inner .carousel-item-next.carousel-item-left >*, .carousel-multiple .carousel-inner .carousel-item-prev.carousel-item-right >*{opacity:1;}

@@ -52,6 +52,7 @@ function ekilineNavbar($navPosition){
 		$dataToggle = 'collapse';
 		$dataTarget = $navPosition.'NavMenu';				
 		$expand = 'navbar-expand-md ';
+		$togglerBtn = 'navbar-toggler collapsed';
 						
 		// Variables por cada tipo de menu: configurcion y distribucion de menu	    						
 		$actions = get_theme_mod('ekiline_'.$navPosition.'menuSettings');
@@ -67,35 +68,28 @@ function ekilineNavbar($navPosition){
 	    } elseif ($actions == '3') {
 	        $navAction = 'navbar-sticky'; 
 	    }	
-				
+
 		//Clases css por estilo de menu
-		if ($styles == '0') {
-		    $navAlign = ' mr-auto';
-	    } else if ($styles == '1') {
-	        $navAlign = ' ml-auto'; 
-	    } else if ($styles == '2') {
-			$navHelper = ' justify-content-md-center';
-			$headNav = ' flex-md-column';
-	    } else if ($styles == '3') {
-			$navHelper = ' justify-content-md-between w-100';
-			$headNav = ' flex-md-column';
-	    } else if ($styles == '4') {
-			$navHelper = ' justify-content-md-around w-100';
-			$headNav = ' flex-md-column';
-	    } else if ($styles == '5') {
-	    	$modalCss = 'modal fade';
-	    } else if ($styles == '6') {
-	    	$modalCss = 'modal fade move-from-bottom';
-	    } else if ($styles == '7') {
-			$modalCss = 'modal fade left-aside';
-	    } else if ($styles == '8') {
-			$modalCss = 'modal fade right-aside';
-	    } 	    		
+		switch ($styles) {
+		    case 0 : $navAlign = ' mr-auto'; break;
+		    case 1 : $navAlign = ' ml-auto'; break;
+		    case 2 : $navHelper = ' justify-content-md-center'; $navAlign = ' justify-content-md-center'; $headNav = ' flex-md-column'; break;
+		    case 3 : $navHelper = ' justify-content-md-between w-100'; $navAlign = ' justify-content-md-between w-100'; $headNav = ' flex-md-column'; break;
+		    case 4 : $navHelper = ' justify-content-md-around w-100'; $navAlign = ' justify-content-md-around w-100'; $headNav = ' flex-md-column'; break;
+		    case 5 : $navHelper = ' offcanvas bg-light'; $navAlign = ' ml-auto'; break;
+		    case 6 : $navHelper = ' order-first'; $expand = ' '; break;
+		    case 7 : $modalCss = 'modal fade'; break;
+		    case 8 : $modalCss = 'modal fade move-from-bottom'; break;
+		    case 9 : $modalCss = 'modal fade left-aside'; break;
+		    case 10 : $modalCss = 'modal fade right-aside'; break;
+		}
+				   		
 		// Clases css para mostrar el boton del modal
-		if ( $styles >= '5'){
+		if ( $styles >= '7'){
 			 $expand = ' '; 
 			 $dataToggle = 'modal';
 			 $dataTarget = $navPosition.'NavModal';
+			 $togglerBtn = 'modal-toggler navbar-toggler collapsed';
 		}
 
 		// Clases reunidas para <nav>
@@ -108,21 +102,21 @@ function ekilineNavbar($navPosition){
 			<nav id="<?php echo $navPosition;?>SiteNavigation"  class="<?php echo $navClassCss;?>">
 			
 		    	<div class="container<?php echo $headNav; ?>">
-		
-		            <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php logoTheme(); ?></a>
 
-		            <button class="navbar-toggler collapsed" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>">
+		            <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php logoTheme(); ?></a>
+		            
+					<?php if( get_bloginfo( 'description' ) ) { ?>
+					<span class="navbar-text d-none d-md-block"><?php echo get_bloginfo( 'description' ); ?></span> 
+					<?php }?>
+
+		            <button class="<?php echo $togglerBtn;?>" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>">
 		      			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 		            </button>
 		            
-	            <?php if ( $styles <= '4'){ ?> 
+	            <?php if ( $styles <= '6'){ ?> 
 
 			        <div id="<?php echo $dataTarget;?>" class="<?php echo $collapseCss;?>">
 
-					<?php if ( get_bloginfo( 'description' ) ) { ?> 
-						<span class="navbar-text d-none d-md-block"><?php echo get_bloginfo( 'description' ); ?></span> 
-					<?php } ?>
-					
 			    	        <?php wp_nav_menu( array(
 			        	                'menu'              => $navPosition,
 			        	                'theme_location'    => $navPosition,
@@ -145,7 +139,7 @@ function ekilineNavbar($navPosition){
 		    	
 			</nav><!-- .site-navigation -->       
 			
-	            <?php if ( $styles >= '5'){
+	            <?php if ( $styles >= '7'){
 		            	ekiline_modalMenuBottom($navPosition);
 	            }?>
 	<?php 
@@ -160,10 +154,10 @@ function ekiline_modalMenuBottom($navPosition){
 	$modalId = $navPosition.'NavModal';
 	$modalCss = '';
 	switch ( get_theme_mod('ekiline_'.$navPosition.'menuStyles') ) {
-	    case 5 : $modalCss = 'modal fade modal-nav'; break;
-	    case 6 : $modalCss = 'modal fade move-from-bottom modal-nav'; break;
-	    case 7 : $modalCss = 'modal fade left-aside modal-nav'; break;
-	    case 8 : $modalCss = 'modal fade right-aside modal-nav'; break;
+	    case 7 : $modalCss = 'modal fade modal-nav'; break;
+	    case 8 : $modalCss = 'modal fade move-from-bottom modal-nav'; break;
+	    case 9 : $modalCss = 'modal fade left-aside modal-nav'; break;
+	    case 10 : $modalCss = 'modal fade right-aside modal-nav'; break;
 	}?>
 	
 <div id="<?php echo $modalId;?>" class="<?php echo $modalCss;?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">

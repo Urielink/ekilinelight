@@ -55,10 +55,12 @@ function ekiline_theme_customizer( $wp_customize ) {
                     '2' => __( 'Centered', 'ekiline' ),
                 	'3' => __( 'Centered between', 'ekiline' ),
                 	'4' => __( 'Centered around', 'ekiline' ),
-                    '5' => __( 'Modal', 'ekiline' ),
-                    '6' => __( 'Modal from bottom', 'ekiline' ),
-                	'7' => __( 'Modal from left', 'ekiline' ),
-                	'8' => __( 'Modal from right', 'ekiline' ),
+                	'5' => __( 'Offcanvas', 'ekiline' ),
+                	'6' => __( 'Top toggle', 'ekiline' ),
+                    '7' => __( 'Modal', 'ekiline' ),
+                    '8' => __( 'Modal from bottom', 'ekiline' ),
+                	'9' => __( 'Modal from left', 'ekiline' ),
+                	'10' => __( 'Modal from right', 'ekiline' ),
                 ),
             )
         );  		       

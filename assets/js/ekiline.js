@@ -33,6 +33,7 @@ jQuery(document).ready(function($){
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/		
 	
 	// variable php
+	var allCss;
 	if ( allCss != null ){
 		
 		var obj = allCss;	
@@ -98,11 +99,11 @@ jQuery(document).ready(function($){
 	});*/
 	
 	//19 ago menú con modal
-	$('#site-navigation-modal .navbar-toggler').on('click',function(){
+	$('.modal-toggler').on('click',function(){
 		$(this).removeClass('collapsed');
 	});
-    $('#navModal').on('hidden.bs.modal', function(){
-    	$('#site-navigation-modal .navbar-toggler').addClass('collapsed');
+    $('.modal-nav').on('hidden.bs.modal', function(){
+    	$('.modal-toggler').addClass('collapsed');
     });             
 	
 	
