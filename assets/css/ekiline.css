@@ -5,8 +5,7 @@
 
 /** Animaciones || Animations 
 -------------------------------------------------------------------------**/
-.navbar,.navbar .navbar-brand,.navbar-nav li a, a:hover, .btn:hover{-webkit-transition:all 0.7s ease-in-out;-moz-transition:all 0.7s ease-in-out;-ms-transition:all 0.7s ease-out;-o-transition:all 0.7s ease-in-out;transition:all 0.7s ease-in-out;}
-.btn-sbleft,.btn-sbright,.icon-bar{-webkit-transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-ms-transition:all 0.4s ease-out;-o-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out;}
+*,.navbar,.navbar .navbar-brand,.navbar-nav li a, a:hover, .btn:hover,.icon-bar{-webkit-transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-ms-transition:all 0.4s ease-out;-o-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out;}
 /* Animacion de toggle btn en menu || Toggle navbar btn animation */
 .navbar-toggler .icon-bar{background-color:#888;display:block;width:22px;height:2px;border-radius:1px;margin:4px 0px;}
 .navbar-toggler .icon-bar:nth-child(1){-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg);position:relative;top:6px;}
@@ -45,8 +44,6 @@ video#bgvid{transition:1s opacity;}
 
 /** En caso de toggle sidebars || If uses toggle sidebars
 -------------------------------------------------------------------------**/
-
-
 
 /* Carrusel extendido || Carousel extended
 ------------------------------------------------------------------------- */
@@ -232,10 +229,11 @@ video#bgvid{transition:1s opacity;}
  -------------------------------------------------- */
 @media only screen and (max-width : 768px) {
 
-/*Offcanvas*/
-.offcanvas{position:fixed;top:48px;bottom:0;left:100%;width:100%;padding-right:1rem;padding-left:1rem;overflow-y:auto;visibility:hidden;transition-timing-function:ease-in-out;transition-duration:.2s;transition-property:left,visibility;}
-.offcanvas.collapsing{height:auto;}
-.offcanvas.show{left:0;visibility:visible;}
+/*Menu Offcanvas (solo responsivo)*/
+.navbar-collapse.offcanvas{position:fixed;z-index:100;top:48px;bottom:0;left:100%;width:100%;padding-right:1rem;padding-left:1rem;overflow-y:auto;visibility:hidden;transition-timing-function:ease-in-out;transition-duration:.2s;transition-property:left,visibility;}
+.navbar-collapse.offcanvas.collapsing{height:auto;}
+.navbar-collapse.offcanvas.show{left:0;visibility:visible;}
+
 /* Carrusel extendido || Carousel extended */
  .carousel-multiple .carousel-item > *:nth-child(n+2){display:none;}
  .carousel-multiple .carousel-inner .carousel-item-next.carousel-item-left >*, .carousel-multiple .carousel-inner .carousel-item-prev.carousel-item-right >*{opacity:1;}

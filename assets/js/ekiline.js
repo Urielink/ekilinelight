@@ -4,33 +4,6 @@ jQuery(document).ready(function($){
 
 	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 	 * 
-	 *	Sidebars ocultar mostrar 
-	 * 
-	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/			
-
-	    // Sidebar izquierdo mostrar ocultar
-		$('#primary').on('click',function(e) {
-	    	e.preventDefault();
-	        $(this).toggleClass('col-md-9 col-md-12', 'col-md-9');
-	        $('#secondary').toggleClass('col-md-3 d-md-none','col-md-3');
-	        $('#third').toggleClass('col-md-3 d-md-none','col-md-3');
-		});     
-
-		$('#secondary').on('click',function(e) {
-	    	e.preventDefault();
-	        $(this).toggleClass('col-md-3 d-md-none','col-md-3');
-	        $('#primary').toggleClass('col-md-9 col-md-12', 'col-md-12');
-		});     
-
-		$('#third').on('click',function(e) {
-	    	e.preventDefault();
-	        $(this).toggleClass('col-md-3 d-md-none','col-md-3');
-	        $('#primary').toggleClass('col-md-9 col-md-12', 'col-md-12');
-		});     
-	
-
-	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-	 * 
 	 *	Botones individuales. 
 	 * 
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/			
