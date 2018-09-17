@@ -120,7 +120,7 @@ function ekilineNavbar($navPosition){
 			    	        <?php wp_nav_menu( array(
 			        	                'menu'              => $navPosition,
 			        	                'theme_location'    => $navPosition,
-			        	                'depth'             => 2,
+			        	                // 'depth'             => 2,
 			        	                'container'         => '',
 		                                'container_class'   => '',
 		                                'container_id'      => '',
@@ -128,6 +128,7 @@ function ekilineNavbar($navPosition){
 			        	                'menu_id'           => $navPosition . 'MenuLinks',
 			                            // 'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
 			        	                // 'walker'            => new WP_Bootstrap_Navwalker()
+			                            'fallback_cb'       => 'EkilineNavFallback',
 			        	                'walker'            => new EkilineNavMenu()
 			    	                ) ); ?>
 		        	
@@ -174,14 +175,16 @@ function ekiline_modalMenuBottom($navPosition){
     <?php wp_nav_menu( array(
                 'menu'              => $navPosition,
                 'theme_location'    => $navPosition,
-                'depth'             => 2,
+                // 'depth'             => 2,
                 'container'         => 'div',
                 'container_class'   => 'modal-body',
                 'container_id'      => '',
                 'menu_class'        => 'navbar-nav',
                 'menu_id'           => 'modal-menu',
-                'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-                'walker'            => new WP_Bootstrap_Navwalker()
+                // 'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+                // 'walker'            => new WP_Bootstrap_Navwalker()
+                'fallback_cb'       => 'EkilineNavFallback',
+                'walker'            => new EkilineNavMenu()
             ) ); ?>
     			
       <div class="modal-footer">
@@ -194,3 +197,12 @@ function ekiline_modalMenuBottom($navPosition){
 <?php }
 // add_action( 'wp_footer', 'ekiline_modalMenuBottom', 0, 1 );
 
+function EkilineNavFallback() {
+  ?>
+  <ul id="SetNavMenu" class="navbar-nav">
+  	<li class="nav-item">
+		<a href="/wp-admin/nav-menus.php"><?php echo __('Create a menu','ekiline');?></a>
+	</li>
+  </ul>
+  <?php
+}
