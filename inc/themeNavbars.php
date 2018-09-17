@@ -126,8 +126,9 @@ function ekilineNavbar($navPosition){
 		                                'container_id'      => '',
 			        	                'menu_class'        => 'navbar-nav' . $navAlign,
 			        	                'menu_id'           => $navPosition . 'MenuLinks',
-			                            'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-			        	                'walker'            => new WP_Bootstrap_Navwalker()
+			                            // 'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+			        	                // 'walker'            => new WP_Bootstrap_Navwalker()
+			        	                'walker'            => new EkilineNavMenu()
 			    	                ) ); ?>
 		        	
 			        </div>

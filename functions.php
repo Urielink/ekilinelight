@@ -215,6 +215,7 @@ add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/themeNavbars.php';
 require get_template_directory() . '/inc/wp-bootstrap-navwalker.php';
+require get_template_directory() . '/inc/ekiline-navwalker.php';
 
 
 /**
@@ -234,9 +235,9 @@ function orderCols($css){
 		$sbL = is_active_sidebar( 'sidebar-1');
 		$sbR = is_active_sidebar( 'sidebar-2');
 	// orden de columnas.	
-		$cssMain = 'col-md-6 col-lg-8 order-md-2';
-		$cssLeft = ' col-md-3 col-lg-2 order-md-1';
-		$cssRight = ' col-md-3 col-lg-2 order-md-3';	
+		$cssMain = 'col-md-6 order-md-2';
+		$cssLeft = ' col-md-3 order-md-1';
+		$cssRight = ' col-md-3 order-md-3';	
 	// aparicion de columnas
 		if( $sbL && !$sbR ){
 			$cssMain = 'col-md-9 order-md-2';
@@ -281,28 +282,20 @@ function ekiline_archive_pagination() {
             
     if (is_array($pages)) {
         
-        $current_page = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
-        
+        $current_page = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');        
         $pagination .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="Page navigation"><ul class="pagination">';
         
         foreach ($pages as $i => $page) {
-            //27 10 17 add CSS B4 pagination
+
             $page = str_replace( 'page-numbers', 'page-link', $page );			
 			
-            if ($current_page == 1 && $i == 0) {
-                
-                $pagination .= "<li class='page-item active'>$page</li>";
-                
-            } else {
-                
-                if ($current_page != 1 && $current_page == $i) {
-                    
-                    $pagination .= "<li class='page-item active'>$page</li>";
-                    
-                } else {
-                    
-                    $pagination .= "<li class='page-item'>$page</li>";
-                    
+            if ($current_page == 1 && $i == 0) {                
+                $pagination .= "<li class='page-item active'>$page</li>";                
+            } else {                
+                if ($current_page != 1 && $current_page == $i) {                    
+                    $pagination .= "<li class='page-item active'>$page</li>";                    
+                } else {                    
+                    $pagination .= "<li class='page-item'>$page</li>";                    
                 }
             }
             
