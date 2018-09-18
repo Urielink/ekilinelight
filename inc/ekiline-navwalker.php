@@ -123,8 +123,13 @@ class EkilineNavMenu extends Walker_Nav_Menu {
  //Bootstrap link class		
         $classes[] .= 'nav-item';
 		if ( $args->walker->has_children ) {
-	        $classes[] .= ' dropdown';
+			if ( $depth > 0 ) {
+		        $classes[] .= ' dropright item-'. $depth;
+			} else {
+		        $classes[] .= ' dropdown';
+			}			
 		}		
+				
 		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
 			$classes[] .= ' active';
 		}
@@ -187,7 +192,11 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		}		
 		if ( $depth > 0 ) {
 			$atts['class']	= 'dropdown-item';
+			// $atts['class']	= 'dropdown-item nav-link dropdown-toggle';
 		}
+		if ( $args->walker->has_children && $depth > 0) {
+			$atts['class']	= 'dropdown-item nav-link dropdown-toggle';
+		}		
  
         /**
          * Filters the HTML attributes applied to a menu item's anchor element.

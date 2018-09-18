@@ -15,6 +15,9 @@
 .navbar-toggler.collapsed .icon-bar:nth-child(2){width:22px;opacity:1;}
 .navbar-toggler.collapsed .icon-bar:nth-child(3){-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-o-transform:rotate(0deg);transform:rotate(0deg);position:relative;top:0px;}
 
+/** Navbar anidado **/
+/*.dropdown-menu .dropdown-menu{position:relative;top:0;left:100%;margin-top:-1px;}*/
+
 /** Bootstrap Cover 
 -------------------------------------------------------------------------**/
 html,body{height:100%;}
@@ -233,6 +236,8 @@ video#bgvid{transition:1s opacity;}
 .navbar-collapse.offcanvas{position:fixed;z-index:100;top:48px;bottom:0;left:100%;width:100%;padding-right:1rem;padding-left:1rem;overflow-y:auto;visibility:hidden;transition-timing-function:ease-in-out;transition-duration:.2s;transition-property:left,visibility;}
 .navbar-collapse.offcanvas.collapsing{height:auto;}
 .navbar-collapse.offcanvas.show{left:0;visibility:visible;}
+/** Navbar anidado **/
+.navbar-nav .dropdown-menu .dropdown-menu{position:static;float:none;padding:0px;border-left:0px;border-radius:0px;border-right:0px;border-bottom:0px;}
 
 /* Carrusel extendido || Carousel extended */
  .carousel-multiple .carousel-item > *:nth-child(n+2){display:none;}

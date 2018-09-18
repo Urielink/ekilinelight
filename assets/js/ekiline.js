@@ -7,7 +7,16 @@ jQuery(document).ready(function($){
 	 *	Botones individuales. 
 	 * 
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/			
-			
+    // Ajuste en dropdown de widgets dentro de navbar
+	// $('.navbar-nav > .dropdown > .dropdown-menu').on('click', function(e){
+		// e.stopPropagation();
+	// });
+	$('.dropdown-menu a').on("click", function(e){
+	    $(this).next('ul').toggle();
+	    e.stopPropagation();
+	    e.preventDefault();
+	  });	
+				
 	/* animar el boton del menu modal */
 	$('.modal-toggler').on('click',function(){
 		$(this).removeClass('collapsed');
