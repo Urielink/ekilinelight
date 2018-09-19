@@ -120,14 +120,12 @@ function ekilineNavbar($navPosition){
 			    	        <?php wp_nav_menu( array(
 			        	                'menu'              => $navPosition,
 			        	                'theme_location'    => $navPosition,
-			        	                // 'depth'             => 2,
+			        	                // 'depth'             => 2, // en caso de restringir la profundidad
 			        	                'container'         => '',
 		                                'container_class'   => '',
 		                                'container_id'      => '',
 			        	                'menu_class'        => 'navbar-nav' . $navAlign,
 			        	                'menu_id'           => $navPosition . 'MenuLinks',
-			                            // 'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-			        	                // 'walker'            => new WP_Bootstrap_Navwalker()
 			                            'fallback_cb'       => 'EkilineNavFallback',
 			        	                'walker'            => new EkilineNavMenu()
 			    	                ) ); ?>
@@ -175,14 +173,12 @@ function ekiline_modalMenuBottom($navPosition){
     <?php wp_nav_menu( array(
                 'menu'              => $navPosition,
                 'theme_location'    => $navPosition,
-                // 'depth'             => 2,
+                // 'depth'             => 2, // en caso de restringir la profundidad
                 'container'         => 'div',
                 'container_class'   => 'modal-body',
                 'container_id'      => '',
                 'menu_class'        => 'navbar-nav',
                 'menu_id'           => 'modal-menu',
-                // 'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
-                // 'walker'            => new WP_Bootstrap_Navwalker()
                 'fallback_cb'       => 'EkilineNavFallback',
                 'walker'            => new EkilineNavMenu()
             ) ); ?>
