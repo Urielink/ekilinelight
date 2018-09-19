@@ -196,13 +196,3 @@ function ekiline_modalMenuBottom($navPosition){
 
 <?php }
 // add_action( 'wp_footer', 'ekiline_modalMenuBottom', 0, 1 );
-
-function EkilineNavFallback() {
-  ?>
-  <ul id="SetNavMenu" class="navbar-nav">
-  	<li class="nav-item">
-		<a href="/wp-admin/nav-menus.php"><?php echo __('Create a menu','ekiline');?></a>
-	</li>
-  </ul>
-  <?php
-}

@@ -8,10 +8,7 @@ jQuery(document).ready(function($){
 	 * 
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/			
     // Ajuste en dropdown de widgets dentro de navbar
-	// $('.navbar-nav > .dropdown > .dropdown-menu').on('click', function(e){
-		// e.stopPropagation();
-	// });
-	$('.dropdown-menu a').on("click", function(e){
+	$('.dropdown-menu a.dropdown-toggle').on("click", function(e){
 	    $(this).next('ul').toggle();
 	    e.stopPropagation();
 	    e.preventDefault();

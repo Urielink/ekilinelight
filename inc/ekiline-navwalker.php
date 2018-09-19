@@ -124,7 +124,7 @@ class EkilineNavMenu extends Walker_Nav_Menu {
         $classes[] .= 'nav-item';
 		if ( $args->walker->has_children ) {
 			if ( $depth > 0 ) {
-		        $classes[] .= ' dropright item-'. $depth;
+		        $classes[] .= ' dropdown item-'. $depth;
 			} else {
 		        $classes[] .= ' dropdown';
 			}			
@@ -294,3 +294,13 @@ class EkilineNavMenu extends Walker_Nav_Menu {
     }
  
 } // EkilineNavMenu
+
+function EkilineNavFallback() {
+  ?>
+  <ul id="SetNavMenu" class="navbar-nav">
+  	<li class="nav-item">
+		<a href="/wp-admin/nav-menus.php"><?php echo __('Create a menu','ekiline');?></a>
+	</li>
+  </ul>
+  <?php
+} // EkilineNavFallback
