@@ -163,29 +163,40 @@ function ekiline_modalMenuBottom($navPosition){
 <div id="<?php echo $modalId;?>" class="<?php echo $modalCss;?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="navModalLabel"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></h3>
+      <!--div class="modal-header">
+        <h3 class="modal-title" id="navModalLabel"><?php // echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
+      </div-->
+      <div class="modal-body navbar-light bg-light">
+      	<div class="navbar p-0">
 
-    <?php wp_nav_menu( array(
-                'menu'              => $navPosition,
-                'theme_location'    => $navPosition,
-                // 'depth'             => 2, // en caso de restringir la profundidad
-                'container'         => 'div',
-                'container_class'   => 'modal-body',
-                'container_id'      => '',
-                'menu_class'        => 'navbar-nav',
-                'menu_id'           => 'modal-menu',
-                'fallback_cb'       => 'EkilineNavFallback',
-                'walker'            => new EkilineNavMenu()
-            ) ); ?>
-    			
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<?php if( get_bloginfo( 'description' ) ) { ?>
+			<span class="navbar-text"><?php echo get_bloginfo( 'description' ); ?></span> 
+		<?php }?>
+        
+        <button class="navbar-toggler m-0" data-dismiss="modal" aria-label="Close">
+  			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        </button>
+        
+	    <?php wp_nav_menu( array(
+	                'menu'              => $navPosition,
+	                'theme_location'    => $navPosition,
+	                // 'depth'             => 2, // en caso de restringir la profundidad
+	                'container'         => 'div',
+	                'container_class'   => 'navbar-collapse collapse show',
+	                'container_id'      => '',
+	                'menu_class'        => 'navbar-nav',
+	                'menu_id'           => 'modal-menu',
+	                'fallback_cb'       => 'EkilineNavFallback',
+	                'walker'            => new EkilineNavMenu()
+	            ) ); ?>
+      	</div>
       </div>
+      <!--div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div-->
     </div>
   </div>
 </div><!-- #<?php echo $modalId;?> -->

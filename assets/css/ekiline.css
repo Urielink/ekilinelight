@@ -136,8 +136,17 @@ video#bgvid{transition:1s opacity;}
 .modal.zoom-out .modal-dialog{transition:all 0.5s;transform:scale(1.3);}
 .modal.zoom-out.show .modal-dialog{transform:scale(1);}
 /* Modal lateral: agregar "left" or "right" en modal parent div, after class="modal" || Add left or right class in parent div.modal */
-.modal.left-aside .modal-dialog,
-.modal.right-aside .modal-dialog{position:fixed;margin:auto;width:320px;height:100%;-webkit-transform:translate3d(0%,0,0);-ms-transform:translate3d(0%,0,0);-o-transform:translate3d(0%,0,0);transform:translate3d(0%,0,0);}
+
+.modal.left-aside .modal-dialog, .modal.right-aside .modal-dialog {
+	position: fixed;
+	margin: auto;
+	/*width: 320px;*/
+	height: 100%;
+	-webkit-transform: translate3d(0%,0,0);
+	-ms-transform: translate3d(0%,0,0);
+	-o-transform: translate3d(0%,0,0);
+	transform: translate3d(0%,0,0);
+}
 .modal.left-aside .modal-content,
 .modal.right-aside .modal-content{height:100%;overflow-y:auto;}
 .modal.left-aside .modal-body,
@@ -146,12 +155,10 @@ video#bgvid{transition:1s opacity;}
 .modal.left-aside.fade.show .modal-dialog{left:0;} 
 .modal.right-aside.fade .modal-dialog{right:-320px;-webkit-transition:opacity 0.3s linear,right 0.3s ease-out;-moz-transition:opacity 0.3s linear,right 0.3s ease-out;-o-transition:opacity 0.3s linear,right 0.3s ease-out;transition:opacity 0.3s linear,right 0.3s ease-out;}
 .modal.right-aside.fade.show .modal-dialog{right:0;}
-/* Modal con nav || Modal with nav*/
-.modal-nav .navbar-nav{text-align:center;}
-.modal-nav .navbar-nav .dropdown-menu.show{position:static !important;margin-top:0;border:0;padding:0px;-ms-transform:inherit !important;-webkit-transform:inherit !important;transform:inherit !important;}
-.modal-nav .navbar-nav .dropdown-menu.show > li > a{padding:10px 15px 10px 15px;text-align:center;}
-.modal-nav.modal.move-from-bottom .modal-dialog{position:fixed;left:0;right:0;bottom:0;margin:0px auto;height:80%;}
-.modal-nav.modal.move-from-bottom .modal-content{height:100%;overflow-y:auto;}
+/** Modal con nav || Modal with nav // Anidado **/
+.modal.move-from-bottom .modal-dialog{position:fixed;left:0;right:0;bottom:0;margin:0px auto;height:80%;}
+.modal.move-from-bottom .modal-content{height:100%;overflow-y:auto;}
+.modal-body .navbar-nav .dropdown-menu .dropdown-menu{position:static;float:none;padding:0px;border-left:0px;border-radius:0px;border-right:0px;border-bottom:0px;}
 
 /*Modal boton fullsize*/
 .modal-dialog .resize{padding:1.2rem 1rem;margin:-1rem;cursor:pointer;background-color:transparent;border:0;font-size:1.2rem;line-height:1;color:#000;text-shadow:0 1px 0 #fff;opacity:.5;position:absolute;right:3.4rem;}
