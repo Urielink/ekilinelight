@@ -130,7 +130,7 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 			}			
 		}		
 				
-		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
+		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
 			$classes[] .= ' active';
 		}
  
@@ -195,7 +195,7 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 			// $atts['class']	= 'dropdown-item nav-link dropdown-toggle';
 		}
 		if ( $args->walker->has_children && $depth > 0) {
-			$atts['class']	= 'dropdown-item nav-link dropdown-toggle';
+			$atts['class']	= 'pl-2 dropdown-item nav-link dropdown-toggle';
 		}		
  
         /**
