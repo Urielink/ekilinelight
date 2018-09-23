@@ -3,96 +3,56 @@
  * ekiline functions and definitions.
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ * @link https://developer.wordpress.org/reference/functions/add_theme_support/
+ * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+ * @link https://developer.wordpress.org/themes/functionality/post-formats/
  *
  * @package ekiline
  */
 
-
-if ( ! function_exists( 'ekiline_setup' ) ) :
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- * Note that this function is hooked into the after_setup_theme hook, which
- * runs before the init hook. The init hook is too late for some features, such
- * as indicating support for post thumbnails.
- */
 function ekiline_setup() {
-	/*
-	 * Make theme available for translation.
-	 * Translations can be filed in the /languages/ directory.
-	 * If you're building a theme based on ekiline, use a find and replace
-	 * to change 'ekiline' to the name of your theme in all the template files.
-	 */
+	// Traducciones // Translations can be filed in the /languages/ directory.
 	load_theme_textdomain( 'ekiline', get_template_directory() . '/languages' );
 
-	// Add default posts and comments RSS feed links to head.
+	// Lector RSS // Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
 
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
+	// Metadatos: Titulo. // Let WordPress manage the document title.
 	add_theme_support( 'title-tag' );
 
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-	 */
+	// Permitir miniaturas // Enable support for Post Thumbnails on posts and pages.
 	add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
+	// Permitir uso de HTML5 en formularios. // Switch default core markup for search form, comment form, and comments
+	$htmlDef = array('search-form','comment-form','comment-list','gallery','caption');
+	add_theme_support( 'html5', $htmlDef );
+
+	// Formatos de entradas // Enable support for Post Formats.
+	$postDef = array('aside','image','video','quote','link');
+	add_theme_support( 'post-formats', $postDef );
+
+	// Color e imagen de fondo // Set up the WordPress core custom background feature.
+	$backDef = array( 'default-image' => '', 'default-color' => 'ffffff');
+	add_theme_support( 'custom-background', $backDef );	
+	
+    // Actualizacion de widgets en el personalizador // Add theme support for selective refresh for widgets.
+    add_theme_support( 'customize-selective-refresh-widgets' );
+	
+	// Menú, Ekiline solo necesita uno: ekilineNavbar('primary') // This theme uses ekilineNavbar('primary') as one location.
 	register_nav_menus( array(
         'primary' => esc_html__( 'Primary Menu', 'ekiline' )
-	) );
-
-	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'search-form',
-		'comment-form',
-		'comment-list',
-		'gallery',
-		'caption',
-	) );
-
-	/*
-	 * Enable support for Post Formats.
-	 * See https://developer.wordpress.org/themes/functionality/post-formats/
-	 */
-	add_theme_support( 'post-formats', array(
-		'aside',
-		'image',
-		'video',
-		'quote',
-		'link',
-	) );
-
-	// Set up the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'ekiline_custom_background_args', array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
-	) ) );
-	
-    // Add theme support for selective refresh for widgets.
-    add_theme_support( 'customize-selective-refresh-widgets' );
+	) );	
 }
-endif; // ekiline_setup
 add_action( 'after_setup_theme', 'ekiline_setup' );
 
 /**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- * Priority 0 to make it available to lower priority callbacks.
- * @global int $content_width
+ * Establecer el ancho de objetos (imagenes).
+ * @link https://codex.wordpress.org/Content_Width#Adding_Theme_Support
+ * @link https://codex.wordpress.org/Function_Reference/get_intermediate_image_sizes
+ * @link https://wycks.wordpress.com/2013/02/14/why-the-content_width-wordpress-global-kinda-sucks/
+ * Heredar la medida de /wp-admin/options-media.php.
  */
- 
-function ekiline_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'ekiline_content_width', 600 );
-}
-add_action( 'after_setup_theme', 'ekiline_content_width', 0 );
+if ( ! isset( $content_width ) ) $content_width = '';
 
 /**
  * Registrar widgets y sus areas // Register widget area.
@@ -214,96 +174,7 @@ add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
  */
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/themeNavbars.php';
-require get_template_directory() . '/inc/ekiline-navwalker.php';
+require get_template_directory() . '/inc/themeNavwalker.php';
+require get_template_directory() . '/inc/themeElements.php';
 
 
-/**
- * Theming: 
- * Orden de columnas, semantica. // Columns and order
- **/
-function mainCols($tag){
-	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
-	if ($tag == 'open'){ echo '<div id="maincolumns" class="row mx-0 container mx-auto px-0">';
-	} elseif ($tag == 'close'){ echo '</div><!-- #maincolumns -->'; }
-}
-function orderCols($css){
-	// if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
-	$cssMain = 'container';
-	if (is_active_sidebar( 'sidebar-1') || is_active_sidebar( 'sidebar-2')) {
-	// sidebars.
-		$sbL = is_active_sidebar( 'sidebar-1');
-		$sbR = is_active_sidebar( 'sidebar-2');
-	// orden de columnas.	
-		$cssMain = 'col-md-6 order-md-2';
-		$cssLeft = ' col-md-3 order-md-1';
-		$cssRight = ' col-md-3 order-md-3';	
-	// aparicion de columnas
-		if( $sbL && !$sbR ){
-			$cssMain = 'col-md-9 order-md-2';
-			$cssLeft = ' col-md-3 order-md-1';
-		} elseif ( !$sbL && $sbR ){
-			$cssMain = 'col-md-9';
-			$cssRight = ' col-md-3';	
-		}
-	}	
-// imprimir
-	if ($css == 'main') echo $cssMain;
-	if ($css == 'left') echo $cssLeft;
-	if ($css == 'right') echo $cssRight;
-}
- 
- 
-/**
- * Theming: 
- * Paginacion para listados
- * Paginate links
- * @link https://codex.wordpress.org/Function_Reference/paginate_links
- * @link https://brinidesigner.com/wordpress-custom-pagination-for-bootstrap/
- **/
-
-function ekiline_archive_pagination() {
-    
-    global $wp_query;
-    $big = 999999999;
-    $pagination = '';
-    
-    $pages = paginate_links(array(
-                'base' => str_replace($big, '%#%', get_pagenum_link($big)),
-                'format' => '?page=%#%',
-                'current' => max(1, get_query_var('paged')),
-                'total' => $wp_query->max_num_pages,
-                'prev_next' => false,
-                'type' => 'array',
-                'prev_next' => TRUE,
-                'prev_text' => __( '&larr; Previous', 'ekiline' ),
-                'next_text' => __( 'Next &rarr;', 'ekiline' ),
-            ));
-            
-    if (is_array($pages)) {
-        
-        $current_page = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');        
-        $pagination .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="Page navigation"><ul class="pagination">';
-        
-        foreach ($pages as $i => $page) {
-
-            $page = str_replace( 'page-numbers', 'page-link', $page );			
-			
-            if ($current_page == 1 && $i == 0) {                
-                $pagination .= "<li class='page-item active'>$page</li>";                
-            } else {                
-                if ($current_page != 1 && $current_page == $i) {                    
-                    $pagination .= "<li class='page-item active'>$page</li>";                    
-                } else {                    
-                    $pagination .= "<li class='page-item'>$page</li>";                    
-                }
-            }
-            
-        }
-        
-        $pagination .= '</ul></nav>';
-        
-    }
-    
-    echo $pagination;
-   
-}

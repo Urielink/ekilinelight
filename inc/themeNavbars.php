@@ -203,3 +203,15 @@ function ekiline_modalMenuBottom($navPosition){
 
 <?php }
 // add_action( 'wp_footer', 'ekiline_modalMenuBottom', 0, 1 );
+
+function EkilineNavFallback() {
+if ( is_user_logged_in() ) $link = '/wp-admin/nav-menus.php'; else $link = '/wp-login.php';
+$link = get_site_url(null,$link);
+  ?>
+  <ul id="SetNavMenu" class="navbar-nav mr-auto">
+  	<li class="nav-item">
+  		<a class="nav-link" href="<?php echo $link; ?>"><?php echo __('Assign a menu!','ekiline'); ?></a>		
+	</li>
+  </ul>
+  <?php
+} // EkilineNavFallback
