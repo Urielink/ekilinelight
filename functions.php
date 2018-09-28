@@ -170,7 +170,7 @@ function ekiline_scripts() {
 add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 
 /**
- * Customizer additions.
+ * Ekiline additions.
  */
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/themeNavbars.php';
