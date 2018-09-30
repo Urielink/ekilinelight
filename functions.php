@@ -32,7 +32,7 @@ function ekiline_setup() {
 	add_theme_support( 'post-formats', $postDef );
 
 	// Color e imagen de fondo // Set up the WordPress core custom background feature.
-	$backDef = array( 'default-image' => '', 'default-color' => 'ffffff');
+	$backDef = array( 'default-image' => '', 'default-color' => 'ffffff' );
 	add_theme_support( 'custom-background', $backDef );	
 	
     // Actualizacion de widgets en el personalizador // Add theme support for selective refresh for widgets.
