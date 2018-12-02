@@ -31,7 +31,7 @@ function ekiline_theme_customizer( $wp_customize ) {
 			$wp_customize, 'ekiline_logo_max', 
 				array(
 				    'label'         => __( 'Navbar brand', 'ekiline' ),
-				    'description' => __( 'Shows your logo on noavbar, we suggest dimensions: 200 x 50px', 'ekiline' ),
+				    'description' => __( 'Show logo on menu (suggest 200x50px)', 'ekiline' ),
 				    'section'       => 'title_tagline',
 				    'settings' 		=> 'ekiline_logo_max',
 				    'priority'      => 100,
@@ -61,7 +61,7 @@ function ekiline_theme_customizer( $wp_customize ) {
     
     $wp_customize->add_control(
     	'ekiline_showFrontPageHeading', array(
-    				'label'          => __( 'Use favicon as responsive navbar brand', 'ekiline' ),
+    				'label'          => __( 'Use site icon as responsive navbar brand', 'ekiline' ),
     				'section'        => 'title_tagline',
     				'settings'       => 'ekiline_minilogo',
     				'type'           => 'checkbox',

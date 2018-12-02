@@ -8,9 +8,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-09-03 14:58-0500\n"
+"PO-Revision-Date: 2018-12-01 22:40-0600\n"
 "Language-Team: \n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Last-Translator: \n"
 "Language: es\n"
@@ -234,6 +234,30 @@ msgstr "Reproducir"
 
 # @ ekiline
 #: inc/customizer.php
+msgid "Navbar brand"
+msgstr "Marca en navegación"
+
+msgid "Show logo on menu (suggest 200x50px)"
+msgstr "Muestra logo en menú (sugerido 200x50px)"
+
+msgid "Select logo"
+msgstr "Seleccionar logo"
+
+msgid "Change logo"
+msgstr "Cambiar logo"
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "No logo selected"
+msgstr "Sin logo seleccionado"
+
+msgid "Choose logo"
+msgstr "Elegir logo"
+
+msgid "Use site icon as responsive navbar brand"
+msgstr "Usar icono de sitio como marca en menú responsivo"
+
 msgid "Text color"
 msgstr "Color del texto"
 
