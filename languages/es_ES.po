@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-12-01 23:13-0600\n"
+"PO-Revision-Date: 2018-12-02 00:40-0600\n"
 "Language-Team: \n"
 "X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -403,6 +403,24 @@ msgstr "Centrado a lo largo"
 
 msgid "Centered around"
 msgstr "Centrado con espacios"
+
+msgid "Offcanvas"
+msgstr "Fuera de ventana"
+
+msgid "Top toggle"
+msgstr "Desplegable"
+
+msgid "Modal"
+msgstr "Modal"
+
+msgid "Modal from bottom"
+msgstr "Modal inferior"
+
+msgid "Modal from left"
+msgstr "Modal izquierdo"
+
+msgid "Modal from right"
+msgstr "Modal derecho"
 
 # @ ekiline
 #: carpeta/archivo.php:29
@@ -831,9 +849,6 @@ msgstr "Formato"
 
 msgid "Dropdown"
 msgstr "Dropdown"
-
-msgid "Modal"
-msgstr "Modal"
 
 # @ ekiline
 #: carpeta/archivo.php:29

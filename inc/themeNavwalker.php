@@ -122,11 +122,15 @@ class EkilineNavMenu extends Walker_Nav_Menu {
         $classes[] = 'menu-item-' . $item->ID;
  //Bootstrap link class		
         $classes[] .= 'nav-item';
+ //Posicion de menu: dropdown/dropup
+ 		$doDrop = ' dropdown';
+ 			if ( get_theme_mod('ekiline_primarymenuSettings') == '2' ) $doDrop = ' dropup';
+
 		if ( $args->walker->has_children ) {
 			if ( $depth > 0 ) {
-		        $classes[] .= ' dropdown item-'. $depth;
+		        $classes[] .= $doDrop . ' item-'. $depth;
 			} else {
-		        $classes[] .= ' dropdown';
+		        $classes[] .= $doDrop;
 			}			
 		}		
 				
