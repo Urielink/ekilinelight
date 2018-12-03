@@ -59,14 +59,13 @@ function ekiline_archive_pagination() {
                 'format' => '?page=%#%',
                 'current' => max(1, get_query_var('paged')),
                 'total' => $wp_query->max_num_pages,
-                'prev_next' => false,
                 'type' => 'array',
                 'prev_next' => TRUE,
                 'prev_text' => __( '&larr; Previous', 'ekiline' ),
                 'next_text' => __( 'Next &rarr;', 'ekiline' ),
             ));
             
-    if (is_array($pages)) {
+    if ( is_array($pages) ) {
         
         $current_page = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');        
         $pagination .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="Page navigation"><ul class="pagination">';
@@ -92,5 +91,32 @@ function ekiline_archive_pagination() {
     }
     
     echo $pagination;
-   
+
 }
+
+/**
+ * Colores dinámicos: Customizer
+ **/
+
+ function ekiline_themeColors(){
+
+    $texto = get_option('text_color');
+    $enlaces = get_option('links_color');
+    $footer = get_option('footer_color');
+    $ftxt = get_option('ftext_color');
+    $menu = get_option('menu_color');
+    $mgradient = get_option('menu_gradient');
+	
+	$colores = array($texto,$enlaces,$menu,$mgradient,$footer,$ftxt);
+	$resultado = '';
+	
+	foreach ($colores as $i => $color) {
+		$resultado .= "console.log(\"$color\");";		
+	}
+
+	echo "<script>".$resultado."</script>";		
+
+
+ } 
+ 
+ 
