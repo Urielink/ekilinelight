@@ -96,27 +96,34 @@ function ekiline_archive_pagination() {
 
 /**
  * Colores dinámicos: Customizer
+ * functions #159 localize script = ekiline_themeColors().
  **/
 
  function ekiline_themeColors(){
-
-    $texto = get_option('text_color');
-    $enlaces = get_option('links_color');
-    $footer = get_option('footer_color');
-    $ftxt = get_option('ftext_color');
-    $menu = get_option('menu_color');
-    $mgradient = get_option('menu_gradient');
-	
-	$colores = array($texto,$enlaces,$menu,$mgradient,$footer,$ftxt);
-	$resultado = '';
-	
-	foreach ($colores as $i => $color) {
-		$resultado .= "console.log(\"$color\");";		
-	}
-
-	echo "<script>".$resultado."</script>";		
-
-
+ 	$colores = array(
+// 	    'texto' => get_option('text_color'),
+// 	    'enlaces' => get_option('links_color'),
+// 	    'footer' => get_option('footer_color'),
+// 	    'ftxt' => get_option('ftext_color'),
+// 	    'menu' => get_option('menu_color'),
+// 	    'mgradient' => get_option('menu_gradient'),
+	    'b4primary' => get_option('b4_primary'),
+	    'b4secondary' => get_option('b4_secondary'),
+	    'b4success' => get_option('b4_success'),
+	    'b4danger' => get_option('b4_danger'),
+	    'b4warning' => get_option('b4_warning'),
+	    'b4info' => get_option('b4_info'),
+	    'b4light' => get_option('b4_light'),
+	    'b4dark' => get_option('b4_dark')
+    );
+	return $colores;
  } 
+
+ // aqui se inserta el script que genera las variables de color de la paleta
+ function ekiline_doColors(){
+	echo '<script> console.log( themeColors.enlaces ); </script>';
+ }
+add_action( 'wp_footer', 'ekiline_doColors', 90 );
+ 
  
  
