@@ -155,6 +155,7 @@ function ekiline_scripts() {
 	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1', true  );
  	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4', true  );
     wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716', true  );
+//Desde aquí los scripts de Ekiline se agregan en bloque.
     wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226', true  );
     	wp_localize_script( 'ekiline-layout', 'themeColors', ekiline_themeColors() );
     wp_enqueue_script( 'ekiline-theme', get_template_directory_uri() . '/assets/js/ekiline-theme.min.js', array('jquery'), '20190817', true  );
