@@ -5,6 +5,12 @@
  * @package ekiline
  */
 
+// Reemplazar la funcion de customizar fondo.
+// add_action( 'after_setup_theme', 'ekiline_remove_custom_background', 20 );
+// function ekiline_remove_custom_background(){
+	 // remove_theme_support( 'custom-background' ); 
+// } 
+ 
 /** 
  *  Los controladores del personalizador
  *  https://codex.wordpress.org/Theme_Customization_API
@@ -121,8 +127,12 @@ function ekiline_theme_customizer( $wp_customize ) {
         )
     );  		       
 	
+// Colores, reemplazar el controlador de color de fondo.
+	$wp_customize->remove_control('background_color');	// se remueve el controlador.
+	
 // Colores base
     $colors = array();
+    $colors[] = array( 'slug'=>'back_color', 'default' => '#ffffff', 'label' => __( 'Background color', 'ekiline' ), 'description' => '' );
     $colors[] = array( 'slug'=>'text_color', 'default' => '#333333', 'label' => __( 'General text and links', 'ekiline' ), 'description' => '' );
     $colors[] = array( 'slug'=>'links_color', 'default' => '#007bff', 'label' => '', 'description' => '' );
     $colors[] = array( 'slug'=>'footer_color', 'default' => '#eeeeee', 'label' => __( 'Footer background and text', 'ekiline' ), 'description' => '' );
