@@ -95,7 +95,7 @@ function ekiline_archive_pagination() {
 }
 
 /**
- * Colores dinámicos: Customizer
+ * Colores dinamicos: Customizer
  * functions #159 localize script = ekiline_themeColors().
  **/
 
@@ -104,11 +104,6 @@ function ekiline_archive_pagination() {
  	$colores = array(
 	    'fondo' => get_option('back_color','#ffffff'),
 	    'texto' => get_option('text_color','#333333'),
-	    'enlaces' => get_option('links_color','#007bff'),
-	    'footer' => get_option('footer_color','#eeeeee'),
-	    'ftxt' => get_option('ftext_color','#333333'),
-	    'menu' => get_option('menu_color'),
-	    'mgradient' => get_option('menu_gradient'),
 	    'b4primary' => get_option('b4_primary','#007bff'),
 	    'b4secondary' => get_option('b4_secondary','#6c757d'),
 	    'b4success' => get_option('b4_success','#28a745'),
@@ -117,6 +112,12 @@ function ekiline_archive_pagination() {
 	    'b4info' => get_option('b4_info','#17a2b8'),
 	    'b4light' => get_option('b4_light','#f8f9fa'),
 	    'b4dark' => get_option('b4_dark','#343a40')
+		// estos valores se aplican independientes a bootstrap.
+	    // 'enlaces' => get_option('links_color','#007bff'),
+	    // 'footer' => get_option('footer_color','#eeeeee'),
+	    // 'ftxt' => get_option('ftext_color','#333333'),
+	    // 'menu' => get_option('menu_color'),
+	    // 'mgradient' => get_option('menu_gradient')
     );
 	return $colores;
  } 
@@ -144,7 +145,7 @@ jQuery(document).ready(function($){
 			
 			// console.log( bgColor, txColor, colPri, colSec, colSuc, colDan, colWar, colInf, colLig, colDak )
 
-			// función que genera varios tonos.
+			// funcion que genera varios tonos.
 
 				$('#tmpstyle').remove();
 
@@ -259,7 +260,7 @@ jQuery(document).ready(function($){
 					var fmFocBxs = hexToRgbA(txColor,.40);
 
 				// nueva variable, color de fondo varios
-					var bgColor004 = hexToRgbA( HexAHslvar(bgColor, 0, 0, 4) ); //hexToRgbA(HexAHslvar(bgColor, 0, 0, -2)); //hexToRgbA(bgColor,.10); 
+					var bgColor004 = hexToRgbA( HexAHslvar(bgColor, 0, 0, 20) ); //hexToRgbA(HexAHslvar(bgColor, 0, 0, -2)); //hexToRgbA(bgColor,.10); 
 					var bgColor5 = hexToRgbA(bgColor,.05);
 					var bgColor75 = hexToRgbA(bgColor,.75);
 
@@ -1067,7 +1068,7 @@ jQuery(document).ready(function($){
 					l = Math.round(l);
 					h = Math.round(360 * h);
 
-					// aquí llamo mis nuevas variables y modifico la salida del color
+					// aqui llamo mis nuevas variables y modifico la salida del color
 					// var nh = nh;
 					// var ns = ns;
 					// var nl = nl;
@@ -1148,8 +1149,8 @@ jQuery(document).ready(function($){
 				// variable array de valores css
 				var all2rgba = [];
 
-				/* Función de cambio de tono:
-				 * obtener los valores css y pasar cada uno por alguna función */
+				/* Funcion de cambio de tono:
+				 * obtener los valores css y pasar cada uno por alguna funcion */
 
 				Object.keys(cssValues).forEach(function(key) {
 
@@ -1184,7 +1185,7 @@ jQuery(document).ready(function($){
 
 				// console.log(string); // ver resultados
 
-				/**  Paso 4 : generar el nuevo CSS con los valores para que se cambie el tema, este puede ser dinámico pero también guardarlo como css**/
+				/**  Paso 4 : generar el nuevo CSS con los valores para que se cambie el tema, este puede ser dinamico pero tambien guardarlo como css**/
 
 				// invocar el css
 				var styleColor = $('<style/>', {
@@ -1193,7 +1194,7 @@ jQuery(document).ready(function($){
 				});
 				$("head").append(styleColor);
 
-			// FIN función simple que genera varios tonos.
+			// FIN funcion simple que genera varios tonos.
 
 }); 			
 		</script>
