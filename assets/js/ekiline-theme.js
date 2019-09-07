@@ -400,75 +400,107 @@ jQuery(document).ready(function($){
 
 					/**Botones**/
 					cssall += '.btn:focus,.btn.focus{box-shadow:0 0 0 0.2rem ' + $fmFocBxs + ';}\n';
-				cssall += '.btn-primary{color:' + $bgColor + ';background-color:' + $aColor + ';border-color:' + $aColor + ';}\n';
-				cssall += '.btn-primary:hover{color:' + $bgColor + ';background-color:' + $btnPriHBgc + ';border-color:' + $btnPriHBdc + ';}\n';
+//				cssall += '.btn-primary{color:' + $bgColor + ';background-color:' + $aColor + ';border-color:' + $aColor + ';}\n';
+				cssall += '.btn-primary{background-color:' + $aColor + ';border-color:' + $aColor + ';}\n';
+//				cssall += '.btn-primary:hover{color:' + $bgColor + ';background-color:' + $btnPriHBgc + ';border-color:' + $btnPriHBdc + ';}\n';
+				cssall += '.btn-primary:hover{background-color:' + $btnPriHBgc + ';border-color:' + $btnPriHBdc + ';}\n';
 				cssall += '.btn-primary:focus,.btn-primary.focus{box-shadow:0 0 0 0.2rem ' + $btnPriFocBx + ';}\n';
-				cssall += '.btn-primary.disabled,.btn-primary:disabled{color:' + $bgColor + ';background-color:' + $aColor + ';border-color:' + $aColor + ';}\n';
+//				cssall += '.btn-primary.disabled,.btn-primary:disabled{color:' + $bgColor + ';background-color:' + $aColor + ';border-color:' + $aColor + ';}\n';
+				cssall += '.btn-primary.disabled,.btn-primary:disabled{background-color:' + $aColor + ';border-color:' + $aColor + ';}\n';
 					cssall += '.btn-primary:not(:disabled):not(.disabled):active,.btn-primary:not(:disabled)';
-				cssall += ':not(.disabled).active,.show > .btn-primary.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnPriHBdc + ';border-color:' + $btnPriNotBdc + ';}\n';
+//				cssall += ':not(.disabled).active,.show > .btn-primary.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnPriHBdc + ';border-color:' + $btnPriNotBdc + ';}\n';
+				cssall += ':not(.disabled).active,.show > .btn-primary.dropdown-toggle{background-color:' + $btnPriHBdc + ';border-color:' + $btnPriNotBdc + ';}\n';
 					cssall += '.btn-primary:not(:disabled):not(.disabled):active:focus,.btn-primary:not(:disabled)';
 				cssall += ':not(.disabled).active:focus,.show > .btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 0.2rem ' + $btnPriFocBx + ';}\n';
 
-				cssall += '.btn-secondary{color:' + $bgColor + ';background-color:' + $capTxColor + ';border-color:' + $capTxColor + ';}\n';
-				cssall += '.btn-secondary:hover{color:' + $bgColor + ';background-color:' + $btnSecHBgc + ';border-color:' + $btnSecHBdc + ';}\n';
+//				cssall += '.btn-secondary{color:' + $bgColor + ';background-color:' + $capTxColor + ';border-color:' + $capTxColor + ';}\n';
+				cssall += '.btn-secondary{background-color:' + $capTxColor + ';border-color:' + $capTxColor + ';}\n';
+//				cssall += '.btn-secondary:hover{color:' + $bgColor + ';background-color:' + $btnSecHBgc + ';border-color:' + $btnSecHBdc + ';}\n';
+				cssall += '.btn-secondary:hover{background-color:' + $btnSecHBgc + ';border-color:' + $btnSecHBdc + ';}\n';
 				cssall += '.btn-secondary:focus,.btn-secondary.focus{box-shadow:0 0 0 0.2rem ' + $btnSecFocBx + ';}\n';
-				cssall += '.btn-secondary.disabled,.btn-secondary:disabled{color:' + $bgColor + ';background-color:' + $capTxColor + ';border-color:' + $capTxColor + ';}\n';
+//				cssall += '.btn-secondary.disabled,.btn-secondary:disabled{color:' + $bgColor + ';background-color:' + $capTxColor + ';border-color:' + $capTxColor + ';}\n';
+				cssall += '.btn-secondary.disabled,.btn-secondary:disabled{background-color:' + $capTxColor + ';border-color:' + $capTxColor + ';}\n';
 					cssall += '.btn-secondary:not(:disabled):not(.disabled):active,.btn-secondary:not(:disabled)';
-				cssall += ':not(.disabled).active,.show > .btn-secondary.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnSecHBdc + ';border-color:' + $btnSecNotBdc + ';}\n';
+//				cssall += ':not(.disabled).active,.show > .btn-secondary.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnSecHBdc + ';border-color:' + $btnSecNotBdc + ';}\n';
+				cssall += ':not(.disabled).active,.show > .btn-secondary.dropdown-toggle{background-color:' + $btnSecHBdc + ';border-color:' + $btnSecNotBdc + ';}\n';
 					cssall += '.btn-secondary:not(:disabled):not(.disabled):active:focus,.btn-secondary:not(:disabled)';
 				cssall += ':not(.disabled).active:focus,.show > .btn-secondary.dropdown-toggle:focus{box-shadow:0 0 0 0.2rem ' + $btnSecFocBx + ';}\n';
 
-					cssall += '.btn-success{color:' + $bgColor + ';background-color:' + $valFdTxc + ';border-color:' + $valFdTxc + ';}\n';
-				cssall += '.btn-success:hover{color:' + $bgColor + ';background-color:' + $btnSucHBgc + ';border-color:' + $btnSucHBdc + ';}\n';
+//					cssall += '.btn-success{color:' + $bgColor + ';background-color:' + $valFdTxc + ';border-color:' + $valFdTxc + ';}\n';
+					cssall += '.btn-success{background-color:' + $valFdTxc + ';border-color:' + $valFdTxc + ';}\n';
+//				cssall += '.btn-success:hover{color:' + $bgColor + ';background-color:' + $btnSucHBgc + ';border-color:' + $btnSucHBdc + ';}\n';
+				cssall += '.btn-success:hover{background-color:' + $btnSucHBgc + ';border-color:' + $btnSucHBdc + ';}\n';
 				cssall += '.btn-success:focus,.btn-success.focus{box-shadow:0 0 0 0.2rem ' + $btnSucFocBx + ';}\n';
-					cssall += '.btn-success.disabled,.btn-success:disabled{color:' + $bgColor + ';background-color:' + $valFdTxc + ';border-color:' + $valFdTxc + ';}\n';
+//					cssall += '.btn-success.disabled,.btn-success:disabled{color:' + $bgColor + ';background-color:' + $valFdTxc + ';border-color:' + $valFdTxc + ';}\n';
+					cssall += '.btn-success.disabled,.btn-success:disabled{background-color:' + $valFdTxc + ';border-color:' + $valFdTxc + ';}\n';
 					cssall += '.btn-success:not(:disabled):not(.disabled):active,.btn-success:not(:disabled)';
-				cssall += ':not(.disabled).active,.show > .btn-success.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnSucHBdc + ';border-color:' + $btnSucNotBdc + ';}\n';
+//				cssall += ':not(.disabled).active,.show > .btn-success.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnSucHBdc + ';border-color:' + $btnSucNotBdc + ';}\n';
+				cssall += ':not(.disabled).active,.show > .btn-success.dropdown-toggle{background-color:' + $btnSucHBdc + ';border-color:' + $btnSucNotBdc + ';}\n';
 					cssall += '.btn-success:not(:disabled):not(.disabled):active:focus,.btn-success:not(:disabled)';
 				cssall += ':not(.disabled).active:focus,.show > .btn-success.dropdown-toggle:focus{box-shadow:0 0 0 0.2rem ' + $btnSucFocBx + ';}\n';
 
-				cssall += '.btn-info{color:' + $bgColor + ';background-color:' + $btnInfBgc + ';border-color:' + $btnInfBgc + ';}\n';
-				cssall += '.btn-info:hover{color:' + $bgColor + ';background-color:' + $btnInfHBgc + ';border-color:' + $btnInfHBdc + ';}\n';
+//				cssall += '.btn-info{color:' + $bgColor + ';background-color:' + $btnInfBgc + ';border-color:' + $btnInfBgc + ';}\n';
+				cssall += '.btn-info{background-color:' + $btnInfBgc + ';border-color:' + $btnInfBgc + ';}\n';
+//				cssall += '.btn-info:hover{color:' + $bgColor + ';background-color:' + $btnInfHBgc + ';border-color:' + $btnInfHBdc + ';}\n';
+				cssall += '.btn-info:hover{background-color:' + $btnInfHBgc + ';border-color:' + $btnInfHBdc + ';}\n';
 				cssall += '.btn-info:focus,.btn-info.focus{box-shadow:0 0 0 0.2rem ' + $btnInfFocBx + ';}\n';
-				cssall += '.btn-info.disabled,.btn-info:disabled{color:' + $bgColor + ';background-color:' + $btnInfBgc + ';border-color:' + $btnInfBgc + ';}\n';
+//				cssall += '.btn-info.disabled,.btn-info:disabled{color:' + $bgColor + ';background-color:' + $btnInfBgc + ';border-color:' + $btnInfBgc + ';}\n';
+				cssall += '.btn-info.disabled,.btn-info:disabled{background-color:' + $btnInfBgc + ';border-color:' + $btnInfBgc + ';}\n';
 					cssall += '.btn-info:not(:disabled):not(.disabled):active,.btn-info:not(:disabled)';
-				cssall += ':not(.disabled).active,.show > .btn-info.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnInfHBdc + ';border-color:' + $btnInfNotBdc + ';}\n';
+//				cssall += ':not(.disabled).active,.show > .btn-info.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnInfHBdc + ';border-color:' + $btnInfNotBdc + ';}\n';
+				cssall += ':not(.disabled).active,.show > .btn-info.dropdown-toggle{background-color:' + $btnInfHBdc + ';border-color:' + $btnInfNotBdc + ';}\n';
 					cssall += '.btn-info:not(:disabled):not(.disabled):active:focus,.btn-info:not(:disabled)';
 				cssall += ':not(.disabled).active:focus,.show > .btn-info.dropdown-toggle:focus{box-shadow:0 0 0 0.2rem ' + $btnInfFocBx + ';}\n';
 
-				cssall += '.btn-warning{color:' + $txColor + ';background-color:' + $btnWarBgc + ';border-color:' + $btnWarBgc + ';}\n';
-				cssall += '.btn-warning:hover{color:' + $txColor + ';background-color:' + $btnWarHBgc + ';border-color:' + $btnWarHBdc + ';}\n';
+//				cssall += '.btn-warning{color:' + $txColor + ';background-color:' + $btnWarBgc + ';border-color:' + $btnWarBgc + ';}\n';
+				cssall += '.btn-warning{background-color:' + $btnWarBgc + ';border-color:' + $btnWarBgc + ';}\n';
+//				cssall += '.btn-warning:hover{color:' + $txColor + ';background-color:' + $btnWarHBgc + ';border-color:' + $btnWarHBdc + ';}\n';
+				cssall += '.btn-warning:hover{background-color:' + $btnWarHBgc + ';border-color:' + $btnWarHBdc + ';}\n';
 				cssall += '.btn-warning:focus,.btn-warning.focus{box-shadow:0 0 0 0.2rem ' + $btnWarFocBx + ';}\n';
-				cssall += '.btn-warning.disabled,.btn-warning:disabled{color:' + $txColor + ';background-color:' + $btnWarBgc + ';border-color:' + $btnWarBgc + ';}\n';
+//				cssall += '.btn-warning.disabled,.btn-warning:disabled{color:' + $txColor + ';background-color:' + $btnWarBgc + ';border-color:' + $btnWarBgc + ';}\n';
+				cssall += '.btn-warning.disabled,.btn-warning:disabled{background-color:' + $btnWarBgc + ';border-color:' + $btnWarBgc + ';}\n';
 					cssall += '.btn-warning:not(:disabled):not(.disabled):active,.btn-warning:not(:disabled)';
-				cssall += ':not(.disabled).active,.show > .btn-warning.dropdown-toggle{color:' + $txColor + ';background-color:' + $btnWarHBdc + ';border-color:' + $btnWarNotBdc + ';}\n';
+//				cssall += ':not(.disabled).active,.show > .btn-warning.dropdown-toggle{color:' + $txColor + ';background-color:' + $btnWarHBdc + ';border-color:' + $btnWarNotBdc + ';}\n';
+				cssall += ':not(.disabled).active,.show > .btn-warning.dropdown-toggle{background-color:' + $btnWarHBdc + ';border-color:' + $btnWarNotBdc + ';}\n';
 					cssall += '.btn-warning:not(:disabled):not(.disabled):active:focus,.btn-warning:not(:disabled)';
 				cssall += ':not(.disabled).active:focus,.show > .btn-warning.dropdown-toggle:focus{box-shadow:0 0 0 0.2rem ' + $btnWarFocBx + ';}\n';
 
-					cssall += '.btn-danger{color:' + $bgColor + ';background-color:' + $invFdTxc + ';border-color:' + $invFdTxc + ';}\n';
-				cssall += '.btn-danger:hover{color:' + $bgColor + ';background-color:' + $btnDanHBgc + ';border-color:' + $btnDanHBdc + ';}\n';
+//					cssall += '.btn-danger{color:' + $bgColor + ';background-color:' + $invFdTxc + ';border-color:' + $invFdTxc + ';}\n';
+					cssall += '.btn-danger{background-color:' + $invFdTxc + ';border-color:' + $invFdTxc + ';}\n';
+//				cssall += '.btn-danger:hover{color:' + $bgColor + ';background-color:' + $btnDanHBgc + ';border-color:' + $btnDanHBdc + ';}\n';
+				cssall += '.btn-danger:hover{background-color:' + $btnDanHBgc + ';border-color:' + $btnDanHBdc + ';}\n';
 				cssall += '.btn-danger:focus,.btn-danger.focus{box-shadow:0 0 0 0.2rem ' + $btnDanFocBx + ';}\n';
-					cssall += '.btn-danger.disabled,.btn-danger:disabled{color:' + $bgColor + ';background-color:' + $invFdTxc + ';border-color:' + $invFdTxc + ';}\n';
+//					cssall += '.btn-danger.disabled,.btn-danger:disabled{color:' + $bgColor + ';background-color:' + $invFdTxc + ';border-color:' + $invFdTxc + ';}\n';
+					cssall += '.btn-danger.disabled,.btn-danger:disabled{background-color:' + $invFdTxc + ';border-color:' + $invFdTxc + ';}\n';
 					cssall += '.btn-danger:not(:disabled):not(.disabled):active,.btn-danger:not(:disabled)';
-				cssall += ':not(.disabled).active,.show > .btn-danger.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnDanHBdc + ';border-color:' + $btnDanNotBdc + ';}\n';
+//				cssall += ':not(.disabled).active,.show > .btn-danger.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnDanHBdc + ';border-color:' + $btnDanNotBdc + ';}\n';
+				cssall += ':not(.disabled).active,.show > .btn-danger.dropdown-toggle{background-color:' + $btnDanHBdc + ';border-color:' + $btnDanNotBdc + ';}\n';
 					cssall += '.btn-danger:not(:disabled):not(.disabled):active:focus,.btn-danger:not(:disabled)';
 				cssall += ':not(.disabled).active:focus,.show > .btn-danger.dropdown-toggle:focus{box-shadow:0 0 0 0.2rem ' + $btnDanFocBx + ';}\n';
 
-					cssall += '.btn-light{color:' + $txColor + ';background-color:' + $btnLigBgc + ';border-color:' + $btnLigBgc + ';}\n';
-					cssall += '.btn-light:hover{color:' + $txColor + ';background-color:' + $btnLigHBgc + ';border-color:' + $btnLigHBdc + ';}\n';
+//					cssall += '.btn-light{color:' + $txColor + ';background-color:' + $btnLigBgc + ';border-color:' + $btnLigBgc + ';}\n';
+					cssall += '.btn-light{background-color:' + $btnLigBgc + ';border-color:' + $btnLigBgc + ';}\n';
+//					cssall += '.btn-light:hover{color:' + $txColor + ';background-color:' + $btnLigHBgc + ';border-color:' + $btnLigHBdc + ';}\n';
+					cssall += '.btn-light:hover{background-color:' + $btnLigHBgc + ';border-color:' + $btnLigHBdc + ';}\n';
 					cssall += '.btn-light:focus,.btn-light.focus{box-shadow:0 0 0 0.2rem ' + $btnLigFocBx + ';}\n';
-					cssall += '.btn-light.disabled,.btn-light:disabled{color:' + $txColor + ';background-color:' + $btnLigBgc + ';border-color:' + $btnLigBgc + ';}\n';
+//					cssall += '.btn-light.disabled,.btn-light:disabled{color:' + $txColor + ';background-color:' + $btnLigBgc + ';border-color:' + $btnLigBgc + ';}\n';
+					cssall += '.btn-light.disabled,.btn-light:disabled{background-color:' + $btnLigBgc + ';border-color:' + $btnLigBgc + ';}\n';
 					cssall += '.btn-light:not(:disabled):not(.disabled):active,.btn-light:not(:disabled)';
-					cssall += ':not(.disabled).active,.show > .btn-light.dropdown-toggle{color:' + $txColor + ';background-color:' + $btnLigHBdc + ';border-color:' + $btnLigNotBdc + ';}\n';
+//					cssall += ':not(.disabled).active,.show > .btn-light.dropdown-toggle{color:' + $txColor + ';background-color:' + $btnLigHBdc + ';border-color:' + $btnLigNotBdc + ';}\n';
+					cssall += ':not(.disabled).active,.show > .btn-light.dropdown-toggle{background-color:' + $btnLigHBdc + ';border-color:' + $btnLigNotBdc + ';}\n';
 					cssall += '.btn-light:not(:disabled):not(.disabled):active:focus,.btn-light:not(:disabled)';
 					cssall += ':not(.disabled).active:focus,.show > .btn-light.dropdown-toggle:focus{box-shadow:0 0 0 0.2rem ' + $btnLigFocBx + ';}\n';
 
-					cssall += '.btn-dark{color:' + $bgColor + ';background-color:' + $btnDakBgc + ';border-color:' + $btnDakBgc + ';}\n';
-					cssall += '.btn-dark:hover{color:' + $bgColor + ';background-color:' + $btnDakHBgc + ';border-color:' + $btnDakHBdc + ';}\n';
+//					cssall += '.btn-dark{color:' + $bgColor + ';background-color:' + $btnDakBgc + ';border-color:' + $btnDakBgc + ';}\n';
+					cssall += '.btn-dark{background-color:' + $btnDakBgc + ';border-color:' + $btnDakBgc + ';}\n';
+//					cssall += '.btn-dark:hover{color:' + $bgColor + ';background-color:' + $btnDakHBgc + ';border-color:' + $btnDakHBdc + ';}\n';
+					cssall += '.btn-dark:hover{background-color:' + $btnDakHBgc + ';border-color:' + $btnDakHBdc + ';}\n';
 					cssall += '.btn-dark:focus,.btn-dark.focus{box-shadow:0 0 0 0.2rem ' + $btnDakFocBx + ';}\n';
-					cssall += '.btn-dark.disabled,.btn-dark:disabled{color:' + $bgColor + ';background-color:' + $btnDakBgc + ';border-color:' + $btnDakBgc + ';}\n';
+//					cssall += '.btn-dark.disabled,.btn-dark:disabled{color:' + $bgColor + ';background-color:' + $btnDakBgc + ';border-color:' + $btnDakBgc + ';}\n';
+					cssall += '.btn-dark.disabled,.btn-dark:disabled{background-color:' + $btnDakBgc + ';border-color:' + $btnDakBgc + ';}\n';
 					cssall += '.btn-dark:not(:disabled):not(.disabled):active,.btn-dark:not(:disabled)';
-					cssall += ':not(.disabled).active,.show > .btn-dark.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnDakHBdc + ';border-color:' + $btnDakNotBdc + ';}\n';
+//					cssall += ':not(.disabled).active,.show > .btn-dark.dropdown-toggle{color:' + $bgColor + ';background-color:' + $btnDakHBdc + ';border-color:' + $btnDakNotBdc + ';}\n';
+					cssall += ':not(.disabled).active,.show > .btn-dark.dropdown-toggle{background-color:' + $btnDakHBdc + ';border-color:' + $btnDakNotBdc + ';}\n';
 					cssall += '.btn-dark:not(:disabled):not(.disabled):active:focus,.btn-dark:not(:disabled)';
 					cssall += ':not(.disabled).active:focus,.show > .btn-dark.dropdown-toggle:focus{box-shadow:0 0 0 0.2rem ' + $btnDakFocBx + ';}\n';
 
@@ -749,29 +781,29 @@ jQuery(document).ready(function($){
 					cssall += '.close:hover,.close:focus{color:' + $close + ';}\n';
 
 					/**modal**/
-					cssall += '.modal-content{background-color:' + $bgColor + ';border-color:' + $modContBdc + ';}\n';
-					cssall += '.modal-backdrop{background-color:' + $close + ';}\n';
-					cssall += '.modal-footer{border-top-color:' + $thLigBgc + ';}\n';
+					// cssall += '.modal-content{background-color:' + $bgColor + ';border-color:' + $modContBdc + ';}\n';
+					// cssall += '.modal-backdrop{background-color:' + $close + ';}\n';
+					// cssall += '.modal-footer{border-top-color:' + $thLigBgc + ';}\n';
 
 					/**tooltip**/
-					cssall += '.bs-tooltip-top .arrow::before,.bs-tooltip-auto[x-placement^="top"] .arrow::before{border-top-color:' + $close + ';}\n';
-					cssall += '.bs-tooltip-right .arrow::before,.bs-tooltip-auto[x-placement^="right"] .arrow::before{border-right-color:' + $close + ';}\n';
-					cssall += '.bs-tooltip-bottom .arrow::before,.bs-tooltip-auto[x-placement^="bottom"] .arrow::before{border-bottom-color:' + $close + ';}\n';
-					cssall += '.bs-tooltip-left .arrow::before,.bs-tooltip-auto[x-placement^="left"] .arrow::before{border-left-color:' + $close + ';}\n';
-					cssall += '.tooltip-inner{color:' + $bgColor + ';background-color:' + $close + ';}\n';
+					// cssall += '.bs-tooltip-top .arrow::before,.bs-tooltip-auto[x-placement^="top"] .arrow::before{border-top-color:' + $close + ';}\n';
+					// cssall += '.bs-tooltip-right .arrow::before,.bs-tooltip-auto[x-placement^="right"] .arrow::before{border-right-color:' + $close + ';}\n';
+					// cssall += '.bs-tooltip-bottom .arrow::before,.bs-tooltip-auto[x-placement^="bottom"] .arrow::before{border-bottom-color:' + $close + ';}\n';
+					// cssall += '.bs-tooltip-left .arrow::before,.bs-tooltip-auto[x-placement^="left"] .arrow::before{border-left-color:' + $close + ';}\n';
+					// cssall += '.tooltip-inner{color:' + $bgColor + ';background-color:' + $close + ';}\n';
 
 					/**popover**/
-					cssall += '.popover{background-color:' + $bgColor + ';border-color:' + $modContBdc + ';}\n';
-					cssall += '.bs-popover-top .arrow::before,.bs-popover-auto[x-placement^="top"] .arrow::before{border-top-color:' + $popBsBdc + ';}\n';
-					cssall += '.bs-popover-top .arrow::after,.bs-popover-auto[x-placement^="top"] .arrow::after{border-top-color:' + $bgColor + ';}\n';
-					cssall += '.bs-popover-right .arrow::after,.bs-popover-auto[x-placement^="right"] .arrow::after{border-right-color:' + $bgColor + ';}\n';
-					cssall += '.bs-popover-bottom .arrow::before,.bs-popover-auto[x-placement^="bottom"] .arrow::before{border-bottom-color:' + $popBsBdc + ';}\n';
-					cssall += '.bs-popover-bottom .arrow::after,.bs-popover-auto[x-placement^="bottom"] .arrow::after{border-bottom-color:' + $bgColor + ';}\n';
-					cssall += '.bs-popover-bottom .popover-header::before,.bs-popover-auto[x-placement^="bottom"] .popover-header::before{border-bottom-color:' + $popBtPhdBdc + ';}\n';
-					cssall += '.bs-popover-left .arrow::before,.bs-popover-auto[x-placement^="left"] .arrow::before{border-left-color:' + $popBsBdc + ';}\n';
-					cssall += '.bs-popover-left .arrow::after,.bs-popover-auto[x-placement^="left"] .arrow::after{border-left-color:' + $bgColor + ';}\n';
-					cssall += '.popover-header{background-color:' + $popBtPhdBdc + ';border-bottom-color:' + $popHdBdc + ';}\n';
-					cssall += '.popover-body{color:' + $txColor + ';}\n';
+					// cssall += '.popover{background-color:' + $bgColor + ';border-color:' + $modContBdc + ';}\n';
+					// cssall += '.bs-popover-top .arrow::before,.bs-popover-auto[x-placement^="top"] .arrow::before{border-top-color:' + $popBsBdc + ';}\n';
+					// cssall += '.bs-popover-top .arrow::after,.bs-popover-auto[x-placement^="top"] .arrow::after{border-top-color:' + $bgColor + ';}\n';
+					// cssall += '.bs-popover-right .arrow::after,.bs-popover-auto[x-placement^="right"] .arrow::after{border-right-color:' + $bgColor + ';}\n';
+					// cssall += '.bs-popover-bottom .arrow::before,.bs-popover-auto[x-placement^="bottom"] .arrow::before{border-bottom-color:' + $popBsBdc + ';}\n';
+					// cssall += '.bs-popover-bottom .arrow::after,.bs-popover-auto[x-placement^="bottom"] .arrow::after{border-bottom-color:' + $bgColor + ';}\n';
+					// cssall += '.bs-popover-bottom .popover-header::before,.bs-popover-auto[x-placement^="bottom"] .popover-header::before{border-bottom-color:' + $popBtPhdBdc + ';}\n';
+					// cssall += '.bs-popover-left .arrow::before,.bs-popover-auto[x-placement^="left"] .arrow::before{border-left-color:' + $popBsBdc + ';}\n';
+					// cssall += '.bs-popover-left .arrow::after,.bs-popover-auto[x-placement^="left"] .arrow::after{border-left-color:' + $bgColor + ';}\n';
+					// cssall += '.popover-header{background-color:' + $popBtPhdBdc + ';border-bottom-color:' + $popHdBdc + ';}\n';
+					// cssall += '.popover-body{color:' + $txColor + ';}\n';
 
 					/**carousel**/
 					cssall += '.carousel-control-prev,.carousel-control-next{color:' + $bgColor + ';}\n';
@@ -823,7 +855,7 @@ jQuery(document).ready(function($){
 					cssall += '.shadow-lg{box-shadow:0 1rem 3rem ' + $ShLg + ' !important;}\n';
 
 					/**Text**/
-					cssall += '.text-white{color:' + $bgColor + ' !important;}\n';
+//					cssall += '.text-white{color:' + $bgColor + ' !important;}\n';
 				cssall += '.text-primary{color:' + $aColor + ' !important;}\n';
 				cssall += 'a.text-primary:hover,a.text-primary:focus{color:' + $btnPriHBdc + ' !important;}\n';
 				cssall += '.text-secondary{color:' + $capTxColor + ' !important;}\n';

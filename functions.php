@@ -158,7 +158,7 @@ function ekiline_scripts() {
 //Desde aquí los scripts de Ekiline se agrupan en bloque.
     wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226', true  );
     	wp_localize_script( 'ekiline-layout', 'themeColors', ekiline_themeColors() );
-    wp_enqueue_script( 'ekiline-theme', get_template_directory_uri() . '/assets/js/ekiline-theme.min.js', array('jquery'), '20190817', true  );
+    wp_enqueue_script( 'ekiline-theme', get_template_directory_uri() . '/assets/js/ekiline-theme.js', array('jquery'), '20190817', true  );
     
 	// wp_enqueue_script( 'ie10-vpbugwkrnd', get_template_directory_uri() . '/assets/js/ie10-viewport-bug-workaround.min.js' );
 		// wp_script_add_data( 'ie10-vpbugwkrnd', 'conditional', 'gte IE 8' );
