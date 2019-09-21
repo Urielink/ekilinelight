@@ -174,7 +174,15 @@ function ekiline_scripts() {
 add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 
 /**
- * Ekiline additions.
+ * Ekiline optimizacion, emojis al footer
+ */
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+add_action('wp_footer', 'print_emoji_detection_script', 20);
+remove_action('wp_print_styles', 'print_emoji_styles');
+add_action('wp_head', 'print_emoji_styles',20); 
+
+/**
+ * Ekiline adiciones.
  */
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/themeNavbars.php';

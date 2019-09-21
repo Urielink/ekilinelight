@@ -43,6 +43,8 @@
 		) );
 	?>	
 	
-<small><?php the_tags(); ?></small>	
+	<?php if ( has_tag() ){ ?>
+        <p><small><?php the_tags(); ?></small></p>
+    <?php } ?>
 
 </article><!-- #post-## -->

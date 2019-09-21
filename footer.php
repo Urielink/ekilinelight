@@ -9,8 +9,8 @@
  *
  */
  // Variables en footer:
- $copyright = sprintf( esc_html__( '&copy; Copyright %1$s', 'ekiline' ), esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) );
- $madein = sprintf( esc_html__( 'Proudly powered by %1$s and %2$s', 'ekiline' ),'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>','<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' );
+ $copyright = sprintf( esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) );
+ $madein = sprintf( esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>','<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' );
  
 ?>
 
@@ -19,9 +19,7 @@
   	
     <?php dynamic_sidebar('footer-w1');?>
   	         
-	<p><?php echo $copyright; ?></p>
-	<small><?php echo $madein; ?></small>
-	<a class="goTop btn btn-sm" href="#top"><span class="fa fa-chevron-up"></span>Up</a>	
+	<p><small> <?php echo $copyright . ' ' . $madein; ?><a class="goTop float-right" href="#top"><span class="fa fa-chevron-up"></span><?php echo __('Back','ekiline'); ?></a></small></p>
   </div>
 </footer><!-- .site-footer -->
 
