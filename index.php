@@ -1,5 +1,5 @@
 <?php
-/**
+/** 
  * Plantilla principal del Frontend.
  * 
  * Esta es la vista principal de un sitio, aqui se mostraran cada una de sus partes.
