@@ -188,6 +188,5 @@ require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/themeNavbars.php';
 require get_template_directory() . '/inc/themeNavwalker.php';
 require get_template_directory() . '/inc/themeElements.php';
-require get_template_directory() . '/inc/themeMeta.php';
 
 
