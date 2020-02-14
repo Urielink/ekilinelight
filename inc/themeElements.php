@@ -11,7 +11,9 @@
  **/
 function mainCols($tag){
 	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
-	if ($tag == 'open'){ echo '<div id="maincolumns" class="row mx-0 container mx-auto px-0">';
+	// ampliar esta funcion en customizer
+	$widthClass = 'container ';
+	if ($tag == 'open'){ echo '<div id="maincolumns" class="row mx-0 ' . $widthClass . 'mx-auto px-0">';
 	} elseif ($tag == 'close'){ echo '</div><!-- #maincolumns -->'; }
 }
 function orderCols($css){

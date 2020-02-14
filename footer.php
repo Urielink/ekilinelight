@@ -19,7 +19,7 @@
   	
     <?php dynamic_sidebar('footer-w1');?>
   	         
-	<p><small> <?php echo $copyright . ' ' . $madein; ?><a class="goTop float-right" href="#top"><span class="fa fa-chevron-up"></span><?php echo __('Back','ekiline'); ?></a></small></p>
+	<p><small> <?php echo $copyright . ' ' . $madein; ?><a class="goTop float-right" href="#top"><span>&uarr;</span><?php echo __('Back','ekiline'); ?></a></small></p>
   </div>
 </footer><!-- .site-footer -->
 

@@ -43,8 +43,8 @@ if ( post_password_required() ) {
 			<h2 class="screen-reader-text"><?php echo esc_html__( 'Comment navigation', 'ekiline' ); ?></h2>
 			<div class="small nav-links d-flex justify-content-end">
 
-				<div class="nav-previous btn-sm"><?php previous_comments_link( '<span class="fa fa-chevron-left"></span> '.esc_html__( 'Older Comments', 'ekiline' ) ); ?></div>
-				<div class="nav-next btn-sm"><?php next_comments_link( esc_html__( 'Newer Comments', 'ekiline' ).' <span class="fa fa-chevron-right"></span>' ); ?></div>
+				<div class="nav-previous btn-sm"><?php previous_comments_link( '<span>&larr;</span> '.esc_html__( 'Older Comments', 'ekiline' ) ); ?></div>
+				<div class="nav-next btn-sm"><?php next_comments_link( esc_html__( 'Newer Comments', 'ekiline' ).' <span>&rarr;</span>' ); ?></div>
 
 			</div><!-- .nav-links -->
 		</nav><!-- #comment-nav-above -->
