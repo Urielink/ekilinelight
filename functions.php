@@ -41,7 +41,10 @@ function ekiline_setup() {
 	// Menú, Ekiline solo necesita uno: ekilineNavbar('primary') // This theme uses ekilineNavbar('primary') as one location.
 	register_nav_menus( array(
         'primary' => esc_html__( 'Primary Menu', 'ekiline' )
-	) );	
+    ) );	
+    
+    // Gutenberg: alineaciones a todo lo ancho.
+    add_theme_support( 'align-wide' );
 }
 add_action( 'after_setup_theme', 'ekiline_setup' );
 
