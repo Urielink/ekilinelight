@@ -215,6 +215,27 @@ function ekiline_theme_customizer( $wp_customize ) {
 		);
     }	  	
 
+    // Front page categories		
+    $wp_customize->add_setting( 
+        'ekiline_featuredcategories', array(
+                    'default' => 0,
+                    'transport'   => 'refresh',
+                    'sanitize_callback' => 'ekiline_sanitize_multipleselect' 
+        )
+    );
+
+    $wp_customize->add_control(
+        new ekiline_controlMultipleSelect (
+            $wp_customize, 'ekiline_featuredcategories', array(
+                'settings' => 'ekiline_featuredcategories',
+                'label'    => __( 'Featured category', 'ekiline' ),
+                'section'  => 'static_front_page',
+                'type'     => 'multiple-select',
+                'choices' => ekiline_list_categories()
+            )
+        )
+    );  
+
     // Page wide
     $wp_customize->add_section( 
         'ekiline_vista_section' , array(
