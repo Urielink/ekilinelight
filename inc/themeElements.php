@@ -6,19 +6,38 @@
  */
 
 /**
- * Orden de columnas, semantica
- * Columns order, semantics
+ * Ancho de layout
+ * Layout width
+ **/
+function widthControl(){
+	$widthClass = 'container';
+	$widthClassAdd = '-fluid';
+	
+	if( is_front_page() || is_home() ){
+		$widthClass .= ( true === get_theme_mod('ekiline_anchoHome') ) ? $widthClassAdd : '' ;
+	}
+	if( is_archive() || is_category() ){
+		$widthClass .= ( true === get_theme_mod('ekiline_anchoCategory') ) ? $widthClassAdd : '' ;
+	}
+	if( is_single() || is_page() && !is_front_page() ){
+		$widthClass .= ( true === get_theme_mod('ekiline_anchoSingle') ) ? $widthClassAdd : '' ;
+	}
+
+	return $widthClass;
+}
+/**
+ * Orden de columnas
+ * Columns order
  **/
 function mainCols($tag){
 	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
-	// ampliar esta funcion en customizer
-	$widthClass = 'container ';
-	if ($tag == 'open'){ echo '<div id="maincolumns" class="row mx-0 ' . $widthClass . 'mx-auto px-0">';
-	} elseif ($tag == 'close'){ echo '</div><!-- #maincolumns -->'; }
+	// En caso de existir barras laterales agregar envoltorio
+	if ($tag == 'open') echo '<div id="maincolumns" class="row mx-0 ' . widthControl() . ' mx-auto px-0">';
+	if ($tag == 'close') echo '</div><!-- #maincolumns -->'; 
 }
+
 function orderCols($css){
-	// if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
-	$cssMain = 'container';
+	$cssMain = widthControl();//'container ';
 	if (is_active_sidebar( 'sidebar-1') || is_active_sidebar( 'sidebar-2')) {
 	// sidebars.
 		$sbL = is_active_sidebar( 'sidebar-1');
@@ -41,7 +60,54 @@ function orderCols($css){
 	if ($css == 'left') echo $cssLeft;
 	if ($css == 'right') echo $cssRight;
 }
- 
+
+/**
+ * Vista de columnas
+ * Columns view
+ **/
+function viewCols($tag){
+	if ( is_single() || is_front_page() ) return;
+
+	$colSet = get_theme_mod('ekiline_Columns'); 
+	$colContain = ( $colSet == 4 ) ? 'card-columns' : 'row' ;
+
+	if ($colSet > 0){
+		if ($tag == 'open') echo '<div id="viewcolumns" class="'.$colContain.'">';
+		if ($tag == 'close') echo '</div><!-- #viewcolumns -->'; 
+	}
+}
+
+function viewColsFilter($classes) {
+	$colSet = get_theme_mod('ekiline_Columns'); 
+	$colView = '';
+	
+	switch ($colSet) {
+		case 1:
+			$colView = 'col-md-6';
+			break;
+		case 2:
+			$colView = 'col-md-4';
+			break;
+		case 3:
+			$colView = 'col-md-3';
+			break;
+		case 4:
+			$colView = 'card';
+			break;
+	}	
+	
+	if ( is_single() || is_page() || is_front_page()) {
+		$colView = '';
+	};
+
+	$classes[] = $colView;
+    return $classes;
+}
+
+add_filter('post_class', 'viewColsFilter');
+
+
+
  
 /**
  * Paginacion para listados

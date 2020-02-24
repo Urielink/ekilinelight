@@ -20,6 +20,8 @@ get_header(); ?>
 
 <?php dynamic_sidebar( 'content-w1' );?>				
 
+<?php viewCols('open'); ?>
+
 <?php
 	/** Loop https://developer.wordpress.org/themes/basics/the-loop/ **/
 	if ( have_posts() ) { 
@@ -31,6 +33,8 @@ get_header(); ?>
 			get_template_part( 'template-parts/content', 'none' );	
     }	
 ?>
+
+<?php viewCols('close'); ?>
 
 <?php ekiline_archive_pagination(); ?>
 

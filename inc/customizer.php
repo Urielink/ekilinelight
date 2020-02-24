@@ -214,6 +214,83 @@ function ekiline_theme_customizer( $wp_customize ) {
 						) ) 
 		);
     }	  	
+
+    // Page wide
+    $wp_customize->add_section( 
+        'ekiline_vista_section' , array(
+            'title'       => __( 'Site view', 'ekiline' ),
+            'priority'    => 120,
+            'description' => __( 'Allow fullwidth of your website by content type: homepage, categories or single content' , 'ekiline' ),
+        ) 
+    );
+
+        $wp_customize->add_setting(
+            'ekiline_anchoHome', array(
+                    'default' => '',
+                    'sanitize_callback' => 'ekiline_sanitize_checkbox'
+                ) );
+        
+        $wp_customize->add_control(
+            'ekiline_anchoHome', array(
+                'type' => 'checkbox',
+                'label' => __( 'Homepage', 'ekiline' ),
+                'section' => 'ekiline_vista_section',
+            )
+        );      
+        
+        $wp_customize->add_setting(
+            'ekiline_anchoCategory', array(
+                    'default' => '',
+                    'sanitize_callback' => 'ekiline_sanitize_checkbox'
+                ) );
+        
+        $wp_customize->add_control(
+            'ekiline_anchoCategory', array(
+                'type' => 'checkbox',
+                'label' => __( 'Categories', 'ekiline' ),
+                'section' => 'ekiline_vista_section',
+            )
+        ); 
+        
+        $wp_customize->add_setting(
+            'ekiline_anchoSingle', array(
+                    'default' => '',
+                    'sanitize_callback' => 'ekiline_sanitize_checkbox'
+                ) 
+        );
+        
+        $wp_customize->add_control(
+            'ekiline_anchoSingle', array(
+                'type' => 'checkbox',
+                'label' => __( 'Single pages', 'ekiline' ),
+                'section' => 'ekiline_vista_section',
+            )
+        );                 
+        
+    // List items
+    
+    $wp_customize->add_setting(
+        'ekiline_Columns', array(
+                'default' => '0',
+                'sanitize_callback' => 'ekiline_sanitize_select'
+            ) 
+    );
+    
+    $wp_customize->add_control(
+        'ekiline_Columns', array(
+            'type' => 'select',
+            'label' => __( 'Columns', 'ekiline' ),
+            'description' => __( 'Show your lists in columns', 'ekiline' ),
+            'section' => 'ekiline_vista_section',
+            'choices' => array(
+                '0' => __( 'Default', 'ekiline' ),
+                '1' => __( '2 columns', 'ekiline' ),
+                '2' => __( '3 columns', 'ekiline' ),
+                '3' => __( '4 columns', 'ekiline' ),   
+                '4' => __( 'Cards grid', 'ekiline' ),   
+            ),
+        )
+    );  
   
 }
 add_action('customize_register', 'ekiline_theme_customizer');

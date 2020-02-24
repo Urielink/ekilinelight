@@ -1,6 +1,6 @@
 <?php
 /** 
- * Template Name: Full Width Page
+ * Template Name: No sidebars
  * 
  * @package WordPress
  * @subpackage ekiline
@@ -8,7 +8,7 @@
  */ 
 get_header(); ?>
 
-<main id="primary" class="container-fluid px-0">
+<main id="primary" class="<?php echo widthControl();?>">
 
 <?php dynamic_sidebar( 'content-w1' );?>				
 
