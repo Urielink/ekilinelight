@@ -66,7 +66,7 @@ function orderCols($css){
  * Columns view
  **/
 function viewCols($tag){
-	if ( is_single() || is_front_page() ) return;
+	if ( is_single() || is_page() || is_front_page() || is_search() ) return;
 
 	$colSet = get_theme_mod('ekiline_Columns'); 
 	$colContain = ( $colSet == 4 ) ? 'card-columns' : 'row' ;
@@ -96,9 +96,9 @@ function viewColsFilter($classes) {
 			break;
 	}	
 	
-	if ( is_single() || is_page() || is_front_page()) {
+	if ( is_single() || is_page() || is_front_page() || is_search() ) {
 		$colView = '';
-	};
+	}
 
 	$classes[] = $colView;
     return $classes;
