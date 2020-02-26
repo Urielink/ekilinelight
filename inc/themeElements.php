@@ -25,6 +25,36 @@ function widthControl(){
 
 	return $widthClass;
 }
+
+/**
+ * Ancho de layout sin sidebars
+ * Layout width, no sidebars
+ * https://chrisblackwell.me/hide-widgets-specific-wordpress-pages/
+ **/
+
+function remove_about_me_widget( $sidebars_widgets ) {
+
+    if( is_front_page() || is_home() ) {
+		if (true === get_theme_mod('ekiline_anchoHome')){
+			unset($sidebars_widgets['sidebar-1']);
+			unset($sidebars_widgets['sidebar-2']);
+		}
+	} elseif ( is_archive() || is_category() ) {
+		if (true === get_theme_mod('ekiline_anchoCategory')){
+			unset($sidebars_widgets['sidebar-1']);
+			unset($sidebars_widgets['sidebar-2']);
+		}
+    } elseif ( is_single() || is_page() && !is_front_page() ) {
+		if (true === get_theme_mod('ekiline_anchoSingle')){
+			unset($sidebars_widgets['sidebar-1']);
+			unset($sidebars_widgets['sidebar-2']);
+		}
+    } 
+	
+    return $sidebars_widgets;
+}
+add_filter( 'sidebars_widgets', 'remove_about_me_widget' );
+
 /**
  * Orden de columnas
  * Columns order
