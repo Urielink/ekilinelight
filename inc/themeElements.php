@@ -34,49 +34,31 @@ function widthControl(){
 
 function viewSbarFilter($wsbCtl) {
 
+	$opt = '';
+
 	if( is_front_page() || is_home() ){
-		switch ( get_theme_mod('ekiline_disableSbHome' ) ) {
-			case 1:
-				unset($wsbCtl['sidebar-1']);
-				break;
-			case 2:
-				unset($wsbCtl['sidebar-2']);
-				break;
-			case 3:
-				unset($wsbCtl['sidebar-1']);
-				unset($wsbCtl['sidebar-2']);			
-				break;
-		}
+		$opt = get_theme_mod('ekiline_disableSbHome' );
 	}
 
 	if( is_archive() || is_category() ){
-		switch ( get_theme_mod('ekiline_disableSbArchive' ) ) {
-			case 1:
-				unset($wsbCtl['sidebar-1']);
-				break;
-			case 2:
-				unset($wsbCtl['sidebar-2']);
-				break;
-			case 3:
-				unset($wsbCtl['sidebar-1']);
-				unset($wsbCtl['sidebar-2']);			
-				break;
-		}
+		$opt = get_theme_mod('ekiline_disableSbArchive' );
 	}
 
 	if( is_single() || is_page() && !is_front_page() ){
-		switch ( get_theme_mod('ekiline_disableSbSingle' ) ) {
-			case 1:
-				unset($wsbCtl['sidebar-1']);
-				break;
-			case 2:
-				unset($wsbCtl['sidebar-2']);
-				break;
-			case 3:
-				unset($wsbCtl['sidebar-1']);
-				unset($wsbCtl['sidebar-2']);			
-				break;
-		}
+		$opt = get_theme_mod('ekiline_disableSbSingle' );
+	}
+
+	switch ( $opt ) {
+		case 1:
+			unset($wsbCtl['sidebar-1']);
+			break;
+		case 2:
+			unset($wsbCtl['sidebar-2']);
+			break;
+		case 3:
+			unset($wsbCtl['sidebar-1']);
+			unset($wsbCtl['sidebar-2']);			
+			break;
 	}
 
 	return $wsbCtl;	

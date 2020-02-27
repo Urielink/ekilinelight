@@ -245,25 +245,28 @@ function ekiline_theme_customizer( $wp_customize ) {
         ) 
     );
 
-    // Layout control and full width
-    $iLayout = ['Home','Archive','Single'];
+    // Layout control and full width    
+    $iLayout = array();
+        $iLayout[] = array( 'name'=>'Home', 'label' => __( 'Home and blog page', 'ekiline' ) );
+        $iLayout[] = array( 'name'=>'Archive', 'label' => __( 'Categories and archive pages', 'ekiline' ) );
+        $iLayout[] = array( 'name'=>'Single', 'label' => __( 'Entries and single pages', 'ekiline' ) );
 
         foreach($iLayout as $value) {
 
             $wp_customize->add_setting(
-                'ekiline_disableSb' . $value, array(
+                'ekiline_disableSb' . $value['name'], array(
                         'default' => '0',
                         'sanitize_callback' => 'ekiline_sanitize_select'
                     ) 
             );
 
             $wp_customize->add_control(
-                'ekiline_disableSb' . $value, array(
+                'ekiline_disableSb' . $value['name'], array(
                     'type' => 'select',
-                    'label' => __( $value . ' layout', 'ekiline' ),
+                    'label' => __( $value['label'], 'ekiline' ),
                     'section' => 'ekiline_vista_section',
                     'choices' => array(
-                        '0' => __( 'Active sidebars in ' . $value, 'ekiline' ),
+                        '0' => __( 'Enabled sidebars', 'ekiline' ),
                         '1' => __( 'Disable left', 'ekiline' ),
                         '2' => __( 'Disable right', 'ekiline' ),
                         '3' => __( 'Disable both', 'ekiline' ),   
@@ -272,16 +275,16 @@ function ekiline_theme_customizer( $wp_customize ) {
             );   
             
             $wp_customize->add_setting(
-                'ekiline_ancho' . $value, array(
+                'ekiline_ancho' . $value['name'], array(
                         'default' => '',
                         'sanitize_callback' => 'ekiline_sanitize_checkbox'
                     ) 
                 );
             
             $wp_customize->add_control(
-                'ekiline_ancho' . $value, array(
+                'ekiline_ancho' . $value['name'], array(
                     'type' => 'checkbox',
-                    'label' => __( 'Show ' . $value . ' full width', 'ekiline' ),
+                    'label' => __( 'Show full width layout', 'ekiline' ),
                     'section' => 'ekiline_vista_section',
                 )
             );   
