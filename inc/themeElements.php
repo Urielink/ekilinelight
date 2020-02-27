@@ -17,7 +17,7 @@ function widthControl(){
 		$widthClass .= ( true === get_theme_mod('ekiline_anchoHome') ) ? $widthClassAdd : '' ;
 	}
 	if( is_archive() || is_category() ){
-		$widthClass .= ( true === get_theme_mod('ekiline_anchoCategory') ) ? $widthClassAdd : '' ;
+		$widthClass .= ( true === get_theme_mod('ekiline_anchoArchive') ) ? $widthClassAdd : '' ;
 	}
 	if( is_single() || is_page() && !is_front_page() ){
 		$widthClass .= ( true === get_theme_mod('ekiline_anchoSingle') ) ? $widthClassAdd : '' ;
@@ -32,28 +32,57 @@ function widthControl(){
  * https://chrisblackwell.me/hide-widgets-specific-wordpress-pages/
  **/
 
-function remove_about_me_widget( $sidebars_widgets ) {
+function viewSbarFilter($wsbCtl) {
 
-    if( is_front_page() || is_home() ) {
-		if (true === get_theme_mod('ekiline_anchoHome')){
-			unset($sidebars_widgets['sidebar-1']);
-			unset($sidebars_widgets['sidebar-2']);
+	if( is_front_page() || is_home() ){
+		switch ( get_theme_mod('ekiline_disableSbHome' ) ) {
+			case 1:
+				unset($wsbCtl['sidebar-1']);
+				break;
+			case 2:
+				unset($wsbCtl['sidebar-2']);
+				break;
+			case 3:
+				unset($wsbCtl['sidebar-1']);
+				unset($wsbCtl['sidebar-2']);			
+				break;
 		}
-	} elseif ( is_archive() || is_category() ) {
-		if (true === get_theme_mod('ekiline_anchoCategory')){
-			unset($sidebars_widgets['sidebar-1']);
-			unset($sidebars_widgets['sidebar-2']);
+	}
+
+	if( is_archive() || is_category() ){
+		switch ( get_theme_mod('ekiline_disableSbArchive' ) ) {
+			case 1:
+				unset($wsbCtl['sidebar-1']);
+				break;
+			case 2:
+				unset($wsbCtl['sidebar-2']);
+				break;
+			case 3:
+				unset($wsbCtl['sidebar-1']);
+				unset($wsbCtl['sidebar-2']);			
+				break;
 		}
-    } elseif ( is_single() || is_page() && !is_front_page() ) {
-		if (true === get_theme_mod('ekiline_anchoSingle')){
-			unset($sidebars_widgets['sidebar-1']);
-			unset($sidebars_widgets['sidebar-2']);
+	}
+
+	if( is_single() || is_page() && !is_front_page() ){
+		switch ( get_theme_mod('ekiline_disableSbSingle' ) ) {
+			case 1:
+				unset($wsbCtl['sidebar-1']);
+				break;
+			case 2:
+				unset($wsbCtl['sidebar-2']);
+				break;
+			case 3:
+				unset($wsbCtl['sidebar-1']);
+				unset($wsbCtl['sidebar-2']);			
+				break;
 		}
-    } 
-	
-    return $sidebars_widgets;
+	}
+
+	return $wsbCtl;	
+
 }
-add_filter( 'sidebars_widgets', 'remove_about_me_widget' );
+add_filter( 'sidebars_widgets', 'viewSbarFilter' );
 
 /**
  * Orden de columnas
@@ -96,7 +125,7 @@ function orderCols($css){
  * Columns view
  **/
 function viewCols($tag){
-	if ( is_single() || is_page() || is_front_page() || is_search() ) return;
+	if ( is_single() || is_page() || is_search() ) return;
 
 	$colSet = get_theme_mod('ekiline_Columns'); 
 	$colContain = ( $colSet == 4 ) ? 'card-columns' : 'row' ;
@@ -126,7 +155,7 @@ function viewColsFilter($classes) {
 			break;
 	}	
 	
-	if ( is_single() || is_page() || is_front_page() || is_search() ) {
+	if ( is_single() || is_page() || is_search() ) {
 		$colView = '';
 	}
 

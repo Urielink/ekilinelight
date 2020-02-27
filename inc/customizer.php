@@ -245,50 +245,50 @@ function ekiline_theme_customizer( $wp_customize ) {
         ) 
     );
 
-        $wp_customize->add_setting(
-            'ekiline_anchoHome', array(
-                    'default' => '',
-                    'sanitize_callback' => 'ekiline_sanitize_checkbox'
-                ) );
-        
-        $wp_customize->add_control(
-            'ekiline_anchoHome', array(
-                'type' => 'checkbox',
-                'label' => __( 'Homepage', 'ekiline' ),
-                'section' => 'ekiline_vista_section',
-            )
-        );      
-        
-        $wp_customize->add_setting(
-            'ekiline_anchoCategory', array(
-                    'default' => '',
-                    'sanitize_callback' => 'ekiline_sanitize_checkbox'
-                ) );
-        
-        $wp_customize->add_control(
-            'ekiline_anchoCategory', array(
-                'type' => 'checkbox',
-                'label' => __( 'Categories', 'ekiline' ),
-                'section' => 'ekiline_vista_section',
-            )
-        ); 
-        
-        $wp_customize->add_setting(
-            'ekiline_anchoSingle', array(
-                    'default' => '',
-                    'sanitize_callback' => 'ekiline_sanitize_checkbox'
-                ) 
-        );
-        
-        $wp_customize->add_control(
-            'ekiline_anchoSingle', array(
-                'type' => 'checkbox',
-                'label' => __( 'Single pages', 'ekiline' ),
-                'section' => 'ekiline_vista_section',
-            )
-        );                 
-        
-    // List items
+    // Layout control and full width
+    $iLayout = ['Home','Archive','Single'];
+
+        foreach($iLayout as $value) {
+
+            $wp_customize->add_setting(
+                'ekiline_disableSb' . $value, array(
+                        'default' => '0',
+                        'sanitize_callback' => 'ekiline_sanitize_select'
+                    ) 
+            );
+
+            $wp_customize->add_control(
+                'ekiline_disableSb' . $value, array(
+                    'type' => 'select',
+                    'label' => __( $value . ' layout', 'ekiline' ),
+                    'section' => 'ekiline_vista_section',
+                    'choices' => array(
+                        '0' => __( 'Active sidebars in ' . $value, 'ekiline' ),
+                        '1' => __( 'Disable left', 'ekiline' ),
+                        '2' => __( 'Disable right', 'ekiline' ),
+                        '3' => __( 'Disable both', 'ekiline' ),   
+                    ),
+                )
+            );   
+            
+            $wp_customize->add_setting(
+                'ekiline_ancho' . $value, array(
+                        'default' => '',
+                        'sanitize_callback' => 'ekiline_sanitize_checkbox'
+                    ) 
+                );
+            
+            $wp_customize->add_control(
+                'ekiline_ancho' . $value, array(
+                    'type' => 'checkbox',
+                    'label' => __( 'Show ' . $value . ' full width', 'ekiline' ),
+                    'section' => 'ekiline_vista_section',
+                )
+            );   
+
+        } 
+    
+    // List grid items
     
     $wp_customize->add_setting(
         'ekiline_Columns', array(
@@ -311,7 +311,7 @@ function ekiline_theme_customizer( $wp_customize ) {
                 '4' => __( 'Cards grid', 'ekiline' ),   
             ),
         )
-    );  
+    );      
   
 }
 add_action('customize_register', 'ekiline_theme_customizer');

@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-02-23 16:07-0600\n"
+"PO-Revision-Date: 2020-02-26 15:37-0600\n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.8.12\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -331,15 +331,15 @@ msgid "Site view"
 msgstr "Vista del sitio"
 
 msgid "Allow fullwidth of your website by content type: homepage, categories or single content"
-msgstr "Elige alguna de las opciones si necesitas mostrar el contenido de tu sitio a todo lo ancho"
+msgstr "Elige alguna opción para mostrar el sitio a todo lo ancho por contenido: home o blog, categorias o entradas"
 
-msgid "Homepage"
+msgid "Home and blog page"
 msgstr "Home y página de entradas"
 
-msgid "Categories"
+msgid "Categories and archive pages"
 msgstr "Categorías y listados de archivo"
 
-msgid "Single pages"
+msgid "Entries and pages"
 msgstr "Entradas y páginas"
 
 msgid "Centered"
