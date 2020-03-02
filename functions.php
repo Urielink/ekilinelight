@@ -97,6 +97,17 @@ function ekiline_widgets_init() {
         'after_title'   => '</h4>',
     ) );
 
+// Widgets between content and footer
+    register_sidebar( array(
+        'name'          => esc_html__( 'Top above footer', 'ekiline' ),
+        'id'            => 'footer-w2',
+        'description'   => '',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h4 class="widget-title">',
+        'after_title'   => '</h4>',
+    ) );   
+
 // Widgets at top of content
     register_sidebar( array(
         'name'          => esc_html__( 'Top first over all content', 'ekiline' ),
@@ -127,8 +138,8 @@ function ekiline_widgets_init() {
         'after_widget'  => '</div>',
         'before_title'  => '<p class="lead font-weight-bold widget-title">',
         'after_title'   => '</p>',
-    ) );
-               	
+    ) ); 
+    
 }
 add_action( 'widgets_init', 'ekiline_widgets_init' );
 
@@ -182,5 +193,6 @@ require get_template_directory() . '/inc/themeNavwalker.php';
 require get_template_directory() . '/inc/themeElements.php';
 require get_template_directory() . '/inc/themeMeta.php';
 require get_template_directory() . '/inc/themeFeaturedCategories.php';
+require get_template_directory() . '/inc/widgetOptions.php';
 
 

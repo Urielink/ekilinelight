@@ -230,3 +230,24 @@ function ekiline_archive_pagination() {
     );
 	return $colores;
  } 
+
+ /**
+ * Widgets en footer
+ **/
+function ekiline_countWidgets( $widgetZone ){
+
+	if ( is_active_sidebar($widgetZone) ) :
+		
+		$the_sidebars = wp_get_sidebars_widgets();
+		$count_sidebars = count( $the_sidebars[$widgetZone] );  
+
+		if ($count_sidebars >= '2'){
+			echo '<div class="row justify-content-between">';
+				dynamic_sidebar($widgetZone);    
+			echo '</div>';
+		} else {
+			dynamic_sidebar($widgetZone);
+		}
+
+	endif;
+}
