@@ -147,9 +147,15 @@ function viewColsFilter($classes) {
 
 add_filter('post_class', 'viewColsFilter');
 
+/**
+ * Reemplazar el marcado para el enlace de leer más.
+ */
+function overrideReadMoreLink(){
+	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), get_the_title() ) . '">'. __( 'Read more', 'ekiline') .'</a>';
+}
+add_filter( 'the_content_more_link', 'overrideReadMoreLink' );
 
 
- 
 /**
  * Paginacion para listados
  * Paginate links

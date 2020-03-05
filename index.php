@@ -27,11 +27,15 @@ get_header(); ?>
 	if ( have_posts() ) { 
 		while ( have_posts() ) : 
 			the_post();
-			if ( is_archive() || is_home() && get_theme_mod('ekiline_Columns') == 4 ){
-				get_template_part( 'template-parts/content', 'card' );	
-			} else {
-				get_template_part( 'template-parts/content', get_post_format() );	
+
+			$postFormat = get_post_format();
+			
+			if ( get_theme_mod('ekiline_Columns') == 4 ){
+				$postFormat = ( is_archive() || is_home() ) ? 'card' : '' ;
 			}
+
+			get_template_part( 'template-parts/content', $postFormat );	
+
 		endwhile;	
     } else {
 			get_template_part( 'template-parts/content', 'none' );	

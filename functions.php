@@ -23,8 +23,8 @@ function ekiline_setup() {
 	// Permitir miniaturas // Enable support for Post Thumbnails on posts and pages.
 	add_theme_support( 'post-thumbnails' );
 
-	// Permitir uso de HTML5 en formularios. // Switch default core markup for search form, comment form, and comments
-	$htmlDef = array('search-form','comment-form','comment-list','gallery','caption');
+	// Permitir uso de HTML5 en formularios y marcado simple. // Switch default core markup for search form, comment form, and comments
+	$htmlDef = array('search-form','comment-form','comment-list','gallery','caption','script', 'style');
 	add_theme_support( 'html5', $htmlDef );
 
 	// Formatos de entradas // Enable support for Post Formats.
@@ -42,7 +42,7 @@ function ekiline_setup() {
 	register_nav_menus( array(
         'primary' => esc_html__( 'Primary Menu', 'ekiline' )
     ) );	
-    
+
     // Gutenberg: alineaciones a todo lo ancho.
     add_theme_support( 'align-wide' );
 }
