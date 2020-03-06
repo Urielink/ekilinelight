@@ -226,11 +226,11 @@ function ekiline_archive_pagination() {
 	    'b4warning' => get_option('b4_warning','#ffc107'),
 	    'b4info' => get_option('b4_info','#17a2b8'),
 	    'b4light' => get_option('b4_light','#f8f9fa'),
-	    'b4dark' => get_option('b4_dark','#343a40')
+	    'b4dark' => get_option('b4_dark','#343a40'),
 		// estos valores se aplican independientes a bootstrap.
-	    // 'enlaces' => get_option('links_color','#007bff'),
-	    // 'footer' => get_option('footer_color','#eeeeee'),
-	    // 'ftxt' => get_option('ftext_color','#333333'),
+	    // 'footer' => get_option('footer_color','#343a40'),
+	    // 'ftxt' => get_option('ftext_color','#ffffff'),
+	    // 'flinks' => get_option('flinks_color','#007bff'),
 	    // 'menu' => get_option('menu_color'),
 	    // 'mgradient' => get_option('menu_gradient')
     );

@@ -4,6 +4,9 @@ jQuery(document).ready(function($){
 		
 			var bgColor = themeColors.fondo;
 			var txColor = themeColors.texto;
+			// var bgFtColor = themeColors.footer;
+			// var txFtColor = themeColors.ftxt;
+			// var aFtColor = themeColors.flinks;
 	
 			var colPri = themeColors.b4primary;
 			var colSec = themeColors.b4secondary;
@@ -14,7 +17,7 @@ jQuery(document).ready(function($){
 			var colLig = themeColors.b4light;
 			var colDak = themeColors.b4dark;
 			
-			// console.log( bgColor, txColor, colPri, colSec, colSuc, colDan, colWar, colInf, colLig, colDak )
+			// console.log( bgColor, txColor, bgFtColor, txFtColor, colPri, colSec, colSuc, colDan, colWar, colInf, colLig, colDak )
 
 			// funcion que genera varios tonos.
 
@@ -147,6 +150,10 @@ jQuery(document).ready(function($){
 					'$bgColIn' : bgColor004,//'#ffffff',
 					'$aColor' : colPri,//'#007bff'
 					'$aHColor' : aHColor,//'#007bff',
+//otros valores en el tema
+					// '$bgFtColor' : bgFtColor,//'#212529',
+					// '$txFtColor' : txFtColor,//'#ffffff',
+					// '$aFtColor' : aFtColor,
 //gris default, afecta multiples items					
 					'$capTxColor' : colSec, //'#6c757d', 
 					'$hrBdtColor' : hrBdtColor, //'rgba(0,0,0,0.1)',
@@ -297,6 +304,8 @@ jQuery(document).ready(function($){
 					cssall += 'code{color:' + $codtxc + ';}\n';
 					cssall += 'kbd{color:' + $bgColor + ';background-color:' + $txColor + ';}\n';
 					cssall += 'pre{color:' + $txColor + ';}\n';
+					// cssall += '.site-footer{color:' + $txFtColor + ';background-color:' + $bgFtColor + ';}\n';
+					// cssall += '.site-footer a{color:' + $aFtColor + ';}\n';
 
 					/**tablas**/
 					cssall += '.table th,.table td{border-top-color:' + $imgthBdc + ';}\n';
@@ -662,7 +671,7 @@ jQuery(document).ready(function($){
 					cssall += '.navbar-light .navbar-text a{color:' + $nvLigBrdTxc + ';}\n';
 					cssall += '.navbar-light .navbar-text a:hover,.navbar-light .navbar-text a:focus{color:' + $nvLigBrdTxc + ';}\n';
 
-					cssall += '.navbar-dark .navbar-brand{color:' + $bgColor + ';}\n';
+					// cssall += '.navbar-dark .navbar-brand{color:' + $bgColor + ';}\n';
 					cssall += '.navbar-dark .navbar-brand:hover,.navbar-dark .navbar-brand:focus{color:' + $bgColor + ';}\n';
 					cssall += '.navbar-dark .navbar-nav .nav-link{color:' + $nvDakNvTxc + ';}\n';
 					cssall += '.navbar-dark .navbar-nav .nav-link:hover,.navbar-dark .navbar-nav .nav-link:focus{color:' + $nvDakNvHTxc + ';}\n';
