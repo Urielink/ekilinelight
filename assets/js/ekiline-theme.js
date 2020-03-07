@@ -1,13 +1,16 @@
 /* Ekiline for WordPress Theme, Copyright 2018 Uri Lazcano. Ekiline is distributed under the terms of the GNU GPL. http://ekiline.com */
 
 jQuery(document).ready(function($){
-		
+		 //pagina		
 			var bgColor = themeColors.fondo;
 			var txColor = themeColors.texto;
-			// var bgFtColor = themeColors.footer;
-			// var txFtColor = themeColors.ftxt;
-			// var aFtColor = themeColors.flinks;
-	
+		//navbar
+			var bgNvColor = themeColors.menu;
+		//footer
+			var bgFtColor = themeColors.footer;
+			var txFtColor = themeColors.ftxt;
+			var aFtColor = themeColors.flinks;
+		//bootstrap
 			var colPri = themeColors.b4primary;
 			var colSec = themeColors.b4secondary;
 			var colSuc = themeColors.b4success;
@@ -17,7 +20,7 @@ jQuery(document).ready(function($){
 			var colLig = themeColors.b4light;
 			var colDak = themeColors.b4dark;
 			
-			// console.log( bgColor, txColor, bgFtColor, txFtColor, colPri, colSec, colSuc, colDan, colWar, colInf, colLig, colDak )
+			// console.log( bgColor, txColor, bgNvColor, bgFtColor, txFtColor, colPri, colSec, colSuc, colDan, colWar, colInf, colLig, colDak )
 
 			// funcion que genera varios tonos.
 
@@ -151,9 +154,10 @@ jQuery(document).ready(function($){
 					'$aColor' : colPri,//'#007bff'
 					'$aHColor' : aHColor,//'#007bff',
 //otros valores en el tema
-					// '$bgFtColor' : bgFtColor,//'#212529',
-					// '$txFtColor' : txFtColor,//'#ffffff',
-					// '$aFtColor' : aFtColor,
+					'$bgFtColor' : bgFtColor,//'#212529',
+					'$txFtColor' : txFtColor,//'#ffffff',
+					'$aFtColor' : aFtColor,
+					'$bgNvColor' : bgNvColor,
 //gris default, afecta multiples items					
 					'$capTxColor' : colSec, //'#6c757d', 
 					'$hrBdtColor' : hrBdtColor, //'rgba(0,0,0,0.1)',
@@ -304,8 +308,13 @@ jQuery(document).ready(function($){
 					cssall += 'code{color:' + $codtxc + ';}\n';
 					cssall += 'kbd{color:' + $bgColor + ';background-color:' + $txColor + ';}\n';
 					cssall += 'pre{color:' + $txColor + ';}\n';
-					// cssall += '.site-footer{color:' + $txFtColor + ';background-color:' + $bgFtColor + ';}\n';
-					// cssall += '.site-footer a{color:' + $aFtColor + ';}\n';
+					// otros elementos
+				cssall += '.site-footer{color:' + $txFtColor + ';background-color:' + $bgFtColor + ';}\n';
+				cssall += '.site-footer a{color:' + $aFtColor + ';}\n';
+				// el menu	
+				if ( $bgNvColor !== '#f9fafbFF' ){
+					cssall += '.primary-navbar.bg-light,.primary-navbar.bg-dark{background-color:' + $bgNvColor + ' !important;}\n';
+				}
 
 					/**tablas**/
 					cssall += '.table th,.table td{border-top-color:' + $imgthBdc + ';}\n';
@@ -1065,21 +1074,19 @@ jQuery(document).ready(function($){
 				 * obtener los valores css y pasar cada uno por alguna funcion */
 
 				Object.keys(cssValues).forEach(function(key) {
+						// 1 todos los tonos HEX a RGBA, manteniendo opacidad.
+						var nc = hexToRgbA(cssValues[key]);
+						// 2 todos RGBA a HEX con opacidad
+						var nc3 = rgbaToHexOp(nc);
+						// 3 todos los hexadecimales con opacidad, cambiar a HSL
+						var nc4 = HexAHslvar(nc3, 0, 0, 0);
 
-					// 1 todos los tonos HEX a RGBA, manteniendo opacidad.
-					var nc = hexToRgbA(cssValues[key]);
-					// 2 todos RGBA a HEX con opacidad
-					var nc3 = rgbaToHexOp(nc);
-					// 3 todos los hexadecimales con opacidad, cambiar a HSL
-					var nc4 = HexAHslvar(nc3, 0, 0, 0);
-
-					all2rgba.push({
-						'item' : key, // el color original
-						'rgba' : nc, // el color en RGBA
-						'hexop' : nc3, // el color HEX con Opacidad
-						'hexhsl' : nc4 // el color HSL a HEX
-					});
-
+						all2rgba.push({
+							'item' : key, // el color original
+							'rgba' : nc, // el color en RGBA
+							'hexop' : nc3, // el color HEX con Opacidad
+							'hexhsl' : nc4 // el color HSL a HEX
+						});
 				});
 
 				/**

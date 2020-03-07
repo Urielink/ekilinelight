@@ -217,22 +217,24 @@ function ekiline_archive_pagination() {
  function ekiline_themeColors(){
  	 	 	
  	$colores = array(
+		 //pagina
 	    'fondo' => get_option('back_color','#ffffff'),
-	    'texto' => get_option('text_color','#333333'),
-	    'b4primary' => get_option('b4_primary','#007bff'),
+		'texto' => get_option('text_color','#333333'),
+		//navbar
+		'menu' => get_option('menu_color','#f8f9fa'),
+		//footer
+	    'footer' => get_option('footer_color','#343a40'),
+	    'ftxt' => get_option('ftext_color','#ffffff'),
+		'flinks' => get_option('flinks_color','#007bff'),
+		//bootstrap
+		'b4primary' => get_option('b4_primary','#007bff'),
 	    'b4secondary' => get_option('b4_secondary','#6c757d'),
 	    'b4success' => get_option('b4_success','#28a745'),
 	    'b4danger' => get_option('b4_danger','#dc3545'),
 	    'b4warning' => get_option('b4_warning','#ffc107'),
 	    'b4info' => get_option('b4_info','#17a2b8'),
 	    'b4light' => get_option('b4_light','#f8f9fa'),
-	    'b4dark' => get_option('b4_dark','#343a40'),
-		// estos valores se aplican independientes a bootstrap.
-	    // 'footer' => get_option('footer_color','#343a40'),
-	    // 'ftxt' => get_option('ftext_color','#ffffff'),
-	    // 'flinks' => get_option('flinks_color','#007bff'),
-	    // 'menu' => get_option('menu_color'),
-	    // 'mgradient' => get_option('menu_gradient')
+	    'b4dark' => get_option('b4_dark','#343a40')
     );
 	return $colores;
  } 

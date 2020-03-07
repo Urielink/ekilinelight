@@ -39,8 +39,7 @@ function ekilineNavbar($navPosition){
 	if ( !has_nav_menu( $navPosition ) ) return; 
 		
 		// invertir color (class css)
-        $inverseMenu = 'navbar-light bg-light ';
-		if( true === get_theme_mod('ekiline_inversemenu') ) : $inverseMenu = 'navbar-dark bg-dark ';  endif;
+		$inverseMenu = ( true === get_theme_mod('ekiline_inversemenu') ) ? 'navbar-dark bg-dark ' : 'navbar-light bg-light ' ;
 
 		// clase auxiliar alineación de items, transformar a header.
         $navAlign = '';
