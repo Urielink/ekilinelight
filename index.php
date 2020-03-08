@@ -18,7 +18,9 @@ get_header(); ?>
 
 <main id="primary" class="<?php orderCols('main');?>">
 
-<?php dynamic_sidebar( 'content-w1' );?>				
+<?php the_archive_title( '<h1 class="page-title">', '</h1>' );?>	
+
+<?php dynamic_sidebar( 'content-w1' );?>
 
 <?php viewCols('open'); ?>
 

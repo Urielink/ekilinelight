@@ -4,12 +4,17 @@ jQuery(document).ready(function($){
 		 //pagina		
 			var bgColor = themeColors.fondo;
 			var txColor = themeColors.texto;
+			var mainColor = themeColors.main;
 		//navbar
 			var bgNvColor = themeColors.menu;
 		//footer
 			var bgFtColor = themeColors.footer;
 			var txFtColor = themeColors.ftxt;
 			var aFtColor = themeColors.flinks;
+		//footer-bar
+			var FbColor = themeColors.fbar;
+			var txFbColor = themeColors.fbartxt;
+			var aFbColor = themeColors.fbarlks;
 		//bootstrap
 			var colPri = themeColors.b4primary;
 			var colSec = themeColors.b4secondary;
@@ -154,9 +159,13 @@ jQuery(document).ready(function($){
 					'$aColor' : colPri,//'#007bff'
 					'$aHColor' : aHColor,//'#007bff',
 //otros valores en el tema
-					'$bgFtColor' : bgFtColor,//'#212529',
-					'$txFtColor' : txFtColor,//'#ffffff',
+					'$bgFtColor' : bgFtColor,
+					'$txFtColor' : txFtColor,
 					'$aFtColor' : aFtColor,
+					'$FbColor' : FbColor,
+					'$txFbColor' : txFbColor,
+					'$aFbColor' : aFbColor,
+					'$mainColor' : mainColor,
 					'$bgNvColor' : bgNvColor,
 //gris default, afecta multiples items					
 					'$capTxColor' : colSec, //'#6c757d', 
@@ -309,11 +318,29 @@ jQuery(document).ready(function($){
 					cssall += 'kbd{color:' + $bgColor + ';background-color:' + $txColor + ';}\n';
 					cssall += 'pre{color:' + $txColor + ';}\n';
 					// otros elementos
-				cssall += '.site-footer{color:' + $txFtColor + ';background-color:' + $bgFtColor + ';}\n';
-				cssall += '.site-footer a{color:' + $aFtColor + ';}\n';
+
+				cssall += '.site-footer{color:' + $txFtColor + ';}\n';
+				if ( $aFtColor !== '#007bffFF' ){
+					cssall += '.site-footer a{color:' + $aFtColor + ';}\n';
+				}
+				if ( $bgFtColor !== '#353b41FF' ){
+					cssall += '.site-footer.bg-dark{background-color:' + $bgFtColor + ' !important;}\n';
+				}
+				// footer-bar
+				cssall += '.footer-bar{color:' + $txFbColor + ';}\n';
+				if ( $aFbColor !== '#007bffFF' ){
+					cssall += '.footer-bar a{color:' + $aFbColor + ';}\n';
+				}				
+				if ( $FbColor !== '#6d767eFF' ){
+					cssall += '.footer-bar.bg-secondary{background-color:' + $FbColor + ' !important;}\n';
+				}
+
 				// el menu	
-				if ( $bgNvColor !== '#f9fafbFF' ){
+				if ( $bgNvColor !== '#353b41FF' ){
 					cssall += '.primary-navbar.bg-light,.primary-navbar.bg-dark{background-color:' + $bgNvColor + ' !important;}\n';
+				}
+				if ( $mainColor !== '#f9fafbFF' ){
+					cssall += '.bg-main{background-color:' + $mainColor + ' !important;}\n';
 				}
 
 					/**tablas**/
@@ -599,9 +626,9 @@ jQuery(document).ready(function($){
 				cssall += '.btn-link:disabled,.btn-link.disabled{color:' + $capTxColor + ';}\n';
 
 					/**Dropdowns**/
-					cssall += '.dropdown-menu{color:' + $txColor + ';background-color:' + $bgColor + ';border-color:' + $ddMnBdc + ';}\n';
+					cssall += '.dropdown-menu{color:' + $txColor + ';background-color:' + $bgColor + ';border-color:' + $thLigBgc + ';}\n';
 					cssall += '.dropdown-divider{border-top-color:' + $thLigBgc + ';}\n';
-					cssall += '.dropdown-item{color:' + $txColor + ';}\n';
+					cssall += '.dropdown-item{color:' + $txColor + '!important;}\n';
 					cssall += '.dropdown-item:hover,.dropdown-item:focus{color:' + $ddItHTxc + ';background-color:' + $btnLigBgc + ';}\n';
 				cssall += '.dropdown-item.active,.dropdown-item:active{color:' + $bgColor + ';background-color:' + $aColor + ';}\n';
 				cssall += '.dropdown-item.disabled,.dropdown-item:disabled{color:' + $capTxColor + ';}\n';
@@ -848,7 +875,7 @@ jQuery(document).ready(function($){
 					cssall += 'a.bg-light:hover,a.bg-light:focus,button.bg-light:hover,button.bg-light:focus{background-color:' + $btnLigHBdc + ' !important;}\n';
 					cssall += '.bg-dark{background-color:' + $btnDakBgc + ' !important;}\n';
 					cssall += 'a.bg-dark:hover,a.bg-dark:focus,button.bg-dark:hover,button.bg-dark:focus{background-color:' + $btnDakHBdc + ' !important;}\n';
-					cssall += '.bg-white{background-color:' + $bgColor + ' !important;}\n';
+					// cssall += '.bg-white{background-color:' + $bgColor + ' !important;}\n';
 
 					/**Borders**/
 					cssall += '.border{border-color:' + $imgthBdc + ' !important;}\n';

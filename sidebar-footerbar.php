@@ -9,8 +9,8 @@
 if (!is_active_sidebar( 'footer-w2' )) return;
 ?>
 
-<aside class="footer-bar pt-4 pb-2">
-  <div class="container">  	
+<div class="footer-bar bg-secondary">
+  <div class="pt-4 pb-2 container">  	
     <?php ekiline_countWidgets('footer-w2'); ?>  	         
   </div>
-</aside><!-- .footer-bar -->
+</div><!-- .footer-bar -->

@@ -23,6 +23,9 @@ function widthControl(){
 		$widthClass .= ( true === get_theme_mod('ekiline_anchoSingle') ) ? $widthClassAdd : '' ;
 	}
 
+	// proteccion a la lectura en caso de imagen
+	$widthClass .= ( get_option('main_color') != '#f8f9fa' ) ? ' bg-main' : '' ;
+
 	return $widthClass;
 }
 
@@ -148,6 +151,41 @@ function viewColsFilter($classes) {
 add_filter('post_class', 'viewColsFilter');
 
 /**
+ * Colores dinamicos: Customizer
+ * functions #159 localize script = ekiline_themeColors().
+ **/
+
+function ekiline_themeColors(){
+ 	 	 	
+	$colores = array(
+		//pagina
+	   'fondo' => get_option('back_color','#ffffff'),
+	   'texto' => get_option('text_color','#333333'),
+	   'main' => get_option('main_color','#f8f9fa'),
+	   //navbar
+	   'menu' => get_option('menu_color','#343a40'),
+	   //footer
+	   'footer' => get_option('footer_color','#343a40'),
+	   'ftxt' => get_option('ftext_color','#ffffff'),
+	   'flinks' => get_option('flinks_color','#007bff'),
+	   //footer-bar
+	   'fbar' => get_option('fbar_color','#6c757d'),
+	   'fbartxt' => get_option('fbartxt_color','#ffffff'),
+	   'fbarlks' => get_option('fbarlks_color','#007bff'),
+	   //bootstrap
+	   'b4primary' => get_option('b4_primary','#007bff'),
+	   'b4secondary' => get_option('b4_secondary','#6c757d'),
+	   'b4success' => get_option('b4_success','#28a745'),
+	   'b4danger' => get_option('b4_danger','#dc3545'),
+	   'b4warning' => get_option('b4_warning','#ffc107'),
+	   'b4info' => get_option('b4_info','#17a2b8'),
+	   'b4light' => get_option('b4_light','#f8f9fa'),
+	   'b4dark' => get_option('b4_dark','#343a40')
+   );
+   return $colores;
+} 
+
+/**
  * Reemplazar el marcado para el enlace de leer más.
  */
 function overrideReadMoreLink(){
@@ -155,6 +193,31 @@ function overrideReadMoreLink(){
 }
 add_filter( 'the_content_more_link', 'overrideReadMoreLink' );
 
+/**
+ * Personalizar el titulo en las paginas de archivo.
+ */
+function my_theme_archive_title( $title ) {
+	if ( is_single() || is_page() ) return;
+    // if ( is_category() ) {
+    //     $title = single_cat_title( '', false );
+    // } elseif ( is_tag() ) {
+    //     $title = single_tag_title( '', false );
+    // } elseif ( is_author() ) {
+    //     $title = '<span class="vcard">' . get_the_author() . '</span>';
+    // } elseif ( is_post_type_archive() ) {
+    //     $title = post_type_archive_title( '', false );
+    // } elseif ( is_tax() ) {
+    //     $title = single_term_title( '', false );
+    // } elseif ( is_home() ) {
+    //     $title = get_bloginfo( 'name' );
+	// }
+	if ( is_home() ) {
+		$title = get_bloginfo( 'name' );
+	}  
+    return $title;
+}
+ 
+add_filter( 'get_the_archive_title', 'my_theme_archive_title' );
 
 /**
  * Paginacion para listados
@@ -208,36 +271,6 @@ function ekiline_archive_pagination() {
     echo $pagination;
 
 }
-
-/**
- * Colores dinamicos: Customizer
- * functions #159 localize script = ekiline_themeColors().
- **/
-
- function ekiline_themeColors(){
- 	 	 	
- 	$colores = array(
-		 //pagina
-	    'fondo' => get_option('back_color','#ffffff'),
-		'texto' => get_option('text_color','#333333'),
-		//navbar
-		'menu' => get_option('menu_color','#f8f9fa'),
-		//footer
-	    'footer' => get_option('footer_color','#343a40'),
-	    'ftxt' => get_option('ftext_color','#ffffff'),
-		'flinks' => get_option('flinks_color','#007bff'),
-		//bootstrap
-		'b4primary' => get_option('b4_primary','#007bff'),
-	    'b4secondary' => get_option('b4_secondary','#6c757d'),
-	    'b4success' => get_option('b4_success','#28a745'),
-	    'b4danger' => get_option('b4_danger','#dc3545'),
-	    'b4warning' => get_option('b4_warning','#ffc107'),
-	    'b4info' => get_option('b4_info','#17a2b8'),
-	    'b4light' => get_option('b4_light','#f8f9fa'),
-	    'b4dark' => get_option('b4_dark','#343a40')
-    );
-	return $colores;
- } 
 
  /**
  * Widgets en footer
