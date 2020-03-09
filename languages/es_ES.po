@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-03-07 18:38-0600\n"
+"PO-Revision-Date: 2020-03-08 20:04-0600\n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.8.12\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -283,11 +283,17 @@ msgstr "Contraste claro"
 msgid "Change background from lighten to darken"
 msgstr "Cambia su contraste de claro a oscuro"
 
-msgid "Custom bootstrap theme"
-msgstr "Tema base de bootstrap"
+msgid "Customize the Bootstrap color palette"
+msgstr "Personaliza la paleta de color de Bootstrap"
+
+msgid "Customize colors per item"
+msgstr "Personaliza colores por elemento"
 
 msgid "Change Bootstrap color palette and use default classes"
 msgstr "Personaliza los colores básicos de Bootstrap y utiliza las clases CSS establecidas"
+
+msgid "Customize the Bootstrap color palette and use the CSS classes set in your design. Or adjust the colors per item."
+msgstr "Personaliza la paleta de color de Bootstrap y utiliza las clases CSS establecidas en tu diseño. O bien ajusta los colores por elemento."
 
 msgid "Horizontal logo"
 msgstr "Logotipo horizontal"
