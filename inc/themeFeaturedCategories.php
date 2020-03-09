@@ -10,14 +10,14 @@
 
 
 /**
- * Customizer: Funcion para obtener los ids de categorias // get categories IDs
+ * Customizer: Funcion para obtener los ids de categorias y la cantidad de publicaicones // get categories IDs
  */
 function ekiline_list_categories() {
   $cats = array();
   $cats[0] = __('All','ekiline');
   foreach ( get_categories() as $categories => $category ) {
     // $cats[$category->term_id] = $category->name .' '. $category->term_id;
-    $cats[$category->term_id] = $category->name;
+    $cats[$category->term_id] = $category->name .' ('. $category->count .')';
   }
   return $cats;
 }
