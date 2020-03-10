@@ -45,6 +45,7 @@
 	?>
   
 	<?php
+	// En caso de que el contenido esté paginado
 		wp_link_pages( array(
 			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'ekiline' ),
 			'after'  => '</div>',
@@ -52,13 +53,7 @@
 	?>	
 	
 <footer>	
-
-	<?php /* if ( has_tag() ){ ?>
-        <p><small><?php the_tags(); ?></small></p>
-    <?php } */ ?>
-
 	<small><?php ekiline_entry_footer(); ?></small>
-
 </footer>
 
 </article><!-- #post-## -->

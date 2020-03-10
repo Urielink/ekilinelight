@@ -40,19 +40,8 @@
 
 	</div>
 
-	<footer class="entry-footer card-footer">
-  
-	<?php
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'ekiline' ),
-			'after'  => '</div>',
-		) );
-	?>	
-	
-	<?php if ( has_tag() ){ ?>
-        <p><small><?php the_tags(); ?></small></p>
-    <?php } ?>
-
+	<footer>	
+		<small><?php ekiline_entry_footer(); ?></small>
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->

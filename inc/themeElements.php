@@ -292,3 +292,118 @@ function ekiline_countWidgets( $widgetZone ){
 
 	endif;
 }
+
+/**
+ * Tema: 
+ * Personalizar el formulario de busqueda
+ * Override search form HTML
+ **/
+ 
+function ekiline_search_form( $form ) {
+    
+    $form = '<form role="search" method="get" id="searchform" class="searchform my-2" action="' . home_url( '/' ) . '" >
+                <label class="screen-reader-text" for="s">' . esc_html__( 'Search Results for: %s', 'ekiline' ) . '</label>
+                <div class="input-group">
+                    <input class="form-control" type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="' . esc_html__( 'Search Results for:', 'ekiline' ) . '"/>
+                    <span class="input-group-append"><button class="btn btn-secondary" type="submit" id="searchsubmit"><i class="fa fa-search"></i> '. esc_attr__( 'Search', 'ekiline' ) .'</button></span>
+                </div>
+            </form>';
+
+    return $form;
+}
+add_filter( 'get_search_form', 'ekiline_search_form' );
+
+
+/*
+ * Personalizar el formulario de proteccion de lectura.
+ * https://developer.wordpress.org/reference/functions/get_the_password_form/
+ * https://wordpress.org/support/article/using-password-protection/
+ */
+function ekiline_password_form() {
+    global $post;
+    $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
+    $output = '<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form form-inline col-sm-8 p-4 mx-auto text-center" method="post">';
+    $output .= '<p>' . __( 'This content is password protected. To view it please enter your password below:','ekiline' ) . '</p>';
+	$output .= '<div class="form-inline mx-auto"><label for="' . $label . '">' . __( 'Password:','ekiline' ) . ' </label>';
+	$output .= '<div class="input-group pl-md-5"><input class="form-control" name="post_password" id="' . $label . '" type="password" size="20" />';
+	$output .= '<span class="input-group-append"><input class="btn btn-dark" type="submit" name="Submit" value="' . esc_attr_x( 'Enter', 'post password form', 'ekiline' ) . '" /></span></div></div></form>';
+    return $output;
+} 
+add_filter( 'the_password_form', 'ekiline_password_form' );
+
+/* 
+* Expirar la sesion
+* https://developer.wordpress.org/reference/hooks/post_password_expires/
+*/
+
+function ekiline_expirCookie( $time ) { 
+	// return time() + 600 ;  // 10 mn
+	// for 5 minutes :  
+	// return time() + 300;  in this case 60 * 5 
+	// return 0; set cookie to expire at the end of the session
+	return 0;
+  }
+  add_filter('post_password_expires', 'ekiline_expirCookie' );
+
+
+  /**
+ * Tema: 
+ * Paginacion de páginas o singles
+ * Next and prevoius links for pages
+ * @link https://codex.wordpress.org/Next_and_Previous_Links
+ *
+ **/
+
+function ekiline_pages_navigation(){
+
+	if ( is_front_page() ) return;	
+
+	if ( class_exists( 'WooCommerce' ) ) {
+		if ( is_cart() || is_checkout() || is_account_page() ) return;
+	}
+
+	$thePages = '';
+	$PreviusLink = '';
+	$NextLink = '';
+	
+	if ( is_page() ){
+			
+			$pagelist = get_pages('sort_column=menu_order&sort_order=asc');
+			$pages = array();
+			foreach ($pagelist as $page) {
+				$pages[] += $page->ID;
+			}
+
+		$current = array_search(get_the_ID(), $pages);
+			$prevID = (isset($pages[$current-1])) ? $pages[$current-1] : '';
+			$nextID = (isset($pages[$current+1])) ? $pages[$current+1] : '';
+			
+		if (!empty($prevID)) {
+			$PreviusLink .= '<li class="previous page-item">';
+			$PreviusLink .= '<a class="page-link" href="'. get_permalink($prevID) .'" title="'. get_the_title($prevID) .'"><span>&leftarrow;</span> '. get_the_title($prevID) .'</a>';
+			$PreviusLink .= "</li>";
+		}
+		if (!empty($nextID)) {
+			$NextLink .= '<li class="next page-item">';
+			$NextLink .= '<a class="page-link" href="'. get_permalink($nextID) .'" title="'. get_the_title($nextID) .'">'. get_the_title($nextID) .' <span>&rightarrow;</span></a>';
+			$NextLink .= "</li>";      
+		}
+				
+	}
+
+	if ( is_single() ){ 
+		$PreviusLink = get_previous_post_link('<li class="page-item page-link">'.'%link'.'</li>', '<span>&leftarrow;</span> %title', TRUE); 
+		$NextLink = get_next_post_link('<li class="page-item page-link">'.'%link'.'</li>', '%title <span>&rightarrow;</span>', TRUE);
+	}
+
+	$thePages .= '<nav id="page-navigation" class="small" aria-label="Post Page navigation">';
+	$thePages .= '<ul class="pagination justify-content-between">';
+	$thePages .= $PreviusLink; 			    
+	$thePages .= $NextLink;
+	$thePages .= '</ul>';
+	$thePages .= '</nav>';
+
+
+	echo $thePages;
+
+} 

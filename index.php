@@ -48,6 +48,9 @@ get_header(); ?>
 
 <?php ekiline_archive_pagination(); ?>
 
+<?php ekiline_pages_navigation();?>
+
+
 <?php dynamic_sidebar( 'content-w2' ); ?>		
 
 <?php

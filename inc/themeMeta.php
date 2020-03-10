@@ -114,17 +114,14 @@ if ( ! function_exists( 'ekiline_posted_on' ) ) :
         //ekiline, mejor elazamos al mes
         $archive_year  = get_the_time('Y');
         $archive_month = get_the_time('m');
-        $timelink = get_month_link( $archive_year, $archive_month );    
+        $timelink = get_month_link( $archive_year, $archive_month ); //era get_permalink() 
     
         $posted_on = sprintf(
-            esc_html_x( 'Posted on %s', 'post date', 'ekiline' ),
-            //'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
-            '<a href="' . esc_url( $timelink ) . '" rel="bookmark">' . $time_string . '</a>'
+            esc_html_x( 'Posted on %s', 'post date', 'ekiline' ), '<a href="' . esc_url( $timelink ) . '" rel="bookmark">' . $time_string . '</a>'
         );
     
         $byline = sprintf(
-            esc_html_x( 'by %s', 'post author', 'ekiline' ),
-            '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+            esc_html_x( 'by %s', 'post author', 'ekiline' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
         );
     
         echo '<span class="posted-on">' . $posted_on . '</span> <span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
@@ -142,7 +139,7 @@ if ( ! function_exists( 'ekiline_entry_footer' ) ) :
         edit_post_link(
             sprintf(
                 /* translators: %s: Name of current post */
-                esc_html__( 'Edit %s', 'ekiline' ) . '<span class="fa fa-pencil-alt"></span>',
+                esc_html__( 'Edit %s', 'ekiline' ) . '<span>&olarr;</span>',
                 the_title( '<span class="screen-reader-text">"', '"</span> ', false )
             ),
             '<span class="edit-link float-right">','</span>'
