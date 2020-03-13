@@ -85,7 +85,18 @@ function ekiline_widgets_init() {
         'before_title'  => '<h3 class="widget-title">',
         'after_title'   => '</h3>',
     ) );
-		
+        
+// Widgets between content and footer
+register_sidebar( array(
+    'name'          => esc_html__( 'Bottom bar', 'ekiline' ),
+    'id'            => 'footer-w2',
+    'description'   => '',
+    'before_widget' => '<div id="%1$s" class="widget %2$s">',
+    'after_widget'  => '</div>',
+    'before_title'  => '<h4 class="widget-title">',
+    'after_title'   => '</h4>',
+) );   
+    
 // Footer widgets
     register_sidebar( array(
         'name'          => esc_html__( 'Footer widgets', 'ekiline' ),
@@ -96,17 +107,6 @@ function ekiline_widgets_init() {
         'before_title'  => '<h4 class="widget-title">',
         'after_title'   => '</h4>',
     ) );
-
-// Widgets between content and footer
-    register_sidebar( array(
-        'name'          => esc_html__( 'Top above footer', 'ekiline' ),
-        'id'            => 'footer-w2',
-        'description'   => '',
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</div>',
-        'before_title'  => '<h4 class="widget-title">',
-        'after_title'   => '</h4>',
-    ) );   
 
 // Widgets at top of content
     register_sidebar( array(
@@ -168,7 +168,7 @@ function ekiline_scripts() {
 //Desde aquí los scripts de Ekiline se agrupan en bloque.
     wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226', true  );
     	wp_localize_script( 'ekiline-layout', 'themeColors', ekiline_themeColors() );
-    wp_enqueue_script( 'ekiline-theme', get_template_directory_uri() . '/assets/js/ekiline-theme.js', array('jquery'), '20190817', true  );
+    wp_enqueue_script( 'ekiline-theme', get_template_directory_uri() . '/assets/js/ekiline-theme.min.js', array('jquery'), '20190817', true  );
     
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

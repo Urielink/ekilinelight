@@ -163,14 +163,14 @@ function ekiline_theme_customizer( $wp_customize ) {
     $colors[] = array( 'slug'=>'main_color', 'default' => '#f8f9fa', 'label' => '', 'description' => __( 'Color on main container', 'ekiline' ), 'priority' => 20, 'section'=>'colors_extended' );
     //navbar
     $colors[] = array( 'slug'=>'menu_color', 'default' => '#343a40', 'label' => __( 'Navbar background', 'ekiline' ), 'description' => '', 'priority' => 30, 'section'=>'colors_extended' );
-    //footer
-    $colors[] = array( 'slug'=>'footer_color', 'default' => '#343a40', 'label' => __( 'Footer background and text', 'ekiline' ), 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
-    $colors[] = array( 'slug'=>'ftext_color', 'default' => '#ffffff', 'label' => '', 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
-    $colors[] = array( 'slug'=>'flinks_color', 'default' => '#007bff', 'label' => '', 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
     //footer-bar
-    $colors[] = array( 'slug'=>'fbar_color', 'default' => '#6c757d', 'label' => __( 'Footer bar background and text', 'ekiline' ), 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
+    $colors[] = array( 'slug'=>'fbar_color', 'default' => '#6c757d', 'label' => __( 'Bottom bar', 'ekiline' ), 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
     $colors[] = array( 'slug'=>'fbartxt_color', 'default' => '#ffffff', 'label' => '', 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
     $colors[] = array( 'slug'=>'fbarlks_color', 'default' => '#007bff', 'label' => '', 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
+    //footer
+    $colors[] = array( 'slug'=>'footer_color', 'default' => '#343a40', 'label' => __( 'Footer', 'ekiline' ), 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
+    $colors[] = array( 'slug'=>'ftext_color', 'default' => '#ffffff', 'label' => '', 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
+    $colors[] = array( 'slug'=>'flinks_color', 'default' => '#007bff', 'label' => '', 'description' => '', 'priority' => 40, 'section'=>'colors_extended' );
     //bootstrap
     $colors[] = array( 'slug'=>'b4_primary', 'default' => '#007bff', 'label' => '', 'description' => __( 'Change Bootstrap color palette and use default classes', 'ekiline' ) . __('<br><code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-primary</code>','ekiline'), 'priority' => 10, 'section'=>'colors' );
     $colors[] = array( 'slug'=>'b4_secondary', 'default' => '#6c757d', 'label' => '', 'description' => __('<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-secondary</code>', 'ekiline'), 'priority' => 10, 'section'=>'colors' );
