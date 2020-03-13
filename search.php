@@ -37,7 +37,7 @@ get_header(); ?>
 			get_template_part( 'template-parts/content', get_post_format() );	
 		endwhile;	
 		
-		ekiline_archive_pagination();
+		ekiline_pages_navigation();
 
     } else {
 			get_template_part( 'template-parts/content', 'none' );	

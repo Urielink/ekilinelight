@@ -46,10 +46,7 @@ get_header(); ?>
 
 <?php viewCols('close'); ?>
 
-<?php ekiline_archive_pagination(); ?>
-
 <?php ekiline_pages_navigation();?>
-
 
 <?php dynamic_sidebar( 'content-w2' ); ?>		
 

@@ -5,10 +5,8 @@
  * @package ekiline
  */
 
-/**
- * Ancho de layout
- * Layout width
- **/
+/* Ancho de layout | Layout width */
+
 function widthControl(){
 	$widthClass = 'container';
 	$widthClassAdd = '-fluid';
@@ -29,11 +27,7 @@ function widthControl(){
 	return $widthClass;
 }
 
-/**
- * Ancho de layout sin sidebars
- * Layout width, no sidebars
- * https://chrisblackwell.me/hide-widgets-specific-wordpress-pages/
- **/
+/* Ancho de layout sin sidebars | Layout width, no sidebars */
 
 function viewSbarFilter($wsbCtl) {
 
@@ -69,10 +63,8 @@ function viewSbarFilter($wsbCtl) {
 }
 add_filter( 'sidebars_widgets', 'viewSbarFilter' );
 
-/**
- * Orden de columnas
- * Columns order
- **/
+/* Orden de columnas | Columns order */
+
 function mainCols($tag){
 	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
 	// En caso de existir barras laterales agregar envoltorio
@@ -105,10 +97,8 @@ function orderCols($css){
 	if ($css == 'right') echo $cssRight;
 }
 
-/**
- * Vista de columnas
- * Columns view
- **/
+/* Vista de columnas | Columns view */
+
 function viewCols($tag){
 	if ( is_single() || is_page() || is_search() ) return;
 
@@ -185,17 +175,15 @@ function ekiline_themeColors(){
    return $colores;
 } 
 
-/**
- * Reemplazar el marcado para el enlace de leer más.
- */
+/* Reemplazar el marcado para el enlace de leer más */
+
 function overrideReadMoreLink(){
 	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), get_the_title() ) . '">'. __( 'Read more', 'ekiline') .'</a>';
 }
 add_filter( 'the_content_more_link', 'overrideReadMoreLink' );
 
-/**
- * Personalizar el titulo en las paginas de archivo.
- */
+/* Personalizar el titulo en las paginas de archivo */
+
 function my_theme_archive_title( $title ) {
 	if ( is_single() || is_page() ) return;
     // if ( is_category() ) {
@@ -219,62 +207,8 @@ function my_theme_archive_title( $title ) {
  
 add_filter( 'get_the_archive_title', 'my_theme_archive_title' );
 
-/**
- * Paginacion para listados
- * Paginate links
- * @link https://codex.wordpress.org/Function_Reference/paginate_links
- * @link https://brinidesigner.com/wordpress-custom-pagination-for-bootstrap/
- **/
+ /* Widgets en footer */
 
-function ekiline_archive_pagination() {
-    
-    global $wp_query;
-    $big = 999999999;
-    $pagination = '';
-    
-    $pages = paginate_links(array(
-                'base' => str_replace($big, '%#%', get_pagenum_link($big)),
-                'format' => '?page=%#%',
-                'current' => max(1, get_query_var('paged')),
-                'total' => $wp_query->max_num_pages,
-                'type' => 'array',
-                'prev_next' => TRUE,
-                'prev_text' => __( '&larr; Previous', 'ekiline' ),
-                'next_text' => __( 'Next &rarr;', 'ekiline' ),
-            ));
-            
-    if ( is_array($pages) ) {
-        
-        $current_page = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');        
-        $pagination .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="Page navigation"><ul class="pagination">';
-        
-        foreach ($pages as $i => $page) {
-
-            $page = str_replace( 'page-numbers', 'page-link', $page );			
-			
-            if ($current_page == 1 && $i == 0) {                
-                $pagination .= "<li class='page-item active'>$page</li>";                
-            } else {                
-                if ($current_page != 1 && $current_page == $i) {                    
-                    $pagination .= "<li class='page-item active'>$page</li>";                    
-                } else {                    
-                    $pagination .= "<li class='page-item'>$page</li>";                    
-                }
-            }
-            
-        }
-        
-        $pagination .= '</ul></nav>';
-        
-    }
-    
-    echo $pagination;
-
-}
-
- /**
- * Widgets en footer
- **/
 function ekiline_countWidgets( $widgetZone ){
 
 	if ( is_active_sidebar($widgetZone) ) :
@@ -314,11 +248,8 @@ function ekiline_search_form( $form ) {
 add_filter( 'get_search_form', 'ekiline_search_form' );
 
 
-/*
- * Personalizar el formulario de proteccion de lectura.
- * https://developer.wordpress.org/reference/functions/get_the_password_form/
- * https://wordpress.org/support/article/using-password-protection/
- */
+/* Tema: Personalizar el formulario de proteccion de lectura. */
+
 function ekiline_password_form() {
     global $post;
     $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
@@ -346,12 +277,10 @@ function ekiline_expirCookie( $time ) {
   add_filter('post_password_expires', 'ekiline_expirCookie' );
 
 
-  /**
+/**
  * Tema: 
- * Paginacion de páginas o singles
- * Next and prevoius links for pages
- * @link https://codex.wordpress.org/Next_and_Previous_Links
- *
+ * Paginacion page & singles & archive
+ * https://codex.wordpress.org/Next_and_Previous_Links
  **/
 
 function ekiline_pages_navigation(){
@@ -368,35 +297,79 @@ function ekiline_pages_navigation(){
 	
 	if ( is_page() ){
 			
-			$pagelist = get_pages('sort_column=menu_order&sort_order=asc');
-			$pages = array();
-			foreach ($pagelist as $page) {
-				$pages[] += $page->ID;
-			}
+		$pagelist = get_pages('sort_column=menu_order&sort_order=asc');
+		$pages = array();
+		
+		foreach ($pagelist as $page) {
+			$pages[] += $page->ID;
+		}
 
 		$current = array_search(get_the_ID(), $pages);
 			$prevID = (isset($pages[$current-1])) ? $pages[$current-1] : '';
 			$nextID = (isset($pages[$current+1])) ? $pages[$current+1] : '';
 			
 		if (!empty($prevID)) {
-			$PreviusLink .= '<li class="previous page-item">';
-			$PreviusLink .= '<a class="page-link" href="'. get_permalink($prevID) .'" title="'. get_the_title($prevID) .'"><span>&leftarrow;</span> '. get_the_title($prevID) .'</a>';
-			$PreviusLink .= "</li>";
+			$PreviusLink .= '<li class="page-item page-link"><a href="'. get_permalink($prevID) .'" title="'. get_the_title($prevID) .'"><span>&leftarrow;</span> '. get_the_title($prevID) .'</a></li>';
 		}
 		if (!empty($nextID)) {
-			$NextLink .= '<li class="next page-item">';
-			$NextLink .= '<a class="page-link" href="'. get_permalink($nextID) .'" title="'. get_the_title($nextID) .'">'. get_the_title($nextID) .' <span>&rightarrow;</span></a>';
-			$NextLink .= "</li>";      
+			$NextLink .= '<li class="page-item page-link"><a href="'. get_permalink($nextID) .'" title="'. get_the_title($nextID) .'">'. get_the_title($nextID) .' <span>&rightarrow;</span></a></li>';
 		}
 				
 	}
 
 	if ( is_single() ){ 
+
 		$PreviusLink = get_previous_post_link('<li class="page-item page-link">'.'%link'.'</li>', '<span>&leftarrow;</span> %title', TRUE); 
 		$NextLink = get_next_post_link('<li class="page-item page-link">'.'%link'.'</li>', '%title <span>&rightarrow;</span>', TRUE);
+
 	}
 
-	$thePages .= '<nav id="page-navigation" class="small" aria-label="Post Page navigation">';
+
+	/**
+	 * Paginacion para listados
+	 * @link https://codex.wordpress.org/Function_Reference/paginate_links
+	 **/
+
+	if ( is_archive() || is_home() || is_search() ){
+		
+		global $wp_query;
+		$big = 999999999;
+		
+		$pages = paginate_links(array(
+					'base' => str_replace($big, '%#%', get_pagenum_link($big)),
+					'format' => '?page=%#%',
+					'current' => max(1, get_query_var('paged')),
+					'total' => $wp_query->max_num_pages,
+					'type' => 'array',
+					'prev_next' => TRUE,
+					'prev_text' => __( '&larr; Previous', 'ekiline' ),
+					'next_text' => __( 'Next &rarr;', 'ekiline' ),
+				));
+				
+		if ( is_array($pages) ) {
+			
+			$current_page = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');        
+			
+			foreach ($pages as $i => $page) {
+	
+				$page = str_replace( 'page-numbers', 'page-link', $page );			
+				
+				if ($current_page == 1 && $i == 0) {                
+					$PreviusLink .= "<li class='page-item active'>$page</li>";                
+				} else {                
+					if ($current_page != 1 && $current_page == $i) {                    
+						$PreviusLink .= "<li class='page-item active'>$page</li>";                    
+					} else {                    
+						$PreviusLink .= "<li class='page-item'>$page</li>";                    
+					}
+				}
+				
+			}			
+		}
+		
+	}
+
+	$thePages .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="Page navigation">';
 	$thePages .= '<ul class="pagination justify-content-between">';
 	$thePages .= $PreviusLink; 			    
 	$thePages .= $NextLink;
@@ -407,3 +380,6 @@ function ekiline_pages_navigation(){
 	echo $thePages;
 
 } 
+
+
+
