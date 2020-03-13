@@ -273,7 +273,7 @@ function ekiline_theme_customizer( $wp_customize ) {
             $wp_customize->add_control(
                 'ekiline_disableSb' . $value['name'], array(
                     'type' => 'select',
-                    'label' => __( $value['label'], 'ekiline' ),
+                    'label' => $value['label'],
                     'section' => 'ekiline_vista_section',
                     'choices' => array(
                         '0' => __( 'Enabled sidebars', 'ekiline' ),

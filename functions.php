@@ -194,5 +194,6 @@ require get_template_directory() . '/inc/themeElements.php';
 require get_template_directory() . '/inc/themeMeta.php';
 require get_template_directory() . '/inc/themeFeaturedCategories.php';
 require get_template_directory() . '/inc/widgetOptions.php';
+require get_template_directory() . '/inc/widgetBreadcrumb.php';
 
 
