@@ -74,7 +74,7 @@ function ekilineNavbar($navPosition){
 		    case 2 : $navHelper = ' justify-content-md-center'; $navAlign = ' justify-content-md-center'; $headNav = ' flex-md-column'; break;
 		    case 3 : $navHelper = ' justify-content-md-between w-100'; $navAlign = ' justify-content-md-between w-100'; $headNav = ' flex-md-column'; break;
 		    case 4 : $navHelper = ' justify-content-md-around w-100'; $navAlign = ' justify-content-md-around w-100'; $headNav = ' flex-md-column'; break;
-		    case 5 : $navHelper = ' offcanvas bg-light'; $navAlign = ' ml-auto'; break;
+		    case 5 : $navHelper = ' offcanvas '.$inverseMenu; $navAlign = ' ml-auto'; break;
 		    case 6 : $navHelper = ' order-first'; $expand = ' '; break;
 		    case 7 : $modalCss = 'modal fade'; break;
 		    case 8 : $modalCss = 'modal fade move-from-bottom'; break;

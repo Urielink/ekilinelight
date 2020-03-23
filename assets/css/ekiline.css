@@ -233,6 +233,8 @@ video#bgvid{transition:1s opacity;}
 .navbar-collapse.offcanvas{position:fixed;z-index:100;top:48px;bottom:0;left:100%;width:100%;padding-right:1rem;padding-left:1rem;overflow-y:auto;visibility:hidden;transition-timing-function:ease-in-out;transition-duration:.2s;transition-property:left,visibility;}
 .navbar-collapse.offcanvas.collapsing{height:auto;}
 .navbar-collapse.offcanvas.show{left:0;visibility:visible;}
+  .fixed-bottom .navbar-collapse.offcanvas{top: 0px;bottom: 48px;}
+
 /** Navbar anidado **/
 .navbar-nav .dropdown-menu .dropdown-menu{position:static;float:none;padding:0px;border-left:0px;border-radius:0px;border-right:0px;border-bottom:0px;}
 

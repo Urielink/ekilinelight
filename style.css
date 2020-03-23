@@ -198,7 +198,13 @@ a.woocommerce-product-gallery__trigger{text-decoration:none;}
 /* PRIMER CAMBIO Escritorio || Desktop */
 @media only screen and (max-width:1200px){}
 @media only screen and (max-width:992px){
-	.container { max-width: 100%;}		
+	.container { max-width: 100%;}	
+ /* gutenberg */
+ .container > .hentry .alignwide {
+    margin-left: -15px;
+	margin-right: -15px;
+	width: auto;
+ }		
 }
 
 /* SEGUNDO CAMBIO Tablets y smartphones horizontales || Tablets or smartphone horizontal */
@@ -218,7 +224,7 @@ a.woocommerce-product-gallery__trigger{text-decoration:none;}
 
 @media only screen and (max-width:480px){
  /*Widget:Dropdown in navbar*/
- .navbar .widget{width:100%;}
+ .navbar .widget{width:100%;} 
 }
 
 /* TERCER CAMBIO Smartphones verticales */

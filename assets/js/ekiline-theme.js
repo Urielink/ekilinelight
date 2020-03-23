@@ -337,7 +337,7 @@ jQuery(document).ready(function($){
 
 				// el menu	
 				if ( $bgNvColor !== '#353b41FF' ){
-					cssall += '.primary-navbar.bg-light,.primary-navbar.bg-dark{background-color:' + $bgNvColor + ' !important;}\n';
+					cssall += '.primary-navbar.bg-light,.primary-navbar.bg-dark, .offcanvas.bg-light, .offcanvas.bg-dark{background-color:' + $bgNvColor + ' !important;}\n';
 				}
 				if ( $mainColor !== '#f9fafbFF' ){
 					cssall += '.bg-main{background-color:' + $mainColor + ' !important;}\n';
