@@ -6,6 +6,7 @@
  */
 
 // Reemplazar la funcion de customizar fondo.
+// https://developer.wordpress.org/reference/functions/add_theme_support/
 // add_action( 'after_setup_theme', 'ekiline_remove_custom_background', 20 );
 // function ekiline_remove_custom_background(){
 	 // remove_theme_support( 'custom-background' ); 

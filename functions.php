@@ -31,7 +31,7 @@ function ekiline_setup() {
 	$postDef = array('aside','image','video','quote','link');
 	add_theme_support( 'post-formats', $postDef );
 
-	// Color e imagen de fondo // Set up the WordPress core custom background feature.
+	// Color e imagen de fondo // Set up the WordPress core custom background feature. https://developer.wordpress.org/reference/functions/add_theme_support/
 	$backDef = array( 'default-image' => '', 'default-color' => 'ffffff' );
 	add_theme_support( 'custom-background', $backDef );	
 	
