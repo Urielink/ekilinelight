@@ -18,6 +18,22 @@
 /** Navbar anidado **/
 /*.dropdown-menu .dropdown-menu{position:relative;top:0;left:100%;margin-top:-1px;}*/
 
+/** Navbar mega-menu y scroll-menu, aplica solo en desktop **/
+@media only screen and (min-width : 768px) {
+/*mega-menu*/
+ .mega-menu.show.dropdown, .mega-menu.show.dropup{position: inherit;}
+ .mega-menu.show > .dropdown-menu{max-width: 1120px;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;}
+ .mega-menu.show > .dropdown-menu > li {padding: .5rem 1rem;}
+ .mega-menu.show > .dropdown-menu > li > ul.dropdown-menu {display: block;position: relative;top: auto;bottom: auto;border:none;}
+ .mega-menu.show .dropdown-header > a.dropdown-item, .mega-menu.show > .dropdown-menu > li > a.dropdown-item {text-transform: uppercase;border-bottom-style: solid;border-bottom-width: 1px;pointer-events: none;font-size: .875rem;}    
+ .mega-menu.show .dropdown-toggle::after {float: right;margin-top: .5em;opacity: 0.5;margin-right: .255em;}
+ .mega-menu.dropup .dropdown-menu {bottom: 95%;}
+/*scroll-menu*/
+ .scroll-menu.show.dropdown, .scroll-menu.show.dropup{position: inherit;}
+ .scroll-menu.show > .dropdown-menu{max-width: 100%;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;overflow-x: scroll;}
+}
+
+
 /** Bootstrap Cover 
 -------------------------------------------------------------------------**/
 html,body{height:100%;}
