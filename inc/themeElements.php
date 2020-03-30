@@ -229,6 +229,60 @@ function ekiline_countWidgets( $widgetZone ){
 
 /**
  * Tema: 
+ * Textos como variables.
+ **/
+ 
+function ekiline_notes($text) {
+	$item = ''; 	
+	switch ($text) {
+		case 'copyright':
+			$item = sprintf( esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) );
+			$item .= '&nbsp;';
+			$item .= sprintf( esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>','<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' );
+		break;
+	}	
+    return $item;
+}
+
+/**
+ * Tema: Obtener un id.
+ **/
+ 
+function ekiline_post_id(){
+	$itemId = get_post_type() . '-' . get_the_ID();; 	
+    return $itemId;
+}
+
+/**
+ * Tema: Manipular el thumbnail
+ * https://developer.wordpress.org/reference/functions/the_post_thumbnail/
+ **/
+function ekiline_thumbnail(){
+	if ( !has_post_thumbnail() ) return;
+	if ( is_single() ) return;
+	// tamaño de thumbnail	
+	$thumbShow = ( is_home() || is_front_page() || is_archive() || is_search() ) ? 'thumbnail' : '' ;
+		$thumbShow = ( get_theme_mod('ekiline_Columns') == 4 ) ? 'medium' : '' ;
+	// clase css	
+	$imgClass = ( get_theme_mod('ekiline_Columns') == 4 ) ? 'card-img-top' : 'img-thumbnail' ;
+
+	return the_post_thumbnail( $thumbShow, array( 'class' => $imgClass ) );
+}
+
+/**
+ * Link all post thumbnails to the post permalink.
+ */
+function wpdocs_post_image_html( $html, $post_id, $post_image_id ) {
+	if ( is_single() ) return $html;
+	$html = '<a href="' . get_permalink( $post_id ) . '" alt="' . esc_attr( get_the_title( $post_id ) ) . '">' . $html . '</a>';	
+    return $html;
+}
+add_filter( 'post_thumbnail_html', 'wpdocs_post_image_html', 10, 3 );
+ 
+
+
+/**
+ * Tema: 
  * Personalizar el formulario de busqueda
  * Override search form HTML
  **/

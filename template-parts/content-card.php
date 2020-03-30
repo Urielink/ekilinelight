@@ -6,20 +6,11 @@
  *
  * @package ekiline
  */
- // Variables en contenido:
- // obtener el ID
-	$itemId = get_post_type().'-'.get_the_ID();
- // mostrar el thumb de acuerdo al tipo de contenido	
-	if ( is_home() || is_front_page() || is_archive() || is_search() ) $thumbShow = 'thumbnail'; else $thumbShow = '';
 ?>
 
-<article id="<?php echo $itemId; ?>" <?php post_class();?>>
-		
-    <?php if ( has_post_thumbnail() ) { ?>
-        <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>">
-            <?php the_post_thumbnail( $thumbShow, array( 'class' => 'card-img-top') ); ?>
-        </a>        
-    <?php } ?>	
+<article id="<?php echo ekiline_post_id();?>" <?php post_class();?>>
+			
+	<?php ekiline_thumbnail(); ?>
 
 	<div class="card-body">
 

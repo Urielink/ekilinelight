@@ -36,7 +36,7 @@ if ( post_password_required() ) {
 			?>
 		</p>
     
-    <div id="comments-activity" class="bg-light p-2 mb-3 collapse show">
+    <div id="comments-activity" class="p-2 mb-3 collapse show">
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
 		<nav id="comment-nav-above" class="navigation comment-navigation border-bottom">
@@ -154,7 +154,7 @@ function ekilineCommentsExtended($comment, $args, $depth) {
             
         </div>
         
-        <div class="d-flex justify-content-between small bg-light">
+        <div class="d-flex justify-content-between small">
         <div class="comment-meta commentmetadata">
             <a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>">
             	<?php
