@@ -98,6 +98,7 @@ a img.aligncenter{display:block;margin-left:auto;margin-right:auto;}
 /* Logo en navbar || Brand in navbar */
 .navbar h1, .navbar h2{margin-bottom:0px;line-height: 100%;}
 .navbar-brand > img{height:50px !important;max-width:220px !important;margin-top:-10px;margin-bottom:-10px;}
+article::after {content: "";clear: both;display: table;}
 
 /* ------------------------------------------------
  * Ekiline SHORTCODES
@@ -193,7 +194,7 @@ a.woocommerce-product-gallery__trigger{text-decoration:none;}
 .container-fluid .navbar{margin-left:-15px;margin-right:-15px;}
 .container-fluid .navbar.fixed-top{margin-left:inherit;margin-right:inherit;}
 /*--------------------------------------------------------------------------------
- * CSS RESPONSIVO || RESPONSIVE DESKTOP FIRST
+ * CSS RESPONSIVO || RESPONSIVE DESKTOP FIRST 
  *------------------------------------------------------------------------------*/
 /* PRIMER CAMBIO Escritorio || Desktop */
 @media only screen and (max-width:1200px){}

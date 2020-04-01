@@ -5,6 +5,11 @@
  * @package ekiline
  */
 
+/*
+ * Funciones complementarias para el personalizador.
+ * Customizer complementary functions.
+ */
+
 /* Ancho de layout | Layout width */
 
 function widthControl(){
@@ -175,6 +180,13 @@ function ekiline_themeColors(){
    return $colores;
 } 
 
+/*
+ * Funciones complementarias para el marcado HTML.
+ * HTML Markup complementary functions.
+ */
+
+
+
 /* Reemplazar el marcado para el enlace de leer más */
 
 function overrideReadMoreLink(){
@@ -259,14 +271,13 @@ function ekiline_post_id(){
  **/
 function ekiline_thumbnail(){
 	if ( !has_post_thumbnail() ) return;
-	if ( is_single() ) return;
+	if ( is_single() || is_page() ) return;
 	// tamaño de thumbnail	
-	$thumbShow = ( is_home() || is_front_page() || is_archive() || is_search() ) ? 'thumbnail' : '' ;
-		$thumbShow = ( get_theme_mod('ekiline_Columns') == 4 ) ? 'medium' : '' ;
-	// clase css	
+	$thumbSize = ( is_search() ) ? 'thumbnail' : 'medium' ;
+	// clase css varia por tipo de contenido.
 	$imgClass = ( get_theme_mod('ekiline_Columns') == 4 ) ? 'card-img-top' : 'img-thumbnail' ;
 
-	return the_post_thumbnail( $thumbShow, array( 'class' => $imgClass ) );
+	return the_post_thumbnail( $thumbSize, array( 'class' => $imgClass ) );
 }
 
 /**
@@ -274,7 +285,10 @@ function ekiline_thumbnail(){
  */
 function wpdocs_post_image_html( $html, $post_id, $post_image_id ) {
 	if ( is_single() ) return $html;
-	$html = '<a href="' . get_permalink( $post_id ) . '" alt="' . esc_attr( get_the_title( $post_id ) ) . '">' . $html . '</a>';	
+	// si es search, se añade una clase 
+	$thumbClass = ( is_search() ) ? ' class="float-md-left pr-2"' : '' ;
+
+	$html = '<a href="' . get_permalink( $post_id ) . '" alt="' . esc_attr( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';	
     return $html;
 }
 add_filter( 'post_thumbnail_html', 'wpdocs_post_image_html', 10, 3 );
