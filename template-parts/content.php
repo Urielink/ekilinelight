@@ -11,8 +11,8 @@
 <article id="<?php echo ekiline_post_id();?>" <?php post_class();?>>
 
 <header>
-	
-	<?php the_title( sprintf( '<h1 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h1>' ); ?>
+		
+	<?php the_title(); ?>
 
 	<small class="entry-meta">
 			<?php ekiline_posted_on(); ?>
@@ -44,7 +44,9 @@
 	?>	
 	
 <footer>	
-	<small><?php ekiline_entry_footer(); ?></small>
+
+	<?php ekiline_entry_footer(); ?>
+	
 </footer>
 
 </article><!-- #post-## -->

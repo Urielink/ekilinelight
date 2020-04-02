@@ -190,7 +190,7 @@ function ekiline_themeColors(){
 /* Reemplazar el marcado para el enlace de leer más */
 
 function overrideReadMoreLink(){
-	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), get_the_title() ) . '">'. __( 'Read more', 'ekiline') .'</a>';
+	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline') .'</a>';
 }
 add_filter( 'the_content_more_link', 'overrideReadMoreLink' );
 
@@ -280,19 +280,41 @@ function ekiline_thumbnail(){
 	return the_post_thumbnail( $thumbSize, array( 'class' => $imgClass ) );
 }
 
-/**
- * Link all post thumbnails to the post permalink.
- */
-function wpdocs_post_image_html( $html, $post_id, $post_image_id ) {
-	if ( is_single() ) return $html;
-	// si es search, se añade una clase 
-	$thumbClass = ( is_search() ) ? ' class="float-md-left pr-2"' : '' ;
+	/**
+	 * Link all post thumbnails to the post permalink.
+	 */
+	function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
+		if ( is_single() ) return $html;
+		// si es search, se añade una clase 
+		$thumbClass = ( is_search() ) ? ' class="float-md-left pr-2"' : '' ;
 
-	$html = '<a href="' . get_permalink( $post_id ) . '" alt="' . esc_attr( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';	
-    return $html;
-}
-add_filter( 'post_thumbnail_html', 'wpdocs_post_image_html', 10, 3 );
- 
+		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';	
+		return $html;
+	}
+	add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
+
+
+
+/**
+ * Manipular el título
+ * https://developer.wordpress.org/reference/functions/the_title_attribute/
+ */
+
+function ekiline_link_title( $title ) {
+
+	$tagClass = ( get_theme_mod('ekiline_Columns') == 4 ) ? 'entry-title card-title' : 'entry-title' ;
+
+	if ( in_the_loop() ){
+		if ( is_single() || is_page() ){
+			$title = '<h1 class="'. $tagClass .'">' . $title . '</h1>';
+		} else {	
+			$title = '<h2 class="'. $tagClass .'"><a href="'. get_the_permalink() .'" title="'. $title .'">' . $title . '</a></h2>';
+		}
+	}
+	return $title;
+}	
+add_filter( 'the_title', 'ekiline_link_title' );
+
 
 
 /**

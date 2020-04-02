@@ -132,19 +132,29 @@ endif;
     
 if ( ! function_exists( 'ekiline_entry_footer' ) ) :
     /**
+     * Abril 2 refactorizar este pié.
      * Prints HTML with meta information for the categories, tags and comments.
      */
     function ekiline_entry_footer() {
-    
-        edit_post_link(
-            sprintf(
-                /* translators: %s: Name of current post */
-                esc_html__( 'Edit %s', 'ekiline' ) . '<span>&olarr;</span>',
-                the_title( '<span class="screen-reader-text">"', '"</span> ', false )
-            ),
-            '<span class="edit-link float-right">','</span>'
-        );
-            
+
+        // edit_post_link(
+        //     sprintf(
+        //         /* translators: %s: Name of current post */
+        //         esc_html__( 'Edit %s', 'ekiline' ) . '<span>&olarr;</span>',
+        //         the_title( '<span class="screen-reader-text">"', '"</span> ', false )
+        //     ),
+        //     '<span class="edit-link float-right">','</span>'
+        // );
+
+        // edit_post_link( 
+        //     sprintf( esc_html__( 'Edit %s', 'ekiline' ), '<span>&olarr;</span>'), 
+        //     null, null, null, 'btn-sm btn-light' );
+
+        // https://developer.wordpress.org/reference/functions/edit_post_link/
+
+        edit_post_link( sprintf( esc_html__( 'Edit %s', 'ekiline' ), '<span>&olarr;</span>'), null,'<br>' );
+
+        
         // Show category and tag text for singles.
         if ( 'post' === get_post_type() ) {
             /* translators: used between list items, there is a space after the comma */

@@ -14,7 +14,7 @@
 
 	<div class="card-body">
 
-		<?php the_title( sprintf( '<h2 class="entry-title card-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+		<?php the_title(); ?>
 
 		<?php
 			if( is_single() || is_page() ) {
@@ -31,8 +31,10 @@
 
 	</div>
 
-	<footer>	
-		<small><?php ekiline_entry_footer(); ?></small>
+	<footer class="card-footer">	
+
+		<?php ekiline_entry_footer(); ?>
+		
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->
