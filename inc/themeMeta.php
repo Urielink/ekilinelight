@@ -93,12 +93,14 @@ add_action( 'wp_head', 'ekiline_meta_keywords', 0 , 0);
  * Metadatos en plantilla de contenido, header y footer.
 */
 
+/**
+ * Informacion de dia de publicaicon y autor.
+ * Prints HTML with meta information for the current post-date/time and author.
+ */
 
 if ( ! function_exists( 'ekiline_posted_on' ) ) :
-    /**
-     * Prints HTML with meta information for the current post-date/time and author.
-     */
     function ekiline_posted_on() {
+
         $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
         if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
             $time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time> <time class="updated" datetime="%3$s">%4$s</time>';
@@ -136,24 +138,9 @@ if ( ! function_exists( 'ekiline_entry_footer' ) ) :
      * Prints HTML with meta information for the categories, tags and comments.
      */
     function ekiline_entry_footer() {
-
-        // edit_post_link(
-        //     sprintf(
-        //         /* translators: %s: Name of current post */
-        //         esc_html__( 'Edit %s', 'ekiline' ) . '<span>&olarr;</span>',
-        //         the_title( '<span class="screen-reader-text">"', '"</span> ', false )
-        //     ),
-        //     '<span class="edit-link float-right">','</span>'
-        // );
-
-        // edit_post_link( 
-        //     sprintf( esc_html__( 'Edit %s', 'ekiline' ), '<span>&olarr;</span>'), 
-        //     null, null, null, 'btn-sm btn-light' );
-
+        // editar articulo.
         // https://developer.wordpress.org/reference/functions/edit_post_link/
-
         edit_post_link( sprintf( esc_html__( 'Edit %s', 'ekiline' ), '<span>&olarr;</span>'), null,'<br>' );
-
         
         // Show category and tag text for singles.
         if ( 'post' === get_post_type() ) {
@@ -171,7 +158,7 @@ if ( ! function_exists( 'ekiline_entry_footer' ) ) :
         }
         
         // Mostrar etiquetas en páginas.
-        if ( is_page() ) {
+        if ( 'page' === get_post_type() ) {
             /* translators: used between list items, there is a space after the comma */
             $tags_list = get_the_tag_list( '', esc_html__( ',  ', 'ekiline' ) );
             if ( $tags_list ) {
@@ -179,9 +166,9 @@ if ( ! function_exists( 'ekiline_entry_footer' ) ) :
             }
         }   
     
-        if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+        if ( ! is_single() && ! is_front_page() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
             echo '<span class="comments-link">';
-            comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
+                comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
             echo '</span> ';
         }
     

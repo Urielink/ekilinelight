@@ -187,7 +187,7 @@ function ekiline_themeColors(){
 
 
 
-/* Reemplazar el marcado para el enlace de leer más */
+/* Reemplazar el marcado para el enlace de leer mas */
 
 function overrideReadMoreLink(){
 	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline') .'</a>';
@@ -272,9 +272,9 @@ function ekiline_post_id(){
 function ekiline_thumbnail(){
 	if ( !has_post_thumbnail() ) return;
 	if ( is_single() || is_page() ) return;
-	// tamaño de thumbnail	
+	// thumbnail size
 	$thumbSize = ( is_search() ) ? 'thumbnail' : 'medium' ;
-	// clase css varia por tipo de contenido.
+	// clase css varia por tipo de contenido
 	$imgClass = ( get_theme_mod('ekiline_Columns') == 4 ) ? 'card-img-top' : 'img-thumbnail' ;
 
 	return the_post_thumbnail( $thumbSize, array( 'class' => $imgClass ) );
@@ -285,7 +285,7 @@ function ekiline_thumbnail(){
 	 */
 	function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
 		if ( is_single() ) return $html;
-		// si es search, se añade una clase 
+		// si es search, se agrega una clase 
 		$thumbClass = ( is_search() ) ? ' class="float-md-left pr-2"' : '' ;
 
 		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';	
@@ -296,7 +296,7 @@ function ekiline_thumbnail(){
 
 
 /**
- * Manipular el título
+ * Manipular el titulo
  * https://developer.wordpress.org/reference/functions/the_title_attribute/
  */
 
@@ -314,6 +314,34 @@ function ekiline_link_title( $title ) {
 	return $title;
 }	
 add_filter( 'the_title', 'ekiline_link_title' );
+
+
+/**
+ * Manipular el contenido
+ * https://developer.wordpress.org/reference/hooks/the_content/
+ * https://developer.wordpress.org/reference/functions/the_excerpt/
+ */
+
+function ekiline_content_additions( $content ) {
+
+	if( is_singular() ) return $content;
+	
+	if ( is_home() || is_front_page() || is_archive() || is_search() ) {
+
+		global $post;
+		if( strpos( $post->post_content, '<!--more-->' ) ) {
+			$content = $content;
+		} else {
+			$link = '... <a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline') .'</a>';
+			$content = wp_trim_words( $content, 55, $link);
+		}
+		
+	}	
+
+	return $content;
+
+}	
+add_filter( 'the_content', 'ekiline_content_additions');
 
 
 

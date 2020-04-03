@@ -16,18 +16,7 @@
 
 		<?php the_title(); ?>
 
-		<?php
-			if( is_single() || is_page() ) {
-				the_content();
-			} else if ( is_home() || is_front_page() || is_archive() || is_search() ) {
-				// En caso de que el cliente quiera recortar su texto de manera personalizada
-				if( strpos( $post->post_content, '<!--more-->' ) ) {
-					the_content();
-				} else {
-					the_excerpt();
-				}
-			}		
-		?>
+		<?php the_content();?>
 
 	</div>
 
