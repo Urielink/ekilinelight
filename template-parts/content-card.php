@@ -8,7 +8,7 @@
  */
 ?>
 
-<article id="<?php echo ekiline_post_id();?>" <?php post_class();?>>
+<article id="<?php ekiline_post_id();?>" <?php post_class();?>>
 			
 	<?php ekiline_thumbnail(); ?>
 
@@ -17,6 +17,8 @@
 		<?php the_title(); ?>
 
 		<?php the_content();?>
+
+		<?php ekiline_link_pages(); ?>	
 
 	</div>
 

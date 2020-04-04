@@ -8,7 +8,7 @@
  */
 ?>
 
-<article id="<?php echo ekiline_post_id();?>" <?php post_class();?>>
+<article id="<?php ekiline_post_id();?>" <?php post_class();?>>
 
 	<header>
 			
@@ -24,13 +24,8 @@
 
 	<?php the_content();?>
   
-	<?php
-	// En caso de que el contenido esté paginado
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'ekiline' ),
-			'after'  => '</div>',
-		) );
-	?>	
+	<?php ekiline_link_pages(); ?>	
+
 	
 	<footer>	
 		<?php ekiline_entry_footer(); ?>		

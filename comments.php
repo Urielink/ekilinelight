@@ -25,7 +25,9 @@ if ( post_password_required() ) {
 	<?php // You can start editing here -- including this comment! ?>
 
 	<?php if ( have_comments() ) : ?>
-		<button class="btn btn-link btn-sm text-secondary float-right" data-toggle="collapse" data-target="#comments-activity"><?php echo __('Hide comments','ekiline'); ?> <i class="fas fa-comments"></i></button>    
+		<button class="btn btn-link btn-sm text-secondary float-right" data-toggle="collapse" data-target="#comments-activity">
+			<?php echo __('Hide comments','ekiline'); ?> <span>&dtrif;</span>
+		</button>    
 		<p class="comments-title text-secondary mb-2 pb-2 pt-1 border-bottom">
 			<?php
 				printf( // WPCS: XSS OK.

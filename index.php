@@ -30,11 +30,7 @@ get_header(); ?>
 		while ( have_posts() ) : 
 			the_post();
 
-			$postFormat = get_post_format();
-			
-			if ( get_theme_mod('ekiline_Columns') == 4 ){
-				$postFormat = ( is_archive() || is_home() ) ? 'card' : '' ;
-			}
+			$postFormat = ( !is_singular() && get_theme_mod('ekiline_Columns') == 4 ) ? 'card' : get_post_format() ;
 
 			get_template_part( 'template-parts/content', $postFormat );	
 

@@ -259,10 +259,9 @@ function ekiline_notes($text) {
 /**
  * Tema: Obtener un id.
  **/
- 
 function ekiline_post_id(){
 	$itemId = get_post_type() . '-' . get_the_ID();; 	
-    return $itemId;
+	echo $itemId;
 }
 
 /**
@@ -343,6 +342,17 @@ function ekiline_content_additions( $content ) {
 }	
 add_filter( 'the_content', 'ekiline_content_additions');
 
+function ekiline_link_pages(){
+
+	if ( !is_singular() ) return;
+
+	$linktag = array(
+		'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'ekiline' ),
+		'after'  => '</div>',
+	);
+	
+	wp_link_pages($linktag);
+}
 
 
 /**
@@ -357,7 +367,7 @@ function ekiline_search_form( $form ) {
                 <label class="screen-reader-text" for="s">' . esc_html__( 'Search Results for: %s', 'ekiline' ) . '</label>
                 <div class="input-group">
                     <input class="form-control" type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="' . esc_html__( 'Search Results for:', 'ekiline' ) . '"/>
-                    <span class="input-group-append"><button class="btn btn-secondary" type="submit" id="searchsubmit"><i class="fa fa-search"></i> '. esc_attr__( 'Search', 'ekiline' ) .'</button></span>
+                    <span class="input-group-append"><button class="btn btn-secondary" type="submit" id="searchsubmit"><span>&orarr;</span> '. esc_attr__( 'Search', 'ekiline' ) .'</button></span>
                 </div>
             </form>';
 
