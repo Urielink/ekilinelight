@@ -1,9 +1,14 @@
 <?php
 /**
- * Metaetiquetas del tema || Meta
+ * Metaetiquetas del tema || Meta tags
  *
  * @package ekiline
  */
+
+/**
+ * Meta descripcion
+ * meta description
+ **/
 
 function ekiline_meta_description() {
     // la descripcion general, default: is_home()
@@ -29,18 +34,21 @@ function ekiline_meta_description() {
 add_action( 'wp_head', 'ekiline_meta_description', 0 , 0);
 
 
+/**
+ * Meta KeyWords, extender, permitirlas en la páginas.
+ * meta keywords, extend this to use in pages.
+ **/
 
-// Permitir el uso de etiquetas en pages // add tag support to pages
 function tags_support_all() {
     register_taxonomy_for_object_type('post_tag', 'page');
 }
 add_action('init', 'tags_support_all');
 
-// Incluir todas // ensure all tags are included in queries
-function tags_support_query($wp_query) {
-    if ($wp_query->get('tag')) $wp_query->set('post_type', 'any');
-}
-add_action('pre_get_posts', 'tags_support_query');
+    // Incluir todas // ensure all tags are included in queries
+    function tags_support_query($wp_query) {
+        if ($wp_query->get('tag')) $wp_query->set('post_type', 'any');
+    }
+    add_action('pre_get_posts', 'tags_support_query');
 
 
 function ekiline_meta_keywords() {
@@ -61,9 +69,13 @@ function ekiline_meta_keywords() {
         }
         
     } elseif ( is_tag() ){
+
         $keywords = single_tag_title( "", false );
+
     } elseif ( is_archive() ){
-        $keywords = single_cat_title("", false);
+
+        $keywords = single_cat_title( "", false);
+
     } elseif ( is_home() || is_front_page() ){
 
         $tags = get_tags();
@@ -90,97 +102,87 @@ add_action( 'wp_head', 'ekiline_meta_keywords', 0 , 0);
 
 
 /**
- * Metadatos en plantilla de contenido, header y footer.
-*/
-
-/**
- * Informacion de dia de publicaicon y autor.
- * Prints HTML with meta information for the current post-date/time and author.
+ * Informacion de dia de publicacion y autor
+ * Information for the current post date/time and author
  */
+function ekiline_posted_on() {
 
-if ( ! function_exists( 'ekiline_posted_on' ) ) :
-    function ekiline_posted_on() {
-
-        $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-        if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-            $time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time> <time class="updated" datetime="%3$s">%4$s</time>';
-        }
-    
-        $time_string = sprintf( $time_string,
-            esc_attr( get_the_date( 'c' ) ),
-            esc_html( get_the_date() ),
-            esc_attr( get_the_modified_date( 'c' ) ),
-            esc_html( get_the_modified_date() )
-        );
-        
-        //ekiline, mejor elazamos al mes
-        $archive_year  = get_the_time('Y');
-        $archive_month = get_the_time('m');
-        $timelink = get_month_link( $archive_year, $archive_month ); //era get_permalink() 
-    
-        $posted_on = sprintf(
-            esc_html_x( 'Posted on %s', 'post date', 'ekiline' ), '<a href="' . esc_url( $timelink ) . '" rel="bookmark">' . $time_string . '</a>'
-        );
-    
-        $byline = sprintf(
-            esc_html_x( 'by %s', 'post author', 'ekiline' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-        );
-    
-        echo '<span class="posted-on">' . $posted_on . '</span> <span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
-    
+    $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+    if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+        $time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time> <time class="updated" datetime="%3$s">%4$s</time>';
     }
 
-endif;
+    $time_string = sprintf( $time_string,
+        esc_attr( get_the_date( 'c' ) ),
+        esc_html( get_the_date() ),
+        esc_attr( get_the_modified_date( 'c' ) ),
+        esc_html( get_the_modified_date() )
+    );
     
-if ( ! function_exists( 'ekiline_entry_footer' ) ) :
-    /**
-     * Abril 2 refactorizar este pié.
-     * Prints HTML with meta information for the categories, tags and comments.
-     */
-    function ekiline_entry_footer() {
-        // editar articulo.
-        // https://developer.wordpress.org/reference/functions/edit_post_link/
-        edit_post_link( sprintf( esc_html__( 'Edit %s', 'ekiline' ), '<span>&olarr;</span>'), null,'<br>' );
-        
-        // Show category and tag text for singles.
-        if ( 'post' === get_post_type() ) {
-            /* translators: used between list items, there is a space after the comma */
-            $categories_list = get_the_category_list( esc_html__( ',  ', 'ekiline' ) );
-            if ( $categories_list && ekiline_categorized_blog() ) {
-                printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'ekiline' ) . '</span> ', $categories_list ); // WPCS: XSS OK.
-            }
+    //ekiline, mejor elazamos al mes
+    $archive_year  = get_the_time('Y');
+    $archive_month = get_the_time('m');
+    $timelink = get_month_link( $archive_year, $archive_month ); //era get_permalink() 
+
+    $posted_on = sprintf(
+        esc_html_x( 'Posted on %s', 'post date', 'ekiline' ), '<a href="' . esc_url( $timelink ) . '" rel="bookmark">' . $time_string . '</a>'
+    );
+
+    $byline = sprintf(
+        esc_html_x( 'by %s', 'post author', 'ekiline' ), '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+    );
+
+    echo '<span class="posted-on">' . $posted_on . '</span> <span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
+
+}
+
     
-            /* translators: used between list items, there is a space after the comma */
-            $tags_list = get_the_tag_list( '', esc_html__( ',  ', 'ekiline' ) );
-            if ( $tags_list ) {
-                printf( '<br/><span class="tags-links">' . esc_html__( 'Tagged %1$s', 'ekiline' ) . '</span> ', $tags_list ); // WPCS: XSS OK.
-            }
+/**
+ * Informacion de la categoria etiquetas y comentarios.
+ * Information for the categories, tags and comments.
+ */
+function ekiline_entry_footer() {
+
+    // editar articulo: https://developer.wordpress.org/reference/functions/edit_post_link/
+    edit_post_link( sprintf( esc_html__( 'Edit %s', 'ekiline' ), '<span>&olarr;</span>'), null,'<br>' );
+    
+    // 1) Show category and tag text for singles.
+    if ( 'post' === get_post_type() ) {
+        /* translators: used between list items, there is a space after the comma */
+        $categories_list = get_the_category_list( esc_html__( ',  ', 'ekiline' ) );
+        if ( $categories_list && ekiline_categorized_blog() ) {
+            printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'ekiline' ) . '</span> ', $categories_list ); // WPCS: XSS OK.
         }
-        
-        // Mostrar etiquetas en páginas.
-        if ( 'page' === get_post_type() ) {
-            /* translators: used between list items, there is a space after the comma */
-            $tags_list = get_the_tag_list( '', esc_html__( ',  ', 'ekiline' ) );
-            if ( $tags_list ) {
-                printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'ekiline' ) . '</span> ', $tags_list ); // WPCS: XSS OK.
-            }
-        }   
-    
-        if ( ! is_single() && ! is_front_page() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
-            echo '<span class="comments-link">';
-                comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
-            echo '</span> ';
+
+        /* translators: used between list items, there is a space after the comma */
+        $tags_list = get_the_tag_list( '', esc_html__( ',  ', 'ekiline' ) );
+        if ( $tags_list ) {
+            printf( '<br/><span class="tags-links">' . esc_html__( 'Tagged %1$s', 'ekiline' ) . '</span> ', $tags_list ); // WPCS: XSS OK.
         }
-    
-    
     }
     
-endif;
+    // Mostrar etiquetas en páginas.
+    if ( 'page' === get_post_type() ) {
+        /* translators: used between list items, there is a space after the comma */
+        $tags_list = get_the_tag_list( '', esc_html__( ',  ', 'ekiline' ) );
+        if ( $tags_list ) {
+            printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'ekiline' ) . '</span> ', $tags_list ); // WPCS: XSS OK.
+        }
+    }   
+
+    if ( ! is_single() && ! is_front_page() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
+        echo '<br><span class="comments-link">';
+            comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
+        echo '</span> ';
+    }
+
+
+}
+    
     
     /**
-     * Returns true if a blog has more than 1 category.
-     *
-     * @return bool
+     * 2) Saber si un contenido tiene mas de una categoria 
+     * Returns true if a blog has more than 1 category
      */
     function ekiline_categorized_blog() {
         if ( false === ( $all_the_cool_cats = get_transient( 'ekiline_categories' ) ) ) {

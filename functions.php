@@ -190,6 +190,7 @@ add_action('wp_head', 'print_emoji_styles',20);
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/themeNavbars.php';
 require get_template_directory() . '/inc/themeNavwalker.php';
+require get_template_directory() . '/inc/themeLayout.php';
 require get_template_directory() . '/inc/themeElements.php';
 require get_template_directory() . '/inc/themeMeta.php';
 require get_template_directory() . '/inc/themeFeaturedCategories.php';

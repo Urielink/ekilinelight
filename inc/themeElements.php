@@ -2,227 +2,55 @@
 /**
  * Objetos del tema || Theme objects
  *
+ * Funciones complementarias para el marcado HTML.
+ * HTML Markup complementary functions.
+ *  
  * @package ekiline
  */
 
-/*
- * Funciones complementarias para el personalizador.
- * Customizer complementary functions.
- */
-
-/* Ancho de layout | Layout width */
-
-function widthControl(){
-	$widthClass = 'container';
-	$widthClassAdd = '-fluid';
-	
-	if( is_front_page() || is_home() ){
-		$widthClass .= ( true === get_theme_mod('ekiline_anchoHome') ) ? $widthClassAdd : '' ;
-	}
-	if( is_archive() || is_category() ){
-		$widthClass .= ( true === get_theme_mod('ekiline_anchoArchive') ) ? $widthClassAdd : '' ;
-	}
-	if( is_single() || is_page() && !is_front_page() ){
-		$widthClass .= ( true === get_theme_mod('ekiline_anchoSingle') ) ? $widthClassAdd : '' ;
-	}
-
-	// proteccion a la lectura en caso de imagen
-	$widthClass .= ( get_option('main_color') != '#f8f9fa' ) ? ' bg-main' : '' ;
-
-	return $widthClass;
-}
-
-/* Ancho de layout sin sidebars | Layout width, no sidebars */
-
-function viewSbarFilter($wsbCtl) {
-
-	$opt = '';
-
-	if( is_front_page() || is_home() ){
-		$opt = get_theme_mod('ekiline_disableSbHome' );
-	}
-
-	if( is_archive() || is_category() ){
-		$opt = get_theme_mod('ekiline_disableSbArchive' );
-	}
-
-	if( is_single() || is_page() && !is_front_page() ){
-		$opt = get_theme_mod('ekiline_disableSbSingle' );
-	}
-
-	switch ( $opt ) {
-		case 1:
-			unset($wsbCtl['sidebar-1']);
-			break;
-		case 2:
-			unset($wsbCtl['sidebar-2']);
-			break;
-		case 3:
-			unset($wsbCtl['sidebar-1']);
-			unset($wsbCtl['sidebar-2']);			
-			break;
-	}
-
-	return $wsbCtl;	
-
-}
-add_filter( 'sidebars_widgets', 'viewSbarFilter' );
-
-/* Orden de columnas | Columns order */
-
-function mainCols($tag){
-	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
-	// En caso de existir barras laterales agregar envoltorio
-	if ($tag == 'open') echo '<div id="maincolumns" class="row mx-0 ' . widthControl() . ' mx-auto px-0">';
-	if ($tag == 'close') echo '</div><!-- #maincolumns -->'; 
-}
-
-function orderCols($css){
-	$cssMain = widthControl();//'container ';
-	if (is_active_sidebar( 'sidebar-1') || is_active_sidebar( 'sidebar-2')) {
-	// sidebars.
-		$sbL = is_active_sidebar( 'sidebar-1');
-		$sbR = is_active_sidebar( 'sidebar-2');
-	// orden de columnas.	
-		$cssMain = 'col-md-6 order-md-2';
-		$cssLeft = ' col-md-3 order-md-1';
-		$cssRight = ' col-md-3 order-md-3';	
-	// aparicion de columnas
-		if( $sbL && !$sbR ){
-			$cssMain = 'col-md-9 order-md-2';
-			$cssLeft = ' col-md-3 order-md-1';
-		} elseif ( !$sbL && $sbR ){
-			$cssMain = 'col-md-9';
-			$cssRight = ' col-md-3';	
-		}
-	}	
-// imprimir
-	if ($css == 'main') echo $cssMain;
-	if ($css == 'left') echo $cssLeft;
-	if ($css == 'right') echo $cssRight;
-}
-
-/* Vista de columnas | Columns view */
-
-function viewCols($tag){
-	if ( is_single() || is_page() || is_search() ) return;
-
-	$colSet = get_theme_mod('ekiline_Columns'); 
-	$colContain = ( $colSet == 4 ) ? 'card-columns' : 'row' ;
-
-	if ($colSet > 0){
-		if ($tag == 'open') echo '<div id="viewcolumns" class="'.$colContain.'">';
-		if ($tag == 'close') echo '</div><!-- #viewcolumns -->'; 
-	}
-}
-
-function viewColsFilter($classes) {
-	$colSet = get_theme_mod('ekiline_Columns'); 
-	$colView = '';
-	
-	switch ($colSet) {
-		case 1:
-			$colView = 'col-md-6';
-			break;
-		case 2:
-			$colView = 'col-md-4';
-			break;
-		case 3:
-			$colView = 'col-md-3';
-			break;
-		case 4:
-			$colView = 'card';
-			break;
-	}	
-	
-	if ( is_single() || is_page() || is_search() ) {
-		$colView = '';
-	}
-
-	$classes[] = $colView;
-    return $classes;
-}
-
-add_filter('post_class', 'viewColsFilter');
 
 /**
- * Colores dinamicos: Customizer
- * functions #159 localize script = ekiline_themeColors().
+ * Directorio de textos, agregar textos que sean necesarios para el tema invocar con funciones.
+ * Custom text lines, use this to add custom texts in theme, and call it with functions.
  **/
+ 
+function ekiline_notes($text) {
+	$item = ''; 	
+	switch ($text) {
+		case 'copyright':
+			$item = sprintf( esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) );
+			$item .= '&nbsp;';
+			$item .= sprintf( esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>','<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' );
+		break;
+	}	
+    return $item;
+}
 
-function ekiline_themeColors(){
- 	 	 	
-	$colores = array(
-		//pagina
-	   'fondo' => get_option('back_color','#ffffff'),
-	   'texto' => get_option('text_color','#333333'),
-	   'main' => get_option('main_color','#f8f9fa'),
-	   //navbar
-	   'menu' => get_option('menu_color','#343a40'),
-	   //footer
-	   'footer' => get_option('footer_color','#343a40'),
-	   'ftxt' => get_option('ftext_color','#ffffff'),
-	   'flinks' => get_option('flinks_color','#007bff'),
-	   //footer-bar
-	   'fbar' => get_option('fbar_color','#6c757d'),
-	   'fbartxt' => get_option('fbartxt_color','#ffffff'),
-	   'fbarlks' => get_option('fbarlks_color','#007bff'),
-	   //bootstrap
-	   'b4primary' => get_option('b4_primary','#007bff'),
-	   'b4secondary' => get_option('b4_secondary','#6c757d'),
-	   'b4success' => get_option('b4_success','#28a745'),
-	   'b4danger' => get_option('b4_danger','#dc3545'),
-	   'b4warning' => get_option('b4_warning','#ffc107'),
-	   'b4info' => get_option('b4_info','#17a2b8'),
-	   'b4light' => get_option('b4_light','#f8f9fa'),
-	   'b4dark' => get_option('b4_dark','#343a40')
-   );
-   return $colores;
-} 
+/**
+ * Obtener un id, agregar al marcado (content.php).
+ * Get id each post.
+ **/
+function ekiline_post_id(){
+	$itemId = get_post_type() . '-' . get_the_ID();; 	
+	echo $itemId;
+}
 
-/*
- * Funciones complementarias para el marcado HTML.
- * HTML Markup complementary functions.
+/**
+ * Reemplazar el marcado para el enlace de leer mas 
+ * Custom read more link
  */
-
-
-
-/* Reemplazar el marcado para el enlace de leer mas */
-
 function overrideReadMoreLink(){
 	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline') .'</a>';
 }
 add_filter( 'the_content_more_link', 'overrideReadMoreLink' );
 
-/* Personalizar el titulo en las paginas de archivo */
-
-function my_theme_archive_title( $title ) {
-	if ( is_single() || is_page() ) return;
-    // if ( is_category() ) {
-    //     $title = single_cat_title( '', false );
-    // } elseif ( is_tag() ) {
-    //     $title = single_tag_title( '', false );
-    // } elseif ( is_author() ) {
-    //     $title = '<span class="vcard">' . get_the_author() . '</span>';
-    // } elseif ( is_post_type_archive() ) {
-    //     $title = post_type_archive_title( '', false );
-    // } elseif ( is_tax() ) {
-    //     $title = single_term_title( '', false );
-    // } elseif ( is_home() ) {
-    //     $title = get_bloginfo( 'name' );
-	// }
-	if ( is_home() ) {
-		$title = get_bloginfo( 'name' );
-	}  
-    return $title;
-}
- 
-add_filter( 'get_the_archive_title', 'my_theme_archive_title' );
-
- /* Widgets en footer */
+/**
+ * Widgets en footer
+ * Footer widgets
+ */
 
 function ekiline_countWidgets( $widgetZone ){
-
+	// agreagar un contenedor en caso de existir más de 2 widgets, util para usar columnas de bootstrap.
 	if ( is_active_sidebar($widgetZone) ) :
 		
 		$the_sidebars = wp_get_sidebars_widgets();
@@ -239,33 +67,10 @@ function ekiline_countWidgets( $widgetZone ){
 	endif;
 }
 
-/**
- * Tema: 
- * Textos como variables.
- **/
- 
-function ekiline_notes($text) {
-	$item = ''; 	
-	switch ($text) {
-		case 'copyright':
-			$item = sprintf( esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) );
-			$item .= '&nbsp;';
-			$item .= sprintf( esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>','<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' );
-		break;
-	}	
-    return $item;
-}
 
 /**
- * Tema: Obtener un id.
- **/
-function ekiline_post_id(){
-	$itemId = get_post_type() . '-' . get_the_ID();; 	
-	echo $itemId;
-}
-
-/**
- * Tema: Manipular el thumbnail
+ * 1) Manipular el marcado en el thumbnail
+ * Custom thumbnail markup
  * https://developer.wordpress.org/reference/functions/the_post_thumbnail/
  **/
 function ekiline_thumbnail(){
@@ -280,8 +85,10 @@ function ekiline_thumbnail(){
 }
 
 	/**
+	 * 2) Agregar enlace a todas las miniaturas. 
 	 * Link all post thumbnails to the post permalink.
 	 */
+
 	function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
 		if ( is_single() ) return $html;
 		// si es search, se agrega una clase 
@@ -295,7 +102,8 @@ function ekiline_thumbnail(){
 
 
 /**
- * Manipular el titulo
+ * Manipular el titulo con filtros.
+ * Custom Title markup.
  * https://developer.wordpress.org/reference/functions/the_title_attribute/
  */
 
@@ -316,7 +124,8 @@ add_filter( 'the_title', 'ekiline_link_title' );
 
 
 /**
- * Manipular el contenido
+ * 1) Manipular el contenido con filtros
+ * Custom markup content.
  * https://developer.wordpress.org/reference/hooks/the_content/
  * https://developer.wordpress.org/reference/functions/the_excerpt/
  */
@@ -342,6 +151,11 @@ function ekiline_content_additions( $content ) {
 }	
 add_filter( 'the_content', 'ekiline_content_additions');
 
+/**
+ * 2) agregar paginado en publicaciones paginadas
+ * Add pagination to paginated content.
+ */
+
 function ekiline_link_pages(){
 
 	if ( !is_singular() ) return;
@@ -356,9 +170,8 @@ function ekiline_link_pages(){
 
 
 /**
- * Tema: 
- * Personalizar el formulario de busqueda
- * Override search form HTML
+ * Personalizar el formulario de busqueda.
+ * Override search form markup.
  **/
  
 function ekiline_search_form( $form ) {
@@ -376,7 +189,10 @@ function ekiline_search_form( $form ) {
 add_filter( 'get_search_form', 'ekiline_search_form' );
 
 
-/* Tema: Personalizar el formulario de proteccion de lectura. */
+/**
+ * 1) Personalizar el formulario de proteccion de lectura. 
+ * Override protected content form.
+*/
 
 function ekiline_password_form() {
     global $post;
@@ -391,7 +207,8 @@ function ekiline_password_form() {
 add_filter( 'the_password_form', 'ekiline_password_form' );
 
 /* 
-* Expirar la sesion
+* 2) Expirar la sesion que permite leer un contenido protegido
+* Expire post password
 * https://developer.wordpress.org/reference/hooks/post_password_expires/
 */
 
@@ -406,8 +223,7 @@ function ekiline_expirCookie( $time ) {
 
 
 /**
- * Tema: 
- * Paginacion page & singles & archive
+ * Paginacion para page & single & archive
  * https://codex.wordpress.org/Next_and_Previous_Links
  **/
 
@@ -415,6 +231,7 @@ function ekiline_pages_navigation(){
 
 	if ( is_front_page() ) return;	
 
+	// en caso de woocommerce no aplica
 	if ( class_exists( 'WooCommerce' ) ) {
 		if ( is_cart() || is_checkout() || is_account_page() ) return;
 	}
@@ -453,10 +270,7 @@ function ekiline_pages_navigation(){
 	}
 
 
-	/**
-	 * Paginacion para listados
-	 * @link https://codex.wordpress.org/Function_Reference/paginate_links
-	 **/
+	/* Paginacion para listados: https://codex.wordpress.org/Function_Reference/paginate_links */
 
 	if ( is_archive() || is_home() || is_search() ){
 		

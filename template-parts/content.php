@@ -25,7 +25,6 @@
 	<?php the_content();?>
   
 	<?php ekiline_link_pages(); ?>	
-
 	
 	<footer>	
 		<?php ekiline_entry_footer(); ?>		
