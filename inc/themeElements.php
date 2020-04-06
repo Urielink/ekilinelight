@@ -21,9 +21,61 @@ function ekiline_notes($text) {
 			$item = sprintf( esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) );
 			$item .= '&nbsp;';
 			$item .= sprintf( esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>','<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' );
-		break;
+			break;
+
+		case 'published':
+			$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+			if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+				$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>' . __(' Updated on ', 'ekiline') . '<time class="updated" datetime="%3$s">%4$s</time>';
+			}
+		
+			$time_string = sprintf( $time_string,
+				esc_attr( get_the_date( 'c' ) ),
+				esc_html( get_the_date() ),
+				esc_attr( get_the_modified_date( 'c' ) ),
+				esc_html( get_the_modified_date() )
+			);
+			
+			//ekiline, mejor elazamos al mes
+			$archive_year  = get_the_time('Y');
+			$archive_month = get_the_time('m');
+			$timelink = get_month_link( $archive_year, $archive_month ); //era get_permalink() 
+		
+			$item = sprintf(
+				esc_html_x( 'Posted on %s', 'post date', 'ekiline' ), 
+				'<a href="' . esc_url( $timelink ) . '" rel="bookmark">' . $time_string . '</a>'
+			);		
+			break;
+		case 'author':
+			$item = sprintf(
+				esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
+				'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+			);			
+			break;
+		case 'categories':
+			if( is_page() ) return;
+				global $post;
+				$cats = get_the_category( $post->ID );
+				foreach ( $cats as $cat ) {
+					$item .= ' <a href="' . get_category_link( $cat->term_id ) . '">' .  $cat->name  .'</a>,';
+				}
+				$item = __('Categories:', 'ekiline') . $item;
+			break;
+		case 'tags':
+			$tags_list = get_the_tag_list( '', esc_html__( ',  ', 'ekiline' ) );
+			if ( $tags_list ) {
+				$item = sprintf( esc_html__( 'Tags: %1$s', 'ekiline' ) , '<span class="tags-links">' . $tags_list . '</span> ' ) ;
+			}	
+			break;
+		case 'addcomment':
+			if ( ! is_single() && ! is_front_page() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) return;
+			$item = '<span class="comments-link">';
+			$item .= comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
+			$item .= '</span> ';
+		
+			break;		
 	}	
-    return $item;
+    echo $item;
 }
 
 /**

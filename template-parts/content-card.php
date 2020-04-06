@@ -15,16 +15,16 @@
 	<div class="card-body">
 
 		<?php the_title(); ?>
-
 		<?php the_content();?>
-
-		<?php ekiline_link_pages(); ?>	
 
 	</div>
 
 	<footer class="card-footer">	
 
-		<?php ekiline_entry_footer(); ?>
+		<p class="entry-meta">
+			<?php ekiline_notes('categories'); ?>
+			<br><?php ekiline_notes('tags'); ?>
+		</p><!-- .entry-meta -->	
 		
 	</footer><!-- .entry-footer -->
 

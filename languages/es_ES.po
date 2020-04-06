@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2020-03-12 20:45-0600\n"
+"PO-Revision-Date: 2020-04-06 00:09-0500\n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.8.12\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -118,6 +118,13 @@ msgctxt "post author"
 msgid "by %s"
 msgstr "por %s"
 
+msgctxt "post authors"
+msgid "Written by %s"
+msgstr "Escrito por %s"
+
+msgid "Categories:"
+msgstr "Categorías:"
+
 # @ ekiline
 #. translators: used between list items, there is a space after the comma
 #: inc/template-tags.php:50 inc/template-tags.php:56
@@ -133,8 +140,8 @@ msgstr "Publicado en %1$s"
 # @ ekiline
 #: inc/template-tags.php:58
 #, php-format
-msgid "Tagged %1$s"
-msgstr "Etiquetado %1$s"
+msgid "Tags: %1$s"
+msgstr "Etiquetas: %1$s"
 
 # @ ekiline
 #: inc/template-tags.php:64

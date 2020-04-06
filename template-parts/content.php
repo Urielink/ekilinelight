@@ -13,10 +13,15 @@
 	<header>
 			
 		<?php the_title(); ?>
+		
+	<?php if (is_singular()){ ?>
+			<p class="entry-meta">
+				<?php ekiline_notes('author'); ?>, 
+				<?php ekiline_notes('published'); ?>,
+				<?php ekiline_notes('addcomment'); ?>
+			</p>
+	<?php } ?>
 
-		<p class="entry-meta">
-			<?php ekiline_posted_on(); ?>
-		</p><!-- .entry-meta -->
 
 	</header>
 	
@@ -26,8 +31,13 @@
   
 	<?php ekiline_link_pages(); ?>	
 	
+<?php if ( is_singular() ){?>
 	<footer>	
-		<?php ekiline_entry_footer(); ?>		
+		<p class="entry-meta">
+			<?php ekiline_notes('categories'); ?>
+			<br><?php ekiline_notes('tags'); ?>
+		</p><!-- .entry-meta -->	
 	</footer>
+<?php } ?>
 
 </article><!-- #post-## -->
