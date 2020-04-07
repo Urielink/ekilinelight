@@ -23,3 +23,4 @@
 			
 <?php ekilineNavbar('primary');?> 
 
+<?php get_template_part( 'template-parts/global-header' );?>

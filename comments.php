@@ -1,19 +1,16 @@
 <?php
 /**
- * The template for displaying comments.
+ * Plantilla de comentarios.
  *
- * This is the template that displays the area of the page that contains both the current comments
- * and the comment form.
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
  *
  * @package ekiline
  */
 
 /*
- * If the current post is protected by a password and
- * the visitor has not yet entered the password we will
- * return early without loading the comments.
+ * Restringir la vista de comentarios 
+ * si el articulo necesita password
+ * Don't show comments if post have password.
  */
 if ( post_password_required() ) {
 	return;
@@ -22,15 +19,14 @@ if ( post_password_required() ) {
 
 <div id="comments" class="comments-area clearfix">
     
-	<?php // You can start editing here -- including this comment! ?>
-
 	<?php if ( have_comments() ) : ?>
+
 		<button class="btn btn-link btn-sm text-secondary float-right" data-toggle="collapse" data-target="#comments-activity">
 			<?php echo __('Hide comments','ekiline'); ?> <span>&dtrif;</span>
 		</button>    
 		<p class="comments-title text-secondary mb-2 pb-2 pt-1 border-bottom">
 			<?php
-				printf( // WPCS: XSS OK.
+				printf( 
 					esc_html( _nx( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'ekiline' ) ),
 					number_format_i18n( get_comments_number() ),
 					'<span>' . get_the_title() . '</span>'
@@ -38,46 +34,55 @@ if ( post_password_required() ) {
 			?>
 		</p>
     
-    <div id="comments-activity" class="p-2 mb-3 collapse show">
+		<div id="comments-activity" class="p-2 mb-3 collapse show">
 
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // Are there comments to navigate through? ?>
-		<nav id="comment-nav-above" class="navigation comment-navigation border-bottom">
-			<h2 class="screen-reader-text"><?php echo esc_html__( 'Comment navigation', 'ekiline' ); ?></h2>
-			<div class="small nav-links d-flex justify-content-end">
+			<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 
-				<div class="nav-previous btn-sm"><?php previous_comments_link( '<span>&larr;</span> '.esc_html__( 'Older Comments', 'ekiline' ) ); ?></div>
-				<div class="nav-next btn-sm"><?php next_comments_link( esc_html__( 'Newer Comments', 'ekiline' ).' <span>&rarr;</span>' ); ?></div>
+				<nav id="comment-nav-above" class="navigation comment-navigation border-bottom">
+					<h2 class="screen-reader-text"><?php echo esc_html__( 'Comment navigation', 'ekiline' ); ?></h2>
+					<div class="small nav-links d-flex justify-content-end">
 
-			</div><!-- .nav-links -->
-		</nav><!-- #comment-nav-above -->
-		<?php endif; // Check for comment navigation. ?>
+						<div class="nav-previous btn-sm"><?php previous_comments_link( '<span>&larr;</span> '.esc_html__( 'Older Comments', 'ekiline' ) ); ?></div>
+						<div class="nav-next btn-sm"><?php next_comments_link( esc_html__( 'Newer Comments', 'ekiline' ).' <span>&rarr;</span>' ); ?></div>
 
-		<ol class="comment-list list-unstyled m-0">
-			<?php
-				wp_list_comments( array(
-					'style'      => 'ol',
-					'short_ping' => true,
-					'class'      => 'border',
-					'callback'   => 'ekilineCommentsExtended',
-					'avatar_size'       => 64
-				) );
-			?>
-		</ol><!-- .comment-list -->
-		
-    </div><!-- #comments-activity -->
+					</div><!-- .nav-links -->
+				</nav><!-- #comment-nav-above -->
+
+			<?php endif; ?>
+
+			<ol class="comment-list list-unstyled m-0">
+				<?php
+					wp_list_comments( array(
+						'style'      => 'ol',
+						'short_ping' => true,
+						'class'      => 'border',
+						'callback'   => 'ekilineCommentsExtended',
+						'avatar_size'       => 64
+					) );
+				?>
+			</ol><!-- .comment-list -->
+			
+		</div><!-- #comments-activity -->
+
 	<?php endif; // Check for have_comments(). ?>
 
 	<?php
-		// If comments are closed and there are comments, let's leave a little note, shall we?
+		// Si hay comentarios pero no activos, mostrar un mensaje
+		// If comments are closed and there are comments, show a  note
+
 		if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
 	?>
 		<p class="no-comments"><?php echo esc_html__( 'Comments are closed', 'ekiline' ); ?></p>
+
 	<?php endif; ?>
 
 <?php 
 /* 
- * Personalizar el formulario, desglosar los elmentos de los comentarios.
+ * Personalizar el formulario geenral de comentarios.
+ * Custom comments forms
+ * https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
  */
+
 function ekilineCommentsSimple($comment, $args, $depth) {
 	
     if ( 'div' === $args['style'] ) {
@@ -188,14 +193,13 @@ function ekilineCommentsExtended($comment, $args, $depth) {
 }
 
 /* 
- * Personalizar el formulario, con validaciones de campos y alertas (theme.js)
- * Custom form, add js verification and alerts with bootstrap modals (theme.js)
+ * Personalizar el formulario de comentarios
+ * Customizing comments form
  * https://developer.wordpress.org/reference/functions/comment_form/
- * https://premium.wpmudev.org/blog/customizing-wordpress-comment-form/?npp=b&utm_expid=3606929-84.YoGL0StOSa-tkbGo-lVlvw.1&utm_referrer=https%3A%2F%2Fwww.google.com.mx%2F
- * Algunas caracteristicas se pueden eliminar desde las funciones:
- * http://crunchify.com/how-to-remove-url-website-field-from-wordpress-comment-form/
+ * https://premium.wpmudev.org/blog/customizing-wordpress-comment-form/
  * 
  */
+
 $req = get_option( 'require_name_email' );
 $aria_req = ( $req ? " aria-required='true'" : '' );
 
@@ -234,7 +238,6 @@ $args = array(
 	
 );
 
- // comment_form();
 	comment_form( $args );
 ?>
 </div><!-- #comments -->

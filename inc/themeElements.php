@@ -83,7 +83,7 @@ function ekiline_notes($text) {
  * Get id each post.
  **/
 function ekiline_post_id(){
-	$itemId = get_post_type() . '-' . get_the_ID();; 	
+	$itemId = get_post_type() . '-' . get_the_ID();	
 	echo $itemId;
 }
 
