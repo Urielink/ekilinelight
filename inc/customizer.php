@@ -118,7 +118,7 @@ function ekiline_theme_customizer( $wp_customize ) {
                 '2' => __( 'Centered', 'ekiline' ),
             	'3' => __( 'Centered between', 'ekiline' ),
             	'4' => __( 'Centered around', 'ekiline' ),
-            	'5' => __( 'Offcanvas', 'ekiline' ),
+            	'5' => __( 'Offcanvas (responsive)', 'ekiline' ),
             	'6' => __( 'Top toggle', 'ekiline' ),
                 '7' => __( 'Modal', 'ekiline' ),
                 '8' => __( 'Modal from bottom', 'ekiline' ),

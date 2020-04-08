@@ -97,7 +97,7 @@ function ekilineNavbar($navPosition){
 
 ?>
 
-			<nav id="<?php echo $navPosition;?>SiteNavigation"  class="<?php echo $navClassCss;?>">
+			<header id="<?php echo $navPosition;?>SiteNavigation"  class="<?php echo $navClassCss;?>">
 			
 		    	<div class="container<?php echo $headNav; ?>">
 
@@ -135,7 +135,7 @@ function ekilineNavbar($navPosition){
 
 		    	</div><!-- .container --> 
 		    	
-			</nav><!-- .site-navigation -->       
+			</header><!-- .site-navigation -->       
 			
 	            <?php if ( $styles >= '7'){
 		            	ekiline_modalMenuBottom($navPosition);
