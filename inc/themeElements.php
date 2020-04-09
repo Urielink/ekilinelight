@@ -14,7 +14,7 @@
  * Custom text lines, use this to add custom texts in theme, and call it with functions.
  **/
  
-function ekiline_notes($text) {
+function ekiline_notes($text = null) {
 	$item = ''; 	
 	switch ($text) {
 		case 'copyright':
@@ -79,7 +79,7 @@ function ekiline_notes($text) {
 		
 			break;		
 	}	
-    echo $item;
+    return $item;
 }
 
 /**

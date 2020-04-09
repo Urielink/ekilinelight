@@ -23,20 +23,5 @@
 
 <?php ekilineNavbar('primary'); ?> 
 
-<?php // get_template_part( 'template-parts/global-header' );?>
+<?php ekiline_addCoverHeader(); ?>
 
-<?php
-/**
- * 
- * abril 7, pruebas y ajustes en funciones de directorio, resulta que, si deseo incorporar un header al sitio, el marcado debe cambiar.
- * global-header, cuenta con todo lo necesario. Hay que refactorizar.
- * **** Prestar especial cuidado a la obtención de titulos.
- * themeElements, se ajustaron unas clases.
- * themeNavbars, se añadio un h2, quizá no es necesario. Pero solo para verificar de momento.
- * **** Colusion 1
- * Siguiendo el orden de bootstrap, el navbar es el header.
- * - entonces no se necesita tener un cover como header.
- * - en tal caso entonces ese cover es un elemento complementario, gráfico del articulo, pero no debiera restar prioridad sino añadir valor.
- */
-
-?> 

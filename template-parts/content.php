@@ -16,9 +16,9 @@
 		
 	<?php if (is_singular()){ ?>
 			<p class="entry-meta">
-				<?php ekiline_notes('author'); ?>, 
-				<?php ekiline_notes('published'); ?>,
-				<?php ekiline_notes('addcomment'); ?>
+				<?php echo ekiline_notes('author'); ?>, 
+				<?php echo ekiline_notes('published'); ?>,
+				<?php echo ekiline_notes('addcomment'); ?>
 			</p>
 	<?php } ?>
 
@@ -34,8 +34,8 @@
 <?php if ( is_singular() ){?>
 	<footer>	
 		<p class="entry-meta">
-			<?php ekiline_notes('categories'); ?>
-			<br><?php ekiline_notes('tags'); ?>
+			<?php echo ekiline_notes('categories'); ?>
+			<br><?php echo ekiline_notes('tags'); ?>
 		</p><!-- .entry-meta -->	
 	</footer>
 <?php } ?>

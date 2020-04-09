@@ -22,8 +22,8 @@
 	<footer class="card-footer">	
 
 		<p class="entry-meta">
-			<?php ekiline_notes('categories'); ?>
-			<br><?php ekiline_notes('tags'); ?>
+			<?php echo ekiline_notes('categories'); ?>
+			<br><?php echo ekiline_notes('tags'); ?>
 		</p><!-- .entry-meta -->	
 		
 	</footer><!-- .entry-footer -->

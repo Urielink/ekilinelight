@@ -20,11 +20,14 @@ get_header(); ?>
 
 		<?php dynamic_sidebar( 'content-w1' );?>
 
+			<?php ekiline_addBlogPageContent(); ?>
+
 			<?php ekiline_show_columns('open'); ?>
 
 				<?php
 					/** Loop https://developer.wordpress.org/themes/basics/the-loop/ **/
 					if ( have_posts() ) { 
+
 						while ( have_posts() ) : 
 							the_post();
 
