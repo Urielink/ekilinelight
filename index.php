@@ -20,8 +20,6 @@ get_header(); ?>
 
 		<?php dynamic_sidebar( 'content-w1' );?>
 
-			<?php ekiline_addBlogPageContent(); ?>
-
 			<?php ekiline_show_columns('open'); ?>
 
 				<?php

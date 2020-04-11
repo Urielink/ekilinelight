@@ -9,8 +9,78 @@
  */
 
 /**
+ * Crear un header dinamico y personalizable.
+ **/
+
+function ekiline_addCoverHeader(){
+	// default, con customizer
+	$url = 'http://localhost/wpdev/ekiline/wp-content/uploads/2008/06/dsc04563.jpg';
+	$title = get_bloginfo( 'name' );
+	$content = get_bloginfo( 'description' );
+	$meta = ekiline_notes('copyright');
+	// Customizer.
+	$custom = false; 
+	//ocupar clases para intercalar contenido.
+	//$wpClass = get_body_class()[0];
+
+	if( is_singular() && !is_front_page() || is_home() && $custom != '' || is_front_page() && $custom != ''){
+		
+		global $post;
+
+		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url() : $url ;
+		$title = get_the_title();
+		$content = wp_trim_words( $post->post_content, 24, '...' );
+		$meta = ekiline_notes('author');
+
+			if( is_single() ) $meta .= ' , '. ekiline_notes('categories');	
+			
+			if( is_home() && $custom ){
+				$title = get_the_title( get_option('page_for_posts', true) ) . ' hfp';
+					$contentfield = get_post_field( 'post_content', get_option('page_for_posts') );
+				$content = wp_trim_words( $contentfield, 24, '...' ) . ' hfp';
+			}
+					
+	} 
+
+	if ( is_archive() || is_category() ){
+		$title = get_the_archive_title();
+		$content = get_the_archive_description();
+		//no meta
+	}
+	if ( is_search() ){
+		global $wp_query;
+		$title = sprintf( esc_html__( 'Search Results for: %s', 'ekiline' ), get_search_query() );
+		$content = sprintf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts );
+	}
+	if ( is_404() ){
+		$title = esc_html__( 'It looks like nothing was found at this location.', 'ekiline' );
+		$content = esc_html__( 'Maybe try one of the links below or a search?', 'ekiline' );
+	}
+
+?>
+
+<div class="wp-block-cover xhas-background-dim-20 xhas-background-dim has-parallax alignfull" 
+	style="background-image:url(<?php echo $url; ?>);height:10vh;color:#fff;margin-top:0px;margin-bottom:0px;flex-direction:column;">
+
+	<h1><?php echo $title; ?></h1>
+	<p class="wp-block-cover-text"><?php echo $content; ?></p>        
+	<p class="entry-meta small"><?php echo $meta; ?></p>        
+
+</div>
+
+<!-- <div class="wp-block-cover has-background-dim aligncenter" style="height:100vh;color:#fff;margin-top:0px;margin-bottom:0px;">
+    <video class="wp-block-cover__video-background" autoplay="" muted="" loop="" src="http://localhost/wpdev/ekiline/wp-content/uploads/2013/12/2014-slider-mobile-behavior.mov"></video>
+    <p class="wp-block-cover-text">Compare the video and image blocks.<br>This block is centered.</p>
+</div> -->
+
+<?php }
+
+// header.php ekiline_addCoverHeader().
+
+/**
  * Extender la información de la pagina blog
  * https://developer.wordpress.org/reference/functions/is_home/
+ * No es necesario. Aún por definir.
  **/
 
 function ekiline_addBlogPageContent(){
@@ -32,80 +102,6 @@ function ekiline_addBlogPageContent(){
 }
 // index.php - ekiline_showBlogPageContent().
 
-
-/**
- * Crear un header dinamico y personalizable.
- **/
-
-function ekiline_addCoverHeader(){
-
-	$url = 'http://localhost/wpdev/ekiline/wp-content/uploads/2008/06/dsc04563.jpg';
-	$title = 'no title';
-	$content = 'no content';
-	$meta = 'no meta';
-	$custom = false; // mostrar el titulo de la pagina blog.
-
-	if ( is_home() || is_front_page() ){
-		$title = get_bloginfo( 'name' );
-		$content = get_bloginfo( 'description' );
-		$meta = ekiline_notes('copyright');
-	}
-
-	if ( is_home() && $custom != '' ){
-		//$url = get_the_post_thumbnail_url( get_option('page_for_posts'), 'medium' );
-		$title = get_the_title( get_option('page_for_posts', true) ) . ' el blog';
-			$contentfield = get_post_field( 'post_content', get_option('page_for_posts') );
-		$content = wp_trim_words( $contentfield, 20, '...' );
-		$meta = '';
-	}
-
-	if( is_singular() && !is_front_page() || is_front_page() && $custom != '' ){
-		global $post;
-		if( has_post_thumbnail() ){
-			$url = get_the_post_thumbnail_url();
-		}
-		$title = get_the_title() . ' pagina o entrada';
-		$content = wp_trim_words( $post->post_content, 10, '...' );
-		$meta = ekiline_notes('author');
-			if( is_single() ) $meta .= ' , '. ekiline_notes('categories');
-	} 
-	
-	if ( is_archive() || is_category() ){
-		$title = get_the_archive_title() . ' archivo, categoria';
-		$content = get_the_archive_description();
-		//no meta
-	}
-	if ( is_search() ){
-		global $wp_query;
-		$title = sprintf( esc_html__( 'Search Results for: %s', 'ekiline' ), '<span>' . get_search_query() . '</span>' );
-		$content = sprintf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts );
-		//no meta
-	}
-	if ( is_404() ){
-		global $wp_query;
-		$title = sprintf( esc_html__( 'Oops! That page can&rsquo;t be found.', 'ekiline' ), '<span>' . get_search_query() . '</span>' );
-		$content = sprintf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts );
-		//no meta
-	}	
-?>
-
-<div class="wp-block-cover xhas-background-dim-20 xhas-background-dim has-parallax alignfull" 
-	style="background-image:url(<?php echo $url; ?>);height:10vh;color:#fff;margin-top:0px;margin-bottom:0px;flex-direction:column;">
-
-	<h1><?php echo $title; ?></h1>
-	<p class="wp-block-cover-text"><?php echo $content; ?></p>        
-	<p class="entry-meta small"><?php echo $meta; ?></p>        
-
-</div>
-
-<!-- <div class="wp-block-cover has-background-dim aligncenter" style="height:100vh;color:#fff;margin-top:0px;margin-bottom:0px;">
-    <video class="wp-block-cover__video-background" autoplay="" muted="" loop="" src="http://localhost/wpdev/ekiline/wp-content/uploads/2013/12/2014-slider-mobile-behavior.mov"></video>
-    <p class="wp-block-cover-text">Compare the video and image blocks.<br>This block is centered.</p>
-</div> -->
-
-<?php }
-
-// header.php ekiline_addCoverHeader().
 
 
 
