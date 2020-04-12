@@ -24,4 +24,3 @@
 <?php ekilineNavbar('primary'); ?> 
 
 <?php ekiline_addCoverHeader(); ?>
-
