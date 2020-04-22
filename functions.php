@@ -167,7 +167,7 @@ function ekiline_scripts() {
     wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716', true  );
 //Desde aquí los scripts de Ekiline se agrupan en bloque.
     wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226', true  );
-    	wp_localize_script( 'ekiline-layout', 'themeColors', ekiline_themeColors() );
+        wp_localize_script( 'ekiline-layout', 'themeColors', ekiline_themeColors() );
     wp_enqueue_script( 'ekiline-theme', get_template_directory_uri() . '/assets/js/ekiline-theme.min.js', array('jquery'), '20190817', true  );
     
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -196,6 +196,7 @@ require get_template_directory() . '/inc/themeMeta.php';
 require get_template_directory() . '/inc/themeFeaturedCategories.php';
 require get_template_directory() . '/inc/themeAddons.php';
 require get_template_directory() . '/inc/themeCustomHeader.php';
+// require get_template_directory() . '/inc/themeCustomColors.php';
 require get_template_directory() . '/inc/widgetOptions.php';
 require get_template_directory() . '/inc/widgetBreadcrumb.php';
 
