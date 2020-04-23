@@ -5,7 +5,7 @@
 
 /** Animaciones || Animations 
 -------------------------------------------------------------------------**/
-*,.navbar,.navbar .navbar-brand,.navbar-nav li a, a:hover, .btn:hover,.icon-bar{-webkit-transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-ms-transition:all 0.4s ease-out;-o-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out;}
+.navbar,.navbar .navbar-brand,.navbar-nav li a, a:hover, .btn:hover,.icon-bar{-webkit-transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-ms-transition:all 0.4s ease-out;-o-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out;}
 /* Animacion de toggle btn en menu || Toggle navbar btn animation */
 .navbar-toggler .icon-bar{background-color:#888;display:block;width:22px;height:2px;border-radius:1px;margin:4px 0px;}
 .navbar-toggler .icon-bar:nth-child(1){-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg);position:relative;top:6px;}

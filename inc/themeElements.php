@@ -77,7 +77,9 @@ function ekiline_notes($text = null) {
 				$item = '<span class="comments-link">';
 				$item .= comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
 				$item .= '</span> ';
-			} 	
+			} else {
+				$item = esc_html__( 'Comments are closed.', 'ekiline' );
+			}
 			break;			
 	}	
     return $item;
@@ -151,7 +153,7 @@ function ekiline_thumbnail(){
 		// si es search, se agrega una clase 
 		$thumbClass = ( is_search() ) ? ' class="float-md-left pr-2"' : '' ;
 
-		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';	
+		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';	
 		return $html;
 	}
 	add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
