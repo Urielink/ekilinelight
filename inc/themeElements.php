@@ -72,12 +72,13 @@ function ekiline_notes($text = null) {
 			}	
 			break;
 		case 'addcomment':
-			if ( ! is_single() && ! is_front_page() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) return;
-			$item = '<span class="comments-link">';
-			$item .= comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
-			$item .= '</span> ';
-		
-			break;		
+			if ( ! is_single() && ! is_front_page() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) return;			
+			if ( comments_open() ) {
+				$item = '<span class="comments-link">';
+				$item .= comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
+				$item .= '</span> ';
+			} 	
+			break;			
 	}	
     return $item;
 }
