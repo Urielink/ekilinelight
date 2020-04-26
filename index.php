@@ -20,6 +20,8 @@ get_header(); ?>
 
 		<?php dynamic_sidebar( 'content-w1' );?>
 
+		<?php if ( !is_singular() ) : the_archive_title('<h1>','</h1>'); endif; ?>
+
 			<?php ekiline_show_columns('open'); ?>
 
 				<?php

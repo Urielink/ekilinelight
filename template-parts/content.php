@@ -16,9 +16,7 @@
 		
 	<?php if (is_singular()){ ?>
 			<p class="entry-meta">
-				<?php echo ekiline_notes('author'); ?>, 
-				<?php echo ekiline_notes('published'); ?>,
-				<?php echo ekiline_notes('addcomment'); ?>
+				<?php echo ekiline_notes('author') . ' , '. ekiline_notes('published') . ' , '. ekiline_notes('addcomment'); ?>
 			</p>
 	<?php } ?>
 

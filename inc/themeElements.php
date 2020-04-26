@@ -183,6 +183,35 @@ add_filter( 'the_title', 'ekiline_link_title' );
 
 
 /**
+ * Manipular el titulo de las paginas de archivo con filtros.
+ * Custom Title markup.
+ * https://developer.wordpress.org/reference/hooks/get_the_archive_title/
+ */
+function my_theme_archive_title( $title ) {
+
+	if ( is_category() ) {
+        $title = single_cat_title( '', false );
+    } elseif ( is_tag() ) {
+        $title = single_tag_title( '', false );
+    } elseif ( is_author() ) {
+        $title = '<span class="vcard">' . get_the_author() . '</span>';
+    } elseif ( is_post_type_archive() ) {
+        $title = post_type_archive_title( '', false );
+    } elseif ( is_tax() ) {
+        $title = single_term_title( '', false );
+	}
+	
+	if ( is_home() ){
+		$title = get_bloginfo('name');
+	}
+  
+	return $title;
+	
+}
+add_filter( 'get_the_archive_title', 'my_theme_archive_title' ); 
+
+
+/**
  * 1) Manipular el contenido con filtros
  * Custom markup content.
  * https://developer.wordpress.org/reference/hooks/the_content/
@@ -265,20 +294,20 @@ function ekiline_password_form() {
 } 
 add_filter( 'the_password_form', 'ekiline_password_form' );
 
-/* 
-* 2) Expirar la sesion que permite leer un contenido protegido
-* Expire post password
-* https://developer.wordpress.org/reference/hooks/post_password_expires/
-*/
+	/* 
+	* 2) Expirar la sesion que permite leer un contenido protegido
+	* Expire post password
+	* https://developer.wordpress.org/reference/hooks/post_password_expires/
+	*/
 
-function ekiline_expirCookie( $time ) { 
-	// return time() + 600 ;  // 10 mn
-	// for 5 minutes :  
-	// return time() + 300;  in this case 60 * 5 
-	// return 0; set cookie to expire at the end of the session
-	return 0;
-  }
-  add_filter('post_password_expires', 'ekiline_expirCookie' );
+	function ekiline_expirCookie( $time ) { 
+		// return time() + 600 ;  // 10 mn
+		// for 5 minutes :  
+		// return time() + 300;  in this case 60 * 5 
+		// return 0; set cookie to expire at the end of the session
+		return 0;
+	}
+	add_filter('post_password_expires', 'ekiline_expirCookie' );
 
 
 /**
@@ -381,6 +410,8 @@ function ekiline_pages_navigation(){
 	echo $thePages;
 
 } 
+
+
 
 
 /**
