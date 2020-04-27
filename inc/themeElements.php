@@ -48,15 +48,17 @@ function ekiline_notes($text = null) {
 			break;
 		case 'author':
 			// https://developer.wordpress.org/reference/functions/get_the_author_meta/
-			global $post;
-			$author_id = $post->post_author;
-			$item = sprintf(
-				esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
-				// '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-				'<span class="author vcard"><a class="url" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID'  ), get_the_author_meta('user_nicename', $author_id) ) ) . '">' . esc_html( get_the_author_meta('display_name', $author_id) ) . '</a></span>'
-			);			
+			// global $post;
+			// $author_id = $post->post_author;
+			// $item = sprintf(
+			// 	esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
+			// 	// '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+			// 	'<span class="author vcard"><a class="url" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID'  ), get_the_author_meta('user_nicename', $author_id) ) ) . '">' . esc_html( get_the_author_meta('display_name', $author_id) ) . '</a></span>'
+			// );	
+			$item = sprintf( esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), get_the_author_posts_link() );		
 			break;
 		case 'categories':
+			https://developer.wordpress.org/reference/functions/get_the_category_list/
 			if( is_page() ) return;
 				global $post;
 				$cats = get_the_category( $post->ID );
@@ -72,6 +74,7 @@ function ekiline_notes($text = null) {
 			}	
 			break;
 		case 'addcomment':
+			// https://developer.wordpress.org/reference/functions/comments_popup_link/
 			if ( ! is_single() && ! is_front_page() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) return;			
 			if ( comments_open() ) {
 				$item = '<span class="comments-link">';
@@ -166,24 +169,24 @@ function ekiline_thumbnail(){
  * https://developer.wordpress.org/reference/functions/the_title_attribute/
  */
 
-function ekiline_link_title( $title ) {
+// function ekiline_link_title( $title ) {
 
-	$tagClass = ( get_theme_mod('ekiline_Columns') == 4 && !is_singular() ) ? 'entry-title card-title' : 'entry-title' ;
+// 	$tagClass = ( get_theme_mod('ekiline_Columns') == 4 && !is_singular() ) ? 'entry-title card-title' : 'entry-title' ;
 
-	if ( in_the_loop() ){
-		if ( is_single() || is_page() ){
-			$title = '<h1 class="'. $tagClass .'">' . $title . '</h1>';
-		} else {	
-			$title = '<h2 class="'. $tagClass .'"><a href="'. get_the_permalink() .'" title="'. $title .'">' . $title . '</a></h2>';
-		}
-	}
-	return $title;
-}	
-add_filter( 'the_title', 'ekiline_link_title' );
+// 	if ( in_the_loop() ){
+// 		if ( is_single() || is_page() ){
+// 			$title = '<h1 class="'. $tagClass .'">' . $title . '</h1>';
+// 		} else {	
+// 			$title = '<h2 class="'. $tagClass .'"><a href="'. get_the_permalink() .'" title="'. $title .'">' . $title . '</a></h2>';
+// 		}
+// 	}
+// 	return $title;
+// }	
+//add_filter( 'the_title', 'ekiline_link_title' );
 
 
 /**
- * Manipular el titulo de las paginas de archivo con filtros.
+ * Manipular el titulo de listados (archive) con filtros.
  * Custom Title markup.
  * https://developer.wordpress.org/reference/hooks/get_the_archive_title/
  */
