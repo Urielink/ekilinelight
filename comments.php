@@ -23,7 +23,8 @@ if ( post_password_required() ) {
 
 		<button class="btn btn-link btn-sm text-secondary float-right" data-toggle="collapse" data-target="#comments-activity">
 			<?php echo __('Hide comments','ekiline'); ?> <span>&dtrif;</span>
-		</button>    
+		</button>   
+
 		<p class="comments-title text-secondary mb-2 pb-2 pt-1 border-bottom">
 			<?php
 				printf( 
@@ -199,45 +200,47 @@ function ekilineCommentsExtended($comment, $args, $depth) {
  * https://premium.wpmudev.org/blog/customizing-wordpress-comment-form/
  * 
  */
-
-$req = get_option( 'require_name_email' );
-$aria_req = ( $req ? " aria-required='true'" : '' );
+/****/
 
 $args = array(
-	'comment_field' => '<div class="comment-form-comment">' .
-	'<label for="comment">' . __( 'Comment', 'ekiline' ) . '</label>' .
-	( $req ? '<span class="required">*</span>' : '' ) .
-	'<textarea id="comment" name="comment" class="form-control mb-2" aria-required="true"></textarea></div>',
+		'comment_field' => '<div class="form-group">' .
+								'<label for="comment">' . __( 'Comment', 'ekiline' ) . '</label>' .
+								'<textarea id="comment" name="comment" class="form-control mb-2"></textarea>' . 
+							'</div>',
 
-  	'fields' => apply_filters( 'comment_form_default_fields', array(
-	    'author' =>
-	      '<div class="comment-form-author">' .
-	      '<label for="author">' . __( 'Name','ekiline' ) . '</label> ' .
-	      ( $req ? '<span class="required">*</span>' : '' ) .
-	      '<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
-	      '" size="30"' . $aria_req . ' /></div>',
-	
-	    'email' =>
-	      '<div class="comment-form-email"><label for="email">' . __( 'Email','ekiline' ) . '</label> ' .
-	      ( $req ? '<span class="required">*</span>' : '' ) .
-	      '<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) .
-	      '" size="30"' . $aria_req . ' /></div>',
-	      
-	    'url' =>
-	      '<div class="comment-form-url"><label for="url">' .
-	      __( 'Website','ekiline' ) . '</label>' .
-	      ( $req ? '<span class="required">*</span>' : '' ) .            
-	      '<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) .
-	      '" size="30" /></div><br/>'      
-	  	)
-	  ),
-	  
-    // las clases de manera independiente:
-    'class_form'           => 'comment-form form',
-    'class_submit' => 'submit btn btn-sm btn-secondary float-right mb-2'  
-	
-);
+		'fields' => apply_filters( 
+			'comment_form_default_fields', array(
+				'author' => '<div class="form-group">' .
+								'<label for="author">' . __( 'Name','ekiline' ) . '*</label> ' .
+								'<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"/>' .
+							'</div>',	
+				'email' => '<div class="form-group">' . 
+								'<label for="email">' . __( 'Email','ekiline' ) . '*</label> ' .
+								'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"/>' . 
+							'</div>',	      
+				'url' => '<div class="form-group">' . 
+								'<label for="url">' . __( 'Website','ekiline' ) . '</label>' .
+								'<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"/>' . 
+							'</div>',
+				'cookies' => '<div class="form-check">' . 
+								'<input class="form-check-input" type="checkbox" id="agree" required>' . 
+								'<label class="form-check-label" for="agree">' . __( 'By commenting you accept the','ekiline' ) . 
+									'<a href="' . get_privacy_policy_url() . '"> ' . __( 'Privacy Policy','ekiline' )  . '</a>' . 
+								'</label>' . 
+							'</div>',
+
+			)
+		),		
+		// las clases de manera independiente:
+		'class_form' => 'comment-form form',
+		'class_submit' => 'submit btn btn-sm btn-secondary float-right mb-2'  
+		
+	);
 
 	comment_form( $args );
+
+
+/***/
+
 ?>
 </div><!-- #comments -->

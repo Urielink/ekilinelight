@@ -21,12 +21,10 @@
 	</div>
 
 	<footer class="card-footer">	
-
-		<p class="entry-meta">
+		<p class="entry-meta small mark">
 			<?php echo ekiline_notes('categories'); ?>
-			<br><?php echo ekiline_notes('tags'); ?>
-		</p><!-- .entry-meta -->	
-		
+			<?php echo ekiline_notes('tags'); ?>
+		</p><!-- .entry-meta -->			
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->

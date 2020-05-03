@@ -18,71 +18,56 @@ function ekiline_notes($text = null) {
 	$item = ''; 	
 	switch ($text) {
 		case 'copyright':
-			$item = sprintf( esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) );
-			$item .= '&nbsp;';
-			$item .= sprintf( esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>','<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' );
-			break;
-
-		case 'published':
-			$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-			if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-				$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time>' . __(' Updated on ', 'ekiline') . '<time class="updated" datetime="%3$s">%4$s</time>';
-			}
-		
-			$time_string = sprintf( $time_string,
-				esc_attr( get_the_date( 'c' ) ),
-				esc_html( get_the_date() ),
-				esc_attr( get_the_modified_date( 'c' ) ),
-				esc_html( get_the_modified_date() )
+			$item = sprintf( 
+				esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), 
+				esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) 
 			);
-			
-			//ekiline, mejor elazamos al mes
-			$archive_year  = get_the_time('Y');
-			$archive_month = get_the_time('m');
-			$timelink = get_month_link( $archive_year, $archive_month ); //era get_permalink() 
-		
-			$item = sprintf(
-				esc_html_x( 'Posted on %s', 'post date', 'ekiline' ), 
-				'<a href="' . esc_url( $timelink ) . '" rel="bookmark">' . $time_string . '</a>'
-			);		
 			break;
+		case 'poweredby':
+			$item = sprintf( 
+				esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),
+				'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>',
+				'<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' 
+			);
+			break;	
 		case 'author':
-			// https://developer.wordpress.org/reference/functions/get_the_author_meta/
-			// global $post;
-			// $author_id = $post->post_author;
-			// $item = sprintf(
-			// 	esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
-			// 	// '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-			// 	'<span class="author vcard"><a class="url" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID'  ), get_the_author_meta('user_nicename', $author_id) ) ) . '">' . esc_html( get_the_author_meta('display_name', $author_id) ) . '</a></span>'
-			// );	
-			$item = sprintf( esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), get_the_author_posts_link() );		
+			$item = sprintf( 
+				esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
+				get_the_author_posts_link() 
+			);
+			break;
+		case 'posted':
+			$item = sprintf( 
+				esc_html_x( 'Posted on %s', 'post date', 'ekiline' ), 
+				'<a href="' . esc_url( get_month_link( get_the_time('Y'), get_the_time('m') ) ) . '" rel="bookmark">' . get_the_time( esc_html__( 'F j, Y', 'ekiline' ) ) . '</a>'
+			);
+			break;
+		case 'updated':
+			$item = sprintf( 
+						esc_html_x( 'Updated on %s', 'ekiline' ), 
+						get_the_modified_date( esc_html__( 'F j, Y', 'ekiline' ) )
+					);
 			break;
 		case 'categories':
-			https://developer.wordpress.org/reference/functions/get_the_category_list/
-			if( is_page() ) return;
-				global $post;
-				$cats = get_the_category( $post->ID );
-				foreach ( $cats as $cat ) {
-					$item .= ' <a href="' . get_category_link( $cat->term_id ) . '">' .  $cat->name  .'</a>,';
-				}
-				$item = __('Categories:', 'ekiline') . $item;
+			$item = sprintf( 
+				esc_html_x( 'Categories: %s', 'ekiline' ), 
+				get_the_category_list(', ')
+			);
 			break;
 		case 'tags':
-			$tags_list = get_the_tag_list( '', esc_html__( ',  ', 'ekiline' ) );
-			if ( $tags_list ) {
-				$item = sprintf( esc_html__( 'Tags: %1$s', 'ekiline' ) , '<span class="tags-links">' . $tags_list . '</span> ' ) ;
-			}	
+			$item = sprintf( 
+				esc_html_x( 'Tags: %s', 'ekiline' ), 
+				get_the_tag_list( '', ', ')
+			);
 			break;
-		case 'addcomment':
-			// https://developer.wordpress.org/reference/functions/comments_popup_link/
-			if ( ! is_single() && ! is_front_page() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) return;			
-			if ( comments_open() ) {
-				$item = '<span class="comments-link">';
-				$item .= comments_popup_link( esc_html__( 'Leave a comment', 'ekiline' ), esc_html__( '1 Comment', 'ekiline' ), esc_html__( '% Comments', 'ekiline' ) );
-				$item .= '</span> ';
-			} else {
-				$item = esc_html__( 'Comments are closed.', 'ekiline' );
-			}
+		case 'comments':
+			$item = comments_popup_link( 
+				__('No comments yet', 'ekiline'), 
+				__('1 Comment', 'ekiline'), 
+				__('% Comments', 'ekiline'), 
+				'comments-link', 
+				__('Comments are closed.', 'ekiline') 
+			);			
 			break;			
 	}	
     return $item;

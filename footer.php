@@ -24,7 +24,11 @@
 <footer class="site-footer pt-4 pb-2 bg-dark">
   <div class="container">  	
     <?php ekiline_countWidgets('footer-w1'); ?>  	         
-    <p><small><?php echo ekiline_notes('copyright'); ?><a class="goTop float-right" href="#top"><span>&uarr;</span><?php echo __('Back','ekiline'); ?></a></small></p>
+    <p>
+      <?php echo ekiline_notes('copyright'); ?>
+      <?php echo ekiline_notes('poweredby'); ?>
+      <a class="goTop float-right" href="#top"><span>&uarr;</span><?php echo __('Back','ekiline'); ?></a>
+    </p>
   </div>
 </footer><!-- .site-footer -->
 

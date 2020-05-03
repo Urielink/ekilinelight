@@ -190,7 +190,8 @@ function ekiline_theme_customizer( $wp_customize ) {
         				'default' => $color['default'], 
         				'type' => 'option', 
         				'capability' => 'edit_theme_options',
-        				'sanitize_callback' => 'sanitize_hex_color'
+        				'sanitize_callback' => 'sanitize_hex_color',
+                        'transport'   => 'refresh' // postMessage || refresh
 				)
 		);
 
