@@ -99,3 +99,44 @@ function ekiline_meta_keywords() {
 
 }
 add_action( 'wp_head', 'ekiline_meta_keywords', 0 , 0);
+
+
+function metaSocial(){
+
+    $metaSocial = '';
+
+    $metaTitle = get_bloginfo( 'name' );
+    $metaDescription = get_bloginfo( "description" );
+    $metaImages = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
+    $twSocial = 'twitter.com';
+    $metaType = 'website';
+    $currentUrl = get_site_url();
+
+        if( is_singular() ){
+            $currentUrl = get_permalink( get_queried_object_id() );
+        } elseif ( is_archive() ){
+            $currentUrl = get_term_link( get_queried_object_id() );
+        }
+        //Google
+        $metaSocial .= '<meta itemprop="name" content="'.$metaTitle.'">'."\n";
+        $metaSocial .= '<meta itemprop="description" content="'.$metaDescription.'">'."\n";
+        $metaSocial .= '<meta itemprop="image" content="'.$metaImages.'">'."\n";
+        //twitter
+        $metaSocial .= '<meta name="twitter:card" content="summary">'."\n";
+        $metaSocial .= '<meta name="twitter:site" content="'.$twSocial.'">'."\n";
+        $metaSocial .= '<meta name="twitter:title" content="'.$metaTitle.'">'."\n";
+        $metaSocial .= '<meta name="twitter:description" content="'.$metaDescription.'">'."\n";
+        $metaSocial .= '<meta name="twitter:creator" content="'.$twSocial.'">'."\n";
+        $metaSocial .= '<meta name="twitter:image" content="'.$metaImages.'">'."\n";
+        //facebook
+        $metaSocial .= '<meta property="og:title" content="'.$metaTitle.'"/>'."\n";
+        $metaSocial .= '<meta property="og:type" content="'.$metaType.'"/>'."\n";
+        $metaSocial .= '<meta property="og:url" content="'.$currentUrl.'"/>'."\n";
+        $metaSocial .= '<meta property="og:image" content="'.$metaImages.'"/>'."\n";
+        $metaSocial .= '<meta property="og:description" content="'.$metaDescription.'"/>'."\n";
+        $metaSocial .= '<meta property="og:site_name" content="'. $metaTitle .'"/>'."\n";
+        
+    echo $metaSocial;   
+}
+    
+add_action( 'wp_head', 'metaSocial', 1);

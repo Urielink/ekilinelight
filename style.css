@@ -107,6 +107,11 @@ a.woocommerce-product-gallery__trigger{text-decoration:none;}
 /* Clearfix en articulos*/
 article::after{content: "";clear: both;display: table;}
 
+/* nueva navegacion son split*/
+.navbar-collapse .btn-group .nav-link, .navbar-collapse .btn-group .dropdown-item {width: 90%;display: inline-block;}
+.navbar-collapse .btn-group .dropdown-toggle-split {width: 9%;float: right;}
+
+
 /*--------------------------------------------------------------------------------
  * CSS RESPONSIVO || RESPONSIVE (Mobile to Desk)
  *------------------------------------------------------------------------------*/
@@ -121,7 +126,10 @@ article::after{content: "";clear: both;display: table;}
 }
 
 /* SEGUNDO CAMBIO Tablets y smartphones horizontales || Tablets or smartphone horizontal */
-@media only screen and (max-width:768px){}
+@media only screen and (max-width:768px){
+	/* nueva navegacion son split*/
+	.navbar-collapse .btn-group {display: block;}
+}
 
 /* PRIMER CAMBIO Escritorio || Desktop */
 @media only screen and (max-width:992px){}

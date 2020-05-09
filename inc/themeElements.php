@@ -49,6 +49,7 @@ function ekiline_notes($text = null) {
 					);
 			break;
 		case 'categories':
+			if (is_page()) break;
 			$item = sprintf( 
 				esc_html_x( 'Categories: %s', 'ekiline' ), 
 				get_the_category_list(', ')

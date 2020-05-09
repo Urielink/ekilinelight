@@ -120,15 +120,12 @@ class EkilineNavMenu extends Walker_Nav_Menu {
  
         $classes = empty( $item->classes ) ? array() : (array) $item->classes;
         $classes[] = 'menu-item-' . $item->ID;
-//1) B4CSS: agregar clases a cada item (ul>li).
+ //Bootstrap link class		
         $classes[] .= 'nav-item';
-//2) B4CSS: auxiliar, al separar el dropdown, se agrega la clase btn-group, el experimento solo es para el nivel 1.
-        // if ( $args->walker->has_children && $depth == 0){
-        if ( $args->walker->has_children ){
-            $classes[] .= 'btn-group'; 
-        }       
-//3) B4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
-        $doDrop = ( get_theme_mod('ekiline_primarymenuSettings') == '2' ) ? ' dropup' : ' dropdown' ;
+ //Posicion de menu: dropdown/dropup
+ 		$doDrop = ' dropdown';
+ 			if ( get_theme_mod('ekiline_primarymenuSettings') == '2' ) $doDrop = ' dropup';
+
 		if ( $args->walker->has_children ) {
 			if ( $depth > 0 ) {
 		        $classes[] .= $doDrop . ' item-'. $depth;
@@ -136,8 +133,8 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		        $classes[] .= $doDrop;
 			}			
 		}		
-//4) B4CSS: el link está activo.
-        if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
+				
+		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
 			$classes[] .= ' active';
 		}
  
@@ -187,26 +184,23 @@ class EkilineNavMenu extends Walker_Nav_Menu {
         $atts['target'] = ! empty( $item->target )     ? $item->target     : '';
         $atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
         $atts['href']   = ! empty( $item->url )        ? $item->url        : '';
-//5) B4CSS: agregar clases a cada item (ul>li>a).
-        $atts['class']	= 'nav-link';
-//6) B4HTML: agregar atributos a cada item (ul>li>a).
-// Ya no es necesario por hacer uso de "dropdown-toggle-split"       
-		// if ( $args->walker->has_children ) {
-		// 	$atts['class']	= 'nav-link dropdown-toggle';
-	    //     $atts['href']   = '#';
-		// 	$atts['data-toggle']	= 'dropdown';
-		// 	$atts['aria-haspopup']	= 'true';
-		// 	$atts['aria-expanded']	= 'false';
-		// 	$atts['id']				= 'menu-item-dropdown-' . $item->ID;
-        // }		
-//7) B4CSS: agregar clases a cada item padre submenu (ul.sub-menu>li>a).
-		// if ( $args->walker->has_children && $depth > 0) {
-		// 	$atts['class']	= 'pl-2 dropdown-item nav-link dropdown-toggle';
-		// }		
-//8) B4CSS: agregar clases a cada item hijo (ul.sub-menu>li>ul>li>a).
-        if ( $depth > 0 ) {
+//Bootstrap link class		
+		$atts['class']	= 'nav-link';
+		if ( $args->walker->has_children ) {
+			$atts['class']	= 'nav-link dropdown-toggle';
+	        $atts['href']   = '#';
+			$atts['data-toggle']	= 'dropdown';
+			$atts['aria-haspopup']	= 'true';
+			$atts['aria-expanded']	= 'false';
+			$atts['id']				= 'menu-item-dropdown-' . $item->ID;
+		}		
+		if ( $depth > 0 ) {
 			$atts['class']	= 'dropdown-item';
+			// $atts['class']	= 'dropdown-item nav-link dropdown-toggle';
 		}
+		if ( $args->walker->has_children && $depth > 0) {
+			$atts['class']	= 'pl-2 dropdown-item nav-link dropdown-toggle';
+		}		
  
         /**
          * Filters the HTML attributes applied to a menu item's anchor element.
@@ -261,15 +255,6 @@ class EkilineNavMenu extends Walker_Nav_Menu {
         $item_output .= '<a'. $attributes .'>';
         $item_output .= $args->link_before . $title . $args->link_after;
         $item_output .= '</a>';
-//Bootstrap nuevo item
-        if ( $args->walker->has_children && $depth == 0){
-            $item_output .= '<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent"></a>';        
-        }
-        if ( $args->walker->has_children && $depth > 0){
-            $item_output .= '<a class="dropdown-item dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent"></a>';        
-        }
-        
-
         $item_output .= $args->after;
  
         /**
