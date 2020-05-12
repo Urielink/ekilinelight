@@ -300,12 +300,11 @@ jQuery(document).ready(function($){
 
 				// esto es el css duro, el cual recibe los colores modificados.
 				// descartar lineas: $btnSecFocBx
-				function cssOrders() {
-
+				function cssOrders(jsoncolors) {
 					var cssall = '';
 
 					/**General**/
-					cssall += 'body{color:' + $txColor + ';background-color:' + $bgColor + ';}';
+					cssall += 'body{color:' + jsoncolors['$txColor'] + ';background-color:' + $bgColor + ';}';
 					cssall += 'a{color:' + $aColor + ';}';
 					cssall += 'a:hover{color:' + $aHColor + ';}';
 					cssall += 'caption{color:' + $capTxColor + ';}';
@@ -1095,7 +1094,7 @@ jQuery(document).ready(function($){
 				/**  Paso 2 : aplicar filtros de ajuste de color, ejercicio con posibilidades **/
 
 				// variable array de valores css
-				var all2rgba = [];
+				var all2rgba = {};
 
 				/* Funcion de cambio de tono:
 					* obtener los valores css y pasar cada uno por alguna funcion */
@@ -1108,26 +1107,32 @@ jQuery(document).ready(function($){
 						// 3 todos los hexadecimales con opacidad, cambiar a HSL
 						var nc4 = HexAHslvar(nc3, 0, 0, 0);
 
-						all2rgba.push({
-							'item' : key, // el color original
-							'rgba' : nc, // el color en RGBA
-							'hexop' : nc3, // el color HEX con Opacidad
-							'hexhsl' : nc4 // el color HSL a HEX
-						});
+						// all2rgba.push({
+						// 	'item' : key, // el color original
+						// 	'rgba' : nc, // el color en RGBA
+						// 	'hexop' : nc3, // el color HEX con Opacidad
+						// 	'hexhsl' : nc4 // el color HSL a HEX
+						// });
+						all2rgba[key] = nc4;
 				});
 
 		/**
 		*  Paso 3 : del json nuevo, se debe generar una cadena de variables y validar en el dom con eval()
 		**/
 
-				var string = '';
-				// cada nuevo color se transforma en una variable para crear el CSS.
-				for (i in all2rgba) {
-					string += 'var ' + all2rgba[i].item + '=\'' + all2rgba[i].hexhsl + '\';';
-				}
-				eval(string);
+				// var string = {}; //= //'';
+				// // cada nuevo color se transforma en una variable para crear el CSS.
+				// for (i in all2rgba) {
+				// 	var txtkey = all2rgba[i].item;
+				// 	string[txtkey] = all2rgba[i].hexhsl;
+				// 	//string += 'var ' + all2rgba[i].item + '=\'' + all2rgba[i].hexhsl + '\';';
+
+				// }
+				// console.log(string);
+				console.log(all2rgba);
+				//eval(string);
 				
-					field2.set( cssOrders() );							
+					field2.set( cssOrders(all2rgba) );							
 
 			} );
 
