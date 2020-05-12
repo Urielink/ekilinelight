@@ -9,12 +9,8 @@
 
 /*
  * Restringir la vista de comentarios 
- * si el articulo necesita password
- * Don't show comments if post have password.
  */
-if ( post_password_required() ) {
-	return;
-}
+if ( !is_singular() || is_front_page() || post_password_required() || !comments_open() || !get_comments_number() ) return;
 ?>
 
 <div id="comments" class="comments-area clearfix">
