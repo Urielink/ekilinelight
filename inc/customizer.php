@@ -128,7 +128,7 @@ function ekiline_theme_customizer( $wp_customize ) {
         )
     );  		       
 	
-// Colores, reemplazar el controlador de color de fondo.
+    // Colores, reemplazar el controlador de color de fondo.
     $wp_customize->remove_control('background_color');	// se remueve el controlador.
 
     // Colores, agregar un panel con subsecciones: https://developer.wordpress.org/themes/customize-api/customizer-objects/
@@ -401,23 +401,3 @@ function ekiline_sanitize_dropdown_pages( $page_id, $setting ) {
   return ( 'publish' == get_post_status( $page_id ) ? $page_id : $setting->default );
 }
 
-/*  Anotaciones  */
-
-    // Guardar informacion en un campo
-    // $wp_customize->add_setting( 
-    //     'ekiline_themeCssJs', array(
-    //         'default' => '',
-    //         'capability' => 'edit_theme_options',
-    //         'sanitize_callback' => 'wp_strip_all_tags',
-    //   ) 
-    // );
-
-    // $wp_customize->add_control(
-    //         'ekiline_themeCssJs', array(
-    //             'type' => 'textarea',
-    //             'label' => __( 'CSS de ekiline' ),
-    //             'description' => __( 'Los colores se guardarán aqui' ),
-    //             'section' => 'colors',
-    //             'priority' => 50,
-    //     ) 
-    // );    

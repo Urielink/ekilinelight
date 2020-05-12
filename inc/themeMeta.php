@@ -102,7 +102,7 @@ add_action( 'wp_head', 'ekiline_meta_keywords', 0 , 0);
 
 
 function metaSocial(){
-
+    global $wp;
     $metaSocial = '';
 
     $metaTitle = get_bloginfo( 'name' );
@@ -110,13 +110,8 @@ function metaSocial(){
     $metaImages = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
     $twSocial = 'twitter.com';
     $metaType = 'website';
-    $currentUrl = get_site_url();
+    $currentUrl = home_url( add_query_arg( array(), $wp->request ) ); //global $wp
 
-        if( is_singular() ){
-            $currentUrl = get_permalink( get_queried_object_id() );
-        } elseif ( is_archive() ){
-            $currentUrl = get_term_link( get_queried_object_id() );
-        }
         //Google
         $metaSocial .= '<meta itemprop="name" content="'.$metaTitle.'">'."\n";
         $metaSocial .= '<meta itemprop="description" content="'.$metaDescription.'">'."\n";
@@ -140,3 +135,9 @@ function metaSocial(){
 }
     
 add_action( 'wp_head', 'metaSocial', 1);
+
+
+//Habilitar microdatos
+function ekiline_schema(){
+    echo ' itemscope itemtype="http://schema.org/WebPage"';
+}

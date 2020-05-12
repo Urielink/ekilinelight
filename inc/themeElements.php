@@ -249,22 +249,13 @@ function ekiline_link_pages(){
 /**
  * Personalizar el formulario de busqueda.
  * Override search form markup.
+ * https://developer.wordpress.org/reference/functions/locate_template/
  **/
  
-function ekiline_search_form( $form ) {
-    
-    $form = '<form role="search" method="get" id="searchform" class="searchform my-2" action="' . home_url( '/' ) . '" >
-                <label class="screen-reader-text" for="s">' . esc_html__( 'Search Results for: %s', 'ekiline' ) . '</label>
-                <div class="input-group">
-                    <input class="form-control" type="text" value="' . get_search_query() . '" name="s" id="s" placeholder="' . esc_html__( 'Search Results for:', 'ekiline' ) . '"/>
-                    <span class="input-group-append"><button class="btn btn-secondary" type="submit" id="searchsubmit"><span>&orarr;</span> '. esc_attr__( 'Search', 'ekiline' ) .'</button></span>
-                </div>
-            </form>';
-
-    return $form;
+function ekiline_search_form() {
+	return locate_template( get_template_part( 'template-parts/searchform' ) );
 }
 add_filter( 'get_search_form', 'ekiline_search_form' );
-
 
 /**
  * 1) Personalizar el formulario de proteccion de lectura. 

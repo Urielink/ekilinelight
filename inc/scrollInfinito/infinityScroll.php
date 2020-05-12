@@ -65,7 +65,7 @@ function ekiline_InfiniteScroll(){
 <?php }
 
 /**
- * Incluir el marcado en plantilla:
+ * Incluir el marcado en plantilla index con relación a archive:
  * echo ekiline_InfiniteScroll();
 **/
 

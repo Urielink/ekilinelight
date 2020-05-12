@@ -10,7 +10,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html <?php language_attributes(); //ekiline_schema();?>>
+<html <?php language_attributes(); ekiline_schema();?>>
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
