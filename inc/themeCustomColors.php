@@ -116,7 +116,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
     $wp_customize->add_setting( 
         'ekiline_textarea_css', array(
             'capability' => 'edit_theme_options',
-            'default' => __( '', 'ekiline' ),
+            'default' => '',
             'sanitize_callback' => 'wp_strip_all_tags',
             'transport' => 'refresh',
           ) 
@@ -124,7 +124,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
         
         $wp_customize->add_control( 
             'ekiline_textarea_css', array(
-                'type' => 'text',
+                'type' => 'hidden',
                 'section' => 'colors_extended',
             ) 
         );    
@@ -144,7 +144,7 @@ add_action( 'customize_controls_enqueue_scripts', 'tuts_customize_control_js' );
  * 3. Imprimir estilo CSS.
  */
 function ekiline_styles_inline() {
-	$ekilineTheme = get_theme_mod( 'ekiline_textarea_css', '/*add your colors*/');	
+	$ekilineTheme = get_theme_mod( 'ekiline_textarea_css' );	
     echo '<style id="ekiline-theme">' . $ekilineTheme . '</style>'. "\n";
 }
 add_action( 'wp_head', 'ekiline_styles_inline', 100);
