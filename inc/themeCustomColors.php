@@ -124,7 +124,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
         
         $wp_customize->add_control( 
             'ekiline_textarea_css', array(
-                'type' => 'hidden',
+                'type' => 'text',
                 'section' => 'colors_extended',
             ) 
         );    
