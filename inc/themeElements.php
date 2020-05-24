@@ -44,20 +44,20 @@ function ekiline_notes($text = null) {
 			break;
 		case 'updated':
 			$item = sprintf( 
-						esc_html_x( 'Updated on %s', 'ekiline' ), 
+						esc_html__( 'Updated on %s', 'ekiline' ), 
 						get_the_modified_date( esc_html__( 'F j, Y', 'ekiline' ) )
 					);
 			break;
 		case 'categories':
 			if (is_page()) break;
 			$item = sprintf( 
-				esc_html_x( 'Categories: %s', 'ekiline' ), 
+				esc_html__( 'Categories: %s', 'ekiline' ), 
 				get_the_category_list(', ')
 			);
 			break;
 		case 'tags':
 			$item = sprintf( 
-				esc_html_x( 'Tags: %s', 'ekiline' ), 
+				esc_html__( 'Tags: %s', 'ekiline' ), 
 				get_the_tag_list( '', ', ')
 			);
 			break;
