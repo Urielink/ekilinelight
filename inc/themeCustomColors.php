@@ -136,7 +136,8 @@ add_action('customize_register', 'ekiline_custom_color_controls');
  * 2. Regsitro de script en personalizador.
  */
 function tuts_customize_control_js() {
-    wp_enqueue_script( 'tuts_customizer_control', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.js', array('jquery'), null, true );
+    // wp_enqueue_script( 'tuts_customizer_control', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.js', array('jquery'), null, true );
+    wp_enqueue_script( 'tuts_customizer_control', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.min.js', array('jquery'), null, true );
 }
 add_action( 'customize_controls_enqueue_scripts', 'tuts_customize_control_js' ); 
 
