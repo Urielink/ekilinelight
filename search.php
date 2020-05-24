@@ -29,9 +29,9 @@ get_header(); ?>
 					while ( have_posts() ) : 
 						the_post();
 						// en caso de ocupar 'cards'.
-						$postFormat = ( !is_singular() && get_theme_mod('ekiline_Columns') == 4 ) ? 'card' : get_post_format() ;
-
-						get_template_part( 'template-parts/content', $postFormat );	
+						// $postFormat = ( !is_singular() && get_theme_mod('ekiline_Columns') == 4 ) ? 'card' : get_post_format() ;
+						// get_template_part( 'template-parts/content', $postFormat );	
+						get_template_part( 'template-parts/content' );
 						
 					endwhile;	
 

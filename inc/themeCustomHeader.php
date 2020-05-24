@@ -74,7 +74,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 	
 	$wp_customize->add_control(
 		'ekiline_headerCustomWidth', array(
-					'label'          => __( 'Fullwidth header', 'ekiline' ),
+					'label'          => __( 'Narrow header', 'ekiline' ),
 					'description'    => '',
 					'section'        => 'header_image',
 					'settings'       => 'ekiline_headerCustomWidth',
@@ -181,7 +181,7 @@ if ( ! function_exists( 'ekiline_header_style' ) ) {
 		$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .' !important; }';
 		$hdrStyle .= 'div.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 - 9px); margin-right: calc( -100vw / 2 + 100% / 2 - 9px); width: 100vw; }';
 
-		echo '<style type="text/css" id="hederstyle">' . $hdrStyle . '</style>';
+		echo '<style type="text/css" id="header-style">' . $hdrStyle . '</style>';
 
 	}
 
@@ -210,7 +210,7 @@ function ekiline_addCoverHeader(){
 	$custom = get_theme_mod('ekiline_headerCustomText'); //false; 
 	//ocupar clases para intercalar contenido.
 	//$wpClass = get_body_class()[0];
-	$fullwidth = ( get_theme_mod('ekiline_headerCustomWidth') != '' ) ? ' alignfull' : ''; //false; 
+	$fullwidth = ( get_theme_mod('ekiline_headerCustomWidth') != '' ) ? '' : ' alignfull'; //false; 
 	$setVideo = get_theme_mod('ekiline_video');
 
 	if( is_singular() && !is_front_page() || is_home() && $custom != '' || is_front_page() && $custom != ''){
@@ -220,6 +220,7 @@ function ekiline_addCoverHeader(){
 		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url() : $url ;
 		$title = get_the_title();
 		$content = wp_trim_words( $post->post_content, 24, '...' );
+
 		$meta = ekiline_notes('author');
 
 			if( is_single() ) $meta .= ' , '. ekiline_notes('categories');	

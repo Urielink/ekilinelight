@@ -15,6 +15,7 @@
  **/
  
 function ekiline_notes($text = null) {
+	global $post;
 	$item = ''; 	
 	switch ($text) {
 		case 'copyright':
@@ -31,10 +32,15 @@ function ekiline_notes($text = null) {
 			);
 			break;	
 		case 'author':
+			// $item = sprintf( 
+			// 	esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
+			// 	get_the_author_posts_link()
+			// );
+			$username = get_userdata( $post->post_author ); 					
 			$item = sprintf( 
 				esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
-				get_the_author_posts_link() 
-			);
+				'<a href="'.get_author_posts_url( $post->post_author ).'" title="'.get_the_title().'" rel="author">'. $username->display_name .'</a>'
+			);			
 			break;
 		case 'posted':
 			$item = sprintf( 
@@ -62,7 +68,7 @@ function ekiline_notes($text = null) {
 			);
 			break;
 		case 'comments':
-			$item = comments_popup_link( 
+			$item = comments_popup_link(
 				__('No comments yet', 'ekiline'), 
 				__('1 Comment', 'ekiline'), 
 				__('% Comments', 'ekiline'), 
@@ -123,11 +129,13 @@ function ekiline_countWidgets( $widgetZone ){
  **/
 function ekiline_thumbnail(){
 	if ( !has_post_thumbnail() ) return;
-	if ( is_single() || is_page() ) return;
+	//if ( is_single() || is_page() ) return;
+	if ( get_header_image() ) return;
 	// thumbnail size
 	$thumbSize = ( is_search() ) ? 'thumbnail' : 'medium' ;
 	// clase css varia por tipo de contenido
-	$imgClass = ( get_theme_mod('ekiline_Columns') == 4 ) ? 'card-img-top' : 'img-thumbnail' ;
+	$imgClass = 'img-fluid ';
+		$imgClass .= ( get_theme_mod('ekiline_Columns') == 4 ) ? 'card-img-top ' : 'img-thumbnail ' ;
 
 	return the_post_thumbnail( $thumbSize, array( 'class' => $imgClass ) );
 }
@@ -140,7 +148,7 @@ function ekiline_thumbnail(){
 	function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
 		if ( is_single() ) return $html;
 		// si es search, se agrega una clase 
-		$thumbClass = ( is_search() ) ? ' class="float-md-left pr-2"' : '' ;
+		$thumbClass = ( is_search() ) ? ' class="search-link"' : '' ;
 
 		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';	
 		return $html;
