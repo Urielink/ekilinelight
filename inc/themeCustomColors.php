@@ -144,7 +144,45 @@ add_action( 'customize_controls_enqueue_scripts', 'tuts_customize_control_js' );
  * 3. Imprimir estilo CSS.
  */
 function ekiline_styles_inline() {
-	$ekilineTheme = get_theme_mod( 'ekiline_textarea_css' );	
-    echo '<style id="ekiline-theme">' . $ekilineTheme . '</style>'. "\n";
+
+    $ekilineTheme = '';
+    $ekilineTheme .= get_theme_mod( 'ekiline_textarea_css' );
+
+    $ekilineTheme .= ( get_option('main_color') != '#f8f9fa' ) ? '#primary{background-color:'. get_option('main_color') .';}' : '' ;
+    $ekilineTheme .= ( get_option('menu_color') != '#343a40' ) ? '#primarySiteNavigation.navbar{background-color:'. get_option('menu_color') .'!important;}' : '' ;
+
+    if( get_option('fbar_color') != '#6c757d' ||  get_option('fbartxt_color') != '#ffffff'){
+        $fbBk = ( get_option('fbar_color') != '#6c757d' ) ? 'background-color:'. get_option('fbar_color') .'!important;' : '' ;
+        $fbTc = ( get_option('fbartxt_color') != '#ffffff' ) ? 'color:'. get_option('fbartxt_color') .'!important;' : '' ;
+            $ekilineTheme .= '.footer-bar{'. $fbBk . $fbTc .'}';
+    }
+
+    $ekilineTheme .= ( get_option('fbarlks_color') != '#007bff' ) ? '.footer-bar a{color:'. get_option('fbarlks_color') .'!important}' : '' ;
+
+    if( get_option('footer_color') != '#343a40' ||  get_option('ftext_color') != '#ffffff' ){
+        $fooBk = ( get_option('footer_color') != '#343a40' ) ? 'background-color:'. get_option('footer_color') .'!important;' : '' ;
+        $fooTc = ( get_option('ftext_color') != '#ffffff' ) ? 'color:'. get_option('ftext_color') .'!important;' : '' ;
+            $ekilineTheme .= '.site-footer{'. $fooBk . $fooTc .'}';
+    }
+
+    $ekilineTheme .= ( get_option('flinks_color') != '#007bff' ) ? '.site-footer a{color:'. get_option('flinks_color') .'!important}' : '' ;
+    
+    // echo '<style id="ekiline-theme">' . $ekilineTheme .'</style>'. "\n";
+    return $ekilineTheme;
+
 }
-add_action( 'wp_head', 'ekiline_styles_inline', 100);
+// add_action( 'wp_head', 'ekiline_styles_inline', 100);
+
+/* 
+ * Andar estilos css en linea
+ * https://developer.wordpress.org/reference/functions/wp_add_inline_style/
+ */
+function wpdocs_styles_method() {
+
+    // wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );	
+    
+    // posibles manejadores: bootstrap-4, layout o ekiline-style
+    wp_add_inline_style( 'ekiline-style', ekiline_styles_inline() );
+
+}
+add_action( 'wp_enqueue_scripts', 'wpdocs_styles_method' );

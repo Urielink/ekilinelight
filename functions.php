@@ -175,6 +175,7 @@ add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 
 /**
  * Ekiline optimizacion, emojis al footer
+ * Otra solución: https://desarrollowp.com/blog/tutoriales/mover-los-scripts-al-footer-wordpress/
  */
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 add_action('wp_footer', 'print_emoji_detection_script', 20);
