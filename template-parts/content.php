@@ -8,13 +8,6 @@
  */
 ?>
 
-<?php
-// en caso de ocupar tarjetas en el inidice.
-if ( !is_singular() && get_theme_mod('ekiline_Columns') == 4 ){
-	return get_template_part( 'template-parts/content', 'card' );
-} 
-?>
-
 <article id="<?php ekiline_post_id();?>" <?php post_class();?>>
 
 	<header>				

@@ -28,7 +28,7 @@ function ekiline_setup() {
 	add_theme_support( 'html5', $htmlDef );
 
 	// Formatos de entradas // Enable support for Post Formats.
-	$postDef = array('aside','image','video','quote','link');
+	$postDef = array('aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat');
 	add_theme_support( 'post-formats', $postDef );
 
 	// Color e imagen de fondo // Set up the WordPress core custom background feature. https://developer.wordpress.org/reference/functions/add_theme_support/
