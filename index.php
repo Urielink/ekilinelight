@@ -38,7 +38,7 @@ get_header(); ?>
 					 */
 					// en caso de ocupar 'cards'.
 					$postType = ( !is_singular() && get_theme_mod('ekiline_Columns') == 4 ) ? 'card' : get_post_type() ;
-					get_template_part( 'template-parts/content', $postFormat );	
+					get_template_part( 'template-parts/content', $postType );	
 
 				endwhile;
 

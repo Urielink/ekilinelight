@@ -27,15 +27,15 @@
 		 **/	
 		?>
 
-		<p><?php echo nl2br( get_the_author_meta('description') ); ?></p>
+		<p>
+			<?php echo nl2br( get_the_author_meta('description') ); ?>
+		</p>
 
-		<p>Usuario: <?php echo get_the_author_meta( 'nickname' ); // to get  nicename ?></p>
-						
-		<p>Correo: <?php echo get_the_author_meta( 'email' ); // to get  email ?></p>
-						
-		<p>Página web: <?php echo get_the_author_meta( 'url' ); // to get  url ?></p>
-						
-		<p><?php echo ( ! get_the_author_meta( 'status' ) == 0 ) ? 'En linea' : '' ; // to get  status ?></p>
+		<p>
+			<?php echo __( 'User: ', 'ekiline' ) . get_the_author_meta( 'nickname' ); // to get  nicename ?>						
+			<br> <?php echo __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ); // to get  email ?>						
+			<br> <?php echo __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ); // to get  url ?>						
+		</p>
 		
 	<?php } ?>
 
