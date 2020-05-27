@@ -49,8 +49,8 @@ get_header(); ?>
 			}	
 		?>
 
-		<?php ekiline_pages_navigation();?>
-
+		<?php ekiline_pagination();?>
+		
 		<?php dynamic_sidebar( 'content-w2' ); ?>		
 
 		<?php comments_template('/template-parts/comments.php'); ?>

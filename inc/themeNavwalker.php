@@ -125,17 +125,25 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 //2) B4CSS: auxiliar, al separar el dropdown, se agrega la clase btn-group, el experimento solo es para el nivel 1.
         // if ( $args->walker->has_children && $depth == 0){
         if ( $args->walker->has_children ){
-            $classes[] .= 'btn-group'; 
+            // $classes[] .= 'btn-group align-items-center'; 
+            $classes[] .= 'd-flex align-items-center'; 
         }       
 //3) B4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
-        $doDrop = ( get_theme_mod('ekiline_primarymenuSettings') == '2' ) ? ' dropup' : ' dropdown' ;
-		if ( $args->walker->has_children ) {
-			if ( $depth > 0 ) {
-		        $classes[] .= $doDrop . ' item-'. $depth;
-			} else {
-		        $classes[] .= $doDrop;
-			}			
-		}		
+        $doDrop = ' dropdown item-'. $depth;
+            if ( get_theme_mod('ekiline_primarymenuSettings') == '2'){
+                $doDrop = ' dropup item-'. $depth;
+            } elseif ( $depth > 0 && get_theme_mod('ekiline_primarymenuSettings') != '2' ){
+                $doDrop = ' dropright item-'. $depth;
+            }
+
+            $classes[] .= $doDrop;
+
+
+
+
+
+
+
 //4) B4CSS: el link está activo.
         if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
 			$classes[] .= ' active';
@@ -261,12 +269,10 @@ class EkilineNavMenu extends Walker_Nav_Menu {
         $item_output .= '<a'. $attributes .'>';
         $item_output .= $args->link_before . $title . $args->link_after;
         $item_output .= '</a>';
-//Bootstrap nuevo item
-        if ( $args->walker->has_children && $depth == 0){
-            $item_output .= '<a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent"></a>';        
-        }
-        if ( $args->walker->has_children && $depth > 0){
-            $item_output .= '<a class="dropdown-item dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent"></a>';        
+//Bootstrap nuevo item        
+        if ( $args->walker->has_children ){
+            $split = ( $depth == 0 ) ? 'nav-link' : 'dropdown-item' ;
+            $item_output .= '<a class="'. $split .' dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent">&nbsp;</a>';        
         }
         
 

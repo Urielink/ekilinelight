@@ -239,18 +239,22 @@ add_filter( 'the_content', 'ekiline_content_additions');
 /**
  * 2) agregar paginado en publicaciones paginadas
  * Add pagination to paginated content.
+ * https://developer.wordpress.org/reference/functions/wp_link_pages/
  */
 
 function ekiline_link_pages(){
 
 	if ( !is_singular() ) return;
 
-	$linktag = array(
-		'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'ekiline' ),
-		'after'  => '</div>',
+	$args = array(
+		'before' => '<p class="page-links border-bottom p-2 text-right"><i class="float-left">' . esc_html__( 'Continue reading:', 'ekiline' ) . '</i>',
+		'after'  => '</p>',
+		'link_before'       => '<span class="btn btn-sm btn-primary">',
+		'link_after'        => '</span>',
+		'next_or_number'    => 'number',
 	);
 	
-	wp_link_pages($linktag);
+	wp_link_pages($args);
 }
 
 
@@ -303,7 +307,7 @@ add_filter( 'the_password_form', 'ekiline_password_form' );
  * https://codex.wordpress.org/Next_and_Previous_Links
  **/
 
-function ekiline_pages_navigation(){
+function ekiline_pagination(){
 
 	if ( is_front_page() ) return;	
 
@@ -400,15 +404,4 @@ function ekiline_pages_navigation(){
 } 
 
 
-
-
-/**
- * Crear un header dinamico y personalizable.
- * https://codex.wordpress.org/Plugin_API/Action_Reference/get_header
- **/
-
-// function themeslug_header_hook() {
-// 	get_template_part( 'template-parts/global-header' );
-// }
-// add_action( 'get_header', 'themeslug_header_hook' );
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying archive data.
+ * Template part for displaying archive, category or author data.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
