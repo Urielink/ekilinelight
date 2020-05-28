@@ -735,7 +735,7 @@ jQuery(document).ready(function($){
 			/**modal**/
 			// cssall += '.modal-content{background-color:' + extraccion.light.focus + ';border-color:' + extraccion.secondary.tabBgHv + ';}\n';
 			cssall += '.modal-content{border-color:' + extraccion.secondary.tabBgHv + ';}\n';
-			cssall += '.modal-backdrop{background-color:' + extraccion.secondary.tabBgHv + ';}\n';
+			cssall += '.modal-backdrop{background-color:' + extraccion.dark.puro + ';}\n';
 			cssall += '.modal-header{border-bottom-color:' + extraccion.secondary.tabBgHv + ';}\n';
 			cssall += '.modal-footer{border-top-color:' + extraccion.secondary.tabBgHv + ';}\n';
 

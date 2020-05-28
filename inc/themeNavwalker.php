@@ -126,8 +126,8 @@ class EkilineNavMenu extends Walker_Nav_Menu {
         // if ( $args->walker->has_children && $depth == 0){
         if ( $args->walker->has_children ){
             // $classes[] .= 'btn-group align-items-center'; 
-            $classes[] .= 'd-flex align-items-center'; 
-        }       
+            $classes[] .= 'd-md-flex align-items-center'; 
+        // }       
 //3) B4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
         $doDrop = ' dropdown item-'. $depth;
             if ( get_theme_mod('ekiline_primarymenuSettings') == '2'){
@@ -137,7 +137,7 @@ class EkilineNavMenu extends Walker_Nav_Menu {
             }
 
             $classes[] .= $doDrop;
-
+        }
 
 
 
@@ -248,7 +248,7 @@ class EkilineNavMenu extends Walker_Nav_Menu {
         $title = apply_filters( 'the_title', $item->title, $item->ID );
 
 //Ekiline description
-		$linkdesc = '<small class="small d-flex">' . $item->description . '</small>';
+		$linkdesc = '<br><small class="small link-description">' . $item->description . '</small>';
         $linkdesc   = ! empty( $item->description ) ? $linkdesc : '';
 		$title .= $linkdesc;
 
