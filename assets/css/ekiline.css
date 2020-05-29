@@ -21,12 +21,14 @@
 /*menus con submenu separado*/
 .navbar .dropdown a,.navbar .dropright a, .navbar .dropup a{display:inline-block;width: auto;}
 .navbar a.dropdown-toggle-split{float: right;}
+  .navbar .scroll-menu.show .dropup a.dropdown-toggle-split {position: absolute;right: 0;}
   .dropright .dropdown-menu {margin-left: .25rem;}
 
 /*Ajustes de flecha en submenu*/
   .modal .navbar .dropright a.dropdown-toggle-split::after,
   .navbar .order-first .dropright a.dropdown-toggle-split::after,
-  .mega-menu.show.dropdown .sub-menu .dropdown-toggle::after {border-top: .3em solid;border-right: .3em solid transparent;border-bottom: 0;border-left: .3em solid transparent;} 
+  .mega-menu.show.dropdown .sub-menu .dropdown-toggle::after,
+  .navbar .scroll-menu.show .dropup .dropdown-toggle::after{border-top: .3em solid;border-right: .3em solid transparent;border-bottom: 0;border-left: .3em solid transparent;} 
   @media only screen and (max-width : 768px) {
     .navbar .dropright a.dropdown-toggle-split::after {border-top: .3em solid;border-right: .3em solid transparent;border-bottom: 0;border-left: .3em solid transparent;}
     .modal .navbar-collapse:not(.order-first) .mega-menu.show.dropdown .sub-menu .dropdown-toggle-split {position: absolute;top: 0px;right: 0;}  
