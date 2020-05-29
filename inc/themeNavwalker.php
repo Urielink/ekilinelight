@@ -122,27 +122,20 @@ class EkilineNavMenu extends Walker_Nav_Menu {
         $classes[] = 'menu-item-' . $item->ID;
 //1) B4CSS: agregar clases a cada item (ul>li).
         $classes[] .= 'nav-item';
-//2) B4CSS: auxiliar, al separar el dropdown, se agrega la clase btn-group, el experimento solo es para el nivel 1.
+//2) ANULADO* B4CSS: auxiliar, al separar el dropdown, se agrega la clase btn-group, el experimento solo es para el nivel 1.
         // if ( $args->walker->has_children && $depth == 0){
-        if ( $args->walker->has_children ){
             // $classes[] .= 'btn-group align-items-center'; 
-            $classes[] .= 'd-md-flex align-items-center'; 
         // }       
 //3) B4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
-        $doDrop = ' dropdown item-'. $depth;
-            if ( get_theme_mod('ekiline_primarymenuSettings') == '2'){
-                $doDrop = ' dropup item-'. $depth;
-            } elseif ( $depth > 0 && get_theme_mod('ekiline_primarymenuSettings') != '2' ){
-                $doDrop = ' dropright item-'. $depth;
-            }
-
+        if ( $args->walker->has_children ){
+            $doDrop = ' dropdown item-'. $depth;
+                if ( get_theme_mod('ekiline_primarymenuSettings') == '2'){
+                    $doDrop = ' dropup item-'. $depth;
+                } elseif ( $depth > 0 && get_theme_mod('ekiline_primarymenuSettings') != '2' ){
+                    $doDrop = ' dropright item-'. $depth;
+                }
             $classes[] .= $doDrop;
         }
-
-
-
-
-
 
 //4) B4CSS: el link está activo.
         if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
@@ -213,7 +206,11 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		// }		
 //8) B4CSS: agregar clases a cada item hijo (ul.sub-menu>li>ul>li>a).
         if ( $depth > 0 ) {
-			$atts['class']	= 'dropdown-item';
+            $linkCss = 'dropdown-item';
+                if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
+                    $linkCss .= ' active';
+                }    
+			$atts['class']	= $linkCss;
 		}
  
         /**
