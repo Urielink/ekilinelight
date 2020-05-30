@@ -28,7 +28,13 @@ jQuery(document).ready(function($){
 	});
     $('.modal-nav').on('hidden.bs.modal', function(){
     	$('.modal-toggler').addClass('collapsed');
-    });             
+	});             
+
+	/* cambiar el tamaño de una ventana modal */
+	$( '.modal-resize' ).click(function(){
+		$( '.modal-open' ).toggleClass('modal-full');
+		$( this ).find('span:first-child').toggleClass('float-right');
+	});
 
 	/* scroll suave en botón de footer */
 	$('.goTop').click(function() {
