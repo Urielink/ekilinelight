@@ -112,7 +112,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
         );  
     
 
-    //Guardar variabe CSS 
+    //input para guardar css con colores generados desde script 
     $wp_customize->add_setting( 
         'ekiline_textarea_css', array(
             'capability' => 'edit_theme_options',
@@ -133,57 +133,169 @@ function ekiline_custom_color_controls( $wp_customize ) {
 add_action('customize_register', 'ekiline_custom_color_controls');
 
 /**
- * 2. Regsitro de script en personalizador.
+ * 2. Regsitro de script auxiliar en personalizador.
  */
-function tuts_customize_control_js() {
-    // wp_enqueue_script( 'tuts_customizer_control', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.js', array('jquery'), null, true );
-    wp_enqueue_script( 'tuts_customizer_control', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.min.js', array('jquery'), null, true );
+function ekiline_themecustomizer_js() {
+    // wp_enqueue_script( 'ekiline-themecustomizer', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.js', array('jquery'), null, true );
+    wp_enqueue_script( 'ekiline-themecustomizer', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.min.js', array('jquery'), null, true );
 }
-add_action( 'customize_controls_enqueue_scripts', 'tuts_customize_control_js' ); 
+add_action( 'customize_controls_enqueue_scripts', 'ekiline_themecustomizer_js' ); 
+
 
 /**
- * 3. Imprimir estilo CSS.
+ * 3. Estilos especificos por objeto de la pagina: 
+ * main, menu, footerbar y footer.
  */
-function ekiline_styles_inline() {
 
-    $ekilineTheme = '';
-    $ekilineTheme .= get_theme_mod( 'ekiline_textarea_css' );
+function ekiline_page_elements() {
 
-    $ekilineTheme .= ( get_option('main_color') != '#f8f9fa' ) ? '#primary{background-color:'. get_option('main_color') .';}' : '' ;
-    $ekilineTheme .= ( get_option('menu_color') != '#343a40' ) ? '#primarySiteNavigation.navbar{background-color:'. get_option('menu_color') .'!important;}' : '' ;
+    $ekilineLmnt = '';
+
+    $ekilineLmnt .= ( get_option('main_color') != '#f8f9fa' ) ? '#primary{background-color:'. get_option('main_color') .';}' : '' ;
+    $ekilineLmnt .= ( get_option('menu_color') != '#343a40' ) ? '#primarySiteNavigation.navbar{background-color:'. get_option('menu_color') .'!important;}' : '' ;
 
     if( get_option('fbar_color') != '#6c757d' ||  get_option('fbartxt_color') != '#ffffff'){
         $fbBk = ( get_option('fbar_color') != '#6c757d' ) ? 'background-color:'. get_option('fbar_color') .'!important;' : '' ;
         $fbTc = ( get_option('fbartxt_color') != '#ffffff' ) ? 'color:'. get_option('fbartxt_color') .'!important;' : '' ;
-            $ekilineTheme .= '.footer-bar{'. $fbBk . $fbTc .'}';
+            $ekilineLmnt .= '.footer-bar{'. $fbBk . $fbTc .'}';
     }
 
-    $ekilineTheme .= ( get_option('fbarlks_color') != '#007bff' ) ? '.footer-bar a{color:'. get_option('fbarlks_color') .'!important}' : '' ;
+    $ekilineLmnt .= ( get_option('fbarlks_color') != '#007bff' ) ? '.footer-bar a{color:'. get_option('fbarlks_color') .'!important}' : '' ;
 
     if( get_option('footer_color') != '#343a40' ||  get_option('ftext_color') != '#ffffff' ){
         $fooBk = ( get_option('footer_color') != '#343a40' ) ? 'background-color:'. get_option('footer_color') .'!important;' : '' ;
         $fooTc = ( get_option('ftext_color') != '#ffffff' ) ? 'color:'. get_option('ftext_color') .'!important;' : '' ;
-            $ekilineTheme .= '.site-footer{'. $fooBk . $fooTc .'}';
+            $ekilineLmnt .= '.site-footer{'. $fooBk . $fooTc .'}';
     }
 
-    $ekilineTheme .= ( get_option('flinks_color') != '#007bff' ) ? '.site-footer a{color:'. get_option('flinks_color') .'!important}' : '' ;
+    $ekilineLmnt .= ( get_option('flinks_color') != '#007bff' ) ? '.site-footer a{color:'. get_option('flinks_color') .'!important}' : '' ;
     
-    // echo '<style id="ekiline-theme">' . $ekilineTheme .'</style>'. "\n";
-    return $ekilineTheme;
-
+    return $ekilineLmnt;
 }
-// add_action( 'wp_head', 'ekiline_styles_inline', 100);
 
 /* 
- * Andar estilos css en linea
- * https://developer.wordpress.org/reference/functions/wp_add_inline_style/
+ * 4. Sobreescribir el uso de background image
+ * Override background image.
+ * https://codex.wordpress.org/Custom_Backgrounds
+ * https://developer.wordpress.org/reference/functions/_custom_background_cb/
  */
-function wpdocs_styles_method() {
 
-    // wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );	
-    
+function ekiline_custom_background_cb() {
+    // $background is the saved custom image, or the default image.
+    $background = set_url_scheme( get_background_image() );
+ 
+    // $color is the saved custom color.
+    // A default has to be specified in style.css. It will not be printed here.
+    // $color = get_background_color(); // se reemplaza por el establecido con bootstrap.
+    $color = get_option('back_color');
+ 
+    if ( get_theme_support( 'custom-background', 'default-color' ) === $color ) {
+        $color = false;
+    }
+ 
+    // $style = $color ? "background-color: #$color;" : '';
+    $style = $color ? "background-color: $color;" : '';
+ 
+    if ( $background ) {
+        $image = ' background-image: url("' . esc_url_raw( $background ) . '");';
+ 
+        // Background Position.
+        $position_x = get_theme_mod( 'background_position_x', get_theme_support( 'custom-background', 'default-position-x' ) );
+        $position_y = get_theme_mod( 'background_position_y', get_theme_support( 'custom-background', 'default-position-y' ) );
+ 
+        if ( ! in_array( $position_x, array( 'left', 'center', 'right' ), true ) ) {
+            $position_x = 'left';
+        }
+ 
+        if ( ! in_array( $position_y, array( 'top', 'center', 'bottom' ), true ) ) {
+            $position_y = 'top';
+        }
+ 
+        $position = " background-position: $position_x $position_y;";
+ 
+        // Background Size.
+        $size = get_theme_mod( 'background_size', get_theme_support( 'custom-background', 'default-size' ) );
+ 
+        if ( ! in_array( $size, array( 'auto', 'contain', 'cover' ), true ) ) {
+            $size = 'auto';
+        }
+ 
+        $size = " background-size: $size;";
+ 
+        // Background Repeat.
+        $repeat = get_theme_mod( 'background_repeat', get_theme_support( 'custom-background', 'default-repeat' ) );
+ 
+        if ( ! in_array( $repeat, array( 'repeat-x', 'repeat-y', 'repeat', 'no-repeat' ), true ) ) {
+            $repeat = 'repeat';
+        }
+ 
+        $repeat = " background-repeat: $repeat;";
+ 
+        // Background Scroll.
+        $attachment = get_theme_mod( 'background_attachment', get_theme_support( 'custom-background', 'default-attachment' ) );
+ 
+        if ( 'fixed' !== $attachment ) {
+            $attachment = 'scroll';
+        }
+ 
+        $attachment = " background-attachment: $attachment;";
+ 
+        $style .= $image . $position . $size . $repeat . $attachment;
+        
+    }
+
+    return 'body.custom-background{'. trim( $style ) .'}';
+}
+
+/* 
+ * 5. incluir los estilos CSS de Customizer 
+ * https://developer.wordpress.org/reference/functions/wp_custom_css_cb/
+ * En caso de ocuparlo, se cancela el uso de la etiqueta.
+ */
+
+function ekiline_custom_css_cb() {
+    //remover los estilos css que se modifican en customizer para agruparlos en una sola cadena.
+    remove_action('wp_head', 'wp_custom_css_cb', 101);
+    $styles = wp_get_custom_css();
+        $str = str_replace(array("\r","\n"),"",$styles);
+
+    if ( $styles || is_customize_preview() ) :
+        return strip_tags( $str );
+    endif;
+}
+
+/* 
+ * Imprimir todos los estilos css en wp_head.
+ * https://developer.wordpress.org/reference/functions/wp_add_inline_style/
+ * 2 posibilidades, por fdefinir, con estilos agrupados o independiente al final del head.
+ */
+
+function ekiline_css_groupMethod(){
+
+    $groupStyles = '';
+    $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
+    $groupStyles .= ekiline_page_elements(); // de los elementos
+    $groupStyles .= ekiline_custom_background_cb(); // de custom background
+    $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
+
+    // wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );	    
     // posibles manejadores: bootstrap-4, layout o ekiline-style
-    wp_add_inline_style( 'ekiline-style', ekiline_styles_inline() );
+    wp_add_inline_style( 'ekiline-style', $groupStyles );
 
 }
-add_action( 'wp_enqueue_scripts', 'wpdocs_styles_method' );
+//add_action( 'wp_enqueue_scripts', 'wpdocs_styles_method' );
+
+function ekiline_css_inlineHeadMethod(){
+
+    $groupStyles = '';
+    $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
+    $groupStyles .= ekiline_page_elements(); // de los elementos
+    $groupStyles .= ekiline_custom_background_cb(); // de custom background
+    $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
+    
+        $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
+        // echo '<style' . $type_attr . 'id="ekiline-style">' . strip_tags( $groupStyles ) . '</style>' . "\n";
+        echo '<style>' . strip_tags( $groupStyles ) . '</style>' . "\n";
+}
+add_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
+
