@@ -250,12 +250,18 @@ function ekiline_custom_background_cb() {
 /* 
  * 5. incluir los estilos CSS de Customizer 
  * https://developer.wordpress.org/reference/functions/wp_custom_css_cb/
+ * https://codex.wordpress.org/Function_Reference/is_customize_preview
  * En caso de ocuparlo, se cancela el uso de la etiqueta.
  */
 
 function ekiline_custom_css_cb() {
-    //remover los estilos css que se modifican en customizer para agruparlos en una sola cadena.
+    //1) remover los estilos css que se modifican en customizer para agruparlos en una sola cadena.
     remove_action('wp_head', 'wp_custom_css_cb', 101);
+        //2) y permitir su ejecución solo en el preview.
+        if ( is_customize_preview() ) {
+            add_action('wp_head', 'wp_custom_css_cb', 101);
+        }
+
     $styles = wp_get_custom_css();
         $str = str_replace(array("\r","\n"),"",$styles);
 
@@ -276,8 +282,9 @@ function ekiline_css_groupMethod(){
     $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
     $groupStyles .= ekiline_page_elements(); // de los elementos
     $groupStyles .= ekiline_custom_background_cb(); // de custom background
-    $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
-
+    if ( ! is_customize_preview() ) {
+        $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
+    }
     // wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );	    
     // posibles manejadores: bootstrap-4, layout o ekiline-style
     wp_add_inline_style( 'ekiline-style', $groupStyles );
@@ -291,7 +298,9 @@ function ekiline_css_inlineHeadMethod(){
     $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
     $groupStyles .= ekiline_page_elements(); // de los elementos
     $groupStyles .= ekiline_custom_background_cb(); // de custom background
-    $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
+    if ( ! is_customize_preview() ) {
+        $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
+    }
     
         $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
         // echo '<style' . $type_attr . 'id="ekiline-style">' . strip_tags( $groupStyles ) . '</style>' . "\n";
