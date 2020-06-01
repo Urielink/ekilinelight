@@ -42,7 +42,7 @@
 .navbar-nav .dropdown-menu .dropdown-menu{border-left:0px;border-radius:0px;border-right:0px;}
   .navbar-nav .dropup .dropdown-menu .dropdown-menu{position: static;}
 
-/* Nuevos tipos de enlace en menú */
+/* Estilos de navegación que solo necesitan ejecutarse en móviles */
 @media only screen and (min-width : 768px) {
   /*scroll-menu*/  
   .navbar-collapse:not(.order-first) .scroll-menu.dropdown.show, .navbar-collapse:not(.order-first) .scroll-menu.dropup.show{position: inherit;}
@@ -62,8 +62,11 @@
   .navbar-collapse:not(.order-first) .mega-menu.show.dropdown .sub-menu .dropdown-toggle-split {position: absolute;top: 0px;right: 0;}  
   /*en caso de modal D: */
       .modal .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 100%;}    
-}
 
+  /*Offcanvas*/
+  .offcanvas.navbar-collapse{ background-color: transparent !important; }
+
+}
 
 
 /* Carrusel extendido || Carousel extended

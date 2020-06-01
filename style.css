@@ -63,6 +63,16 @@ a img.aligncenter{display:block;margin-left:auto;margin-right:auto;}
 .hentry .alignfull iframe,.hentry .alignwide iframe{width: 100%;height: calc(100vw / 3);min-height: 400px;}
 .hentry .alignfull video,.hentry .alignwide video{width: 100%;min-height: 400px;}
 
+/*Estilos en caso de ser Admin*/
+/* body.admin-bar .navbar.fixed-top{margin-top:30px;}
+@media only screen and (max-width:768px){
+	body.admin-bar .navbar.fixed-top{margin-top:46px;}
+	body.admin-bar .navbar-collapse.offcanvas.show {top: 46px;}
+} */
+
+
+
+
 /* ------------------------------------------------
  * WIDGETS
  * ----------------------------------------------*/
