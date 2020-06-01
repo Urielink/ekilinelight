@@ -130,7 +130,7 @@ function ekiline_countWidgets( $widgetZone ){
 function ekiline_thumbnail(){
 	if ( !has_post_thumbnail() ) return;
 	//if ( is_single() || is_page() ) return;
-	if ( get_header_image() ) return;
+	if ( is_singular() && get_header_image() ) return;
 	// thumbnail size
 	$thumbSize = ( is_search() ) ? 'thumbnail' : 'medium' ;
 	// clase css varia por tipo de contenido
@@ -309,7 +309,7 @@ add_filter( 'the_password_form', 'ekiline_password_form' );
 
 function ekiline_pagination(){
 
-	if ( is_front_page() ) return;	
+	if ( is_front_page() && !is_home() ) return;	
 
 	// en caso de woocommerce no aplica
 	if ( class_exists( 'WooCommerce' ) ) {
