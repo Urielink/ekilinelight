@@ -111,7 +111,7 @@ function ekiline_countWidgets( $widgetZone ){
 		$count_sidebars = count( $the_sidebars[$widgetZone] );  
 
 		if ($count_sidebars >= '2'){
-			echo '<div class="row justify-content-between">';
+			echo '<div class="row">';
 				dynamic_sidebar($widgetZone);    
 			echo '</div>';
 		} else {

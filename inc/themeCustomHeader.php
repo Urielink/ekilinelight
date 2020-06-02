@@ -14,6 +14,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 
 	// Colores, reemplazar el controlador de color de fondo.
 	$wp_customize->remove_control('header_textcolor');	// se remueve el controlador.
+	// $wp_customize->remove_control('display_header_text');	// No es necesario ocultar los textos.
 
 	// Colores
 	$colors = array();
@@ -55,7 +56,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 	
 	$wp_customize->add_control(
 		'ekiline_headerCustomText', array(
-					'label'          => __( 'Mostrar datos de home y blog', 'ekiline' ),
+					'label'          => __( 'Mostrar título de la pagina de entradas', 'ekiline' ),
 					'description'    => '',
 					'section'        => 'header_image',
 					'settings'       => 'ekiline_headerCustomText',
@@ -188,6 +189,18 @@ if ( ! function_exists( 'ekiline_header_style' ) ) {
 };
 
 /**
+ * Clases CSS de apoyo en body_class().
+ * https://developer.wordpress.org/reference/functions/body_class/
+ */
+function ekiline_customHeaderCss( $classes ) {
+	if ( !get_header_image() ) return $classes;	
+	global $post;
+	$classes[] = 'has-custom-header';
+	return $classes;
+}
+add_filter( 'body_class', 'ekiline_customHeaderCss' );
+
+/**
  * Crear un header dinamico y personalizable.
  * the_header_image_tag() : llama la etiqueta completa.
  * header_image(); : llama la url.
@@ -213,7 +226,8 @@ function ekiline_addCoverHeader(){
 	$fullwidth = ( get_theme_mod('ekiline_headerCustomWidth') != '' ) ? '' : ' alignfull'; //false; 
 	$setVideo = get_theme_mod('ekiline_video');
 
-	if( is_singular() && !is_front_page() || is_home() && $custom != '' || is_front_page() && $custom != ''){
+	// if( is_singular() && !is_front_page() || is_home() && $custom != '' || is_front_page() && $custom != ''){
+	if( is_singular() && !is_front_page() || is_home() || is_front_page() ){
 		
 		global $post;
 
@@ -225,7 +239,7 @@ function ekiline_addCoverHeader(){
 
 			if( is_single() ) $meta .= ' , '. ekiline_notes('categories');	
 			
-			if( is_home() && $custom ){
+			if( is_home() && $custom != '' ){
 				$title = get_the_title( get_option('page_for_posts', true) );
 					$contentfield = get_post_field( 'post_content', get_option('page_for_posts') );
 				$content = wp_trim_words( $contentfield, 24, '...' );

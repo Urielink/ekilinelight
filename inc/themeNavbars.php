@@ -29,6 +29,18 @@ function logoTheme() {
 }
 
 /**
+ * Clases CSS de apoyo en body_class().
+ * https://developer.wordpress.org/reference/functions/body_class/
+ */
+function ekiline_hideTextNavsCss( $classes ) {
+	if ( display_header_text() ) return $classes;	
+	global $post;
+	$classes[] = 'hide-nav-description';
+	return $classes;
+}
+add_filter( 'body_class', 'ekiline_hideTextNavsCss' );
+
+/**
  * Todos los menus
  * Se complementa con acciones preestablecidas en customizer.php
  * Works with customizer.php
@@ -104,7 +116,7 @@ function ekilineNavbar($navPosition){
 		            <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php logoTheme(); ?></a>
 		            
 					<?php if( get_bloginfo( 'description' ) ) { ?>
-					<span class="navbar-text d-none d-md-block"><?php echo get_bloginfo( 'description' ); ?></span> 
+					<span class="navbar-text d-none d-md-block site-description"><?php echo get_bloginfo( 'description' ); ?></span> 
 					<?php }?>
 
 		            <button class="<?php echo $togglerBtn;?>" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>">
@@ -188,7 +200,7 @@ function ekiline_modalMenuBottom($navPosition){
       	<div class="navbar p-0">
 
 		<?php if( get_bloginfo( 'description' ) ) { ?>
-			<span class="navbar-text"><?php echo get_bloginfo( 'description' ); ?></span> 
+			<span class="navbar-text site-description"><?php echo get_bloginfo( 'description' ); ?></span> 
 		<?php }?>
 		        
 	    <?php wp_nav_menu( array(
