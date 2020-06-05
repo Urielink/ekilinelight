@@ -14,7 +14,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 
 	// Colores, reemplazar el controlador de color de fondo.
 	$wp_customize->remove_control('header_textcolor');	// se remueve el controlador.
-	// $wp_customize->remove_control('display_header_text');	// No es necesario ocultar los textos.
+	$wp_customize->remove_control('display_header_text');	// No es necesario ocultar los textos.
 
 	// Colores
 	$colors = array();

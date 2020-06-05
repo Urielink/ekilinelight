@@ -17,6 +17,7 @@
 
 /* Navegacion extendida || Extended nav items
 ------------------------------------------------------------------------- */
+/* .navbar-collapse{max-height: 80vh;overflow-x: auto;} */
 /* Enlace descripcion || Nav link description */
 .link-description {display: inline-block;text-transform: initial;white-space: normal;}
 
@@ -42,6 +43,11 @@
 .navbar-nav .dropdown-menu .dropdown-menu{border-left:0px;border-radius:0px;border-right:0px;}
   .navbar-nav .dropup .dropdown-menu .dropdown-menu{position: static;}
 
+/* Scroller nav */
+.nav-scroller {height: 3rem;overflow-y: hidden;line-height: 2;}
+.nav-scroller .nav {-ms-flex-wrap: nowrap;flex-wrap: nowrap;overflow-x: auto;white-space: nowrap;-webkit-overflow-scrolling: touch;}
+.nav-scroller .nav-link {padding: .5rem;}
+
 /* Estilos de navegación que solo necesitan ejecutarse en móviles */
 @media only screen and (min-width : 768px) {
   /*scroll-menu*/  
@@ -62,10 +68,10 @@
   .navbar-collapse:not(.order-first) .mega-menu.show.dropdown .sub-menu .dropdown-toggle-split {position: absolute;top: 0px;right: 0;}  
   /*en caso de modal D: */
       .modal .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 100%;}    
-
-  /*Offcanvas*/
+  /*Offcanvas nav*/
   .offcanvas.navbar-collapse{ background-color: transparent !important; }
-
+  /* Scroller nav */
+  .nav-scroller {height: 2rem;}
 }
 
 

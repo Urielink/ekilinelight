@@ -32,13 +32,13 @@ function logoTheme() {
  * Clases CSS de apoyo en body_class().
  * https://developer.wordpress.org/reference/functions/body_class/
  */
-function ekiline_hideTextNavsCss( $classes ) {
-	if ( display_header_text() ) return $classes;	
-	global $post;
-	$classes[] = 'hide-nav-description';
-	return $classes;
-}
-add_filter( 'body_class', 'ekiline_hideTextNavsCss' );
+// function ekiline_hideTextNavsCss( $classes ) {
+// 	if ( ! display_header_text() ) return $classes;	
+// 	global $post;
+// 	$classes[] = 'hide-nav-description';
+// 	return $classes;
+// }
+// add_filter( 'body_class', 'ekiline_hideTextNavsCss' );
 
 /**
  * Todos los menus
@@ -85,7 +85,8 @@ function ekilineNavbar($navPosition){
 		    case 1 : $navAlign = ' ml-auto'; break;
 		    case 2 : $navHelper = ' justify-content-md-center'; $navAlign = ' justify-content-md-center'; $headNav = ' flex-md-column'; break;
 		    case 3 : $navHelper = ' justify-content-md-between w-100'; $navAlign = ' justify-content-md-between w-100'; $headNav = ' flex-md-column'; break;
-		    case 4 : $navHelper = ' justify-content-md-around w-100'; $navAlign = ' justify-content-md-around w-100'; $headNav = ' flex-md-column'; break;
+			// case 4 : $navHelper = ' justify-content-md-around w-100'; $navAlign = ' justify-content-md-around w-100'; $headNav = ' flex-md-column'; break;
+			case 4 : $navHelper = ' nav-scroller w-100 show'; $navAlign = ' nav flex-row'; $headNav = ' flex-md-column'; break;
 		    case 5 : $navHelper = ' offcanvas '.$inverseMenu; $navAlign = ' ml-auto'; break;
 		    case 6 : $navHelper = ' order-first'; $expand = ' '; break;
 		    case 7 : $modalCss = 'modal fade'; break;
