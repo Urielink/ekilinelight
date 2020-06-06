@@ -22,9 +22,9 @@ class ekilineBreadcrumb extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array( 
 			'classname' => 'ekilineBreadcrumb',
-			'description' => __('Add bootstrap breadcrumb','ekiline'),
+			'description' => __('Add bootstrap breadcrumb', 'ekiline'),
 		);
-		parent::__construct( 'ekilineBreadcrumb', __('Show breadcrumb','ekiline'), $widget_ops );
+		parent::__construct( 'ekilineBreadcrumb', __('Show breadcrumb', 'ekiline'), $widget_ops );
 	}
 
 	/**
@@ -164,7 +164,7 @@ function createBreadcrumb(){
 			}
 			// en caso de no tener titulo
 			if( !get_the_title() ){
-				$breadcrumb .= __('&not;&not;','ekiline').'</li><!--.single-category-child.post-child-->';
+				$breadcrumb .= __('&not;&not;', 'ekiline').'</li><!--.single-category-child.post-child-->';
 			} else {
 		        $breadcrumb .= the_title('','</li><!--.single-category-child.post-child-->', false);
 			}

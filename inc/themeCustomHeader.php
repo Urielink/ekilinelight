@@ -56,7 +56,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 	
 	$wp_customize->add_control(
 		'ekiline_headerCustomText', array(
-					'label'          => __( 'Mostrar título de la pagina de entradas', 'ekiline' ),
+					'label'          => __( 'If Post Page is assigned (Homepage Settings), show page title.', 'ekiline' ),
 					'description'    => '',
 					'section'        => 'header_image',
 					'settings'       => 'ekiline_headerCustomText',
@@ -75,7 +75,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 	
 	$wp_customize->add_control(
 		'ekiline_headerCustomWidth', array(
-					'label'          => __( 'Narrow header', 'ekiline' ),
+					'label'          => __( 'Narrow header (jumbotron)', 'ekiline' ),
 					'description'    => '',
 					'section'        => 'header_image',
 					'settings'       => 'ekiline_headerCustomWidth',
@@ -99,7 +99,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
         		'priority'    => 40,
         		'section'     => 'header_image',
         		'label'       => __( 'Header image height', 'ekiline' ),
-        		'description' => __( 'Choose from a standard Jumbotron size to a Cover full display format (only in homepage)', 'ekiline' ),
+        		'description' => __( 'Extend the image to fill the entire screen', 'ekiline' ),
         		'input_attrs' => array(
         				'min'   => 40,
         				'max'   => 100,
@@ -121,8 +121,8 @@ function ekiline_custom_header_controls( $wp_customize ) {
         new WP_Customize_Upload_Control( 
             $wp_customize, 'ekiline_video', 
                 array(
-            		'label'    => __( 'Upload video to header', 'ekiline' ),
-                	'description' => __( 'Recommended formats: MP4, WEBM or OGV, your header image conserves as video background or replacement', 'ekiline' ),
+            		'label'    => __( 'Front Page video', 'ekiline' ),
+                	'description' => __( 'Recommended formats: MP4, WEBM or OGV, your header image conserves as poster', 'ekiline' ),
             		'section'  => 'header_image',
             		'settings' => 'ekiline_video',
                     'priority'    => 10,
@@ -155,7 +155,7 @@ function ekiline_custom_header_setup() {
 			'default-image' => array(
 				'url'           => get_parent_theme_file_uri('/assets/img/ekiline-pattern.png'),
 				'thumbnail_url' => get_parent_theme_file_uri('/assets/img/ekiline-pattern.png'),
-				'description'   => __( 'Default Header Image', 'ekiline' ),
+				'description'   => __( 'Default header image', 'ekiline' ),
 			),
 		) );   	
 }
@@ -268,7 +268,7 @@ function ekiline_addCoverHeader(){
 
 			<div class="wp-block-cover has-background-dim-20 has-background-dim has-parallax rounded <?php echo $fullwidth; ?>" style="background-image:url(<?php echo $url; ?>);">
 
-			<?php if ($setVideo){?>
+			<?php if ( $setVideo && is_front_page() ){?>
 				<video class="wp-block-cover__video-background" autoplay="" muted="" loop="" src="<?php echo $setVideo;?>" poster="<?php echo $url; ?>"></video>
 			<?php } ?>
 

@@ -19,7 +19,7 @@ function ekiline_in_widget_form($t,$return,$instance){
     if ( !isset($instance['css_style']) ) $instance['css_style'] = null;
     ?>
     <p>
-        <label for="<?php echo $t->get_field_id('css_style'); ?>"><?php echo __( 'CSS custom class','ekiline' ) ?></label>
+        <label for="<?php echo $t->get_field_id('css_style'); ?>"><?php echo __( 'CSS custom class', 'ekiline' ) ?></label>
 	    <input class="widefat" type="text" id="<?php echo $t->get_field_id('css_style');?>" name="<?php echo $t->get_field_name('css_style'); ?>" value="<?php echo $instance['css_style'];?>" />
     </p>
     <?php
@@ -79,12 +79,12 @@ function ekiline_widgetView( $widget , $return , $instance ){
     
     ?>
     <p>
-        <label for="<?php echo $widget->get_field_id('viewFormat'); ?>"><?php echo __( 'Format','ekiline' ) ?></label>
+        <label for="<?php echo $widget->get_field_id('viewFormat'); ?>"><?php echo __( 'Format', 'ekiline' ) ?></label>
         
         <select id="<?php echo $widget->get_field_id('viewFormat'); ?>" name="<?php echo $widget->get_field_name('viewFormat'); ?>">
-            <option <?php selected($instance['viewFormat'], 'none');?> value="none"><?php echo __( 'Default','ekiline' ) ?></option>
-            <option <?php selected($instance['viewFormat'], 'dropdown');?>value="dropdown"><?php echo __( 'Dropdown','ekiline' ) ?></option>
-            <option <?php selected($instance['viewFormat'], 'modal');?> value="modal"><?php echo __( 'Modal','ekiline' ) ?></option>
+            <option <?php selected($instance['viewFormat'], 'none');?> value="none"><?php echo __( 'Default', 'ekiline' ) ?></option>
+            <option <?php selected($instance['viewFormat'], 'dropdown');?>value="dropdown"><?php echo __( 'Dropdown', 'ekiline' ) ?></option>
+            <option <?php selected($instance['viewFormat'], 'modal');?> value="modal"><?php echo __( 'Modal', 'ekiline' ) ?></option>
         </select>
     </p>
     <?php    

@@ -68,7 +68,7 @@ function ekiline_theme_customizer( $wp_customize ) {
     
     $wp_customize->add_control(
     	'ekiline_showFrontPageHeading', array(
-    				'label'          => __( 'Use site icon as responsive navbar brand', 'ekiline' ),
+    				'label'          => __( 'Replace navbar brand with site icon in small devices', 'ekiline' ),
     				'section'        => 'title_tagline',
     				'settings'       => 'ekiline_minilogo',
     				'type'           => 'checkbox',
@@ -88,14 +88,14 @@ function ekiline_theme_customizer( $wp_customize ) {
         'ekiline_primarymenuSettings', array(
             'type' => 'select',
             'label' => __( 'Primary menu settings', 'ekiline' ),
-            'description' => __( 'Add behaviors for this menu, fix to top, fix to bottom or fixed with scroll', 'ekiline' ),
+            'description' => __( 'Assign positions to the menu: top, fixed or bottom', 'ekiline' ),
             'section' => 'menu_locations',
             'priority'    => 100,
             'choices' => array(
                 '0' => __( 'Default', 'ekiline' ),
                 '1' => __( 'Fixed top', 'ekiline' ),
                 '2' => __( 'Fixed bottom', 'ekiline' ),
-                '3' => __( 'Fix to scroll', 'ekiline' ),
+                '3' => __( 'Fixed with scroll', 'ekiline' ),
             ),
         )
     );    
@@ -154,7 +154,7 @@ function ekiline_theme_customizer( $wp_customize ) {
         'ekiline_vista_section' , array(
             'title'       => __( 'Site view', 'ekiline' ),
             'priority'    => 120,
-            'description' => __( 'Allow fullwidth of your website by content type: homepage, categories or single content' , 'ekiline' ),
+            'description' => __( 'Allow fullwidth of your website by content type: homepage, categories or single content', 'ekiline' ),
         ) 
     );
 

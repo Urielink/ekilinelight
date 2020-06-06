@@ -88,7 +88,7 @@ function ekiline_widgets_init() {
         
 // Widgets between content and footer
 register_sidebar( array(
-    'name'          => esc_html__( 'Bottom bar', 'ekiline' ),
+    'name'          => esc_html__( 'Bottom aside', 'ekiline' ),
     'id'            => 'footer-w2',
     'description'   => '',
     'before_widget' => '<div id="%1$s" class="widget %2$s">',
@@ -99,7 +99,7 @@ register_sidebar( array(
     
 // Footer widgets
     register_sidebar( array(
-        'name'          => esc_html__( 'Footer widgets', 'ekiline' ),
+        'name'          => esc_html__( 'Footer', 'ekiline' ),
         'id'            => 'footer-w1',
         'description'   => '',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
@@ -110,7 +110,7 @@ register_sidebar( array(
 
 // Widgets at top of content
     register_sidebar( array(
-        'name'          => esc_html__( 'Top first over all content', 'ekiline' ),
+        'name'          => esc_html__( 'Top before all content', 'ekiline' ),
         'id'            => 'toppage-w1',
         'description'   => '',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
@@ -121,7 +121,7 @@ register_sidebar( array(
 
 // Widget in content
     register_sidebar( array(
-        'name'          => esc_html__( 'In page at top of content', 'ekiline' ),
+        'name'          => esc_html__( 'In page top content', 'ekiline' ),
         'id'            => 'content-w1',
         'description'   => '',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
@@ -131,7 +131,7 @@ register_sidebar( array(
     ) );
 
         register_sidebar( array(
-        'name'          => esc_html__( 'In page at bottom of content', 'ekiline' ),
+        'name'          => esc_html__( 'In page bottom content', 'ekiline' ),
         'id'            => 'content-w2',
         'description'   => '',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',

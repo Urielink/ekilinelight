@@ -18,7 +18,7 @@ if ( !is_singular() || is_front_page() || post_password_required() || !comments_
 	<?php if ( have_comments() ) : ?>
 
 		<button class="btn btn-link btn-sm text-secondary float-right" data-toggle="collapse" data-target="#comments-activity">
-			<?php echo __('Hide comments','ekiline'); ?> <span>&dtrif;</span>
+			<?php echo __('Hide comments', 'ekiline'); ?> <span>&dtrif;</span>
 		</button>   
 
 		<p class="comments-title text-secondary mb-2 pb-2 pt-1 border-bottom">
@@ -106,7 +106,7 @@ function ekilineCommentsSimple($comment, $args, $depth) {
 	        	<?php comment_reply_link( array_merge( $args, array( 
 	        					// 'before' => '<div class="btn btn-danger">',
 	        					// 'after' => '</div>',
-	                            // 'reply_text' => __('Reply','ekiline'),
+	                            // 'reply_text' => __('Reply', 'ekiline'),
 	                            'add_below' => $add_below, 
 	                            'depth'     => $depth, 
 	                            'max_depth' => $args['max_depth']
@@ -146,10 +146,10 @@ function ekilineCommentsExtended($comment, $args, $depth) {
         	</div>
         	
         	<div class="rounded bg-white col-md-11 col-sm-10 col-9 py-2">
-		        <?php printf( __( '<cite class="fn">%s</cite> <span class="says">says:</span>','ekiline' ), get_comment_author_link() ); ?>
+		        <?php printf( __( '<cite class="fn">%s</cite> <span class="says">says:</span>', 'ekiline' ), get_comment_author_link() ); ?>
 		        
 		        <?php if ( $comment->comment_approved == '0' ) { ?>
-		            <em class="comment-awaiting-moderation"><?php __( 'Your comment is awaiting moderation.','ekiline' ); ?></em><br/>
+		            <em class="comment-awaiting-moderation"><?php __( 'Your comment is awaiting moderation.', 'ekiline' ); ?></em><br/>
 		        <?php } ?>
 
 		        <?php comment_text(); ?>
@@ -164,12 +164,12 @@ function ekilineCommentsExtended($comment, $args, $depth) {
             	<?php
                 /* translators: 1: date, 2: time */
                 printf( 
-                    __('%1$s at %2$s','ekiline'), 
+                    __('%1$s at %2$s', 'ekiline'), 
                     get_comment_date(),  
                     get_comment_time() 
                 ); ?>
             </a>
-            <?php edit_comment_link( __( '(Edit)','ekiline' ), '  ', '' ); ?>
+            <?php edit_comment_link( __( '(Edit)', 'ekiline' ), '  ', '' ); ?>
         </div>
 
         <div class="reply text-right">
@@ -207,21 +207,21 @@ $args = array(
 		'fields' => apply_filters( 
 			'comment_form_default_fields', array(
 				'author' => '<div class="form-group">' .
-								'<label for="author">' . __( 'Name','ekiline' ) . '*</label> ' .
+								'<label for="author">' . __( 'Name', 'ekiline' ) . '*</label> ' .
 								'<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"/>' .
 							'</div>',	
 				'email' => '<div class="form-group">' . 
-								'<label for="email">' . __( 'Email','ekiline' ) . '*</label> ' .
+								'<label for="email">' . __( 'Email', 'ekiline' ) . '*</label> ' .
 								'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"/>' . 
 							'</div>',	      
 				'url' => '<div class="form-group">' . 
-								'<label for="url">' . __( 'Website','ekiline' ) . '</label>' .
+								'<label for="url">' . __( 'Website', 'ekiline' ) . '</label>' .
 								'<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"/>' . 
 							'</div>',
 				'cookies' => '<div class="form-check">' . 
 								'<input class="form-check-input" type="checkbox" id="agree" required>' . 
-								'<label class="form-check-label" for="agree">' . __( 'By commenting you accept the','ekiline' ) . 
-									'<a href="' . get_privacy_policy_url() . '"> ' . __( 'Privacy Policy','ekiline' )  . '</a>' . 
+								'<label class="form-check-label" for="agree">' . __( 'By commenting you accept the', 'ekiline' ) . 
+									'<a href="' . get_privacy_policy_url() . '"> ' . __( 'Privacy Policy', 'ekiline' )  . '</a>' . 
 								'</label>' . 
 							'</div>',
 

@@ -236,7 +236,7 @@ $link = get_site_url(null,$link);
   ?>
   <ul id="SetNavMenu" class="navbar-nav mr-auto">
   	<li class="nav-item">
-  		<a class="nav-link" href="<?php echo $link; ?>"><?php echo __('Assign a menu!','ekiline'); ?></a>		
+  		<a class="nav-link" href="<?php echo $link; ?>"><?php echo __('Assign a menu!', 'ekiline'); ?></a>		
 	</li>
   </ul>
   <?php

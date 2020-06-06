@@ -27,8 +27,8 @@ function ekiline_notes($text = null) {
 		case 'poweredby':
 			$item = sprintf( 
 				esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),
-				'<a href="'.__('https://wordpress.org/','ekiline').'" target="_blank">WordPress</a>',
-				'<a href="'.__('http://ekiline.com','ekiline').'" target="_blank">Ekiline</a>' 
+				'<a href="'.__('https://wordpress.org/', 'ekiline').'" target="_blank">WordPress</a>',
+				'<a href="'.__('http://ekiline.com', 'ekiline').'" target="_blank">Ekiline</a>' 
 			);
 			break;	
 		case 'author':
@@ -278,8 +278,8 @@ function ekiline_password_form() {
     global $post;
     $label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
     $output = '<form action="' . esc_url( site_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form form-inline col-sm-8 p-4 mx-auto text-center" method="post">';
-    $output .= '<p>' . __( 'This content is password protected. To view it please enter your password below:','ekiline' ) . '</p>';
-	$output .= '<div class="form-inline mx-auto"><label for="' . $label . '">' . __( 'Password:','ekiline' ) . ' </label>';
+    $output .= '<p>' . __( 'This content is password protected. To view it please enter your password below:', 'ekiline' ) . '</p>';
+	$output .= '<div class="form-inline mx-auto"><label for="' . $label . '">' . __( 'Password:', 'ekiline' ) . ' </label>';
 	$output .= '<div class="input-group pl-md-5"><input class="form-control" name="post_password" id="' . $label . '" type="password" size="20" />';
 	$output .= '<span class="input-group-append"><input class="btn btn-dark" type="submit" name="Submit" value="' . esc_attr_x( 'Enter', 'post password form', 'ekiline' ) . '" /></span></div></div></form>';
     return $output;
