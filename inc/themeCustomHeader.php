@@ -146,7 +146,7 @@ function ekiline_custom_header_setup() {
 				'width'              => '',
 				'height'             => '',
 				'flex-height'        => true,
-				'wp-head-callback'   => 'ekiline_header_style',
+				// 'wp-head-callback'   => 'ekiline_header_style',
 			)
 		)
 	);
@@ -182,9 +182,11 @@ if ( ! function_exists( 'ekiline_header_style' ) ) {
 		$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .' !important; }';
 		$hdrStyle .= 'div.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 - 9px); margin-right: calc( -100vw / 2 + 100% / 2 - 9px); width: 100vw; }';
 
-		echo '<style type="text/css" id="header-style">' . $hdrStyle . '</style>';
+		// echo '<style type="text/css" id="header-style">' . $hdrStyle . '</style>' . "\n";
+		echo '<style>' . $hdrStyle . '</style>' . "\n";
 
 	}
+	add_action( 'wp_head', 'ekiline_header_style', 110);
 
 };
 
