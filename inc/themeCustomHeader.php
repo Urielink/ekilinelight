@@ -221,7 +221,7 @@ function ekiline_addCoverHeader(){
 	$url = get_header_image();
 	$title = get_bloginfo( 'name' );
 	$content = get_bloginfo( 'description' );
-	$meta = ekiline_notes('copyright');
+	$meta = '';//ekiline_notes('copyright');
 	// Customizer.
 	$custom = get_theme_mod('ekiline_headerCustomText'); //false; 
 	//ocupar clases para intercalar contenido.
@@ -253,6 +253,7 @@ function ekiline_addCoverHeader(){
 	if ( is_archive() || is_category() ){
 		$title = get_the_archive_title();
 		$content = get_the_archive_description();
+			$content = wp_strip_all_tags( substr($content, 0, strpos($content, '.')) );
 		//no meta
 	}
 	if ( is_search() ){
