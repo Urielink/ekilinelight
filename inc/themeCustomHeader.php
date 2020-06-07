@@ -165,7 +165,7 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
  * Callback: ekiline_header_style(), aparecerá en el header.
  */
 
-if ( ! function_exists( 'ekiline_header_style' ) ) {
+// if ( ! function_exists( 'ekiline_header_style' ) ) {
 
 	function ekiline_header_style() {
 		if ( !get_header_image() ) return;
@@ -183,12 +183,13 @@ if ( ! function_exists( 'ekiline_header_style' ) ) {
 		$hdrStyle .= 'div.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 - 9px); margin-right: calc( -100vw / 2 + 100% / 2 - 9px); width: 100vw; }';
 
 		// echo '<style type="text/css" id="header-style">' . $hdrStyle . '</style>' . "\n";
-		echo '<style>' . $hdrStyle . '</style>' . "\n";
+		// echo '<style>' . $hdrStyle . '</style>' . "\n";
+		return $hdrStyle;
 
 	}
-	add_action( 'wp_head', 'ekiline_header_style', 110);
+	//add_action( 'wp_head', 'ekiline_header_style', 110);
 
-};
+// };
 
 /**
  * Clases CSS de apoyo en body_class().

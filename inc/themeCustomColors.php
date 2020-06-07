@@ -282,6 +282,8 @@ function ekiline_css_groupMethod(){
     $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
     $groupStyles .= ekiline_page_elements(); // de los elementos
     $groupStyles .= ekiline_custom_background_cb(); // de custom background
+    $groupStyles .= ekiline_header_style(); // de custom header
+
     if ( ! is_customize_preview() ) {
         $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
     }
@@ -290,7 +292,7 @@ function ekiline_css_groupMethod(){
     wp_add_inline_style( 'ekiline-style', $groupStyles );
 
 }
-//add_action( 'wp_enqueue_scripts', 'wpdocs_styles_method' );
+// add_action( 'wp_enqueue_scripts', 'ekiline_css_groupMethod' );
 
 function ekiline_css_inlineHeadMethod(){
 
@@ -298,13 +300,13 @@ function ekiline_css_inlineHeadMethod(){
     $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
     $groupStyles .= ekiline_page_elements(); // de los elementos
     $groupStyles .= ekiline_custom_background_cb(); // de custom background
+    $groupStyles .= ekiline_header_style(); // de custom header
     if ( ! is_customize_preview() ) {
         $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
     }
     
         $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-        // echo '<style' . $type_attr . 'id="ekiline-style">' . strip_tags( $groupStyles ) . '</style>' . "\n";
-        echo '<style>' . strip_tags( $groupStyles ) . '</style>' . "\n";
+        echo '<style' . $type_attr . 'id="ekiline-style">' . strip_tags( $groupStyles ) . '</style>' . "\n";
 }
 add_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
 

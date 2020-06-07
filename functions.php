@@ -180,7 +180,7 @@ add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 add_action('wp_footer', 'print_emoji_detection_script', 20);
 remove_action('wp_print_styles', 'print_emoji_styles');
-add_action('wp_head', 'print_emoji_styles',20); 
+add_action('wp_head', 'print_emoji_styles',110);
 
 /**
  * Ekiline adiciones.
@@ -205,6 +205,8 @@ require get_template_directory() . '/inc/widgetBreadcrumb.php';
 //     remove_action('wp_head', 'wp_print_scripts');
 //      remove_action('wp_head', 'wp_print_head_scripts', 9);
 //      remove_action('wp_head', 'wp_enqueue_scripts', 1);
+//      remove_action('wp_head', 'wp_custom_css_cb', 101);
+
 //      add_action('wp_footer', 'wp_print_scripts', 5);
 //      add_action('wp_footer', 'wp_enqueue_scripts', 5);
 //      add_action('wp_footer', 'wp_print_head_scripts', 5);
