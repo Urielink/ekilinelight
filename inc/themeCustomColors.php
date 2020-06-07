@@ -310,3 +310,25 @@ function ekiline_css_inlineHeadMethod(){
 }
 add_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
 
+
+/** Optimización **/
+
+$optimizeCSS = false;
+
+if ( $optimizeCSS == true && ! is_customize_preview() ){
+
+    function footer_enqueue_scripts() {
+        remove_action('wp_head', 'wp_print_scripts');
+        remove_action('wp_head', 'wp_print_head_scripts', 9);
+        remove_action('wp_head', 'wp_enqueue_scripts', 1);
+        remove_action('wp_head', 'wp_custom_css_cb', 101); // remove wordpress custom styles
+        remove_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);  // themeCustomColors remove styles.
+
+        add_action('wp_footer', 'wp_print_scripts', 5);
+        add_action('wp_footer', 'wp_enqueue_scripts', 5);
+        add_action('wp_footer', 'wp_print_head_scripts', 5);
+        add_action( 'wp_enqueue_scripts', 'ekiline_css_groupMethod' ); //add ekiline styles.
+    }
+    add_action('after_setup_theme', 'footer_enqueue_scripts');
+
+}
