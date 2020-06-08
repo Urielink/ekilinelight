@@ -177,10 +177,12 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 		$rangeHead = get_theme_mod('ekiline_range_header');
 		if ( $rangeHead == '0' ) $rangeHead = '30';
 	
-		$hdrStyle = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:'. esc_attr( $hdrBkc ) .'; min-height:' . $rangeHead . 'vh; }';
+		$hdrStyle = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:'. esc_attr( $hdrBkc ) .'; min-height:' . $rangeHead . 'vh;align-items:flex-end; }';
 		$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:'. esc_attr( $hdrTxtc ) .' !important; }';
 		$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .' !important; }';
-		$hdrStyle .= 'div.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 - 9px); margin-right: calc( -100vw / 2 + 100% / 2 - 9px); width: 100vw; }';
+		$hdrStyle .= '.custom-header.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 - 9px); margin-right: calc( -100vw / 2 + 100% / 2 - 9px); width: 100vw; }';
+		$hdrStyle .= '.custom-header.container .wp-block-cover.has-background-dim::before{z-index: 0;opacity: .3 !important;}';
+		$hdrStyle .= '@media only screen and (max-width:576px){ .custom-header.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 ); margin-right: calc( -100vw / 2 + 100% / 2); } }';
 
 		// echo '<style type="text/css" id="header-style">' . $hdrStyle . '</style>' . "\n";
 		// echo '<style>' . $hdrStyle . '</style>' . "\n";
