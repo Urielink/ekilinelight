@@ -151,9 +151,10 @@ add_action( 'widgets_init', 'ekiline_widgets_init' );
  */
  
 function ekiline_scripts() {	
+
     wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4', 'all' );
-	wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );	
-	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri() );	        
+	wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );
+    wp_enqueue_style( 'ekiline-style', get_stylesheet_uri() );	        
     if( !is_admin() ){
         wp_dequeue_script('jquery');
         wp_dequeue_script('jquery-core');
@@ -162,16 +163,21 @@ function ekiline_scripts() {
         wp_enqueue_script('jquery-core', false, array(), false, true);
         wp_enqueue_script('jquery-migrate', false, array(), false, true);          
      }        	
-	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1', true  );
- 	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4', true  );
-    wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716', true  );
-    wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226', true  );
+	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1' , true );
+ 	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4' , true );
+    wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716' , true );
+    wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226' , true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
-	}			
+    }			
+    
 }
 add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
+
+
+
+/** Optimización **/
 
 /**
  * Ekiline optimizacion, emojis al footer
@@ -181,6 +187,18 @@ remove_action('wp_head', 'print_emoji_detection_script', 7);
 add_action('wp_footer', 'print_emoji_detection_script', 20);
 remove_action('wp_print_styles', 'print_emoji_styles');
 add_action('wp_head', 'print_emoji_styles',110);
+
+/**
+ * Ekiline optimizacion, script para agregar posts externos con oEmbed 
+ * embed posts from remote WordPress sites into your own WordPress site, via oEmbed
+ * aplicar solo en posts o paginas.
+ */
+// function my_deregister_scripts(){
+//     if ( !is_singular() ) return;
+//     wp_deregister_script( 'wp-embed' );
+// }
+// add_action( 'wp_footer', 'my_deregister_scripts' );
+
 
 /**
  * Ekiline adiciones.
@@ -196,3 +214,33 @@ require get_template_directory() . '/inc/themeCustomHeader.php';
 require get_template_directory() . '/inc/themeCustomColors.php';
 require get_template_directory() . '/inc/widgetOptions.php';
 require get_template_directory() . '/inc/widgetBreadcrumb.php';
+
+
+
+$optimizeCSS = false;
+
+function ekiline_B4F() {
+    $cssB4f = '';
+    echo '<style type="text/css" id="b4f">' . $cssB4f . '</style>' . "\n";
+}
+
+if ( $optimizeCSS == true && ! is_customize_preview() ){
+
+    function footer_enqueue_scripts() {
+        remove_action('wp_head', 'wp_print_scripts');
+        remove_action('wp_head', 'wp_print_head_scripts', 9);
+        remove_action('wp_head', 'wp_enqueue_scripts', 1);
+        remove_action('wp_head', 'wp_custom_css_cb', 101); // remove wordpress custom styles
+        remove_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);  // themeCustomColors remove styles.
+    
+        print_late_styles();
+        add_action('wp_footer', 'wp_print_scripts', 5);
+        add_action('wp_footer', 'wp_enqueue_scripts', 5);
+        add_action('wp_footer', 'wp_print_head_scripts', 5);
+        add_action( 'wp_enqueue_scripts', 'ekiline_css_groupMethod' ); //add ekiline styles.
+        // add_action( 'wp_head', 'ekiline_B4F', 90);
+
+    }
+    add_action('after_setup_theme', 'footer_enqueue_scripts');
+
+}
