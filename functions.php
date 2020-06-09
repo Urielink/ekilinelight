@@ -192,7 +192,6 @@ require get_template_directory() . '/inc/themeLayout.php';
 require get_template_directory() . '/inc/themeElements.php';
 require get_template_directory() . '/inc/themeMeta.php';
 require get_template_directory() . '/inc/themeFeaturedCategories.php';
-require get_template_directory() . '/inc/themeAddons.php';
 require get_template_directory() . '/inc/themeCustomHeader.php';
 require get_template_directory() . '/inc/themeCustomColors.php';
 require get_template_directory() . '/inc/widgetOptions.php';

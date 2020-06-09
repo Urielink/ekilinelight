@@ -10,12 +10,23 @@
 
 <?php if ( is_singular() ) return; ?>
 
+<?php 
+ /* 
+  * Mostrar diversos formatos en cada listado, segun el tipo (pagina de entradas, categoria o las entradas de autor).
+  */
+?>
 
-<?php the_archive_title('<h1 class="archive-title">','</h1>'); ?>
-
-
+<h1 class="archive-title">
+	<?php echo ( is_home() && !is_front_page() ) ? get_the_title( get_option('page_for_posts', true) ) : get_the_archive_title() ; ?>
+</h1>
 	
-	<?php if ( is_category() ) { ?>
+	<?php if ( is_home() && !is_front_page() ) { ?>
+
+		<div>
+			<?php echo get_post_field( 'post_content', get_option('page_for_posts') );?>
+		</div>
+
+	<?php } else if ( is_category() ) { ?>
 
 		<div> <?php echo category_description(); ?> </div>
 
@@ -41,4 +52,3 @@
 		</div>
 		
 	<?php } ?>
-
