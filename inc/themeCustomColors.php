@@ -306,7 +306,7 @@ function ekiline_css_inlineHeadMethod(){
     }
     
         $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-        echo '<style' . $type_attr . 'id="ekiline-style">' . strip_tags( $groupStyles ) . '</style>' . "\n";
+        echo '<style' . $type_attr . 'id="ekiline-inline-style">' . strip_tags( $groupStyles ) . '</style>' . "\n";
 }
 add_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
 

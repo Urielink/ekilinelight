@@ -156,12 +156,10 @@ function ekiline_scripts() {
 	wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );
     wp_enqueue_style( 'ekiline-style', get_stylesheet_uri() );	        
     if( !is_admin() ){
-        wp_dequeue_script('jquery');
-        wp_dequeue_script('jquery-core');
-        wp_dequeue_script('jquery-migrate');
-        wp_enqueue_script('jquery', false, array(), false, true);
-        wp_enqueue_script('jquery-core', false, array(), false, true);
-        wp_enqueue_script('jquery-migrate', false, array(), false, true);          
+        //https://developer.wordpress.org/reference/functions/wp_script_add_data/
+        wp_scripts()->add_data( 'jquery', 'group', 1 );
+        wp_scripts()->add_data( 'jquery-core', 'group', 1 );
+        wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );    
      }        	
 	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1' , true );
  	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4' , true );
@@ -217,8 +215,8 @@ require get_template_directory() . '/inc/widgetBreadcrumb.php';
 
 
 
+/*
 $optimizeCSS = false;
-
 function ekiline_B4F() {
     $cssB4f = '';
     echo '<style type="text/css" id="b4f">' . $cssB4f . '</style>' . "\n";
@@ -244,3 +242,100 @@ if ( $optimizeCSS == true && ! is_customize_preview() ){
     add_action('after_setup_theme', 'footer_enqueue_scripts');
 
 }
+*/
+
+function ekiline_reloadCSS(){
+
+    $params = null;
+    
+    global $wp_styles; 
+
+        $allcss = array();
+        foreach( $wp_styles->queue as $csshandle ) {    	
+            $allcss[] = $csshandle;   
+        } 
+        /* Permitir la carga de estilos que tienen dependencia o prioridad, 
+        * feature, crear una lista para seleccionar cada objeto.
+        * $allowcss = array('photoswipe-default-skin','woocommerce-inline');
+        */
+            $allowcss = array();	
+            $load_css = array_diff( $allcss, $allowcss );        
+        
+        $cssDic = array();
+        foreach( $load_css as $handle) {
+            //deshabilitar cada estilo
+            wp_dequeue_style($handle);
+
+            /* Crear diccionario: 
+            * sobrescribir url de cada CSS en caso de ser relativa al sistema.
+            */
+
+            $srcUrl = $wp_styles->registered[$handle]->src;
+            $siteurl   = get_site_url();
+                $hasSiteurl = strpos($srcUrl, $siteurl);
+
+            if ($hasSiteurl === false){
+                $srcUrl = get_site_url() . $wp_styles->registered[$handle]->src;
+            } 
+
+            $cssDic[] = array( 'id' => $handle, 'src' => $srcUrl, 'media' => $wp_styles->registered[$handle]->args );   
+
+        }   
+
+        $params = $cssDic; 
+                
+        return $params;
+        
+}  
+
+
+function ekiline_loadAllCss(){ ?>
+
+<script>
+jQuery(document).ready( function($){
+    // variable php
+    if ( allCss != null   ){
+        var obj = allCss;	
+        // crear un estilo por cada ruta extríada.
+        
+        $.each( obj, function( key, value ) {
+                    
+            var $head = $("head");
+            var $wpcss = $head.find("style[id='ekiline-inline-style']"); 
+            var $cssinline = $head.find("style:last");
+            var $ultimocss = $head.find("link[rel='stylesheet']:last");
+            var linkCss = $('<link/>',{'rel':'stylesheet','id':value.id,'href':value.src,'media':value.media});
+        
+            // En caso de de encontrar una etiqueta de estilo ó link ó nada inserta el otro estilo css, 
+        
+                if ($wpcss.length){ 
+                    $wpcss.before(linkCss); 
+                } else if ($cssinline.length){ 
+                    $cssinline.before(linkCss); 
+                } else if ($ultimocss.length){ 
+                    $ultimocss.before(linkCss); 
+                } else { 
+                    $head.append(linkCss); 
+                }		
+                            
+        });				        
+        
+    }	            
+} );     
+</script>
+
+<?php 
+}
+
+
+function ekiline_loadcss() {
+
+    $optimizeCSS = true;
+    if( $optimizeCSS != true ) return;
+
+    wp_localize_script( 'ekiline-layout', 'allCss', ekiline_reloadCSS() ); 
+    add_action( 'wp_footer', 'ekiline_loadAllCss', 100);
+
+}
+add_action( 'wp_enqueue_scripts', 'ekiline_loadcss' );
+
