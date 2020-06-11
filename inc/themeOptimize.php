@@ -11,10 +11,18 @@
  */
 
 $optimizeCSS = true;
-if( $optimizeCSS === true ){
+
+function is_login_page() {
+    return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
+}
+
+if( $optimizeCSS === true && ! is_login_page() && ! is_admin() && ! is_user_logged_in() ){
     add_filter( 'style_loader_tag',  'ekiline_change_tag', 10, 4 );
     add_action( 'wp_enqueue_scripts', 'ekiline_print_localize' );
     add_action( 'wp_footer', 'ekiline_load_allCss_js', 100);
+    
+    add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
+    add_filter('script_loader_tag', 'add_async_attribute', 10, 2);   
 }
 
 /**
@@ -23,7 +31,7 @@ if( $optimizeCSS === true ){
  */
 
     function ekiline_choose_styles(){
-        // $discardCss = array('bootstrap-4');
+        // $discardCss = array('login','bootstrap-4');
         $discard_styles = array(); 
         return $discard_styles;
     }
@@ -103,8 +111,8 @@ function ekiline_load_allCss_js(){ ?>
     jQuery(document).ready( function($){
         // variable php
         if ( allCss != null ){
+
             var obj = allCss;	
-            // crear un estilo por cada ruta extríada.
             
             $.each( obj, function( key, value ) {
                         
@@ -114,7 +122,7 @@ function ekiline_load_allCss_js(){ ?>
                 var ultimocss = head.find('link[rel="stylesheet"]:last');
                 var linkCss = $('<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media });
             
-                // En caso de de encontrar una etiqueta de estilo ó link ó nada inserta el otro estilo css, 
+                // En caso de de encontrar una etiqueta de estilo imprimir
             
                     if (wpcss.length){ 
                         wpcss.before(linkCss); 
@@ -135,8 +143,6 @@ function ekiline_load_allCss_js(){ ?>
 
 
 
-/*** otros métodos que ayudan ***/
-
 /* 
  * Defer / Async scripts.
  * https://developer.wordpress.org/reference/hooks/script_loader_src/
@@ -154,7 +160,7 @@ function add_defer_attribute($tag, $handle) {
     }
     return $tag;
  }
- add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
+//  add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
 
 
  function add_async_attribute($tag, $handle) {
@@ -168,7 +174,7 @@ function add_defer_attribute($tag, $handle) {
     }
     return $tag;
  }
- add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
+//  add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
 
 
 
