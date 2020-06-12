@@ -310,3 +310,7 @@ function ekiline_css_inlineHeadMethod(){
 }
 add_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
 
+if( is_customize_preview() ){
+    remove_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);  // themeCustomColors remove styles.
+    add_action( 'wp_enqueue_scripts', 'ekiline_css_groupMethod' ); //add ekiline styles.
+}

@@ -99,7 +99,8 @@ function ekiline_styles_localize(){
 
             $the_styles[] = array( 'id' => $handler, 'src' => $srcUrl, 'media' => $wp_styles->registered[$handler]->args );   
 
-            // Para deshabilitar estilos: wp_dequeue_style($handler);
+            // Para deshabilitar estilos, es posible que no se necesite: 
+            wp_dequeue_style($handler);
 
         }   
                 
@@ -261,7 +262,8 @@ if( $footerAllScripts === true && ! is_login_page() && ! is_admin() && ! is_user
              */            
             // remove_action('wp_head', 'wp_enqueue_scripts', 1);
             // add_action('wp_footer', 'wp_enqueue_scripts', 5);
-            print_late_styles();
+
+            // print_late_styles();
 
 
     }
