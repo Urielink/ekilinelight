@@ -155,16 +155,20 @@ function ekiline_scripts() {
     wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4', 'all' );
 	wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );
     wp_enqueue_style( 'ekiline-style', get_stylesheet_uri() );	        
-    if( !is_admin() ){
-        //https://developer.wordpress.org/reference/functions/wp_script_add_data/
-        wp_scripts()->add_data( 'jquery', 'group', 1 );
-        wp_scripts()->add_data( 'jquery-core', 'group', 1 );
-        wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );    
-     }        	
-	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1' , true );
- 	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4' , true );
-    wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716' , true );
-    wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226' , true );
+        // if( !is_admin() ){
+        //     //https://developer.wordpress.org/reference/functions/wp_script_add_data/
+        //     wp_scripts()->add_data( 'jquery', 'group', 1 );
+        //     wp_scripts()->add_data( 'jquery-core', 'group', 1 );
+        //     wp_scripts()->add_data( 'jquery-migrate', 'group', 1 );    
+        //  }        	
+        // wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1' , true );
+        // wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4' , true );
+        // wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716' , true );
+        // wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226' , true );
+	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1' );
+ 	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4' );
+    wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716' );
+    wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -172,30 +176,6 @@ function ekiline_scripts() {
     
 }
 add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
-
-
-
-/** Optimización **/
-
-/**
- * Ekiline optimizacion, emojis al footer
- * Otra solución: https://desarrollowp.com/blog/tutoriales/mover-los-scripts-al-footer-wordpress/
- */
-remove_action('wp_head', 'print_emoji_detection_script', 7);
-add_action('wp_footer', 'print_emoji_detection_script', 20);
-remove_action('wp_print_styles', 'print_emoji_styles');
-add_action('wp_head', 'print_emoji_styles',110);
-
-/**
- * Ekiline optimizacion, script para agregar posts externos con oEmbed 
- * embed posts from remote WordPress sites into your own WordPress site, via oEmbed
- * aplicar solo en posts o paginas.
- */
-// function my_deregister_scripts(){
-//     if ( !is_singular() ) return;
-//     wp_deregister_script( 'wp-embed' );
-// }
-// add_action( 'wp_footer', 'my_deregister_scripts' );
 
 
 /**
