@@ -86,18 +86,9 @@ function ekiline_styles_localize(){
         foreach( $load_css_from as $handler) {
 
             /* Crear diccionario: 
-            * sobrescribir url de cada CSS en caso de ser relativa al sistema.
+            * sobrescribir url de cada CSS en caso de solo ser relativa al sistema.
             */
-
-            $srcUrl = $wp_styles->registered[$handler]->src;
-            $siteurl   = get_site_url();
-                $hasSiteurl = strpos($srcUrl, $siteurl);
-
-            if ($hasSiteurl === false){
-                $srcUrl = get_site_url() . $wp_styles->registered[$handler]->src;
-            } 
-
-            $the_styles[] = array( 'id' => $handler, 'src' => $srcUrl, 'media' => $wp_styles->registered[$handler]->args );   
+            $the_styles[] = array( 'id' => $handler, 'src' => $wp_styles->registered[$handler]->src, 'media' => $wp_styles->registered[$handler]->args );   
 
             // Para deshabilitar estilos, es posible que no se necesite: 
             wp_dequeue_style($handler);
@@ -231,10 +222,12 @@ if( $footerAllScripts === true && ! is_login_page() && ! is_admin() && ! is_user
      * Emojis al footer
      * Otra solución: https://desarrollowp.com/blog/tutoriales/mover-los-scripts-al-footer-wordpress/
      */
-        remove_action('wp_head', 'print_emoji_detection_script', 7);
-        add_action('wp_footer', 'print_emoji_detection_script', 20);
-        remove_action('wp_print_styles', 'print_emoji_styles');
-        add_action('wp_head', 'print_emoji_styles',110);
+        $emojiDetect = 'print_emoji_detection_script';
+        $emojiStyles = 'print_emoji_styles';
+            remove_action('wp_head', $emojiDetect, 7);
+            add_action('wp_footer', $emojiDetect, 20);
+            remove_action('wp_print_styles', $emojiStyles);
+            add_action('wp_head', $emojiStyles,110);
 
     /**
      * Combinar estilos superior inferior.

@@ -267,17 +267,11 @@ function ekiline_addCoverHeader(){
 		$title = esc_html__( 'It looks like nothing was found at this location.', 'ekiline' );
 		$content = esc_html__( 'Maybe try one of the links below or a search?', 'ekiline' );
 	}
-
-	//Incorporar la imagen de fondo como un recurso en linea.
-	$type = pathinfo($url, PATHINFO_EXTENSION);
-	$data = file_get_contents($url);
-	$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-
 ?>
 
 <div class="custom-header container">
 
-			<div class="wp-block-cover has-background-dim-20 has-background-dim has-parallax rounded <?php echo $fullwidth; ?>" style="background-image:url('<?php echo $base64; ?>');">
+			<div class="wp-block-cover has-background-dim-20 has-background-dim has-parallax rounded <?php echo $fullwidth; ?>" style="background-image:url('<?php echo $url; ?>');">
 
 			<?php if ( $setVideo && is_front_page() ){?>
 				<video class="wp-block-cover__video-background" autoplay="" muted="" loop="" src="<?php echo $setVideo;?>" poster="<?php echo $base64; ?>"></video>

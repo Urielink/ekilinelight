@@ -232,7 +232,7 @@ function ekiline_modalMenuBottom($navPosition){
 
 function EkilineNavFallback() {
 if ( is_user_logged_in() ) $link = '/wp-admin/nav-menus.php'; else $link = '/wp-login.php';
-$link = get_site_url(null,$link);
+$link = home_url(null,$link);
   ?>
   <ul id="SetNavMenu" class="navbar-nav mr-auto">
   	<li class="nav-item">
