@@ -88,7 +88,16 @@ function ekiline_styles_localize(){
             /* Crear diccionario: 
             * sobrescribir url de cada CSS en caso de solo ser relativa al sistema.
             */
-            $the_styles[] = array( 'id' => $handler, 'src' => $wp_styles->registered[$handler]->src, 'media' => $wp_styles->registered[$handler]->args );   
+
+            $siteurl = home_url();
+            $srcUrl = $wp_styles->registered[$handler]->src;
+                $hasSiteurl = strpos($srcUrl, $siteurl);
+
+            if ( $hasSiteurl === false ){
+                $srcUrl = $siteurl . $srcUrl;
+            } 
+
+            $the_styles[] = array( 'id' => $handler, 'src' => $srcUrl, 'media' => $wp_styles->registered[$handler]->args );   
 
             // Para deshabilitar estilos, es posible que no se necesite: 
             wp_dequeue_style($handler);
