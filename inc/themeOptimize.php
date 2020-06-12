@@ -89,7 +89,7 @@ function ekiline_styles_localize(){
             * sobrescribir url de cada CSS en caso de solo ser relativa al sistema.
             */
 
-            $siteurl = home_url();
+            $siteurl = get_site_url();
             $srcUrl = $wp_styles->registered[$handler]->src;
                 $hasSiteurl = strpos($srcUrl, $siteurl);
 
