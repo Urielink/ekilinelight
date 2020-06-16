@@ -156,18 +156,10 @@ function ekiline_load_allCss_js(){ ?>
 
 /* 
  * Optimizar el llamado de cada Script JS
- * 
  */
 
-$optimizeJS = true;
-
-if( $optimizeJS === true && ! is_login_page() && ! is_admin() && ! is_user_logged_in() ){    
-    add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
-    add_filter('script_loader_tag', 'add_async_attribute', 10, 2);   
-}
-
 /* 
- * Defer / Async scripts.
+ * Defer / Async scripts uno por uno y en grupo.
  * https://developer.wordpress.org/reference/hooks/script_loader_src/
  * http://hookr.io/filters/script_loader_src/
  */
@@ -188,37 +180,91 @@ function ekiline_wpqueued_scripts(){
     return $all_scripts;
 }
 
-function add_defer_attribute($tag, $handle) {
-    // add script handles to the array below
-    $scripts_to_defer = array( 'jquery-core', 'jquery-migrate', 'wp-embed', 'popper-script', 'bootstrap-script', 'ekiline-swipe', 'ekiline-bundle' , 'ekiline-layout' );
-    // $scripts_to_defer = array( 'jquery-migrate', 'wp-embed', 'popper-script', 'bootstrap-script', 'ekiline-swipe', 'ekiline-layout' );
-    
-    foreach($scripts_to_defer as $defer_script) {
-       if ($defer_script === $handle) {
-          return str_replace(' src', ' defer="defer" src', $tag);
-       }
-    }
-    return $tag;
- }
-//  add_filter('script_loader_tag', 'add_defer_attribute', 10, 2);
+/**
+ * 1) Si los scripts se modifican uno a uno.
+ */
+function ekiline_choose_scripts(){
+    $selected_scripts = array(); 
+        // $selected_scripts[] = array( 'handle'=>'ekiline-layout', 'attr' => 'async');
+        // $selected_scripts[] = array( 'handle'=>'ekiline-bundle', 'attr' => 'defer');
+    return $selected_scripts;
+}
 
-function add_async_attribute($tag, $handle) {
-    // add script handles to the array below
-    $scripts_to_async = array();
-    
-    foreach($scripts_to_async as $async_script) {
-       if ($async_script === $handle) {
-          return str_replace(' src', ' async="async" src', $tag);
-       }
+    function override_scripts($tag, $handle) {
+
+        foreach( ekiline_choose_scripts() as $new_script ) {
+
+            if ( $new_script['handle'] === $handle ) {
+
+                if( $new_script['attr'] === 'defer' ){
+                    return str_replace(' src', ' defer="defer" src', $tag);
+                } else if ( $new_script['attr'] === 'async' ){
+                    return str_replace(' src', ' async="async" src', $tag);
+                }
+
+            }
+
+        }
+
+        return $tag;
+
     }
+
+    // if( ekiline_choose_scripts() != null && ! is_login_page() && ! is_admin() && ! is_user_logged_in() ){    
+    //     add_filter('script_loader_tag', 'override_scripts', 10, 2);
+    // }
+
+/**
+ * 2) Si los scripts se modifican en grupo.
+ */
+function add_new_attribute($tag, $handle) {
+
+    $defer_all_scripts = false;
+    $async_all_scripts = false;
+    
+    $scripts_to_change = ekiline_wpqueued_scripts();
+    $newAttr = '';
+    
+    if( $defer_all_scripts && !$async_all_scripts){
+        $newAttr = 'defer="defer"';
+    } else if( $async_all_scripts && !$defer_all_scripts ) {
+        $newAttr = 'async="async"';
+    }
+
+    foreach($scripts_to_change as $new_script) {
+        if ($new_script === $handle) {
+            return str_replace(' src', ' '. $newAttr .' src', $tag);
+        }
+    }
+
     return $tag;
- }
-//  add_filter('script_loader_tag', 'add_async_attribute', 10, 2);
+
+}
+
+    // if( ! is_login_page() && ! is_admin() && ! is_user_logged_in() ){    
+    //     add_filter('script_loader_tag', 'add_new_attribute', 10, 2);
+    // }
+
+    $defer_all_scripts = false;
+    $async_all_scripts = false;
+
+    if( ! is_login_page() && ! is_admin() && ! is_user_logged_in() ){  
+
+        if( ekiline_choose_scripts() != null && !$defer_all_scripts && !$async_all_scripts ){
+            add_filter('script_loader_tag', 'override_scripts', 10, 2);
+        } else if( $defer_all_scripts || $async_all_scripts ) {
+            add_filter('script_loader_tag', 'add_new_attribute', 10, 2);
+        }
+
+    }    
+
+
 
 
 
 /* 
- * All scripts to footer.
+ * Todos los scripts al footer
+ * All scripts to footer
  */
 
 $footerAllScripts = true;
@@ -285,3 +331,5 @@ if( $footerAllScripts === true && ! is_login_page() && ! is_admin() && ! is_user
 //     wp_deregister_script( 'wp-embed' );
 // }
 // add_action( 'wp_footer', 'my_deregister_scripts' );
+
+
