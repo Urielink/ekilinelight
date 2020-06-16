@@ -190,7 +190,7 @@ function ekiline_wpqueued_scripts(){
 
 function add_defer_attribute($tag, $handle) {
     // add script handles to the array below
-    $scripts_to_defer = array( 'jquery-core', 'jquery-migrate', 'wp-embed', 'popper-script', 'bootstrap-script', 'ekiline-swipe', 'ekiline-layout' );
+    $scripts_to_defer = array( 'jquery-core', 'jquery-migrate', 'wp-embed', 'popper-script', 'bootstrap-script', 'ekiline-swipe', 'ekiline-bundle' , 'ekiline-layout' );
     // $scripts_to_defer = array( 'jquery-migrate', 'wp-embed', 'popper-script', 'bootstrap-script', 'ekiline-swipe', 'ekiline-layout' );
     
     foreach($scripts_to_defer as $defer_script) {
