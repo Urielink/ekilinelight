@@ -15,7 +15,7 @@ function is_login_page() {
 }
 
 /**
- * Optimizar el llamdo de los estilos.
+ * paso 1) Optimizar el llamdo de los estilos.
  */
 
 $optimizeCSS = true;
@@ -108,7 +108,8 @@ function ekiline_styles_localize(){
         
 }  
 function ekiline_print_localize(){
-    wp_localize_script( 'ekiline-layout', 'allCss', ekiline_styles_localize() );     
+    // wp_localize_script( 'ekiline-layout', 'allCss', ekiline_styles_localize() );     
+    wp_localize_script( 'jquery', 'allCss', ekiline_styles_localize() );     
 }
 // add_action( 'wp_enqueue_scripts', 'ekiline_print_localize' );
 
@@ -187,7 +188,9 @@ function ekiline_choose_scripts(){
     $selected_scripts = array(); 
         // $selected_scripts[] = array( 'handle'=>'ekiline-layout', 'attr' => 'async');
         // $selected_scripts[] = array( 'handle'=>'ekiline-bundle', 'attr' => 'defer');
-    return $selected_scripts;
+        $selected_scripts[] = array( 'handle'=>'jquery-core', 'attr' => 'defer');
+        $selected_scripts[] = array( 'handle'=>'wp-embed', 'attr' => 'defer');
+        return $selected_scripts;
 }
 
     function override_scripts($tag, $handle) {
@@ -263,7 +266,7 @@ function add_new_attribute($tag, $handle) {
 
 
 /* 
- * Todos los scripts al footer
+ * paso 2) Todos los scripts al footer
  * All scripts to footer
  */
 
@@ -332,4 +335,102 @@ if( $footerAllScripts === true && ! is_login_page() && ! is_admin() && ! is_user
 // }
 // add_action( 'wp_footer', 'my_deregister_scripts' );
 
+
+
+
+
+
+
+/**
+ * paso 3) Imprimir script decalarados al vuelo.
+ */
+
+function ekiline_discard_scripts(){
+    // $selected_scripts = array('jquery','jquery-core','ekiline-bundle','ekiline-layout'); 
+    $selected_scripts = array('jquery'); 
+    return $selected_scripts;
+}
+
+function ekiline_filter_scripts(){
+    // Filtrar los estilos
+    $load_jss = array_diff( ekiline_wpqueued_scripts(), ekiline_discard_scripts() );
+    $final_scripts = $load_jss;
+    return $final_scripts;
+}
+
+/**
+ * Crear variables de cada estilo filtrado en js.
+ * NOTA: Localize si funciona, pero la dependencia de scripts es un tema a revisar.
+ */
+function ekiline_scripts_localize(){
+
+    global $wp_scripts; 
+    $load_jss_from = ekiline_filter_scripts();        
+    $the_scripts = array();
+
+    foreach( $load_jss_from as $handler) {
+
+        /* Crear diccionario: 
+        * sobrescribir url de cada CSS en caso de solo ser relativa al sistema.
+        */
+
+        $siteurl = get_site_url();
+        $srcUrl = $wp_scripts->registered[$handler]->src;
+            $hasSiteurl = strpos($srcUrl, $siteurl);
+
+        if ( $hasSiteurl === false ){
+            $srcUrl = $siteurl . $srcUrl;
+        } 
+
+        $the_scripts[] = array( 'id' => $handler, 'src' => $srcUrl );   
+
+        // Para deshabilitar estilos, es posible que no se necesite: 
+        wp_dequeue_script($handler);
+
+    }   
+            
+    return $the_scripts;
+    
+}  
+
+function ekiline_print_localizejs(){
+    // wp_localize_script( 'wp-embed', 'allJss', ekiline_scripts_localize() );     
+    wp_localize_script( 'jquery', 'allJss', ekiline_scripts_localize() );     
+}
+add_action( 'wp_enqueue_scripts', 'ekiline_print_localizejs' );
+
+
+
+function add_styles_scripts(){
+	// Add script in the footer
+    // wp_enqueue_script('pretty-photo', get_stylesheet_directory_uri() . '/.../jquery.prettyPhoto.js', array('jquery'), NULL, true);
+    
+    // wp_enqueue_script('jquery');	// este lo invocamos en functions.php
+
+    $inline_js = 'console.log("hola hola")';//'jQuery(function($){ $("a[rel^=\'prettyPhoto\']").prettyPhoto(); });';
+	wp_add_inline_script('ekiline-layout', $inline_js);
+}
+add_action('wp_enqueue_scripts', 'add_styles_scripts');
+
+
+function ekiline_load_allJss_js(){ ?>
+    <script>
+    window.addEventListener('load', function () {
+
+        jQuery(document).ready( function($){
+            // variable php
+            if ( allJss != null ){
+
+                var obj = allJss;	
+                
+                $.each( obj, function( key, value ) {
+                    $.getScript( value.src );
+                });				                
+            }	            
+        });     
+
+    });
+    </script>
+<?php }
+add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);
 

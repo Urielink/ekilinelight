@@ -180,6 +180,7 @@ function ekiline_scripts() {
  	// wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4' );
     // wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716' );
 // ejercicio con scripts unificados
+    wp_enqueue_script('jquery');	
     wp_enqueue_script( 'ekiline-bundle', get_template_directory_uri() . '/assets/js/bootstrap-bundle.min.js', array('jquery'), '20200614' );
     wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array('jquery'), '20151226' );
 
