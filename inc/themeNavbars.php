@@ -120,7 +120,7 @@ function ekilineNavbar($navPosition){
 					<span class="navbar-text d-none d-md-block site-description"><?php echo get_bloginfo( 'description' ); ?></span> 
 					<?php }?>
 
-		            <button class="<?php echo $togglerBtn;?>" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>">
+		            <button class="<?php echo $togglerBtn;?>" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>" aria-label="Toggle navigation">
 		      			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 		            </button>
 		            
@@ -129,7 +129,7 @@ function ekilineNavbar($navPosition){
 			        <div id="<?php echo $dataTarget;?>" class="<?php echo $collapseCss;?>">
 
 					<?php if ( $styles == '5' ){ ?>
-						<button class="<?php echo $togglerBtn;?>" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>">
+						<button class="<?php echo $togglerBtn;?>" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>" aria-label="Toggle navigation">
 			      			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 						</button>
 					<?php }?>
@@ -189,7 +189,7 @@ function ekiline_modalMenuBottom($navPosition){
       <div class="modal-body navbar-light bg-light">
 	  
 	  	<div class="btn-group float-right">
-			<button type="button" class="modal-resize btn btn-sm btn-outline-secondary">
+			<button type="button" class="modal-resize btn btn-sm btn-outline-secondary" aria-label="Modal size">
 				<span>&leftarrow;</span>
 				<span>&rightarrow;</span>
 			</button>					
