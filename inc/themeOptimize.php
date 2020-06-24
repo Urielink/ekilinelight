@@ -406,21 +406,3 @@ function footer_enqueue_scripts() {
         // print_late_styles();
 
 }
-
-/**
- * Opcion 5: Desactivar script para agregar posts externos con oEmbed 
- * embed posts from remote WordPress sites into your own WordPress site, via oEmbed
- * ¿aplicar solo en posts o paginas?
- */
-
-$deregisterScripts = false;
-
-if( $deregisterScripts === true ){
-    add_action( 'wp_footer', 'deregister_scripts' );
-}
-    function deregister_scripts(){
-        if ( !is_singular() ) return;
-        wp_deregister_script( 'wp-embed' );
-    }
-// add_action( 'wp_footer', 'deregister_scripts' );
-
