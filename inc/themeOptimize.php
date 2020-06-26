@@ -239,7 +239,7 @@ if( ekiline_choose_scripts() != null && !defer_or_async_group() ){
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 function ekiline_discard_scripts(){
-    // $selected_scripts = array('jquery','jquery-core','ekiline-bundle','ekiline-layout'); 
+    // $selected_scripts = array('jquery','jquery-core','ekiline-bundle','ekiline-layout','google_gtagjs'); 
     $selected_scripts = array('jquery'); 
     return $selected_scripts;
 }

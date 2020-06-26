@@ -308,11 +308,10 @@ function ekiline_get_all_styles(){
 
 /* 
  * Estilos básicos, above the fold.
- * Obtener los estilos de un css e imprimirlos en el head
+ * Obtener los estilos de un css e imprimirlos en el head, 
+ * debe aparecer al principio de cualquier css (0).
  */
 function ekiline_above_fold_styles(){
-    if ( is_customize_preview() ) return;
-
     // de estilos
     $file = get_template_directory_uri() . '/assets/css/afterfold.css';
     $file = wp_remote_get($file);
@@ -325,4 +324,4 @@ function ekiline_above_fold_styles(){
         $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
         echo "\n".'<style' . $type_attr . 'id="ekiline-atf">' . strip_tags( $data ) .'</style>' . "\n";
 }
-add_action( 'wp_head', 'ekiline_above_fold_styles', 99);
+add_action( 'wp_head', 'ekiline_above_fold_styles', 0);

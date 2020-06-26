@@ -66,11 +66,11 @@
  .hentry .alignfull video,.hentry .alignwide video{width: 100%;min-height: 400px;}
  
  /*Estilos en caso de ser Admin*/
- body.admin-bar .navbar.fixed-top{margin-top:30px;}
+ /* body.admin-bar .navbar.fixed-top{margin-top:30px;}
  @media only screen and (max-width:768px){
    body.admin-bar .navbar.fixed-top{margin-top:46px;}
    body.admin-bar .navbar-collapse.offcanvas.show {top: 46px;}
- }
+ } */
  
  
  
@@ -124,7 +124,7 @@
   * ----------------------------------------------*/
  
  /* Logo en navbar || Brand in navbar */
- .navbar-brand img{height:50px ;max-width:220px;margin-top:-5px;margin-bottom:-5px;}
+ .navbar-brand img{margin-top:-5px;margin-bottom:-5px;}
  /* Clearfix en articulos*/
  article::after{content: "";clear: both;display: table;}
  article footer, article .page-links{clear: both;}
