@@ -344,7 +344,7 @@ window.addEventListener('load', function () {
 <?php }
 // add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);
 
-    $on_the_fly_js = true;
+    $on_the_fly_js = false;
 
     if( $on_the_fly_js === true ){
         add_action( 'wp_enqueue_scripts', 'ekiline_js_localize' );
@@ -359,7 +359,7 @@ window.addEventListener('load', function () {
  * Todos los scripts al footer / All scripts to footer
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-$footerAllScripts = true;
+$footerAllScripts = false;
 
 if( $footerAllScripts === true ){
     add_action('after_setup_theme', 'footer_enqueue_scripts');

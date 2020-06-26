@@ -136,7 +136,6 @@ add_action('customize_register', 'ekiline_custom_color_controls');
  * 2. Regsitro de script auxiliar en personalizador.
  */
 function ekiline_themecustomizer_js() {
-    // wp_enqueue_script( 'ekiline-themecustomizer', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.js', array('jquery'), null, true );
     wp_enqueue_script( 'ekiline-themecustomizer', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.min.js', array('jquery'), null, true );
 }
 add_action( 'customize_controls_enqueue_scripts', 'ekiline_themecustomizer_js' ); 
@@ -146,7 +145,6 @@ add_action( 'customize_controls_enqueue_scripts', 'ekiline_themecustomizer_js' )
  * 3. Estilos especificos por objeto de la pagina: 
  * main, menu, footerbar y footer.
  */
-
 function ekiline_page_elements() {
 
     $ekilineLmnt = '';
@@ -262,105 +260,69 @@ function ekiline_custom_css_cb() {
             add_action('wp_head', 'wp_custom_css_cb', 101);
         }
 
-    $styles = wp_get_custom_css();
-        $str = str_replace(array("\r","\n"),"",$styles);
+    $cstmStyles = wp_get_custom_css();
+    $cstmStyles = str_replace( array("\r","\n") , "" , $cstmStyles );
+    $cstmStyles = strip_tags( $cstmStyles );
 
-    if ( $styles || is_customize_preview() ) :
-        return strip_tags( $str );
-    endif;
+        if ( $cstmStyles && !is_customize_preview() ) :
+            return $cstmStyles;
+        endif;
 }
 
 
 /* 
- * Imprimir todos los estilos css en wp_head.
+ * Integrar todos los estilos css en wp_head.
  * https://developer.wordpress.org/reference/functions/wp_add_inline_style/
- * 2 posibilidades, por fdefinir, con estilos agrupados o independiente al final del head.
  */
-
-function ekiline_css_groupMethod(){
-
+function ekiline_get_all_styles(){
     $groupStyles = '';
     $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
     $groupStyles .= ekiline_page_elements(); // de los elementos
     $groupStyles .= ekiline_custom_background_cb(); // de custom background
     $groupStyles .= ekiline_header_style(); // de custom header
-
-    if ( ! is_customize_preview() ) {
         $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
-    }
-    // wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '1.0', 'all' );	    
-    // posibles manejadores: bootstrap-4, layout o ekiline-style
-    wp_add_inline_style( 'ekiline-style', $groupStyles );
-
+    return $groupStyles;
 }
-// add_action( 'wp_enqueue_scripts', 'ekiline_css_groupMethod' );
 
-function ekiline_css_inlineHeadMethod(){
-
-    $groupStyles = '';
-    $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
-    $groupStyles .= ekiline_page_elements(); // de los elementos
-    $groupStyles .= ekiline_custom_background_cb(); // de custom background
-    $groupStyles .= ekiline_header_style(); // de custom header
-    if ( ! is_customize_preview() ) {
-        $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
+    /* 
+    * Imprimir estilos en customizer
+    * dependencia: functions.php  wp_enqueue_style( 'ekiline-style', get_stylesheet_uri() );
+    * posibles manejadores: bootstrap-4, layout, ekiline-style o un nuevo CSS
+    */
+    function ekiline_css_groupMethod(){
+        if ( !is_customize_preview() ) return;        
+        wp_add_inline_style( 'ekiline-style', ekiline_get_all_styles() );
     }
-    
+    add_action( 'wp_enqueue_scripts', 'ekiline_css_groupMethod' );
+
+    /* 
+    * Imprimir estilos en el front
+    */
+    function ekiline_css_inlineHeadMethod(){
+        if ( is_customize_preview() ) return;
         $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-        echo '<style' . $type_attr . 'id="ekiline-inline-style">' . strip_tags( $groupStyles ) . '</style>' . "\n";
-}
-add_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
+        echo '<style' . $type_attr . 'id="ekiline-inline-style">' . strip_tags( ekiline_get_all_styles() ) . '</style>' . "\n";
+    }
+    add_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
 
 
 /* 
- * Estilos básicos, after the fold.
+ * Estilos básicos, above the fold.
+ * Obtener los estilos de un css e imprimirlos en el head
  */
-function ekiline_styles_after(){
-$atfb4 = 'html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";line-height:1.5}
-.container{width:100%;margin-right:auto;margin-left:auto}
-.row{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap}
-.collapse:not(.show){display:none}
-.collapsing{position:relative;height:0;overflow:hidden}
-.img-fluid{max-width:100%;height:auto}
-.dropdown,.dropleft,.dropright,.dropup{position:relative}
-.dropdown-toggle::after{display:inline-block;width:0;height:0;margin-left:.255em;vertical-align:.255em;content:"";border-top:.3em solid;border-right:.3em solid transparent;border-bottom:0;border-left:.3em solid transparent}
-.dropdown-toggle:empty::after{margin-left:0}
-.dropdown-menu{position:absolute;top:100%;left:0;z-index:1000;display:none;float:left;min-width:10rem;padding:.5rem 0;margin:.125rem 0 0;font-size:1rem;text-align:left;list-style:none;background-color:#fff;background-clip:padding-box}
-.dropright .dropdown-menu{top:0;right:auto;left:100%;margin-top:0;margin-left:.125rem}
-.dropright .dropdown-toggle::after{display:inline-block;width:0;height:0;margin-left:.255em;vertical-align:.255em;content:"";border-top:.3em solid transparent;border-right:0;border-bottom:.3em solid transparent;border-left:.3em solid}
-.dropright .dropdown-toggle:empty::after{margin-left:0}
-.dropright .dropdown-toggle::after{vertical-align:0}
-.dropdown-item{display:block;width:100%;padding:.25rem 1.5rem;clear:both;font-weight:400;text-align:inherit;white-space:nowrap;background-color:transparent;border:0}
-.dropdown-menu.show{display:block}
-.nav-link{display:block;padding:.5rem 1rem}
-.navbar>.container,.navbar>.container-fluid{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:center;align-items:center;-ms-flex-pack:justify;justify-content:space-between}
-.navbar-nav{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;padding-left:0;margin-bottom:0;list-style:none}
-.navbar-nav .dropdown-menu{position:static;float:none}
-.navbar-collapse{-ms-flex-preferred-size:100%;flex-basis:100%;-ms-flex-positive:1;flex-grow:1;-ms-flex-align:center;align-items:center}
-.navbar-toggler{padding:.25rem;border:1px solid}
-.navbar-toggler:not(:disabled):not(.disabled){cursor:pointer}
-@media (min-width:768px){
-.col-md-3{-ms-flex:0 0 25%;flex:0 0 25%;max-width:25%}
-.col-md-6{-ms-flex:0 0 50%;flex:0 0 50%;max-width:50%}
-.order-md-0{-ms-flex-order:0;order:0}
-.order-md-1{-ms-flex-order:1;order:1}
-.order-md-2{-ms-flex-order:2;order:2}
-.order-md-3{-ms-flex-order:3;order:3}  
-.navbar-expand-md .navbar-nav{-ms-flex-direction:row;flex-direction:row}
-.navbar-expand-md .navbar-nav .dropdown-menu{position:absolute}
-.navbar-expand-md .navbar-collapse{display:-ms-flexbox!important;display:flex!important;-ms-flex-preferred-size:auto;flex-basis:auto}
-.navbar-expand-md .navbar-toggler{display:none}
-}';
-    $atfb4 = str_replace(array("\r","\n"),"",$atfb4);
-    $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-    echo "\n".'<style' . $type_attr . 'id="ekiline-after-fold">' . strip_tags( $atfb4 ) . '</style>' . "\n";
-}
-add_action( 'wp_head', 'ekiline_styles_after', 90);
+function ekiline_above_fold_styles(){
+    if ( is_customize_preview() ) return;
 
-
-if( is_customize_preview() ){
-    remove_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);  // themeCustomColors remove styles.
-    remove_action( 'wp_head', 'ekiline_styles_after', 90);  // themeCustomColors remove styles.
-    add_action( 'wp_enqueue_scripts', 'ekiline_css_groupMethod' ); //add ekiline styles.
+    // de estilos
+    $file = get_template_directory_uri() . '/assets/css/afterfold.css';
+    $file = wp_remote_get($file);
+    $data = wp_remote_retrieve_body( $file );
+    // quitar comentarios: 
+        $data = preg_replace('#/\*.*?\*/#s', '', $data);  
+    // quitar saltos de linea y convertir en un string
+        $data = str_replace( array("\r","\n") , "" , $data );
+    // html5
+        $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
+        echo "\n".'<style' . $type_attr . 'id="ekiline-atf">' . strip_tags( $data ) .'</style>' . "\n";
 }
+add_action( 'wp_head', 'ekiline_above_fold_styles', 99);

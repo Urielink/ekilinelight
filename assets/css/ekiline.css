@@ -15,28 +15,6 @@
 .navbar-toggler.collapsed .icon-bar:nth-child(2){width:22px;opacity:1;}
 .navbar-toggler.collapsed .icon-bar:nth-child(3){-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-o-transform:rotate(0deg);transform:rotate(0deg);position:relative;top:0px;}
 
-/* Desplace de imagenes */
-@keyframes bgresize { 
-  0% { background-size: 110%; } 
-  100% { background-size: 100%; } 
-}
-.bg-deep{ 
-  animation: bgresize 5s ease; 
-  background-position: center center; 
-  background-size: 100%;
-}
-@media only screen and (max-width:768px){ 
-  @keyframes bgresize { 
-    0% { background-size: 170vh; } 
-    100% { background-size: 160vh; } 
-  } 
-  .bg-deep{ 
-    animation: bgresize 5s ease;
-    background-position: center top;
-    background-size: 160vh;}
-}
-
-
 /* Navegacion extendida || Extended nav items
 ------------------------------------------------------------------------- */
 /* .navbar-collapse{max-height: 80vh;overflow-x: auto;} */

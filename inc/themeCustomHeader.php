@@ -183,11 +183,9 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 		$hdrStyle .= '.custom-header.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 - 9px); margin-right: calc( -100vw / 2 + 100% / 2 - 9px); width: 100vw; }';
 		$hdrStyle .= '.custom-header.container .wp-block-cover.has-background-dim::before{z-index: 0;opacity: .3 !important;}';
 		$hdrStyle .= '@media only screen and (max-width:576px){ .custom-header.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 ); margin-right: calc( -100vw / 2 + 100% / 2); } }';
-		// $hdrStyle .= '@keyframes bgresize { 0% { background-size: 110%; } 100% { background-size: 100%; } }';
-		// $hdrStyle .= '.custom-header.container .wp-block-cover{ animation: bgresize 5s ease; background-position: center center; background-size: 100%;}';
-		// $hdrStyle .= '@media only screen and (max-width:768px){ @keyframes bgresize { 0% { background-size: 170vh; } 100% { background-size: 160vh; } } .custom-header.container .wp-block-cover{ animation: bgresize 5s ease;background-position: center top;background-size: 160vh;}}';
-		// echo '<style type="text/css" id="header-style">' . $hdrStyle . '</style>' . "\n";
-		// echo '<style>' . $hdrStyle . '</style>' . "\n";
+		$hdrStyle .= '@keyframes bgresize { 0% { background-size: 130%; } 100% { background-size: 120%; } }';
+		$hdrStyle .= '.bg-deep, .wp-block-cover.bg-deep{ animation: bgresize 5s ease; background-position: 50% 50%; background-repeat: no-repeat; background-size: 120%; }';
+		$hdrStyle .= '@media only screen and (max-width:960px){ @keyframes bgresize { 0% { background-size: 170vh; } 100% { background-size: 140vh; } } .bg-deep, .wp-block-cover.bg-deep{ background-size: 140vh;} }';
 		return $hdrStyle;
 
 	}
