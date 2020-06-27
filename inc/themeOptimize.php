@@ -22,7 +22,7 @@ if( is_login_page() || is_admin() || is_user_logged_in() ) return;
  * Imprimir estilos con javscript true / false.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-$optimizeCSS = true;
+$optimizeCSS = false;
 
 if( $optimizeCSS === true ){
     add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 );
@@ -109,7 +109,8 @@ function ekiline_styles_localize(){
 /* Accion 3: incorporar los estilos con js */
 function ekiline_load_allCss_js(){ ?>
 <script>
-window.addEventListener('load', function () {
+// DOMContentLoaded || load
+window.addEventListener('DOMContentLoaded', function () {
 
     jQuery(document).ready( function($){
 
@@ -180,7 +181,8 @@ function ekiline_wpqueued_scripts(){
 /* Seleccionar scripts y asignar atributo */
 function ekiline_choose_scripts(){
     $selected_scripts = array(); 
-        // $selected_scripts[] = array( 'handle'=>'jquery-core', 'attr' => 'defer');
+    // $selected_scripts[] = array( 'handle'=>'jquery-core', 'attr' => 'defer');
+    // $selected_scripts[] = array( 'handle'=>'jquery-migrate', 'attr' => 'defer');
         // $selected_scripts[] = array( 'handle'=>'wp-embed', 'attr' => 'defer');
         return $selected_scripts;
 }
@@ -326,7 +328,8 @@ add_action('wp_enqueue_scripts', 'add_styles_scripts');
 
 function ekiline_load_allJss_js(){ ?>
 <script>
-window.addEventListener('load', function () {
+// DOMContentLoaded || load
+window.addEventListener('DOMContentLoaded', function () {
 
     jQuery(document).ready( function($){
         // variable php
@@ -344,7 +347,7 @@ window.addEventListener('load', function () {
 <?php }
 // add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);
 
-    $on_the_fly_js = false;
+    $on_the_fly_js = true;
 
     if( $on_the_fly_js === true ){
         add_action( 'wp_enqueue_scripts', 'ekiline_js_localize' );
@@ -359,7 +362,7 @@ window.addEventListener('load', function () {
  * Todos los scripts al footer / All scripts to footer
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-$footerAllScripts = false;
+$footerAllScripts = true;
 
 if( $footerAllScripts === true ){
     add_action('after_setup_theme', 'footer_enqueue_scripts');
