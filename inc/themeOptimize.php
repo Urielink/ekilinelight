@@ -22,7 +22,7 @@ if( is_login_page() || is_admin() || is_user_logged_in() ) return;
  * Imprimir estilos con javscript true / false.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-$optimizeCSS = false;
+$optimizeCSS = true;
 
 if( $optimizeCSS === true ){
     add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 );
@@ -109,7 +109,6 @@ function ekiline_styles_localize(){
 /* Accion 3: incorporar los estilos con js */
 function ekiline_load_allCss_js(){ ?>
 <script>
-// DOMContentLoaded || load
 window.addEventListener('DOMContentLoaded', function () {
 
     jQuery(document).ready( function($){
@@ -181,9 +180,10 @@ function ekiline_wpqueued_scripts(){
 /* Seleccionar scripts y asignar atributo */
 function ekiline_choose_scripts(){
     $selected_scripts = array(); 
-    // $selected_scripts[] = array( 'handle'=>'jquery-core', 'attr' => 'defer');
-    // $selected_scripts[] = array( 'handle'=>'jquery-migrate', 'attr' => 'defer');
         // $selected_scripts[] = array( 'handle'=>'wp-embed', 'attr' => 'defer');
+        $selected_scripts[] = array( 'handle'=>'jquery-core', 'attr' => 'defer');
+        $selected_scripts[] = array( 'handle'=>'jquery-migrate', 'attr' => 'defer');
+        $selected_scripts[] = array( 'handle'=>'google_gtagjs', 'attr' => 'async');
         return $selected_scripts;
 }
 
@@ -242,7 +242,7 @@ if( ekiline_choose_scripts() != null && !defer_or_async_group() ){
 
 function ekiline_discard_scripts(){
     // $selected_scripts = array('jquery','jquery-core','ekiline-bundle','ekiline-layout','google_gtagjs'); 
-    $selected_scripts = array('jquery'); 
+    $selected_scripts = array('jquery','google_gtagjs'); 
     return $selected_scripts;
 }
 
@@ -328,7 +328,6 @@ add_action('wp_enqueue_scripts', 'add_styles_scripts');
 
 function ekiline_load_allJss_js(){ ?>
 <script>
-// DOMContentLoaded || load
 window.addEventListener('DOMContentLoaded', function () {
 
     jQuery(document).ready( function($){
@@ -337,7 +336,7 @@ window.addEventListener('DOMContentLoaded', function () {
             var obj = allJss;	                
             $.each( obj, function( key, value ) {
                 $.getScript( value.src );
-                // console.log(key + " hola");	                
+                //console.log(key + " " + value.id );	                
             });			
         }	            
     });     
