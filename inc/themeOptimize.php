@@ -106,42 +106,35 @@ function ekiline_styles_localize(){
     // add_action( 'wp_enqueue_scripts', 'ekiline_css_localize' );
 
 
-/* Accion 3: incorporar los estilos con js */
+/* Accion 3: incorporar los estilos con js 
+ * buscar la etiqueta de estilo en linea principal (ekiline-inline-style) y 
+ * agregar antes.
+ */
 function ekiline_load_allCss_js(){ ?>
 <script>
-window.addEventListener('DOMContentLoaded', function () {
+if ( allCss != null ){
+    window.addEventListener('DOMContentLoaded', function () {
+        loadStyles(allCss);
+    });
+}
 
-    jQuery(document).ready( function($){
+function loadStyles(styles){
+    var $ = jQuery.noConflict();
+    var head = $('head');
+    var wpcss = head.find('style[id="ekiline-inline-style"]'); 
+    var cssinline = head.find('style:last');
 
-        if ( allCss != null ){
-
-            /* variable de localize */
-            var obj = allCss;	
-            var head = $('head');
-            var wpcss = head.find('style[id="ekiline-inline-style"]'); 
-            var cssinline = head.find('style:last');
-            var ultimocss = head.find('link[rel="stylesheet"]:last');
-            
-            $.each( obj, function( key, value ) {
-                        
-                var linkCss = $('<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media });            
-
-                /* En caso de de encontrar una etiqueta de estilo imprimir */            
-                if (wpcss.length){ 
-                    wpcss.before(linkCss); 
-                } else if (cssinline.length){ 
-                    cssinline.before(linkCss); 
-                } else if (ultimocss.length){ 
-                    ultimocss.before(linkCss); 
-                } else { 
-                    head.append(linkCss); 
-                }		
-                                
-            });				                
-        }	            
-    });     
-
-});
+    $.each( styles, function( key, value ) {                
+        var linkCss = $('<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media });            
+        if ( wpcss.length ){ 
+            wpcss.before( linkCss ); 
+        } else if ( cssinline.length ){ 
+            cssinline.before( linkCss ); 
+        } else { 
+            head.append( linkCss ); 
+        }
+    });		        
+}
 </script>
 <?php }
 // add_action( 'wp_footer', 'ekiline_load_allCss_js', 100);
@@ -326,22 +319,22 @@ add_action('wp_enqueue_scripts', 'add_styles_scripts');
     // add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 );
 
 
+/* 
+ * Accion: incorporar los scripts con jquery mediante get 
+ */
 function ekiline_load_allJss_js(){ ?>
 <script>
-window.addEventListener('DOMContentLoaded', function () {
-
-    jQuery(document).ready( function($){
-        // variable php
-        if ( allJss != null ){
-            var obj = allJss;	                
-            $.each( obj, function( key, value ) {
-                $.getScript( value.src );
-                //console.log(key + " " + value.id );	                
-            });			
-        }	            
-    });     
-
-});
+if ( allJss != null ){
+    window.addEventListener('DOMContentLoaded', function () {
+        loadScripts(allJss);
+    });
+}
+function loadScripts(scripts){
+    var $ = jQuery.noConflict();
+    $.each( scripts, function( key, value ) {
+        $.getScript( value.src );
+    });
+}
 </script>
 <?php }
 // add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);

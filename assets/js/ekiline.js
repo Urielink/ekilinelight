@@ -1,5 +1,5 @@
 /* Ekiline for WordPress Theme, Copyright 2018 Uri Lazcano. Ekiline is distributed under the terms of the GNU GPL. http://ekiline.com */
-(function($) {
+jQuery(document).ready(function( $ ) {
 
 	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
 	 * 
@@ -39,9 +39,8 @@
 	 * 
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/			
 	// inicializar popovers y tooltips
-	if ( $('[data-toggle="tooltip"],[data-toggle="popover"]').length !== '' ){
 		$('[data-toggle="tooltip"]').tooltip();
 		$('[data-toggle="popover"]').popover();
-	}
 
-})(jQuery);
+
+});
