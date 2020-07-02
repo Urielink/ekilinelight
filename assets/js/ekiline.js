@@ -39,10 +39,10 @@ jQuery(document).ready(function( $ ) {
 	 * 
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/			
 	// inicializar popovers y tooltips 
-	$(this).one('mousemove', startPop() ).one('scroll', startPop() );
-	function startPop(){
+	// $(this).one('mousemove', startPop() ).one('scroll', startPop() );
+	// function startPop(){
 		$('[data-toggle="tooltip"]').tooltip();
 		$('[data-toggle="popover"]').popover();
-	}
+	// }
 
 });

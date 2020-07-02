@@ -324,17 +324,32 @@ add_action('wp_enqueue_scripts', 'add_styles_scripts');
  */
 function ekiline_load_allJss_js(){ ?>
 <script>
+
 if ( allJss != null ){
     window.addEventListener('DOMContentLoaded', function () {
-        loadScripts(allJss);
+        // loadScripts(allJss); //random
+        loadScriptsOrdered(allJss,0); //ordenada
     });
 }
+
 function loadScripts(scripts){
     var $ = jQuery.noConflict();
     $.each( scripts, function( key, value ) {
         $.getScript( value.src );
     });
 }
+
+function loadScriptsOrdered(scripts,i) {
+    var $ = jQuery.noConflict();
+    if (i < scripts.length) {
+        $.getScript(scripts[i].src, function () {
+            //console.log('Loaded: ' + scripts[i].src);
+            i++;
+            loadScriptsOrdered(scripts,i);
+        });
+    }
+}
+
 </script>
 <?php }
 // add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);
