@@ -28,12 +28,24 @@ get_header(); ?>
 
 				<div class="col-md-6">
 					<?php the_widget( 'WP_Widget_Recent_Posts' ); ?>
-					<?php
-						/* translators: %1$s: smiley */
-						$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'ekiline' ), convert_smilies( ':)' ) ) . '</p>';
-						the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
-					?>
-
+					<?php /** https://developer.wordpress.org/reference/functions/wp_get_archives/ **/ ?>
+					<p> <?php echo sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'ekiline' ), convert_smilies( ':)' ) ); ?></p>					
+					<select class="form-control" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
+						<option value=""><?php esc_attr( _e( 'Search', 'ekiline' ) ); ?></option> 
+						<?php
+							$argsArchive = array(
+								'type'            => 'monthly',
+								'limit'           => '',
+								'format'          => 'option', //html
+								'before'          => '',
+								'after'           => '',
+								'show_post_count' => false,
+								'echo'            => true,
+								'order'           => 'DESC'
+							);						
+							wp_get_archives( $argsArchive ); 
+						?>
+					</select>					
 				</div>
 
 				<div class="col-md-6">
