@@ -6,11 +6,6 @@
  *
  * @package ekiline
  */
-
-/*
- * Restringir la vista de comentarios 
- */
-if ( !is_singular() || is_front_page() || post_password_required() || !comments_open() || !get_comments_number() ) return;
 ?>
 
 <div id="comments" class="comments-area clearfix">
