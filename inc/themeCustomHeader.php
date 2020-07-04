@@ -135,6 +135,7 @@ add_action('customize_register', 'ekiline_custom_header_controls');
 
  /**
  * Controladores con callback: ekiline_header_style()
+ * https://developer.wordpress.org/themes/functionality/custom-headers/
  */
 function ekiline_custom_header_setup() {
 	
@@ -229,8 +230,15 @@ function ekiline_addCoverHeader(){
 		* https://developer.wordpress.org/reference/functions/wp_get_attachment_image/
 		* otra documentacion: https://premium.wpmudev.org/blog/wordpress-image-sizes/
 		*/
-	$url = wp_get_attachment_image_url( get_custom_header()->attachment_id, 'medium_large', false, '' );
 
+	/* Condicion: en caso de ser la imagen de muestra, o ser una imagen nueva */
+	if( get_header_image() == get_parent_theme_file_uri('/assets/img/ekiline-pattern.png') ){
+		$url = get_header_image();
+	} else {
+		$url = wp_get_attachment_image_url( get_custom_header()->attachment_id, 'medium_large', false, '' );
+	}
+
+	
 
 	$title = get_bloginfo( 'name' );
 	$content = get_bloginfo( 'description' );
