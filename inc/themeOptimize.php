@@ -1,6 +1,6 @@
 <?php
 /**
- * ekiline orrganize scripts.
+ * ekiline arrange scripts.
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  * @link https://developer.wordpress.org/reference/functions/add_theme_support/
@@ -31,16 +31,17 @@ if( $optimizeCSS === true ){
 }
 
 /* Inspeccionar estilos registrados */
-// function inspect_styles() {
-//     global $wp_styles;
-//     print_r($wp_styles->queue);
-// }
-// add_action( 'wp_print_styles', 'inspect_styles' );
+function inspect_styles() {
+	global $wp_styles;
+	print_r($wp_styles->queue);
+}
+//add_action( 'wp_print_styles', 'inspect_styles' );
 
 /* Decidir estilos para mantener integros */
 function ekiline_choose_styles(){
     // $discardCss = array('login','bootstrap-4');
-    $discard_styles = array(); 
+    // $discard_styles = array('eu-cookie-law-style','jetpack_css'); //jetpack
+    $discard_styles = array('jetpack_css'); 
     return $discard_styles;
 }
 
@@ -125,7 +126,8 @@ function loadStyles(styles){
     var cssinline = head.find('style:last');
 
     $.each( styles, function( key, value ) {                
-        var linkCss = $('<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media });            
+        var linkCss = $('<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media });   
+		//console.log( value.id + ' ' + value.src );
         if ( wpcss.length ){ 
             wpcss.before( linkCss ); 
         } else if ( cssinline.length ){ 
@@ -146,10 +148,10 @@ function loadStyles(styles){
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 /* Inspeccionar scripts registrados */
-// function inspect_scripts() {
-//     global $wp_scripts;
-//     print_r( $wp_scripts->queue );
-// }
+function inspect_scripts() {
+	global $wp_scripts;
+	print_r( $wp_scripts->queue );
+}
 // add_action( 'wp_print_scripts', 'inspect_scripts' );
 
 /* Recopilar los scripts registrados */
@@ -234,8 +236,9 @@ if( ekiline_choose_scripts() != null && !defer_or_async_group() ){
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 function ekiline_discard_scripts(){
-    // $selected_scripts = array('jquery','jquery-core','ekiline-bundle','ekiline-layout','google_gtagjs'); 
-    $selected_scripts = array('jquery','google_gtagjs'); 
+    // $selected_scripts = array('jquery','jquery-core','ekiline-bundle','ekiline-layout','google_gtagjs'); //sitekit
+    // $selected_scripts = array('eu-cookie-law-script','grofiles-cards'); //jetpack
+    $selected_scripts = array('jquery','google_gtagjs','eu-cookie-law-script','grofiles-cards','google-translate-init','google-translate'); 
     return $selected_scripts;
 }
 
@@ -367,6 +370,7 @@ function loadScriptsOrdered(scripts,i) {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * Opcion 4
  * Todos los scripts al footer / All scripts to footer
+ * https://desarrollowp.com/blog/tutoriales/mover-los-scripts-al-footer-wordpress/
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 $footerAllScripts = true;
@@ -377,7 +381,6 @@ if( $footerAllScripts === true ){
 function footer_enqueue_scripts() {
 /**
  * Emojis al footer
- * Otra solución: https://desarrollowp.com/blog/tutoriales/mover-los-scripts-al-footer-wordpress/
  */
     $emojiDetect = 'print_emoji_detection_script';
     $emojiStyles = 'print_emoji_styles';
@@ -386,10 +389,6 @@ function footer_enqueue_scripts() {
         remove_action('wp_print_styles', $emojiStyles);
         add_action('wp_head', $emojiStyles,110);
 
-/**
- * Combinar estilos superior inferior.
- * Otra solución: https://desarrollowp.com/blog/tutoriales/mover-los-scripts-al-footer-wordpress/
- */
         /**
          * Prints scripts in document head that are in the $handles queue.
          * https://developer.wordpress.org/reference/functions/wp_print_scripts/

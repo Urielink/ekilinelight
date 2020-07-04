@@ -220,7 +220,18 @@ function ekiline_addCoverHeader(){
 
 	// default, con customizer
 	// $url = 'http://localhost/wpdev/ekiline/wp-content/uploads/2008/06/dsc04563.jpg';
-	$url = get_header_image();
+	// $url = get_header_image();
+		/* 
+		* Multiples dimensiones de un attachment
+		* https://developer.wordpress.org/reference/functions/wp_get_attachment_image_srcset/
+		* $url = wp_get_attachment_image_srcset( get_custom_header()->attachment_id, 'medium', null );
+		* Tamaño medio (thumbnail,medium,medium_large,large,full)
+		* https://developer.wordpress.org/reference/functions/wp_get_attachment_image/
+		* otra documentacion: https://premium.wpmudev.org/blog/wordpress-image-sizes/
+		*/
+	$url = wp_get_attachment_image_url( get_custom_header()->attachment_id, 'medium_large', false, '' );
+
+
 	$title = get_bloginfo( 'name' );
 	$content = get_bloginfo( 'description' );
 	$meta = '';//ekiline_notes('copyright');
@@ -236,7 +247,7 @@ function ekiline_addCoverHeader(){
 		
 		global $post;
 
-		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url() : $url ;
+		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, 'medium_large' ) : $url ;
 		$title = get_the_title();
 		$content = wp_trim_words( $post->post_content, 24, '...' );
 
@@ -274,7 +285,7 @@ function ekiline_addCoverHeader(){
 	<div class="wp-block-cover has-background-dim-20 has-background-dim has-parallax rounded bg-deep <?php echo $fullwidth; ?>" style="background-image:url('<?php echo $url; ?>');">
 
 	<?php if ( $setVideo && is_front_page() ){?>
-		<video class="wp-block-cover__video-background" autoplay="" muted="" loop="" src="<?php echo $setVideo;?>" poster="<?php echo $base64; ?>"></video>
+		<video class="wp-block-cover__video-background" autoplay="" muted="" loop="" src="<?php echo $setVideo;?>" poster="<?php echo $url; ?>"></video>
 	<?php } ?>
 
 		<div class="col-md-6 px-0 mx-auto text-center">
