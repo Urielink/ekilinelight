@@ -200,3 +200,5 @@ require get_template_directory() . '/inc/themeCustomColors.php';
 require get_template_directory() . '/inc/themeOptimize.php';
 require get_template_directory() . '/inc/widgetOptions.php';
 require get_template_directory() . '/inc/widgetBreadcrumb.php';
+require get_template_directory() . '/inc/info.php';
+require get_template_directory() . '/inc/settings.php';

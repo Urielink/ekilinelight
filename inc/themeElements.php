@@ -27,8 +27,8 @@ function ekiline_notes($text = null) {
 		case 'poweredby':
 			$item = sprintf( 
 				esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),
-				'<a href="'.__('https://wordpress.org/', 'ekiline').'" target="_blank">WordPress</a>',
-				'<a href="'.__('http://ekiline.com', 'ekiline').'" target="_blank">Ekiline</a>' 
+				'<a href="'.__('https://wordpress.org/', 'ekiline').'" target="_blank" rel="noopener">WordPress</a>',
+				'<a href="'.__('http://ekiline.com', 'ekiline').'" target="_blank" rel="noopener">Ekiline</a>' 
 			);
 			break;	
 		case 'author':
@@ -55,17 +55,19 @@ function ekiline_notes($text = null) {
 					);
 			break;
 		case 'categories':
-			if (is_page()) break;
+			if ( is_page() || get_the_category_list() == '' ) break;
 			$item = sprintf( 
 				esc_html__( 'Categories: %s', 'ekiline' ), 
 				get_the_category_list(', ')
 			);
 			break;
 		case 'tags':
+			if (get_the_tag_list() == '') break;
 			$item = sprintf( 
 				esc_html__( 'Tags: %s', 'ekiline' ), 
 				get_the_tag_list( '', ', ')
 			);
+			// $item = ( get_the_tag_list() != '' ) ? $item : '';
 			break;
 		case 'comments':
 			$item = comments_popup_link(

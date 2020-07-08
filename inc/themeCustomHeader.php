@@ -84,8 +84,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 		)
 	);  
 
-	// Altura de header
-    
+	// Altura de header    
     $wp_customize->add_setting( 
         'ekiline_range_header', array( 
     			'default' => '40',
@@ -109,7 +108,6 @@ function ekiline_custom_header_controls( $wp_customize ) {
    );    	
 
 	// Video
-
     $wp_customize->add_setting( 
             'ekiline_video', array(
                     'default' => '',
@@ -134,7 +132,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 add_action('customize_register', 'ekiline_custom_header_controls');
 
  /**
- * Controladores con callback: ekiline_header_style()
+ * Controladores con callback: ekiline_custom_header_style()
  * https://developer.wordpress.org/themes/functionality/custom-headers/
  */
 function ekiline_custom_header_setup() {
@@ -147,7 +145,7 @@ function ekiline_custom_header_setup() {
 				'width'              => '',
 				'height'             => '',
 				'flex-height'        => true,
-				// 'wp-head-callback'   => 'ekiline_header_style',
+				// 'wp-head-callback'   => 'ekiline_custom_header_style',
 			)
 		)
 	);
@@ -163,12 +161,11 @@ function ekiline_custom_header_setup() {
 add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 
  /**
- * Callback: ekiline_header_style(), aparecerá en el header.
+ * Cancelar callback: ekiline_custom_header_style(), aparecerá en el header.
+ * Por las caracteristicas del tema, lo agrupamos en themeCustomColors.php
  */
 
-// if ( ! function_exists( 'ekiline_header_style' ) ) {
-
-	function ekiline_header_style() {
+	function ekiline_custom_header_style() {
 		if ( !get_header_image() ) return;
 
 		$hdrBkc = get_option('chdr_color','#000000');
@@ -176,7 +173,7 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 		$hdrLksc = get_option('chdrlks_color','#007bff');
 		
 		$rangeHead = get_theme_mod('ekiline_range_header');
-		if ( $rangeHead == '0' ) $rangeHead = '30';
+			if ( $rangeHead == '0' ) $rangeHead = '30';
 	
 		$hdrStyle = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:'. esc_attr( $hdrBkc ) .'; min-height:' . $rangeHead . 'vh;align-items:flex-end; }';
 		$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:'. esc_attr( $hdrTxtc ) .' !important; }';
@@ -187,12 +184,11 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 		$hdrStyle .= '@keyframes bgresize { 0% { background-size: 130%; } 100% { background-size: 120%; } }';
 		$hdrStyle .= '.bg-deep, .wp-block-cover.bg-deep{ animation: bgresize 5s ease; background-position: 50% 50%; background-repeat: no-repeat; background-size: 120%; }';
 		$hdrStyle .= '@media only screen and (max-width:960px){ @keyframes bgresize { 0% { background-size: 170vh; } 100% { background-size: 140vh; } } .bg-deep, .wp-block-cover.bg-deep{ background-size: 140vh;} }';
+		$hdrStyle .= '@media only screen and (min-width:960px){ .custom-header.container .wp-block-cover{ background-image: url("'.ekiline_header_image('full').'") !important; } }';
 		return $hdrStyle;
 
 	}
-	//add_action( 'wp_head', 'ekiline_header_style', 110);
-
-// };
+	//add_action( 'wp_head', 'ekiline_custom_header_style', 110);
 
 /**
  * Clases CSS de apoyo en body_class().
@@ -215,94 +211,91 @@ add_filter( 'body_class', 'ekiline_customHeaderCss' );
  * https://developer.wordpress.org/reference/functions/the_header_image_tag/
  **/
 
-function ekiline_addCoverHeader(){
+function ekiline_header_image($size = null){
 
-	if ( !get_header_image() ) return;
+	$size = ( $size != '' ) ? $size : 'medium_large'; //false; 
+	$url = get_header_image();	
 
-	// default, con customizer
-	// $url = 'http://localhost/wpdev/ekiline/wp-content/uploads/2008/06/dsc04563.jpg';
-	// $url = get_header_image();
-		/* 
-		* Multiples dimensiones de un attachment
-		* https://developer.wordpress.org/reference/functions/wp_get_attachment_image_srcset/
-		* $url = wp_get_attachment_image_srcset( get_custom_header()->attachment_id, 'medium', null );
-		* Tamaño medio (thumbnail,medium,medium_large,large,full)
-		* https://developer.wordpress.org/reference/functions/wp_get_attachment_image/
-		* otra documentacion: https://premium.wpmudev.org/blog/wordpress-image-sizes/
-		*/
+	/* 
+	* Multiples dimensiones de un attachment
+	* https://developer.wordpress.org/reference/functions/wp_get_attachment_image_srcset/
+	* $url = wp_get_attachment_image_srcset( get_custom_header()->attachment_id, 'medium', null );
+	* Tamaño medio (thumbnail,medium,medium_large,large,full)
+	* https://developer.wordpress.org/reference/functions/wp_get_attachment_image/
+	* otra documentacion: https://premium.wpmudev.org/blog/wordpress-image-sizes/
+	*/
 
-	/* Condicion: en caso de ser la imagen de muestra, o ser una imagen nueva */
-	if( get_header_image() == get_parent_theme_file_uri('/assets/img/ekiline-pattern.png') ){
-		$url = get_header_image();
-	} else {
-		$url = wp_get_attachment_image_url( get_custom_header()->attachment_id, 'medium_large', false, '' );
+	/* Condicion: en caso de ser la imagen de muestra, o ser una imagen nueva */	
+	if( get_header_image() != get_parent_theme_file_uri('/assets/img/ekiline-pattern.png') ){
+		$url = wp_get_attachment_image_url( get_custom_header()->attachment_id, $size, false, '' );
 	}
 
-	
-
-	$title = get_bloginfo( 'name' );
-	$content = get_bloginfo( 'description' );
-	$meta = '';//ekiline_notes('copyright');
-	// Customizer.
-	$custom = get_theme_mod('ekiline_headerCustomText'); //false; 
-	//ocupar clases para intercalar contenido.
-	//$wpClass = get_body_class()[0];
-	$fullwidth = ( get_theme_mod('ekiline_headerCustomWidth') != '' ) ? '' : ' alignfull'; //false; 
-	$setVideo = get_theme_mod('ekiline_video');
-
-	// if( is_singular() && !is_front_page() || is_home() && $custom != '' || is_front_page() && $custom != ''){
-	if( is_singular() && !is_front_page() || is_home() || is_front_page() ){
-		
+	/* Condicion: si es una entrada o pagina */	
+	if( is_singular() && !is_front_page() || is_home() || is_front_page() ){		
 		global $post;
-
-		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, 'medium_large' ) : $url ;
-		$title = get_the_title();
-		$content = wp_trim_words( $post->post_content, 24, '...' );
-
-		$meta = ekiline_notes('author');
-
-			if( is_single() ) $meta .= ' , '. ekiline_notes('categories');	
-			
-			if( is_home() && $custom != '' ){
-				$title = get_the_title( get_option('page_for_posts', true) );
-					$contentfield = get_post_field( 'post_content', get_option('page_for_posts') );
-				$content = wp_trim_words( $contentfield, 24, '...' );
-			}
-					
-	} 
-
-	if ( is_archive() || is_category() ){
-		$title = get_the_archive_title();
-		$content = get_the_archive_description();
-			$content = wp_strip_all_tags( substr($content, 0, strpos($content, '.')) );
-		//no meta
+		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, $size ) : $url ;
 	}
-	if ( is_search() ){
-		global $wp_query;
-		$title = sprintf( esc_html__( 'Search Results for: %s', 'ekiline' ), get_search_query() );
-		$content = sprintf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts );
-	}
-	if ( is_404() ){
-		$title = esc_html__( 'It looks like nothing was found at this location.', 'ekiline' );
-		$content = esc_html__( 'Maybe try one of the links below or a search?', 'ekiline' );
-	}
-?>
 
-<div class="custom-header container">
+	return $url;	
+}
 
-	<div class="wp-block-cover has-background-dim-20 has-background-dim has-parallax rounded bg-deep <?php echo $fullwidth; ?>" style="background-image:url('<?php echo $url; ?>');">
+function custom_header_content($contentType = null){
 
-	<?php if ( $setVideo && is_front_page() ){?>
-		<video class="wp-block-cover__video-background" autoplay="" muted="" loop="" src="<?php echo $setVideo;?>" poster="<?php echo $url; ?>"></video>
-	<?php } ?>
+    $custom_header_title = get_bloginfo( 'name' );
+    $custom_header_text = get_bloginfo( 'description' );
 
-		<div class="col-md-6 px-0 mx-auto text-center">
-			<h1 class="display-4 font-italic"><?php echo $title; ?></h1>
-				<p class="lead"><?php echo $content; ?></p>        
-				<p class="small"><?php echo $meta; ?></p>        
-		</div>
-	</div>
+        if ( is_front_page() && get_theme_mod('ekiline_headerCustomText') ){
+            global $post;
+            $custom_header_title = get_the_title();
+            $custom_header_text = wp_trim_words( $post->post_content, 24, '...' );
+        } 
+            
+        if ( is_home() ){
+            if( get_theme_mod('ekiline_headerCustomText') ){
+                $custom_header_title = get_the_title( get_option('page_for_posts', true) );
+                    $contentfield = get_post_field( 'post_content', get_option('page_for_posts') );
+                        $custom_header_text = wp_trim_words( $contentfield, 24, '...' );
+            } else {
+				$custom_header_title = '<a href="' . esc_url( get_the_permalink() ) . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
+				global $post;
+				$custom_header_text = wp_trim_words( $post->post_content, 24, '...' ) . '<br>';
+				$custom_header_text .= '<small>'.ekiline_notes('categories') . ' | ' . ekiline_notes('tags') . '</small>';
+            }
+        }
 
-</div>
+        if ( is_singular() && !is_front_page() ){
+			$custom_header_title = get_the_title();
+				$addCategories = ( !is_page() ) ? ' | ' . ekiline_notes('categories') : '';
+				$custom_header_text = '<small>'. ekiline_notes('author') . $addCategories . '</small>';
+        }
 
-<?php } // header.php ekiline_addCoverHeader().
+        if( is_archive() || is_category() ){
+            $custom_header_title = get_the_archive_title();
+            $custom_header_text = '';
+            if ( get_the_archive_description() ){
+                $content = get_the_archive_description();
+                    $custom_header_text .= wp_strip_all_tags( substr( $content, 0, strpos( $content, '.' ) ) ) . '<br>';
+            }
+            $custom_header_text .= ekiline_notes('categories') . '<br>';
+            $custom_header_text .= ekiline_notes('tags');
+        }
+
+        if( is_search() ){
+			global $wp_query;
+            $custom_header_title = sprintf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts );
+            $custom_header_text =  sprintf( esc_html__( 'Search Results for: %s', 'ekiline' ), get_search_query() );
+        }
+
+        if( is_404() ){
+            $custom_header_title =  esc_html__( 'It looks like nothing was found at this location.', 'ekiline' );
+            $custom_header_text = esc_html__( 'Maybe try one of the links below or a search?', 'ekiline' );
+        } 
+        
+    if ($contentType == 'title'){
+        $contentType = $custom_header_title;
+    } else if ($contentType == 'text'){
+        $contentType = $custom_header_text;
+    }
+
+    return $contentType;    
+}

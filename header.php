@@ -24,4 +24,4 @@
 
 <?php ekilineNavbar('primary'); ?> 
 
-<?php ekiline_addCoverHeader(); ?>
+<?php get_template_part( 'template-parts/custom-header' ); ?>

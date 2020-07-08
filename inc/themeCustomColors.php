@@ -279,7 +279,7 @@ function ekiline_get_all_styles(){
     $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
     $groupStyles .= ekiline_page_elements(); // de los elementos
     $groupStyles .= ekiline_custom_background_cb(); // de custom background
-    $groupStyles .= ekiline_header_style(); // de custom header
+    $groupStyles .= ekiline_custom_header_style(); // de custom header
         $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
     return $groupStyles;
 }
