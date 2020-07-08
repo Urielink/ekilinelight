@@ -17,12 +17,12 @@ function logoTheme() {
     $logoHor = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
 
     if ( $logoHor && !$logoIcono ) {
-        echo '<img class="img-fluid" src="' . $logoHor . '" alt="' . get_bloginfo( 'name' ) . '"/>';
+        echo '<img class="img-fluid" src="' . $logoHor . '" alt="' . get_bloginfo( 'name' ) . '" loading="lazy"/>';
     } elseif ( !$logoHor && $logoIcono ) {
-        echo '<img class="brand-icon" src="' . get_site_icon_url() . '" alt="' . get_bloginfo( 'name' ) . '"/>' . get_bloginfo( 'name' );
+        echo '<img class="brand-icon" src="' . get_site_icon_url() . '" alt="' . get_bloginfo( 'name' ) . '" loading="lazy"/>' . get_bloginfo( 'name' );
     } elseif ( $logoHor && $logoIcono ) {
-        echo '<img class="img-fluid d-none d-md-block" src="' . $logoHor . '" alt="' . get_bloginfo( 'name' ) . '"/>
-        <span class="d-block d-md-none"><img class="brand-icon" src="' . get_site_icon_url('150') . '" alt="' . get_bloginfo( 'name' ) . '"/>' . get_bloginfo( 'name' ) . '</span>';
+        echo '<img class="img-fluid d-none d-md-block" src="' . $logoHor . '" alt="' . get_bloginfo( 'name' ) . '" loading="lazy"/>
+        <span class="d-block d-md-none"><img class="brand-icon" src="' . get_site_icon_url('150') . '" alt="' . get_bloginfo( 'name' ) . '" loading="lazy"/>' . get_bloginfo( 'name' ) . '</span>';
     } else {
         echo get_bloginfo( 'name' );
     } 
