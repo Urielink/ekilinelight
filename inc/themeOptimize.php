@@ -179,6 +179,7 @@ function ekiline_choose_scripts(){
         $selected_scripts[] = array( 'handle'=>'jquery-core', 'attr' => 'defer');
         $selected_scripts[] = array( 'handle'=>'jquery-migrate', 'attr' => 'defer');
         $selected_scripts[] = array( 'handle'=>'google_gtagjs', 'attr' => 'async');
+        $selected_scripts[] = array( 'handle'=>'eu-cookie-law-script', 'attr' => 'async');
         return $selected_scripts;
 }
 
