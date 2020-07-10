@@ -215,6 +215,7 @@ add_filter( 'get_the_archive_title', 'my_theme_archive_title' );
  * Custom markup content.
  * https://developer.wordpress.org/reference/hooks/the_content/
  * https://developer.wordpress.org/reference/functions/the_excerpt/
+ * https://wordpress.stackexchange.com/questions/38030/is-there-a-has-more-tag-method-or-equivalent
  */
 
 function ekiline_content_additions( $content ) {
@@ -224,10 +225,13 @@ function ekiline_content_additions( $content ) {
 	if ( is_home() || is_front_page() || is_archive() || is_search() ) {
 
 		global $post;
+		$link = '... <a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline') .'</a>';
+
 		if( strpos( $post->post_content, '<!--more-->' ) ) {
 			$content = $content;
+		} else if ( $post->post_excerpt != '' ) {
+			$content = $post->post_excerpt . $link;
 		} else {
-			$link = '... <a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline') .'</a>';
 			$content = wp_trim_words( $content, 55, $link);
 		}
 		
@@ -237,6 +241,36 @@ function ekiline_content_additions( $content ) {
 
 }	
 add_filter( 'the_content', 'ekiline_content_additions');
+
+	/**
+	 * 1B) Obtener un fragmento del contenido fuera del loop
+	 * Get content fragment out the loop
+	 * https://wordpress.stackexchange.com/questions/38030/is-there-a-has-more-tag-method-or-equivalent
+	 * https://wordpress.stackexchange.com/questions/149099/only-show-content-before-more-tag
+	 */
+	function ekiline_content_out_the_loop(){
+		global $post;
+		$content = $post->post_content;
+			$more = strpos( $content, '<!--more-->' );
+				$excerpt = $post->post_excerpt;
+
+			if( $more ) {
+				$content_parts = get_extended( $content );
+					$content = $content_parts['main'];
+			} else if ($excerpt) {
+				$content = $excerpt;
+			} else {
+				//toma el primer parrafo solo 24 palabras y cortar
+				$content = wp_trim_words( $content, 24 );
+					//Si existe un punto antes cortar
+					$punto = strpos( $content, '.' );
+					if ($punto){
+						$content = substr( $content, 0, strpos( $content, '.' ) ) . '.';
+					} 
+			}
+
+		return wp_strip_all_tags( $content );
+	}
 
 /**
  * 2) agregar paginado en publicaciones paginadas

@@ -247,19 +247,24 @@ function custom_header_content($contentType = null){
         if ( is_front_page() && get_theme_mod('ekiline_headerCustomText') ){
             global $post;
             $custom_header_title = get_the_title();
-            $custom_header_text = wp_trim_words( $post->post_content, 24, '...' );
+			$custom_header_text = ekiline_content_out_the_loop() . '<br>';
         } 
             
         if ( is_home() ){
             if( get_theme_mod('ekiline_headerCustomText') ){
                 $custom_header_title = get_the_title( get_option('page_for_posts', true) );
                     $contentfield = get_post_field( 'post_content', get_option('page_for_posts') );
-                        $custom_header_text = wp_trim_words( $contentfield, 24, '...' );
+						$custom_header_text = wp_trim_words( $contentfield, 24 );
+						//Si existe un punto antes cortar
+						$punto = strpos( $custom_header_text, '.' );
+						if ($punto){
+							$custom_header_text = substr( $custom_header_text, 0, strpos( $custom_header_text, '.' ) ) . '.';
+						} 
+
             } else {
 				$custom_header_title = '<a href="' . esc_url( get_the_permalink() ) . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
-				global $post;
-				$custom_header_text = wp_trim_words( $post->post_content, 24, '...' ) . '<br>';
-				$custom_header_text .= '<small>'.ekiline_notes('categories') . ' | ' . ekiline_notes('tags') . '</small>';
+				$custom_header_text = ekiline_content_out_the_loop()  . '<br>';
+					$custom_header_text .= '<small>'.ekiline_notes('categories') . ' | ' . ekiline_notes('tags') . '</small>';
             }
         }
 
