@@ -185,10 +185,12 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 		$hdrStyle .= '.bg-deep, .wp-block-cover.bg-deep{ animation: bgresize 5s ease; background-position: 50% 50%; background-repeat: no-repeat; background-size: 120%; }';
 		$hdrStyle .= '@media only screen and (max-width:960px){ @keyframes bgresize { 0% { background-size: 170vh; } 100% { background-size: 140vh; } } .bg-deep, .wp-block-cover.bg-deep{ background-size: 140vh;} }';
 		$hdrStyle .= '@media only screen and (min-width:960px){ .custom-header.container .wp-block-cover{ background-image: url("'.ekiline_header_image('full').'") !important; } }';
-		return $hdrStyle;
+		// return $hdrStyle;
+		echo $hdrStyle;
 
 	}
-	//add_action( 'wp_head', 'ekiline_custom_header_style', 110);
+	add_action('group_inline_css', 'ekiline_custom_header_style', 4);
+
 
 /**
  * Clases CSS de apoyo en body_class().

@@ -276,52 +276,13 @@ function ekiline_custom_css_cb() {
  */
 function ekiline_get_all_styles(){
     $groupStyles = '';
-    $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js.
-    $groupStyles .= ekiline_page_elements(); // de los elementos
-    $groupStyles .= ekiline_custom_background_cb(); // de custom background
-    $groupStyles .= ekiline_custom_header_style(); // de custom header
-        $groupStyles .= ekiline_custom_css_cb(); // de custom CSS
-    return $groupStyles;
+    $groupStyles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js (1)
+    $groupStyles .= ekiline_page_elements(); // de los elementos (3)
+    $groupStyles .= ekiline_custom_background_cb(); // de custom background (4)
+        $groupStyles .= ekiline_custom_css_cb(); // de custom CSS (5)
+    echo $groupStyles;
 }
-
-    /* 
-    * Imprimir estilos en customizer
-    * dependencia: functions.php  wp_enqueue_style( 'ekiline-style', get_stylesheet_uri() );
-    * posibles manejadores: bootstrap-4, layout, ekiline-style o un nuevo CSS
-    */
-    function ekiline_css_groupMethod(){
-        if ( !is_customize_preview() ) return;        
-        wp_add_inline_style( 'ekiline-style', ekiline_get_all_styles() );
-    }
-    add_action( 'wp_enqueue_scripts', 'ekiline_css_groupMethod' );
-
-    /* 
-    * Imprimir estilos en el front
-    */
-    function ekiline_css_inlineHeadMethod(){
-        if ( is_customize_preview() ) return;
-        $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-        echo '<style' . $type_attr . 'id="ekiline-inline-style">' . strip_tags( ekiline_get_all_styles() ) . '</style>' . "\n";
-    }
-    add_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
+add_action('group_inline_css', 'ekiline_get_all_styles', 5);
 
 
-/* 
- * Estilos básicos, above the fold.
- * Obtener los estilos de un css e imprimirlos en el head, 
- * debe aparecer al principio de cualquier css (0).
- */
-function ekiline_above_fold_styles(){
-    // de estilos
-    $file = get_template_directory_uri() . '/assets/css/afterfold.css';
-    $file = wp_remote_get($file);
-    $data = wp_remote_retrieve_body( $file );
-    // quitar comentarios: 
-        $data = preg_replace('#/\*.*?\*/#s', '', $data);  
-    // quitar saltos de linea y convertir en un string
-        $data = str_replace( array("\r","\n") , "" , $data );
-    // html5
-        $type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-        echo "\n".'<style' . $type_attr . 'id="ekiline-atf">' . strip_tags( $data ) .'</style>' . "\n";
-}
-add_action( 'wp_head', 'ekiline_above_fold_styles', 0);
+

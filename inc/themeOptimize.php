@@ -96,7 +96,7 @@ function ekiline_styles_localize(){
         $the_styles[] = array( 'id' => $handler, 'src' => $srcUrl, 'media' => $wp_styles->registered[$handler]->args );   
 
         // Deshabilitar estilos, si no requere preload: 
-        wp_dequeue_style($handler);
+        // wp_dequeue_style($handler); // es necesario que aparezcan a causa de dependencias
     }               
     return $the_styles;        
 }  
@@ -122,7 +122,7 @@ if ( allCss != null ){
 function loadStyles(styles){
     var $ = jQuery.noConflict();
     var head = $('head');
-    var wpcss = head.find('style[id="ekiline-inline-style"]'); 
+    var wpcss = head.find('style[id="ekiline-style-inline-css"]'); 
     var cssinline = head.find('style:last');
 
     $.each( styles, function( key, value ) {                
