@@ -44,9 +44,9 @@
 			</p>
 
 			<p>
-				<?php echo __( 'User: ', 'ekiline' ) . get_the_author_meta( 'nickname' ); // to get  nicename ?>						
-				<br> <?php echo __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ); // to get  email ?>						
-				<br> <?php echo __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ); // to get  url ?>						
+				<?php echo __( 'User: ', 'ekiline' ) . get_the_author_meta( 'display_name' ); // to get selected name ?>
+				<br> <?php echo __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ); // to get  email ?>
+				<br> <?php echo __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ); // to get  url ?>
 			</p>
 
 		</div>

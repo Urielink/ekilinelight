@@ -283,8 +283,7 @@ function custom_header_content($contentType = null){
                 $content = get_the_archive_description();
                     $custom_header_text .= wp_strip_all_tags( substr( $content, 0, strpos( $content, '.' ) ) ) . '<br>';
             }
-            $custom_header_text .= ekiline_notes('categories') . '<br>';
-            $custom_header_text .= ekiline_notes('tags');
+					$custom_header_text .= '<small>'.ekiline_notes('categories') . ' | ' . ekiline_notes('tags') . '</small>';
         }
 
         if( is_search() ){
