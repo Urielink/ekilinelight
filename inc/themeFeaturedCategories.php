@@ -8,6 +8,30 @@
  * @package ekiline 
  */
 
+function ekiline_featured_categories( $wp_customize ) {
+    // Front page categories		
+    $wp_customize->add_setting( 
+        'ekiline_featuredcategories', array(
+                    'default' => 0,
+                    'transport'   => 'refresh',
+                    'sanitize_callback' => 'ekiline_sanitize_multipleselect' 
+        )
+    );
+
+    $wp_customize->add_control(
+        new ekiline_controlMultipleSelect (
+            $wp_customize, 'ekiline_featuredcategories', array(
+                'settings' => 'ekiline_featuredcategories',
+                'label'    => __( 'Featured category', 'ekiline' ),
+                'section'  => 'static_front_page',
+                'type'     => 'multiple-select',
+                'choices' => ekiline_list_categories()
+            )
+        )
+    );  
+}
+add_action('customize_register', 'ekiline_featured_categories');
+
 
 /**
  * Customizer: Funcion para obtener los ids de categorias y la cantidad de publicaicones // get categories IDs

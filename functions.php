@@ -160,7 +160,7 @@ function ekiline_scripts() {
         // wp_deregister_style( array('wp-block-library','bootstrap-4','layout','ekiline-style') );
         // remove_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
     // scripts
-    wp_enqueue_script('jquery');
+    wp_enqueue_script('jquery-core');
     wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array('jquery'), '1' , true );
     wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), '4' , true );
     wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array('jquery'), '20150716' , true );
@@ -178,7 +178,7 @@ add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 * https://digwp.com/2009/09/wordpress-action-hooks/
 * A) Dependiente de un estilo realizado como variable
 * B) Invasivo, directo con etiqueta en head
-* cada nuevo estilo en linea se agrega con: add_action('group_inline_css', 'new_style', 0-100);
+* cada nuevo estilo en linea se agrega con: add_action('group_inline_css', 'new_style', 0/100);
 */
 
 function group_inline_css_stored(){
@@ -252,9 +252,7 @@ require get_template_directory() . '/inc/themeMeta.php';
 require get_template_directory() . '/inc/themeFeaturedCategories.php';
 require get_template_directory() . '/inc/themeCustomHeader.php';
 require get_template_directory() . '/inc/themeCustomColors.php';
-// require get_template_directory() . '/inc/themeOptimize.php';
 require get_template_directory() . '/inc/themeOptimizeScripts.php';
 require get_template_directory() . '/inc/widgetOptions.php';
 require get_template_directory() . '/inc/widgetBreadcrumb.php';
 require get_template_directory() . '/inc/info.php';
-require get_template_directory() . '/inc/settings.php';
