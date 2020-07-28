@@ -175,17 +175,11 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 		$rangeHead = get_theme_mod('ekiline_range_header');
 			if ( $rangeHead == '0' ) $rangeHead = '30';
 	
-		$hdrStyle = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:'. esc_attr( $hdrBkc ) .'; min-height:' . $rangeHead . 'vh;align-items:flex-end; }';
-		$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:'. esc_attr( $hdrTxtc ) .' !important; }';
-		$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .' !important; }';
-		$hdrStyle .= '.custom-header.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 - 9px); margin-right: calc( -100vw / 2 + 100% / 2 - 9px); width: 100vw; }';
-		$hdrStyle .= '.custom-header.container .wp-block-cover.has-background-dim::before{z-index: 0;opacity: .3 !important;}';
-		$hdrStyle .= '@media only screen and (max-width:576px){ .custom-header.container > .alignfull { margin-left: calc( -100vw / 2 + 100% / 2 ); margin-right: calc( -100vw / 2 + 100% / 2); } }';
-		$hdrStyle .= '@keyframes bgresize { 0% { background-size: 130%; } 100% { background-size: 120%; } }';
-		$hdrStyle .= '.bg-deep, .wp-block-cover.bg-deep{ animation: bgresize 5s ease; background-position: 50% 50%; background-repeat: no-repeat; background-size: 120%; }';
-		$hdrStyle .= '@media only screen and (max-width:960px){ @keyframes bgresize { 0% { background-size: 170vh; } 100% { background-size: 140vh; } } .bg-deep, .wp-block-cover.bg-deep{ background-size: 140vh;} }';
+		$hdrStyle = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:'. esc_attr( $hdrBkc ) .'; min-height:' . $rangeHead . 'vh; }';
+		$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:'. esc_attr( $hdrTxtc ) .'; }';
+		$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .'; }';
 		$hdrStyle .= '@media only screen and (min-width:960px){ .custom-header.container .wp-block-cover{ background-image: url("'.ekiline_header_image('full').'") !important; } }';
-		// return $hdrStyle;
+
 		echo $hdrStyle;
 
 	}
