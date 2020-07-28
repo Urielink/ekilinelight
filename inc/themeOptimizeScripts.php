@@ -89,6 +89,7 @@ function ekiline_reload_libraries( $wp_customize ) {
     foreach($type as $kind) {
 
         $field_name = 'ekiline_' . $kind . '_handler_array';
+        $field_label = sprintf( esc_html__( 'Comma separated %1$s handlers', 'ekiline' ), $kind );
 
         // Campos de manejadores para llenar
         $wp_customize->add_setting(
@@ -101,7 +102,7 @@ function ekiline_reload_libraries( $wp_customize ) {
         $wp_customize->add_control(
             $field_name, array(
                 'type' => 'text',
-                'label' => __( 'Add comma separated ' . $kind . ' handler', 'ekiline' ), //'css_handler',
+                'label' => $field_label,
                 'section' => 'ekiline_reload_libraries',
             ));   
 
