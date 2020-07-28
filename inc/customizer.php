@@ -15,7 +15,11 @@
 
 function ekiline_theme_customizer( $wp_customize ) {
 
-// Identidad, logo en navbar
+/* 
+ * Identidad, logo en navbar || Navbar brand 
+ * Uso: themeMeta.php, themeNavbars.php
+ */
+
     $wp_customize->add_setting( 
         'ekiline_logo_max', array(
                 'default' => '',
@@ -23,8 +27,8 @@ function ekiline_theme_customizer( $wp_customize ) {
         ) 
     );
     
-// Logo personalizado
-// https://developer.wordpress.org/reference/classes/WP_Customize_Cropped_Image_Control/	
+    // Logo personalizado
+    // https://developer.wordpress.org/reference/classes/WP_Customize_Cropped_Image_Control/	
 	$wp_customize->add_control( 
 		new WP_Customize_Cropped_Image_Control(
 			$wp_customize, 'ekiline_logo_max', 
@@ -51,7 +55,12 @@ function ekiline_theme_customizer( $wp_customize ) {
 		) 
 	);	
 	
-// Usar favicon como identidad responsiva 
+/* 
+ * Identidad, ocupar favicon como identidad responsiva
+ * Use favicon as responsive logo. 
+ * Uso: themeNavbars.php
+ */
+
     $wp_customize->add_setting( 
         'ekiline_minilogo', array(
     				'default' => '',
@@ -68,8 +77,13 @@ function ekiline_theme_customizer( $wp_customize ) {
 	                'priority' 		 => 100
         )
     ); 
-	
-// Comportamientos Primary Menu
+    
+/* 
+ * Diseño, Navbar con opciones de visualizacion
+ * "primary" Menu behaviors. 
+ * Uso: themeNavwalker.php, themeNavbars.php
+ */
+
     $wp_customize->add_setting(
         'ekiline_primarymenuSettings', array(
                 'default' => '0',
@@ -121,6 +135,11 @@ function ekiline_theme_customizer( $wp_customize ) {
         )
     );  		       
 
+/* 
+ * Diseño, ajuste de elementos y paginas
+ * Layout design 
+ * Uso: themeLayout.php, themeElements.php, index.php, search.php
+ */
     // Page wide
     $wp_customize->add_section( 
         'ekiline_vista_section' , array(
@@ -130,7 +149,7 @@ function ekiline_theme_customizer( $wp_customize ) {
         ) 
     );
 
-    // Layout control and full width    
+    // Layout control and full width 
     $iLayout = array();
         $iLayout[] = array( 'name'=>'Home', 'label' => __( 'Home and blog page', 'ekiline' ) );
         $iLayout[] = array( 'name'=>'Archive', 'label' => __( 'Categories and archive pages', 'ekiline' ) );

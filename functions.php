@@ -244,6 +244,7 @@ add_action('wp_default_scripts', 'remove_jquery_migrate');
  * Ekiline adiciones.
  */
 require get_template_directory() . '/inc/customizer.php';
+require get_template_directory() . '/inc/themeCustomColors.php';
 require get_template_directory() . '/inc/themeNavbars.php';
 require get_template_directory() . '/inc/themeNavwalker.php';
 require get_template_directory() . '/inc/themeLayout.php';
@@ -251,7 +252,6 @@ require get_template_directory() . '/inc/themeElements.php';
 require get_template_directory() . '/inc/themeMeta.php';
 require get_template_directory() . '/inc/themeFeaturedCategories.php';
 require get_template_directory() . '/inc/themeCustomHeader.php';
-require get_template_directory() . '/inc/themeCustomColors.php';
 require get_template_directory() . '/inc/themeOptimizeScripts.php';
 require get_template_directory() . '/inc/widgetOptions.php';
 require get_template_directory() . '/inc/widgetBreadcrumb.php';
