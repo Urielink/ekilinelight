@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ekiline\n"
-"POT-Creation-Date: 2020-06-05 20:42-0500\n"
-"PO-Revision-Date: 2020-06-05 21:30-0500\n"
+"POT-Creation-Date: 2020-07-27 21:42-0500\n"
+"PO-Revision-Date: 2020-07-27 22:12-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -32,12 +32,16 @@ msgstr ""
 "Parece que no encontramos nada en esta ubicación. ¿Que tal si pruebas con "
 "los links que aparecen abajo o haz una búsqueda?"
 
-#: 404.php:33
+#: 404.php:32
 #, php-format
 msgid "Try looking in the monthly archives. %1$s"
 msgstr "Intenta buscar en nuestro archivo mensual. %1$s"
 
-#: 404.php:42
+#: 404.php:34 template-parts/searchform.php:17
+msgid "Search"
+msgstr "Buscar"
+
+#: 404.php:54
 msgid "Most used categories"
 msgstr "Categorías mas usadas"
 
@@ -49,204 +53,400 @@ msgstr "Volver"
 msgid "Primary Menu"
 msgstr "Menú Principal"
 
-#: functions.php:69
+#: functions.php:70
 msgid "Left sidebar"
 msgstr "Sidebar izquierdo"
 
-#: functions.php:80
+#: functions.php:81
 msgid "Right sidebar"
 msgstr "Sidebar derecho"
 
-#: functions.php:91
+#: functions.php:92
 msgid "Bottom aside"
 msgstr "Sidebar inferior"
 
-#: functions.php:102 inc/themeCustomColors.php:56
+#: functions.php:103 inc/themeCustomColors.php:56
 msgid "Footer"
 msgstr "Pié de página"
 
-#: functions.php:113
+#: functions.php:114
 msgid "Top before all content"
 msgstr "Parte superior (antes del contenido)"
 
-#: functions.php:124
+#: functions.php:125
 msgid "In page top content"
 msgstr "Arriba del contenido en página"
 
-#: functions.php:134
+#: functions.php:135
 msgid "In page bottom content"
 msgstr "Debajo del contenido en página"
 
-#: inc/customizer.php:39
+#: inc/customizer.php:32
 msgid "Navbar brand"
 msgstr "Marca en navegación"
 
-#: inc/customizer.php:40
+#: inc/customizer.php:33
 msgid "Show logo on menu (suggest 200x50px)"
 msgstr "Mostrar logo en menú (sugerido 200x50px)"
 
-#: inc/customizer.php:49 inc/customizer.php:54
+#: inc/customizer.php:42 inc/customizer.php:47
 msgid "Select logo"
 msgstr "Elegir logo"
 
-#: inc/customizer.php:50
+#: inc/customizer.php:43
 msgid "Change logo"
 msgstr "Cambiar logo"
 
-#: inc/customizer.php:51
+#: inc/customizer.php:44
 msgid "Remove"
 msgstr "Remover"
 
-#: inc/customizer.php:52 inc/customizer.php:95 inc/customizer.php:116
-#: inc/customizer.php:223 inc/widgetOptions.php:85
+#: inc/customizer.php:45 inc/customizer.php:88 inc/customizer.php:109
+#: inc/customizer.php:216 inc/widgetOptions.php:85
 msgid "Default"
 msgstr "Por defecto"
 
-#: inc/customizer.php:53
+#: inc/customizer.php:46
 msgid "No logo selected"
 msgstr "No se seleccionó un logotipo"
 
-#: inc/customizer.php:55
+#: inc/customizer.php:48
 msgid "Choose logo"
 msgstr "Elegir logo"
 
-#: inc/customizer.php:71
+#: inc/customizer.php:64
 msgid "Replace navbar brand with site icon in small devices"
 msgstr ""
 "Reemplace la marca de navegación por el icono del sitio en dispositivos "
 "pequeños"
 
-#: inc/customizer.php:90
+#: inc/customizer.php:83
 msgid "Primary menu settings"
 msgstr "Configuración del menú principal"
 
-#: inc/customizer.php:91
+#: inc/customizer.php:84
 msgid "Assign positions to the menu: top, fixed or bottom"
 msgstr "Asignar posiciones al menú: superior, fijo o inferior"
 
-#: inc/customizer.php:96
+#: inc/customizer.php:89
 msgid "Fixed top"
 msgstr "Parte superior fija"
 
-#: inc/customizer.php:97
+#: inc/customizer.php:90
 msgid "Fixed bottom"
 msgstr "Parte inferior fija"
 
-#: inc/customizer.php:98
+#: inc/customizer.php:91
 msgid "Fixed with scroll"
 msgstr "Fijar con scroll"
 
-#: inc/customizer.php:117
+#: inc/customizer.php:110
 msgid "Right"
 msgstr "Derecha"
 
-#: inc/customizer.php:118
+#: inc/customizer.php:111
 msgid "Centered"
 msgstr "Centrado"
 
-#: inc/customizer.php:119
+#: inc/customizer.php:112
 msgid "Centered between"
 msgstr "Centrado con espacios"
 
-#: inc/customizer.php:120
+#: inc/customizer.php:113
 msgid "Scroller"
 msgstr "Scroller"
 
-#: inc/customizer.php:121
+#: inc/customizer.php:114
 msgid "Offcanvas (responsive)"
 msgstr "Fuera de ventana (responsivo)"
 
-#: inc/customizer.php:122
+#: inc/customizer.php:115
 msgid "Top toggle"
 msgstr "Desplegado superior"
 
-#: inc/customizer.php:123 inc/widgetOptions.php:87
+#: inc/customizer.php:116 inc/widgetOptions.php:87
 msgid "Modal"
 msgstr "Modal"
 
-#: inc/customizer.php:124
+#: inc/customizer.php:117
 msgid "Modal from bottom"
 msgstr "Modal inferior"
 
-#: inc/customizer.php:125
+#: inc/customizer.php:118
 msgid "Modal from left"
 msgstr "Modal izquierdo"
 
-#: inc/customizer.php:126
+#: inc/customizer.php:119
 msgid "Modal from right"
 msgstr "Modal derecho"
 
-#: inc/customizer.php:144
+#: inc/customizer.php:137
 msgid "Featured category"
 msgstr "Categorías destacadas"
 
-#: inc/customizer.php:155
+#: inc/customizer.php:148
 msgid "Site view"
 msgstr "Vista del sitio"
 
-#: inc/customizer.php:157
+#: inc/customizer.php:150
 msgid ""
 "Allow fullwidth of your website by content type: homepage, categories or "
 "single content"
 msgstr ""
-"Permitir el ancho completo de su sitio web por tipo de contenido: página de "
-"inicio, categorías o contenido único"
+"Elige alguna opción para mostrar el sitio a todo lo ancho por contenido: "
+"home o blog, categorias o entradas"
 
-#: inc/customizer.php:163
+#: inc/customizer.php:156
 msgid "Home and blog page"
 msgstr "Home y página de entradas"
 
-#: inc/customizer.php:164
+#: inc/customizer.php:157
 msgid "Categories and archive pages"
 msgstr "Categorías y páginas de archivo"
 
-#: inc/customizer.php:165
+#: inc/customizer.php:158
 msgid "Entries and single pages"
 msgstr "Entradas y páginas"
 
-#: inc/customizer.php:182
+#: inc/customizer.php:175
 msgid "Enabled sidebars"
 msgstr "Sidebars habilitadas"
 
-#: inc/customizer.php:183
+#: inc/customizer.php:176
 msgid "Disable left"
 msgstr "Deshabilitar sidebar izquierda"
 
-#: inc/customizer.php:184
+#: inc/customizer.php:177
 msgid "Disable right"
 msgstr "Deshabilitar sidebar derecha"
 
-#: inc/customizer.php:185
+#: inc/customizer.php:178
 msgid "Disable both"
 msgstr "Deshabilitar sidebars"
 
-#: inc/customizer.php:200
+#: inc/customizer.php:193
 msgid "Show full width layout"
 msgstr "Ver a todo lo ancho"
 
-#: inc/customizer.php:219
+#: inc/customizer.php:212
 msgid "Columns"
 msgstr "Columnas"
 
-#: inc/customizer.php:220
+#: inc/customizer.php:213
 msgid "Show your lists in columns"
 msgstr "Muestra tus listados en columnas"
 
-#: inc/customizer.php:224
+#: inc/customizer.php:217
 msgid "2 columns"
 msgstr "2 columnas"
 
-#: inc/customizer.php:225
+#: inc/customizer.php:218
 msgid "3 columns"
 msgstr "3 columnas"
 
-#: inc/customizer.php:226
+#: inc/customizer.php:219
 msgid "4 columns"
 msgstr "4 columnas"
 
-#: inc/customizer.php:227
+#: inc/customizer.php:220
 msgid "Cards grid"
 msgstr "Tarjetas"
+
+#: inc/info.php:24
+msgid "FundMe"
+msgstr "FondeaMe"
+
+#: inc/info.php:38
+msgid "About Ekiline"
+msgstr "Más de Ekiline"
+
+#: inc/info.php:50
+msgid "About Ekiline for Wordpress"
+msgstr ""
+
+#: inc/info.php:56
+msgid "Thanks for using this theme!"
+msgstr "¡Gracias por utilizar este tema!"
+
+#: inc/info.php:58
+msgid ""
+"Find more information to improve your skills in the personalization of your "
+"site."
+msgstr ""
+"Encuentra más informacion para mejorar tus habilidades en la personalizacion "
+"de tu sitio."
+
+#: inc/info.php:63
+msgid ""
+"Get the definitive version, with more benefits for the distribution of your "
+"projects:"
+msgstr ""
+"Obtén la versión definitiva, con más beneficios para la distribución de tus "
+"proyectos:"
+
+#: inc/info.php:65
+msgid ""
+"Quick use guide for your clients, in Keynote and Power Point format for "
+"editing."
+msgstr ""
+"Guía de uso rápido para tus clientes, en formato Keynote y Power Point para "
+"edición."
+
+#: inc/info.php:66
+msgid "CSS complementary designs for general theme."
+msgstr "Diseños CSS complementarios para tema general."
+
+#: inc/info.php:67
+msgid "HTML structures preloaded for use in publications."
+msgstr "Estructuras HTML precargados para uso en publicaciones."
+
+#: inc/info.php:68
+msgid "Complete theme, without external links, ads or tips."
+msgstr "Tema completo, sin enlaces externos, anuncios o tips."
+
+#: inc/info.php:71
+msgid "http://ekiline.com/compra/"
+msgstr "http://ekiline.com/compra/"
+
+#: inc/info.php:71
+msgid "Buy and download"
+msgstr "Comprar y descargar"
+
+#: inc/info.php:73
+msgid "You can also"
+msgstr "También puedes"
+
+#: inc/info.php:73
+msgid "http://ekiline.com/fondeo/"
+msgstr "http://ekiline.com/fondeo/"
+
+#: inc/info.php:73
+msgid "fund the development"
+msgstr "fondear el desarrollo"
+
+#: inc/info.php:74
+msgid "or"
+msgstr "o"
+
+#: inc/info.php:74
+msgid "http://ekiline.com/gana/"
+msgstr "http://ekiline.com/gana/"
+
+#: inc/info.php:74
+msgid "earn money"
+msgstr "ganar dinero"
+
+#: inc/info.php:74
+msgid "by helping."
+msgstr "ayudando."
+
+#: inc/info.php:79 inc/info.php:152
+msgid "About"
+msgstr "Acerca"
+
+#: inc/info.php:80
+msgid ""
+"Ekiline simplifies the creation of a website with Wordpress, it is a working "
+"method that brings together the standard practices of the internet industry, "
+"to facilitate the tasks of planning, design, development and optimization. "
+"For more information visit ekiline.com"
+msgstr ""
+"Ekiline simplifica la creación de un sitio web con Wordpress, es un método "
+"de trabajo que reúne las prácticas estándar de la industria de internet, "
+"para facilitar las tareas de planeación, diseño, desarrollo y optimización. "
+"Para mayor información visita ekiline.com"
+
+#: inc/info.php:81
+msgid "Limited liability"
+msgstr "Responsabilidad limitada"
+
+#: inc/info.php:82
+msgid ""
+"As a courtesy, we provide information on how to use certain third-party "
+"products, but we do not directly support their use and we are not "
+"responsible for the functions, reliability or compatibility of such "
+"products. The names, trademarks and logos of third parties are registered "
+"trademarks of their respective owners."
+msgstr ""
+"Como cortesía, proporcionamos información de cómo utilizar determinados "
+"productos de terceros, pero no respaldamos directamente su uso y no somos "
+"responsables de las funciones, fiabilidad o compatibilidad de dichos "
+"productos. Los nombres, marcas y logotipos de terceros son marcas "
+"registradas de sus respectivos propietarios."
+
+#: inc/info.php:87
+msgid "Documentation"
+msgstr "Documentación"
+
+#: inc/info.php:89
+msgid "http://ekiline.com/instala/"
+msgstr "http://ekiline.com/instala/"
+
+#: inc/info.php:89
+msgid "Installation"
+msgstr "Instalación"
+
+#: inc/info.php:90
+msgid "http://ekiline.com/personaliza/"
+msgstr "http://ekiline.com/personaliza/"
+
+#: inc/info.php:90
+msgid "Personalization"
+msgstr "Personalización"
+
+#: inc/info.php:91
+msgid "http://ekiline.com/elementos/"
+msgstr "http://ekiline.com/elementos/"
+
+#: inc/info.php:91
+msgid "Elements and shortcodes"
+msgstr "Elementos y shortcodes"
+
+#: inc/info.php:92
+msgid "http://ekiline.com/compatible/"
+msgstr "http://ekiline.com/compatible/"
+
+#: inc/info.php:92
+msgid "Compatibility"
+msgstr "Compatibilidad"
+
+#: inc/info.php:93
+msgid "Edit your HTML presets:"
+msgstr "Edita tus sets de HTML:"
+
+#: inc/info.php:94
+msgid "theme-editor.php?file=template-parts%2Fcustom-layouts.php&theme=ekiline"
+msgstr ""
+"theme-editor.php?file-template-parts%2Fcustom-layouts.php&theme-ekiline"
+
+#: inc/info.php:94
+msgid "Custom presets"
+msgstr "Formatos personalizados"
+
+#: inc/info.php:105
+#, php-format
+msgid "&copy; Copyright %1$s Ekiline"
+msgstr "&copy; Copyright %1$s Ekiline"
+
+#: inc/info.php:106
+msgid "All rights reserved. Ekiline developed by"
+msgstr "Todos los derechos reservados. Ekiline desarrollado por"
+
+#: inc/info.php:107
+msgid "https://bixnia.com/"
+msgstr "https://bixnia.com/"
+
+#: inc/info.php:108
+msgid "B&nbsp;I&nbsp;X&nbsp;N&nbsp;I&nbsp;A"
+msgstr "B&nbsp;I&nbsp;X&nbsp;N&nbsp;I&nbsp;A"
+
+#: inc/info.php:150
+msgid "Make money"
+msgstr "Gana dinero"
+
+#: inc/info.php:151
+msgid "Get more"
+msgstr "Obtén más"
 
 #: inc/themeCustomColors.php:21 inc/themeCustomHeader.php:21
 msgid "Colors"
@@ -380,44 +580,44 @@ msgstr ""
 msgid "Narrow header (jumbotron)"
 msgstr "Encabezado estrecho (jumbotron)"
 
-#: inc/themeCustomHeader.php:101
+#: inc/themeCustomHeader.php:100
 msgid "Header image height"
 msgstr "Altura de la imagen del encabezado"
 
-#: inc/themeCustomHeader.php:102
+#: inc/themeCustomHeader.php:101
 msgid "Extend the image to fill the entire screen"
 msgstr "Extienda la imagen para llenar toda la pantalla"
 
-#: inc/themeCustomHeader.php:124
+#: inc/themeCustomHeader.php:122
 msgid "Front Page video"
 msgstr "Vídeo de la página principal"
 
-#: inc/themeCustomHeader.php:125
+#: inc/themeCustomHeader.php:123
 msgid ""
 "Recommended formats: MP4, WEBM or OGV, your header image conserves as poster"
 msgstr ""
 "Formatos recomendados: MP4, WEBM or OGV, la imagen de cabecera se conserva "
 "como fondo del video"
 
-#: inc/themeCustomHeader.php:158
+#: inc/themeCustomHeader.php:157
 msgid "Default header image"
 msgstr "Imagen del encabezado por defecto"
 
-#: inc/themeCustomHeader.php:257 search.php:20 template-parts/searchform.php:12
-#, php-format
-msgid "Search Results for: %s"
-msgstr "Resultados de búsqueda para: %s"
-
-#: inc/themeCustomHeader.php:258 search.php:21
+#: inc/themeCustomHeader.php:291 search.php:21
 #, php-format
 msgid "%s results found."
 msgstr "%s resultados encontrados."
 
-#: inc/themeCustomHeader.php:261
+#: inc/themeCustomHeader.php:292 search.php:20 template-parts/searchform.php:12
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Resultados de búsqueda para: %s"
+
+#: inc/themeCustomHeader.php:296
 msgid "It looks like nothing was found at this location."
 msgstr "Parece que no encontramos nada en esta ubicación."
 
-#: inc/themeCustomHeader.php:262
+#: inc/themeCustomHeader.php:297
 msgid "Maybe try one of the links below or a search?"
 msgstr ""
 "¿Que tal si pruebas con los links que aparecen abajo o haz una búsqueda?"
@@ -466,41 +666,41 @@ msgstr "Última actualización: %s"
 msgid "Categories: %s"
 msgstr "Categorías: %s"
 
-#: inc/themeElements.php:66
+#: inc/themeElements.php:67
 #, php-format
 msgid "Tags: %s"
 msgstr "Etiquetas: %s"
 
-#: inc/themeElements.php:72
+#: inc/themeElements.php:74
 msgid "No comments yet"
 msgstr "No hay comentarios aún"
 
-#: inc/themeElements.php:73
+#: inc/themeElements.php:75
 msgid "1 Comment"
 msgstr "1 Comentario"
 
-#: inc/themeElements.php:74
+#: inc/themeElements.php:76
 msgid "% Comments"
 msgstr "% Comentarios"
 
-#: inc/themeElements.php:76
+#: inc/themeElements.php:78
 msgid "Comments are closed."
 msgstr "Comentarios cerrados."
 
-#: inc/themeElements.php:97 inc/themeElements.php:228
+#: inc/themeElements.php:99 inc/themeElements.php:228
 #, php-format
 msgid "Continue reading %s"
 msgstr "Continuar leyendo %s"
 
-#: inc/themeElements.php:97 inc/themeElements.php:228
+#: inc/themeElements.php:99 inc/themeElements.php:228
 msgid "Read more"
 msgstr "Leer mas"
 
-#: inc/themeElements.php:250
+#: inc/themeElements.php:286
 msgid "Continue reading:"
 msgstr "Continuar leyendo:"
 
-#: inc/themeElements.php:281
+#: inc/themeElements.php:317
 msgid ""
 "This content is password protected. To view it please enter your password "
 "below:"
@@ -508,20 +708,20 @@ msgstr ""
 "Este contenido está protegido con contraseña. Para verlo, ingrese su "
 "contraseña a continuación:"
 
-#: inc/themeElements.php:282
+#: inc/themeElements.php:318
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: inc/themeElements.php:284
+#: inc/themeElements.php:320
 msgctxt "post password form"
 msgid "Enter"
 msgstr "Ingresar"
 
-#: inc/themeElements.php:367
+#: inc/themeElements.php:403
 msgid "&larr; Previous"
 msgstr "&larr; Anterior"
 
-#: inc/themeElements.php:368
+#: inc/themeElements.php:404
 msgid "Next &rarr;"
 msgstr "Siguiente &rarr;"
 
@@ -531,7 +731,66 @@ msgstr "Todo"
 
 #: inc/themeNavbars.php:239
 msgid "Assign a menu!"
-msgstr "Asignar un menú"
+msgstr "¡Asigna un menú!"
+
+#: inc/themeOptimizeScripts.php:24
+msgid "Something go wrong, check theme file."
+msgstr "Algo va mal, revisa el archivo del tema."
+
+#: inc/themeOptimizeScripts.php:41
+msgid "Sort Scripts "
+msgstr "Scripts"
+
+#: inc/themeOptimizeScripts.php:43
+msgid "Choose and copy handlers in customizer \"Ekiline Sort Scripts\" option"
+msgstr ""
+"Elija y copie controladores en la opción \"Ekiline Organizar Scripts\" del "
+"personalizador"
+
+#: inc/themeOptimizeScripts.php:44
+msgid "Styles: "
+msgstr "Estilos:"
+
+#: inc/themeOptimizeScripts.php:45
+msgid "Scripts: "
+msgstr "Scripts: "
+
+#: inc/themeOptimizeScripts.php:62
+msgid "Ekiline Sort Scripts"
+msgstr "Ekiline Organizar Scripts"
+
+#: inc/themeOptimizeScripts.php:64
+msgid "Sort your CSS Styles and JS Scripts"
+msgstr "Ordena tus estilos CSS y scripts JS"
+
+#: inc/themeOptimizeScripts.php:77
+msgid "Move all scripts at end of page"
+msgstr "Mover todos los scripts al final de la página"
+
+#: inc/themeOptimizeScripts.php:92
+#, php-format
+msgid "Comma separated %1$s handlers"
+msgstr "Controladores %1$s separados por comas"
+
+#: inc/themeOptimizeScripts.php:115 inc/themeOptimizeScripts.php:120
+msgid "No changes"
+msgstr "Sin cambios"
+
+#: inc/themeOptimizeScripts.php:116 inc/themeOptimizeScripts.php:124
+msgid "javascript load"
+msgstr "carga javascript"
+
+#: inc/themeOptimizeScripts.php:121
+msgid "async"
+msgstr "async"
+
+#: inc/themeOptimizeScripts.php:122
+msgid "defer"
+msgstr "defer"
+
+#: inc/themeOptimizeScripts.php:123
+msgid "defer & async"
+msgstr "defer & async"
 
 #: inc/widgetBreadcrumb.php:25
 msgid "Add bootstrap breadcrumb"
@@ -569,11 +828,11 @@ msgstr "Formato"
 msgid "Dropdown"
 msgstr "Dropdown"
 
-#: template-parts/comments.php:21
+#: template-parts/comments.php:16
 msgid "Hide comments"
 msgstr "Ocultar comentarios"
 
-#: template-parts/comments.php:27
+#: template-parts/comments.php:22
 #, php-format
 msgctxt "comments title"
 msgid "One thought on &ldquo;%2$s&rdquo;"
@@ -581,73 +840,73 @@ msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
 msgstr[0] "Un comentario en &ldquo;%2$s&rdquo;"
 msgstr[1] "%1$s comentarios en &ldquo;%2$s&rdquo;"
 
-#: template-parts/comments.php:39
+#: template-parts/comments.php:34
 msgid "Comment navigation"
 msgstr "Navegación de comentarios"
 
-#: template-parts/comments.php:42
+#: template-parts/comments.php:37
 msgid "Older Comments"
 msgstr "Comentarios anteriores"
 
-#: template-parts/comments.php:43
+#: template-parts/comments.php:38
 msgid "Newer Comments"
 msgstr "Comentarios nuevos"
 
-#: template-parts/comments.php:72
+#: template-parts/comments.php:67
 msgid "Comments are closed"
 msgstr "Comentarios cerrados"
 
-#: template-parts/comments.php:149
+#: template-parts/comments.php:144
 #, php-format
 msgid "<cite class=\"fn\">%s</cite> <span class=\"says\">says:</span>"
 msgstr "<cite class=\"fn\">%s</cite> <span class=\"says\">dice:</span>"
 
-#: template-parts/comments.php:152
+#: template-parts/comments.php:147
 msgid "Your comment is awaiting moderation."
 msgstr "Tu comentario está esperando ser moderado."
 
-#: template-parts/comments.php:167
+#: template-parts/comments.php:162
 #, php-format
 msgid "%1$s at %2$s"
 msgstr "%1$s en %2$s"
 
-#: template-parts/comments.php:172
+#: template-parts/comments.php:167
 msgid "(Edit)"
 msgstr "(Editar)"
 
-#: template-parts/comments.php:203
+#: template-parts/comments.php:198
 msgid "Comment"
 msgstr "Comentario"
 
-#: template-parts/comments.php:210
+#: template-parts/comments.php:205
 msgid "Name"
 msgstr "Nombre"
 
-#: template-parts/comments.php:214
+#: template-parts/comments.php:209
 msgid "Email"
 msgstr "Correo"
 
-#: template-parts/comments.php:218
+#: template-parts/comments.php:213
 msgid "Website"
 msgstr "Sitio Web"
 
-#: template-parts/comments.php:223
+#: template-parts/comments.php:218
 msgid "By commenting you accept the"
 msgstr "Al comentar que acepta la"
 
-#: template-parts/comments.php:224
+#: template-parts/comments.php:219
 msgid "Privacy Policy"
 msgstr "Politica de Privacidad"
 
-#: template-parts/content-archive.php:36
+#: template-parts/content-archive.php:47
 msgid "User: "
 msgstr "Usuario:"
 
-#: template-parts/content-archive.php:37
+#: template-parts/content-archive.php:48
 msgid "Email: "
 msgstr "Email "
 
-#: template-parts/content-archive.php:38
+#: template-parts/content-archive.php:49
 msgid "Web: "
 msgstr "Web:"
 
@@ -674,10 +933,6 @@ msgstr ""
 #: template-parts/searchform.php:14
 msgid "Search Results for:"
 msgstr "Buscar resultados para:"
-
-#: template-parts/searchform.php:17
-msgid "Search"
-msgstr "Buscar"
 
 #. Theme Name of the plugin/theme
 msgid "Ekiline"
