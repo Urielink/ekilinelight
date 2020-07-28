@@ -317,7 +317,6 @@ if ( get_theme_mod( 'ekiline_js_handler_array' ) != '' ){
  function override_scripts($tag, $handle) {
 
     $load_jss_from = ctmzr_handlers_options('js');
-    // if(!$load_jss_from) return;
 
     foreach( $load_jss_from as $new_script ) {
         if ( $new_script['handler'] === $handle ) {
@@ -344,7 +343,6 @@ function ekiline_scripts_localize(){
 
     global $wp_scripts; 
     $load_jss_from = ctmzr_handlers_options('js');       
-    // if (!$load_jss_from) return; 
     $the_scripts = array();
 
     foreach( $load_jss_from as $handler) {
@@ -387,7 +385,6 @@ function ekiline_change_js_tag( $tag, $handle, $src  ) {
 
     global $wp_scripts;
     $load_jss_from = ctmzr_handlers_options('js');
-    // if (!$load_jss_from) return; 
  
     foreach( $load_jss_from as $pre_script ) {
         if ( $pre_script['handler'] === $handle && $pre_script['option'] === '4' ) {
