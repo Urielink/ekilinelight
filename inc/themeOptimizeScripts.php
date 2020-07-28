@@ -1,67 +1,70 @@
 <?php
 /**
- * ekiline arrange scripts.
+ * ekiline sort scripts.
  *
  * @package ekiline
  */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 1 Controles:
- * Mostrar estilos y scripts en el sistema
+ *
+ * 1) Controles: Mostrar estilos y scripts en el sistema
+ * Customizer preview window reference, show styles and scripts handlers
+ * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-/* Mostrar estilos */
-function print_styles($unused = null){
-    if (!$unused) return;
-    global $wp_styles;
-    $styles = $wp_styles->queue;
-    $filter = array_diff( $styles, $unused );
-        $styles = implode(',', $filter);
-            return $styles;
+function print_libs($kind,$ignore){
+    if ( !$kind || !$ignore ) return;
+    global $wp_styles,$wp_scripts;
+
+    if ($kind == 'css'){
+        $kind = $wp_styles;
+    } elseif ($kind == 'js'){
+        $kind = $wp_scripts;
+    } else {
+        return __('Something go wrong, check theme file.','ekiline');
+    }
+
+    $libs = $kind->queue;
+    $filter = array_diff( $libs, $ignore );
+        $libs = implode(',', $filter);
+            return $libs;
 }
 
-/* Mostrar scripts */
-function print_scripts($unused = null){
-    if (!$unused) return;
-    global $wp_scripts;
-    $scripts = $wp_scripts->queue;
-    $filter = array_diff( $scripts, $unused );
-        $scripts = implode(',', $filter);
-            return $scripts;
-}
-
-/* Imprimir modulo */
+/* Modulo en previsualizador */
     function print_styles_and_scripts_info(){
         if (!is_customize_preview()) return;
-        //descartar estilos y scripts de customizer
-        $unusedStyles = array('admin-bar','customize-preview','wp-mediaelement');
-        $unusedScripts = array('customize-preview','admin-bar','wp-mediaelement','mediaelement-vimeo','wp-playlist','customize-selective-refresh','customize-preview-widgets','customize-preview-nav-menus','jquery');
+        //ignorar estilos o scripts de customizer
+        $ignoreCss = array('admin-bar','customize-preview','wp-mediaelement');
+        $ignoreJs = array('customize-preview','admin-bar','wp-mediaelement','mediaelement-vimeo','wp-playlist','customize-selective-refresh','customize-preview-widgets','customize-preview-nav-menus');
         //mostrar modulo html
-            $html_action = '<div style="position:fixed;bottom:0px;left:0px;right:0px;background:#eeeeee;color:#656a6f;padding:10px;z-index:100;">';
-            $html_action .= __('Styles: ','ekiline') . '<code>' . print_styles( $unusedStyles ) . '</code><br>';
-            $html_action .= __('Scripts: ','ekiline') . '<code>' . print_scripts( $unusedScripts ) .'</code>';
-            $html_action .= '</div>';
+            $html_action = '<div style="position:fixed;bottom:0px;left:0px;right:0px;z-index:100;">';
+            $html_action .= '<a class="btn btn-sm btn-primary show-handlers" data-toggle="collapse" href="#collapseHandlers">'.__('Sort Scripts ','ekiline').'</a> ';
+            $html_action .= '<div class="collapse" id="collapseHandlers" style="background:#eeeeee;color:#656a6f;padding:10px;">';
+            $html_action .= '<small>'.__('Choose and copy handlers in customizer "Ekiline Sort Scripts" option','ekiline') . '</small><br>';
+            $html_action .= __('Styles: ','ekiline') . '<code>' . print_libs( 'css', $ignoreCss ) . '</code><br>';
+            $html_action .= __('Scripts: ','ekiline') . '<code>' . print_libs( 'js', $ignoreJs ) .'</code>';
+            $html_action .= '</div></div>';
             echo $html_action;
     }
     add_action('wp_footer', 'print_styles_and_scripts_info',0);
 
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 2 Controles:
- * Customizer, campo y opciones de customizer.
+ *
+ * 2) Controles Customizer, campos para los estilos
+ * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 function ekiline_reload_libraries( $wp_customize ) {
 
-// Libraries reload description
+// Ekiline Sort Scripts
     $wp_customize->add_section( 
         'ekiline_reload_libraries' , array(
-            'title'       => __( 'Optimize', 'ekiline' ),
+            'title'       => __( 'Ekiline Sort Scripts', 'ekiline' ),
             'priority'    => 120,
             'description' => __( 'Sort your CSS Styles and JS Scripts', 'ekiline' ),
-        ));
+        ));    
 
-    // Enviar estilos al footer
+// Enviar estilos al footer
     $wp_customize->add_setting( 
         'ekiline_scripts_at_footer', array(
     				'default' => '',
@@ -80,9 +83,11 @@ function ekiline_reload_libraries( $wp_customize ) {
             )
         );  
 
+
     $type = array('css','js');
 
     foreach($type as $kind) {
+
         $field_name = 'ekiline_' . $kind . '_handler_array';
 
         // Campos de manejadores para llenar
@@ -96,12 +101,13 @@ function ekiline_reload_libraries( $wp_customize ) {
         $wp_customize->add_control(
             $field_name, array(
                 'type' => 'text',
-                'label' => __( 'Add comma separated ' . $kind . ' libraries', 'ekiline' ), //'css_handler',
+                'label' => __( 'Add comma separated ' . $kind . ' handler', 'ekiline' ), //'css_handler',
                 'section' => 'ekiline_reload_libraries',
             ));   
 
         // Opciones por cada manejador registrado    
         $libraries = ctmzr_array_handlers( $kind );
+
         if($libraries){
 
             $choices = array(
@@ -119,8 +125,8 @@ function ekiline_reload_libraries( $wp_customize ) {
                 }
 
             foreach($libraries as $handler) {
+                // ID Ejemplo: ekiline_sortcss_bootstrap-4
                 $library_field_name = 'ekiline_' . $kind . '_' . $handler;
-                // ekiline_sortcss_bootstrap-4
                 $wp_customize->add_setting(
                     $library_field_name , array(
                             'default' => '0',
@@ -142,8 +148,10 @@ function ekiline_reload_libraries( $wp_customize ) {
 add_action( 'customize_register', 'ekiline_reload_libraries' );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 3 Filtros:
+ *
+ * 3) Filtros:
  * Obtener cada libreria, registrada en el campo de customizer.
+ * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // Indice de librerias segun descritos por el usuario
@@ -182,8 +190,9 @@ function ctmzr_array_handlers($kind = null){
 */
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * 4 Control de ejecucion:
- * Solo cuando el usaurio no sea administrador
+ * 4) Control para ejecucion:
+ * Solo cuando el usuario no sea administrador
+ * Execute only in frontend, when user logged out.
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 function is_login_page() {
@@ -194,17 +203,19 @@ if( is_login_page() || is_admin() || is_user_logged_in() ) return;
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * 5 Modificaciones en librerias CSS:
+ * 5) Modificaciones en librerias CSS:
+ * Change CSS tags and load method
  * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+// Ejecutar solo cuando exista informacion en el campo
 if ( get_theme_mod( 'ekiline_css_handler_array' ) != '' ){
-    add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 );
-    add_action( 'wp_enqueue_scripts', 'ekiline_css_localize' );
-    add_action( 'wp_footer', 'ekiline_load_allCss_js', 100);
+    add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 ); // 5.1
+    add_action( 'wp_enqueue_scripts', 'ekiline_css_localize' ); // 5.2
+    add_action( 'wp_footer', 'ekiline_load_allCss_js', 100); // 5.3
 }
 
-/* Accion 1: Transformar etiquetas de estilo en preloads, publicar */
+/* Accion 5.1: Transformar etiquetas de estilo en preloads, publicar */
 function ekiline_change_css_tag( $tag, $handle, $src  ) {
     foreach( ctmzr_handlers_options('css') as $pre_style ) {
         if ( $pre_style['handler'] === $handle && $pre_style['option'] === '1' ) {
@@ -215,7 +226,7 @@ function ekiline_change_css_tag( $tag, $handle, $src  ) {
 }
 // add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 );
 
-    /* Accion 2: Crear variables de cada estilo filtrado en js, publicar como dependencia de jquery */
+    /* Accion 5.2: Crear variables de cada estilo filtrado en js, publicar como dependencia de jquery */
     function ekiline_styles_localize(){
         
         global $wp_styles; 
@@ -250,7 +261,7 @@ function ekiline_change_css_tag( $tag, $handle, $src  ) {
 
 
 /* 
- * Accion 3: incorporar los estilos con js 
+ * Accion 5.3: incorporar los estilos con js 
  * buscar la etiqueta de estilo en linea principal (ekiline-inline-style) y 
  * agregar antes.
  */
@@ -288,15 +299,24 @@ function ekiline_load_allCss_js(){ ?>
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
- * 6 Modificaciones en librerias JS:
+ * 6) Modificaciones en librerias JS:
+ * Change JS tags and load method
  * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
- /* Accion 1: Transformar etiquetas individuales con nuevo atributo, publicar */
+// Ejecutar solo cuando exista informacion en el campo
+if ( get_theme_mod( 'ekiline_js_handler_array' ) != '' ){
+    add_filter('script_loader_tag', 'override_scripts', 10, 2); // 6.1
+    add_action( 'wp_enqueue_scripts', 'ekiline_js_localize' ); // 6.2
+    add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 ); //6.3
+    add_action( 'wp_footer', 'ekiline_load_allJss_js', 100); //6.4
+}
+
+ /* Accion 6.1: Transformar etiquetas individuales con nuevo atributo, publicar */
  function override_scripts($tag, $handle) {
 
     $load_jss_from = ctmzr_handlers_options('js');
-    if(!$load_jss_from) return;
+    // if(!$load_jss_from) return;
 
     foreach( $load_jss_from as $new_script ) {
         if ( $new_script['handler'] === $handle ) {
@@ -313,17 +333,17 @@ function ekiline_load_allCss_js(){ ?>
     }
     return $tag;
 }
-add_filter('script_loader_tag', 'override_scripts', 10, 2);
+// add_filter('script_loader_tag', 'override_scripts', 10, 2);
 
 /**
- * Accion 2: Crear variables de cada estilo filtrado en js.
+ * Accion 6.2: Crear variables de cada estilo filtrado en js.
  * NOTA: Localize si funciona, pero la dependencia de scripts es un tema a revisar.
  */
 function ekiline_scripts_localize(){
 
     global $wp_scripts; 
     $load_jss_from = ctmzr_handlers_options('js');       
-    if (!$load_jss_from) return; 
+    // if (!$load_jss_from) return; 
     $the_scripts = array();
 
     foreach( $load_jss_from as $handler) {
@@ -359,14 +379,14 @@ function ekiline_scripts_localize(){
         //loclizar script como dependencia de jquery.
         wp_localize_script( 'jquery', 'allJss', ekiline_scripts_localize() );     
     }
-    add_action( 'wp_enqueue_scripts', 'ekiline_js_localize' );
+    // add_action( 'wp_enqueue_scripts', 'ekiline_js_localize' );
 
-/* Accion 3: Transformar scripts en preloads, publicar */
+/* Accion 6.3: Transformar scripts en preloads, publicar */
 function ekiline_change_js_tag( $tag, $handle, $src  ) {
 
     global $wp_scripts;
     $load_jss_from = ctmzr_handlers_options('js');
-    if (!$load_jss_from) return; 
+    // if (!$load_jss_from) return; 
  
     foreach( $load_jss_from as $pre_script ) {
         if ( $pre_script['handler'] === $handle && $pre_script['option'] === '4' ) {
@@ -381,10 +401,11 @@ function ekiline_change_js_tag( $tag, $handle, $src  ) {
     return $tag;
     
 }
-add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 );
+// add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 );
+
 
 /* 
- * Accion: incorporar los scripts con jquery mediante get 
+ * Accion 6.4: incorporar los scripts con jquery mediante get 
  */
 function ekiline_load_allJss_js(){ ?>
     <script>
@@ -416,7 +437,7 @@ function ekiline_load_allJss_js(){ ?>
     
     </script>
     <?php }
-    add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);
+    // add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);
 
 
 
@@ -426,7 +447,7 @@ function ekiline_load_allJss_js(){ ?>
  * 
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-if( get_theme_mod('ekiline_inversemenu') === true ){
+if( get_theme_mod('ekiline_scripts_at_footer') === true ){
     add_action('after_setup_theme', 'footer_enqueue_scripts');
 }
 function footer_enqueue_scripts() {
