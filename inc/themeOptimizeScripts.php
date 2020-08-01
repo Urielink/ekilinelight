@@ -389,7 +389,8 @@ function ekiline_change_js_tag( $tag, $handle, $src  ) {
     foreach( $load_jss_from as $pre_script ) {
         if ( $pre_script['handler'] === $handle && $pre_script['option'] === '4' ) {
             // $tag = '<link rel="preload" as="script" href="' . esc_url( $src ) . '">'."\n".$tag;
-            $patterns = array('/<script src=/','/><\/script>/');
+            $tagwrd = 'script';
+            $patterns = array('/<'.$tagwrd.' src=/','/><\/'.$tagwrd.'>/');
             // $replacements = array('<!-- script src=','></script -->');//opcion comentado
             // $replacements = array('<link rel="preload" as="script" href=','/>');//opcion preload
             $replacements = array('<!-- link rel="preload" as="script" href=','/ -->');//opcion preload comentado

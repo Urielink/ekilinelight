@@ -47,7 +47,7 @@ add_action( 'admin_menu', 'ekiline_theme_page' );
 function theme_html_page() { ?>
 
 <div class="wrap">
-	<h1><span class="dashicons dashicons-layout" aria-hidden="true"></span> <?php _e('About Ekiline for Wordpress','ekiline'); ?></h1>
+	<h1><span class="dashicons dashicons-layout" aria-hidden="true"></span> <?php _e('About Ekiline for WordPress','ekiline'); ?></h1>
     
 	<div id="welcome-panel" class="welcome-panel">
 		
@@ -77,7 +77,7 @@ function theme_html_page() { ?>
 				<div class="welcome-panel-column">
 					<div style="padding:4px;">
 						<h3><?php _e('About','ekiline'); ?></h3>
-						<p><?php _e('Ekiline simplifies the creation of a website with Wordpress, it is a working method that brings together the standard practices of the internet industry, to facilitate the tasks of planning, design, development and optimization. For more information visit ekiline.com','ekiline'); ?></p>
+						<p><?php _e('Ekiline simplifies the creation of a website with WordPress, it is a working method that brings together the standard practices of the internet industry, to facilitate the tasks of planning, design, development and optimization. For more information visit ekiline.com','ekiline'); ?></p>
 						<p><strong><?php _e('Limited liability','ekiline'); ?></strong></p>
 						<p><small><?php _e('As a courtesy, we provide information on how to use certain third-party products, but we do not directly support their use and we are not responsible for the functions, reliability or compatibility of such products. The names, trademarks and logos of third parties are registered trademarks of their respective owners.','ekiline'); ?></small></p>
 					</div>
@@ -118,9 +118,9 @@ function theme_html_page() { ?>
  * https://developer.wordpress.org/reference/functions/the_widget/ */
 
 global $pagenow;
-$pages = array('index.php','edit.php','post.php','themes.php','tools.php','plugins.php');
+$adminpages = array('index.php','edit.php','post.php','themes.php','tools.php','plugins.php');
 
-if ( in_array( $pagenow, $pages, true ) ){
+if ( in_array( $pagenow, $adminpages, true ) ){
     add_action( 'admin_footer', 'ekiline_docs_feed_set' );
     add_action( 'admin_notices', 'ekiline_docs_feed' );
 }    

@@ -40,6 +40,7 @@ add_action( 'wp_head', 'ekiline_meta_description', 0 , 0);
  **/
 
 function tags_support_all() {
+    // phpcs:ignore WPThemeReview.PluginTerritory.ForbiddenFunctions.plugin_territory_register_taxonomy_for_object_type
     register_taxonomy_for_object_type('post_tag', 'page');
 }
 add_action('init', 'tags_support_all');
