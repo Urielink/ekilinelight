@@ -213,8 +213,7 @@ if( is_login_page() || is_admin() || is_user_logged_in() ) return;
 // Ejecutar solo cuando exista informacion en el campo
 if ( get_theme_mod( 'ekiline_css_handler_array' ) != '' ){
     add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 ); // 5.1
-    add_action( 'wp_enqueue_scripts', 'ekiline_css_localize' ); // 5.2
-    add_action( 'wp_footer', 'ekiline_load_allCss_js', 100); // 5.3
+    add_action( 'wp_footer', 'ekiline_load_allCss_js', 100); // 5.2 y 5.3
 }
 
 /* Accion 5.1: Transformar etiquetas de estilo en preloads, publicar */
@@ -241,61 +240,52 @@ function ekiline_change_css_tag( $tag, $handle, $src  ) {
 
             if ( $getOption === '1' ) {
             /* Crear diccionario: sobrescribir url de cada CSS en caso de solo ser relativa al sistema */
-                $siteurl = get_site_url();
                 $srcUrl = $wp_styles->registered[ $getHandler ]->src;
-                    $hasSiteurl = strpos($srcUrl, $siteurl);
-
-                if ( $hasSiteurl === false ){
-                    $srcUrl = $siteurl . $srcUrl;
-                } 
-
                 $the_styles[] = array( 'id' => $getHandler, 'src' => $srcUrl, 'media' => $wp_styles->registered[ $getHandler ]->args );   
             }
 
         }               
-        return $the_styles;        
+        // return $the_styles;  
+        printf( json_encode($the_styles) );
     }  
 
-    function ekiline_css_localize(){
-        wp_localize_script( 'jquery', 'allCss', ekiline_styles_localize() );     
-    }
-    // add_action( 'wp_enqueue_scripts', 'ekiline_css_localize' );
+        /* 
+        * Accion 5.3: incorporar los estilos con js 
+        * buscar la etiqueta de estilo en linea principal (ekiline-inline-style) y 
+        * agregar antes.
+        */
+        function ekiline_load_allCss_js(){ ?>
+            <script>
 
+            var allCss = <?php ekiline_styles_localize(); ?>;
 
-/* 
- * Accion 5.3: incorporar los estilos con js 
- * buscar la etiqueta de estilo en linea principal (ekiline-inline-style) y 
- * agregar antes.
- */
-function ekiline_load_allCss_js(){ ?>
-    <script>
-    if ( allCss != null ){
-        window.addEventListener('DOMContentLoaded', function () {
-            loadStyles(allCss);
-        });
-    }
-    
-    function loadStyles(styles){
-        var $ = jQuery.noConflict();
-        var head = $('head');
-        var wpcss = head.find('style[id="ekiline-style-inline-css"]'); 
-        var cssinline = head.find('style:last');
-    
-        $.each( styles, function( key, value ) {                
-            var linkCss = $('<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media });   
-            //console.log( value.id + ' ' + value.src );
-            if ( wpcss.length ){ 
-                wpcss.before( linkCss ); 
-            } else if ( cssinline.length ){ 
-                cssinline.before( linkCss ); 
-            } else { 
-                head.append( linkCss ); 
+            if ( allCss != null ){
+                window.addEventListener('DOMContentLoaded', function () {
+                    loadStyles(allCss);
+                });
             }
-        });		        
-    }
-    </script>
-<?php }
-// add_action( 'wp_footer', 'ekiline_load_allCss_js', 100);
+            
+            function loadStyles(styles){
+                var $ = jQuery.noConflict();
+                var head = $('head');
+                var wpcss = head.find('style[id="ekiline-style-inline-css"]'); 
+                var cssinline = head.find('style:last');
+            
+                $.each( styles, function( key, value ) {                
+                    var linkCss = $('<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media });   
+                    //console.log( value.id + ' ' + value.src );
+                    if ( wpcss.length ){ 
+                        wpcss.before( linkCss ); 
+                    } else if ( cssinline.length ){ 
+                        cssinline.before( linkCss ); 
+                    } else { 
+                        head.append( linkCss ); 
+                    }
+                });		        
+            }
+            </script>
+        <?php }
+        // add_action( 'wp_footer', 'ekiline_load_allCss_js', 100);
 
 
 
@@ -309,9 +299,8 @@ function ekiline_load_allCss_js(){ ?>
 // Ejecutar solo cuando exista informacion en el campo
 if ( get_theme_mod( 'ekiline_js_handler_array' ) != '' ){
     add_filter('script_loader_tag', 'override_scripts', 10, 2); // 6.1
-    add_action( 'wp_enqueue_scripts', 'ekiline_js_localize' ); // 6.2
     add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 ); //6.3
-    add_action( 'wp_footer', 'ekiline_load_allJss_js', 100); //6.4
+    add_action( 'wp_footer', 'ekiline_load_allJss_js', 100); //6.2 y 6.4
 }
 
  /* Accion 6.1: Transformar etiquetas individuales con nuevo atributo, publicar */
@@ -336,108 +325,94 @@ if ( get_theme_mod( 'ekiline_js_handler_array' ) != '' ){
 }
 // add_filter('script_loader_tag', 'override_scripts', 10, 2);
 
-/**
- * Accion 6.2: Crear variables de cada estilo filtrado en js.
- * NOTA: Localize si funciona, pero la dependencia de scripts es un tema a revisar.
- */
-function ekiline_scripts_localize(){
+    /**
+     * Accion 6.2: Crear variables de cada estilo filtrado en js.
+     * NOTA: Localize si funciona, pero la dependencia de scripts es un tema a revisar.
+     */
+    function ekiline_scripts_localize(){
 
-    global $wp_scripts; 
-    $load_jss_from = ctmzr_handlers_options('js');       
-    $the_scripts = array();
+        global $wp_scripts; 
+        $load_jss_from = ctmzr_handlers_options('js');       
+        $the_scripts = array();
 
-    foreach( $load_jss_from as $handler) {
-        $getHandler = $handler['handler'];
-        $getOption = $handler['option'];
+        foreach( $load_jss_from as $handler) {
+            $getHandler = $handler['handler'];
+            $getOption = $handler['option'];
 
-        /* Crear diccionario: 
-        * sobrescribir url de cada JS en caso de solo ser relativa al sistema.
-        */
-        if ( $getOption === '4' ) {
+            /* Crear diccionario: 
+            * sobrescribir url de cada JS en caso de solo ser relativa al sistema.
+            */
+            if ( $getOption === '4' ) {
+                $srcUrl = $wp_scripts->registered[$getHandler]->src;
+                $the_scripts[] = array( 'id' => $getHandler, 'src' => $srcUrl );   
+            }
+            // Para deshabilitar estilos, es posible que no se necesite: 
+            // wp_dequeue_script($getHandler);
+        }               
+        // return $the_scripts;
+        printf( json_encode($the_scripts) );
+    }  
 
-            $siteurl = get_site_url();
-            $srcUrl = $wp_scripts->registered[$getHandler]->src;
-                $hasSiteurl = strpos($srcUrl, $siteurl);
 
-            if ( $hasSiteurl === false ){
-                $srcUrl = $siteurl . $srcUrl;
-            } 
+        /* Accion 6.3: Transformar scripts en preloads, publicar */
+        function ekiline_change_js_tag( $tag, $handle, $src  ) {
 
-            $the_scripts[] = array( 'id' => $getHandler, 'src' => $srcUrl );   
-
-        }
-        // Para deshabilitar estilos, es posible que no se necesite: 
-        // wp_dequeue_script($getHandler);
-
-    }   
+            global $wp_scripts;
+            $load_jss_from = ctmzr_handlers_options('js');
+        
+            foreach( $load_jss_from as $pre_script ) {
+                if ( $pre_script['handler'] === $handle && $pre_script['option'] === '4' ) {
+                    // $tag = '<link rel="preload" as="script" href="' . esc_url( $src ) . '">'."\n".$tag;
+                    $tagwrd = 'script';
+                    $patterns = array('/<'.$tagwrd.' src=/','/><\/'.$tagwrd.'>/');
+                    // $replacements = array('<!-- script src=','></script -->');//opcion comentado
+                    // $replacements = array('<link rel="preload" as="script" href=','/>');//opcion preload
+                    $replacements = array('<!-- link rel="preload" as="script" href=','/ -->');//opcion preload comentado
+                    $tag = preg_replace($patterns, $replacements, $tag);         
+                }
+            }
+            return $tag;
             
-    return $the_scripts;
-    
-}  
-
-    function ekiline_js_localize(){
-        //loclizar script como dependencia de jquery.
-        wp_localize_script( 'jquery', 'allJss', ekiline_scripts_localize() );     
-    }
-    // add_action( 'wp_enqueue_scripts', 'ekiline_js_localize' );
-
-/* Accion 6.3: Transformar scripts en preloads, publicar */
-function ekiline_change_js_tag( $tag, $handle, $src  ) {
-
-    global $wp_scripts;
-    $load_jss_from = ctmzr_handlers_options('js');
- 
-    foreach( $load_jss_from as $pre_script ) {
-        if ( $pre_script['handler'] === $handle && $pre_script['option'] === '4' ) {
-            // $tag = '<link rel="preload" as="script" href="' . esc_url( $src ) . '">'."\n".$tag;
-            $tagwrd = 'script';
-            $patterns = array('/<'.$tagwrd.' src=/','/><\/'.$tagwrd.'>/');
-            // $replacements = array('<!-- script src=','></script -->');//opcion comentado
-            // $replacements = array('<link rel="preload" as="script" href=','/>');//opcion preload
-            $replacements = array('<!-- link rel="preload" as="script" href=','/ -->');//opcion preload comentado
-            $tag = preg_replace($patterns, $replacements, $tag);         
         }
-    }
-    return $tag;
-    
-}
-// add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 );
+        // add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 );
 
 
-/* 
- * Accion 6.4: incorporar los scripts con jquery mediante get 
- */
-function ekiline_load_allJss_js(){ ?>
-    <script>
-    
-    if ( allJss != null ){
-        window.addEventListener('DOMContentLoaded', function () {
-            // loadScripts(allJss); //random
-            loadScriptsOrdered(allJss,0); //ordenada
-        });
-    }
-    
-    function loadScripts(scripts){
-        var $ = jQuery.noConflict();
-        $.each( scripts, function( key, value ) {
-            $.getScript( value.src );
-        });
-    }
-    
-    function loadScriptsOrdered(scripts,i) {
-        var $ = jQuery.noConflict();
-        if (i < scripts.length) {
-            $.getScript(scripts[i].src, function () {
-                //console.log('Loaded: ' + scripts[i].src);
-                i++;
-                loadScriptsOrdered(scripts,i);
-            });
-        }
-    }
-    
-    </script>
-    <?php }
-    // add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);
+            /* 
+            * Accion 6.4: incorporar los scripts con jquery mediante get 
+            */
+            function ekiline_load_allJss_js(){ ?>
+                <script>
+
+                var allJss = <?php ekiline_scripts_localize(); ?>;
+                
+                if ( allJss != null ){
+                    window.addEventListener('DOMContentLoaded', function () {
+                        // loadScripts(allJss); //random
+                        loadScriptsOrdered(allJss,0); //ordenada
+                    });
+                }
+                
+                function loadScripts(scripts){
+                    var $ = jQuery.noConflict();
+                    $.each( scripts, function( key, value ) {
+                        $.getScript( value.src );
+                    });
+                }
+                
+                function loadScriptsOrdered(scripts,i) {
+                    var $ = jQuery.noConflict();
+                    if (i < scripts.length) {
+                        $.getScript(scripts[i].src, function () {
+                            //console.log('Loaded: ' + scripts[i].src);
+                            i++;
+                            loadScriptsOrdered(scripts,i);
+                        });
+                    }
+                }
+                
+                </script>
+                <?php }
+                // add_action( 'wp_footer', 'ekiline_load_allJss_js', 100);
 
 
 
