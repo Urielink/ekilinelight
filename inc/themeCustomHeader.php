@@ -179,7 +179,7 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 		$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:'. esc_attr( $hdrTxtc ) .'; }';
 		$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .'; }';
 		$hdrStyle .= '@media only screen and (min-width:960px){ .custom-header.container .wp-block-cover{ background-image: url("'.ekiline_header_image('full').'") !important; } }';
-
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $hdrStyle;
 
 	}
@@ -282,7 +282,9 @@ function custom_header_content($contentType = null){
 
         if( is_search() ){
 			global $wp_query;
-            $custom_header_title = sprintf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts );
+			/* translators: %1$s is replaced with number of posts */
+			$custom_header_title = sprintf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts );
+			/* translators: %1$s is replaced with name of search post */
             $custom_header_text =  sprintf( esc_html__( 'Search Results for: %s', 'ekiline' ), get_search_query() );
         }
 

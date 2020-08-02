@@ -18,12 +18,14 @@
 			<?php the_title('<h1 class="entry-title">','</h1>'); ?>
 
 			<p class="entry-meta small mark">
-				<?php echo ekiline_notes('author'); ?>
-				<?php echo ekiline_notes('posted'); ?>
-				<?php echo ekiline_notes('updated'); ?>
-				<?php echo ekiline_notes('comments'); ?>
+				<?php echo wp_kses_post( ekiline_notes('author') ); ?>
+				<?php echo wp_kses_post( ekiline_notes('posted') ); ?>
+				<?php echo wp_kses_post( ekiline_notes('updated') ); ?>
+				<?php echo wp_kses_post( ekiline_notes('comments') ); ?>
 			</p><!-- .entry-meta -->	
 	
+
+
 		<?php } else { ?>
 
 			<?php // Archive, list titles ?>
@@ -42,8 +44,8 @@
 <?php if ( is_singular() ){?>
 	<footer>
 		<p class="entry-meta small mark">
-			<?php echo ekiline_notes('categories'); ?>
-			<?php echo ekiline_notes('tags'); ?>
+			<?php echo wp_kses_post( ekiline_notes('categories') ); ?>
+			<?php echo wp_kses_post( ekiline_notes('tags') ); ?>
 		</p><!-- .entry-meta -->	
 	</footer>
 <?php } ?>

@@ -74,7 +74,7 @@ add_filter( 'sidebars_widgets', 'viewSbarFilter' );
 function ekiline_main_columns($tag){
 	if (!is_active_sidebar( 'sidebar-1') && !is_active_sidebar( 'sidebar-2')) return;
 	// En caso de existir barras laterales agregar envoltorio
-	if ($tag == 'open') echo '<div id="maincolumns" class="row mx-0 ' . ekiline_widthControl() . ' mx-auto px-0">';
+	if ($tag == 'open') echo '<div id="maincolumns" class="row mx-0 ' . esc_attr( ekiline_widthControl() ) . ' mx-auto px-0">';
 	if ($tag == 'close') echo '</div><!-- #maincolumns -->'; 
 }
 	/* 
@@ -100,9 +100,9 @@ function ekiline_main_columns($tag){
 			}
 		}	
 	// imprimir
-		if ($css == 'main') echo $cssMain;
-		if ($css == 'left') echo $cssLeft;
-		if ($css == 'right') echo $cssRight;
+		if ($css == 'main') echo esc_attr($cssMain);
+		if ($css == 'left') echo esc_attr($cssLeft);
+		if ($css == 'right') echo esc_attr($cssRight);
 	}
  
 /* 
@@ -116,7 +116,7 @@ function ekiline_show_columns($tag){
 	$colContain = ( $colSet == 4 ) ? 'card-columns' : 'row' ;
 
 	if ($colSet > 0){
-		if ($tag == 'open') echo '<div id="viewcolumns" class="'.$colContain.'">';
+		if ($tag == 'open') echo '<div id="viewcolumns" class="'.esc_attr($colContain).'">';
 		if ($tag == 'close') echo '</div><!-- #viewcolumns -->'; 
 	}
 }

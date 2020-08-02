@@ -29,7 +29,7 @@ function ekiline_meta_description() {
             $descHead = strip_tags(category_description());
         } 
     }
-    echo '<meta name="description" content="' . $descHead . '" />' . "\n";
+    echo '<meta name="description" content="' . esc_attr( $descHead ) . '" />' . "\n";
 }
 add_action( 'wp_head', 'ekiline_meta_description', 0 , 0);
 
@@ -95,7 +95,7 @@ function ekiline_meta_keywords() {
     } 
 
     if ($keywords){
-        echo '<meta name="keywords" content="' . $keywords . '" />' . "\n";
+        echo '<meta name="keywords" content="' . esc_attr( $keywords ) . '" />' . "\n";
     }
 
 }
@@ -108,10 +108,10 @@ function metaSocial(){
 
     $metaTitle = get_bloginfo( 'name' );
     $metaDescription = get_bloginfo( "description" );
-    $metaImages = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
-    $twSocial = 'twitter.com';
-    $metaType = 'website';
-    $currentUrl = home_url( add_query_arg( array(), $wp->request ) ); //global $wp
+    $metaImages = esc_url( wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) ) );
+    $twSocial = esc_html('twitter.com');
+    $metaType = esc_html('website');
+    $currentUrl = esc_url( home_url( add_query_arg( array(), $wp->request ) ) ); //global $wp
 
         //Google
         $metaSocial .= '<meta itemprop="name" content="'.$metaTitle.'">'."\n";
@@ -132,7 +132,9 @@ function metaSocial(){
         $metaSocial .= '<meta property="og:description" content="'.$metaDescription.'"/>'."\n";
         $metaSocial .= '<meta property="og:site_name" content="'. $metaTitle .'"/>'."\n";
         
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     echo $metaSocial;   
+
 }
     
 add_action( 'wp_head', 'metaSocial', 1);

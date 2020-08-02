@@ -25,9 +25,9 @@
   <div class="container">  	
     <?php ekiline_countWidgets('footer-w1'); ?>  	         
     <p>
-      <?php echo ekiline_notes('copyright'); ?>
-      <?php echo ekiline_notes('poweredby'); ?>
-      <a class="goTop float-right" href="#top"><span>&uarr;</span><?php echo __( 'Back', 'ekiline' ); ?></a>
+      <?php echo wp_kses_post( ekiline_notes('copyright') ); ?>
+      <?php echo wp_kses_post( ekiline_notes('poweredby') ); ?>
+      <a class="goTop float-right" href="#top"><span>&uarr;</span><?php echo esc_html( __( 'Back', 'ekiline' ) ); ?></a>
     </p>
   </div>
 </footer><!-- .site-footer -->

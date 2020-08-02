@@ -22,8 +22,8 @@
 
 	<footer class="card-footer">	
 		<p class="entry-meta small mark">
-			<?php echo ekiline_notes('categories'); ?>
-			<?php echo ekiline_notes('tags'); ?>
+			<?php echo wp_kses_post( ekiline_notes('categories') ); ?>
+			<?php echo wp_kses_post( ekiline_notes('tags') ); ?>
 		</p><!-- .entry-meta -->			
 	</footer><!-- .entry-footer -->
 

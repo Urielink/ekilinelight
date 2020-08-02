@@ -280,6 +280,7 @@ function ekiline_get_all_styles(){
     $groupStyles .= ekiline_page_elements(); // de los elementos (3)
     $groupStyles .= ekiline_custom_background_cb(); // de custom background (4)
         $groupStyles .= ekiline_custom_css_cb(); // de custom CSS (5)
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     echo $groupStyles;
 }
 add_action('group_inline_css', 'ekiline_get_all_styles', 5);

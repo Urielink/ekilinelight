@@ -47,51 +47,63 @@ add_action( 'admin_menu', 'ekiline_theme_page' );
 function theme_html_page() { ?>
 
 <div class="wrap">
-	<h1><span class="dashicons dashicons-layout" aria-hidden="true"></span> <?php _e('About Ekiline for WordPress','ekiline'); ?></h1>
+	<h1>
+        <span class="dashicons dashicons-layout" aria-hidden="true"></span> 
+            <?php esc_html_e('About Ekiline for WordPress','ekiline'); ?>
+    </h1>
     
 	<div id="welcome-panel" class="welcome-panel">
 		
 		<div class="welcome-panel-content">
 	
-			<h2><?php _e('Thanks for using this theme!','ekiline'); ?></h2>
-			<hr />
-			<p class="about-description"><?php _e('Find more information to improve your skills in the personalization of your site.','ekiline'); ?></p>
+			<h2><?php esc_html_e('Thanks for using this theme!','ekiline'); ?></h2>
+			<hr>
+			<p class="about-description">
+                <?php esc_html_e('Find more information to improve your skills in the personalization of your site.','ekiline'); ?>
+            </p>
 				
 			<div class="welcome-panel-column-container">
 				<div class="welcome-panel-column">
 					<div style="padding:4px;">
-						<h3><?php _e('Get the definitive version, with more benefits for the distribution of your projects:','ekiline'); ?></h3>
+						<h3><?php esc_html_e('Get the definitive version, with more benefits for the distribution of your projects:','ekiline'); ?></h3>
 						<ul>
-							<li><span class="dashicons dashicons-book dash-note"></span><?php _e('Quick use guide for your clients, in Keynote and Power Point format for editing.','ekiline'); ?></li>
-							<li><span class="dashicons dashicons-edit dash-note"></span><?php _e('CSS complementary designs for general theme.','ekiline'); ?></li>
-							<li><span class="dashicons dashicons-layout dash-note"></span><?php _e('HTML structures preloaded for use in publications.','ekiline'); ?></li>
-							<li><span class="dashicons dashicons-welcome-view-site dash-note"></span><?php _e('Complete theme, without external links, ads or tips.','ekiline'); ?></li>
+                            <li><span class="dashicons dashicons-book dash-note"></span>
+                                <?php esc_html_e('Quick use guide for your clients, in Keynote and Power Point format for editing.','ekiline'); ?></li>
+                            <li><span class="dashicons dashicons-edit dash-note"></span>
+                                <?php esc_html_e('CSS complementary designs for general theme.','ekiline'); ?></li>
+                            <li><span class="dashicons dashicons-layout dash-note"></span>
+                                <?php esc_html_e('HTML structures preloaded for use in publications.','ekiline'); ?></li>
+                            <li><span class="dashicons dashicons-welcome-view-site dash-note"></span>
+                                <?php esc_html_e('Complete theme, without external links, ads or tips.','ekiline'); ?></li>
 						</ul>
 						<p>
-							<a class="button button-primary button-hero" href="<?php _e('http://ekiline.com/compra/','ekiline'); ?>" target="_blank"><span class="dashicons dashicons-cart"></span> <?php _e('Buy and download','ekiline'); ?></a>
+                            <?php printf( '<a class="button button-primary button-hero" href="%1$s" target="_blank"><span class="dashicons dashicons-cart"></span>%2$s</a>', esc_url('http://ekiline.com/compra/'), esc_html__('Buy and download','ekiline') );?>
 						</p>
-						<p><span class="dashicons dashicons-carrot"></span> <?php _e('You can also','ekiline'); ?> <a href="<?php _e('http://ekiline.com/fondeo/','ekiline'); ?>" target="_blank"><?php _e('fund the development','ekiline'); ?></a> 
-							<?php _e('or','ekiline'); ?> <a href="<?php _e('http://ekiline.com/gana/','ekiline'); ?>" target="_blank"><?php _e('earn money','ekiline'); ?></a> <?php _e('by helping.','ekiline'); ?></p>
+                        <p>
+                            <span class="dashicons dashicons-carrot"></span> <?php esc_html_e('You can also','ekiline'); ?>                         
+                            <?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url('http://ekiline.com/fondeo/'), esc_html__('fund the development','ekiline') );?>
+                            <?php esc_html_e('or','ekiline'); ?> 
+                            <?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url('http://ekiline.com/gana/'), esc_html__('earn money','ekiline') );?>                            
+                            <?php esc_html_e('by helping.','ekiline'); ?>
+                        </p>
 					</div>
 				</div>
 				<div class="welcome-panel-column">
 					<div style="padding:4px;">
-						<h3><?php _e('About','ekiline'); ?></h3>
-						<p><?php _e('Ekiline simplifies the creation of a website with WordPress, it is a working method that brings together the standard practices of the internet industry, to facilitate the tasks of planning, design, development and optimization. For more information visit ekiline.com','ekiline'); ?></p>
-						<p><strong><?php _e('Limited liability','ekiline'); ?></strong></p>
-						<p><small><?php _e('As a courtesy, we provide information on how to use certain third-party products, but we do not directly support their use and we are not responsible for the functions, reliability or compatibility of such products. The names, trademarks and logos of third parties are registered trademarks of their respective owners.','ekiline'); ?></small></p>
+						<h3><?php esc_html_e('About','ekiline'); ?></h3>
+						<p><?php esc_html_e('Ekiline simplifies the creation of a website with WordPress, it is a working method that brings together the standard practices of the internet industry, to facilitate the tasks of planning, design, development and optimization. For more information visit ekiline.com','ekiline'); ?></p>
+						<p><strong><?php esc_html_e('Limited liability','ekiline'); ?></strong></p>
+						<p><small><?php esc_html_e('As a courtesy, we provide information on how to use certain third-party products, but we do not directly support their use and we are not responsible for the functions, reliability or compatibility of such products. The names, trademarks and logos of third parties are registered trademarks of their respective owners.','ekiline'); ?></small></p>
 					</div>
 				</div>
 				<div class="welcome-panel-column welcome-panel-last">
 					<div style="padding:4px;">
-						<h3><?php _e('Documentation','ekiline'); ?></h3>
+						<h3><?php esc_html_e('Documentation','ekiline'); ?></h3>
 						<ul>
-							<li><a href="<?php _e('http://ekiline.com/instala/','ekiline'); ?>" target="_blank"> <?php _e('Installation','ekiline'); ?></a></li>
-							<li><a href="<?php _e('http://ekiline.com/personaliza/','ekiline'); ?>" target="_blank"> <?php _e('Personalization','ekiline'); ?></a></li>
-							<li><a href="<?php _e('http://ekiline.com/elementos/','ekiline'); ?>" target="_blank"> <?php _e('Elements and shortcodes','ekiline'); ?></a></li>
-							<li><a href="<?php _e('http://ekiline.com/compatible/','ekiline'); ?>" target="_blank"> <?php _e('Compatibility','ekiline'); ?></a></li>
-							<li><?php _e('Edit your HTML presets:','ekiline'); ?></li>
-							<li><a href="<?php _e('theme-editor.php?file=template-parts%2Fcustom-layouts.php&theme=ekiline','ekiline'); ?>" target="_blank"> <?php _e('Custom presets','ekiline'); ?></a></li>
+                            <li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url('http://ekiline.com/instala/'), esc_html__('Installation','ekiline') );?></li>
+                            <li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url('http://ekiline.com/personaliza/'), esc_html__('Personalization','ekiline') );?></li>
+                            <li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url('http://ekiline.com/elementos/'), esc_html__('Elements and shortcodes','ekiline') );?></li>
+                            <li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url('http://ekiline.com/compatible/'), esc_html__('Compatibility','ekiline') );?></li>
 						</ul>
 					</div>
 				</div>
@@ -100,12 +112,15 @@ function theme_html_page() { ?>
 		</div>
 	</div>   
 
+
+
+
 	<p style="text-align: right;">
         <small>
-            <?php printf( esc_html__( '&copy; Copyright %1$s Ekiline', 'ekiline' ), esc_attr( date('Y') ) );?>. 
-            <?php _e('All rights reserved. Ekiline developed by','ekiline'); ?> 
-            <a href="<?php _e('https://bixnia.com/','ekiline'); ?>" target="_blank"> 
-            <?php _e('B&nbsp;I&nbsp;X&nbsp;N&nbsp;I&nbsp;A','ekiline'); ?></a>
+            <?php /* translators: %1$s is replaced with date data */
+                printf( esc_html__( '&copy; Copyright %1$s Ekiline', 'ekiline' ), esc_attr( date('Y') ) );?>. 
+            <?php esc_html_e('All rights reserved. Ekiline developed by','ekiline'); ?> 
+            <?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url('https://bixnia.com/'), esc_html__('B I X N I A','ekiline') );?>
         </small>
     </p>
 </div>
@@ -147,9 +162,9 @@ function ekiline_docs_feed() { ?>
         the_widget( 'WP_Widget_RSS', $rssInstance, $rssArgs ); 
         ?>
         <div>
-            <a class="button button-primary" href="http://ekiline.com/gana/" target="_blank"><?php _e( 'Make money', 'ekiline' ); ?> <i class="far fa-money-bill-alt"></i></a>
-            <a class="button button-primary" href="http://ekiline.com/compra/" target="_blank"><?php _e( 'Get more', 'ekiline' ); ?></a>
-            <a class="button button-primary" href="themes.php?page=ekiline_options"><?php _e( 'About', 'ekiline' ); ?></a>
+            <?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url('http://ekiline.com/gana/'), esc_html__('Make money','ekiline') );?>
+            <?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url('http://ekiline.com/compra/'), esc_html__('Get more','ekiline') );?>
+            <?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url('themes.php?page=ekiline_options'), esc_html__('About','ekiline') );?>
         </div>
     </div>
 

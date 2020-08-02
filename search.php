@@ -17,8 +17,14 @@ get_header(); ?>
 		<?php if ( have_posts() ) { ?>
 
 			<header class="entry-header">
-				<h1 class="page-title"><?php printf( esc_html__( 'Search Results for: %s', 'ekiline' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-				<p><?php printf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts ); ?></p>
+				<h1 class="page-title">
+					<?php /* translators: %s is replaced with search query */
+						printf( esc_html__( 'Search Results for: %s', 'ekiline' ), '<span>' . get_search_query() . '</span>' ); ?>
+				</h1>
+				<p>
+					<?php /* translators: %s is replaced with results */
+					printf( esc_html__( '%s results found.', 'ekiline' ), esc_attr( $wp_query->found_posts ) ); ?>
+				</p>
 			</header><!-- .entry-header -->
 
 			<?php get_search_form(); ?>

@@ -2018,9 +2018,3 @@ body{min-width:992px!important}
       background-size: 140vh;
    } 
 }
-
-/* @media only screen and (min-width:960px){ 
-   .custom-header.container .wp-block-cover{ 
-      background-image: url("'.ekiline_header_image('full').'") !important; 
-   } 
-} */

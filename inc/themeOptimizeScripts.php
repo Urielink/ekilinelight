@@ -37,14 +37,14 @@ function print_libs($kind,$ignore){
         $ignoreCss = array('admin-bar','customize-preview','wp-mediaelement');
         $ignoreJs = array('customize-preview','admin-bar','wp-mediaelement','mediaelement-vimeo','wp-playlist','customize-selective-refresh','customize-preview-widgets','customize-preview-nav-menus');
         //mostrar modulo html
-            $html_action = '<div style="position:fixed;bottom:0px;left:0px;right:0px;z-index:100;">';
+            $html_action = '<div class="fixed-bottom" style="position:fixed;bottom:0px;left:0px;right:0px;z-index:100;">';
             $html_action .= '<a class="btn btn-sm btn-primary show-handlers" data-toggle="collapse" href="#collapseHandlers">'.__('Sort Scripts ','ekiline').'</a> ';
             $html_action .= '<div class="collapse" id="collapseHandlers" style="background:#eeeeee;color:#656a6f;padding:10px;">';
             $html_action .= '<small>'.__('Choose and copy handlers in customizer "Ekiline Sort Scripts" option','ekiline') . '</small><br>';
-            $html_action .= __('Styles: ','ekiline') . '<code>' . print_libs( 'css', $ignoreCss ) . '</code><br>';
-            $html_action .= __('Scripts: ','ekiline') . '<code>' . print_libs( 'js', $ignoreJs ) .'</code>';
+            $html_action .= __('Styles: ','ekiline') . '<code>'.print_libs( 'css', $ignoreCss ).'</code><br>';
+            $html_action .= __('Scripts: ','ekiline') . '<code>'.print_libs( 'js', $ignoreJs ).'</code>';
             $html_action .= '</div></div>';
-            echo $html_action;
+            echo wp_kses_post( $html_action );
     }
     add_action('wp_footer', 'print_styles_and_scripts_info',0);
 
@@ -89,6 +89,7 @@ function ekiline_reload_libraries( $wp_customize ) {
     foreach($type as $kind) {
 
         $field_name = 'ekiline_' . $kind . '_handler_array';
+        /* translators: %1$s is replaced with variable kind */
         $field_label = sprintf( esc_html__( 'Comma separated %1$s handlers', 'ekiline' ), $kind );
 
         // Campos de manejadores para llenar

@@ -17,13 +17,13 @@
 ?>
 
 <h1 class="archive-title">
-	<?php echo ( is_home() && !is_front_page() ) ? get_the_title( get_option('page_for_posts', true) ) : get_the_archive_title() ; ?>
+	<?php echo wp_kses_post( ( is_home() && !is_front_page() ) ? get_the_title( get_option('page_for_posts', true) ) : get_the_archive_title() ) ; ?>
 </h1>
 	
 	<?php if ( is_home() && !is_front_page() ) { ?>
 
 		<div>
-			<?php echo get_post_field( 'post_content', get_option('page_for_posts') );?>
+			<?php echo wp_kses_post( get_post_field( 'post_content', get_option('page_for_posts') ) );?>
 		</div>
 
 	<?php } else if ( is_category() ) { ?>
@@ -40,13 +40,13 @@
 		<div> 
 
 			<p>
-				<?php echo nl2br( get_the_author_meta('description') ); ?>
+				<?php echo wp_kses_post( nl2br( get_the_author_meta('description') ) ); ?>
 			</p>
 
 			<p>
-				<?php echo __( 'User: ', 'ekiline' ) . get_the_author_meta( 'display_name' ); // to get selected name ?>
-				<br> <?php echo __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ); // to get  email ?>
-				<br> <?php echo __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ); // to get  url ?>
+				<?php echo wp_kses_post( __( 'User: ', 'ekiline' ) . get_the_author_meta( 'display_name' ) ); // to get selected name ?>
+				<br> <?php echo wp_kses_post( __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ) ); // to get  email ?>
+				<br> <?php echo wp_kses_post( __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ) ); // to get  url ?>
 			</p>
 
 		</div>

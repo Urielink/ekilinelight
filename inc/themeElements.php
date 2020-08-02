@@ -20,17 +20,19 @@ function ekiline_notes($text = null) {
 	switch ($text) {
 		case 'copyright':
 			$item = sprintf( 
+				/* translators: %1$s is replaced with date */
 				esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), 
 				esc_attr( date('Y') . ' ' . get_bloginfo( 'name', 'display' ) ) 
 			);
-			break;
+			break; // se ocupaba sprintf y se imprimia con echo
 		case 'poweredby':
-			$item = sprintf( 
+			$item = sprintf(
+				/* translators: %1$s and %2$s are replaced with link url  */
 				esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ),
-				'<a href="'.__('https://wordpress.org/', 'ekiline').'" target="_blank" rel="noopener">WordPress</a>',
-				'<a href="'.__('http://ekiline.com', 'ekiline').'" target="_blank" rel="noopener">Ekiline</a>' 
+				'<a href="'.esc_url('https://wordpress.org/').'" target="_blank" rel="noopener">'.esc_html__('WordPress','ekiline').'</a>',
+				'<a href="'.esc_url('http://ekiline.com').'" target="_blank" rel="noopener">'.esc_html__('Ekiline','ekiline').'</a>' 
 			);
-			break;	
+			break; // se ocupaba sprintf y se imprimia con echo
 		case 'author':
 			// $item = sprintf( 
 			// 	esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
@@ -38,18 +40,21 @@ function ekiline_notes($text = null) {
 			// );
 			$username = get_userdata( $post->post_author ); 					
 			$item = sprintf( 
+				/* translators: %s are replaced with author name  */
 				esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
 				'<a href="'.get_author_posts_url( $post->post_author ).'" title="'.get_the_title().'" rel="author">'. $username->display_name .'</a>'
 			);			
 			break;
 		case 'posted':
 			$item = sprintf( 
+				/* translators: %s is replaced with post date */
 				esc_html_x( 'Posted on %s', 'post date', 'ekiline' ), 
 				'<a href="' . esc_url( get_month_link( get_the_time('Y'), get_the_time('m') ) ) . '" rel="bookmark">' . get_the_time( esc_html__( 'F j, Y', 'ekiline' ) ) . '</a>'
 			);
 			break;
 		case 'updated':
 			$item = sprintf( 
+				/* translators: %s is replaced with modification date */
 						esc_html__( 'Updated on %s', 'ekiline' ), 
 						get_the_modified_date( esc_html__( 'F j, Y', 'ekiline' ) )
 					);
@@ -57,6 +62,7 @@ function ekiline_notes($text = null) {
 		case 'categories':
 			if ( is_page() || get_the_category_list() == '' ) break;
 			$item = sprintf( 
+				/* translators: %s is replaced with category title */
 				esc_html__( 'Categories: %s', 'ekiline' ), 
 				get_the_category_list(', ')
 			);
@@ -64,6 +70,7 @@ function ekiline_notes($text = null) {
 		case 'tags':
 			if (get_the_tag_list() == '') break;
 			$item = sprintf( 
+				/* translators: %s is replaced with tags */
 				esc_html__( 'Tags: %s', 'ekiline' ), 
 				get_the_tag_list( '', ', ')
 			);
@@ -77,7 +84,7 @@ function ekiline_notes($text = null) {
 				'comments-link', 
 				__('Comments are closed.', 'ekiline') 
 			);			
-			break;			
+			break;								
 	}	
     return $item;
 }
@@ -88,7 +95,7 @@ function ekiline_notes($text = null) {
  **/
 function ekiline_post_id(){
 	$itemId = get_post_type() . '-' . get_the_ID();	
-	echo $itemId;
+	echo esc_attr($itemId);
 }
 
 /**
@@ -96,6 +103,7 @@ function ekiline_post_id(){
  * Custom read more link
  */
 function overrideReadMoreLink(){
+	/* translators: screenread only %s is replaced with title */
 	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline') .'</a>';
 }
 add_filter( 'the_content_more_link', 'overrideReadMoreLink' );
@@ -225,6 +233,7 @@ function ekiline_content_additions( $content ) {
 	if ( is_home() || is_front_page() || is_archive() || is_search() ) {
 
 		global $post;
+		/* translators: screenread only %s is replaced with title */
 		$link = '... <a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline') .'</a>';
 
 		if( strpos( $post->post_content, '<!--more-->' ) ) {
@@ -434,7 +443,7 @@ function ekiline_pagination(){
 	$thePages .= '</ul>';
 	$thePages .= '</nav>';
 
-
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $thePages;
 
 } 
