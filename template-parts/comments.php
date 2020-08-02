@@ -13,18 +13,19 @@
 	<?php if ( have_comments() ) : ?>
 
 		<button class="btn btn-link btn-sm text-secondary float-right" data-toggle="collapse" data-target="#comments-activity">
-			<?php echo __('Hide comments', 'ekiline'); ?> <span>&dtrif;</span>
+			<?php esc_html_e('Hide comments', 'ekiline'); ?> <span>&dtrif;</span>
 		</button>   
 
 		<p class="comments-title text-secondary mb-2 pb-2 pt-1 border-bottom">
-			<?php
+			<?php /* NX https://developer.wordpress.org/reference/functions/_nx/ */
 				printf( 
 					esc_html( 
+						/* translators: %1$s is replaced with comments count, %2$s is replaced with title  */
 						_nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'ekiline' ) 
 					),
-					number_format_i18n( get_comments_number() ),
-					'<span>' . get_the_title() . '</span>'
-				);
+					esc_html(number_format_i18n( get_comments_number() )),
+					'<span>' . esc_html(get_the_title()) . '</span>'
+				);				
 			?>
 		</p>
     
@@ -87,7 +88,7 @@ function ekilineCommentsSimple($comment, $args, $depth) {
         $add_below = 'div-comment';
     }?>
     
-    <<?php echo $tag; ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
+    <<?php echo esc_attr($tag); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
     
     <?php if ( 'div' != $args['style'] ) { ?>    	
         <div id="div-comment-<?php comment_ID() ?>" class="comment-body row mb-2 px-md-3">
@@ -129,7 +130,7 @@ function ekilineCommentsExtended($comment, $args, $depth) {
         $add_below = 'div-comment';
     }?>
     
-    <<?php echo $tag; ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
+    <<?php echo esc_attr($tag); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
     
     <?php if ( 'div' != $args['style'] ) { ?>    	
         <div id="div-comment-<?php comment_ID() ?>" class="comment-body">
@@ -143,10 +144,13 @@ function ekilineCommentsExtended($comment, $args, $depth) {
         	</div>
         	
         	<div class="rounded bg-white col-md-11 col-sm-10 col-9 py-2">
-		        <?php printf( __( '<cite class="fn">%s</cite> <span class="says">says:</span>', 'ekiline' ), get_comment_author_link() ); ?>
+		        <?php printf( 
+					/* translators: %s is replaced with author link  */
+						wp_kses_post( __( '<cite class="fn">%s</cite> <span class="says">says:</span>', 'ekiline' ) ), get_comment_author_link() 
+					); ?>
 		        
 		        <?php if ( $comment->comment_approved == '0' ) { ?>
-		            <em class="comment-awaiting-moderation"><?php __( 'Your comment is awaiting moderation.', 'ekiline' ); ?></em><br/>
+		            <em class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'ekiline' ); ?></em><br/>
 		        <?php } ?>
 
 		        <?php comment_text(); ?>
@@ -157,13 +161,13 @@ function ekilineCommentsExtended($comment, $args, $depth) {
         
         <div class="d-flex justify-content-between small">
         <div class="comment-meta commentmetadata">
-            <a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ); ?>">
-            	<?php
-                /* translators: 1: date, 2: time */
-                printf( 
-                    __('%1$s at %2$s', 'ekiline'), 
-                    get_comment_date(),  
-                    get_comment_time() 
+            <a href="<?php echo esc_url( htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ); ?>">
+            	<?php                
+                printf(
+					/* translators: 1: date, 2: time */ 
+                    esc_html( __('%1$s at %2$s', 'ekiline') ), 
+                    esc_html( get_comment_date() ),  
+                    esc_html( get_comment_time() ) 
                 ); ?>
             </a>
             <?php edit_comment_link( __( '(Edit)', 'ekiline' ), '  ', '' ); ?>

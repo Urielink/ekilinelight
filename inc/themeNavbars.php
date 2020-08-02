@@ -17,15 +17,20 @@ function logoTheme() {
     $logoHor = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
 
     if ( $logoHor && !$logoIcono ) {
-        echo '<img class="img-fluid" src="' . $logoHor . '" alt="' . get_bloginfo( 'name' ) . '" loading="lazy"/>';
+		echo '<img class="img-fluid" src="' . esc_url($logoHor) . '" alt="' . esc_html(get_bloginfo( 'name' )) . '" loading="lazy"/>';
     } elseif ( !$logoHor && $logoIcono ) {
-        echo '<img class="brand-icon" src="' . get_site_icon_url() . '" alt="' . get_bloginfo( 'name' ) . '" loading="lazy"/>' . get_bloginfo( 'name' );
+		echo '<img class="brand-icon" src="' . esc_url(get_site_icon_url()) . '" alt="' . esc_html(get_bloginfo( 'name' )) . '" loading="lazy"/>
+			' . esc_html(get_bloginfo( 'name' )) ;
     } elseif ( $logoHor && $logoIcono ) {
-        echo '<img class="img-fluid d-none d-md-block" src="' . $logoHor . '" alt="' . get_bloginfo( 'name' ) . '" loading="lazy"/>
-        <span class="d-block d-md-none"><img class="brand-icon" src="' . get_site_icon_url('150') . '" alt="' . get_bloginfo( 'name' ) . '" loading="lazy"/>' . get_bloginfo( 'name' ) . '</span>';
+		echo '
+		<img class="img-fluid d-none d-md-block" src="' . esc_url($logoHor) . '" alt="' . esc_html(get_bloginfo( 'name' )) . '" loading="lazy"/>
+		<span class="d-block d-md-none">
+			<img class="brand-icon" src="' . esc_url(get_site_icon_url('150')) . '" alt="' . esc_html(get_bloginfo( 'name' )) . '" loading="lazy"/>
+			' . esc_html(get_bloginfo( 'name' )) . '
+		</span>';
     } else {
-        echo get_bloginfo( 'name' );
-    } 
+        echo esc_html(get_bloginfo( 'name' ));
+	} 
 }
 
 /**
@@ -110,26 +115,26 @@ function ekilineNavbar($navPosition){
 
 ?>
 
-			<header id="<?php echo $navPosition;?>SiteNavigation"  class="<?php echo $navClassCss;?>">
+			<header id="<?php echo esc_attr($navPosition);?>SiteNavigation"  class="<?php echo esc_attr($navClassCss);?>">
 			
-		    	<div class="container<?php echo $headNav; ?>">
+		    	<div class="container<?php echo esc_attr($headNav); ?>">
 
 		            <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>"><?php logoTheme(); ?></a>
 		            
 					<?php if( get_bloginfo( 'description' ) ) { ?>
-					<span class="navbar-text d-none d-md-block site-description"><?php echo get_bloginfo( 'description' ); ?></span> 
+					<span class="navbar-text d-none d-md-block site-description"><?php echo esc_html(get_bloginfo( 'description' )); ?></span> 
 					<?php }?>
 
-		            <button class="<?php echo $togglerBtn;?>" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>" aria-label="Toggle navigation">
+		            <button class="<?php echo esc_attr($togglerBtn);?>" type="button" data-toggle="<?php echo esc_attr($dataToggle); ?>" data-target="#<?php echo esc_attr($dataTarget); ?>" aria-label="Toggle navigation">
 		      			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 		            </button>
 		            
 	            <?php if ( $styles <= '6'){ ?> 
 
-			        <div id="<?php echo $dataTarget;?>" class="<?php echo $collapseCss;?>">
+			        <div id="<?php echo esc_attr($dataTarget);?>" class="<?php echo esc_attr($collapseCss);?>">
 
 					<?php if ( $styles == '5' ){ ?>
-						<button class="<?php echo $togglerBtn;?>" type="button" data-toggle="<?php echo $dataToggle; ?>" data-target="#<?php echo $dataTarget; ?>" aria-label="Toggle navigation">
+						<button class="<?php echo esc_attr($togglerBtn);?>" type="button" data-toggle="<?php echo esc_attr($dataToggle); ?>" data-target="#<?php echo esc_attr($dataTarget); ?>" aria-label="Toggle navigation">
 			      			<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 						</button>
 					<?php }?>
@@ -177,7 +182,7 @@ function ekiline_modalMenuBottom($navPosition){
 	    case 10 : $modalCss = 'modal fade right-aside modal-nav'; break;
 	}?>
 	
-<div id="<?php echo $modalId;?>" class="<?php echo $modalCss;?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
+<div id="<?php echo esc_attr($modalId);?>" class="<?php echo esc_attr($modalCss);?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <!-- <div class="modal-header">
@@ -201,7 +206,7 @@ function ekiline_modalMenuBottom($navPosition){
       	<div class="navbar p-0">
 
 		<?php if( get_bloginfo( 'description' ) ) { ?>
-			<span class="navbar-text site-description"><?php echo get_bloginfo( 'description' ); ?></span> 
+			<span class="navbar-text site-description"><?php echo esc_html(get_bloginfo( 'description' )); ?></span> 
 		<?php }?>
 		        
 	    <?php wp_nav_menu( array(
@@ -225,7 +230,7 @@ function ekiline_modalMenuBottom($navPosition){
       </div-->
     </div>
   </div>
-</div><!-- #<?php echo $modalId;?> -->
+</div><!-- #<?php echo esc_attr($modalId);?> -->
 
 <?php }
 // add_action( 'wp_footer', 'ekiline_modalMenuBottom', 0, 1 );
@@ -236,7 +241,7 @@ $link = home_url(null,$link);
   ?>
   <ul id="SetNavMenu" class="navbar-nav mr-auto">
   	<li class="nav-item">
-  		<a class="nav-link" href="<?php echo $link; ?>"><?php echo __('Assign a menu!', 'ekiline'); ?></a>		
+  		<a class="nav-link" href="<?php echo esc_url($link); ?>"><?php esc_html_e('Assign a menu!', 'ekiline'); ?></a>		
 	</li>
   </ul>
   <?php

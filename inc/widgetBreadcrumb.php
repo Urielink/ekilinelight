@@ -22,9 +22,9 @@ class ekilineBreadcrumb extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array( 
 			'classname' => 'ekilineBreadcrumb',
-			'description' => __('Add bootstrap breadcrumb', 'ekiline'),
+			'description' => __('Show breadcrumb module (Ekiline)', 'ekiline'),
 		);
-		parent::__construct( 'ekilineBreadcrumb', __('Show breadcrumb', 'ekiline'), $widget_ops );
+		parent::__construct( 'ekilineBreadcrumb', __('Breadcrumb Nav', 'ekiline'), $widget_ops );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class ekilineBreadcrumb extends WP_Widget {
 	    );     
 
 		// outputs the content of the widget
-		 echo $args['before_widget'];
+		 echo wp_kses_post( $args['before_widget'] );
 		// echo str_replace('<div', '<nav', $args['before_widget'] );
 		
 		// if ( ! empty( $instance['title'] ) ) {
@@ -61,9 +61,9 @@ class ekilineBreadcrumb extends WP_Widget {
 		// }
 		// echo esc_html__( 'Hello, World!', 'text_domain' );
 		
-		echo createBreadcrumb();
+		echo wp_kses_post( createBreadcrumb() );
 		
-		 echo $args['after_widget'];		
+		 echo wp_kses_post( $args['after_widget'] );		
 		// echo str_replace('div>', 'nav>', $args['after_widget'] );
 	}
 
@@ -223,7 +223,7 @@ function createBreadcrumb(){
         $breadcrumb .= '<li class="breadcrumb-item 404">' . __( 'Not found ', 'ekiline' ) .'</li><!--.404-->';
     }
 
-	echo '<ul class="breadcrumb">' . $breadcrumb . '</ul>';
+	echo wp_kses_post( '<ul class="breadcrumb">' . $breadcrumb . '</ul>' );
 					
 }
 
