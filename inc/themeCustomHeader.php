@@ -238,7 +238,19 @@ function ekiline_header_image($size = null){
 function custom_header_content($contentType = null){
 
     $custom_header_title = get_bloginfo( 'name' );
-    $custom_header_text = get_bloginfo( 'description' );
+	$custom_header_text = get_bloginfo( 'description' );
+
+	$categories_list = '';	
+	if ( !is_page() || get_the_category_list() != '' ){
+		/* translators: %s is replaced with category title */
+		$categories_list = sprintf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list(', ') ) );			
+	}
+
+	$tags_list = '';	
+	if ( get_the_tag_list() != '' ) {
+		/* translators: %s is replaced with tags */
+		$tags_list = sprintf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ') ) );					
+	}
 
         if ( is_front_page() && get_theme_mod('ekiline_headerCustomText') ){
             global $post;
@@ -260,14 +272,22 @@ function custom_header_content($contentType = null){
             } else {
 				$custom_header_title = '<a href="' . esc_url( get_the_permalink() ) . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
 				$custom_header_text = ekiline_content_out_the_loop()  . '<br>';
-					$custom_header_text .= '<small>'.ekiline_notes('categories') . ' | ' . ekiline_notes('tags') . '</small>';
+					$custom_header_text .= '<small>'.$categories_list . ' | ' . $tags_list . '</small>';
             }
         }
 
         if ( is_singular() && !is_front_page() ){
+			global $post;
+			$username = get_userdata( $post->post_author ); 					
+			$author_item = sprintf( 
+				/* translators: %s are replaced with author name  */
+				esc_html_x( 'Written by %s', 'post authors', 'ekiline' ), 
+				'<a href="'.get_author_posts_url( $post->post_author ).'" title="'.get_the_title().'" rel="author">'. $username->display_name .'</a>'
+			);
+					
 			$custom_header_title = get_the_title();
-				$addCategories = ( !is_page() ) ? ' | ' . ekiline_notes('categories') : '';
-				$custom_header_text = '<small>'. ekiline_notes('author') . $addCategories . '</small>';
+				$addCategories = ( !is_page() ) ? ' | ' . $categories_list : '';
+				$custom_header_text = '<small>'. $author_item . $addCategories . '</small>';
         }
 
         if( is_archive() || is_category() ){
@@ -277,7 +297,7 @@ function custom_header_content($contentType = null){
                 $content = get_the_archive_description();
                     $custom_header_text .= wp_strip_all_tags( substr( $content, 0, strpos( $content, '.' ) ) ) . '<br>';
             }
-					$custom_header_text .= '<small>'.ekiline_notes('categories') . ' | ' . ekiline_notes('tags') . '</small>';
+					$custom_header_text .= '<small>'. $categories_list . ' | ' . $tags_list . '</small>';
         }
 
         if( is_search() ){

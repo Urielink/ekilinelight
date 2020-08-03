@@ -8,7 +8,7 @@
  */
 ?>
 
-<article id="<?php ekiline_post_id();?>" <?php post_class();?>>
+<article <?php post_class();?>>
 			
 	<?php ekiline_thumbnail(); ?>
 
@@ -22,8 +22,17 @@
 
 	<footer class="card-footer">	
 		<p class="entry-meta small mark">
-			<?php echo wp_kses_post( ekiline_notes('categories') ); ?>
-			<?php echo wp_kses_post( ekiline_notes('tags') ); ?>
+			<?php 
+				if ( !is_page() || get_the_category_list() != '' ){
+					/* translators: %s is replaced with category title */
+					printf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list(', ') ) );			
+				}
+
+				if ( get_the_tag_list() != '' ) {
+					/* translators: %s is replaced with tags */
+					printf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ') ) );					
+				}
+			?>
 		</p><!-- .entry-meta -->			
 	</footer><!-- .entry-footer -->
 
