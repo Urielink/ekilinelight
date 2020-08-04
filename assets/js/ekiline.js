@@ -1,26 +1,26 @@
 /* Ekiline for WordPress Theme, Copyright 2018 Uri Lazcano. Ekiline is distributed under the terms of the GNU GPL. http://ekiline.com */
 jQuery(document).ready(function( $ ) {
 
-	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-	 * 
-	 *	Addons Ekiline 
-	 * 
-	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/			
+	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	 *
+	 *	Addons Ekiline
+	 *
+	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 
     // Ajuste en dropdown de widgets dentro de navbar
 	$('.dropdown-menu a.dropdown-toggle').on('click', function(e){
 	    $(this).next('ul').toggle();
 	    e.stopPropagation();
 	    e.preventDefault();
-	  });	
-				
+	  });
+
 	/* animar el boton del menu modal */
 	$('.modal-toggler').on('click',function(){
 		$(this).removeClass('collapsed');
 	});
 		$('.modal-nav').on('hidden.bs.modal', function(){
 			$('.modal-toggler').addClass('collapsed');
-		});             
+		});
 
 	/* cambiar el tamaño de una ventana modal */
 	$( '.modal-resize' ).click(function(){
@@ -30,15 +30,15 @@ jQuery(document).ready(function( $ ) {
 
 	/* scroll suave en botón de footer */
 	$('.goTop').click(function() {
-	  $('html, body').animate({ scrollTop:0 }, 'slow');		
-	});	
+	  $('html, body').animate({ scrollTop:0 }, 'slow');
+	});
 
-	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
-	 * 
-	 *	Bootstrap  
-	 * 
-	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/			
-	// inicializar popovers y tooltips 
+	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	 *
+	 *	Bootstrap
+	 *
+	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
+	// inicializar popovers y tooltips
 	// $(this).one('mousemove', startPop() ).one('scroll', startPop() );
 	// function startPop(){
 		$('[data-toggle="tooltip"]').tooltip();

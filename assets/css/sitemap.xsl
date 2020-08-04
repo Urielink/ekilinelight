@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="2.0" 
-                xmlns:html="http://www.w3.org/TR/REC-html40"
-                xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="2.0"
+				xmlns:html="http://www.w3.org/TR/REC-html40"
+				xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
+				xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
 	<xsl:template match="/">
 		<html xmlns="http://www.w3.org/1999/xhtml">
@@ -14,49 +14,49 @@
 						font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana;
 						font-size:13px;
 					}
-					
+
 					#intro {
 						background-color:#F5F5F5;
 						border:1px #000000 solid;
 						padding:5px 13px 5px 13px;
 						margin:10px 0px;
 					}
-					
+
 					#intro p {
 						line-height:	16.8667px;
 					}
-					
+
 					td {
 						font-size:11px;
 					}
-					
+
 					th {
 						text-align:left;
 						padding-right:30px;
 						font-size:11px;
 					}
-					
+
 					tr.high {
 						background-color:whitesmoke;
 					}
-					
+
 					#footer {
 						padding:2px;
 						margin:10px;
 						font-size:8pt;
 						color:gray;
 					}
-					
+
 					#footer a {
 						color:gray;
 					}
-					
+
 					a {
 						color:black;
 					}
 					table {
 						width:100%;
-					}					
+					}
 				</style>
 			</head>
 			<body>

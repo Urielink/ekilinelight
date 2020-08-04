@@ -1,18 +1,18 @@
 <?php
 /**
- * Plantilla de búsqueda
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
- *
- * @package ekiline
- */
+* Plantilla de búsqueda
+*
+* @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
+*
+* @package ekiline
+*/
 get_header(); ?>
 
-<?php ekiline_main_columns('open'); ?>
+<?php ekiline_main_columns( 'open' ); ?>
 
-	<main id="primary" class="<?php orderCols('main');?>">
+	<main id="primary" class="<?php orderCols( 'main' );?>">
 
-		<?php dynamic_sidebar( 'content-w1' );?>				
+		<?php dynamic_sidebar( 'content-w1' );?>
 
 		<?php if ( have_posts() ) { ?>
 
@@ -29,32 +29,32 @@ get_header(); ?>
 
 			<?php get_search_form(); ?>
 
-			<?php		
-				ekiline_show_columns('open');
+			<?php
+				ekiline_show_columns( 'open' );
 
-					while ( have_posts() ) : 
+					while ( have_posts() ) :
 						the_post();
 						// en caso de ocupar 'cards'.
-						$postType = ( !is_singular() && get_theme_mod('ekiline_Columns') == 4 ) ? 'card' : get_post_type() ;
-						get_template_part( 'template-parts/content', $postType );	
-							
-					endwhile;	
+						$postType = ( !is_singular() && get_theme_mod( 'ekiline_Columns' ) == 4 ) ? 'card' : get_post_type() ;
+						get_template_part( 'template-parts/content', $postType );
 
-				ekiline_show_columns('close');
+					endwhile;
+
+				ekiline_show_columns( 'close' );
 
 			} else {
-				get_template_part( 'template-parts/content', 'none' );	
-			}	
+				get_template_part( 'template-parts/content', 'none' );
+			}
 			?>
 
 		<?php ekiline_pagination();?>
 
-		<?php dynamic_sidebar( 'content-w2' ); ?>		
+		<?php dynamic_sidebar( 'content-w2' ); ?>
 
 	</main><!-- #primary -->
 
 	<?php get_sidebar(); ?>
 
-<?php ekiline_main_columns('close'); ?>
+<?php ekiline_main_columns( 'close' ); ?>
 
 <?php get_footer(); ?>

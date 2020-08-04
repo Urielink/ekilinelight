@@ -1,25 +1,25 @@
 <?php
 /**
- * The sidebar containing the main widget area.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package ekiline
- */
+* The sidebar containing the main widget area.
+*
+* @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+*
+* @package ekiline
+*/
 ?>
 
-<?php if ( is_active_sidebar( 'sidebar-1') ) { ?>
+<?php if ( is_active_sidebar( 'sidebar-1' ) ) { ?>
 
-<aside id="secondary" class="widget-area<?php orderCols('left');?>">
+<aside id="secondary" class="widget-area<?php orderCols( 'left' );?>">
 	<?php dynamic_sidebar( 'sidebar-1' ); ?>
 </aside><!-- #secondary -->
 
 <?php } ?>
 
 
-<?php if ( is_active_sidebar( 'sidebar-2') ) { ?>
+<?php if ( is_active_sidebar( 'sidebar-2' ) ) { ?>
 
-<aside id="third" class="widget-area<?php orderCols('right');?>">
+<aside id="third" class="widget-area<?php orderCols( 'right' );?>">
 	<?php dynamic_sidebar( 'sidebar-2' ); ?>
 </aside><!-- #third -->
 

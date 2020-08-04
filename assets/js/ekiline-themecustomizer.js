@@ -18,7 +18,7 @@ jQuery(document).ready(function($){
 	];
 
 	function proColores(tonos){
-					
+
 		var objTonoExt = {};
 
 		$.each( tonos , function( index, value ) {
@@ -37,10 +37,10 @@ jQuery(document).ready(function($){
 			var nvLigNvTxc = rgbaToHexOp(hexToRgbA(absoluto,.5)); // light texto. borde HR y borde thumbnail
 			var nvLigNvHTxc = rgbaToHexOp(hexToRgbA(absoluto,.7)); // light hover
 			var nvLigNvDisTxc = rgbaToHexOp(hexToRgbA(absoluto,.3)); // light disabled y fondo de tarjetas, box shadow input
-			// Varios fondos y bordes dependen del color del texto						
-			var thLigBgc = rgbaToHexOp(hexToRgbA( HexAHslvar(absoluto, 0, 0, 20) , .20)); //fondo de breadcrub						
+			// Varios fondos y bordes dependen del color del texto
+			var thLigBgc = rgbaToHexOp(hexToRgbA( HexAHslvar(absoluto, 0, 0, 20) , .20)); //fondo de breadcrub
 			// fondo de tablas
-			var tabBgc05 = rgbaToHexOp(hexToRgbA(absoluto,.05)); 
+			var tabBgc05 = rgbaToHexOp(hexToRgbA(absoluto,.05));
 			var tabBgc075 = rgbaToHexOp(hexToRgbA(absoluto,.075));
 			var crdBdc = rgbaToHexOp(hexToRgbA(absoluto,.1));
 
@@ -242,7 +242,7 @@ jQuery(document).ready(function($){
 	// function cssOrders(extraccion){
 	// 	var cssall = '';
 	// 		/**General**/
-	// 		cssall += 'body{color:' + extraccion.text.puro + ';background-color:' + extraccion.background.puro + ';}';								
+	// 		cssall += 'body{color:' + extraccion.text.puro + ';background-color:' + extraccion.background.puro + ';}';
 	// 	return cssall;
 	// }
 
@@ -273,7 +273,7 @@ jQuery(document).ready(function($){
 			cssall += '.table .table{background-color:' + extraccion.background.puro + ';}\n';
 			cssall += '.table-bordered{border-color:' + extraccion.text.tabBd + ';}\n';
 			cssall += '.table-bordered th,.table-bordered td{border-color:' + extraccion.text.tabBd + ';}\n';
-			cssall += '.table-striped tbody tr:nth-of-type(odd){background-color:' + extraccion.text.tabBg + ';}\n';        
+			cssall += '.table-striped tbody tr:nth-of-type(odd){background-color:' + extraccion.text.tabBg + ';}\n';
 			cssall += '.table-hover tbody tr:hover{background-color:' + extraccion.text.tabBgHv + ';}\n';
 
 			cssall += '.table-primary,.table-primary > th,.table-primary > td{background-color:' + extraccion.primary.navDis + ';}\n';
@@ -520,7 +520,7 @@ jQuery(document).ready(function($){
 			/**Dropdowns**/
 			cssall += '.dropdown-menu{color:' + extraccion.secondary.puro + ';background-color:' + extraccion.light.focus + ';border-color:' + extraccion.secondary.breadBg + ';}\n';
 			cssall += '.dropdown-divider{border-top-color:' + extraccion.dark.breadBg + ';}\n';
-			cssall += '.dropdown-item{color:' + extraccion.secondary.alertLk + ';}\n';        
+			cssall += '.dropdown-item{color:' + extraccion.secondary.alertLk + ';}\n';
 			cssall += '.dropdown-item:hover,.dropdown-item:focus{color:' + extraccion.primary.puro + ';background-color:' + extraccion.primary.breadBg + ';}\n';
 			cssall += '.dropdown-item.active,.dropdown-item:active{color:' + extraccion.primary.puro + ';background-color:' + extraccion.primary.breadBg + ';}\n';
 			cssall += '.dropdown-item.disabled,.dropdown-item:disabled{color:' + extraccion.secondary.navDis + ';}\n';
@@ -848,8 +848,7 @@ jQuery(document).ready(function($){
 			field1.bind( function( item ) {
 
 				item = cssOrders( proColores( misColores ) );
-				
-				field2.set( item );							
+				field2.set( item );
 
 			} );
 

@@ -1961,10 +1961,10 @@ body{min-width:992px!important}
  /* ------------------------------------------------
   * Ekiline CUSTOM STYLES tus estilos || your styles
   * ----------------------------------------------*/
- 
+
  /* Logo en navbar || Brand in navbar */
  .navbar-brand img{max-height:32px;max-width:200px;}
- 
+
  /* Custom header */
  .bg-deep, .wp-block-cover.bg-deep div{
     background-size: 1px;
@@ -1976,13 +1976,13 @@ body{min-width:992px!important}
      transition:all 0.4s ease-in-out;
 }
 
-.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ 
-   display:flex; 
-   align-items:flex-end; 
+.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{
+   display:flex;
+   align-items:flex-end;
 }
-.custom-header.container > .alignfull { 
-   margin-left: calc( -100vw / 2 + 100% / 2 - 9px); 
-   margin-right: calc( -100vw / 2 + 100% / 2 - 9px); 
+.custom-header.container > .alignfull {
+   margin-left: calc( -100vw / 2 + 100% / 2 - 9px);
+   margin-right: calc( -100vw / 2 + 100% / 2 - 9px);
    width: 100vw;
 }
 .custom-header.container .wp-block-cover.has-background-dim::before{
@@ -1990,31 +1990,31 @@ body{min-width:992px!important}
    opacity: .3 !important;
 }
 
-@media only screen and (max-width:576px){ 
-   .custom-header.container > .alignfull { 
-      margin-left: calc( -100vw / 2 + 100% / 2 ); 
-      margin-right: calc( -100vw / 2 + 100% / 2); 
-   } 
+@media only screen and (max-width:576px){
+   .custom-header.container > .alignfull {
+      margin-left: calc( -100vw / 2 + 100% / 2 );
+      margin-right: calc( -100vw / 2 + 100% / 2);
+   }
 }
 
-@keyframes bgresize { 
-   0% { background-size: 130%; } 
-   100% { background-size: 120%; } 
+@keyframes bgresize {
+   0% { background-size: 130%; }
+   100% { background-size: 120%; }
 }
 
-.bg-deep, .wp-block-cover.bg-deep{ 
-   animation: bgresize 5s ease; 
-   background-position: 50% 50%; 
-   background-repeat: no-repeat; 
-   background-size: 120%; 
+.bg-deep, .wp-block-cover.bg-deep{
+   animation: bgresize 5s ease;
+   background-position: 50% 50%;
+   background-repeat: no-repeat;
+   background-size: 120%;
 }
 
-@media only screen and (max-width:960px){ 
-   @keyframes bgresize { 
-      0% { background-size: 170vh; } 
-      100% { background-size: 140vh; } 
-   } 
-   .bg-deep, .wp-block-cover.bg-deep{ 
+@media only screen and (max-width:960px){
+   @keyframes bgresize {
+      0% { background-size: 170vh; }
+      100% { background-size: 140vh; }
+   }
+   .bg-deep, .wp-block-cover.bg-deep{
       background-size: 140vh;
-   } 
+   }
 }

@@ -1,7 +1,7 @@
 /* Ekiline for WordPress Theme, Copyright 2018 Uri Lazcano. Ekiline is distributed under the terms of the GNU GPL. http://ekiline.com */
-/* CSS que afectan al layout general de Ekiline. No sobreescribir. Recomiendo utilizar el editor CSS de Wordpress o los campos personalizados para agregar modificaciones. 
+/* CSS que afectan al layout general de Ekiline. No sobreescribir. Recomiendo utilizar el editor CSS de Wordpress o los campos personalizados para agregar modificaciones.
  * CSS that affect the general layout of Ekiline. No override. I recommend using the Wordpress CSS editor or the custom fields to personalize your css.
- */ 
+ */
 
 /* Animaciones || Animations */
 .navbar,.navbar .navbar-brand,.navbar-nav li a, a:hover, .btn:hover,.icon-bar{-webkit-transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-ms-transition:all 0.4s ease-out;-o-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out;}
@@ -34,7 +34,7 @@
   .navbar .order-first .dropright a.dropdown-toggle-split::after,
   .navbar .mega-menu.show.dropdown .sub-menu .dropdown-toggle::after,
   .navbar .scroll-menu.show .dropup .dropdown-toggle::after,
-  .navbar .offcanvas.show .dropup a.dropdown-toggle-split::after{border-top: .3em solid;border-right: .3em solid transparent;border-bottom: 0;border-left: .3em solid transparent;} 
+  .navbar .offcanvas.show .dropup a.dropdown-toggle-split::after{border-top: .3em solid;border-right: .3em solid transparent;border-bottom: 0;border-left: .3em solid transparent;}
   @media only screen and (max-width : 768px) {
     .navbar .dropright a.dropdown-toggle-split::after {border-top: .3em solid;border-right: .3em solid transparent;border-bottom: 0;border-left: .3em solid transparent;}
   }
@@ -50,7 +50,7 @@
 
 /* Estilos de navegación que solo necesitan ejecutarse en móviles */
 @media only screen and (min-width : 768px) {
-  /*scroll-menu*/  
+  /*scroll-menu*/
   .navbar-collapse:not(.order-first) .scroll-menu.dropdown.show, .navbar-collapse:not(.order-first) .scroll-menu.dropup.show{position: inherit;}
   .navbar-collapse:not(.order-first) .scroll-menu.show > .dropdown-menu{max-width: 100%;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;overflow-x: scroll;/*white-space: nowrap;*/}
   .navbar-collapse:not(.order-first) .scroll-menu.dropdown.show .dropdown,.navbar-collapse:not(.order-first) .scroll-menu.dropdown.show .dropright{display: flex;}
@@ -58,16 +58,16 @@
   /*en caso de modal D: */
     .modal .navbar-collapse .scroll-menu.show .dropdown-menu{display: block;overflow: auto;flex-direction: column;}
     .modal .navbar-collapse .scroll-menu.dropdown.show .dropdown,.modal .navbar-collapse .scroll-menu.dropdown.show .dropright{display: block;}
-  /*mega-menu*/  
-  .navbar-collapse:not(.order-first) .mega-menu.show.dropdown, .navbar-collapse:not(.order-first) .mega-menu.show.dropup{position: inherit;}    
+  /*mega-menu*/
+  .navbar-collapse:not(.order-first) .mega-menu.show.dropdown, .navbar-collapse:not(.order-first) .mega-menu.show.dropup{position: inherit;}
   .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu{max-width: 1120px;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;flex-wrap: wrap;}
   .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 20%;}
   .navbar-collapse:not(.order-first) .mega-menu.show .dropdown a, .navbar-collapse:not(.order-first) .mega-menu.show .dropright a {display: block;}
   .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li > ul.dropdown-menu {display: block;position: static;border-bottom:none;}
-  .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > .menu-item > a.dropdown-item:first-child{text-transform: uppercase;font-size: .875rem;white-space: normal;}    
-  .navbar-collapse:not(.order-first) .mega-menu.show.dropdown .sub-menu .dropdown-toggle-split {position: absolute;top: 0px;right: 0;}  
+  .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > .menu-item > a.dropdown-item:first-child{text-transform: uppercase;font-size: .875rem;white-space: normal;}
+  .navbar-collapse:not(.order-first) .mega-menu.show.dropdown .sub-menu .dropdown-toggle-split {position: absolute;top: 0px;right: 0;}
   /*en caso de modal D: */
-      .modal .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 100%;}    
+      .modal .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 100%;}
   /*Offcanvas nav*/
   .offcanvas.navbar-collapse{ background-color: transparent !important; }
   /* Scroller nav */
@@ -129,8 +129,8 @@
 .carousel-multiple.x6 .carousel-inner .active.carousel-item-left{-webkit-transform:translate3d(-16.66666667%,0,0);-moz-transform:translate3d(-16.66666667%,0,0);-ms-transform:translate3d(-16.66666667%,0,0);transform:translate3d(-16.66666667%,0,0);}
 .carousel-multiple.x6 .carousel-inner .active.carousel-item-right{-webkit-transform:translate3d(16.66666667%,0,0);-moz-transform:translate3d(16.66666667%,0,0);-ms-transform:translate3d(16.66666667%,0,0);transform:translate3d(16.66666667%,0,0);}
 .carousel-multiple.x6 .carousel-inner .carousel-item-prev{left:-16.66666667%;}
-.carousel-multiple.x6 .carousel-inner .carousel-item-next{left:16.66666667%;}     
-/* Regla general: posición de objetos, después del clic || Objects after clic */  
+.carousel-multiple.x6 .carousel-inner .carousel-item-next{left:16.66666667%;}
+/* Regla general: posición de objetos, después del clic || Objects after clic */
 .carousel-multiple .carousel-inner .carousel-item-next.carousel-item-left{left:0%;}
 .carousel-multiple .carousel-inner .carousel-item-prev.carousel-item-right{left:0%;}
 .carousel-multiple .carousel-inner .carousel-item-next.carousel-item-left > *{opacity:0;}
@@ -169,7 +169,7 @@
 .modal.left-aside .modal-body,
 .modal.right-aside .modal-body{padding:15px 15px 80px;}
 .modal.left-aside.fade .modal-dialog{left:-320px;-webkit-transition:opacity 0.3s linear,left 0.3s ease-out;-moz-transition:opacity 0.3s linear,left 0.3s ease-out;-o-transition:opacity 0.3s linear,left 0.3s ease-out;transition:opacity 0.3s linear,left 0.3s ease-out;}
-.modal.left-aside.fade.show .modal-dialog{left:0;} 
+.modal.left-aside.fade.show .modal-dialog{left:0;}
 .modal.right-aside.fade .modal-dialog{right:-320px;-webkit-transition:opacity 0.3s linear,right 0.3s ease-out;-moz-transition:opacity 0.3s linear,right 0.3s ease-out;-o-transition:opacity 0.3s linear,right 0.3s ease-out;transition:opacity 0.3s linear,right 0.3s ease-out;}
 .modal.right-aside.fade.show .modal-dialog{right:0;}
 /** Modal inferior **/
@@ -189,7 +189,6 @@
   /*full modal específicos,inline,iframe*/
   .modal-full .window-inline .modal-header{position:relative;}
   .modal-full .window-image,.modal-full .window-image .modal-dialog,.modal-full .window-image .modal-content,.modal-full .window-image .modal-body{height:auto;}
-  
   /* Modal con nav || Modal with nav */
   .modal-nav {padding:0px !important;margin:0px auto;}
   .modal-nav .modal-dialog{margin:0px auto;}
@@ -212,7 +211,7 @@
 
 /*--------------------------------------------------------------------------------
  * CSS RESPONSIVO: Método Escritorio a movil || Desktop First Method
- *-------------------------------------------------------------------------------- 
+ *--------------------------------------------------------------------------------
  */
 
 /* PRIMER CAMBIO: Bootstrap container 1200/992 ( Monitores )
@@ -222,7 +221,7 @@
  /*Utilidades para grid de listados*/
  .card-columns{-webkit-column-count: 3;-moz-column-count: 3;column-count: 3;}
   /*En caso de habilitar sidebars 2 o 1*/
-  .col-md-6.order-md-2 .card-columns, .col-md-9 .card-columns{-webkit-column-count: 2;-moz-column-count: 2;column-count: 2;} 
+  .col-md-6.order-md-2 .card-columns, .col-md-9 .card-columns{-webkit-column-count: 2;-moz-column-count: 2;column-count: 2;}
   /*En caso de habilitar fullwith*/
   .container-fluid .card-columns{-webkit-column-count: 4;-moz-column-count: 4;column-count: 4;}
     /*En caso de habilitar sidebars 2 o 1 con fullwidth*/
@@ -232,7 +231,7 @@
 
 }
 @media only screen and (max-width : 992px) {
- .navbar-nav .show .dropdown-menu > li > a{white-space: normal;}	 	
+ .navbar-nav .show .dropdown-menu > li > a{white-space: normal;}
  .navbar .container{padding:0px;}
 }
 
@@ -251,12 +250,12 @@
  .carousel-multiple .carousel-item > *:nth-child(n+2){display:none;}
  .carousel-multiple .carousel-inner .carousel-item-next.carousel-item-left >*, .carousel-multiple .carousel-inner .carousel-item-prev.carousel-item-right >*{opacity:1;}
  .carousel-multiple.x2 .carousel-inner .active.carousel-item-left,.carousel-multiple.x3 .carousel-inner .active.carousel-item-left,.carousel-multiple.x4 .carousel-inner .active.carousel-item-left,.carousel-multiple.x6 .carousel-inner .active.carousel-item-left{-webkit-transform:translate3d(-100%,0,0);-moz-transform:translate3d(-100%,0,0);-ms-transform:translate3d(-100%,0,0);transform:translate3d(-100%,0,0);}
- .carousel-multiple.x2 .carousel-inner .active.carousel-item-right,.carousel-multiple.x3 .carousel-inner .active.carousel-item-right,.carousel-multiple.x4 .carousel-inner .active.carousel-item-right,.carousel-multiple.x6 .carousel-inner .active.carousel-item-right{-webkit-transform:translate3d(100%,0,0);-moz-transform:translate3d(100%,0,0);-ms-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0);} 
+ .carousel-multiple.x2 .carousel-inner .active.carousel-item-right,.carousel-multiple.x3 .carousel-inner .active.carousel-item-right,.carousel-multiple.x4 .carousel-inner .active.carousel-item-right,.carousel-multiple.x6 .carousel-inner .active.carousel-item-right{-webkit-transform:translate3d(100%,0,0);-moz-transform:translate3d(100%,0,0);-ms-transform:translate3d(100%,0,0);transform:translate3d(100%,0,0);}
  .col-sm-1a5,.col-xs-1a5,.col-sm-1a7,.col-xs-1a7,.col-sm-1a8,.col-xs-1a8,.col-sm-1a9,.col-xs-1a9{width:100%;*width:100%;}
- 
+
  /*full modal específicos,image,iframe*/
- .modal-full .window-image .modal-body img,.modal-full .window-image .modal-body img.img-fluid{max-width:inherit;} 
- .modal-full .window-image,.modal-full .window-image .modal-dialog,.modal-full .window-image .modal-content,.modal-full .window-image .modal-body{height:100%;} 
+ .modal-full .window-image .modal-body img,.modal-full .window-image .modal-body img.img-fluid{max-width:inherit;}
+ .modal-full .window-image,.modal-full .window-image .modal-dialog,.modal-full .window-image .modal-content,.modal-full .window-image .modal-body{height:100%;}
 
  /*Utilidades para grid de listados*/
  .card-columns{-webkit-column-count: 2;-moz-column-count: 2;column-count: 2;}
@@ -273,7 +272,7 @@
 /*Utilidades para grid de listados*/
 .card-columns{-webkit-column-count: 1;-moz-column-count: 1;column-count: 1;}
   /*En caso de habilitar sidebars 2 o 1*/
-  .col-md-6.order-md-2 .card-columns, .col-md-9 .card-columns{-webkit-column-count: 1;-moz-column-count: 1;column-count: 1;} 
+  .col-md-6.order-md-2 .card-columns, .col-md-9 .card-columns{-webkit-column-count: 1;-moz-column-count: 1;column-count: 1;}
   /*En caso de habilitar fullwith*/
   .container-fluid .card-columns{-webkit-column-count: 1;-moz-column-count: 1;column-count: 1;}
     /*En caso de habilitar sidebars 2 o 1 con fullwidth*/
@@ -284,5 +283,4 @@
 
 /* CUARTO CAMBIO: Bootstrap container 320px ( smarphone-ver )
  -------------------------------------------------- */
-@media only screen and (max-width : 320px){}	
-
+@media only screen and (max-width : 320px){}

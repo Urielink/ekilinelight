@@ -1,11 +1,11 @@
 <?php
 /**
- * Plantilla 404 (not found)
- *
- * @link https://codex.wordpress.org/Creating_an_Error_404_Page
- *
- * @package ekiline
- */
+* Plantilla 404 (not found)
+*
+* @link https://codex.wordpress.org/Creating_an_Error_404_Page
+*
+* @package ekiline
+*/
 get_header(); ?>
 
 <?php ekiline_main_columns( 'open' ); ?>
@@ -38,7 +38,7 @@ get_header(); ?>
 						?>
 					</p>
 					<select class="form-control" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
-						<option value=""><?php esc_html_e( 'Search', 'ekiline' ); ?></option> 
+						<option value=""><?php esc_html_e( 'Search', 'ekiline' ); ?></option>
 						<?php
 							$args_archive = array(
 								'type'            => 'monthly',
