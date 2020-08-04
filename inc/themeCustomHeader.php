@@ -22,7 +22,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 	$colors[] = array( 'slug'=>'chdrtxt_color', 'default' => '#6c757d', 'label' => '', 'description' => __( 'Text color', 'ekiline' ), 'priority' => 20, 'section'=>'header_image' );
 	$colors[] = array( 'slug'=>'chdrlks_color', 'default' => '#007bff', 'label' => '', 'description' => __( 'Links color', 'ekiline' ), 'priority' => 20, 'section'=>'header_image' );
 
-	foreach($colors as $color) {
+	foreach( $colors as $color) {
 		// add settings
 		$wp_customize->add_setting(
 				$color['slug'], array(
@@ -161,29 +161,29 @@ function ekiline_custom_header_setup() {
 add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 
 /**
-	* Cancelar callback: ekiline_custom_header_style(), aparecerá en el header.
-	* Por las caracteristicas del tema, lo agrupamos en themeCustomColors.php
-	*/
+* Cancelar callback: ekiline_custom_header_style(), aparecerá en el header.
+* Por las caracteristicas del tema, lo agrupamos en themeCustomColors.php
+*/
 
-	function ekiline_custom_header_style() {
-		if ( !get_header_image() ) return;
+function ekiline_custom_header_style() {
+	if ( !get_header_image() ) return;
 
-		$hdrBkc = get_option( 'chdr_color', '#000000' );
-		$hdrTxtc = get_option( 'chdrtxt_color', '#6c757d' );
-		$hdrLksc = get_option( 'chdrlks_color', '#007bff' );
+	$hdrBkc = get_option( 'chdr_color', '#000000' );
+	$hdrTxtc = get_option( 'chdrtxt_color', '#6c757d' );
+	$hdrLksc = get_option( 'chdrlks_color', '#007bff' );
 
-		$rangeHead = get_theme_mod( 'ekiline_range_header' );
-			if ( $rangeHead == '0' ) $rangeHead = '30';
+	$rangeHead = get_theme_mod( 'ekiline_range_header' );
+		if ( $rangeHead == '0' ) $rangeHead = '30';
 
-		$hdrStyle = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:'. esc_attr( $hdrBkc ) .'; min-height:' . $rangeHead . 'vh; }';
-		$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:'. esc_attr( $hdrTxtc ) .'; }';
-		$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .'; }';
-		$hdrStyle .= '@media only screen and (min-width:960px) { .custom-header.container .wp-block-cover{ background-image: url("'.ekiline_header_image( 'full' ).'") !important; } }';
-		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo $hdrStyle;
+	$hdrStyle = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:'. esc_attr( $hdrBkc ) .'; min-height:' . $rangeHead . 'vh; }';
+	$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:'. esc_attr( $hdrTxtc ) .'; }';
+	$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .'; }';
+	$hdrStyle .= '@media only screen and (min-width:960px) { .custom-header.container .wp-block-cover{ background-image: url("'.ekiline_header_image( 'full' ).'") !important; } }';
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo $hdrStyle;
 
-	}
-	add_action( 'group_inline_css', 'ekiline_custom_header_style', 4);
+}
+add_action( 'group_inline_css', 'ekiline_custom_header_style', 4 );
 
 
 /**
@@ -207,7 +207,7 @@ add_filter( 'body_class', 'ekiline_customHeaderCss' );
 	* https://developer.wordpress.org/reference/functions/the_header_image_tag/
 	**/
 
-function ekiline_header_image($size = null) {
+function ekiline_header_image( $size = null) {
 
 	$size = ( $size != '' ) ? $size : 'medium_large'; //false;
 	$url = get_header_image();
@@ -235,7 +235,7 @@ function ekiline_header_image($size = null) {
 	return $url;
 }
 
-function custom_header_content($contentType = null) {
+function custom_header_content( $contentType = null) {
 
 	$custom_header_title = get_bloginfo( 'name' );
 	$custom_header_text = get_bloginfo( 'description' );
@@ -265,7 +265,7 @@ function custom_header_content($contentType = null) {
 						$custom_header_text = wp_trim_words( $contentfield, 24 );
 						//Si existe un punto antes cortar
 						$punto = strpos( $custom_header_text, '.' );
-						if ($punto) {
+						if ( $punto) {
 							$custom_header_text = substr( $custom_header_text, 0, strpos( $custom_header_text, '.' ) ) . '.';
 						}
 
@@ -313,9 +313,9 @@ function custom_header_content($contentType = null) {
 			$custom_header_text = esc_html__( 'Maybe try one of the links below or a search?', 'ekiline' );
 		}
 
-	if ($contentType == 'title' ) {
+	if ( $contentType == 'title' ) {
 		$contentType = $custom_header_title;
-	} else if ($contentType == 'text' ) {
+	} else if ( $contentType == 'text' ) {
 		$contentType = $custom_header_text;
 	}
 

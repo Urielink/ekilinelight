@@ -26,17 +26,17 @@ add_filter( 'the_content_more_link', 'overrideReadMoreLink' );
 
 function ekiline_countWidgets( $widgetZone ) {
 	// agreagar un contenedor en caso de existir más de 2 widgets, util para usar columnas de bootstrap.
-	if ( is_active_sidebar($widgetZone) ) :
+	if ( is_active_sidebar( $widgetZone) ) :
 
 		$the_sidebars = wp_get_sidebars_widgets();
 		$count_sidebars = count( $the_sidebars[$widgetZone] );
 
-		if ($count_sidebars >= '2' ) {
+		if ( $count_sidebars >= '2' ) {
 			echo '<div class="row">';
-				dynamic_sidebar($widgetZone);
+				dynamic_sidebar( $widgetZone );
 			echo '</div>';
 		} else {
-			dynamic_sidebar($widgetZone);
+			dynamic_sidebar( $widgetZone );
 		}
 
 	endif;
@@ -61,20 +61,20 @@ function ekiline_thumbnail() {
 	return the_post_thumbnail( $thumbSize, array( 'class' => $imgClass ) );
 }
 
-	/**
-	 * 2) Agregar enlace a todas las miniaturas.
-	 * Link all post thumbnails to the post permalink.
-	 */
+/**
+ * 2) Agregar enlace a todas las miniaturas.
+ * Link all post thumbnails to the post permalink.
+ */
 
-	function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
-		if ( is_single() ) return $html;
-		// si es search, se agrega una clase
-		$thumbClass = ( is_search() ) ? ' class="search-link"' : '' ;
+function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
+	if ( is_single() ) return $html;
+	// si es search, se agrega una clase
+	$thumbClass = ( is_search() ) ? ' class="search-link"' : '' ;
 
-		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';
-		return $html;
-	}
-	add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
+	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';
+	return $html;
+}
+add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
 
 
 
@@ -152,7 +152,7 @@ function ekiline_content_additions( $content ) {
 		} else if ( $post->post_excerpt != '' ) {
 			$content = $post->post_excerpt . $link;
 		} else {
-			$content = wp_trim_words( $content, 55, $link);
+			$content = wp_trim_words( $content, 55, $link );
 		}
 
 	}
@@ -162,35 +162,35 @@ function ekiline_content_additions( $content ) {
 }
 add_filter( 'the_content', 'ekiline_content_additions' );
 
-	/**
-	 * 1B) Obtener un fragmento del contenido fuera del loop
-	 * Get content fragment out the loop
-	 * https://wordpress.stackexchange.com/questions/38030/is-there-a-has-more-tag-method-or-equivalent
-	 * https://wordpress.stackexchange.com/questions/149099/only-show-content-before-more-tag
-	 */
-	function ekiline_content_out_the_loop() {
-		global $post;
-		$content = $post->post_content;
-			$more = strpos( $content, '<!--more-->' );
-				$excerpt = $post->post_excerpt;
+/**
+ * 1B) Obtener un fragmento del contenido fuera del loop
+ * Get content fragment out the loop
+ * https://wordpress.stackexchange.com/questions/38030/is-there-a-has-more-tag-method-or-equivalent
+ * https://wordpress.stackexchange.com/questions/149099/only-show-content-before-more-tag
+ */
+function ekiline_content_out_the_loop() {
+	global $post;
+	$content = $post->post_content;
+		$more = strpos( $content, '<!--more-->' );
+			$excerpt = $post->post_excerpt;
 
-			if( $more ) {
-				$content_parts = get_extended( $content );
-					$content = $content_parts['main'];
-			} else if ($excerpt) {
-				$content = $excerpt;
-			} else {
-				//toma el primer parrafo solo 24 palabras y cortar
-				$content = wp_trim_words( $content, 24 );
-					//Si existe un punto antes cortar
-					$punto = strpos( $content, '.' );
-					if ($punto) {
-						$content = substr( $content, 0, strpos( $content, '.' ) ) . '.';
-					}
-			}
+		if( $more ) {
+			$content_parts = get_extended( $content );
+				$content = $content_parts['main'];
+		} else if ( $excerpt) {
+			$content = $excerpt;
+		} else {
+			//toma el primer parrafo solo 24 palabras y cortar
+			$content = wp_trim_words( $content, 24 );
+				//Si existe un punto antes cortar
+				$punto = strpos( $content, '.' );
+				if ( $punto) {
+					$content = substr( $content, 0, strpos( $content, '.' ) ) . '.';
+				}
+		}
 
-		return wp_strip_all_tags( $content );
-	}
+	return wp_strip_all_tags( $content );
+}
 
 /**
 * 2) agregar paginado en publicaciones paginadas
@@ -210,7 +210,7 @@ function ekiline_link_pages() {
 		'next_or_number'    => 'number',
 	);
 
-	wp_link_pages($args);
+	wp_link_pages( $args );
 }
 
 
@@ -242,20 +242,20 @@ function ekiline_password_form() {
 }
 add_filter( 'the_password_form', 'ekiline_password_form' );
 
-	/*
-	* 2) Expirar la sesion que permite leer un contenido protegido
-	* Expire post password
-	* https://developer.wordpress.org/reference/hooks/post_password_expires/
-	*/
+/*
+* 2) Expirar la sesion que permite leer un contenido protegido
+* Expire post password
+* https://developer.wordpress.org/reference/hooks/post_password_expires/
+*/
 
-	function ekiline_expirCookie( $time ) {
-		// return time() + 600 ;  // 10 mn
-		// for 5 minutes :
-		// return time() + 300;  in this case 60 * 5
-		// return 0; set cookie to expire at the end of the session
-		return 0;
-	}
-	add_filter( 'post_password_expires', 'ekiline_expirCookie' );
+function ekiline_expirCookie( $time ) {
+	// return time() + 600 ;  // 10 mn
+	// for 5 minutes :
+	// return time() + 300;  in this case 60 * 5
+	// return 0; set cookie to expire at the end of the session
+	return 0;
+}
+add_filter( 'post_password_expires', 'ekiline_expirCookie' );
 
 
 /**
@@ -281,27 +281,27 @@ function ekiline_pagination() {
 		$pagelist = get_pages( 'sort_column=menu_order&sort_order=asc' );
 		$pages = array();
 
-		foreach ($pagelist as $page) {
+		foreach ( $pagelist as $page) {
 			$pages[] += $page->ID;
 		}
 
-		$current = array_search(get_the_ID(), $pages);
-			$prevID = (isset($pages[$current-1])) ? $pages[$current-1] : '';
-			$nextID = (isset($pages[$current+1])) ? $pages[$current+1] : '';
+		$current = array_search(get_the_ID(), $pages );
+			$prevID = (isset( $pages[$current-1])) ? $pages[$current-1] : '';
+			$nextID = (isset( $pages[$current+1])) ? $pages[$current+1] : '';
 
-		if (!empty($prevID)) {
-			$PreviusLink .= '<li class="page-item page-link"><a href="'. get_permalink($prevID) .'" title="'. get_the_title($prevID) .'"><span>&leftarrow;</span> '. get_the_title($prevID) .'</a></li>';
+		if (!empty( $prevID)) {
+			$PreviusLink .= '<li class="page-item page-link"><a href="'. get_permalink( $prevID) .'" title="'. get_the_title( $prevID) .'"><span>&leftarrow;</span> '. get_the_title( $prevID) .'</a></li>';
 		}
-		if (!empty($nextID)) {
-			$NextLink .= '<li class="page-item page-link"><a href="'. get_permalink($nextID) .'" title="'. get_the_title($nextID) .'">'. get_the_title($nextID) .' <span>&rightarrow;</span></a></li>';
+		if (!empty( $nextID)) {
+			$NextLink .= '<li class="page-item page-link"><a href="'. get_permalink( $nextID) .'" title="'. get_the_title( $nextID) .'">'. get_the_title( $nextID) .' <span>&rightarrow;</span></a></li>';
 		}
 
 	}
 
 	if ( is_single() ) {
 
-		$PreviusLink = get_previous_post_link( '<li class="page-item page-link">'.'%link'.'</li>', '<span>&leftarrow;</span> %title', TRUE);
-		$NextLink = get_next_post_link( '<li class="page-item page-link">'.'%link'.'</li>', '%title <span>&rightarrow;</span>', TRUE);
+		$PreviusLink = get_previous_post_link( '<li class="page-item page-link">'.'%link'.'</li>', '<span>&leftarrow;</span> %title', TRUE );
+		$NextLink = get_next_post_link( '<li class="page-item page-link">'.'%link'.'</li>', '%title <span>&rightarrow;</span>', TRUE );
 
 	}
 
@@ -314,7 +314,7 @@ function ekiline_pagination() {
 		$big = 999999999;
 
 		$pages = paginate_links(array(
-					'base' => str_replace($big, '%#%', get_pagenum_link($big)),
+					'base' => str_replace( $big, '%#%', get_pagenum_link( $big)),
 					'format' => '?page=%#%',
 					'current' => max(1, get_query_var( 'paged' )),
 					'total' => $wp_query->max_num_pages,
@@ -322,20 +322,20 @@ function ekiline_pagination() {
 					'prev_next' => TRUE,
 					'prev_text' => __( '&larr; Previous', 'ekiline' ),
 					'next_text' => __( 'Next &rarr;', 'ekiline' ),
-				));
+				) );
 
-		if ( is_array($pages) ) {
+		if ( is_array( $pages) ) {
 
 			$current_page = ( get_query_var( 'paged' ) == 0 ) ? 1 : get_query_var( 'paged' );
 
-			foreach ($pages as $i => $page) {
+			foreach ( $pages as $i => $page) {
 
 				$page = str_replace( 'page-numbers', 'page-link', $page );
 
-				if ($current_page == 1 && $i == 0) {
+				if ( $current_page == 1 && $i == 0) {
 					$PreviusLink .= "<li class='page-item active'>$page</li>";
 				} else {
-					if ($current_page != 1 && $current_page == $i) {
+					if ( $current_page != 1 && $current_page == $i) {
 						$PreviusLink .= "<li class='page-item active'>$page</li>";
 					} else {
 						$PreviusLink .= "<li class='page-item'>$page</li>";

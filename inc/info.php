@@ -173,10 +173,10 @@ function ekiline_docs_feed() { ?>
 
 function ekiline_docs_feed_set() { ?>
 <script type='text/javascript'>
-	jQuery(document).ready(function($) {
-		$( '.ekiline-notice' ).delay(2000).show(100);
+	jQuery(document).ready(function( $) {
+		$( '.ekiline-notice' ).delay(2000).show(100 );
 		var random = Math.floor(Math.random() * 10) + 1;;
-		$( '.ekiline-notice ul li:nth-child( '+random+' )' ).delay(3000).show(100);
+		$( '.ekiline-notice ul li:nth-child( '+random+' )' ).delay(3000).show(100 );
 	});
 </script>
 <?php }

@@ -180,7 +180,7 @@ function ekiline_scripts() {
 	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri(), array(), '4', 'all' );
 	// test
 	// wp_deregister_style( array( 'wp-block-library', 'bootstrap-4', 'layout', 'ekiline-style' ) );
-	// remove_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100);
+	// remove_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100 );
 	// scripts
 	wp_enqueue_script( 'jquery-core' );
 	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array( 'jquery' ), '1', true );
@@ -200,7 +200,7 @@ add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 * https://digwp.com/2009/09/wordpress-action-hooks/
 * A) Dependiente de un estilo realizado como variable
 * B) Invasivo, directo con etiqueta en head
-* cada nuevo estilo en linea se agrega con: add_action( 'group_inline_css', 'new_style', 0/100);
+* cada nuevo estilo en linea se agrega con: add_action( 'group_inline_css', 'new_style', 0/100 );
 */
 
 function group_inline_css_stored() {
@@ -211,21 +211,21 @@ function group_inline_css_stored() {
 	return $stored_value; // variable
 }
 
-	// function ekiline_inline_css_handled() {
-	//     wp_add_inline_style( 'ekiline-style', group_inline_css_stored() );
-	// }
-	// add_action( 'wp_enqueue_scripts', 'ekiline_inline_css_handled' );
+// function ekiline_inline_css_handled() {
+//     wp_add_inline_style( 'ekiline-style', group_inline_css_stored() );
+// }
+// add_action( 'wp_enqueue_scripts', 'ekiline_inline_css_handled' );
 
-	function ekiline_inline_css_tag() {
-		$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-		printf(
-			'<style%1$sid="ekiline-style-inline-css">%2$s</style>' . "\n",
-			wp_kses_post( $type_attr ),
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			wp_strip_all_tags( group_inline_css_stored() )
-		);
-	}
-	add_action( 'wp_head', 'ekiline_inline_css_tag', 100);
+function ekiline_inline_css_tag() {
+	$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
+	printf(
+		'<style%1$sid="ekiline-style-inline-css">%2$s</style>' . "\n",
+		wp_kses_post( $type_attr ),
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		wp_strip_all_tags( group_inline_css_stored() )
+	);
+}
+add_action( 'wp_head', 'ekiline_inline_css_tag', 100 );
 
 
 /*
@@ -236,10 +236,10 @@ function group_inline_css_stored() {
 function ekiline_above_fold_styles() {
 	// de estilos
 	$file = get_template_directory_uri() . '/assets/css/afterfold.css';
-	$file = wp_remote_get($file);
+	$file = wp_remote_get( $file );
 	$data = wp_remote_retrieve_body( $file );
 	// quitar comentarios:
-		$data = preg_replace( '#/\*.*?\*/#s', '', $data);
+		$data = preg_replace( '#/\*.*?\*/#s', '', $data );
 	// quitar saltos de linea y convertir en un string
 		$data = str_replace( array("\r","\n") , "" , $data );
 	// html5
@@ -252,18 +252,18 @@ function ekiline_above_fold_styles() {
 			wp_strip_all_tags( $data )
 		);
 }
-add_action( 'wp_head', 'ekiline_above_fold_styles', 0);
+add_action( 'wp_head', 'ekiline_above_fold_styles', 0 );
 
 
 /**
 	* Ekiline no require jquery_migrate.
 	*/
-function remove_jquery_migrate($scripts) {
-	if (!is_admin() && isset($scripts->registered['jquery'])) {
+function remove_jquery_migrate( $scripts) {
+	if (!is_admin() && isset( $scripts->registered['jquery'])) {
 		$script = $scripts->registered['jquery'];
 			// verificar dependencias
-			if ($script->deps) {
-				$script->deps = array_diff($script->deps, array( 'jquery-migrate' ));
+			if ( $script->deps) {
+				$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
 			}
 	}
 }

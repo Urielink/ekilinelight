@@ -67,7 +67,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		$colors[] = array( 'slug'=>'b4_dark', 'default' => '#343a40', 'label' => '', 'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-dark</code>', 'ekiline' ), 'priority' => 10, 'section'=>'colors' );
 
 
-	foreach($colors as $color) {
+	foreach( $colors as $color) {
 		// add settings
 		$wp_customize->add_setting(
 				$color['slug'], array(
@@ -195,7 +195,7 @@ function ekiline_custom_background_cb() {
 	$style = $color ? "background-color: $color;" : '';
 
 	if ( $background ) {
-		$image = ' background-image: url("' . esc_url_raw( $background ) . '");';
+		$image = ' background-image: url("' . esc_url_raw( $background ) . '" );';
 
 		// Background Position.
 		$position_x = get_theme_mod( 'background_position_x', get_theme_support( 'custom-background', 'default-position-x' ) );
@@ -254,10 +254,10 @@ function ekiline_custom_background_cb() {
 
 function ekiline_custom_css_cb() {
 	//1) remover los estilos css que se modifican en customizer para agruparlos en una sola cadena.
-	remove_action( 'wp_head', 'wp_custom_css_cb', 101);
+	remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
 		//2) y permitir su ejecución solo en el preview.
 		if ( is_customize_preview() ) {
-			add_action( 'wp_head', 'wp_custom_css_cb', 101);
+			add_action( 'wp_head', 'wp_custom_css_cb', 101 );
 		}
 
 	$cstmStyles = wp_get_custom_css();
@@ -283,4 +283,4 @@ function ekiline_get_all_styles() {
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $groupStyles;
 }
-add_action( 'group_inline_css', 'ekiline_get_all_styles', 5);
+add_action( 'group_inline_css', 'ekiline_get_all_styles', 5 );

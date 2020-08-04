@@ -58,7 +58,7 @@ function ekiline_frontpage_featured( $query ) {
 	// Al instalar el tema por primera vez reacciona la falta de validar el campo por eso este if.
 	if( $seleccion != '' ) {
 		$str = array();
-		$str = implode( ', ', $seleccion);
+		$str = implode( ', ', $seleccion );
 	}
 
 	if ( $query->is_home() && $query->is_main_query() ) {
@@ -106,7 +106,7 @@ if (class_exists( 'WP_Customize_Control' )) {
 function ekiline_sanitize_multipleselect( $input )
 {
 	$valid = ekiline_list_categories();
-	foreach ($input as $value) {
+	foreach ( $input as $value) {
 		if ( !array_key_exists( $value, $valid ) ) return;
 	}
 	return $input;

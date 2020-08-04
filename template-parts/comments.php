@@ -78,7 +78,7 @@
 * https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
 */
 
-function ekilineCommentsSimple($comment, $args, $depth) {
+function ekilineCommentsSimple( $comment, $args, $depth) {
 
 	if ( 'div' === $args['style'] ) {
 		$tag       = 'div';
@@ -88,7 +88,7 @@ function ekilineCommentsSimple($comment, $args, $depth) {
 		$add_below = 'div-comment';
 	}?>
 
-	<<?php echo esc_attr($tag); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
+	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
 
 	<?php if ( 'div' != $args['style'] ) { ?>
 		<div id="div-comment-<?php comment_ID() ?>" class="comment-body row mb-2 px-md-3">
@@ -108,7 +108,7 @@ function ekilineCommentsSimple($comment, $args, $depth) {
 								'add_below' => $add_below,
 								'depth'     => $depth,
 								'max_depth' => $args['max_depth']
-							))); ?>
+							)) ); ?>
 			</div>
 
 
@@ -120,7 +120,7 @@ function ekilineCommentsSimple($comment, $args, $depth) {
 
 }
 
-function ekilineCommentsExtended($comment, $args, $depth) {
+function ekilineCommentsExtended( $comment, $args, $depth) {
 
 	if ( 'div' === $args['style'] ) {
 		$tag       = 'div';
@@ -130,7 +130,7 @@ function ekilineCommentsExtended($comment, $args, $depth) {
 		$add_below = 'div-comment';
 	}?>
 
-	<<?php echo esc_attr($tag); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
+	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
 
 	<?php if ( 'div' != $args['style'] ) { ?>
 		<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
@@ -178,7 +178,7 @@ function ekilineCommentsExtended($comment, $args, $depth) {
 							'add_below' => $add_below,
 							'depth'     => $depth,
 							'max_depth' => $args['max_depth']
-						))); ?>
+						)) ); ?>
 		</div>
 		</div>
 

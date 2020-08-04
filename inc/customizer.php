@@ -155,7 +155,7 @@ function ekiline_theme_customizer( $wp_customize ) {
 		$iLayout[] = array( 'name'=>'Archive', 'label' => __( 'Categories and archive pages', 'ekiline' ) );
 		$iLayout[] = array( 'name'=>'Single', 'label' => __( 'Entries and single pages', 'ekiline' ) );
 
-		foreach($iLayout as $value) {
+		foreach( $iLayout as $value) {
 
 			$wp_customize->add_setting(
 				'ekiline_disableSb' . $value['name'], array(

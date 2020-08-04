@@ -32,7 +32,7 @@ function ekiline_widthControl() {
 /*
 * Layout sin sidebars | No sidebars layout
 */
-function viewSbarFilter($wsbCtl) {
+function viewSbarFilter( $wsbCtl) {
 
 	$opt = '';
 
@@ -50,14 +50,14 @@ function viewSbarFilter($wsbCtl) {
 
 	switch ( $opt ) {
 		case 1:
-			unset($wsbCtl['sidebar-1']);
+			unset( $wsbCtl['sidebar-1'] );
 			break;
 		case 2:
-			unset($wsbCtl['sidebar-2']);
+			unset( $wsbCtl['sidebar-2'] );
 			break;
 		case 3:
-			unset($wsbCtl['sidebar-1']);
-			unset($wsbCtl['sidebar-2']);
+			unset( $wsbCtl['sidebar-1'] );
+			unset( $wsbCtl['sidebar-2'] );
 			break;
 	}
 
@@ -71,82 +71,82 @@ add_filter( 'sidebars_widgets', 'viewSbarFilter' );
 * 1) Orden de columnas | Columns order
 * agregar contenedor a index.php
 */
-function ekiline_main_columns($tag) {
+function ekiline_main_columns( $tag) {
 	if (!is_active_sidebar( 'sidebar-1' ) && !is_active_sidebar( 'sidebar-2' )) return;
 	// En caso de existir barras laterales agregar envoltorio
-	if ($tag == 'open' ) echo '<div id="maincolumns" class="row mx-0 ' . esc_attr( ekiline_widthControl() ) . ' mx-auto px-0">';
-	if ($tag == 'close' ) echo '</div><!-- #maincolumns -->';
+	if ( $tag == 'open' ) echo '<div id="maincolumns" class="row mx-0 ' . esc_attr( ekiline_widthControl() ) . ' mx-auto px-0">';
+	if ( $tag == 'close' ) echo '</div><!-- #maincolumns -->';
 }
-	/*
-	* 2) Agregar clases CSS a cada columna index.php y sidebar.php
-	*/
-	function orderCols($css) {
-		$cssMain = ekiline_widthControl();//'container ';
-		if ( is_active_sidebar( 'sidebar-1' ) || is_active_sidebar( 'sidebar-2' ) ) {
-		// sidebars.
-			$sbL = is_active_sidebar( 'sidebar-1' );
-			$sbR = is_active_sidebar( 'sidebar-2' );
-		// orden de columnas.
-			$cssMain = 'col-md-6 order-md-2';
+/*
+* 2) Agregar clases CSS a cada columna index.php y sidebar.php
+*/
+function orderCols( $css) {
+	$cssMain = ekiline_widthControl();//'container ';
+	if ( is_active_sidebar( 'sidebar-1' ) || is_active_sidebar( 'sidebar-2' ) ) {
+	// sidebars.
+		$sbL = is_active_sidebar( 'sidebar-1' );
+		$sbR = is_active_sidebar( 'sidebar-2' );
+	// orden de columnas.
+		$cssMain = 'col-md-6 order-md-2';
+		$cssLeft = ' col-md-3 order-md-1';
+		$cssRight = ' col-md-3 order-md-3';
+	// aparicion de columnas
+		if( $sbL && !$sbR ) {
+			$cssMain = 'col-md-9 order-md-2';
 			$cssLeft = ' col-md-3 order-md-1';
-			$cssRight = ' col-md-3 order-md-3';
-		// aparicion de columnas
-			if( $sbL && !$sbR ) {
-				$cssMain = 'col-md-9 order-md-2';
-				$cssLeft = ' col-md-3 order-md-1';
-			} elseif ( !$sbL && $sbR ) {
-				$cssMain = 'col-md-9';
-				$cssRight = ' col-md-3';
-			}
+		} elseif ( !$sbL && $sbR ) {
+			$cssMain = 'col-md-9';
+			$cssRight = ' col-md-3';
 		}
-	// imprimir
-		if ($css == 'main' ) echo esc_attr($cssMain);
-		if ($css == 'left' ) echo esc_attr($cssLeft);
-		if ($css == 'right' ) echo esc_attr($cssRight);
 	}
+// imprimir
+	if ( $css == 'main' ) echo esc_attr( $cssMain );
+	if ( $css == 'left' ) echo esc_attr( $cssLeft );
+	if ( $css == 'right' ) echo esc_attr( $cssRight );
+}
 
 /*
 * 1) Vista de columnas | Columns view
 * // loop_start, loop_end, podria romper la vista.
 */
-function ekiline_show_columns($tag) {
+function ekiline_show_columns( $tag) {
 	if ( is_singular() ) return;
 
 	$colSet = get_theme_mod( 'ekiline_Columns' );
 	$colContain = ( $colSet == 4 ) ? 'card-columns' : 'row' ;
 
-	if ($colSet > 0) {
-		if ($tag == 'open' ) echo '<div id="viewcolumns" class="'.esc_attr($colContain).'">';
-		if ($tag == 'close' ) echo '</div><!-- #viewcolumns -->';
+	if ( $colSet > 0) {
+		if ( $tag == 'open' ) echo '<div id="viewcolumns" class="'.esc_attr( $colContain).'">';
+		if ( $tag == 'close' ) echo '</div><!-- #viewcolumns -->';
 	}
 }
-	/*
-	* 2) Agregar clase a cada post para complementar la vista.
-	*/
-	function ekiline_show_columns_item($classes) {
+/*
+* 2) Agregar clase a cada post para complementar la vista.
+*/
+function ekiline_show_columns_item( $classes) {
 
-		if ( is_singular() ) return $classes;
+	if ( is_singular() ) return $classes;
 
-		$colSet = get_theme_mod( 'ekiline_Columns' );
-		$colView = '';
+	$colSet = get_theme_mod( 'ekiline_Columns' );
+	$colView = '';
 
-		switch ($colSet) {
-			case 1:
-				$colView = 'col-md-6';
-				break;
-			case 2:
-				$colView = 'col-md-4';
-				break;
-			case 3:
-				$colView = 'col-md-3';
-				break;
-			case 4:
-				$colView = 'card';
-				break;
-		}
-
-		$classes[] = $colView;
-		return $classes;
+	switch ( $colSet) {
+		case 1:
+			$colView = 'col-md-6';
+			break;
+		case 2:
+			$colView = 'col-md-4';
+			break;
+		case 3:
+			$colView = 'col-md-3';
+			break;
+		case 4:
+			$colView = 'card';
+			break;
 	}
 
-	add_filter( 'post_class', 'ekiline_show_columns_item' );
+	$classes[] = $colView;
+	return $classes;
+}
+
+add_filter( 'post_class', 'ekiline_show_columns_item' );

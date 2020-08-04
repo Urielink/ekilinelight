@@ -43,7 +43,7 @@ class ekilineBreadcrumb extends WP_Widget {
 	global $wp_registered_widgets;
 	$widget_id = $args['widget_id'];
 	$widget_obj = $wp_registered_widgets[$widget_id];
-	$widget_opt = get_option($widget_obj['callback'][0]->option_name);
+	$widget_opt = get_option( $widget_obj['callback'][0]->option_name );
 	$widget_num = $widget_obj['params'][0]['number'];
 	$css_style = $widget_opt[$widget_num]['css_style'];
 
@@ -91,7 +91,7 @@ class ekilineBreadcrumb extends WP_Widget {
 
 /**add_action( 'widgets_init', function() {
 	register_widget( 'ekilineBreadcrumb' );
-});**/ // esto no funciona en php5
+} );**/ // esto no funciona en php5
 
 function ekilineBreadcrumb_register_widgets() {
 	register_widget( 'ekilineBreadcrumb' );
@@ -107,67 +107,67 @@ function createBreadcrumb() {
 
 	if ( is_page() || is_single() ) {
 
-			if ( is_attachment() ) {
-				//variables para los attachments
-				$attachPost = get_post( get_the_ID() );
-				$attachUrl = get_permalink( $attachPost->post_parent );
-				$attachParent = get_the_title( $attachPost->post_parent );
+		if ( is_attachment() ) {
+			//variables para los attachments
+			$attachPost = get_post( get_the_ID() );
+			$attachUrl = get_permalink( $attachPost->post_parent );
+			$attachParent = get_the_title( $attachPost->post_parent );
 
-				// si es un adjunto, muestra el titulo de donde viene
-				$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="'.$attachUrl.'" title="Volver a  '.$attachParent.'" rel="gallery">'.$attachParent.'</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
+			// si es un adjunto, muestra el titulo de donde viene
+			$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="'.$attachUrl.'" title="Volver a  '.$attachParent.'" rel="gallery">'.$attachParent.'</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
 
-			} elseif ( is_page()  ) {
+		} elseif ( is_page()  ) {
 
-				//Si es pagina y tiene herencia, padres.
-				// https://wordpress.stackexchange.com/questions/140362/wordpress-breadcrumb-depth
-				// 1) Se llama la variable global para hacer un loop de paginas.
-				global $post;
-				// 2) confirmamos si tiene herencia, si no brinca al final (3)
-				if ( $post->post_parent ) {
-				//se llama al padre de esta página
-					$parent_id  = $post->post_parent;
-				//establezco mi variable para crear una lista de las paginas superirores
-					$breadcrumbs = array();
-				//doy formato los items de este array.
-					while ( $parent_id ) {
-						$page = get_page( $parent_id );
-						$breadcrumbs[] = '<li class="breadcrumb-item post-parent"><a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a></li><!--.post-parent-->';
-						$parent_id  = $page->post_parent;
-					}
-					//organizo el array para que el orden sea inverso
-					$breadcrumbs = array_reverse( $breadcrumbs );
-					// creo un loop por cada loop
-					foreach ( $breadcrumbs as $crumb ) {
-						$breadcrumb .= $crumb;
-					}
-					//cierro el HTML.
-					$breadcrumb .= '<li class="breadcrumb-item post-childB">';
-
-
-				} else {
-				// 3) Final de loop
-					$breadcrumb .= '<li class="breadcrumb-item post-childA">';
+			//Si es pagina y tiene herencia, padres.
+			// https://wordpress.stackexchange.com/questions/140362/wordpress-breadcrumb-depth
+			// 1) Se llama la variable global para hacer un loop de paginas.
+			global $post;
+			// 2) confirmamos si tiene herencia, si no brinca al final (3)
+			if ( $post->post_parent ) {
+			//se llama al padre de esta página
+				$parent_id  = $post->post_parent;
+			//establezco mi variable para crear una lista de las paginas superirores
+				$breadcrumbs = array();
+			//doy formato los items de este array.
+				while ( $parent_id ) {
+					$page = get_page( $parent_id );
+					$breadcrumbs[] = '<li class="breadcrumb-item post-parent"><a href="' . get_permalink( $page->ID) . '">' . get_the_title( $page->ID) . '</a></li><!--.post-parent-->';
+					$parent_id  = $page->post_parent;
 				}
-
-			} elseif ( is_single() ) {
-
-				$cats = get_the_category( get_the_ID() );
-				$cat = array_shift($cats);
-
-				if ( get_post_type( get_the_ID() ) != 'product' ) {
-					//en caso de woocommerce
-					$breadcrumb .= '<li class="breadcrumb-item single-category">' . get_category_parents( $cat, true, '</li><!--.single-category--><li class="breadcrumb-item single-category-child">' );
-				} else {
-					$breadcrumb .= '<li class="breadcrumb-item single-category">';
+				//organizo el array para que el orden sea inverso
+				$breadcrumbs = array_reverse( $breadcrumbs );
+				// creo un loop por cada loop
+				foreach ( $breadcrumbs as $crumb ) {
+					$breadcrumb .= $crumb;
 				}
+				//cierro el HTML.
+				$breadcrumb .= '<li class="breadcrumb-item post-childB">';
 
-			}
-			// en caso de no tener titulo
-			if( !get_the_title() ) {
-				$breadcrumb .= __( '&not;&not;', 'ekiline' ).'</li><!--.single-category-child.post-child-->';
+
 			} else {
-				$breadcrumb .= the_title( '', '</li><!--.single-category-child.post-child-->', false);
+			// 3) Final de loop
+				$breadcrumb .= '<li class="breadcrumb-item post-childA">';
 			}
+
+		} elseif ( is_single() ) {
+
+			$cats = get_the_category( get_the_ID() );
+			$cat = array_shift( $cats );
+
+			if ( get_post_type( get_the_ID() ) != 'product' ) {
+				//en caso de woocommerce
+				$breadcrumb .= '<li class="breadcrumb-item single-category">' . get_category_parents( $cat, true, '</li><!--.single-category--><li class="breadcrumb-item single-category-child">' );
+			} else {
+				$breadcrumb .= '<li class="breadcrumb-item single-category">';
+			}
+
+		}
+		// en caso de no tener titulo
+		if( !get_the_title() ) {
+			$breadcrumb .= __( '&not;&not;', 'ekiline' ).'</li><!--.single-category-child.post-child-->';
+		} else {
+			$breadcrumb .= the_title( '', '</li><!--.single-category-child.post-child-->', false );
+		}
 
 	}
 
@@ -176,16 +176,16 @@ function createBreadcrumb() {
 		$title = '';
 		if ( is_category() ) {
 
-			$catName = single_term_title( '',false);
+			$catName = single_term_title( '',false );
 			$catid = get_cat_ID( $catName );
 			// diferenciar si hay categorías padre:
 			// https://wordpress.stackexchange.com/questions/11267/check-is-category-parent-or-not-from-its-id
-			$catobj = get_category($catid);
+			$catobj = get_category( $catid );
 			// auxiliar para mostrar solo el padre
 			$parentobj = $catobj->parent;
 
 
-			if ($catobj->category_parent > 0) {
+			if ( $catobj->category_parent > 0) {
 				// este muestra toda una lista
 				// $breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $catid, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' );
 				$breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $parentobj, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' ). $catName;
