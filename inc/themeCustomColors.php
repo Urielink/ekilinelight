@@ -25,14 +25,14 @@ function ekiline_custom_color_controls( $wp_customize ) {
 	);
 
 		$wp_customize->add_section(
-			'colors' , array(
+			'colors', array(
 				'title' => __( 'Customize the Bootstrap color palette', 'ekiline' ),
 				'panel' => 'ekiline_ThemeColors',
 			)
 		);
 
 		$wp_customize->add_section(
-			'colors_extended' , array(
+			'colors_extended', array(
 				'title' => __( 'Customize colors per item', 'ekiline' ),
 				'panel' => 'ekiline_ThemeColors',
 			)
@@ -67,49 +67,50 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		$colors[] = array( 'slug'=>'b4_dark', 'default' => '#343a40', 'label' => '', 'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-dark</code>', 'ekiline' ), 'priority' => 10, 'section'=>'colors' );
 
 
-	foreach( $colors as $color) {
+	foreach( $colors as $color ) {
 		// add settings
 		$wp_customize->add_setting(
-				$color['slug'], array(
-						'default' => $color['default'],
-						'type' => 'option',
-						'capability' => 'edit_theme_options',
-						'sanitize_callback' => 'sanitize_hex_color',
-						'transport'   => 'refresh'
-				)
+			$color['slug'], array(
+				'default' => $color['default'],
+				'type' => 'option',
+				'capability' => 'edit_theme_options',
+				'sanitize_callback' => 'sanitize_hex_color',
+				'transport'   => 'refresh',
+			)
 		);
 
 		// add controls
 		$wp_customize->add_control(
-				new WP_Customize_Color_Control(
-						$wp_customize, $color['slug'],
-						array( 'label' => $color['label'],
-								'description' => $color['description'],
-								'section' => $color['section'],
-								'settings' => $color['slug'],
-								'priority' => $color['priority']
-						) )
+			new WP_Customize_Color_Control(
+				$wp_customize, $color['slug'],
+				array( 'label' => $color['label'],
+					'description' => $color['description'],
+					'section' => $color['section'],
+					'settings' => $color['slug'],
+					'priority' => $color['priority']
+				)
+			)
 		);
 	}
 
 	// Bootstrap inverse menu
 	$wp_customize->add_setting(
 		'ekiline_inversemenu', array(
-					'default' => '',
-					'sanitize_callback' => 'ekiline_sanitize_checkbox',
+			'default' => '',
+			'sanitize_callback' => 'ekiline_sanitize_checkbox',
 		)
 	);
 
-		$wp_customize->add_control(
-			'ekiline_inversemenu', array(
-						'label'          => __( 'Use light navbar', 'ekiline' ),
-						'description'    => '',
-						'section'        => 'colors_extended',
-						'settings'       => 'ekiline_inversemenu',
-						'type'           => 'checkbox',
-						'priority'       => 30,
-			)
-		);
+	$wp_customize->add_control(
+		'ekiline_inversemenu', array(
+			'label'          => __( 'Use light navbar', 'ekiline' ),
+			'description'    => '',
+			'section'        => 'colors_extended',
+			'settings'       => 'ekiline_inversemenu',
+			'type'           => 'checkbox',
+			'priority'       => 30,
+		)
+	);
 
 
 	//input para guardar css con colores generados desde script
@@ -122,19 +123,19 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		)
 	);
 
-		$wp_customize->add_control(
-			'ekiline_textarea_css', array(
-				'type' => 'hidden',
-				'section' => 'colors_extended',
-			)
-		);
+	$wp_customize->add_control(
+		'ekiline_textarea_css', array(
+			'type' => 'hidden',
+			'section' => 'colors_extended',
+		)
+	);
 
 }
 add_action( 'customize_register', 'ekiline_custom_color_controls' );
 
 /**
-	* 2. Regsitro de script auxiliar en personalizador.
-	*/
+* 2. Regsitro de script auxiliar en personalizador.
+*/
 function ekiline_themecustomizer_js() {
 	wp_enqueue_script( 'ekiline-themecustomizer', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.min.js', array( 'jquery' ), null, true );
 }
@@ -142,9 +143,9 @@ add_action( 'customize_controls_enqueue_scripts', 'ekiline_themecustomizer_js' )
 
 
 /**
-	* 3. Estilos especificos por objeto de la pagina:
-	* main, menu, footerbar y footer.
-	*/
+* 3. Estilos especificos por objeto de la pagina:
+* main, menu, footerbar y footer.
+*/
 function ekiline_page_elements() {
 
 	$ekilineLmnt = '';
@@ -261,10 +262,10 @@ function ekiline_custom_css_cb() {
 		}
 
 	$cstmStyles = wp_get_custom_css();
-	$cstmStyles = str_replace( array("\r","\n") , "" , $cstmStyles );
+	$cstmStyles = str_replace( array( "\r", "\n" ), "", $cstmStyles );
 	$cstmStyles = strip_tags( $cstmStyles );
 
-		if ( $cstmStyles && !is_customize_preview() ) :
+		if ( $cstmStyles && ! is_customize_preview() ) :
 			return $cstmStyles;
 		endif;
 }

@@ -8,7 +8,7 @@
 */
 ?>
 
-<article <?php post_class();?>>
+<article <?php post_class(); ?>>
 
 	<header>
 
@@ -26,12 +26,12 @@
 				<?php /* translators: %s is replaced with post date */
 					printf( esc_html_x( 'Posted on %s', 'post date', 'ekiline' ),
 						wp_kses_post( '<a href="' . get_month_link( get_the_time( 'Y' ), get_the_time( 'm' ) ) . '" rel="bookmark">' . get_the_time( __( 'F j, Y', 'ekiline' ) ) . '</a>' )
-					);?>
+					); ?>
 
 				<?php /* translators: %s is replaced with modification date */
 					printf( esc_html__( 'Updated on %s', 'ekiline' ),
 						wp_kses_post( get_the_modified_date( __( 'F j, Y', 'ekiline' ) )
-					) );?>
+					) ); ?>
 
 				<?php printf( wp_kses_post(
 						comments_popup_link( __( 'No comments yet', 'ekiline' ), __( '1 Comment', 'ekiline' ), __( '% Comments', 'ekiline' ), 'comments-link', __( 'Comments are closed.', 'ekiline' ) )
@@ -52,15 +52,15 @@
 
 	<?php ekiline_thumbnail(); ?>
 
-	<?php the_content();?>
+	<?php the_content(); ?>
 
 	<?php ekiline_link_pages(); ?>
 
-<?php if ( is_singular() ) {?>
+<?php if ( is_singular() ) { ?>
 	<footer>
 		<p class="entry-meta small mark">
 		<?php
-			if ( !is_page() || get_the_category_list() != '' ) {
+			if ( ! is_page() || get_the_category_list() != '' ) {
 				/* translators: %s is replaced with category title */
 				printf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
 			}

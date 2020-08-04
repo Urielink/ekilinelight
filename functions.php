@@ -241,7 +241,7 @@ function ekiline_above_fold_styles() {
 	// quitar comentarios:
 		$data = preg_replace( '#/\*.*?\*/#s', '', $data );
 	// quitar saltos de linea y convertir en un string
-		$data = str_replace( array("\r","\n") , "" , $data );
+		$data = str_replace( array( "\r", "\n" ), "", $data );
 	// html5
 		$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
 		// echo "\n".'<style' . $type_attr . 'id="ekiline-atf">' . strip_tags( $data ) .'</style>' . "\n";
@@ -258,13 +258,13 @@ add_action( 'wp_head', 'ekiline_above_fold_styles', 0 );
 /**
 	* Ekiline no require jquery_migrate.
 	*/
-function remove_jquery_migrate( $scripts) {
-	if (!is_admin() && isset( $scripts->registered['jquery'])) {
+function remove_jquery_migrate( $scripts ) {
+	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
 		$script = $scripts->registered['jquery'];
-			// verificar dependencias
-			if ( $script->deps) {
-				$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
-			}
+		// verificar dependencias
+		if ( $script->deps ) {
+			$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
+		}
 	}
 }
 add_action( 'wp_default_scripts', 'remove_jquery_migrate' );

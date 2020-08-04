@@ -123,7 +123,7 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 //1) B4CSS: agregar clases a cada item (ul>li).
 		$classes[] .= 'nav-item';
 //2) ANULADO* B4CSS: auxiliar, al separar el dropdown, se agrega la clase btn-group, el experimento solo es para el nivel 1.
-		// if ( $args->walker->has_children && $depth == 0) {
+		// if ( $args->walker->has_children && $depth == 0 ) {
 			// $classes[] .= 'btn-group align-items-center';
 		// }
 //3) B4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
@@ -201,7 +201,7 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		// 	$atts['id']				= 'menu-item-dropdown-' . $item->ID;
 		// }
 //7) B4CSS: agregar clases a cada item padre submenu (ul.sub-menu>li>a).
-		// if ( $args->walker->has_children && $depth > 0) {
+		// if ( $args->walker->has_children && $depth > 0 ) {
 		// 	$atts['class']	= 'pl-2 dropdown-item nav-link dropdown-toggle';
 		// }
 //8) B4CSS: agregar clases a cada item hijo (ul.sub-menu>li>ul>li>a).

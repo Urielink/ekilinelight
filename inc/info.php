@@ -77,13 +77,13 @@ function theme_html_page() { ?>
 								<?php esc_html_e( 'Complete theme, without external links, ads or tips.', 'ekiline' ); ?></li>
 						</ul>
 						<p>
-							<?php printf( '<a class="button button-primary button-hero" href="%1$s" target="_blank"><span class="dashicons dashicons-cart"></span>%2$s</a>', esc_url( 'http://ekiline.com/compra/' ), esc_html__( 'Buy and download', 'ekiline' ) );?>
+							<?php printf( '<a class="button button-primary button-hero" href="%1$s" target="_blank"><span class="dashicons dashicons-cart"></span>%2$s</a>', esc_url( 'http://ekiline.com/compra/' ), esc_html__( 'Buy and download', 'ekiline' ) ); ?>
 						</p>
 						<p>
 							<span class="dashicons dashicons-carrot"></span> <?php esc_html_e( 'You can also', 'ekiline' ); ?>
-							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/fondeo/' ), esc_html__( 'fund the development', 'ekiline' ) );?>
+							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/fondeo/' ), esc_html__( 'fund the development', 'ekiline' ) ); ?>
 							<?php esc_html_e( 'or', 'ekiline' ); ?>
-							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/gana/' ), esc_html__( 'earn money', 'ekiline' ) );?>
+							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/gana/' ), esc_html__( 'earn money', 'ekiline' ) ); ?>
 							<?php esc_html_e( 'by helping.', 'ekiline' ); ?>
 						</p>
 					</div>
@@ -100,10 +100,10 @@ function theme_html_page() { ?>
 					<div style="padding:4px;">
 						<h3><?php esc_html_e( 'Documentation', 'ekiline' ); ?></h3>
 						<ul>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/instala/' ), esc_html__( 'Installation', 'ekiline' ) );?></li>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/personaliza/' ), esc_html__( 'Personalization', 'ekiline' ) );?></li>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/elementos/' ), esc_html__( 'Elements and shortcodes', 'ekiline' ) );?></li>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/compatible/' ), esc_html__( 'Compatibility', 'ekiline' ) );?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/instala/' ), esc_html__( 'Installation', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/personaliza/' ), esc_html__( 'Personalization', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/elementos/' ), esc_html__( 'Elements and shortcodes', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/compatible/' ), esc_html__( 'Compatibility', 'ekiline' ) ); ?></li>
 						</ul>
 					</div>
 				</div>
@@ -118,9 +118,9 @@ function theme_html_page() { ?>
 	<p style="text-align: right;">
 		<small>
 			<?php /* translators: %1$s is replaced with date data */
-				printf( esc_html__( '&copy; Copyright %1$s Ekiline', 'ekiline' ), esc_attr( date( 'Y' ) ) );?>.
+				printf( esc_html__( '&copy; Copyright %1$s Ekiline', 'ekiline' ), esc_attr( date( 'Y' ) ) ); ?>.
 			<?php esc_html_e( 'All rights reserved. Ekiline developed by', 'ekiline' ); ?>
-			<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://bixnia.com/' ), esc_html__( 'B I X N I A', 'ekiline' ) );?>
+			<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://bixnia.com/' ), esc_html__( 'B I X N I A', 'ekiline' ) ); ?>
 		</small>
 	</p>
 </div>
@@ -145,12 +145,12 @@ function ekiline_docs_feed() { ?>
 
 		<?php
 		$rssInstance = array(
-				'title' => 'Ekiline Tips',
-				'url' => 'http://ekiline.com/feed/',
-				'items' => 10,
-				'show_summary' => 0,
-				'show_author' => 0,
-				'show_date' => 0
+			'title' => 'Ekiline Tips',
+			'url' => 'http://ekiline.com/feed/',
+			'items' => 10,
+			'show_summary' => 0,
+			'show_author' => 0,
+			'show_date' => 0,
 		);
 		$rssArgs = array(
 			'before_widget' => '<div class="widget rss-admin-notice %s">',
@@ -162,9 +162,9 @@ function ekiline_docs_feed() { ?>
 		the_widget( 'WP_Widget_RSS', $rssInstance, $rssArgs );
 		?>
 		<div>
-			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/gana/' ), esc_html__( 'Make money', 'ekiline' ) );?>
-			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/compra/' ), esc_html__( 'Get more', 'ekiline' ) );?>
-			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'themes.php?page=ekiline_options' ), esc_html__( 'About', 'ekiline' ) );?>
+			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/gana/' ), esc_html__( 'Make money', 'ekiline' ) ); ?>
+			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/compra/' ), esc_html__( 'Get more', 'ekiline' ) ); ?>
+			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'themes.php?page=ekiline_options' ), esc_html__( 'About', 'ekiline' ) ); ?>
 		</div>
 	</div>
 
@@ -173,7 +173,7 @@ function ekiline_docs_feed() { ?>
 
 function ekiline_docs_feed_set() { ?>
 <script type='text/javascript'>
-	jQuery(document).ready(function( $) {
+	jQuery(document).ready(function( $ ) {
 		$( '.ekiline-notice' ).delay(2000).show(100 );
 		var random = Math.floor(Math.random() * 10) + 1;;
 		$( '.ekiline-notice ul li:nth-child( '+random+' )' ).delay(3000).show(100 );

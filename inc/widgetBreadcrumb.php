@@ -116,7 +116,7 @@ function createBreadcrumb() {
 			// si es un adjunto, muestra el titulo de donde viene
 			$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="'.$attachUrl.'" title="Volver a  '.$attachParent.'" rel="gallery">'.$attachParent.'</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
 
-		} elseif ( is_page()  ) {
+		} elseif ( is_page() ) {
 
 			//Si es pagina y tiene herencia, padres.
 			// https://wordpress.stackexchange.com/questions/140362/wordpress-breadcrumb-depth
@@ -185,7 +185,7 @@ function createBreadcrumb() {
 			$parentobj = $catobj->parent;
 
 
-			if ( $catobj->category_parent > 0) {
+			if ( $catobj->category_parent > 0 ) {
 				// este muestra toda una lista
 				// $breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $catid, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' );
 				$breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $parentobj, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' ). $catName;

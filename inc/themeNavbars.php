@@ -16,9 +16,9 @@ function logoTheme() {
 	$logoIcono = get_theme_mod( 'ekiline_minilogo' ); //get_site_icon_url();
 	$logoHor = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
 
-	if ( $logoHor && !$logoIcono ) {
+	if ( $logoHor && ! $logoIcono ) {
 		echo '<img class="img-fluid" src="' . esc_url( $logoHor) . '" alt="' . esc_html(get_bloginfo( 'name' )) . '" loading="lazy"/>';
-	} elseif ( !$logoHor && $logoIcono ) {
+	} elseif ( ! $logoHor && $logoIcono ) {
 		echo '<img class="brand-icon" src="' . esc_url(get_site_icon_url()) . '" alt="' . esc_html(get_bloginfo( 'name' )) . '" loading="lazy"/>
 			' . esc_html(get_bloginfo( 'name' )) ;
 	} elseif ( $logoHor && $logoIcono ) {
@@ -51,7 +51,7 @@ function logoTheme() {
 	* Works with customizer.php
 	**/
 
-function ekilineNavbar( $navPosition) {
+function ekilineNavbar( $navPosition ) {
 
 	if ( !has_nav_menu( $navPosition ) ) return;
 
@@ -85,7 +85,7 @@ function ekilineNavbar( $navPosition) {
 		}
 
 		//Clases css por estilo de menu
-		switch ( $styles) {
+		switch ( $styles ) {
 			case 0 : $navAlign = ' mr-auto'; break;
 			case 1 : $navAlign = ' ml-auto'; break;
 			case 2 : $navHelper = ' justify-content-md-center'; $navAlign = ' justify-content-md-center'; $headNav = ' flex-md-column'; break;
@@ -115,7 +115,7 @@ function ekilineNavbar( $navPosition) {
 
 ?>
 
-			<header id="<?php echo esc_attr( $navPosition );?>SiteNavigation"  class="<?php echo esc_attr( $navClassCss );?>">
+			<header id="<?php echo esc_attr( $navPosition ); ?>SiteNavigation"  class="<?php echo esc_attr( $navClassCss ); ?>">
 
 				<div class="container<?php echo esc_attr( $headNav ); ?>">
 
@@ -123,34 +123,38 @@ function ekilineNavbar( $navPosition) {
 
 					<?php if( get_bloginfo( 'description' ) ) { ?>
 					<span class="navbar-text d-none d-md-block site-description"><?php echo esc_html(get_bloginfo( 'description' ) ); ?></span>
-					<?php }?>
+					<?php } ?>
 
-					<button class="<?php echo esc_attr( $togglerBtn );?>" type="button" data-toggle="<?php echo esc_attr( $dataToggle ); ?>" data-target="#<?php echo esc_attr( $dataTarget ); ?>" aria-label="Toggle navigation">
+					<button class="<?php echo esc_attr( $togglerBtn ); ?>" type="button" data-toggle="<?php echo esc_attr( $dataToggle ); ?>" data-target="#<?php echo esc_attr( $dataTarget ); ?>" aria-label="Toggle navigation">
 						<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 					</button>
 
 				<?php if ( $styles <= '6' ) { ?>
 
-					<div id="<?php echo esc_attr( $dataTarget );?>" class="<?php echo esc_attr( $collapseCss );?>">
+					<div id="<?php echo esc_attr( $dataTarget ); ?>" class="<?php echo esc_attr( $collapseCss ); ?>">
 
 					<?php if ( $styles == '5' ) { ?>
-						<button class="<?php echo esc_attr( $togglerBtn );?>" type="button" data-toggle="<?php echo esc_attr( $dataToggle ); ?>" data-target="#<?php echo esc_attr( $dataTarget ); ?>" aria-label="Toggle navigation">
+						<button class="<?php echo esc_attr( $togglerBtn ); ?>" type="button" data-toggle="<?php echo esc_attr( $dataToggle ); ?>" data-target="#<?php echo esc_attr( $dataTarget ); ?>" aria-label="Toggle navigation">
 							<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 						</button>
-					<?php }?>
+					<?php } ?>
 
-							<?php wp_nav_menu( array(
-										'menu'              => $navPosition,
-										'theme_location'    => $navPosition,
-										// 'depth'             => 2, // en caso de restringir la profundidad
-										'container'         => '',
-										'container_class'   => '',
-										'container_id'      => '',
-										'menu_class'        => 'navbar-nav' . $navAlign,
-										'menu_id'           => $navPosition . 'MenuLinks',
-										'fallback_cb'       => 'EkilineNavFallback',
-										'walker'            => new EkilineNavMenu()
-									) ); ?>
+					<?php
+					wp_nav_menu(
+						array(
+							'menu'              => $navPosition,
+							'theme_location'    => $navPosition,
+							// 'depth'             => 2, // en caso de restringir la profundidad
+							'container'         => '',
+							'container_class'   => '',
+							'container_id'      => '',
+							'menu_class'        => 'navbar-nav' . $navAlign,
+							'menu_id'           => $navPosition . 'MenuLinks',
+							'fallback_cb'       => 'EkilineNavFallback',
+							'walker'            => new EkilineNavMenu()
+						)
+					);
+					?>
 
 					</div>
 
@@ -163,7 +167,7 @@ function ekilineNavbar( $navPosition) {
 
 				<?php if ( $styles >= '7' ) {
 						ekiline_modalMenuBottom( $navPosition );
-				}?>
+				} ?>
 	<?php
 
 }
@@ -171,7 +175,7 @@ function ekilineNavbar( $navPosition) {
 /*
 * Fragmento para crear un menu con madal
 */
-function ekiline_modalMenuBottom( $navPosition) {
+function ekiline_modalMenuBottom( $navPosition ) {
 	/*tipos de animacion: .zoom, .newspaper, .move-horizontal, .move-from-bottom, .unfold-3d, .zoom-out, .left-aside, .right-aside */
 	$modalId = $navPosition.'NavModal';
 	$modalCss = '';
@@ -180,9 +184,9 @@ function ekiline_modalMenuBottom( $navPosition) {
 		case 8 : $modalCss = 'modal fade move-from-bottom modal-nav'; break;
 		case 9 : $modalCss = 'modal fade left-aside modal-nav'; break;
 		case 10 : $modalCss = 'modal fade right-aside modal-nav'; break;
-	}?>
+	} ?>
 
-<div id="<?php echo esc_attr( $modalId );?>" class="<?php echo esc_attr( $modalCss );?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
+<div id="<?php echo esc_attr( $modalId ); ?>" class="<?php echo esc_attr( $modalCss ); ?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
 	<!-- <div class="modal-header">
@@ -207,20 +211,24 @@ function ekiline_modalMenuBottom( $navPosition) {
 
 		<?php if( get_bloginfo( 'description' ) ) { ?>
 			<span class="navbar-text site-description"><?php echo esc_html(get_bloginfo( 'description' ) ); ?></span>
-		<?php }?>
+		<?php } ?>
 
-		<?php wp_nav_menu( array(
-					'menu'              => $navPosition,
-					'theme_location'    => $navPosition,
-					// 'depth'             => 2, // en caso de restringir la profundidad
-					'container'         => 'div',
-					'container_class'   => 'navbar-collapse collapse show',
-					'container_id'      => '',
-					'menu_class'        => 'navbar-nav',
-					'menu_id'           => 'modal-menu',
-					'fallback_cb'       => 'EkilineNavFallback',
-					'walker'            => new EkilineNavMenu()
-				) ); ?>
+		<?php
+		wp_nav_menu(
+			array(
+				'menu'              => $navPosition,
+				'theme_location'    => $navPosition,
+				// 'depth'             => 2, // en caso de restringir la profundidad
+				'container'         => 'div',
+				'container_class'   => 'navbar-collapse collapse show',
+				'container_id'      => '',
+				'menu_class'        => 'navbar-nav',
+				'menu_id'           => 'modal-menu',
+				'fallback_cb'       => 'EkilineNavFallback',
+				'walker'            => new EkilineNavMenu()
+			)
+		);
+		?>
 		</div>
 
 	</div>
@@ -230,7 +238,7 @@ function ekiline_modalMenuBottom( $navPosition) {
 	</div-->
 	</div>
 </div>
-</div><!-- #<?php echo esc_attr( $modalId );?> -->
+</div><!-- #<?php echo esc_attr( $modalId ); ?> -->
 
 <?php }
 // add_action( 'wp_footer', 'ekiline_modalMenuBottom', 0, 1 );

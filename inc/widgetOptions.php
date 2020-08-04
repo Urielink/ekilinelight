@@ -14,9 +14,9 @@
 * @link https://github.com/lowhow/Whitecoat/blob/master/whitecoat2/functions-theme.php
 */
 
-function ekiline_in_widget_form( $t,$return,$instance) {
+function ekiline_in_widget_form( $t,$return,$instance ) {
 	$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'text' => '', 'css_style' => '' ) );
-	if ( !isset( $instance['css_style']) ) $instance['css_style'] = null;
+	if ( !isset( $instance['css_style'] ) ) $instance['css_style'] = null;
 	?>
 	<p>
 		<label for="<?php echo esc_attr( $t->get_field_id( 'css_style' ) ); ?>">
@@ -24,21 +24,21 @@ function ekiline_in_widget_form( $t,$return,$instance) {
 		</label>
 		<input
 			class="widefat" type="text"
-			id="<?php echo esc_attr( $t->get_field_id( 'css_style' ) );?>"
+			id="<?php echo esc_attr( $t->get_field_id( 'css_style' ) ); ?>"
 			name="<?php echo esc_attr( $t->get_field_name( 'css_style' ) ); ?>"
-			value="<?php echo esc_attr( $instance['css_style'] );?>" />
+			value="<?php echo esc_attr( $instance['css_style'] ); ?>" />
 	</p>
 	<?php
 	$retrun = null;
 	return array( $t,$return,$instance );
 }
 
-function ekiline_in_widget_form_update( $instance, $new_instance, $old_instance) {
+function ekiline_in_widget_form_update( $instance, $new_instance, $old_instance ) {
 	$instance['css_style'] = strip_tags( $new_instance['css_style'] );
 	return $instance;
 }
 
-function ekiline_dynamic_sidebar_params( $params) {
+function ekiline_dynamic_sidebar_params( $params ) {
 	global $wp_registered_widgets;
 	$widget_id = $params[0]['widget_id'];
 	$widget_obj = $wp_registered_widgets[$widget_id];
@@ -78,26 +78,26 @@ add_filter( 'dynamic_sidebar_params', 'ekiline_dynamic_sidebar_params' );
 * https://stackoverflow.com/questions/41113890/retrieve-value-widget-form-option-wordpress
 */
 
-function ekiline_widgetView( $widget , $return , $instance ) {
+function ekiline_widgetView( $widget, $return, $instance ) {
 
 	$instance = wp_parse_args( (array) $instance, array( 'viewFormat' => 'none' ) );
-	if ( !isset( $instance['viewFormat']) ) $instance['viewFormat'] = null;
+	if ( !isset( $instance['viewFormat'] ) ) $instance['viewFormat'] = null;
 
 	?>
 	<p>
 		<label for="<?php echo esc_attr( $widget->get_field_id( 'viewFormat' ) ); ?>"><?php esc_html_e( 'Format (Ekiline)', 'ekiline' ) ?></label>
 
 		<select id="<?php echo esc_attr( $widget->get_field_id( 'viewFormat' ) ); ?>" name="<?php echo esc_attr( $widget->get_field_name( 'viewFormat' ) ); ?>">
-			<option <?php selected( $instance['viewFormat'], 'none' );?> value="none"><?php esc_html_e( 'Default', 'ekiline' ) ?></option>
-			<option <?php selected( $instance['viewFormat'], 'dropdown' );?>value="dropdown"><?php esc_html_e( 'Dropdown', 'ekiline' ) ?></option>
-			<option <?php selected( $instance['viewFormat'], 'modal' );?> value="modal"><?php esc_html_e( 'Modal', 'ekiline' ) ?></option>
+			<option <?php selected( $instance['viewFormat'], 'none' ); ?> value="none"><?php esc_html_e( 'Default', 'ekiline' ) ?></option>
+			<option <?php selected( $instance['viewFormat'], 'dropdown' ); ?>value="dropdown"><?php esc_html_e( 'Dropdown', 'ekiline' ) ?></option>
+			<option <?php selected( $instance['viewFormat'], 'modal' ); ?> value="modal"><?php esc_html_e( 'Modal', 'ekiline' ) ?></option>
 		</select>
 	</p>
 	<?php
 }
 add_action( 'in_widget_form', 'ekiline_widgetView',5,3 );
 
-function ekiline_widgetViewSave( $instance, $new_instance, $old_instance) {
+function ekiline_widgetViewSave( $instance, $new_instance, $old_instance ) {
 
 	$instance['viewFormat'] = $new_instance['viewFormat'];
 	return $instance;
@@ -105,7 +105,7 @@ function ekiline_widgetViewSave( $instance, $new_instance, $old_instance) {
 }
 add_filter( 'widget_update_callback', 'ekiline_widgetViewSave',5,3 );
 
-function ekiline_widgetShow( $params) {
+function ekiline_widgetShow( $params ) {
 
 	global $wp_registered_widgets;
 	$widget_id = $params[0]['widget_id'];
@@ -129,7 +129,7 @@ function ekiline_widgetShow( $params) {
 	}
 
 
-	if( isset( $widget_opt[$widget_num]['viewFormat']) ) {
+	if( isset( $widget_opt[$widget_num]['viewFormat'] ) ) {
 
 		$viewFormat = $widget_opt[$widget_num]['viewFormat'];
 

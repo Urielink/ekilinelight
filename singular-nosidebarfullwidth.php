@@ -10,7 +10,7 @@ get_header(); ?>
 
 <main id="primary" class="container-fluid">
 
-	<?php dynamic_sidebar( 'content-w1' );?>
+	<?php dynamic_sidebar( 'content-w1' ); ?>
 
 		<?php
 			while ( have_posts() ) : the_post();

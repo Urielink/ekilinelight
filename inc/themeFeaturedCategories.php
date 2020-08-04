@@ -12,9 +12,9 @@ function ekiline_featured_categories( $wp_customize ) {
 	// Front page categories
 	$wp_customize->add_setting(
 		'ekiline_featuredcategories', array(
-					'default' => 0,
-					'transport'   => 'refresh',
-					'sanitize_callback' => 'ekiline_sanitize_multipleselect'
+			'default' => 0,
+			'transport'   => 'refresh',
+			'sanitize_callback' => 'ekiline_sanitize_multipleselect'
 		)
 	);
 
@@ -75,7 +75,7 @@ add_action( 'pre_get_posts', 'ekiline_frontpage_featured' );
 	* 3) se crea el arreglo para desplegar las categories
 	* https://stackoverflow.com/questions/38481936/multi-select-category-wordpress-customizer-control
 	**/
-if (class_exists( 'WP_Customize_Control' )) {
+if (class_exists( 'WP_Customize_Control' ) ) {
 	class ekiline_controlMultipleSelect extends WP_Customize_Control {
 
 		// Establecer el tipo del control, el formulario
@@ -106,7 +106,7 @@ if (class_exists( 'WP_Customize_Control' )) {
 function ekiline_sanitize_multipleselect( $input )
 {
 	$valid = ekiline_list_categories();
-	foreach ( $input as $value) {
+	foreach ( $input as $value ) {
 		if ( !array_key_exists( $value, $valid ) ) return;
 	}
 	return $input;

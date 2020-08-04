@@ -17,10 +17,10 @@
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<?php wp_head(); ?>
 	</head>
-	<body <?php body_class();?>>
+	<body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<?php dynamic_sidebar( 'toppage-w1' );?>
+<?php dynamic_sidebar( 'toppage-w1' ); ?>
 
 <?php ekilineNavbar( 'primary' ); ?>
 

@@ -16,9 +16,9 @@ get_header(); ?>
 
 <?php ekiline_main_columns( 'open' ); ?>
 
-	<main id="primary" class="<?php orderCols( 'main' );?>">
+	<main id="primary" class="<?php orderCols( 'main' ); ?>">
 
-		<?php dynamic_sidebar( 'content-w1' );?>
+		<?php dynamic_sidebar( 'content-w1' ); ?>
 
 		<?php get_template_part( 'template-parts/content', 'archive' ); ?>
 
@@ -37,7 +37,7 @@ get_header(); ?>
 					* https://wordpress.stackexchange.com/questions/260998/get-template-part-based-on-get-post-type-for-a-custom-post-type-instead-of-g
 					*/
 					// en caso de ocupar 'cards'.
-					$postType = ( !is_singular() && get_theme_mod( 'ekiline_Columns' ) == 4 ) ? 'card' : get_post_type() ;
+					$postType = ( ! is_singular() && get_theme_mod( 'ekiline_Columns' ) == 4 ) ? 'card' : get_post_type() ;
 					get_template_part( 'template-parts/content', $postType );
 
 				endwhile;
@@ -49,7 +49,7 @@ get_header(); ?>
 			}
 		?>
 
-		<?php ekiline_pagination();?>
+		<?php ekiline_pagination(); ?>
 
 		<?php dynamic_sidebar( 'content-w2' ); ?>
 

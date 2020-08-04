@@ -8,9 +8,9 @@
 */
 get_header(); ?>
 
-<main id="primary" class="<?php echo esc_attr( ekiline_widthControl() );?>">
+<main id="primary" class="<?php echo esc_attr( ekiline_widthControl() ); ?>">
 
-	<?php dynamic_sidebar( 'content-w1' );?>
+	<?php dynamic_sidebar( 'content-w1' ); ?>
 
 		<?php
 			while ( have_posts() ) : the_post();

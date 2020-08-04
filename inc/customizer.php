@@ -22,8 +22,8 @@ function ekiline_theme_customizer( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'ekiline_logo_max', array(
-				'default' => '',
-				'sanitize_callback' => 'absint'
+			'default' => '',
+			'sanitize_callback' => 'absint'
 		)
 	);
 
@@ -63,18 +63,18 @@ function ekiline_theme_customizer( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'ekiline_minilogo', array(
-					'default' => '',
-					'sanitize_callback' => 'ekiline_sanitize_checkbox'
+			'default' => '',
+			'sanitize_callback' => 'ekiline_sanitize_checkbox'
 		)
 	);
 
 	$wp_customize->add_control(
 		'ekiline_showFrontPageHeading', array(
-					'label'          => __( 'Replace navbar brand with site icon in small devices', 'ekiline' ),
-					'section'        => 'title_tagline',
-					'settings'       => 'ekiline_minilogo',
-					'type'           => 'checkbox',
-					'priority' 		 => 100
+			'label'          => __( 'Replace navbar brand with site icon in small devices', 'ekiline' ),
+			'section'        => 'title_tagline',
+			'settings'       => 'ekiline_minilogo',
+			'type'           => 'checkbox',
+			'priority' 		 => 100
 		)
 	);
 
@@ -86,9 +86,9 @@ function ekiline_theme_customizer( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'ekiline_primarymenuSettings', array(
-				'default' => '0',
-				'sanitize_callback' => 'ekiline_sanitize_select'
-			)
+			'default' => '0',
+			'sanitize_callback' => 'ekiline_sanitize_select'
+		)
 	);
 
 	$wp_customize->add_control(
@@ -109,9 +109,9 @@ function ekiline_theme_customizer( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'ekiline_primarymenuStyles', array(
-				'default' => '0',
-				'sanitize_callback' => 'ekiline_sanitize_select'
-			)
+			'default' => '0',
+			'sanitize_callback' => 'ekiline_sanitize_select'
+		)
 	);
 
 	$wp_customize->add_control(
@@ -142,7 +142,7 @@ function ekiline_theme_customizer( $wp_customize ) {
 */
 	// Page wide
 	$wp_customize->add_section(
-		'ekiline_vista_section' , array(
+		'ekiline_vista_section', array(
 			'title'       => __( 'Site view', 'ekiline' ),
 			'priority'    => 120,
 			'description' => __( 'Allow fullwidth of your website by content type: homepage, categories or single content', 'ekiline' ),
@@ -155,13 +155,13 @@ function ekiline_theme_customizer( $wp_customize ) {
 		$iLayout[] = array( 'name'=>'Archive', 'label' => __( 'Categories and archive pages', 'ekiline' ) );
 		$iLayout[] = array( 'name'=>'Single', 'label' => __( 'Entries and single pages', 'ekiline' ) );
 
-		foreach( $iLayout as $value) {
+		foreach( $iLayout as $value ) {
 
 			$wp_customize->add_setting(
 				'ekiline_disableSb' . $value['name'], array(
-						'default' => '0',
-						'sanitize_callback' => 'ekiline_sanitize_select'
-					)
+					'default' => '0',
+					'sanitize_callback' => 'ekiline_sanitize_select'
+				)
 			);
 
 			$wp_customize->add_control(
@@ -180,10 +180,10 @@ function ekiline_theme_customizer( $wp_customize ) {
 
 			$wp_customize->add_setting(
 				'ekiline_ancho' . $value['name'], array(
-						'default' => '',
-						'sanitize_callback' => 'ekiline_sanitize_checkbox'
-					)
-				);
+					'default' => '',
+					'sanitize_callback' => 'ekiline_sanitize_checkbox'
+				)
+			);
 
 			$wp_customize->add_control(
 				'ekiline_ancho' . $value['name'], array(
@@ -199,9 +199,9 @@ function ekiline_theme_customizer( $wp_customize ) {
 
 	$wp_customize->add_setting(
 		'ekiline_Columns', array(
-				'default' => '0',
-				'sanitize_callback' => 'ekiline_sanitize_select'
-			)
+			'default' => '0',
+			'sanitize_callback' => 'ekiline_sanitize_select'
+		)
 	);
 
 	$wp_customize->add_control(

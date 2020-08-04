@@ -86,7 +86,7 @@ add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
 
 // function ekiline_link_title( $title ) {
 
-// 	$tagClass = ( get_theme_mod( 'ekiline_Columns' ) == 4 && !is_singular() ) ? 'entry-title card-title' : 'entry-title' ;
+// 	$tagClass = ( get_theme_mod( 'ekiline_Columns' ) == 4 && ! is_singular() ) ? 'entry-title card-title' : 'entry-title' ;
 
 // 	if ( in_the_loop() ) {
 // 		if ( is_single() || is_page() ) {
@@ -177,14 +177,14 @@ function ekiline_content_out_the_loop() {
 		if( $more ) {
 			$content_parts = get_extended( $content );
 				$content = $content_parts['main'];
-		} else if ( $excerpt) {
+		} else if ( $excerpt ) {
 			$content = $excerpt;
 		} else {
 			//toma el primer parrafo solo 24 palabras y cortar
 			$content = wp_trim_words( $content, 24 );
 				//Si existe un punto antes cortar
 				$punto = strpos( $content, '.' );
-				if ( $punto) {
+				if ( $punto ) {
 					$content = substr( $content, 0, strpos( $content, '.' ) ) . '.';
 				}
 		}
@@ -200,7 +200,7 @@ function ekiline_content_out_the_loop() {
 
 function ekiline_link_pages() {
 
-	if ( !is_singular() ) return;
+	if ( ! is_singular() ) return;
 
 	$args = array(
 		'before' => '<p class="page-links border-bottom p-2 text-right"><i class="float-left">' . esc_html__( 'Continue reading:', 'ekiline' ) . '</i>',
@@ -265,7 +265,7 @@ add_filter( 'post_password_expires', 'ekiline_expirCookie' );
 
 function ekiline_pagination() {
 
-	if ( is_front_page() && !is_home() ) return;
+	if ( is_front_page() && ! is_home() ) return;
 
 	// en caso de woocommerce no aplica
 	if ( class_exists( 'WooCommerce' ) ) {
@@ -281,18 +281,18 @@ function ekiline_pagination() {
 		$pagelist = get_pages( 'sort_column=menu_order&sort_order=asc' );
 		$pages = array();
 
-		foreach ( $pagelist as $page) {
+		foreach ( $pagelist as $page ) {
 			$pages[] += $page->ID;
 		}
 
 		$current = array_search(get_the_ID(), $pages );
-			$prevID = (isset( $pages[$current-1])) ? $pages[$current-1] : '';
-			$nextID = (isset( $pages[$current+1])) ? $pages[$current+1] : '';
+			$prevID = (isset( $pages[$current-1] ) ) ? $pages[$current-1] : '';
+			$nextID = (isset( $pages[$current+1] ) ) ? $pages[$current+1] : '';
 
-		if (!empty( $prevID)) {
+		if ( !empty( $prevID) ) {
 			$PreviusLink .= '<li class="page-item page-link"><a href="'. get_permalink( $prevID) .'" title="'. get_the_title( $prevID) .'"><span>&leftarrow;</span> '. get_the_title( $prevID) .'</a></li>';
 		}
-		if (!empty( $nextID)) {
+		if ( !empty( $nextID) ) {
 			$NextLink .= '<li class="page-item page-link"><a href="'. get_permalink( $nextID) .'" title="'. get_the_title( $nextID) .'">'. get_the_title( $nextID) .' <span>&rightarrow;</span></a></li>';
 		}
 
@@ -313,29 +313,31 @@ function ekiline_pagination() {
 		global $wp_query;
 		$big = 999999999;
 
-		$pages = paginate_links(array(
-					'base' => str_replace( $big, '%#%', get_pagenum_link( $big)),
-					'format' => '?page=%#%',
-					'current' => max(1, get_query_var( 'paged' )),
-					'total' => $wp_query->max_num_pages,
-					'type' => 'array',
-					'prev_next' => TRUE,
-					'prev_text' => __( '&larr; Previous', 'ekiline' ),
-					'next_text' => __( 'Next &rarr;', 'ekiline' ),
-				) );
+		$pages = paginate_links(
+					array(
+						'base' => str_replace( $big, '%#%', get_pagenum_link( $big)),
+						'format' => '?page=%#%',
+						'current' => max(1, get_query_var( 'paged' )),
+						'total' => $wp_query->max_num_pages,
+						'type' => 'array',
+						'prev_next' => TRUE,
+						'prev_text' => __( '&larr; Previous', 'ekiline' ),
+						'next_text' => __( 'Next &rarr;', 'ekiline' ),
+					)
+				);
 
 		if ( is_array( $pages) ) {
 
 			$current_page = ( get_query_var( 'paged' ) == 0 ) ? 1 : get_query_var( 'paged' );
 
-			foreach ( $pages as $i => $page) {
+			foreach ( $pages as $i => $page ) {
 
 				$page = str_replace( 'page-numbers', 'page-link', $page );
 
-				if ( $current_page == 1 && $i == 0) {
+				if ( $current_page == 1 && $i == 0 ) {
 					$PreviusLink .= "<li class='page-item active'>$page</li>";
 				} else {
-					if ( $current_page != 1 && $current_page == $i) {
+					if ( $current_page != 1 && $current_page == $i ) {
 						$PreviusLink .= "<li class='page-item active'>$page</li>";
 					} else {
 						$PreviusLink .= "<li class='page-item'>$page</li>";

@@ -78,7 +78,7 @@
 * https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
 */
 
-function ekilineCommentsSimple( $comment, $args, $depth) {
+function ekilineCommentsSimple( $comment, $args, $depth ) {
 
 	if ( 'div' === $args['style'] ) {
 		$tag       = 'div';
@@ -86,7 +86,7 @@ function ekilineCommentsSimple( $comment, $args, $depth) {
 	} else {
 		$tag       = 'li';
 		$add_below = 'div-comment';
-	}?>
+	} ?>
 
 	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
 
@@ -101,14 +101,17 @@ function ekilineCommentsSimple( $comment, $args, $depth) {
 			<div class="rounded bg-white col-md-11 col-sm-10 col-9 py-2">
 				<?php comment_text(); ?>
 
-				<?php comment_reply_link( array_merge( $args, array(
-								// 'before' => '<div class="btn btn-danger">',
-								// 'after' => '</div>',
-								// 'reply_text' => __( 'Reply', 'ekiline' ),
-								'add_below' => $add_below,
-								'depth'     => $depth,
-								'max_depth' => $args['max_depth']
-							)) ); ?>
+				<?php
+				comment_reply_link(
+					array_merge( $args, array(
+						// 'before' => '<div class="btn btn-danger">',
+						// 'after' => '</div>',
+						// 'reply_text' => __( 'Reply', 'ekiline' ),
+						'add_below' => $add_below,
+						'depth'     => $depth,
+						'max_depth' => $args['max_depth']
+					))
+				); ?>
 			</div>
 
 
@@ -120,7 +123,7 @@ function ekilineCommentsSimple( $comment, $args, $depth) {
 
 }
 
-function ekilineCommentsExtended( $comment, $args, $depth) {
+function ekilineCommentsExtended( $comment, $args, $depth ) {
 
 	if ( 'div' === $args['style'] ) {
 		$tag       = 'div';
@@ -128,7 +131,7 @@ function ekilineCommentsExtended( $comment, $args, $depth) {
 	} else {
 		$tag       = 'li';
 		$add_below = 'div-comment';
-	}?>
+	} ?>
 
 	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
 
@@ -140,7 +143,7 @@ function ekilineCommentsExtended( $comment, $args, $depth) {
 
 			<div class="col col-md-1 col-sm-2 col-3 text-center">
 				<?php if ( $args['avatar_size'] != 0 ) echo get_avatar( $comment, $args['avatar_size'], '', '', array( 'class' => 'img-fluid mt-2' )  ); ?>
-				<?php //if ( $args['avatar_size'] != 0 ) { echo get_avatar( $comment, $args['avatar_size'] ); }  ?>
+				<?php //if ( $args['avatar_size'] != 0 ) { echo get_avatar( $comment, $args['avatar_size'] ); } ?>
 			</div>
 
 			<div class="rounded bg-white col-md-11 col-sm-10 col-9 py-2">
@@ -174,11 +177,15 @@ function ekilineCommentsExtended( $comment, $args, $depth) {
 		</div>
 
 		<div class="reply text-right">
-			<?php comment_reply_link( array_merge( $args, array(
-							'add_below' => $add_below,
-							'depth'     => $depth,
-							'max_depth' => $args['max_depth']
-						)) ); ?>
+			<?php
+			comment_reply_link(
+				array_merge( $args, array(
+					'add_below' => $add_below,
+					'depth'     => $depth,
+					'max_depth' => $args['max_depth']
+				))
+			);
+			?>
 		</div>
 		</div>
 
@@ -200,39 +207,38 @@ function ekilineCommentsExtended( $comment, $args, $depth) {
 /****/
 
 $args = array(
-		'comment_field' => '<div class="form-group">' .
-								'<label for="comment">' . __( 'Comment', 'ekiline' ) . '</label>' .
-								'<textarea id="comment" name="comment" class="form-control mb-2"></textarea>' .
-							'</div>',
+	'comment_field' => '<div class="form-group">' .
+							'<label for="comment">' . __( 'Comment', 'ekiline' ) . '</label>' .
+							'<textarea id="comment" name="comment" class="form-control mb-2"></textarea>' .
+						'</div>',
 
-		'fields' => apply_filters(
-			'comment_form_default_fields', array(
-				'author' => '<div class="form-group">' .
-								'<label for="author">' . __( 'Name', 'ekiline' ) . '*</label> ' .
-								'<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"/>' .
-							'</div>',
-				'email' => '<div class="form-group">' .
-								'<label for="email">' . __( 'Email', 'ekiline' ) . '*</label> ' .
-								'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"/>' .
-							'</div>',
-				'url' => '<div class="form-group">' .
-								'<label for="url">' . __( 'Website', 'ekiline' ) . '</label>' .
-								'<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"/>' .
-							'</div>',
-				'cookies' => '<div class="form-check">' .
-								'<input class="form-check-input" type="checkbox" id="agree" required>' .
-								'<label class="form-check-label" for="agree">' . __( 'By commenting you accept the', 'ekiline' ) .
-									'<a href="' . get_privacy_policy_url() . '"> ' . __( 'Privacy Policy', 'ekiline' )  . '</a>' .
-								'</label>' .
-							'</div>',
+	'fields' => apply_filters(
+		'comment_form_default_fields', array(
+			'author' => '<div class="form-group">' .
+							'<label for="author">' . __( 'Name', 'ekiline' ) . '*</label> ' .
+							'<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"/>' .
+						'</div>',
+			'email' => '<div class="form-group">' .
+							'<label for="email">' . __( 'Email', 'ekiline' ) . '*</label> ' .
+							'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"/>' .
+						'</div>',
+			'url' => '<div class="form-group">' .
+							'<label for="url">' . __( 'Website', 'ekiline' ) . '</label>' .
+							'<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"/>' .
+						'</div>',
+			'cookies' => '<div class="form-check">' .
+							'<input class="form-check-input" type="checkbox" id="agree" required>' .
+							'<label class="form-check-label" for="agree">' . __( 'By commenting you accept the', 'ekiline' ) .
+								'<a href="' . get_privacy_policy_url() . '"> ' . __( 'Privacy Policy', 'ekiline' )  . '</a>' .
+							'</label>' .
+						'</div>',
 
-			)
-		),
-		// las clases de manera independiente:
-		'class_form' => 'comment-form form',
-		'class_submit' => 'submit btn btn-sm btn-secondary float-right mb-2'
-
-	);
+		)
+	),
+	// las clases de manera independiente:
+	'class_form' => 'comment-form form',
+	'class_submit' => 'submit btn btn-sm btn-secondary float-right mb-2'
+);
 
 	comment_form( $args );
 
