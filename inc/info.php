@@ -19,16 +19,18 @@
 
 function ekiline_bar() {
 	global $wp_admin_bar;
-	$wp_admin_bar->add_menu( array(
-		'id' => 'goekiline',
-		'title' => __( 'FundMe', 'ekiline' ),
-		'href' => 'http://ekiline.com/fondeo/',
-		'meta' => array(
-			'class' => 'gold',
-			'target' => '_blank'
+	$wp_admin_bar->add_menu(
+		array(
+			'id'     => 'goekiline',
+			'title'  => __( 'FundMe', 'ekiline' ),
+			'href'   => 'http://ekiline.com/fondeo/',
+			'meta'   => array(
+				'class'  => 'gold',
+				'target' => '_blank',
 			),
-		'parent' => 'top-secondary'
-	) );
+			'parent' => 'top-secondary',
+		)
+	);
 }
 add_action( 'admin_bar_menu', 'ekiline_bar', 0 );
 
@@ -38,7 +40,7 @@ function ekiline_theme_page() {
 		__( 'About Ekiline', 'ekiline' ),
 		'edit_posts',
 		'ekiline_options',
-		'theme_html_page'
+		'theme_html_page',
 	);
 }
 add_action( 'admin_menu', 'ekiline_theme_page' );
@@ -117,15 +119,18 @@ function theme_html_page() { ?>
 
 	<p style="text-align: right;">
 		<small>
-			<?php /* translators: %1$s is replaced with date data */
-				printf( esc_html__( '&copy; Copyright %1$s Ekiline', 'ekiline' ), esc_attr( date( 'Y' ) ) ); ?>.
+			<?php
+				/* translators: %1$s is replaced with date data */
+				printf( esc_html__( '&copy; Copyright %1$s Ekiline', 'ekiline' ), esc_attr( date( 'Y' ) ) );
+			?>
 			<?php esc_html_e( 'All rights reserved. Ekiline developed by', 'ekiline' ); ?>
 			<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://bixnia.com/' ), esc_html__( 'B I X N I A', 'ekiline' ) ); ?>
 		</small>
 	</p>
 </div>
 
-<?php }
+	<?php
+}
 
 
 /*
@@ -140,26 +145,27 @@ if ( in_array( $pagenow, $adminpages, true ) ) {
 	add_action( 'admin_notices', 'ekiline_docs_feed' );
 }
 
-function ekiline_docs_feed() { ?>
+function ekiline_docs_feed() {
+	?>
 	<div class="notice notice-success is-dismissible ekiline-notice" style="display: none;">
 
 		<?php
-		$rssInstance = array(
-			'title' => 'Ekiline Tips',
-			'url' => 'http://ekiline.com/feed/',
-			'items' => 10,
+		$rss_instance = array(
+			'title'        => 'Ekiline Tips',
+			'url'          => 'http://ekiline.com/feed/',
+			'items'        => 10,
 			'show_summary' => 0,
-			'show_author' => 0,
-			'show_date' => 0,
+			'show_author'  => 0,
+			'show_date'    => 0,
 		);
-		$rssArgs = array(
+		$rss_args     = array(
 			'before_widget' => '<div class="widget rss-admin-notice %s">',
-			'after_widget' => '</div>',
-			'before_title' => '<h2 class="widgettitle">',
-			'after_title' => '</h2>'
+			'after_widget'  => '</div>',
+			'before_title'  => '<h2 class="widgettitle">',
+			'after_title'   => '</h2>',
 		);
 
-		the_widget( 'WP_Widget_RSS', $rssInstance, $rssArgs );
+		the_widget( 'WP_Widget_RSS', $rss_instance, $rss_args );
 		?>
 		<div>
 			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/gana/' ), esc_html__( 'Make money', 'ekiline' ) ); ?>
@@ -168,10 +174,12 @@ function ekiline_docs_feed() { ?>
 		</div>
 	</div>
 
-<?php }
+	<?php
+}
 // add_action( 'admin_notices', 'ekiline_docs_feed' );
 
-function ekiline_docs_feed_set() { ?>
+function ekiline_docs_feed_set() {
+	?>
 <script type='text/javascript'>
 	jQuery(document).ready(function( $ ) {
 		$( '.ekiline-notice' ).delay(2000).show(100 );
@@ -179,11 +187,12 @@ function ekiline_docs_feed_set() { ?>
 		$( '.ekiline-notice ul li:nth-child( '+random+' )' ).delay(3000).show(100 );
 	});
 </script>
-<?php }
+	<?php
+}
 // add_action( 'admin_footer', 'ekiline_docs_feed_set' );
 
 function ekiline_admin_styles() {
-	$extracss = '.gold a::before { content: "\f511";} .gold a{ background-color: #58aa03 !important; } .gold:hover a{ background-color: #ffb900 !important; color: #fff !important; } .gold:hover a::before { content: "\f339"; color: #fff !important; }';
+	$extracss  = '.gold a::before { content: "\f511";} .gold a{ background-color: #58aa03 !important; } .gold:hover a{ background-color: #ffb900 !important; color: #fff !important; } .gold:hover a::before { content: "\f339"; color: #fff !important; }';
 	$extracss .= '.advice a::before { content: "\f325";} .advice a { background-color: #ff7e00 !important; } .advice:hover a { background-color: #ff7e00 !important; color: #fff !important; } .advice:hover a::before { content: "\f325"; color: #fff !important; }';
 	$extracss .= 'a.gold{ background-color: #58aa03 !important; } a.gold:hover{ background-color: #ffb900 !important; color: #fff !important; } a.gold:hover .dashicons-carrot::before {content: "\f339";color: #fff !important;}';
 	$extracss .= '.dash-note{margin: 0px 10px 0px 0px;float: left;font-size: 20px;}';

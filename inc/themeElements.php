@@ -28,7 +28,7 @@ function ekiline_countWidgets( $widgetZone ) {
 	// agreagar un contenedor en caso de existir más de 2 widgets, util para usar columnas de bootstrap.
 	if ( is_active_sidebar( $widgetZone) ) :
 
-		$the_sidebars = wp_get_sidebars_widgets();
+		$the_sidebars   = wp_get_sidebars_widgets();
 		$count_sidebars = count( $the_sidebars[$widgetZone] );
 
 		if ( $count_sidebars >= '2' ) {
@@ -55,8 +55,8 @@ function ekiline_thumbnail() {
 	// thumbnail size
 	$thumbSize = ( is_search() ) ? 'thumbnail' : 'medium' ;
 	// clase css varia por tipo de contenido
-	$imgClass = 'img-fluid ';
-		$imgClass .= ( get_theme_mod( 'ekiline_Columns' ) == 4 ) ? 'card-img-top ' : 'img-thumbnail ' ;
+	$imgClass  = 'img-fluid ';
+	$imgClass .= ( get_theme_mod( 'ekiline_Columns' ) == 4 ) ? 'card-img-top ' : 'img-thumbnail ' ;
 
 	return the_post_thumbnail( $thumbSize, array( 'class' => $imgClass ) );
 }
@@ -139,7 +139,7 @@ add_filter( 'get_the_archive_title', 'my_theme_archive_title' );
 
 function ekiline_content_additions( $content ) {
 
-	if( is_singular() ) return $content;
+	if ( is_singular() ) return $content;
 
 	if ( is_home() || is_front_page() || is_archive() || is_search() ) {
 
@@ -147,7 +147,7 @@ function ekiline_content_additions( $content ) {
 		/* translators: screenread only %s is replaced with title */
 		$link = '... <a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">'. __( 'Read more', 'ekiline' ) .'</a>';
 
-		if( strpos( $post->post_content, '<!--more-->' ) ) {
+		if ( strpos( $post->post_content, '<!--more-->' ) ) {
 			$content = $content;
 		} else if ( $post->post_excerpt != '' ) {
 			$content = $post->post_excerpt . $link;
@@ -171,23 +171,23 @@ add_filter( 'the_content', 'ekiline_content_additions' );
 function ekiline_content_out_the_loop() {
 	global $post;
 	$content = $post->post_content;
-		$more = strpos( $content, '<!--more-->' );
-			$excerpt = $post->post_excerpt;
+	$more    = strpos( $content, '<!--more-->' );
+	$excerpt = $post->post_excerpt;
 
-		if( $more ) {
-			$content_parts = get_extended( $content );
-				$content = $content_parts['main'];
-		} else if ( $excerpt ) {
-			$content = $excerpt;
-		} else {
-			//toma el primer parrafo solo 24 palabras y cortar
-			$content = wp_trim_words( $content, 24 );
-				//Si existe un punto antes cortar
-				$punto = strpos( $content, '.' );
-				if ( $punto ) {
-					$content = substr( $content, 0, strpos( $content, '.' ) ) . '.';
-				}
+	if ( $more ) {
+		$content_parts = get_extended( $content );
+		$content       = $content_parts['main'];
+	} else if ( $excerpt ) {
+		$content = $excerpt;
+	} else {
+		//toma el primer parrafo solo 24 palabras y cortar
+		$content = wp_trim_words( $content, 24 );
+		//Si existe un punto antes cortar
+		$punto = strpos( $content, '.' );
+		if ( $punto ) {
+			$content = substr( $content, 0, strpos( $content, '.' ) ) . '.';
 		}
+	}
 
 	return wp_strip_all_tags( $content );
 }
@@ -203,11 +203,11 @@ function ekiline_link_pages() {
 	if ( ! is_singular() ) return;
 
 	$args = array(
-		'before' => '<p class="page-links border-bottom p-2 text-right"><i class="float-left">' . esc_html__( 'Continue reading:', 'ekiline' ) . '</i>',
-		'after'  => '</p>',
-		'link_before'       => '<span class="btn btn-sm btn-primary">',
-		'link_after'        => '</span>',
-		'next_or_number'    => 'number',
+		'before'         => '<p class="page-links border-bottom p-2 text-right"><i class="float-left">' . esc_html__( 'Continue reading:', 'ekiline' ) . '</i>',
+		'after'          => '</p>',
+		'link_before'    => '<span class="btn btn-sm btn-primary">',
+		'link_after'     => '</span>',
+		'next_or_number' => 'number',
 	);
 
 	wp_link_pages( $args );
@@ -232,8 +232,8 @@ add_filter( 'get_search_form', 'ekiline_search_form' );
 
 function ekiline_password_form() {
 	global $post;
-	$label = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
-	$output = '<form action="' . esc_url( home_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form form-inline col-sm-8 p-4 mx-auto text-center" method="post">';
+	$label   = 'pwbox-'.( empty( $post->ID ) ? rand() : $post->ID );
+	$output  = '<form action="' . esc_url( home_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form form-inline col-sm-8 p-4 mx-auto text-center" method="post">';
 	$output .= '<p>' . __( 'This content is password protected. To view it please enter your password below:', 'ekiline' ) . '</p>';
 	$output .= '<div class="form-inline mx-auto"><label for="' . $label . '">' . __( 'Password:', 'ekiline' ) . ' </label>';
 	$output .= '<div class="input-group pl-md-5"><input class="form-control" name="post_password" id="' . $label . '" type="password" size="20" />';
@@ -272,22 +272,22 @@ function ekiline_pagination() {
 		if ( is_cart() || is_checkout() || is_account_page() ) return;
 	}
 
-	$thePages = '';
+	$thePages    = '';
 	$PreviusLink = '';
-	$NextLink = '';
+	$NextLink    = '';
 
 	if ( is_page() ) {
 
 		$pagelist = get_pages( 'sort_column=menu_order&sort_order=asc' );
-		$pages = array();
+		$pages    = array();
 
 		foreach ( $pagelist as $page ) {
 			$pages[] += $page->ID;
 		}
 
 		$current = array_search(get_the_ID(), $pages );
-			$prevID = (isset( $pages[$current-1] ) ) ? $pages[$current-1] : '';
-			$nextID = (isset( $pages[$current+1] ) ) ? $pages[$current+1] : '';
+		$prevID  = ( isset( $pages[ $current - 1 ] ) ) ? $pages[ $current - 1 ] : '' ;
+		$nextID  = ( isset( $pages[ $current + 1 ] ) ) ? $pages[ $current + 1 ] : '' ;
 
 		if ( !empty( $prevID) ) {
 			$PreviusLink .= '<li class="page-item page-link"><a href="'. get_permalink( $prevID) .'" title="'. get_the_title( $prevID) .'"><span>&leftarrow;</span> '. get_the_title( $prevID) .'</a></li>';
@@ -299,12 +299,9 @@ function ekiline_pagination() {
 	}
 
 	if ( is_single() ) {
-
 		$PreviusLink = get_previous_post_link( '<li class="page-item page-link">'.'%link'.'</li>', '<span>&leftarrow;</span> %title', TRUE );
-		$NextLink = get_next_post_link( '<li class="page-item page-link">'.'%link'.'</li>', '%title <span>&rightarrow;</span>', TRUE );
-
+		$NextLink    = get_next_post_link( '<li class="page-item page-link">'.'%link'.'</li>', '%title <span>&rightarrow;</span>', TRUE );
 	}
-
 
 	/* Paginacion para listados: https://codex.wordpress.org/Function_Reference/paginate_links */
 
@@ -315,11 +312,11 @@ function ekiline_pagination() {
 
 		$pages = paginate_links(
 					array(
-						'base' => str_replace( $big, '%#%', get_pagenum_link( $big)),
-						'format' => '?page=%#%',
-						'current' => max(1, get_query_var( 'paged' )),
-						'total' => $wp_query->max_num_pages,
-						'type' => 'array',
+						'base'      => str_replace( $big, '%#%', get_pagenum_link( $big)),
+						'format'    => '?page=%#%',
+						'current'   => max(1, get_query_var( 'paged' )),
+						'total'     => $wp_query->max_num_pages,
+						'type'      => 'array',
 						'prev_next' => TRUE,
 						'prev_text' => __( '&larr; Previous', 'ekiline' ),
 						'next_text' => __( 'Next &rarr;', 'ekiline' ),

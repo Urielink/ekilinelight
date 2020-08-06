@@ -14,38 +14,47 @@ get_header(); ?>
 
 		<?php dynamic_sidebar( 'content-w1' ); ?>
 
-		<?php if ( have_posts() ) { ?>
+		<?php
+
+		if ( have_posts() ) {
+			?>
 
 			<header class="entry-header">
 				<h1 class="page-title">
-					<?php /* translators: %s is replaced with search query */
-						printf( esc_html__( 'Search Results for: %s', 'ekiline' ), '<span>' . get_search_query() . '</span>' ); ?>
+					<?php
+						/* translators: %s is replaced with search query */
+						printf( esc_html__( 'Search Results for: %s', 'ekiline' ), '<span>' . get_search_query() . '</span>' );
+					?>
 				</h1>
 				<p>
-					<?php /* translators: %s is replaced with results */
-					printf( esc_html__( '%s results found.', 'ekiline' ), esc_attr( $wp_query->found_posts ) ); ?>
+					<?php
+						/* translators: %s is replaced with results */
+						printf( esc_html__( '%s results found.', 'ekiline' ), esc_attr( $wp_query->found_posts ) );
+					?>
 				</p>
 			</header><!-- .entry-header -->
 
-			<?php get_search_form(); ?>
-
 			<?php
-				ekiline_show_columns( 'open' );
 
-					while ( have_posts() ) :
-						the_post();
-						// en caso de ocupar 'cards'.
-						$postType = ( ! is_singular() && get_theme_mod( 'ekiline_Columns' ) == 4 ) ? 'card' : get_post_type() ;
-						get_template_part( 'template-parts/content', $postType );
+			get_search_form();
 
-					endwhile;
+			ekiline_show_columns( 'open' );
 
-				ekiline_show_columns( 'close' );
+			while ( have_posts() ) :
+				the_post();
+				// en caso de ocupar 'cards'.
+				$postType = ( ! is_singular() && get_theme_mod( 'ekiline_Columns' ) == 4 ) ? 'card' : get_post_type() ;
+				get_template_part( 'template-parts/content', $postType );
 
-			} else {
-				get_template_part( 'template-parts/content', 'none' );
-			}
-			?>
+			endwhile;
+
+			ekiline_show_columns( 'close' );
+
+		} else {
+			get_template_part( 'template-parts/content', 'none' );
+		}
+
+		?>
 
 		<?php ekiline_pagination(); ?>
 

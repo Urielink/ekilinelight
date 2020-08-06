@@ -68,14 +68,14 @@ function ekiline_meta_keywords() {
 	// etiqueta por default
 	$keywords = '';
 
-	if( is_single() || is_page() ) {
+	if ( is_single() || is_page() ) {
 
 		global $post;
 		$tags = get_the_tags( $post->ID );
 
-		if( $tags ) {
-			foreach( $tags as $tag) :
-				$sep = (empty( $keywords)) ? '' : ', ';
+		if ( $tags ) {
+			foreach ( $tags as $tag) :
+				$sep       = ( empty( $keywords ) ) ? '' : ', ';
 				$keywords .= $sep . $tag->name;
 			endforeach;
 			$keywords = $keywords;
@@ -92,14 +92,14 @@ function ekiline_meta_keywords() {
 	} elseif ( is_home() || is_front_page() ) {
 
 		$tags = get_tags();
-		if( $tags ) {
-			$i=0;
-			foreach( $tags as $tag) :
-				$sep = (empty( $keywords)) ? '' : ', ';
+		if ( $tags ) {
+			$i = 0;
+			foreach ( $tags as $tag ) :
+				$sep       = ( empty( $keywords ) ) ? '' : ', ';
 				$keywords .= $sep . $tag->name;
 
 				$i++;
-				if( $i==10) break;
+				if ( $i == 10 ) break;
 			endforeach;
 			$keywords = $keywords;
 		}
@@ -146,12 +146,12 @@ function metaSocial() {
 	global $wp;
 	$metaSocial = '';
 
-	$metaTitle = get_bloginfo( 'name' );
+	$metaTitle       = get_bloginfo( 'name' );
 	$metaDescription = ekiline_meta_description();
-	$metaImages = ekiline_meta_image();
-	$twSocial = 'twitter.com';
-	$metaType = 'website';
-	$currentUrl = home_url( add_query_arg( array(), $wp->request ) ); //global $wp
+	$metaImages      = ekiline_meta_image();
+	$twSocial        = 'twitter.com';
+	$metaType        = 'website';
+	$currentUrl      = home_url( add_query_arg( array(), $wp->request ) ); //global $wp
 
 	//Google
 	$metaSocial .= '<meta itemprop="name" content="' . $metaTitle . '">' . "\n";
@@ -173,12 +173,12 @@ function metaSocial() {
 	$metaSocial .= '<meta property="og:site_name" content="'. $metaTitle .'"/>' . "\n";
 
 	$allowed_html = array(
-		'meta'      => array(
-			'itemprop'  => array(),
-			'content' => array(),
-			'name' => array(),
+		'meta' => array(
+			'itemprop' => array(),
+			'content'  => array(),
+			'name'     => array(),
 			'property' => array(),
-			),
+		),
 	 );
 	echo wp_kses( $metaSocial, $allowed_html );
 

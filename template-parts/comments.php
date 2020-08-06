@@ -17,7 +17,8 @@
 		</button>
 
 		<p class="comments-title text-secondary mb-2 pb-2 pt-1 border-bottom">
-			<?php /* NX https://developer.wordpress.org/reference/functions/_nx/ */
+			<?php
+				/* NX https://developer.wordpress.org/reference/functions/_nx/ */
 				printf(
 					esc_html(
 						/* translators: %1$s is replaced with comments count, %2$s is replaced with title  */
@@ -47,13 +48,15 @@
 
 			<ol class="comment-list list-unstyled m-0">
 				<?php
-					wp_list_comments( array(
-						'style'      => 'ol',
-						'short_ping' => true,
-						'class'      => 'border',
-						'callback'   => 'ekilineCommentsExtended',
-						'avatar_size'       => 64
-					) );
+					wp_list_comments(
+						array(
+							'style'       => 'ol',
+							'short_ping'  => true,
+							'class'       => 'border',
+							'callback'    => 'ekilineCommentsExtended',
+							'avatar_size' => 64,
+						)
+					);
 				?>
 			</ol><!-- .comment-list -->
 
@@ -62,11 +65,11 @@
 	<?php endif; // Check for have_comments(). ?>
 
 	<?php
-		// Si hay comentarios pero no activos, mostrar un mensaje
-		// If comments are closed and there are comments, show a  note
+	// Si hay comentarios pero no activos, mostrar un mensaje
+	// If comments are closed and there are comments, show a  note
+	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
+		?>
 
-		if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
-	?>
 		<p class="no-comments"><?php echo esc_html__( 'Comments are closed', 'ekiline' ); ?></p>
 
 	<?php endif; ?>
@@ -86,7 +89,8 @@ function ekilineCommentsSimple( $comment, $args, $depth ) {
 	} else {
 		$tag       = 'li';
 		$add_below = 'div-comment';
-	} ?>
+	}
+	?>
 
 	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
 
@@ -103,23 +107,30 @@ function ekilineCommentsSimple( $comment, $args, $depth ) {
 
 				<?php
 				comment_reply_link(
-					array_merge( $args, array(
-						// 'before' => '<div class="btn btn-danger">',
-						// 'after' => '</div>',
-						// 'reply_text' => __( 'Reply', 'ekiline' ),
-						'add_below' => $add_below,
-						'depth'     => $depth,
-						'max_depth' => $args['max_depth']
-					))
-				); ?>
+					array_merge(
+						$args,
+						array(
+							// 'before' => '<div class="btn btn-danger">',
+							// 'after' => '</div>',
+							// 'reply_text' => __( 'Reply', 'ekiline' ),
+							'add_below' => $add_below,
+							'depth'     => $depth,
+							'max_depth' => $args['max_depth'],
+						)
+					)
+				);
+				?>
 			</div>
 
 
-		<?php if ( 'div' != $args['style'] ) { ?>
+		<?php
+		if ( 'div' != $args['style'] ) {
+			?>
 
 		</div>
 
-		<?php }
+			<?php
+		}
 
 }
 
@@ -131,7 +142,8 @@ function ekilineCommentsExtended( $comment, $args, $depth ) {
 	} else {
 		$tag       = 'li';
 		$add_below = 'div-comment';
-	} ?>
+	}
+	?>
 
 	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
 
@@ -147,10 +159,10 @@ function ekilineCommentsExtended( $comment, $args, $depth ) {
 			</div>
 
 			<div class="rounded bg-white col-md-11 col-sm-10 col-9 py-2">
-				<?php printf(
+				<?php
 					/* translators: %s is replaced with author link  */
-						wp_kses_post( __( '<cite class="fn">%s</cite> <span class="says">says:</span>', 'ekiline' ) ), get_comment_author_link()
-					); ?>
+					printf( wp_kses_post( __( '<cite class="fn">%s</cite> <span class="says">says:</span>', 'ekiline' ) ), get_comment_author_link() );
+				?>
 
 				<?php if ( $comment->comment_approved == '0' ) { ?>
 					<em class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'ekiline' ); ?></em><br/>
@@ -171,7 +183,8 @@ function ekilineCommentsExtended( $comment, $args, $depth ) {
 					esc_html( __( '%1$s at %2$s', 'ekiline' ) ),
 					esc_html( get_comment_date() ),
 					esc_html( get_comment_time() )
-				); ?>
+				);
+				?>
 			</a>
 			<?php edit_comment_link( __( '(Edit)', 'ekiline' ), '  ', '' ); ?>
 		</div>
@@ -179,21 +192,27 @@ function ekilineCommentsExtended( $comment, $args, $depth ) {
 		<div class="reply text-right">
 			<?php
 			comment_reply_link(
-				array_merge( $args, array(
-					'add_below' => $add_below,
-					'depth'     => $depth,
-					'max_depth' => $args['max_depth']
-				))
+				array_merge(
+					$args,
+					array(
+						'add_below' => $add_below,
+						'depth'     => $depth,
+						'max_depth' => $args['max_depth'],
+					)
+				)
 			);
 			?>
 		</div>
 		</div>
 
-		<?php if ( 'div' != $args['style'] ) { ?>
+		<?php
+		if ( 'div' != $args['style'] ) {
+			?>
 
 		</div>
 
-		<?php }
+			<?php
+		}
 
 }
 
@@ -212,17 +231,18 @@ $args = array(
 							'<textarea id="comment" name="comment" class="form-control mb-2"></textarea>' .
 						'</div>',
 
-	'fields' => apply_filters(
-		'comment_form_default_fields', array(
-			'author' => '<div class="form-group">' .
+	'fields'        => apply_filters(
+		'comment_form_default_fields',
+		array(
+			'author'  => '<div class="form-group">' .
 							'<label for="author">' . __( 'Name', 'ekiline' ) . '*</label> ' .
 							'<input id="author" name="author" class="form-control" type="text" value="' . esc_attr( $commenter['comment_author'] ) . '" size="30"/>' .
 						'</div>',
-			'email' => '<div class="form-group">' .
+			'email'   => '<div class="form-group">' .
 							'<label for="email">' . __( 'Email', 'ekiline' ) . '*</label> ' .
 							'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"/>' .
 						'</div>',
-			'url' => '<div class="form-group">' .
+			'url'     => '<div class="form-group">' .
 							'<label for="url">' . __( 'Website', 'ekiline' ) . '</label>' .
 							'<input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) . '" size="30"/>' .
 						'</div>',
@@ -236,8 +256,8 @@ $args = array(
 		)
 	),
 	// las clases de manera independiente:
-	'class_form' => 'comment-form form',
-	'class_submit' => 'submit btn btn-sm btn-secondary float-right mb-2'
+	'class_form'    => 'comment-form form',
+	'class_submit'  => 'submit btn btn-sm btn-secondary float-right mb-2',
 );
 
 	comment_form( $args );

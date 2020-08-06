@@ -23,15 +23,15 @@
 	<footer class="card-footer">
 		<p class="entry-meta small mark">
 			<?php
-				if ( ! is_page() || get_the_category_list() != '' ) {
-					/* translators: %s is replaced with category title */
-					printf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
-				}
+			if ( ! is_page() || get_the_category_list() != '' ) {
+				/* translators: %s is replaced with category title */
+				printf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
+			}
 
-				if ( get_the_tag_list() != '' ) {
-					/* translators: %s is replaced with tags */
-					printf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ' ) ) );
-				}
+			if ( get_the_tag_list() != '' ) {
+				/* translators: %s is replaced with tags */
+				printf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ' ) ) );
+			}
 			?>
 		</p><!-- .entry-meta -->
 	</footer><!-- .entry-footer -->

@@ -11,21 +11,24 @@
 function ekiline_featured_categories( $wp_customize ) {
 	// Front page categories
 	$wp_customize->add_setting(
-		'ekiline_featuredcategories', array(
-			'default' => 0,
-			'transport'   => 'refresh',
-			'sanitize_callback' => 'ekiline_sanitize_multipleselect'
+		'ekiline_featuredcategories',
+		array(
+			'default'           => 0,
+			'transport'         => 'refresh',
+			'sanitize_callback' => 'ekiline_sanitize_multipleselect',
 		)
 	);
 
 	$wp_customize->add_control(
 		new ekiline_controlMultipleSelect (
-			$wp_customize, 'ekiline_featuredcategories', array(
+			$wp_customize,
+			'ekiline_featuredcategories',
+			array(
 				'settings' => 'ekiline_featuredcategories',
 				'label'    => __( 'Featured category', 'ekiline' ),
 				'section'  => 'static_front_page',
 				'type'     => 'multiple-select',
-				'choices' => ekiline_list_categories()
+				'choices'  => ekiline_list_categories(),
 			)
 		)
 	);
@@ -37,13 +40,13 @@ add_action( 'customize_register', 'ekiline_featured_categories' );
 	* Customizer: Funcion para obtener los ids de categorias y la cantidad de publicaicones // get categories IDs
 	*/
 function ekiline_list_categories() {
-$cats = array();
-$cats[0] = __( 'All', 'ekiline' );
-foreach ( get_categories() as $categories => $category ) {
-	// $cats[$category->term_id] = $category->name .' '. $category->term_id;
-	$cats[$category->term_id] = $category->name .' ( '. $category->count .' )';
-}
-return $cats;
+	$cats    = array();
+	$cats[0] = __( 'All', 'ekiline' );
+	foreach ( get_categories() as $categories => $category ) {
+		// $cats[$category->term_id] = $category->name .' '. $category->term_id;
+		$cats[$category->term_id] = $category->name .' ( '. $category->count .' )';
+	}
+	return $cats;
 }
 
 /**
@@ -54,9 +57,9 @@ function ekiline_frontpage_featured( $query ) {
 
 	$seleccion =  get_theme_mod( 'ekiline_featuredcategories' );
 	// crear un string con lo seleccionado
-	$str=0;
+	$str = 0;
 	// Al instalar el tema por primera vez reacciona la falta de validar el campo por eso este if.
-	if( $seleccion != '' ) {
+	if ( $seleccion != '' ) {
 		$str = array();
 		$str = implode( ', ', $seleccion );
 	}
@@ -75,7 +78,7 @@ add_action( 'pre_get_posts', 'ekiline_frontpage_featured' );
 	* 3) se crea el arreglo para desplegar las categories
 	* https://stackoverflow.com/questions/38481936/multi-select-category-wordpress-customizer-control
 	**/
-if (class_exists( 'WP_Customize_Control' ) ) {
+if ( class_exists( 'WP_Customize_Control' ) ) {
 	class ekiline_controlMultipleSelect extends WP_Customize_Control {
 
 		// Establecer el tipo del control, el formulario
@@ -83,19 +86,22 @@ if (class_exists( 'WP_Customize_Control' ) ) {
 		// Crear el formulario
 		public function render_content() {
 			if ( empty( $this->choices ) ) return; ?>
+
 			<label>
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
 				<select <?php $this->link(); ?> multiple="multiple" size="10">
 					<?php
-						foreach ( $this->choices as $value => $label ) {
-							// $selected = ( in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
-							$selected = ( !empty( $this->value() ) && in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
-							echo '<option value="' . esc_attr( $value ) . '"' . esc_attr( $selected ) . '>' . esc_attr( $label ) . '</option>';
-						}
+					foreach ( $this->choices as $value => $label ) {
+						// $selected = ( in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
+						$selected = ( !empty( $this->value() ) && in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
+						echo '<option value="' . esc_attr( $value ) . '"' . esc_attr( $selected ) . '>' . esc_attr( $label ) . '</option>';
+					}
 					?>
 				</select>
 			</label>
-		<?php }
+
+			<?php
+		}
 	}
 }
 

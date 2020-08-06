@@ -13,9 +13,9 @@ get_header(); ?>
 	<?php dynamic_sidebar( 'content-w1' ); ?>
 
 		<?php
-			while ( have_posts() ) : the_post();
-				get_template_part( 'template-parts/content', get_post_format() );
-			endwhile;
+		while ( have_posts() ) : the_post();
+			get_template_part( 'template-parts/content', get_post_format() );
+		endwhile;
 		?>
 
 	<?php dynamic_sidebar( 'content-w2' ); ?>

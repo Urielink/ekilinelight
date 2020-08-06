@@ -241,7 +241,7 @@ function ekiline_above_fold_styles() {
 	// quitar comentarios:
 		$data = preg_replace( '#/\*.*?\*/#s', '', $data );
 	// quitar saltos de linea y convertir en un string
-		$data = str_replace( array( "\r", "\n" ), "", $data );
+		$data = str_replace( array( "\r", "\n" ), '', $data );
 	// html5
 		$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
 		// echo "\n".'<style' . $type_attr . 'id="ekiline-atf">' . strip_tags( $data ) .'</style>' . "\n";
