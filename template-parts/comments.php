@@ -24,8 +24,8 @@
 						/* translators: %1$s is replaced with comments count, %2$s is replaced with title  */
 						_nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'ekiline' )
 					),
-					esc_html(number_format_i18n( get_comments_number() )),
-					'<span>' . esc_html(get_the_title()) . '</span>'
+					esc_html( number_format_i18n( get_comments_number() ) ),
+					'<span>' . esc_html( get_the_title() ) . '</span>'
 				);
 			?>
 		</p>
@@ -38,8 +38,8 @@
 					<h2 class="screen-reader-text"><?php echo esc_html__( 'Comment navigation', 'ekiline' ); ?></h2>
 					<div class="small nav-links d-flex justify-content-end">
 
-						<div class="nav-previous btn-sm"><?php previous_comments_link( '<span>&larr;</span> '.esc_html__( 'Older Comments', 'ekiline' ) ); ?></div>
-						<div class="nav-next btn-sm"><?php next_comments_link( esc_html__( 'Newer Comments', 'ekiline' ).' <span>&rarr;</span>' ); ?></div>
+						<div class="nav-previous btn-sm"><?php previous_comments_link( '<span>&larr;</span> ' . esc_html__( 'Older Comments', 'ekiline' ) ); ?></div>
+						<div class="nav-next btn-sm"><?php next_comments_link( esc_html__( 'Newer Comments', 'ekiline' ) . ' <span>&rarr;</span>' ); ?></div>
 
 					</div><!-- .nav-links -->
 				</nav><!-- #comment-nav-above -->
@@ -53,7 +53,7 @@
 							'style'       => 'ol',
 							'short_ping'  => true,
 							'class'       => 'border',
-							'callback'    => 'ekilineCommentsExtended',
+							'callback'    => 'ekiline_comments_extended',
 							'avatar_size' => 64,
 						)
 					);
@@ -81,7 +81,7 @@
 * https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
 */
 
-function ekilineCommentsSimple( $comment, $args, $depth ) {
+function ekiline_comments_simple( $comment, $args, $depth ) {
 
 	if ( 'div' === $args['style'] ) {
 		$tag       = 'div';
@@ -92,14 +92,18 @@ function ekilineCommentsSimple( $comment, $args, $depth ) {
 	}
 	?>
 
-	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
+	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID(); ?>">
 
-	<?php if ( 'div' != $args['style'] ) { ?>
-		<div id="div-comment-<?php comment_ID() ?>" class="comment-body row mb-2 px-md-3">
+	<?php if ( 'div' !== $args['style'] ) { ?>
+		<div id="div-comment-<?php comment_ID(); ?>" class="comment-body row mb-2 px-md-3">
 	<?php } ?>
 
 			<div class="col col-md-1 col-sm-2 col-3 text-center">
-			<?php if ( $args['avatar_size'] != 0 ) echo get_avatar( $comment, $args['avatar_size'], '', '', array( 'class' => 'rounded-circle img-fluid' )  ); ?>
+			<?php
+			if ( 0 !== $args['avatar_size'] ) {
+				echo get_avatar( $comment, $args['avatar_size'], '', '', array( 'class' => 'rounded-circle img-fluid' ) );
+			}
+			?>
 			</div>
 
 			<div class="rounded bg-white col-md-11 col-sm-10 col-9 py-2">
@@ -124,7 +128,7 @@ function ekilineCommentsSimple( $comment, $args, $depth ) {
 
 
 		<?php
-		if ( 'div' != $args['style'] ) {
+		if ( 'div' !== $args['style'] ) {
 			?>
 
 		</div>
@@ -134,7 +138,7 @@ function ekilineCommentsSimple( $comment, $args, $depth ) {
 
 }
 
-function ekilineCommentsExtended( $comment, $args, $depth ) {
+function ekiline_comments_extended( $comment, $args, $depth ) {
 
 	if ( 'div' === $args['style'] ) {
 		$tag       = 'div';
@@ -145,17 +149,21 @@ function ekilineCommentsExtended( $comment, $args, $depth ) {
 	}
 	?>
 
-	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID() ?>">
+	<<?php echo esc_attr( $tag ); ?> <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?> id="comment-<?php comment_ID(); ?>">
 
-	<?php if ( 'div' != $args['style'] ) { ?>
-		<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
+	<?php if ( 'div' !== $args['style'] ) { ?>
+		<div id="div-comment-<?php comment_ID(); ?>" class="comment-body">
 	<?php } ?>
 
 		<div class="comment-author vcard row">
 
 			<div class="col col-md-1 col-sm-2 col-3 text-center">
-				<?php if ( $args['avatar_size'] != 0 ) echo get_avatar( $comment, $args['avatar_size'], '', '', array( 'class' => 'img-fluid mt-2' )  ); ?>
-				<?php //if ( $args['avatar_size'] != 0 ) { echo get_avatar( $comment, $args['avatar_size'] ); } ?>
+				<?php
+				if ( 0 !== $args['avatar_size'] ) {
+					echo get_avatar( $comment, $args['avatar_size'], '', '', array( 'class' => 'img-fluid mt-2' ) );
+				}
+				?>
+				<?php //if ( $args['avatar_size'] !== 0 ) { echo get_avatar( $comment, $args['avatar_size'] ); } ?>
 			</div>
 
 			<div class="rounded bg-white col-md-11 col-sm-10 col-9 py-2">
@@ -164,7 +172,7 @@ function ekilineCommentsExtended( $comment, $args, $depth ) {
 					printf( wp_kses_post( __( '<cite class="fn">%s</cite> <span class="says">says:</span>', 'ekiline' ) ), get_comment_author_link() );
 				?>
 
-				<?php if ( $comment->comment_approved == '0' ) { ?>
+				<?php if ( 0 === $comment->comment_approved ) { ?>
 					<em class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'ekiline' ); ?></em><br/>
 				<?php } ?>
 
@@ -206,7 +214,7 @@ function ekilineCommentsExtended( $comment, $args, $depth ) {
 		</div>
 
 		<?php
-		if ( 'div' != $args['style'] ) {
+		if ( 'div' !== $args['style'] ) {
 			?>
 
 		</div>
@@ -240,7 +248,7 @@ $args = array(
 						'</div>',
 			'email'   => '<div class="form-group">' .
 							'<label for="email">' . __( 'Email', 'ekiline' ) . '*</label> ' .
-							'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" size="30"/>' .
+							'<input id="email" name="email" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_email'] ) . '" size="30"/>' .
 						'</div>',
 			'url'     => '<div class="form-group">' .
 							'<label for="url">' . __( 'Website', 'ekiline' ) . '</label>' .
@@ -249,7 +257,7 @@ $args = array(
 			'cookies' => '<div class="form-check">' .
 							'<input class="form-check-input" type="checkbox" id="agree" required>' .
 							'<label class="form-check-label" for="agree">' . __( 'By commenting you accept the', 'ekiline' ) .
-								'<a href="' . get_privacy_policy_url() . '"> ' . __( 'Privacy Policy', 'ekiline' )  . '</a>' .
+								'<a href="' . get_privacy_policy_url() . '"> ' . __( 'Privacy Policy', 'ekiline' ) . '</a>' .
 							'</label>' .
 						'</div>',
 

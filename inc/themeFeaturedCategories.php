@@ -20,7 +20,7 @@ function ekiline_featured_categories( $wp_customize ) {
 	);
 
 	$wp_customize->add_control(
-		new ekiline_controlMultipleSelect (
+		new ekiline_controlMultipleSelect(
 			$wp_customize,
 			'ekiline_featuredcategories',
 			array(
@@ -43,8 +43,8 @@ function ekiline_list_categories() {
 	$cats    = array();
 	$cats[0] = __( 'All', 'ekiline' );
 	foreach ( get_categories() as $categories => $category ) {
-		// $cats[$category->term_id] = $category->name .' '. $category->term_id;
-		$cats[$category->term_id] = $category->name .' ( '. $category->count .' )';
+		// $cats[ $category->term_id ] = $category->name . ' ' . $category->term_id;
+		$cats[ $category->term_id ] = $category->name . ' ( ' . $category->count . ' )';
 	}
 	return $cats;
 }
@@ -55,11 +55,11 @@ function ekiline_list_categories() {
 
 function ekiline_frontpage_featured( $query ) {
 
-	$seleccion =  get_theme_mod( 'ekiline_featuredcategories' );
+	$seleccion = get_theme_mod( 'ekiline_featuredcategories' );
 	// crear un string con lo seleccionado
 	$str = 0;
 	// Al instalar el tema por primera vez reacciona la falta de validar el campo por eso este if.
-	if ( $seleccion != '' ) {
+	if ( $seleccion !== '' ) {
 		$str = array();
 		$str = implode( ', ', $seleccion );
 	}
@@ -85,7 +85,9 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		public $type = 'multiple-select';
 		// Crear el formulario
 		public function render_content() {
-			if ( empty( $this->choices ) ) return; ?>
+			if ( empty( $this->choices ) ) {
+				return;
+			} ?>
 
 			<label>
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
@@ -93,7 +95,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 					<?php
 					foreach ( $this->choices as $value => $label ) {
 						// $selected = ( in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
-						$selected = ( !empty( $this->value() ) && in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
+						$selected = ( ! empty( $this->value() ) && in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
 						echo '<option value="' . esc_attr( $value ) . '"' . esc_attr( $selected ) . '>' . esc_attr( $label ) . '</option>';
 					}
 					?>
@@ -109,11 +111,12 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 /**
 	* Validar un multi-select
 	*/
-function ekiline_sanitize_multipleselect( $input )
-{
+function ekiline_sanitize_multipleselect( $input ) {
 	$valid = ekiline_list_categories();
 	foreach ( $input as $value ) {
-		if ( !array_key_exists( $value, $valid ) ) return;
+		if ( ! array_key_exists( $value, $valid ) ) {
+			return;
+		}
 	}
 	return $input;
 }

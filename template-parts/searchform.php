@@ -8,7 +8,7 @@
 */
 ?>
 
-<form role="search" method="get" id="searchform" class="searchform my-2" action="<?php echo esc_url(home_url( '/' ) ); ?>">
+<form role="search" method="get" id="searchform" class="searchform my-2" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<label class="screen-reader-text" for="search">
 		<?php
 			/* translators: %s is replaced by searchquery */

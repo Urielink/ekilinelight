@@ -59,7 +59,9 @@ add_action( 'init', 'tags_support_all' );
 
 // Incluir todas // ensure all tags are included in queries
 function tags_support_query( $wp_query ) {
-	if ( $wp_query->get( 'tag' )) $wp_query->set( 'post_type', 'any' );
+	if ( $wp_query->get( 'tag' ) ) {
+		$wp_query->set( 'post_type', 'any' );
+	}
 }
 add_action( 'pre_get_posts', 'tags_support_query' );
 
@@ -74,13 +76,12 @@ function ekiline_meta_keywords() {
 		$tags = get_the_tags( $post->ID );
 
 		if ( $tags ) {
-			foreach ( $tags as $tag) :
+			foreach ( $tags as $tag ) :
 				$sep       = ( empty( $keywords ) ) ? '' : ', ';
 				$keywords .= $sep . $tag->name;
 			endforeach;
 			$keywords = $keywords;
 		}
-
 	} elseif ( is_tag() ) {
 
 		$keywords = single_tag_title( '', false );
@@ -99,11 +100,12 @@ function ekiline_meta_keywords() {
 				$keywords .= $sep . $tag->name;
 
 				$i++;
-				if ( $i == 10 ) break;
+				if ( $i === 10 ) {
+					break;
+				}
 			endforeach;
 			$keywords = $keywords;
 		}
-
 	}
 
 	if ( $keywords ) {
@@ -131,7 +133,7 @@ function ekiline_meta_image() {
 
 	if ( is_singular() && ! is_front_page() || is_home() || is_front_page() ) {
 		global $post;
-		$img_url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, 'medium_large' ) : $img_url ;
+		$img_url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, 'medium_large' ) : $img_url;
 	}
 
 	return $img_url;
@@ -170,7 +172,7 @@ function metaSocial() {
 	$metaSocial .= '<meta property="og:url" content="' . $currentUrl . '"/>' . "\n";
 	$metaSocial .= '<meta property="og:image" content="' . $metaImages . '"/>' . "\n";
 	$metaSocial .= '<meta property="og:description" content="' . $metaDescription . '"/>' . "\n";
-	$metaSocial .= '<meta property="og:site_name" content="'. $metaTitle .'"/>' . "\n";
+	$metaSocial .= '<meta property="og:site_name" content="' . $metaTitle . '"/>' . "\n";
 
 	$allowed_html = array(
 		'meta' => array(
@@ -179,7 +181,7 @@ function metaSocial() {
 			'name'     => array(),
 			'property' => array(),
 		),
-	 );
+	);
 	echo wp_kses( $metaSocial, $allowed_html );
 
 }

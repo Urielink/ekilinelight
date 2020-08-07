@@ -41,13 +41,13 @@ class ekilineBreadcrumb extends WP_Widget {
 		 **/
 		global $wp_registered_widgets;
 		$widget_id  = $args['widget_id'];
-		$widget_obj = $wp_registered_widgets[$widget_id];
+		$widget_obj = $wp_registered_widgets[ $widget_id ];
 		$widget_opt = get_option( $widget_obj['callback'][0]->option_name );
 		$widget_num = $widget_obj['params'][0]['number'];
-		$css_style  = $widget_opt[$widget_num]['css_style'];
+		$css_style  = $widget_opt[ $widget_num ]['css_style'];
 
 		$args = array(
-			'before_widget' => '<nav id="'. $args['widget_id'] .'" class="'. $css_style .' widget '. $args['widget_id'] .'">',
+			'before_widget' => '<nav id="' . $args['widget_id'] . '" class="' . $css_style . ' widget ' . $args['widget_id'] . '">',
 			'after_widget'  => '</nav>',
 		);
 
@@ -99,9 +99,11 @@ add_action( 'widgets_init', 'ekilineBreadcrumb_register_widgets' );
 
 function createBreadcrumb() {
 
-	if ( is_home() || is_front_page() ) return;
+	if ( is_home() || is_front_page() ) {
+		return;
+	}
 
-	$breadcrumb = '<li class="breadcrumb-item home"><a href="'. home_url() .'"> ' . __( 'Home', 'ekiline' ) . ' </a></li><!--.home-->';
+	$breadcrumb = '<li class="breadcrumb-item home"><a href="' . home_url() . '"> ' . __( 'Home', 'ekiline' ) . ' </a></li><!--.home-->';
 
 	if ( is_page() || is_single() ) {
 
@@ -112,7 +114,7 @@ function createBreadcrumb() {
 			$attachParent = get_the_title( $attachPost->post_parent );
 
 			// si es un adjunto, muestra el titulo de donde viene
-			$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="'.$attachUrl.'" title="Volver a  '.$attachParent.'" rel="gallery">'.$attachParent.'</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
+			$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="' . $attachUrl . '" title="Volver a  ' . $attachParent . '" rel="gallery">' . $attachParent . '</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
 
 		} elseif ( is_page() ) {
 
@@ -129,7 +131,7 @@ function createBreadcrumb() {
 				//doy formato los items de este array.
 				while ( $parent_id ) {
 					$page          = get_page( $parent_id );
-					$breadcrumbs[] = '<li class="breadcrumb-item post-parent"><a href="' . get_permalink( $page->ID) . '">' . get_the_title( $page->ID) . '</a></li><!--.post-parent-->';
+					$breadcrumbs[] = '<li class="breadcrumb-item post-parent"><a href="' . get_permalink( $page->ID ) . '">' . get_the_title( $page->ID ) . '</a></li><!--.post-parent-->';
 					$parent_id     = $page->post_parent;
 				}
 				//organizo el array para que el orden sea inverso
@@ -144,27 +146,24 @@ function createBreadcrumb() {
 				// 3) Final de loop
 				$breadcrumb .= '<li class="breadcrumb-item post-childA">';
 			}
-
 		} elseif ( is_single() ) {
 
 			$cats = get_the_category( get_the_ID() );
 			$cat  = array_shift( $cats );
 
-			if ( get_post_type( get_the_ID() ) != 'product' ) {
+			if ( get_post_type( get_the_ID() ) !== 'product' ) {
 				//en caso de woocommerce
 				$breadcrumb .= '<li class="breadcrumb-item single-category">' . get_category_parents( $cat, true, '</li><!--.single-category--><li class="breadcrumb-item single-category-child">' );
 			} else {
 				$breadcrumb .= '<li class="breadcrumb-item single-category">';
 			}
-
 		}
 		// en caso de no tener titulo
-		if ( !get_the_title() ) {
-			$breadcrumb .= __( '&not;&not;', 'ekiline' ).'</li><!--.single-category-child.post-child-->';
+		if ( ! get_the_title() ) {
+			$breadcrumb .= __( '&not;&not;', 'ekiline' ) . '</li><!--.single-category-child.post-child-->';
 		} else {
 			$breadcrumb .= the_title( '', '</li><!--.single-category-child.post-child-->', false );
 		}
-
 	}
 
 	if ( is_archive() ) {
@@ -172,7 +171,7 @@ function createBreadcrumb() {
 		$title = '';
 		if ( is_category() ) {
 
-			$catName = single_term_title( '',false );
+			$catName = single_term_title( '', false );
 			$catid   = get_cat_ID( $catName );
 			// diferenciar si hay categorías padre:
 			// https://wordpress.stackexchange.com/questions/11267/check-is-category-parent-or-not-from-its-id
@@ -183,11 +182,10 @@ function createBreadcrumb() {
 			if ( $catobj->category_parent > 0 ) {
 				// este muestra toda una lista
 				// $breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $catid, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' );
-				$breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $parentobj, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' ). $catName;
+				$breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $parentobj, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' ) . $catName;
 			} else {
 				$breadcrumb .= '<li class="breadcrumb-item category-child">' . get_category_parents( $catid, false, '' );
 			}
-
 		} elseif ( is_tag() ) {
 			$title = '<li class="breadcrumb-item tag">' . single_tag_title( '', false );
 		} elseif ( is_author() ) {
@@ -205,7 +203,7 @@ function createBreadcrumb() {
 			$title = '<li class="breadcrumb-item tax">' . single_term_title( '', false );
 		}
 
-		$breadcrumb .= $title .'</li><!--.category-child.tag.author.year.month.day.ptArchive.tax-->';
+		$breadcrumb .= $title . '</li><!--.category-child.tag.author.year.month.day.ptArchive.tax-->';
 
 	}
 
@@ -214,7 +212,7 @@ function createBreadcrumb() {
 	}
 
 	if ( is_404() ) {
-		$breadcrumb .= '<li class="breadcrumb-item 404">' . __( 'Not found ', 'ekiline' ) .'</li><!--.404-->';
+		$breadcrumb .= '<li class="breadcrumb-item 404">' . __( 'Not found ', 'ekiline' ) . '</li><!--.404-->';
 	}
 
 	echo wp_kses_post( '<ul class="breadcrumb">' . $breadcrumb . '</ul>' );

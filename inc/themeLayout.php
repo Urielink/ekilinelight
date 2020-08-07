@@ -17,13 +17,13 @@ function ekiline_widthControl() {
 	$fluid     = '-fluid';
 
 	if ( is_front_page() || is_home() ) {
-		$container .= ( true === get_theme_mod( 'ekiline_anchoHome' ) ) ? $fluid : '' ;
+		$container .= ( true === get_theme_mod( 'ekiline_anchoHome' ) ) ? $fluid : '';
 	}
 	if ( is_archive() || is_category() ) {
-		$container .= ( true === get_theme_mod( 'ekiline_anchoArchive' ) ) ? $fluid : '' ;
+		$container .= ( true === get_theme_mod( 'ekiline_anchoArchive' ) ) ? $fluid : '';
 	}
 	if ( is_singular() && ! is_front_page() ) {
-		$container .= ( true === get_theme_mod( 'ekiline_anchoSingle' ) ) ? $fluid : '' ;
+		$container .= ( true === get_theme_mod( 'ekiline_anchoSingle' ) ) ? $fluid : '';
 	}
 
 	return $container;
@@ -72,10 +72,16 @@ add_filter( 'sidebars_widgets', 'viewSbarFilter' );
 * agregar contenedor a index.php
 */
 function ekiline_main_columns( $tag ) {
-	if ( ! is_active_sidebar( 'sidebar-1' ) && ! is_active_sidebar( 'sidebar-2' )) return;
+	if ( ! is_active_sidebar( 'sidebar-1' ) && ! is_active_sidebar( 'sidebar-2' ) ) {
+		return;
+	}
 	// En caso de existir barras laterales agregar envoltorio
-	if ( $tag == 'open' ) echo '<div id="maincolumns" class="row mx-0 ' . esc_attr( ekiline_widthControl() ) . ' mx-auto px-0">';
-	if ( $tag == 'close' ) echo '</div><!-- #maincolumns -->';
+	if ( $tag === 'open' ) {
+		echo '<div id="maincolumns" class="row mx-0 ' . esc_attr( ekiline_widthControl() ) . ' mx-auto px-0">';
+	}
+	if ( $tag === 'close' ) {
+		echo '</div><!-- #maincolumns -->';
+	}
 }
 /*
 * 2) Agregar clases CSS a cada columna index.php y sidebar.php
@@ -100,9 +106,15 @@ function orderCols( $css ) {
 		}
 	}
 	// imprimir
-	if ( $css == 'main' ) echo esc_attr( $cssMain );
-	if ( $css == 'left' ) echo esc_attr( $cssLeft );
-	if ( $css == 'right' ) echo esc_attr( $cssRight );
+	if ( $css === 'main' ) {
+		echo esc_attr( $cssMain );
+	}
+	if ( $css === 'left' ) {
+		echo esc_attr( $cssLeft );
+	}
+	if ( $css === 'right' ) {
+		echo esc_attr( $cssRight );
+	}
 }
 
 /*
@@ -110,14 +122,20 @@ function orderCols( $css ) {
 * // loop_start, loop_end, podria romper la vista.
 */
 function ekiline_show_columns( $tag ) {
-	if ( is_singular() ) return;
+	if ( is_singular() ) {
+		return;
+	}
 
 	$colSet     = get_theme_mod( 'ekiline_Columns' );
-	$colContain = ( $colSet == 4 ) ? 'card-columns' : 'row' ;
+	$colContain = ( $colSet === '4' ) ? 'card-columns' : 'row';
 
-	if ( $colSet > 0 ) {
-		if ( $tag == 'open' ) echo '<div id="viewcolumns" class="'.esc_attr( $colContain).'">';
-		if ( $tag == 'close' ) echo '</div><!-- #viewcolumns -->';
+	if ( $colSet > '0' ) {
+		if ( $tag === 'open' ) {
+			echo '<div id="viewcolumns" class="' . esc_attr( $colContain ) . '">';
+		}
+		if ( $tag === 'close' ) {
+			echo '</div><!-- #viewcolumns -->';
+		}
 	}
 }
 /*
@@ -125,22 +143,24 @@ function ekiline_show_columns( $tag ) {
 */
 function ekiline_show_columns_item( $classes ) {
 
-	if ( is_singular() ) return $classes;
+	if ( is_singular() ) {
+		return $classes;
+	}
 
 	$colSet  = get_theme_mod( 'ekiline_Columns' );
 	$colView = '';
 
 	switch ( $colSet ) {
-		case 1:
+		case '1':
 			$colView = 'col-md-6';
 			break;
-		case 2:
+		case '2':
 			$colView = 'col-md-4';
 			break;
-		case 3:
+		case '3':
 			$colView = 'col-md-3';
 			break;
-		case 4:
+		case '4':
 			$colView = 'card';
 			break;
 	}

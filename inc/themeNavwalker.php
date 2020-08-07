@@ -130,11 +130,11 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		// }
 		//3) B4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
 		if ( $args->walker->has_children ) {
-			$doDrop = ' dropdown item-'. $depth;
-			if ( get_theme_mod( 'ekiline_primarymenuSettings' ) == '2' ) {
-				$doDrop = ' dropup item-'. $depth;
-			} elseif ( $depth > 0 && get_theme_mod( 'ekiline_primarymenuSettings' ) != '2' ) {
-				$doDrop = ' dropright item-'. $depth;
+			$doDrop = ' dropdown item-' . $depth;
+			if ( get_theme_mod( 'ekiline_primarymenuSettings' ) === '2' ) {
+				$doDrop = ' dropup item-' . $depth;
+			} elseif ( $depth > 0 && get_theme_mod( 'ekiline_primarymenuSettings' ) !== '2' ) {
+				$doDrop = ' dropright item-' . $depth;
 			}
 			$classes[] .= $doDrop;
 		}
@@ -180,10 +180,10 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		 * @param stdClass $args    An object of wp_nav_menu() arguments.
 		 * @param int      $depth   Depth of menu item. Used for padding.
 		 */
-		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args, $depth );
+		$id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
 		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		$output .= $indent . '<li' . $id . $class_names .'>';
+		$output .= $indent . '<li' . $id . $class_names . '>';
 
 		$atts           = array();
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
@@ -264,13 +264,13 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
 		$item_output  = $args->before;
-		$item_output .= '<a'. $attributes .'>';
+		$item_output .= '<a' . $attributes . '>';
 		$item_output .= $args->link_before . $title . $args->link_after;
 		$item_output .= '</a>';
 		//Bootstrap nuevo item
 		if ( $args->walker->has_children ) {
-			$split        = ( $depth == 0 ) ? 'nav-link' : 'dropdown-item' ;
-			$item_output .= '<a class="'. $split .' dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent">&nbsp;</a>';
+			$split        = ( $depth === 0 ) ? 'nav-link' : 'dropdown-item';
+			$item_output .= '<a class="' . $split . ' dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent">&nbsp;</a>';
 		}
 
 		$item_output .= $args->after;

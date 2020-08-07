@@ -40,7 +40,7 @@ function ekiline_theme_page() {
 		__( 'About Ekiline', 'ekiline' ),
 		'edit_posts',
 		'ekiline_options',
-		'theme_html_page',
+		'theme_html_page'
 	);
 }
 add_action( 'admin_menu', 'ekiline_theme_page' );

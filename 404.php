@@ -55,7 +55,7 @@ get_header(); ?>
 					</select>
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-md-6">Hola
 					<?php if ( ekiline_categorized_blog() ) : // Only show the widget if site has multiple categories. ?>
 					<div class="widget widget_categories">
 						<h2 class="widget-title"><?php esc_html_e( 'Most used categories', 'ekiline' ); ?></h2>

@@ -13,7 +13,8 @@ get_header(); ?>
 	<?php dynamic_sidebar( 'content-w1' ); ?>
 
 		<?php
-		while ( have_posts() ) : the_post();
+		while ( have_posts() ) :
+			the_post();
 			get_template_part( 'template-parts/content', get_post_format() );
 		endwhile;
 		?>

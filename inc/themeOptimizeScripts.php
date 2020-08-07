@@ -12,13 +12,15 @@
 *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-function print_libs( $kind,$ignore ) {
-	if ( ! $kind || ! $ignore ) return;
+function print_libs( $kind, $ignore ) {
+	if ( ! $kind || ! $ignore ) {
+		return;
+	}
 	global $wp_styles,$wp_scripts;
 
-	if ( $kind == 'css' ) {
+	if ( $kind === 'css' ) {
 		$kind = $wp_styles;
-	} elseif ( $kind == 'js' ) {
+	} elseif ( $kind === 'js' ) {
 		$kind = $wp_scripts;
 	} else {
 		return __( 'Something go wrong, check theme file.', 'ekiline' );
@@ -26,7 +28,7 @@ function print_libs( $kind,$ignore ) {
 
 	$libs   = $kind->queue;
 	$filter = array_diff( $libs, $ignore );
-	$libs   = implode( ', ', $filter );
+	$libs   = implode( ',', $filter );
 			return $libs;
 }
 
@@ -38,15 +40,15 @@ function print_styles_and_scripts_info() {
 	$ignoreJs  = array( 'customize-preview', 'admin-bar', 'wp-mediaelement', 'mediaelement-vimeo', 'wp-playlist', 'customize-selective-refresh', 'customize-preview-widgets', 'customize-preview-nav-menus' );
 	//mostrar modulo html
 		$html_action  = '<div class="fixed-bottom" style="position:fixed;bottom:0px;left:0px;right:0px;z-index:100;">';
-		$html_action .= '<a class="btn btn-sm btn-primary show-handlers" data-toggle="collapse" href="#collapseHandlers">'.__( 'Sort Scripts ', 'ekiline' ).'</a> ';
+		$html_action .= '<a class="btn btn-sm btn-primary show-handlers" data-toggle="collapse" href="#collapseHandlers">' . __( 'Sort Scripts ', 'ekiline' ) . '</a> ';
 		$html_action .= '<div class="collapse" id="collapseHandlers" style="background:#eeeeee;color:#656a6f;padding:10px;">';
-		$html_action .= '<small>'.__( 'Choose and copy handlers in customizer "Ekiline Sort Scripts" option', 'ekiline' ) . '</small><br>';
-		$html_action .= __( 'Styles: ', 'ekiline' ) . '<code>'.print_libs( 'css', $ignoreCss ).'</code><br>';
-		$html_action .= __( 'Scripts: ', 'ekiline' ) . '<code>'.print_libs( 'js', $ignoreJs ).'</code>';
+		$html_action .= '<small>' . __( 'Choose and copy handlers in customizer "Ekiline Sort Scripts" option', 'ekiline' ) . '</small><br>';
+		$html_action .= __( 'Styles: ', 'ekiline' ) . '<code>' . print_libs( 'css', $ignoreCss ) . '</code><br>';
+		$html_action .= __( 'Scripts: ', 'ekiline' ) . '<code>' . print_libs( 'js', $ignoreJs ) . '</code>';
 		$html_action .= '</div></div>';
 		echo wp_kses_post( $html_action );
 }
-add_action( 'wp_footer', 'print_styles_and_scripts_info',0 );
+add_action( 'wp_footer', 'print_styles_and_scripts_info', 0 );
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 *
@@ -63,7 +65,8 @@ function ekiline_reload_libraries( $wp_customize ) {
 			'title'       => __( 'Ekiline Sort Scripts', 'ekiline' ),
 			'priority'    => 120,
 			'description' => __( 'Sort your CSS Styles and JS Scripts', 'ekiline' ),
-		) );
+		)
+	);
 
 	// Enviar estilos al footer
 	$wp_customize->add_setting(
@@ -94,12 +97,12 @@ function ekiline_reload_libraries( $wp_customize ) {
 		/* translators: %1$s is replaced with variable kind */
 		$field_label = sprintf( esc_html__( 'Comma separated %1$s handlers', 'ekiline' ), $kind );
 
-		// Campos de manejadores para llenar
+		// Campos de manejadores para llenar (transport = postMessage or refresh)
 		$wp_customize->add_setting(
 			$field_name,
 			array(
 				'default'           => '',
-				'transport'         => 'postMessage',//'refresh',
+				'transport'         => 'postMessage',
 				'sanitize_callback' => 'sanitize_text_field',
 			)
 		);
@@ -123,7 +126,7 @@ function ekiline_reload_libraries( $wp_customize ) {
 				'1' => __( 'javascript load', 'ekiline' ),
 			);
 
-			if ( $kind == 'js' ) {
+			if ( $kind === 'js' ) {
 				$choices = array(
 					'0' => __( 'No changes', 'ekiline' ),
 					'1' => __( 'async', 'ekiline' ),
@@ -148,14 +151,13 @@ function ekiline_reload_libraries( $wp_customize ) {
 					array(
 						'type'        => 'select',
 						// 'label'       => $kind,
-						'description' => $handler ,
+						'description' => $handler,
 						'section'     => 'ekiline_reload_libraries',
 						'choices'     => $choices,
 					)
 				);
 			}
 		}
-
 	}
 }
 add_action( 'customize_register', 'ekiline_reload_libraries' );
@@ -169,9 +171,9 @@ add_action( 'customize_register', 'ekiline_reload_libraries' );
 
 // Indice de librerias segun descritos por el usuario
 function ctmzr_array_handlers( $kind = null ) {
-	$handlers = get_theme_mod( 'ekiline_'.$kind.'_handler_array' );
+	$handlers = get_theme_mod( 'ekiline_' . $kind . '_handler_array' );
 	if ( $handlers ) {
-		$handlers_ar = explode( ', ', $handlers );
+		$handlers_ar = explode( ',', $handlers );
 		return $handlers_ar;
 	}
 }
@@ -182,7 +184,7 @@ function ctmzr_handlers_options( $kind = null ) {
 	$itemChange = array();
 	if ( $libs ) {
 		foreach ( $libs as $value ) {
-			$item         = get_theme_mod( 'ekiline_'.$kind.'_'.$value );
+			$item         = get_theme_mod( 'ekiline_' . $kind . '_' . $value );
 			$itemChange[] = array(
 				'handler' => $value,
 				'option'  => $item,
@@ -214,7 +216,9 @@ function ctmzr_handlers_options( $kind = null ) {
 function is_login_page() {
 	return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) );
 }
-if ( is_login_page() || is_admin() || is_user_logged_in() ) return;
+if ( is_login_page() || is_admin() || is_user_logged_in() ) {
+	return;
+}
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -225,8 +229,8 @@ if ( is_login_page() || is_admin() || is_user_logged_in() ) return;
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // Ejecutar solo cuando exista informacion en el campo
-if ( get_theme_mod( 'ekiline_css_handler_array' ) != '' ) {
-	add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 ); // 5.1
+if ( get_theme_mod( 'ekiline_css_handler_array' ) !== '' ) {
+	add_filter( 'style_loader_tag', 'ekiline_change_css_tag', 10, 4 ); // 5.1
 	add_action( 'wp_footer', 'ekiline_load_allCss_js', 100 ); // 5.2 y 5.3
 }
 
@@ -234,7 +238,7 @@ if ( get_theme_mod( 'ekiline_css_handler_array' ) != '' ) {
 function ekiline_change_css_tag( $tag, $handle, $src ) {
 	foreach ( ctmzr_handlers_options( 'css' ) as $pre_style ) {
 		if ( $pre_style['handler'] === $handle && $pre_style['option'] === '1' ) {
-			$tag = '<link rel="preload" as="style" href="' . esc_url( $src ) . '">'."\n";
+			$tag = '<link rel="preload" as="style" href="' . esc_url( $src ) . '">' . "\n";
 		}
 	}
 	return $tag;
@@ -252,19 +256,23 @@ function ekiline_styles_localize() {
 		$getHandler = $pre_style['handler'];
 		$getOption  = $pre_style['option'];
 
-		if ( $getOption === '1' ) {
-			/* Crear diccionario: sobrescribir url de cada CSS en caso de solo ser relativa al sistema */
-			$srcUrl       = $wp_styles->registered[ $getHandler ]->src;
-			$the_styles[] = array(
-				'id'    => $getHandler,
-				'src'   => $srcUrl,
-				'media' => $wp_styles->registered[ $getHandler ]->args,
-			);
-		}
+		/* Crear diccionario */
 
+		if ( isset( $wp_styles->registered[ $getHandler ] ) ) {
+
+			$css_src = $wp_styles->registered[ $getHandler ];
+
+			if ( $getOption === '1' ) {
+				$the_styles[] = array(
+					'id'    => $getHandler,
+					'src'   => $css_src->src,
+					'media' => $css_src->args,
+				);
+			}
+		}
 	}
 	// return $the_styles;
-	printf( json_encode( $the_styles) );
+	printf( json_encode( $the_styles ) );
 }
 
 /*
@@ -277,7 +285,7 @@ function ekiline_load_allCss_js() { ?>
 
 	var allCss = <?php ekiline_styles_localize(); ?>;
 
-	if ( allCss != null ) {
+	if ( allCss !== null ) {
 		window.addEventListener( 'DOMContentLoaded', function () {
 			loadStyles(allCss );
 		} );
@@ -316,9 +324,9 @@ function ekiline_load_allCss_js() { ?>
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // Ejecutar solo cuando exista informacion en el campo
-if ( get_theme_mod( 'ekiline_js_handler_array' ) != '' ) {
+if ( get_theme_mod( 'ekiline_js_handler_array' ) !== '' ) {
 	add_filter( 'script_loader_tag', 'override_scripts', 10, 2 ); // 6.1
-	add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 ); //6.3
+	add_filter( 'script_loader_tag', 'ekiline_change_js_tag', 10, 4 ); //6.3
 	add_action( 'wp_footer', 'ekiline_load_allJss_js', 100 ); //6.2 y 6.4
 }
 
@@ -332,12 +340,11 @@ function override_scripts( $tag, $handle ) {
 
 			if ( $new_script['option'] === '1' ) {
 				return str_replace( ' src', ' async="async" src', $tag );
-			} else if ( $new_script['option'] === '2' ) {
+			} elseif ( $new_script['option'] === '2' ) {
 				return str_replace( ' src', ' defer="defer" src', $tag );
-			} else if ( $new_script['option'] === '3' ) {
+			} elseif ( $new_script['option'] === '3' ) {
 				return str_replace( ' src', ' async="async" defer="defer" src', $tag );
 			}
-
 		}
 	}
 	return $tag;
@@ -358,21 +365,23 @@ function ekiline_scripts_localize() {
 		$getHandler = $handler['handler'];
 		$getOption  = $handler['option'];
 
-		/* Crear diccionario:
-		* sobrescribir url de cada JS en caso de solo ser relativa al sistema.
-		*/
-		if ( $getOption === '4' ) {
-			$srcUrl        = $wp_scripts->registered[$getHandler]->src;
-			$the_scripts[] = array(
-				'id'  => $getHandler,
-				'src' => $srcUrl,
-			);
+		if ( isset( $wp_scripts->registered[ $getHandler ] ) ) {
+
+			$js_src = $wp_scripts->registered[ $getHandler ];
+
+			/* Crear diccionario */
+			if ( $getOption === '4' ) {
+				$the_scripts[] = array(
+					'id'  => $getHandler,
+					'src' => $js_src->src,
+				);
+			}
+			// Para deshabilitar estilos, es posible que no se necesite:
+			// wp_dequeue_script( $getHandler );
 		}
-		// Para deshabilitar estilos, es posible que no se necesite:
-		// wp_dequeue_script( $getHandler );
 	}
 	// return $the_scripts;
-	printf( json_encode( $the_scripts) );
+	printf( json_encode( $the_scripts ) );
 }
 
 
@@ -386,7 +395,7 @@ function ekiline_change_js_tag( $tag, $handle, $src ) {
 		if ( $pre_script['handler'] === $handle && $pre_script['option'] === '4' ) {
 			// $tag   = '<link rel="preload" as="script" href="' . esc_url( $src ) . '">'."\n".$tag;
 			$tagwrd   = 'script';
-			$patterns = array( '/<'.$tagwrd.' src=/', '/><\/'.$tagwrd.'>/' );
+			$patterns = array( '/<' . $tagwrd . ' src=/', '/><\/' . $tagwrd . '>/' );
 			// $replacements = array( '<!-- script src=', '></script -->' );//opcion comentado
 			// $replacements = array( '<link rel="preload" as="script" href=', '/>' );//opcion preload
 			$replacements = array( '<!-- link rel="preload" as="script" href=', '/ -->' );//opcion preload comentado
@@ -408,7 +417,7 @@ function ekiline_load_allJss_js() {
 
 	var allJss = <?php ekiline_scripts_localize(); ?>;
 
-	if ( allJss != null ) {
+	if ( allJss !== null ) {
 		window.addEventListener( 'DOMContentLoaded', function () {
 			// loadScripts(allJss ); //random
 			loadScriptsOrdered(allJss,0 ); //ordenada
@@ -458,7 +467,7 @@ function footer_enqueue_scripts() {
 	remove_action( 'wp_head', $emojiDetect, 7 );
 	add_action( 'wp_footer', $emojiDetect, 20 );
 	remove_action( 'wp_print_styles', $emojiStyles );
-	add_action( 'wp_head', $emojiStyles,110 );
+	add_action( 'wp_head', $emojiStyles, 110 );
 
 	/**
 	 * Prints scripts in document head that are in the $handles queue.

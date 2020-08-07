@@ -151,14 +151,14 @@ function ekiline_custom_header_controls( $wp_customize ) {
 		new WP_Customize_Upload_Control(
 			$wp_customize,
 			'ekiline_video',
-				array(
-					'label'       => __( 'Front Page video', 'ekiline' ),
-					'description' => __( 'Recommended formats: MP4, WEBM or OGV, your header image conserves as poster', 'ekiline' ),
-					'section'     => 'header_image',
-					'settings'    => 'ekiline_video',
-					'priority'    => 10,
-				)
+			array(
+				'label'       => __( 'Front Page video', 'ekiline' ),
+				'description' => __( 'Recommended formats: MP4, WEBM or OGV, your header image conserves as poster', 'ekiline' ),
+				'section'     => 'header_image',
+				'settings'    => 'ekiline_video',
+				'priority'    => 10,
 			)
+		)
 	);
 
 }
@@ -170,8 +170,10 @@ add_action( 'customize_register', 'ekiline_custom_header_controls' );
 	*/
 function ekiline_custom_header_setup() {
 
-	add_theme_support( 'custom-header',
-		apply_filters( 'ekiline_custom_header_args',
+	add_theme_support(
+		'custom-header',
+		apply_filters(
+			'ekiline_custom_header_args',
 			array(
 				'default-image'      => '', // se registra posteriormente.
 				'default-text-color' => '000000',
@@ -201,19 +203,24 @@ add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 */
 
 function ekiline_custom_header_style() {
-	if ( !get_header_image() ) return;
+
+	if ( ! get_header_image() ) {
+		return;
+	}
 
 	$hdrBkc    = get_option( 'chdr_color', '#000000' );
 	$hdrTxtc   = get_option( 'chdrtxt_color', '#6c757d' );
 	$hdrLksc   = get_option( 'chdrlks_color', '#007bff' );
 	$rangeHead = get_theme_mod( 'ekiline_range_header' );
 
-	if ( $rangeHead == '0' ) $rangeHead = '30';
+	if ( $rangeHead === '0' ) {
+		$rangeHead = '30';
+	}
 
-	$hdrStyle  = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:'. esc_attr( $hdrBkc ) .'; min-height:' . $rangeHead . 'vh; }';
-	$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:'. esc_attr( $hdrTxtc ) .'; }';
-	$hdrStyle .= '.custom-header.container a { color:'. esc_attr( $hdrLksc ) .'; }';
-	$hdrStyle .= '@media only screen and (min-width:960px ) { .custom-header.container .wp-block-cover{ background-image: url("'.ekiline_header_image( 'full' ).'") !important; } }';
+	$hdrStyle  = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:' . esc_attr( $hdrBkc ) . '; min-height:' . $rangeHead . 'vh; }';
+	$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:' . esc_attr( $hdrTxtc ) . '; }';
+	$hdrStyle .= '.custom-header.container a { color:' . esc_attr( $hdrLksc ) . '; }';
+	$hdrStyle .= '@media only screen and (min-width:960px ) { .custom-header.container .wp-block-cover{ background-image: url("' . ekiline_header_image( 'full' ) . '") !important; } }';
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $hdrStyle;
 
@@ -226,7 +233,9 @@ add_action( 'group_inline_css', 'ekiline_custom_header_style', 4 );
 	* https://developer.wordpress.org/reference/functions/body_class/
 	*/
 function ekiline_customHeaderCss( $classes ) {
-	if ( !get_header_image() ) return $classes;
+	if ( ! get_header_image() ) {
+		return $classes;
+	}
 	global $post;
 	$classes[] = 'has-custom-header';
 	return $classes;
@@ -244,7 +253,7 @@ add_filter( 'body_class', 'ekiline_customHeaderCss' );
 
 function ekiline_header_image( $size = null ) {
 
-	$size = ( $size != '' ) ? $size : 'medium_large'; //false;
+	$size = ( ! $size ) ? 'medium_large' : '';
 	$url  = get_header_image();
 
 	/*
@@ -257,14 +266,14 @@ function ekiline_header_image( $size = null ) {
 	*/
 
 	/* Condicion: en caso de ser la imagen de muestra, o ser una imagen nueva */
-	if ( get_header_image() != get_parent_theme_file_uri( '/assets/img/ekiline-pattern.png' ) ) {
+	if ( get_header_image() !== get_parent_theme_file_uri( '/assets/img/ekiline-pattern.png' ) ) {
 		$url = wp_get_attachment_image_url( get_custom_header()->attachment_id, $size, false, '' );
 	}
 
 	/* Condicion: si es una entrada o pagina */
 	if ( is_singular() && ! is_front_page() || is_home() || is_front_page() ) {
 		global $post;
-		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, $size ) : $url ;
+		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, $size ) : $url;
 	}
 
 	return $url;
@@ -276,13 +285,13 @@ function custom_header_content( $contentType = null ) {
 	$custom_header_text  = get_bloginfo( 'description' );
 
 	$categories_list = '';
-	if ( ! is_page() || get_the_category_list() != '' ) {
+	if ( ! is_page() || get_the_category_list() !== '' ) {
 		/* translators: %s is replaced with category title */
 		$categories_list = sprintf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
 	}
 
 	$tags_list = '';
-	if ( get_the_tag_list() != '' ) {
+	if ( get_the_tag_list() !== '' ) {
 		/* translators: %s is replaced with tags */
 		$tags_list = sprintf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ' ) ) );
 	}
@@ -295,7 +304,7 @@ function custom_header_content( $contentType = null ) {
 
 	if ( is_home() ) {
 		if ( get_theme_mod( 'ekiline_headerCustomText' ) ) {
-			$custom_header_title = get_the_title( get_option( 'page_for_posts', true) );
+			$custom_header_title = get_the_title( get_option( 'page_for_posts', true ) );
 			$contentfield        = get_post_field( 'post_content', get_option( 'page_for_posts' ) );
 			$custom_header_text  = wp_trim_words( $contentfield, 24 );
 			//Si existe un punto antes cortar
@@ -303,11 +312,10 @@ function custom_header_content( $contentType = null ) {
 			if ( $punto ) {
 				$custom_header_text = substr( $custom_header_text, 0, strpos( $custom_header_text, '.' ) ) . '.';
 			}
-
 		} else {
 			$custom_header_title = '<a href="' . esc_url( get_the_permalink() ) . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
-			$custom_header_text  = ekiline_content_out_the_loop()  . '<br>';
-			$custom_header_text .= '<small>'.$categories_list . ' | ' . $tags_list . '</small>';
+			$custom_header_text  = ekiline_content_out_the_loop() . '<br>';
+			$custom_header_text .= '<small>' . $categories_list . ' | ' . $tags_list . '</small>';
 		}
 	}
 
@@ -317,12 +325,12 @@ function custom_header_content( $contentType = null ) {
 		$author_item = sprintf(
 			/* translators: %s are replaced with author name  */
 			esc_html_x( 'Written by %s', 'post authors', 'ekiline' ),
-			'<a href="'.get_author_posts_url( $post->post_author ).'" title="'.get_the_title().'" rel="author">'. $username->display_name .'</a>'
+			'<a href="' . get_author_posts_url( $post->post_author ) . '" title="' . get_the_title() . '" rel="author">' . $username->display_name . '</a>'
 		);
 
 		$custom_header_title = get_the_title();
 		$addCategories       = ( ! is_page() ) ? ' | ' . $categories_list : '';
-		$custom_header_text  = '<small>'. $author_item . $addCategories . '</small>';
+		$custom_header_text  = '<small>' . $author_item . $addCategories . '</small>';
 	}
 
 	if ( is_archive() || is_category() ) {
@@ -332,7 +340,7 @@ function custom_header_content( $contentType = null ) {
 			$content             = get_the_archive_description();
 			$custom_header_text .= wp_strip_all_tags( substr( $content, 0, strpos( $content, '.' ) ) ) . '<br>';
 		}
-		$custom_header_text .= '<small>'. $categories_list . ' | ' . $tags_list . '</small>';
+		$custom_header_text .= '<small>' . $categories_list . ' | ' . $tags_list . '</small>';
 	}
 
 	if ( is_search() ) {
@@ -340,17 +348,17 @@ function custom_header_content( $contentType = null ) {
 		/* translators: %1$s is replaced with number of posts */
 		$custom_header_title = sprintf( esc_html__( '%s results found.', 'ekiline' ), $wp_query->found_posts );
 		/* translators: %1$s is replaced with name of search post */
-		$custom_header_text =  sprintf( esc_html__( 'Search Results for: %s', 'ekiline' ), get_search_query() );
+		$custom_header_text = sprintf( esc_html__( 'Search Results for: %s', 'ekiline' ), get_search_query() );
 	}
 
 	if ( is_404() ) {
-		$custom_header_title =  esc_html__( 'It looks like nothing was found at this location.', 'ekiline' );
+		$custom_header_title = esc_html__( 'It looks like nothing was found at this location.', 'ekiline' );
 		$custom_header_text  = esc_html__( 'Maybe try one of the links below or a search?', 'ekiline' );
 	}
 
-	if ( $contentType == 'title' ) {
+	if ( $contentType === 'title' ) {
 		$contentType = $custom_header_title;
-	} else if ( $contentType == 'text' ) {
+	} elseif ( $contentType === 'text' ) {
 		$contentType = $custom_header_text;
 	}
 
