@@ -12,7 +12,7 @@
 /**
 	* Ancho de layout | Layout width
 	*/
-function ekiline_widthControl() {
+function ekiline_width_control() {
 	$container = 'container';
 	$fluid     = '-fluid';
 
@@ -32,7 +32,7 @@ function ekiline_widthControl() {
 /*
 * Layout sin sidebars | No sidebars layout
 */
-function viewSbarFilter( $wsbCtl ) {
+function view_sidebar_filter( $width_sb_ctrl ) {
 
 	$opt = '';
 
@@ -50,21 +50,21 @@ function viewSbarFilter( $wsbCtl ) {
 
 	switch ( $opt ) {
 		case 1:
-			unset( $wsbCtl['sidebar-1'] );
+			unset( $width_sb_ctrl['sidebar-1'] );
 			break;
 		case 2:
-			unset( $wsbCtl['sidebar-2'] );
+			unset( $width_sb_ctrl['sidebar-2'] );
 			break;
 		case 3:
-			unset( $wsbCtl['sidebar-1'] );
-			unset( $wsbCtl['sidebar-2'] );
+			unset( $width_sb_ctrl['sidebar-1'] );
+			unset( $width_sb_ctrl['sidebar-2'] );
 			break;
 	}
 
-	return $wsbCtl;
+	return $width_sb_ctrl;
 
 }
-add_filter( 'sidebars_widgets', 'viewSbarFilter' );
+add_filter( 'sidebars_widgets', 'view_sidebar_filter' );
 
 
 /*
@@ -76,44 +76,44 @@ function ekiline_main_columns( $tag ) {
 		return;
 	}
 	// En caso de existir barras laterales agregar envoltorio
-	if ( $tag === 'open' ) {
-		echo '<div id="maincolumns" class="row mx-0 ' . esc_attr( ekiline_widthControl() ) . ' mx-auto px-0">';
+	if ( 'open' === $tag ) {
+		echo '<div id="maincolumns" class="row mx-0 ' . esc_attr( ekiline_width_control() ) . ' mx-auto px-0">';
 	}
-	if ( $tag === 'close' ) {
+	if ( 'close' === $tag ) {
 		echo '</div><!-- #maincolumns -->';
 	}
 }
 /*
 * 2) Agregar clases CSS a cada columna index.php y sidebar.php
 */
-function orderCols( $css ) {
-	$cssMain = ekiline_widthControl();//'container ';
+function sort_cols( $css ) {
+	$css_main = ekiline_width_control();//'container ';
 	if ( is_active_sidebar( 'sidebar-1' ) || is_active_sidebar( 'sidebar-2' ) ) {
 		// sidebars.
-		$sbL = is_active_sidebar( 'sidebar-1' );
-		$sbR = is_active_sidebar( 'sidebar-2' );
+		$sblft = is_active_sidebar( 'sidebar-1' );
+		$sbrgt = is_active_sidebar( 'sidebar-2' );
 		// orden de columnas.
-		$cssMain  = 'col-md-6 order-md-2';
-		$cssLeft  = ' col-md-3 order-md-1';
-		$cssRight = ' col-md-3 order-md-3';
+		$css_main  = 'col-md-6 order-md-2';
+		$css_left  = ' col-md-3 order-md-1';
+		$css_right = ' col-md-3 order-md-3';
 		// aparicion de columnas
-		if ( $sbL && ! $sbR ) {
-			$cssMain = 'col-md-9 order-md-2';
-			$cssLeft = ' col-md-3 order-md-1';
-		} elseif ( ! $sbL && $sbR ) {
-			$cssMain  = 'col-md-9';
-			$cssRight = ' col-md-3';
+		if ( $sblft && ! $sbrgt ) {
+			$css_main = 'col-md-9 order-md-2';
+			$css_left = ' col-md-3 order-md-1';
+		} elseif ( ! $sblft && $sbrgt ) {
+			$css_main  = 'col-md-9';
+			$css_right = ' col-md-3';
 		}
 	}
 	// imprimir
-	if ( $css === 'main' ) {
-		echo esc_attr( $cssMain );
+	if ( 'main' === $css ) {
+		echo esc_attr( $css_main );
 	}
-	if ( $css === 'left' ) {
-		echo esc_attr( $cssLeft );
+	if ( 'left' === $css ) {
+		echo esc_attr( $css_left );
 	}
-	if ( $css === 'right' ) {
-		echo esc_attr( $cssRight );
+	if ( 'right' === $css ) {
+		echo esc_attr( $css_right );
 	}
 }
 
@@ -126,14 +126,14 @@ function ekiline_show_columns( $tag ) {
 		return;
 	}
 
-	$colSet     = get_theme_mod( 'ekiline_Columns' );
-	$colContain = ( $colSet === '4' ) ? 'card-columns' : 'row';
+	$colset     = get_theme_mod( 'ekiline_Columns' );
+	$colcontain = ( '4' === $colset ) ? 'card-columns' : 'row';
 
-	if ( $colSet > '0' ) {
-		if ( $tag === 'open' ) {
-			echo '<div id="viewcolumns" class="' . esc_attr( $colContain ) . '">';
+	if ( $colset > '0' ) {
+		if ( 'open' === $tag ) {
+			echo '<div id="viewcolumns" class="' . esc_attr( $colcontain ) . '">';
 		}
-		if ( $tag === 'close' ) {
+		if ( 'close' === $tag ) {
 			echo '</div><!-- #viewcolumns -->';
 		}
 	}
@@ -147,25 +147,25 @@ function ekiline_show_columns_item( $classes ) {
 		return $classes;
 	}
 
-	$colSet  = get_theme_mod( 'ekiline_Columns' );
-	$colView = '';
+	$colset  = get_theme_mod( 'ekiline_Columns' );
+	$colview = '';
 
-	switch ( $colSet ) {
+	switch ( $colset ) {
 		case '1':
-			$colView = 'col-md-6';
+			$colview = 'col-md-6';
 			break;
 		case '2':
-			$colView = 'col-md-4';
+			$colview = 'col-md-4';
 			break;
 		case '3':
-			$colView = 'col-md-3';
+			$colview = 'col-md-3';
 			break;
 		case '4':
-			$colView = 'card';
+			$colview = 'card';
 			break;
 	}
 
-	$classes[] = $colView;
+	$classes[] = $colview;
 	return $classes;
 }
 

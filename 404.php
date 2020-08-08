@@ -10,7 +10,7 @@ get_header(); ?>
 
 <?php ekiline_main_columns( 'open' ); ?>
 
-	<main id="primary" class="<?php orderCols( 'main' ); ?>">
+	<main id="primary" class="<?php sort_cols( 'main' ); ?>">
 
 		<?php dynamic_sidebar( 'content-w1' ); ?>
 

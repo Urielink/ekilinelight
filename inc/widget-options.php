@@ -29,7 +29,7 @@ function ekiline_in_widget_form( $t, $return, $instance ) {
 	?>
 	<p>
 		<label for="<?php echo esc_attr( $t->get_field_id( 'css_style' ) ); ?>">
-			<?php esc_html_e( 'CSS custom class (Ekiline)', 'ekiline' ) ?>
+			<?php esc_html_e( 'CSS custom class (Ekiline)', 'ekiline' ); ?>
 		</label>
 		<input
 			class="widefat" type="text"
@@ -43,7 +43,7 @@ function ekiline_in_widget_form( $t, $return, $instance ) {
 }
 
 function ekiline_in_widget_form_update( $instance, $new_instance, $old_instance ) {
-	$instance['css_style'] = strip_tags( $new_instance['css_style'] );
+	$instance['css_style'] = wp_strip_all_tags( $new_instance['css_style'] );
 	return $instance;
 }
 
@@ -53,10 +53,9 @@ function ekiline_dynamic_sidebar_params( $params ) {
 	$widget_obj = $wp_registered_widgets[ $widget_id ];
 	$widget_opt = get_option( $widget_obj['callback'][0]->option_name );
 	$widget_num = $widget_obj['params'][0]['number'];
-	// $css_style = '';
 
 	if ( isset( $widget_opt[ $widget_num ]['css_style'] ) ) {
-		if ( $widget_opt[ $widget_num ]['css_style'] === '' ) {
+		if ( ! $widget_opt[ $widget_num ]['css_style'] ) {
 			$css_style = '';
 		} else {
 			$css_style = $widget_opt[ $widget_num ]['css_style'] . ' ';
@@ -70,13 +69,13 @@ function ekiline_dynamic_sidebar_params( $params ) {
 	return $params;
 }
 
-// callbacks y actualización
+/* callbacks y actualizacion */
 
-//Agregar el input: prioridad 5 y 3 parametros
+// Agregar el input: prioridad 5 y 3 parametros
 add_action( 'in_widget_form', 'ekiline_in_widget_form', 5, 3 );
-//Callback para actualización de parametros
+// Callback para actualización de parametros
 add_filter( 'widget_update_callback', 'ekiline_in_widget_form_update', 5, 3 );
-//Agregar los CSS con reemplazo.
+// Agregar los CSS con reemplazo.
 add_filter( 'dynamic_sidebar_params', 'ekiline_dynamic_sidebar_params' );
 
 
@@ -87,7 +86,7 @@ add_filter( 'dynamic_sidebar_params', 'ekiline_dynamic_sidebar_params' );
 * https://stackoverflow.com/questions/41113890/retrieve-value-widget-form-option-wordpress
 */
 
-function ekiline_widgetView( $widget, $return, $instance ) {
+function ekiline_widget_view( $widget, $return, $instance ) {
 
 	$instance = wp_parse_args( (array) $instance, array( 'viewFormat' => 'none' ) );
 	if ( ! isset( $instance['viewFormat'] ) ) {
@@ -96,27 +95,27 @@ function ekiline_widgetView( $widget, $return, $instance ) {
 
 	?>
 	<p>
-		<label for="<?php echo esc_attr( $widget->get_field_id( 'viewFormat' ) ); ?>"><?php esc_html_e( 'Format (Ekiline)', 'ekiline' ) ?></label>
+		<label for="<?php echo esc_attr( $widget->get_field_id( 'viewFormat' ) ); ?>"><?php esc_html_e( 'Format (Ekiline)', 'ekiline' ); ?></label>
 
 		<select id="<?php echo esc_attr( $widget->get_field_id( 'viewFormat' ) ); ?>" name="<?php echo esc_attr( $widget->get_field_name( 'viewFormat' ) ); ?>">
-			<option <?php selected( $instance['viewFormat'], 'none' ); ?> value="none"><?php esc_html_e( 'Default', 'ekiline' ) ?></option>
-			<option <?php selected( $instance['viewFormat'], 'dropdown' ); ?>value="dropdown"><?php esc_html_e( 'Dropdown', 'ekiline' ) ?></option>
-			<option <?php selected( $instance['viewFormat'], 'modal' ); ?> value="modal"><?php esc_html_e( 'Modal', 'ekiline' ) ?></option>
+			<option <?php selected( $instance['viewFormat'], 'none' ); ?> value="none"><?php esc_html_e( 'Default', 'ekiline' ); ?></option>
+			<option <?php selected( $instance['viewFormat'], 'dropdown' ); ?>value="dropdown"><?php esc_html_e( 'Dropdown', 'ekiline' ); ?></option>
+			<option <?php selected( $instance['viewFormat'], 'modal' ); ?> value="modal"><?php esc_html_e( 'Modal', 'ekiline' ); ?></option>
 		</select>
 	</p>
 	<?php
 }
-add_action( 'in_widget_form', 'ekiline_widgetView', 5, 3 );
+add_action( 'in_widget_form', 'ekiline_widget_view', 5, 3 );
 
-function ekiline_widgetViewSave( $instance, $new_instance, $old_instance ) {
+function ekiline_widget_view_save( $instance, $new_instance, $old_instance ) {
 
 	$instance['viewFormat'] = $new_instance['viewFormat'];
 	return $instance;
 
 }
-add_filter( 'widget_update_callback', 'ekiline_widgetViewSave', 5, 3 );
+add_filter( 'widget_update_callback', 'ekiline_widget_view_save', 5, 3 );
 
-function ekiline_widgetShow( $params ) {
+function ekiline_widget_show( $params ) {
 
 	global $wp_registered_widgets;
 	$widget_id  = $params[0]['widget_id'];
@@ -125,53 +124,53 @@ function ekiline_widgetShow( $params ) {
 	$widget_num = $widget_obj['params'][0]['number'];
 
 	// variables para modificar la estructura del widget
-	$viewFormat = '';
+	$view_format = '';
 
-	$befWdg = $params[0]['before_widget'];
-	$befTtl = $params[0]['before_title'];
-	$aftTtl = $params[0]['after_title'];
-	$aftWdg = $params[0]['after_widget'];
+	$bef_wdg = $params[0]['before_widget'];
+	$bef_ttl = $params[0]['before_title'];
+	$aft_ttl = $params[0]['after_title'];
+	$aft_wdg = $params[0]['after_widget'];
 
-	$widgetTitle = '';
+	$widget_ttl = '';
 
 	if ( isset( $widget_opt[ $widget_num ]['title'] ) ) {
-		if ( $widget_opt[ $widget_num ]['title'] !== '' ) {
-			$widgetTitle = $widget_opt[ $widget_num ]['title'];
+		if ( '' !== $widget_opt[ $widget_num ]['title'] ) {
+			$widget_ttl = $widget_opt[ $widget_num ]['title'];
 		}
 	}
 
 	if ( isset( $widget_opt[ $widget_num ]['viewFormat'] ) ) {
 
-		$viewFormat = $widget_opt[ $widget_num ]['viewFormat'];
+		$view_format = $widget_opt[ $widget_num ]['viewFormat'];
 
-		if ( $viewFormat === 'dropdown' ) {
+		if ( 'dropdown' === $view_format ) {
 
-			$widgetTitle = ( $widgetTitle !== '' ) ? '<h6 class="dropdown-header">' . $widgetTitle . '</h6>' : '';
+			$widget_ttl = ( '' !== $widget_ttl ) ? '<h6 class="dropdown-header">' . $widget_ttl . '</h6>' : '';
 
-			$befWdg = preg_replace( '/class="/', 'class="' . $viewFormat . ' ', $params[0]['before_widget'], 1 );
-			$befTtl = '<button class="btn btn-secondary btn-block dropdown-toggle" type="button" data-toggle="dropdown">';
-			$aftTtl = '</button><div class="dropdown-menu">' . $widgetTitle;
-			$aftWdg = '</div>' . $aftWdg;
+			$bef_wdg = preg_replace( '/class="/', 'class="' . $view_format . ' ', $params[0]['before_widget'], 1 );
+			$bef_ttl = '<button class="btn btn-secondary btn-block dropdown-toggle" type="button" data-toggle="dropdown">';
+			$aft_ttl = '</button><div class="dropdown-menu">' . $widget_ttl;
+			$aft_wdg = '</div>' . $aft_wdg;
 
-		} elseif ( $viewFormat === 'modal' ) {
+		} elseif ( 'modal' === $view_format ) {
 
-			$widgetTitle = ( $widgetTitle !== '' ) ? '<h5>' . $widgetTitle . '</h5>' : '';
+			$widget_ttl = ( '' !== $widget_ttl ) ? '<h5>' . $widget_ttl . '</h5>' : '';
 
-			$befWdg  = $befWdg;
-			$befTtl  = '<button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#wdgModal-' . $widget_id . '">';
-			$aftTtl  = '</button><div class="modal fade" id="wdgModal-' . $widget_id . '">';
-			$aftTtl .= '<div class="modal-dialog"><div class="modal-content">';
-			$aftTtl .= '<div class="modal-header">' . $widgetTitle . '<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button></div><div class="modal-body">';
-			$aftWdg  = '</div></div></div></div>' . $aftWdg;
+			$bef_wdg  = $bef_wdg;
+			$bef_ttl  = '<button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#wdgModal-' . $widget_id . '">';
+			$aft_ttl  = '</button><div class="modal fade" id="wdgModal-' . $widget_id . '">';
+			$aft_ttl .= '<div class="modal-dialog"><div class="modal-content">';
+			$aft_ttl .= '<div class="modal-header">' . $widget_ttl . '<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button></div><div class="modal-body">';
+			$aft_wdg  = '</div></div></div></div>' . $aft_wdg;
 		}
 	}
 	// Agrega etiquetas
-	$params[0]['before_widget'] = $befWdg;
-	$params[0]['before_title']  = $befTtl;
-	$params[0]['after_title']   = $aftTtl;
-	$params[0]['after_widget']  = $aftWdg;
+	$params[0]['before_widget'] = $bef_wdg;
+	$params[0]['before_title']  = $bef_ttl;
+	$params[0]['after_title']   = $aft_ttl;
+	$params[0]['after_widget']  = $aft_wdg;
 
 	return $params;
 
 }
-add_filter( 'dynamic_sidebar_params', 'ekiline_widgetShow' );
+add_filter( 'dynamic_sidebar_params', 'ekiline_widget_show' );

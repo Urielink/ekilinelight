@@ -17,22 +17,22 @@ function ekiline_meta_description() {
 	if ( is_singular() ) {
 		global $post;
 		if ( $post->post_content ) {
-			$pExtract = wp_trim_words( strip_shortcodes( $post->post_content ), 24, '...' );
-			if ( $pExtract ) {
-				$desc_head = $pExtract;
+			$cont_trim = wp_trim_words( strip_shortcodes( $post->post_content ), 24, '...' );
+			if ( $cont_trim ) {
+				$desc_head = $cont_trim;
 			}
 		}
 	}
 	// si es archivo o categoria
 	if ( is_archive() ) {
 		if ( category_description() ) {
-			$desc_head = strip_tags( category_description() );
+			$desc_head = wp_strip_all_tags( category_description() );
 		} else {
 			$cat = get_the_category();
 			if ( $cat ) {
 				$cat_count = $cat[0]->count;
 				/* translators: %1$s is replaced with post count and %2$s is asigned to title */
-				$desc_head = sprintf( __( 'There are %1$s entries related to %2$s', 'ekiline' ), $cat_count, strip_tags( get_the_archive_title() ) );
+				$desc_head = sprintf( __( 'There are %1$s entries related to %2$s', 'ekiline' ), $cat_count, wp_strip_all_tags( get_the_archive_title() ) );
 			}
 		}
 	}
@@ -100,7 +100,7 @@ function ekiline_meta_keywords() {
 				$keywords .= $sep . $tag->name;
 
 				$i++;
-				if ( $i === 10 ) {
+				if ( 10 === $i ) {
 					break;
 				}
 			endforeach;
@@ -144,35 +144,35 @@ function ekiline_meta_image() {
 /**
 * Meta social, itemprop, twitter y facebook.
 **/
-function metaSocial() {
+function ekiline_meta_social() {
 	global $wp;
-	$metaSocial = '';
+	$meta_social = '';
 
-	$metaTitle       = get_bloginfo( 'name' );
-	$metaDescription = ekiline_meta_description();
-	$metaImages      = ekiline_meta_image();
-	$twSocial        = 'twitter.com';
-	$metaType        = 'website';
-	$currentUrl      = home_url( add_query_arg( array(), $wp->request ) ); //global $wp
+	$meta_title  = get_bloginfo( 'name' );
+	$meta_desc   = ekiline_meta_description();
+	$meta_imgs   = ekiline_meta_image();
+	$ttr_link    = 'twitter.com';
+	$meta_type   = 'website';
+	$current_url = home_url( add_query_arg( array(), $wp->request ) ); //global $wp
 
 	//Google
-	$metaSocial .= '<meta itemprop="name" content="' . $metaTitle . '">' . "\n";
-	$metaSocial .= '<meta itemprop="description" content="' . $metaDescription . '">' . "\n";
-	$metaSocial .= '<meta itemprop="image" content="' . $metaImages . '">' . "\n";
+	$meta_social .= '<meta itemprop="name" content="' . $meta_title . '">' . "\n";
+	$meta_social .= '<meta itemprop="description" content="' . $meta_desc . '">' . "\n";
+	$meta_social .= '<meta itemprop="image" content="' . $meta_imgs . '">' . "\n";
 	//twitter
-	$metaSocial .= '<meta name="twitter:card" content="summary">' . "\n";
-	$metaSocial .= '<meta name="twitter:site" content="' . $twSocial . '">' . "\n";
-	$metaSocial .= '<meta name="twitter:title" content="' . $metaTitle . '">' . "\n";
-	$metaSocial .= '<meta name="twitter:description" content="' . $metaDescription . '">' . "\n";
-	$metaSocial .= '<meta name="twitter:creator" content="' . $twSocial . '">' . "\n";
-	$metaSocial .= '<meta name="twitter:image" content="' . $metaImages . '">' . "\n";
+	$meta_social .= '<meta name="twitter:card" content="summary">' . "\n";
+	$meta_social .= '<meta name="twitter:site" content="' . $ttr_link . '">' . "\n";
+	$meta_social .= '<meta name="twitter:title" content="' . $meta_title . '">' . "\n";
+	$meta_social .= '<meta name="twitter:description" content="' . $meta_desc . '">' . "\n";
+	$meta_social .= '<meta name="twitter:creator" content="' . $ttr_link . '">' . "\n";
+	$meta_social .= '<meta name="twitter:image" content="' . $meta_imgs . '">' . "\n";
 	//facebook
-	$metaSocial .= '<meta property="og:title" content="' . $metaTitle . '"/>' . "\n";
-	$metaSocial .= '<meta property="og:type" content="' . $metaType . '"/>' . "\n";
-	$metaSocial .= '<meta property="og:url" content="' . $currentUrl . '"/>' . "\n";
-	$metaSocial .= '<meta property="og:image" content="' . $metaImages . '"/>' . "\n";
-	$metaSocial .= '<meta property="og:description" content="' . $metaDescription . '"/>' . "\n";
-	$metaSocial .= '<meta property="og:site_name" content="' . $metaTitle . '"/>' . "\n";
+	$meta_social .= '<meta property="og:title" content="' . $meta_title . '"/>' . "\n";
+	$meta_social .= '<meta property="og:type" content="' . $meta_type . '"/>' . "\n";
+	$meta_social .= '<meta property="og:url" content="' . $current_url . '"/>' . "\n";
+	$meta_social .= '<meta property="og:image" content="' . $meta_imgs . '"/>' . "\n";
+	$meta_social .= '<meta property="og:description" content="' . $meta_desc . '"/>' . "\n";
+	$meta_social .= '<meta property="og:site_name" content="' . $meta_title . '"/>' . "\n";
 
 	$allowed_html = array(
 		'meta' => array(
@@ -182,8 +182,8 @@ function metaSocial() {
 			'property' => array(),
 		),
 	);
-	echo wp_kses( $metaSocial, $allowed_html );
+	echo wp_kses( $meta_social, $allowed_html );
 
 }
 
-add_action( 'wp_head', 'metaSocial', 1 );
+add_action( 'wp_head', 'ekiline_meta_social', 1 );

@@ -13,30 +13,30 @@
 * Reemplazar el marcado para el enlace de leer mas
 * Custom read more link
 */
-function overrideReadMoreLink() {
+function override_read_more_link() {
 	/* translators: screenread only %s is replaced with title */
 	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
 }
-add_filter( 'the_content_more_link', 'overrideReadMoreLink' );
+add_filter( 'the_content_more_link', 'override_read_more_link' );
 
 /**
 * Widgets en footer
 * Footer widgets
 */
 
-function ekiline_countWidgets( $widgetZone ) {
+function ekiline_count_widgets( $widget_area ) {
 	// agreagar un contenedor en caso de existir más de 2 widgets, util para usar columnas de bootstrap.
-	if ( is_active_sidebar( $widgetZone ) ) :
+	if ( is_active_sidebar( $widget_area ) ) :
 
 		$the_sidebars   = wp_get_sidebars_widgets();
-		$count_sidebars = count( $the_sidebars[ $widgetZone ] );
+		$count_sidebars = count( $the_sidebars[ $widget_area ] );
 
 		if ( $count_sidebars >= '2' ) {
 			echo '<div class="row">';
-				dynamic_sidebar( $widgetZone );
+				dynamic_sidebar( $widget_area );
 			echo '</div>';
 		} else {
-			dynamic_sidebar( $widgetZone );
+			dynamic_sidebar( $widget_area );
 		}
 
 	endif;
@@ -57,12 +57,12 @@ function ekiline_thumbnail() {
 		return;
 	}
 	// thumbnail size
-	$thumbSize = ( is_search() ) ? 'thumbnail' : 'medium';
+	$thumb_size = ( is_search() ) ? 'thumbnail' : 'medium';
 	// clase css varia por tipo de contenido
-	$imgClass  = 'img-fluid ';
-	$imgClass .= ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card-img-top ' : 'img-thumbnail ';
+	$img_class  = 'img-fluid ';
+	$img_class .= ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card-img-top ' : 'img-thumbnail ';
 
-	return the_post_thumbnail( $thumbSize, array( 'class' => $imgClass ) );
+	return the_post_thumbnail( $thumb_size, array( 'class' => $img_class ) );
 }
 
 /**
@@ -75,9 +75,9 @@ function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
 		return $html;
 	}
 	// si es search, se agrega una clase
-	$thumbClass = ( is_search() ) ? ' class="search-link"' : '';
+	$thumb_class = ( is_search() ) ? ' class="search-link"' : '';
 
-	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '"' . $thumbClass . '>' . $html . '</a>';
+	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '"' . $thumb_class . '>' . $html . '</a>';
 	return $html;
 }
 add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
@@ -156,7 +156,7 @@ function ekiline_content_additions( $content ) {
 
 		if ( strpos( $post->post_content, '<!--more-->' ) ) {
 			$content = $content;
-		} elseif ( $post->post_excerpt !== '' ) {
+		} elseif ( '' !== $post->post_excerpt ) {
 			$content = $post->post_excerpt . $link;
 		} else {
 			$content = wp_trim_words( $content, 55, $link );
@@ -240,7 +240,8 @@ add_filter( 'get_search_form', 'ekiline_search_form' );
 
 function ekiline_password_form() {
 	global $post;
-	$label   = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
+	// $label   = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
+	$label   = 'pwbox-' . ( empty( $post->ID ) ? wp_rand() : $post->ID );
 	$output  = '<form action="' . esc_url( home_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form form-inline col-sm-8 p-4 mx-auto text-center" method="post">';
 	$output .= '<p>' . __( 'This content is password protected. To view it please enter your password below:', 'ekiline' ) . '</p>';
 	$output .= '<div class="form-inline mx-auto"><label for="' . $label . '">' . __( 'Password:', 'ekiline' ) . ' </label>';
@@ -256,14 +257,14 @@ add_filter( 'the_password_form', 'ekiline_password_form' );
 * https://developer.wordpress.org/reference/hooks/post_password_expires/
 */
 
-function ekiline_expirCookie( $time ) {
+function ekiline_expire_cookie( $time ) {
 	// return time() + 600 ;  // 10 mn
 	// for 5 minutes :
 	// return time() + 300;  in this case 60 * 5
 	// return 0; set cookie to expire at the end of the session
 	return 0;
 }
-add_filter( 'post_password_expires', 'ekiline_expirCookie' );
+add_filter( 'post_password_expires', 'ekiline_expire_cookie' );
 
 
 /**
@@ -284,9 +285,9 @@ function ekiline_pagination() {
 		}
 	}
 
-	$thePages    = '';
-	$PreviusLink = '';
-	$NextLink    = '';
+	$the_pages = '';
+	$prev_link = '';
+	$next_link = '';
 
 	if ( is_page() ) {
 
@@ -297,21 +298,21 @@ function ekiline_pagination() {
 			$pages[] += $page->ID;
 		}
 
-		$current = array_search( get_the_ID(), $pages );
-		$prevID  = ( isset( $pages[ $current - 1 ] ) ) ? $pages[ $current - 1 ] : '';
-		$nextID  = ( isset( $pages[ $current + 1 ] ) ) ? $pages[ $current + 1 ] : '';
+		$current = array_search( get_the_ID(), $pages, true );
+		$prev_id = ( isset( $pages[ $current - 1 ] ) ) ? $pages[ $current - 1 ] : '';
+		$nexr_id = ( isset( $pages[ $current + 1 ] ) ) ? $pages[ $current + 1 ] : '';
 
-		if ( ! empty( $prevID ) ) {
-			$PreviusLink .= '<li class="page-item page-link"><a href="' . get_permalink( $prevID ) . '" title="' . get_the_title( $prevID ) . '"><span>&leftarrow;</span> ' . get_the_title( $prevID ) . '</a></li>';
+		if ( ! empty( $prev_id ) ) {
+			$prev_link .= '<li class="page-item page-link"><a href="' . get_permalink( $prev_id ) . '" title="' . get_the_title( $prev_id ) . '"><span>&leftarrow;</span> ' . get_the_title( $prev_id ) . '</a></li>';
 		}
-		if ( ! empty( $nextID ) ) {
-			$NextLink .= '<li class="page-item page-link"><a href="' . get_permalink( $nextID ) . '" title="' . get_the_title( $nextID ) . '">' . get_the_title( $nextID ) . ' <span>&rightarrow;</span></a></li>';
+		if ( ! empty( $nexr_id ) ) {
+			$next_link .= '<li class="page-item page-link"><a href="' . get_permalink( $nexr_id ) . '" title="' . get_the_title( $nexr_id ) . '">' . get_the_title( $nexr_id ) . ' <span>&rightarrow;</span></a></li>';
 		}
 	}
 
 	if ( is_single() ) {
-		$PreviusLink = get_previous_post_link( '<li class="page-item page-link">%link</li>', '<span>&leftarrow;</span> %title', true );
-		$NextLink    = get_next_post_link( '<li class="page-item page-link">%link</li>', '%title <span>&rightarrow;</span>', true );
+		$prev_link = get_previous_post_link( '<li class="page-item page-link">%link</li>', '<span>&leftarrow;</span> %title', true );
+		$next_link = get_next_post_link( '<li class="page-item page-link">%link</li>', '%title <span>&rightarrow;</span>', true );
 	}
 
 	/* Paginacion para listados: https://codex.wordpress.org/Function_Reference/paginate_links */
@@ -342,28 +343,28 @@ function ekiline_pagination() {
 
 				$page = str_replace( 'page-numbers', 'page-link', $page );
 
-				if ( $current_page === 1 && $i === 0 ) {
-					$PreviusLink .= "<li class='page-item active'>$page</li>";
+				if ( 1 === $current_page && 0 === $i ) {
+					$prev_link .= "<li class='page-item active'>$page</li>";
 				} else {
-					if ( $current_page !== 1 && $current_page === $i ) {
-						$PreviusLink .= "<li class='page-item active'>$page</li>";
+					if ( 1 !== $current_page && $i === $current_page ) {
+						$prev_link .= "<li class='page-item active'>$page</li>";
 					} else {
-						$PreviusLink .= "<li class='page-item'>$page</li>";
+						$prev_link .= "<li class='page-item'>$page</li>";
 					}
 				}
 			}
 		}
 	}
 
-	$thePages .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="Page navigation">';
-	$thePages .= '<ul class="pagination justify-content-between">';
-	$thePages .= $PreviusLink;
-	$thePages .= $NextLink;
-	$thePages .= '</ul>';
-	$thePages .= '</nav>';
+	$the_pages .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="Page navigation">';
+	$the_pages .= '<ul class="pagination justify-content-between">';
+	$the_pages .= $prev_link;
+	$the_pages .= $next_link;
+	$the_pages .= '</ul>';
+	$the_pages .= '</nav>';
 
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	echo $thePages;
+	echo $the_pages;
 }
 
 
@@ -372,10 +373,10 @@ function ekiline_pagination() {
 	* Obtener categorias para pagina 404
 	*/
 function ekiline_categorized_blog() {
-	$all_the_cool_cats = get_transient( 'ekiline_categories' );
-	if ( false === $all_the_cool_cats ) {
+	$all_categories = get_transient( 'ekiline_categories' );
+	if ( false === $all_categories ) {
 		// Create an array of all the categories that are attached to posts.
-		$all_the_cool_cats = get_categories(
+		$all_categories = get_categories(
 			array(
 				'fields'     => 'ids',
 				'hide_empty' => 1,
@@ -385,12 +386,12 @@ function ekiline_categorized_blog() {
 		);
 
 		// Count the number of categories that are attached to the posts.
-		$all_the_cool_cats = count( $all_the_cool_cats );
+		$all_categories = count( $all_categories );
 
-		set_transient( 'ekiline_categories', $all_the_cool_cats );
+		set_transient( 'ekiline_categories', $all_categories );
 	}
 
-	if ( $all_the_cool_cats > 1 ) {
+	if ( $all_categories > 1 ) {
 		// This blog has more than 1 category so ekiline_categorized_blog should return true.
 		return true;
 	} else {

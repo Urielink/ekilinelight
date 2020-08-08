@@ -6,8 +6,8 @@
 */
 
 /**
-	* Agregar a customizer
-	*/
+* Agregar a customizer
+*/
 
 // Usar el contenido de home y frontpage
 function ekiline_custom_header_controls( $wp_customize ) {
@@ -167,6 +167,7 @@ add_action( 'customize_register', 'ekiline_custom_header_controls' );
 /**
 	* Controladores con callback: ekiline_custom_header_style()
 	* https://developer.wordpress.org/themes/functionality/custom-headers/
+	* Ocupar si fuera necesario: 'wp-head-callback' => 'ekiline_custom_header_style',
 	*/
 function ekiline_custom_header_setup() {
 
@@ -175,16 +176,15 @@ function ekiline_custom_header_setup() {
 		apply_filters(
 			'ekiline_custom_header_args',
 			array(
-				'default-image'      => '', // se registra posteriormente.
+				'default-image'      => '',
 				'default-text-color' => '000000',
 				'width'              => '',
 				'height'             => '',
 				'flex-height'        => true,
-				// 'wp-head-callback'   => 'ekiline_custom_header_style',
 			)
 		)
 	);
-	// registrar una imagen default.
+	// registrar una imagen default, primero se declara en los filtros
 		register_default_headers(
 			array(
 				'default-image' => array(
@@ -208,21 +208,21 @@ function ekiline_custom_header_style() {
 		return;
 	}
 
-	$hdrBkc    = get_option( 'chdr_color', '#000000' );
-	$hdrTxtc   = get_option( 'chdrtxt_color', '#6c757d' );
-	$hdrLksc   = get_option( 'chdrlks_color', '#007bff' );
-	$rangeHead = get_theme_mod( 'ekiline_range_header' );
+	$hdr_bgc    = get_option( 'chdr_color', '#000000' );
+	$hdr_txc    = get_option( 'chdrtxt_color', '#6c757d' );
+	$hdr_lkc    = get_option( 'chdrlks_color', '#007bff' );
+	$range_head = get_theme_mod( 'ekiline_range_header' );
 
-	if ( $rangeHead === '0' ) {
-		$rangeHead = '30';
+	if ( '0' === $range_head ) {
+		$range_head = '30';
 	}
 
-	$hdrStyle  = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:' . esc_attr( $hdrBkc ) . '; min-height:' . $rangeHead . 'vh; }';
-	$hdrStyle .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:' . esc_attr( $hdrTxtc ) . '; }';
-	$hdrStyle .= '.custom-header.container a { color:' . esc_attr( $hdrLksc ) . '; }';
-	$hdrStyle .= '@media only screen and (min-width:960px ) { .custom-header.container .wp-block-cover{ background-image: url("' . ekiline_header_image( 'full' ) . '") !important; } }';
+	$hdr_style  = '.custom-header.container .wp-block-cover, .custom-header.container .wp-block-cover.has-background-dim::before{ background-color:' . esc_attr( $hdr_bgc ) . '; min-height:' . $range_head . 'vh; }';
+	$hdr_style .= '.custom-header.container .display-4.font-italic, .custom-header.container p { color:' . esc_attr( $hdr_txc ) . '; }';
+	$hdr_style .= '.custom-header.container a { color:' . esc_attr( $hdr_lkc ) . '; }';
+	$hdr_style .= '@media only screen and (min-width:960px ) { .custom-header.container .wp-block-cover{ background-image: url("' . ekiline_header_image( 'full' ) . '") !important; } }';
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	echo $hdrStyle;
+	echo $hdr_style;
 
 }
 add_action( 'group_inline_css', 'ekiline_custom_header_style', 4 );
@@ -232,7 +232,7 @@ add_action( 'group_inline_css', 'ekiline_custom_header_style', 4 );
 	* Clases CSS de apoyo en body_class().
 	* https://developer.wordpress.org/reference/functions/body_class/
 	*/
-function ekiline_customHeaderCss( $classes ) {
+function ekiline_custom_header_css( $classes ) {
 	if ( ! get_header_image() ) {
 		return $classes;
 	}
@@ -240,7 +240,7 @@ function ekiline_customHeaderCss( $classes ) {
 	$classes[] = 'has-custom-header';
 	return $classes;
 }
-add_filter( 'body_class', 'ekiline_customHeaderCss' );
+add_filter( 'body_class', 'ekiline_custom_header_css' );
 
 /**
 	* Crear un header dinamico y personalizable.
@@ -279,7 +279,7 @@ function ekiline_header_image( $size = null ) {
 	return $url;
 }
 
-function custom_header_content( $contentType = null ) {
+function custom_header_content( $content_type = null ) {
 
 	$custom_header_title = get_bloginfo( 'name' );
 	$custom_header_text  = get_bloginfo( 'description' );
@@ -329,8 +329,8 @@ function custom_header_content( $contentType = null ) {
 		);
 
 		$custom_header_title = get_the_title();
-		$addCategories       = ( ! is_page() ) ? ' | ' . $categories_list : '';
-		$custom_header_text  = '<small>' . $author_item . $addCategories . '</small>';
+		$add_categories      = ( ! is_page() ) ? ' | ' . $categories_list : '';
+		$custom_header_text  = '<small>' . $author_item . $add_categories . '</small>';
 	}
 
 	if ( is_archive() || is_category() ) {
@@ -356,11 +356,11 @@ function custom_header_content( $contentType = null ) {
 		$custom_header_text  = esc_html__( 'Maybe try one of the links below or a search?', 'ekiline' );
 	}
 
-	if ( $contentType === 'title' ) {
-		$contentType = $custom_header_title;
-	} elseif ( $contentType === 'text' ) {
-		$contentType = $custom_header_text;
+	if ( 'title' === $content_type ) {
+		$content_type = $custom_header_title;
+	} elseif ( 'text' === $content_type ) {
+		$content_type = $custom_header_text;
 	}
 
-	return $contentType;
+	return $content_type;
 }

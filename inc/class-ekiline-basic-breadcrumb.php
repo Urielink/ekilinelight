@@ -14,17 +14,17 @@
 *
 */
 
-class ekilineBreadcrumb extends WP_Widget {
+class Ekiline_Basic_Breadcrumb extends WP_Widget {
 
 	/**
 	 * Sets up the widgets name etc
 	 */
 	public function __construct() {
 		$widget_ops = array(
-			'classname'   => 'ekilineBreadcrumb',
+			'classname'   => 'Ekiline_Basic_Breadcrumb',
 			'description' => __( 'Show breadcrumb module (Ekiline)', 'ekiline' ),
 		);
-		parent::__construct( 'ekilineBreadcrumb', __( 'Breadcrumb Nav', 'ekiline' ), $widget_ops );
+		parent::__construct( 'Ekiline_Basic_Breadcrumb', __( 'Breadcrumb Nav', 'ekiline' ), $widget_ops );
 	}
 
 	/**
@@ -60,7 +60,7 @@ class ekilineBreadcrumb extends WP_Widget {
 		// }
 		// echo esc_html__( 'Hello, World!', 'text_domain' );
 
-		echo wp_kses_post( createBreadcrumb() );
+		echo wp_kses_post( create_breadcrumb() );
 
 		echo wp_kses_post( $args['after_widget'] );
 		// echo str_replace( 'div>', 'nav>', $args['after_widget'] );
@@ -88,16 +88,13 @@ class ekilineBreadcrumb extends WP_Widget {
 	}
 }
 
-/**add_action( 'widgets_init', function() {
-	register_widget( 'ekilineBreadcrumb' );
-} );**/ // esto no funciona en php5
 
-function ekilineBreadcrumb_register_widgets() {
-	register_widget( 'ekilineBreadcrumb' );
+function ekiline_breadcrumb_register_widgets() {
+	register_widget( 'Ekiline_Basic_Breadcrumb' );
 }
-add_action( 'widgets_init', 'ekilineBreadcrumb_register_widgets' );
+add_action( 'widgets_init', 'ekiline_breadcrumb_register_widgets' );
 
-function createBreadcrumb() {
+function create_breadcrumb() {
 
 	if ( is_home() || is_front_page() ) {
 		return;
@@ -109,16 +106,16 @@ function createBreadcrumb() {
 
 		if ( is_attachment() ) {
 			//variables para los attachments
-			$attachPost   = get_post( get_the_ID() );
-			$attachUrl    = get_permalink( $attachPost->post_parent );
-			$attachParent = get_the_title( $attachPost->post_parent );
+			$attach_post   = get_post( get_the_ID() );
+			$attach_url    = get_permalink( $attach_post->post_parent );
+			$attach_parent = get_the_title( $attach_post->post_parent );
 
 			// si es un adjunto, muestra el titulo de donde viene
-			$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="' . $attachUrl . '" title="Volver a  ' . $attachParent . '" rel="gallery">' . $attachParent . '</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
+			$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="' . $attach_url . '" title="Volver a  ' . $attach_parent . '" rel="gallery">' . $attach_parent . '</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
 
 		} elseif ( is_page() ) {
 
-			//Si es pagina y tiene herencia, padres.
+			// Si es pagina y tiene herencia, padres.
 			// https://wordpress.stackexchange.com/questions/140362/wordpress-breadcrumb-depth
 			// 1) Se llama la variable global para hacer un loop de paginas.
 			global $post;
@@ -171,8 +168,8 @@ function createBreadcrumb() {
 		$title = '';
 		if ( is_category() ) {
 
-			$catName = single_term_title( '', false );
-			$catid   = get_cat_ID( $catName );
+			$catname = single_term_title( '', false );
+			$catid   = get_cat_ID( $catname );
 			// diferenciar si hay categorías padre:
 			// https://wordpress.stackexchange.com/questions/11267/check-is-category-parent-or-not-from-its-id
 			$catobj = get_category( $catid );
@@ -182,14 +179,14 @@ function createBreadcrumb() {
 			if ( $catobj->category_parent > 0 ) {
 				// este muestra toda una lista
 				// $breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $catid, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' );
-				$breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $parentobj, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' ) . $catName;
+				$breadcrumb .= '<li class="breadcrumb-item category-parent">' . get_category_parents( $parentobj, true, '</li><!--.category-parent--><li class="breadcrumb-item category-child">' ) . $catname;
 			} else {
 				$breadcrumb .= '<li class="breadcrumb-item category-child">' . get_category_parents( $catid, false, '' );
 			}
 		} elseif ( is_tag() ) {
 			$title = '<li class="breadcrumb-item tag">' . single_tag_title( '', false );
 		} elseif ( is_author() ) {
-			$title = '<li class="breadcrumb-item author">' . '<span class="vcard">' . get_the_author() . '</span>';
+			$title = '<li class="breadcrumb-item author"><span class="vcard">' . get_the_author() . '</span>';
 		} elseif ( is_year() ) {
 			$title = '<li class="breadcrumb-item year">' . get_the_date( 'Y' );
 		} elseif ( is_month() ) {

@@ -6,6 +6,11 @@
 *
 * @package ekiline
 */
+
+if ( post_password_required() ) {
+	return;
+}
+
 ?>
 
 <div id="comments" class="comments-area clearfix">
@@ -65,8 +70,7 @@
 	<?php endif; // Check for have_comments(). ?>
 
 	<?php
-	// Si hay comentarios pero no activos, mostrar un mensaje
-	// If comments are closed and there are comments, show a  note
+	/* Si hay comentarios pero no activos, mostrar un mensaje || If comments are closed and there are comments, show a  note */
 	if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
 		?>
 
@@ -114,9 +118,6 @@ function ekiline_comments_simple( $comment, $args, $depth ) {
 					array_merge(
 						$args,
 						array(
-							// 'before' => '<div class="btn btn-danger">',
-							// 'after' => '</div>',
-							// 'reply_text' => __( 'Reply', 'ekiline' ),
 							'add_below' => $add_below,
 							'depth'     => $depth,
 							'max_depth' => $args['max_depth'],
@@ -163,7 +164,6 @@ function ekiline_comments_extended( $comment, $args, $depth ) {
 					echo get_avatar( $comment, $args['avatar_size'], '', '', array( 'class' => 'img-fluid mt-2' ) );
 				}
 				?>
-				<?php //if ( $args['avatar_size'] !== 0 ) { echo get_avatar( $comment, $args['avatar_size'] ); } ?>
 			</div>
 
 			<div class="rounded bg-white col-md-11 col-sm-10 col-9 py-2">
@@ -229,9 +229,7 @@ function ekiline_comments_extended( $comment, $args, $depth ) {
 * Customizing comments form
 * https://developer.wordpress.org/reference/functions/comment_form/
 * https://premium.wpmudev.org/blog/customizing-wordpress-comment-form/
-*
 */
-/****/
 
 $args = array(
 	'comment_field' => '<div class="form-group">' .
@@ -263,7 +261,7 @@ $args = array(
 
 		)
 	),
-	// las clases de manera independiente:
+	/* las clases de manera independiente: */
 	'class_form'    => 'comment-form form',
 	'class_submit'  => 'submit btn btn-sm btn-secondary float-right mb-2',
 );

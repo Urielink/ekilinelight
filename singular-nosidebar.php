@@ -8,7 +8,7 @@
 */
 get_header(); ?>
 
-<main id="primary" class="<?php echo esc_attr( ekiline_widthControl() ); ?>">
+<main id="primary" class="<?php echo esc_attr( ekiline_width_control() ); ?>">
 
 	<?php dynamic_sidebar( 'content-w1' ); ?>
 

@@ -22,6 +22,6 @@
 
 <?php dynamic_sidebar( 'toppage-w1' ); ?>
 
-<?php ekilineNavbar( 'primary' ); ?>
+<?php ekiline_navbar_menu( 'primary' ); ?>
 
 <?php get_template_part( 'template-parts/custom-header' ); ?>

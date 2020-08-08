@@ -42,7 +42,7 @@ function ekiline_setup() {
 	// Actualizacion de widgets en el personalizador // Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
-	// Menú, Ekiline solo necesita uno: ekilineNavbar( 'primary' ) // This theme uses ekilineNavbar( 'primary' ) as one location.
+	// Menú, Ekiline solo necesita uno: ekiline_navbar_menu( 'primary' ) // This theme uses ekiline_navbar_menu( 'primary' ) as one location.
 	register_nav_menus(
 		array(
 			'primary' => esc_html__( 'Primary Menu', 'ekiline' ),
@@ -178,9 +178,6 @@ function ekiline_scripts() {
 	wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4', 'all' );
 	wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '4', 'all' );
 	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri(), array(), '4', 'all' );
-	// test
-	// wp_deregister_style( array( 'wp-block-library', 'bootstrap-4', 'layout', 'ekiline-style' ) );
-	// remove_action( 'wp_head', 'ekiline_css_inlineHeadMethod', 100 );
 	// scripts
 	wp_enqueue_script( 'jquery-core' );
 	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array( 'jquery' ), '1', true );
@@ -211,11 +208,14 @@ function group_inline_css_stored() {
 	return $stored_value; // variable
 }
 
-// function ekiline_inline_css_handled() {
-//     wp_add_inline_style( 'ekiline-style', group_inline_css_stored() );
-// }
-// add_action( 'wp_enqueue_scripts', 'ekiline_inline_css_handled' );
+/* En caso de declarar como dependencia ocupar:
+* function ekiline_inline_css_handled() {
+*   wp_add_inline_style( 'ekiline-style', group_inline_css_stored() );
+* }
+* add_action( 'wp_enqueue_scripts', 'ekiline_inline_css_handled' );
+*/
 
+/* Se declaran como estilo unico en linea */
 function ekiline_inline_css_tag() {
 	$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
 	printf(
@@ -270,19 +270,20 @@ function remove_jquery_migrate( $scripts ) {
 add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
 
 
-/**
-	* Ekiline adiciones.
-	*/
+/* Ekiline adiciones */
+require get_template_directory() . '/inc/class-ekiline-nav-menu.php';
+require get_template_directory() . '/inc/class-ekiline-control-multiple-select.php';
+require get_template_directory() . '/inc/class-ekiline-basic-breadcrumb.php';
+require get_template_directory() . '/inc/widget-options.php';
+/* Ekiline modificadores de tema */
 require get_template_directory() . '/inc/customizer.php';
-require get_template_directory() . '/inc/themeCustomColors.php';
-require get_template_directory() . '/inc/themeNavbars.php';
-require get_template_directory() . '/inc/themeNavwalker.php';
-require get_template_directory() . '/inc/themeLayout.php';
-require get_template_directory() . '/inc/themeElements.php';
-require get_template_directory() . '/inc/themeMeta.php';
-require get_template_directory() . '/inc/themeFeaturedCategories.php';
-require get_template_directory() . '/inc/themeCustomHeader.php';
-require get_template_directory() . '/inc/themeOptimizeScripts.php';
-require get_template_directory() . '/inc/widgetOptions.php';
-require get_template_directory() . '/inc/widgetBreadcrumb.php';
+require get_template_directory() . '/inc/theme-customcolors.php';
+require get_template_directory() . '/inc/theme-navbars.php';
+require get_template_directory() . '/inc/theme-layout.php';
+require get_template_directory() . '/inc/theme-elements.php';
+require get_template_directory() . '/inc/theme-meta.php';
+require get_template_directory() . '/inc/theme-customheader.php';
+/* Ekiline optimizacion */
+require get_template_directory() . '/inc/theme-optimizescripts.php';
+/* Ekiline info admin */
 require get_template_directory() . '/inc/info.php';

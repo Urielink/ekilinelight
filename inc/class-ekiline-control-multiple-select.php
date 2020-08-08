@@ -20,7 +20,7 @@ function ekiline_featured_categories( $wp_customize ) {
 	);
 
 	$wp_customize->add_control(
-		new ekiline_controlMultipleSelect(
+		new Ekiline_Control_Multiple_Select(
 			$wp_customize,
 			'ekiline_featuredcategories',
 			array(
@@ -43,7 +43,6 @@ function ekiline_list_categories() {
 	$cats    = array();
 	$cats[0] = __( 'All', 'ekiline' );
 	foreach ( get_categories() as $categories => $category ) {
-		// $cats[ $category->term_id ] = $category->name . ' ' . $category->term_id;
 		$cats[ $category->term_id ] = $category->name . ' ( ' . $category->count . ' )';
 	}
 	return $cats;
@@ -59,7 +58,7 @@ function ekiline_frontpage_featured( $query ) {
 	// crear un string con lo seleccionado
 	$str = 0;
 	// Al instalar el tema por primera vez reacciona la falta de validar el campo por eso este if.
-	if ( $seleccion !== '' ) {
+	if ( $seleccion ) {
 		$str = array();
 		$str = implode( ', ', $seleccion );
 	}
@@ -79,7 +78,7 @@ add_action( 'pre_get_posts', 'ekiline_frontpage_featured' );
 	* https://stackoverflow.com/questions/38481936/multi-select-category-wordpress-customizer-control
 	**/
 if ( class_exists( 'WP_Customize_Control' ) ) {
-	class ekiline_controlMultipleSelect extends WP_Customize_Control {
+	class Ekiline_Control_Multiple_Select extends WP_Customize_Control {
 
 		// Establecer el tipo del control, el formulario
 		public $type = 'multiple-select';
@@ -94,8 +93,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				<select <?php $this->link(); ?> multiple="multiple" size="10">
 					<?php
 					foreach ( $this->choices as $value => $label ) {
-						// $selected = ( in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
-						$selected = ( ! empty( $this->value() ) && in_array( $value, $this->value() ) ) ? selected( 1, 1, false ) : '';
+						$selected = ( ! empty( $this->value() ) && in_array( $value, $this->value(), true ) ) ? selected( 1, 1, false ) : '';
 						echo '<option value="' . esc_attr( $value ) . '"' . esc_attr( $selected ) . '>' . esc_attr( $label ) . '</option>';
 					}
 					?>

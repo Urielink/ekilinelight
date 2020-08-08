@@ -176,7 +176,7 @@ function ekiline_docs_feed() {
 
 	<?php
 }
-// add_action( 'admin_notices', 'ekiline_docs_feed' );
+// Se declaran en #143 add_action( 'admin_notices', 'ekiline_docs_feed' );
 
 function ekiline_docs_feed_set() {
 	?>
@@ -189,7 +189,7 @@ function ekiline_docs_feed_set() {
 </script>
 	<?php
 }
-// add_action( 'admin_footer', 'ekiline_docs_feed_set' );
+// Se declaran en #143 add_action( 'admin_footer', 'ekiline_docs_feed_set' );
 
 function ekiline_admin_styles() {
 	$extracss  = '.gold a::before { content: "\f511";} .gold a{ background-color: #58aa03 !important; } .gold:hover a{ background-color: #ffb900 !important; color: #fff !important; } .gold:hover a::before { content: "\f339"; color: #fff !important; }';

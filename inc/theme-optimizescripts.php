@@ -18,9 +18,9 @@ function print_libs( $kind, $ignore ) {
 	}
 	global $wp_styles,$wp_scripts;
 
-	if ( $kind === 'css' ) {
+	if ( 'css' === $kind ) {
 		$kind = $wp_styles;
-	} elseif ( $kind === 'js' ) {
+	} elseif ( 'js' === $kind ) {
 		$kind = $wp_scripts;
 	} else {
 		return __( 'Something go wrong, check theme file.', 'ekiline' );
@@ -34,19 +34,20 @@ function print_libs( $kind, $ignore ) {
 
 /* Modulo en previsualizador */
 function print_styles_and_scripts_info() {
-	if ( ! is_customize_preview()) return;
-	//ignorar estilos o scripts de customizer
-	$ignoreCss = array( 'admin-bar', 'customize-preview', 'wp-mediaelement' );
-	$ignoreJs  = array( 'customize-preview', 'admin-bar', 'wp-mediaelement', 'mediaelement-vimeo', 'wp-playlist', 'customize-selective-refresh', 'customize-preview-widgets', 'customize-preview-nav-menus' );
-	//mostrar modulo html
+	if ( is_customize_preview() ) {
+		//ignorar estilos o scripts de customizer
+		$ignore_css = array( 'admin-bar', 'customize-preview', 'wp-mediaelement' );
+		$ignore_js  = array( 'customize-preview', 'admin-bar', 'wp-mediaelement', 'mediaelement-vimeo', 'wp-playlist', 'customize-selective-refresh', 'customize-preview-widgets', 'customize-preview-nav-menus' );
+		//mostrar modulo html
 		$html_action  = '<div class="fixed-bottom" style="position:fixed;bottom:0px;left:0px;right:0px;z-index:100;">';
 		$html_action .= '<a class="btn btn-sm btn-primary show-handlers" data-toggle="collapse" href="#collapseHandlers">' . __( 'Sort Scripts ', 'ekiline' ) . '</a> ';
 		$html_action .= '<div class="collapse" id="collapseHandlers" style="background:#eeeeee;color:#656a6f;padding:10px;">';
 		$html_action .= '<small>' . __( 'Choose and copy handlers in customizer "Ekiline Sort Scripts" option', 'ekiline' ) . '</small><br>';
-		$html_action .= __( 'Styles: ', 'ekiline' ) . '<code>' . print_libs( 'css', $ignoreCss ) . '</code><br>';
-		$html_action .= __( 'Scripts: ', 'ekiline' ) . '<code>' . print_libs( 'js', $ignoreJs ) . '</code>';
+		$html_action .= __( 'Styles: ', 'ekiline' ) . '<code>' . print_libs( 'css', $ignore_css ) . '</code><br>';
+		$html_action .= __( 'Scripts: ', 'ekiline' ) . '<code>' . print_libs( 'js', $ignore_js ) . '</code>';
 		$html_action .= '</div></div>';
 		echo wp_kses_post( $html_action );
+	}
 }
 add_action( 'wp_footer', 'print_styles_and_scripts_info', 0 );
 
@@ -126,7 +127,7 @@ function ekiline_reload_libraries( $wp_customize ) {
 				'1' => __( 'javascript load', 'ekiline' ),
 			);
 
-			if ( $kind === 'js' ) {
+			if ( 'js' === $kind ) {
 				$choices = array(
 					'0' => __( 'No changes', 'ekiline' ),
 					'1' => __( 'async', 'ekiline' ),
@@ -179,19 +180,19 @@ function ctmzr_array_handlers( $kind = null ) {
 }
 // Por cada libreria, obtener la opcion de customizer
 function ctmzr_handlers_options( $kind = null ) {
-	$libs       = ctmzr_array_handlers( $kind );
-	$item       = '';
-	$itemChange = array();
+	$libs        = ctmzr_array_handlers( $kind );
+	$item        = '';
+	$item_change = array();
 	if ( $libs ) {
 		foreach ( $libs as $value ) {
-			$item         = get_theme_mod( 'ekiline_' . $kind . '_' . $value );
-			$itemChange[] = array(
+			$item          = get_theme_mod( 'ekiline_' . $kind . '_' . $value );
+			$item_change[] = array(
 				'handler' => $value,
 				'option'  => $item,
 			);
 		}
-		// $itemChange = json_encode( $itemChange );
-		return $itemChange;
+		// $item_change = json_encode( $item_change );
+		return $item_change;
 	}
 }
 
@@ -214,7 +215,7 @@ function ctmzr_handlers_options( $kind = null ) {
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 function is_login_page() {
-	return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) );
+	return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ), true );
 }
 if ( is_login_page() || is_admin() || is_user_logged_in() ) {
 	return;
@@ -231,13 +232,13 @@ if ( is_login_page() || is_admin() || is_user_logged_in() ) {
 // Ejecutar solo cuando exista informacion en el campo
 if ( get_theme_mod( 'ekiline_css_handler_array' ) !== '' ) {
 	add_filter( 'style_loader_tag', 'ekiline_change_css_tag', 10, 4 ); // 5.1
-	add_action( 'wp_footer', 'ekiline_load_allCss_js', 100 ); // 5.2 y 5.3
+	add_action( 'wp_footer', 'ekiline_load_all_csstojs', 100 ); // 5.2 y 5.3
 }
 
 /* Accion 5.1: Transformar etiquetas de estilo en preloads, publicar */
 function ekiline_change_css_tag( $tag, $handle, $src ) {
 	foreach ( ctmzr_handlers_options( 'css' ) as $pre_style ) {
-		if ( $pre_style['handler'] === $handle && $pre_style['option'] === '1' ) {
+		if ( $pre_style['handler'] === $handle && '1' === $pre_style['option'] ) {
 			$tag = '<link rel="preload" as="style" href="' . esc_url( $src ) . '">' . "\n";
 		}
 	}
@@ -253,18 +254,18 @@ function ekiline_styles_localize() {
 	$the_styles    = array();
 
 	foreach ( $load_css_from as $pre_style ) {
-		$getHandler = $pre_style['handler'];
-		$getOption  = $pre_style['option'];
+		$thehandler = $pre_style['handler'];
+		$theoption  = $pre_style['option'];
 
 		/* Crear diccionario */
 
-		if ( isset( $wp_styles->registered[ $getHandler ] ) ) {
+		if ( isset( $wp_styles->registered[ $thehandler ] ) ) {
 
-			$css_src = $wp_styles->registered[ $getHandler ];
+			$css_src = $wp_styles->registered[ $thehandler ];
 
-			if ( $getOption === '1' ) {
+			if ( '1' === $theoption ) {
 				$the_styles[] = array(
-					'id'    => $getHandler,
+					'id'    => $thehandler,
 					'src'   => $css_src->src,
 					'media' => $css_src->args,
 				);
@@ -272,7 +273,8 @@ function ekiline_styles_localize() {
 		}
 	}
 	// return $the_styles;
-	printf( json_encode( $the_styles ) );
+	// printf( json_encode( $the_styles ) );
+	printf( wp_json_encode( $the_styles ) );
 }
 
 /*
@@ -280,7 +282,7 @@ function ekiline_styles_localize() {
 * buscar la etiqueta de estilo en linea principal (ekiline-inline-style) y
 * agregar antes.
 */
-function ekiline_load_allCss_js() { ?>
+function ekiline_load_all_csstojs() { ?>
 	<script>
 
 	var allCss = <?php ekiline_styles_localize(); ?>;
@@ -312,7 +314,7 @@ function ekiline_load_allCss_js() { ?>
 	</script>
 	<?php
 }
-// add_action( 'wp_footer', 'ekiline_load_allCss_js', 100 );
+// add_action( 'wp_footer', 'ekiline_load_all_csstojs', 100 );
 
 
 
@@ -327,7 +329,7 @@ function ekiline_load_allCss_js() { ?>
 if ( get_theme_mod( 'ekiline_js_handler_array' ) !== '' ) {
 	add_filter( 'script_loader_tag', 'override_scripts', 10, 2 ); // 6.1
 	add_filter( 'script_loader_tag', 'ekiline_change_js_tag', 10, 4 ); //6.3
-	add_action( 'wp_footer', 'ekiline_load_allJss_js', 100 ); //6.2 y 6.4
+	add_action( 'wp_footer', 'ekiline_load_all_jstojs', 100 ); //6.2 y 6.4
 }
 
 /* Accion 6.1: Transformar etiquetas individuales con nuevo atributo, publicar */
@@ -338,11 +340,11 @@ function override_scripts( $tag, $handle ) {
 	foreach ( $load_jss_from as $new_script ) {
 		if ( $new_script['handler'] === $handle ) {
 
-			if ( $new_script['option'] === '1' ) {
+			if ( '1' === $new_script['option'] ) {
 				return str_replace( ' src', ' async="async" src', $tag );
-			} elseif ( $new_script['option'] === '2' ) {
+			} elseif ( '2' === $new_script['option'] ) {
 				return str_replace( ' src', ' defer="defer" src', $tag );
-			} elseif ( $new_script['option'] === '3' ) {
+			} elseif ( '3' === $new_script['option'] ) {
 				return str_replace( ' src', ' async="async" defer="defer" src', $tag );
 			}
 		}
@@ -362,26 +364,27 @@ function ekiline_scripts_localize() {
 	$the_scripts   = array();
 
 	foreach ( $load_jss_from as $handler ) {
-		$getHandler = $handler['handler'];
-		$getOption  = $handler['option'];
+		$thehandler = $handler['handler'];
+		$theoption  = $handler['option'];
 
-		if ( isset( $wp_scripts->registered[ $getHandler ] ) ) {
+		if ( isset( $wp_scripts->registered[ $thehandler ] ) ) {
 
-			$js_src = $wp_scripts->registered[ $getHandler ];
+			$js_src = $wp_scripts->registered[ $thehandler ];
 
 			/* Crear diccionario */
-			if ( $getOption === '4' ) {
+			if ( '4' === $theoption ) {
 				$the_scripts[] = array(
-					'id'  => $getHandler,
+					'id'  => $thehandler,
 					'src' => $js_src->src,
 				);
 			}
 			// Para deshabilitar estilos, es posible que no se necesite:
-			// wp_dequeue_script( $getHandler );
+			// wp_dequeue_script( $thehandler );
 		}
 	}
 	// return $the_scripts;
-	printf( json_encode( $the_scripts ) );
+	// printf( json_encode( $the_scripts ) );
+	printf( wp_json_encode( $the_scripts ) );
 }
 
 
@@ -392,7 +395,7 @@ function ekiline_change_js_tag( $tag, $handle, $src ) {
 	$load_jss_from = ctmzr_handlers_options( 'js' );
 
 	foreach ( $load_jss_from as $pre_script ) {
-		if ( $pre_script['handler'] === $handle && $pre_script['option'] === '4' ) {
+		if ( $pre_script['handler'] === $handle && '4' === $pre_script['option'] ) {
 			// $tag   = '<link rel="preload" as="script" href="' . esc_url( $src ) . '">'."\n".$tag;
 			$tagwrd   = 'script';
 			$patterns = array( '/<' . $tagwrd . ' src=/', '/><\/' . $tagwrd . '>/' );
@@ -411,7 +414,7 @@ function ekiline_change_js_tag( $tag, $handle, $src ) {
 /*
 * Accion 6.4: incorporar los scripts con jquery mediante get
 */
-function ekiline_load_allJss_js() {
+function ekiline_load_all_jstojs() {
 	?>
 	<script>
 
@@ -445,7 +448,7 @@ function ekiline_load_allJss_js() {
 	</script>
 	<?php
 }
-	// add_action( 'wp_footer', 'ekiline_load_allJss_js', 100 );
+	// add_action( 'wp_footer', 'ekiline_load_all_jstojs', 100 );
 
 
 
@@ -462,12 +465,12 @@ function footer_enqueue_scripts() {
 	/**
 	* Emojis al footer
 	*/
-	$emojiDetect = 'print_emoji_detection_script';
-	$emojiStyles = 'print_emoji_styles';
-	remove_action( 'wp_head', $emojiDetect, 7 );
-	add_action( 'wp_footer', $emojiDetect, 20 );
-	remove_action( 'wp_print_styles', $emojiStyles );
-	add_action( 'wp_head', $emojiStyles, 110 );
+	$emoji_detect = 'print_emoji_detection_script';
+	$emoji_styles = 'print_emoji_styles';
+	remove_action( 'wp_head', $emoji_detect, 7 );
+	add_action( 'wp_footer', $emoji_detect, 20 );
+	remove_action( 'wp_print_styles', $emoji_styles );
+	add_action( 'wp_head', $emoji_styles, 110 );
 
 	/**
 	 * Prints scripts in document head that are in the $handles queue.

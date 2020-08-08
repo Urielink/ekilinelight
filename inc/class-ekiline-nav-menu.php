@@ -10,7 +10,7 @@
 * @package ekiline
 */
 
-class EkilineNavMenu extends Walker_Nav_Menu {
+class Ekiline_Nav_Menu extends Walker_Nav_Menu {
 	/**
 	 * What the class handles.
 	 *
@@ -130,13 +130,13 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		// }
 		//3) B4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
 		if ( $args->walker->has_children ) {
-			$doDrop = ' dropdown item-' . $depth;
+			$drop = ' dropdown item-' . $depth;
 			if ( get_theme_mod( 'ekiline_primarymenuSettings' ) === '2' ) {
-				$doDrop = ' dropup item-' . $depth;
+				$drop = ' dropup item-' . $depth;
 			} elseif ( $depth > 0 && get_theme_mod( 'ekiline_primarymenuSettings' ) !== '2' ) {
-				$doDrop = ' dropright item-' . $depth;
+				$drop = ' dropright item-' . $depth;
 			}
-			$classes[] .= $doDrop;
+			$classes[] .= $drop;
 		}
 
 		//4) B4CSS: el link está activo.
@@ -208,11 +208,11 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		// }
 		//8) B4CSS: agregar clases a cada item hijo (ul.sub-menu>li>ul>li>a).
 		if ( $depth > 0 ) {
-			$linkCss = 'dropdown-item';
+			$link_css = 'dropdown-item';
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
-				$linkCss .= ' active';
+				$link_css .= ' active';
 			}
-			$atts['class'] = $linkCss;
+			$atts['class'] = $link_css;
 		}
 
 		/**
@@ -269,7 +269,7 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		$item_output .= '</a>';
 		//Bootstrap nuevo item
 		if ( $args->walker->has_children ) {
-			$split        = ( $depth === 0 ) ? 'nav-link' : 'dropdown-item';
+			$split        = ( 0 === $depth ) ? 'nav-link' : 'dropdown-item';
 			$item_output .= '<a class="' . $split . ' dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent">&nbsp;</a>';
 		}
 
@@ -315,4 +315,4 @@ class EkilineNavMenu extends Walker_Nav_Menu {
 		$output .= "</li>{$n}";
 	}
 
-} // EkilineNavMenu
+} // Ekiline_Nav_Menu
