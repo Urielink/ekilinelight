@@ -11,13 +11,12 @@
 * En lugar de crear un breadcrumb fijo, mejor lo transformo a widget .
 * https://codex.wordpress.org/Widgets_API
 * https://www.cssigniter.com/extending-wordpress-core-3rd-party-widgets/
-*
 */
 
 class Ekiline_Basic_Breadcrumb extends WP_Widget {
 
 	/**
-	 * Sets up the widgets name etc
+	 * Setup de widget
 	 */
 	public function __construct() {
 		$widget_ops = array(
@@ -28,7 +27,7 @@ class Ekiline_Basic_Breadcrumb extends WP_Widget {
 	}
 
 	/**
-	 * Outputs the content of the widget
+	 * Contenido de widget
 	 *
 	 * @param array $args
 	 * @param array $instance
@@ -37,7 +36,6 @@ class Ekiline_Basic_Breadcrumb extends WP_Widget {
 		/**
 		 * Para sobrescribir un widget, en este caso ekiline, agrega opciones css y tipo de mestreo,
 		 * entonces es necesario llamar un widget, obteniendo su id y llamando el dato que necesitamos.
-		 *
 		 **/
 		global $wp_registered_widgets;
 		$widget_id  = $args['widget_id'];
@@ -51,23 +49,14 @@ class Ekiline_Basic_Breadcrumb extends WP_Widget {
 			'after_widget'  => '</nav>',
 		);
 
-		// outputs the content of the widget
+		// Widget con nuevos datos
 		echo wp_kses_post( $args['before_widget'] );
-		// echo str_replace( '<div', '<nav', $args['before_widget'] );
-
-		// if ( ! empty( $instance['title'] ) ) {
-			// echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
-		// }
-		// echo esc_html__( 'Hello, World!', 'text_domain' );
-
 		echo wp_kses_post( create_breadcrumb() );
-
 		echo wp_kses_post( $args['after_widget'] );
-		// echo str_replace( 'div>', 'nav>', $args['after_widget'] );
 	}
 
 	/**
-	 * Outputs the options form on admin
+	 * Opciones en admin
 	 *
 	 * @param array $instance The widget options
 	 */
@@ -115,8 +104,10 @@ function create_breadcrumb() {
 
 		} elseif ( is_page() ) {
 
-			// Si es pagina y tiene herencia, padres.
-			// https://wordpress.stackexchange.com/questions/140362/wordpress-breadcrumb-depth
+			/* Si es pagina y tiene herencia, padres.
+			 * info: https://wordpress.stackexchange.com/questions/140362/wordpress-breadcrumb-depth
+			 */
+
 			// 1) Se llama la variable global para hacer un loop de paginas.
 			global $post;
 			// 2) confirmamos si tiene herencia, si no brinca al final (3)

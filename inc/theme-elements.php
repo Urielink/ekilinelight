@@ -52,7 +52,6 @@ function ekiline_thumbnail() {
 	if ( ! has_post_thumbnail() ) {
 		return;
 	}
-	//if ( is_single() || is_page() ) return;
 	if ( is_singular() && get_header_image() ) {
 		return;
 	}
@@ -81,30 +80,6 @@ function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
 	return $html;
 }
 add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
-
-
-
-/**
-* Manipular el titulo con filtros.
-* Custom Title markup.
-* https://developer.wordpress.org/reference/functions/the_title_attribute/
-*/
-
-// function ekiline_link_title( $title ) {
-
-// 	$tagClass = ( get_theme_mod( 'ekiline_Columns' ) === '4' && ! is_singular() ) ? 'entry-title card-title' : 'entry-title' ;
-
-// 	if ( in_the_loop() ) {
-// 		if ( is_single() || is_page() ) {
-// 			$title = '<h1 class="'. $tagClass .'">' . $title . '</h1>';
-// 		} else {
-// 			$title = '<h2 class="'. $tagClass .'"><a href="'. get_the_permalink() .'" title="'. $title .'">' . $title . '</a></h2>';
-// 		}
-// 	}
-// 	return $title;
-// }
-//add_filter( 'the_title', 'ekiline_link_title' );
-
 
 /**
 * Manipular el titulo de listados (archive) con filtros.
@@ -240,7 +215,6 @@ add_filter( 'get_search_form', 'ekiline_search_form' );
 
 function ekiline_password_form() {
 	global $post;
-	// $label   = 'pwbox-' . ( empty( $post->ID ) ? rand() : $post->ID );
 	$label   = 'pwbox-' . ( empty( $post->ID ) ? wp_rand() : $post->ID );
 	$output  = '<form action="' . esc_url( home_url( 'wp-login.php?action=postpass', 'login_post' ) ) . '" class="post-password-form form-inline col-sm-8 p-4 mx-auto text-center" method="post">';
 	$output .= '<p>' . __( 'This content is password protected. To view it please enter your password below:', 'ekiline' ) . '</p>';

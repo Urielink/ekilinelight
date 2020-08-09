@@ -93,7 +93,8 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 				<select <?php $this->link(); ?> multiple="multiple" size="10">
 					<?php
 					foreach ( $this->choices as $value => $label ) {
-						$selected = ( ! empty( $this->value() ) && in_array( $value, $this->value(), true ) ) ? selected( 1, 1, false ) : '';
+						$thevalue = $this->value();
+						$selected = ( ! empty( $thevalue ) && in_array( $value, $thevalue, true ) ) ? selected( 1, 1, false ) : '';
 						echo '<option value="' . esc_attr( $value ) . '"' . esc_attr( $selected ) . '>' . esc_attr( $label ) . '</option>';
 					}
 					?>

@@ -151,7 +151,7 @@ function ekiline_reload_libraries( $wp_customize ) {
 					$library_field_name,
 					array(
 						'type'        => 'select',
-						// 'label'       => $kind,
+						'label'       => '',
 						'description' => $handler,
 						'section'     => 'ekiline_reload_libraries',
 						'choices'     => $choices,
@@ -191,22 +191,22 @@ function ctmzr_handlers_options( $kind = null ) {
 				'option'  => $item,
 			);
 		}
-		// $item_change = json_encode( $item_change );
 		return $item_change;
 	}
 }
 
-/* Comprobacion de arrays:
-	function agregar_scripts() { ?>
+/* Comprobacion de arrays: add_action( 'wp_head', 'agregar_scripts' ); */
+function agregar_scripts() {
+	?>
 	<script id="note">
-	// console.log( '<?php // echo json_encode( ctmzr_array_handlers( 'css' ) ); ?>' );
-	// console.log( '<?php // echo json_encode(ctmzr_handlers_options( 'css' ) ); ?>' );
-	// console.log( '<?php // echo json_encode( ctmzr_array_handlers( 'js' ) ); ?>' );
-	// console.log( '<?php // echo json_encode(ctmzr_handlers_options( 'js' ) ); ?>' );
+		console.log( '<?php echo wp_json_encode( ctmzr_array_handlers( 'css' ) ); ?>' );
+		console.log( '<?php echo wp_json_encode( ctmzr_handlers_options( 'css' ) ); ?>' );
+		console.log( '<?php echo wp_json_encode( ctmzr_array_handlers( 'js' ) ); ?>' );
+		console.log( '<?php echo wp_json_encode( ctmzr_handlers_options( 'js' ) ); ?>' );
 	</script>
-	<?php }
-	add_action( 'wp_head', 'agregar_scripts' );
-*/
+	<?php
+}
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * 4) Control para ejecucion:
@@ -235,7 +235,10 @@ if ( get_theme_mod( 'ekiline_css_handler_array' ) !== '' ) {
 	add_action( 'wp_footer', 'ekiline_load_all_csstojs', 100 ); // 5.2 y 5.3
 }
 
-/* Accion 5.1: Transformar etiquetas de estilo en preloads, publicar */
+/* Accion 5.1: Transformar etiquetas de estilo en preloads, publicar
+* Se ejecuta en #233
+* add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 );
+*/
 function ekiline_change_css_tag( $tag, $handle, $src ) {
 	foreach ( ctmzr_handlers_options( 'css' ) as $pre_style ) {
 		if ( $pre_style['handler'] === $handle && '1' === $pre_style['option'] ) {
@@ -244,7 +247,6 @@ function ekiline_change_css_tag( $tag, $handle, $src ) {
 	}
 	return $tag;
 }
-// add_filter( 'style_loader_tag',  'ekiline_change_css_tag', 10, 4 );
 
 /* Accion 5.2: Crear variables de cada estilo filtrado en js, publicar como dependencia de jquery */
 function ekiline_styles_localize() {
@@ -272,8 +274,6 @@ function ekiline_styles_localize() {
 			}
 		}
 	}
-	// return $the_styles;
-	// printf( json_encode( $the_styles ) );
 	printf( wp_json_encode( $the_styles ) );
 }
 
@@ -281,8 +281,11 @@ function ekiline_styles_localize() {
 * Accion 5.3: incorporar los estilos con js
 * buscar la etiqueta de estilo en linea principal (ekiline-inline-style) y
 * agregar antes.
+* Se ejecuta en #233
+* add_action( 'wp_footer', 'ekiline_load_all_csstojs', 100 );
 */
-function ekiline_load_all_csstojs() { ?>
+function ekiline_load_all_csstojs() {
+	?>
 	<script>
 
 	var allCss = <?php ekiline_styles_localize(); ?>;
@@ -314,9 +317,6 @@ function ekiline_load_all_csstojs() { ?>
 	</script>
 	<?php
 }
-// add_action( 'wp_footer', 'ekiline_load_all_csstojs', 100 );
-
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 *
@@ -332,7 +332,11 @@ if ( get_theme_mod( 'ekiline_js_handler_array' ) !== '' ) {
 	add_action( 'wp_footer', 'ekiline_load_all_jstojs', 100 ); //6.2 y 6.4
 }
 
-/* Accion 6.1: Transformar etiquetas individuales con nuevo atributo, publicar */
+/*
+* Accion 6.1: Transformar etiquetas individuales con nuevo atributo, publicar
+* Se ejecuta en #329
+* add_filter( 'script_loader_tag', 'override_scripts', 10, 2 );
+*/
 function override_scripts( $tag, $handle ) {
 
 	$load_jss_from = ctmzr_handlers_options( 'js' );
@@ -351,12 +355,11 @@ function override_scripts( $tag, $handle ) {
 	}
 	return $tag;
 }
-// add_filter( 'script_loader_tag', 'override_scripts', 10, 2 );
 
 /**
-	* Accion 6.2: Crear variables de cada estilo filtrado en js.
-	* NOTA: Localize si funciona, pero la dependencia de scripts es un tema a revisar.
-	*/
+* Accion 6.2: Crear variables de cada estilo filtrado en js.
+* NOTA: Localize si funciona, pero la dependencia de scripts es un tema a revisar.
+*/
 function ekiline_scripts_localize() {
 
 	global $wp_scripts;
@@ -378,41 +381,43 @@ function ekiline_scripts_localize() {
 					'src' => $js_src->src,
 				);
 			}
-			// Para deshabilitar estilos, es posible que no se necesite:
-			// wp_dequeue_script( $thehandler );
+			/* Para deshabilitar estilos, es posible que no se necesite:
+			*  wp_dequeue_script( $thehandler );
+			*/
 		}
 	}
-	// return $the_scripts;
-	// printf( json_encode( $the_scripts ) );
 	printf( wp_json_encode( $the_scripts ) );
 }
 
 
-/* Accion 6.3: Transformar scripts en preloads, publicar */
+/* Accion 6.3: Transformar scripts en preloads, publicar
+* Se ejecuta en #329
+* add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 );
+*/
 function ekiline_change_js_tag( $tag, $handle, $src ) {
 
 	global $wp_scripts;
 	$load_jss_from = ctmzr_handlers_options( 'js' );
+	//Replacements
+	$rplcs_comment = array( '<!-- script src=', '></script -->' );
+	$rplcs_preload = array( '<link rel="preload" as="script" href=', '/>' );
+	$rplcs_precomm = array( '<!-- link rel="preload" as="script" href=', '/ -->' );
 
 	foreach ( $load_jss_from as $pre_script ) {
 		if ( $pre_script['handler'] === $handle && '4' === $pre_script['option'] ) {
-			// $tag   = '<link rel="preload" as="script" href="' . esc_url( $src ) . '">'."\n".$tag;
 			$tagwrd   = 'script';
 			$patterns = array( '/<' . $tagwrd . ' src=/', '/><\/' . $tagwrd . '>/' );
-			// $replacements = array( '<!-- script src=', '></script -->' );//opcion comentado
-			// $replacements = array( '<link rel="preload" as="script" href=', '/>' );//opcion preload
-			$replacements = array( '<!-- link rel="preload" as="script" href=', '/ -->' );//opcion preload comentado
-			$tag          = preg_replace( $patterns, $replacements, $tag );
+			$tag      = preg_replace( $patterns, $rplcs_precomm, $tag );
 		}
 	}
 	return $tag;
 
 }
-// add_filter( 'script_loader_tag',  'ekiline_change_js_tag', 10, 4 );
-
 
 /*
 * Accion 6.4: incorporar los scripts con jquery mediante get
+* Se ejecuta en #329
+* add_action( 'wp_footer', 'ekiline_load_all_jstojs', 100 );
 */
 function ekiline_load_all_jstojs() {
 	?>
@@ -448,9 +453,6 @@ function ekiline_load_all_jstojs() {
 	</script>
 	<?php
 }
-	// add_action( 'wp_footer', 'ekiline_load_all_jstojs', 100 );
-
-
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 *
@@ -473,28 +475,12 @@ function footer_enqueue_scripts() {
 	add_action( 'wp_head', $emoji_styles, 110 );
 
 	/**
-	 * Prints scripts in document head that are in the $handles queue.
-	 * https://developer.wordpress.org/reference/functions/wp_print_scripts/
-	 */
-	// remove_action( 'wp_head', 'wp_print_scripts' );
-	// add_action( 'wp_footer', 'wp_print_scripts', 5 );
-
-	/**
 	 * Esta orden, traspasa los scripts al footer
 	 * Prints the script queue in the HTML head on the front end.
 	 * https://developer.wordpress.org/reference/functions/wp_print_head_scripts/
 	 */
 	remove_action( 'wp_head', 'wp_print_head_scripts', 9 );
-	add_action( 'wp_footer', 'wp_print_head_scripts', 5 );//orden principal
-
-	/**
-	 * Estilos CSS y Scripts en general, los elimina y envia al footer, no es una buena opcion.
-	 * Fires when scripts and styles are enqueued.
-	 * https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
-	 */
-	// remove_action( 'wp_head', 'wp_enqueue_scripts', 1 );
-	// add_action( 'wp_footer', 'wp_enqueue_scripts', 5 );
-
-	// print_late_styles();
+	//orden principal
+	add_action( 'wp_footer', 'wp_print_head_scripts', 5 );
 
 }
