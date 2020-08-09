@@ -1,11 +1,12 @@
 <?php
 /**
-* Footer
-*
-* @link https://developer.wordpress.org/reference/functions/get_footer/
-*
-* @package ekiline
-*/
+ * Footer
+ *
+ * @link https://developer.wordpress.org/reference/functions/get_footer/
+ *
+ * @package ekiline
+ */
+
 ?>
 
 <?php if ( is_active_sidebar( 'footer-w2' ) ) { ?>

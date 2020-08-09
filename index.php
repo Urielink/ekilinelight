@@ -1,18 +1,20 @@
 <?php
 /**
-* Plantilla principal del Frontend.
-*
-* Esta es la vista principal de un sitio, aqui se mostraran cada una de sus partes.
-* El consejo es que no ocupes caracteres especiales.
-* Y organices bien tus archivos.
-* Ekiline esta hecho para tener control sobre elementos de diseno.
-*
-* @link https://developer.wordpress.org/themes/basics/template-files/
-*
-* @package ekiline
-*
-*/
-get_header(); ?>
+ * Plantilla principal del Frontend.
+ *
+ * Esta es la vista principal de un sitio, aqui se mostraran cada una de sus partes.
+ * El consejo es que no ocupes caracteres especiales.
+ * Y organices bien tus archivos.
+ * Ekiline esta hecho para tener control sobre elementos de diseno.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-files/
+ *
+ * @package ekiline
+ *
+ */
+
+get_header();
+?>
 
 <?php ekiline_main_columns( 'open' ); ?>
 

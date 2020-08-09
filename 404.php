@@ -1,12 +1,14 @@
 <?php
 /**
-* Plantilla 404 (not found)
-*
-* @link https://codex.wordpress.org/Creating_an_Error_404_Page
-*
-* @package ekiline
-*/
-get_header(); ?>
+ * Plantilla 404 (not found)
+ *
+ * @link https://codex.wordpress.org/Creating_an_Error_404_Page
+ *
+ * @package ekiline
+ */
+
+get_header();
+?>
 
 <?php ekiline_main_columns( 'open' ); ?>
 
@@ -28,7 +30,7 @@ get_header(); ?>
 			<?php get_search_form(); ?>
 
 			<div class="row">
-				<?php /** https://developer.wordpress.org/reference/functions/wp_get_archives/ **/ ?>
+				<?php /* Reference: https://developer.wordpress.org/reference/functions/wp_get_archives/ */ ?>
 				<div class="col-md-6">
 					<?php the_widget( 'WP_Widget_Recent_Posts' ); ?>
 					<p>
@@ -43,7 +45,7 @@ get_header(); ?>
 							$args_archive = array(
 								'type'            => 'monthly',
 								'limit'           => '',
-								'format'          => 'option', //html
+								'format'          => 'option', // html.
 								'before'          => '',
 								'after'           => '',
 								'show_post_count' => false,

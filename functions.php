@@ -1,15 +1,18 @@
 <?php
 /**
-* ekiline functions and definitions.
-*
-* @link https://developer.wordpress.org/themes/basics/theme-functions/
-* @link https://developer.wordpress.org/reference/functions/add_theme_support/
-* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-* @link https://developer.wordpress.org/themes/functionality/post-formats/
-*
-* @package ekiline
-*/
+ * Functions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ * @link https://developer.wordpress.org/reference/functions/add_theme_support/
+ * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+ * @link https://developer.wordpress.org/themes/functionality/post-formats/
+ *
+ * @package ekiline
+ */
 
+/**
+ * Theme setup
+ */
 function ekiline_setup() {
 	// Traducciones // Translations can be filed in the /languages/ directory.
 	load_theme_textdomain( 'ekiline', get_template_directory() . '/languages' );
@@ -23,7 +26,7 @@ function ekiline_setup() {
 	// Permitir miniaturas // Enable support for Post Thumbnails on posts and pages.
 	add_theme_support( 'post-thumbnails' );
 
-	// Permitir uso de HTML5 en formularios y marcado simple. // Switch default core markup for search form, comment form, and comments
+	// Permitir uso de HTML5 en formularios y marcado simple. // Switch default core markup for search form, comment form, and comments.
 	$html_def = array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'script', 'style' );
 	add_theme_support( 'html5', $html_def );
 
@@ -31,7 +34,8 @@ function ekiline_setup() {
 	$post_def = array( 'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat' );
 	add_theme_support( 'post-formats', $post_def );
 
-	// Color e imagen de fondo // Set up the WordPress core custom background feature. https://developer.wordpress.org/reference/functions/add_theme_support/
+	// Color e imagen de fondo // Set up the WordPress core custom background feature.
+	// Reference: https://developer.wordpress.org/reference/functions/add_theme_support/?
 	$back_def = array(
 		'default-image'    => '',
 		'default-color'    => 'ffffff',
@@ -56,24 +60,26 @@ add_action( 'after_setup_theme', 'ekiline_setup' );
 
 
 /**
-	* Establecer el ancho de objetos (imagenes).
-	* @link https://codex.wordpress.org/Content_Width#Adding_Theme_Support
-	* @link https://codex.wordpress.org/Function_Reference/get_intermediate_image_sizes
-	* @link https://wycks.wordpress.com/2013/02/14/why-the-content_width-wordpress-global-kinda-sucks/
-	* Heredar la medida de /wp-admin/options-media.php.
-	*/
+ * Establecer el ancho de objetos (imagenes).
+ *
+ * @link https://codex.wordpress.org/Content_Width#Adding_Theme_Support
+ * @link https://codex.wordpress.org/Function_Reference/get_intermediate_image_sizes
+ * @link https://wycks.wordpress.com/2013/02/14/why-the-content_width-wordpress-global-kinda-sucks/
+ *
+ * Heredar la medida de /wp-admin/options-media.php.
+ */
 if ( ! isset( $content_width ) ) {
 	$content_width = '';
 }
 
 /**
-	* Registrar widgets y sus areas // Register widget area.
-	* @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
-	*/
-
+ * Registrar widgets y sus areas // Register widget area.
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
 function ekiline_widgets_init() {
 
-	// Default sidebar
+	// Default sidebar.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Left sidebar', 'ekiline' ),
@@ -86,7 +92,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Right sidebar
+	// Right sidebar.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Right sidebar', 'ekiline' ),
@@ -99,7 +105,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Widgets between content and footer
+	// Widgets between content and footer.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Bottom aside', 'ekiline' ),
@@ -112,7 +118,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Footer widgets
+	// Footer widgets.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Footer', 'ekiline' ),
@@ -125,7 +131,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Widgets at top of content
+	// Widgets at top of content.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Top before all content', 'ekiline' ),
@@ -138,7 +144,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Widget in content
+	// Widget in content.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'In page top content', 'ekiline' ),
@@ -167,24 +173,24 @@ function ekiline_widgets_init() {
 add_action( 'widgets_init', 'ekiline_widgets_init' );
 
 /**
-	* Estilos CSS // Javascript // Js con argumentos
-	* @link https://developer.wordpress.org/reference/functions/wp_enqueue_style/
-	* @link https://developer.wordpress.org/reference/functions/wp_enqueue_script/
-	* @link https://developer.wordpress.org/reference/functions/wp_script_add_data/
-	*/
-
+ * Estilos CSS // Javascript // Js con argumentos
+ *
+ * @link https://developer.wordpress.org/reference/functions/wp_enqueue_style/
+ * @link https://developer.wordpress.org/reference/functions/wp_enqueue_script/
+ * @link https://developer.wordpress.org/reference/functions/wp_script_add_data/
+ */
 function ekiline_scripts() {
-	// estilos
+	// estilos.
 	wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4', 'all' );
 	wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '4', 'all' );
 	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri(), array(), '4', 'all' );
-	// scripts
+	// scripts.
 	wp_enqueue_script( 'jquery-core' );
 	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array( 'jquery' ), '1', true );
 	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array( 'jquery' ), '4', true );
 	wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array( 'jquery' ), '20150716', true );
 	wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array( 'jquery' ), '20151226', true );
-	// comentarios
+	// comentarios.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -192,32 +198,31 @@ function ekiline_scripts() {
 add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
 
 
-/*
-* Ekiline ocupa varios modulos con estilos en linea, se agrupan en una sola cadena
-* https://digwp.com/2009/09/wordpress-action-hooks/
-* A) Dependiente de un estilo realizado como variable
-* B) Invasivo, directo con etiqueta en head
-* cada nuevo estilo en linea se agrega con: add_action( 'group_inline_css', 'new_style', 0/100 );
-*/
-
+/**
+ * Ekiline ocupa varios modulos con estilos en linea, se agrupan en una sola cadena
+ * https://digwp.com/2009/09/wordpress-action-hooks/
+ * A) Dependiente de un estilo realizado como variable
+ * B) Invasivo, directo con etiqueta en head
+ * cada nuevo estilo en linea se agrega con: add_action( 'group_inline_css', 'new_style', 0/100 );
+ */
 function group_inline_css_stored() {
-	ob_start(); // inicia captura de datos
-		do_action( 'group_inline_css' ); // accion predeterminada
-		$stored_value = ob_get_contents(); // capturar los datos en una variable
-	ob_end_clean(); // finalizar la captura
-	return $stored_value; // variable
+	ob_start(); // inicia captura de datos.
+		do_action( 'group_inline_css' ); // accion predeterminada.
+		$stored_value = ob_get_contents(); // capturar los datos en una variable.
+	ob_end_clean(); // finalizar la captura.
+	return $stored_value; // variable.
 }
 
-/* En caso de declarar como dependencia ocupar:
-* function ekiline_inline_css_handled() {
-*   wp_add_inline_style( 'ekiline-style', group_inline_css_stored() );
-* }
-* add_action( 'wp_enqueue_scripts', 'ekiline_inline_css_handled' );
-*/
-
-/* Se declaran como estilo unico en linea */
+/**
+ * En caso de declarar como dependencia ocupar:
+ * function ekiline_inline_css_handled() {
+ *   wp_add_inline_style( 'ekiline-style', group_inline_css_stored() );
+ * }
+ * add_action( 'wp_enqueue_scripts', 'ekiline_inline_css_handled' );
+ */
 function ekiline_inline_css_tag() {
 	$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
+	// Se declaran como estilo unico en linea.
 	printf(
 		'<style%1$sid="ekiline-style-inline-css">%2$s</style>' . "\n",
 		wp_kses_post( $type_attr ),
@@ -228,23 +233,22 @@ function ekiline_inline_css_tag() {
 add_action( 'wp_head', 'ekiline_inline_css_tag', 100 );
 
 
-/*
-* Estilos css, above the fold.
-* Obtener los estilos de un css e imprimirlos en el head,
-* debe aparecer al principio de cualquier css (0).
-*/
+/**
+ * Estilos css, above the fold.
+ * Obtener los estilos de un css e imprimirlos en el head,
+ * debe aparecer al principio de cualquier css (0).
+ */
 function ekiline_above_fold_styles() {
-	// de estilos
+	// de estilos.
 	$file = get_template_directory_uri() . '/assets/css/afterfold.css';
 	$file = wp_remote_get( $file );
 	$data = wp_remote_retrieve_body( $file );
-	// quitar comentarios:
+	// quitar comentarios.
 		$data = preg_replace( '#/\*.*?\*/#s', '', $data );
-	// quitar saltos de linea y convertir en un string
+	// quitar saltos de linea y convertir en un string.
 		$data = str_replace( array( "\r", "\n" ), '', $data );
-	// html5
+	// html5.
 		$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-		// echo "\n".'<style' . $type_attr . 'id="ekiline-atf">' . strip_tags( $data ) .'</style>' . "\n";
 		printf(
 			'<style%1$sid="ekiline-atf">%2$s</style>' . "\n",
 			wp_kses_post( $type_attr ),
@@ -256,12 +260,14 @@ add_action( 'wp_head', 'ekiline_above_fold_styles', 0 );
 
 
 /**
-	* Ekiline no require jquery_migrate.
-	*/
+ * Ekiline no require jquery_migrate.
+ *
+ * @param string $scripts find handler and isset.
+ */
 function remove_jquery_migrate( $scripts ) {
 	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
 		$script = $scripts->registered['jquery'];
-		// verificar dependencias
+		// verificar dependencias.
 		if ( $script->deps ) {
 			$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
 		}

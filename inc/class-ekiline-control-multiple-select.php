@@ -1,15 +1,19 @@
 <?php
 /**
-* Custom functions that act independently of the theme templates
-*
-* Eventually, some of the functionality here could be replaced by core features
-*     // Jugar con urls https://wordpress.stackexchange.com/questions/29512/permalink-for-category-pages-and-posts
-*
-* @package ekiline
-*/
+ * Custom functions that act independently of the theme templates
+ *
+ * Eventually, some of the functionality here could be replaced by core features
+ *
+ * @package ekiline
+ */
 
+/**
+ * Contenido de widget
+ *
+ * @param string $wp_customize setup control.
+ */
 function ekiline_featured_categories( $wp_customize ) {
-	// Front page categories
+	// Front page categories.
 	$wp_customize->add_setting(
 		'ekiline_featuredcategories',
 		array(
@@ -37,8 +41,8 @@ add_action( 'customize_register', 'ekiline_featured_categories' );
 
 
 /**
-	* Customizer: Funcion para obtener los ids de categorias y la cantidad de publicaicones // get categories IDs
-	*/
+ * Customizer: Funcion para obtener los ids de categorias y la cantidad de publicaicones // get categories IDs.
+ */
 function ekiline_list_categories() {
 	$cats    = array();
 	$cats[0] = __( 'All', 'ekiline' );
@@ -49,13 +53,14 @@ function ekiline_list_categories() {
 }
 
 /**
-	* Customizer: Función para elegir categorías predeterminadas // Frontpage featured categories.
-	*/
-
+ * Customizer: Función para elegir categorías predeterminadas // Frontpage featured categories.
+ *
+ * @param string $query retrieve categories.
+ */
 function ekiline_frontpage_featured( $query ) {
 
 	$seleccion = get_theme_mod( 'ekiline_featuredcategories' );
-	// crear un string con lo seleccionado
+	// crear un string con lo seleccionado.
 	$str = 0;
 	// Al instalar el tema por primera vez reacciona la falta de validar el campo por eso este if.
 	if ( $seleccion ) {
@@ -71,22 +76,32 @@ function ekiline_frontpage_featured( $query ) {
 add_action( 'pre_get_posts', 'ekiline_frontpage_featured' );
 
 /***
-	* Nuevo ejercicio,
-	* 1) extender la clase de selectores
-	* 2) Solo se debe definir el tipo de formulario en ekiline_theme_customizer
-	* 3) se crea el arreglo para desplegar las categories
-	* https://stackoverflow.com/questions/38481936/multi-select-category-wordpress-customizer-control
-	**/
+ * Nuevo ejercicio,
+ * 1) extender la clase de selectores
+ * 2) Solo se debe definir el tipo de formulario en ekiline_theme_customizer
+ * 3) se crea el arreglo para desplegar las categories
+ * https://stackoverflow.com/questions/38481936/multi-select-category-wordpress-customizer-control
+ */
 if ( class_exists( 'WP_Customize_Control' ) ) {
+	/**
+	 * Esta clse permite mostrar y seleccionar categorias en la pagina blog.
+	 */
 	class Ekiline_Control_Multiple_Select extends WP_Customize_Control {
 
-		// Establecer el tipo del control, el formulario
+		/**
+		 * Establecer el tipo del control
+		 *
+		 * @var $type
+		 */
 		public $type = 'multiple-select';
-		// Crear el formulario
+		/**
+		 * Genera el contenido
+		 */
 		public function render_content() {
 			if ( empty( $this->choices ) ) {
 				return;
-			} ?>
+			}
+			?>
 
 			<label>
 				<span class="customize-control-title"><?php echo esc_html( $this->label ); ?></span>
@@ -106,10 +121,11 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 	}
 }
 
-
 /**
-	* Validar un multi-select
-	*/
+ * Validar un multi-select
+ *
+ * @param string $input data Sanitization.
+ */
 function ekiline_sanitize_multipleselect( $input ) {
 	$valid = ekiline_list_categories();
 	foreach ( $input as $value ) {
