@@ -1,11 +1,12 @@
 <?php
 /**
-* Formulario de Búsqueda.
-*
-* @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
-*
-* @package ekiline
-*/
+ * Formulario de Búsqueda.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
+ *
+ * @package ekiline
+ */
+
 ?>
 
 <form role="search" method="get" id="searchform" class="searchform my-2" action="<?php echo esc_url( home_url( '/' ) ); ?>">

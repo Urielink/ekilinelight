@@ -1,18 +1,16 @@
 <?php
 /**
-* Navegacion principal || Default menu
-*
-* @package ekiline
-*/
-
+ * Navegacion principal || Default menu
+ *
+ * @package ekiline
+ */
 
 /**
-	* Agregar logotipo a menu
-	* Adding logo image to navbar-brand:
-	**/
-
+ * Agregar logotipo a menu
+ * Adding logo image to navbar-brand:
+ */
 function ekiline_logo_theme() {
-	//variables de logotipo
+	// Variables de logotipo.
 	$brand_icon = get_theme_mod( 'ekiline_minilogo' );
 	$brand_hor  = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
 
@@ -34,37 +32,38 @@ function ekiline_logo_theme() {
 }
 
 /**
-* Todos los menus
-* Se complementa con acciones preestablecidas en customizer.php
-* Works with customizer.php
-**/
-
+ * Todos los menus
+ * Se complementa con acciones preestablecidas en customizer.php
+ * Works with customizer.php
+ *
+ * @param string $nav_position Elegir posicion del menu.
+ */
 function ekiline_navbar_menu( $nav_position ) {
 
 	if ( ! has_nav_menu( $nav_position ) ) {
 		return;
 	}
 
-	// invertir color (class css)
+	// Invertir color (class css).
 	$nav_inverse = ( true === get_theme_mod( 'ekiline_inversemenu' ) ) ? 'navbar-light bg-light ' : 'navbar-dark bg-dark ';
 
-	// clase auxiliar alineación de items, transformar a header.
+	// Clase CSS auxiliar alineación de items, transformar a header.
 	$nav_align = '';
 	$nav_head  = '';
 	$nav_help  = '';
 	$modal_css = '';
 
-	// variables para boton modal
+	// Variables para boton modal.
 	$datatoggle = 'collapse';
 	$datatarget = $nav_position . 'NavMenu';
 	$expand     = 'navbar-expand-md ';
 	$toggle_btn = 'navbar-toggler collapsed';
 
-	// Variables por cada tipo de menu: configurcion y distribucion de menu
+	// Variables por cada tipo de menu: configurcion y distribucion de menu.
 	$actions = get_theme_mod( 'ekiline_' . $nav_position . 'menuSettings' );
 	$styles  = get_theme_mod( 'ekiline_' . $nav_position . 'menuStyles' );
 
-	//Clases css por configuración de menu
+	// Clases css por configuración de menu.
 	if ( '0' === $actions ) {
 		$nav_action = 'static-top';
 	} elseif ( '1' === $actions ) {
@@ -75,7 +74,7 @@ function ekiline_navbar_menu( $nav_position ) {
 		$nav_action = 'navbar-sticky';
 	}
 
-	//Clases css por estilo de menu
+	// Clases css por estilo de menu.
 	switch ( $styles ) {
 		case 0:
 			$nav_align = ' mr-auto';
@@ -120,7 +119,7 @@ function ekiline_navbar_menu( $nav_position ) {
 			break;
 	}
 
-	// Clases css para mostrar el boton del modal
+	// Clases css para mostrar el boton del modal.
 	if ( $styles >= '7' ) {
 		$expand     = ' ';
 		$datatoggle = 'modal';
@@ -128,10 +127,10 @@ function ekiline_navbar_menu( $nav_position ) {
 		$toggle_btn = 'modal-toggler navbar-toggler collapsed';
 	}
 
-	// Clases reunidas para <nav>
+	// Clases reunidas para <nav>.
 	$nav_class_css = 'navbar ' . $nav_inverse . $nav_position . '-navbar ' . $expand . $nav_action;
 
-	// Clases reunidas para .navbar-collapse
+	// Clases reunidas para .navbar-collapse.
 	$collapse_css = 'collapse navbar-collapse ' . $nav_help;
 
 	?>
@@ -196,11 +195,13 @@ function ekiline_navbar_menu( $nav_position ) {
 
 }
 
-/*
-* Fragmento para crear un menu con madal
-*/
+/**
+ * Fragmento para crear un menu con madal
+ *
+ * @param string $nav_position Elegir posicion del menu.
+ */
 function ekiline_modal_menu_bottom( $nav_position ) {
-	/*tipos de animacion: .zoom, .newspaper, .move-horizontal, .move-from-bottom, .unfold-3d, .zoom-out, .left-aside, .right-aside */
+	/* tipos de animacion: .zoom, .newspaper, .move-horizontal, .move-from-bottom, .unfold-3d, .zoom-out, .left-aside, .right-aside */
 	$modal_id  = $nav_position . 'NavModal';
 	$modal_css = '';
 	switch ( get_theme_mod( 'ekiline_' . $nav_position . 'menuStyles' ) ) {
@@ -222,14 +223,12 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 <div id="<?php echo esc_attr( $modal_id ); ?>" class="<?php echo esc_attr( $modal_css ); ?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<?php
-			/* <div class="modal-header">
-				<h3 class="modal-title" id="navModalLabel"><?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?></h3>
+			<!-- <div class="modal-header">
+				<h3 class="modal-title" id="navModalLabel"><?php echo esc_html( get_bloginfo( 'name', 'display' ) ); ?></h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
+					<span aria-hidden="true">&times;</span>
 				</button>
-			</div> */
-			?>
+			</div> -->
 			<div class="modal-body navbar-light bg-light">
 
 				<div class="btn-group float-right">
@@ -267,21 +266,19 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 				</div>
 
 			</div>
-			<?php
-			/* <div class="modal-footer">
+			<!-- <div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			</div> */
-			?>
+			</div> -->
 		</div>
 	</div>
 </div><!-- #<?php echo esc_attr( $modal_id ); ?> -->
 
 	<?php
 }
-/* Se invoca debajo de nav, pero puede necesitarse en la parte baja del sitio
+/**
+ * Se invoca debajo de nav, pero puede necesitarse en la parte baja del sitio
  * add_action( 'wp_footer', 'ekiline_modal_menu_bottom', 0, 1 );
  */
-
 function ekiline_nav_fallback() {
 	if ( is_user_logged_in() ) {
 		$link = '/wp-admin/nav-menus.php';

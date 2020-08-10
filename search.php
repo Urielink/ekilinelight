@@ -1,12 +1,14 @@
 <?php
 /**
-* Plantilla de búsqueda
-*
-* @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
-*
-* @package ekiline
-*/
-get_header(); ?>
+ * Plantilla de búsqueda
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
+ *
+ * @package ekiline
+ */
+
+get_header();
+?>
 
 <?php ekiline_main_columns( 'open' ); ?>
 

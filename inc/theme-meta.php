@@ -1,19 +1,19 @@
 <?php
 /**
-* Metaetiquetas del tema || Meta tags
-*
-* @package ekiline
-*/
-
+ * Metaetiquetas del tema || Meta tags
+ *
+ * @package ekiline
+ */
 
 /**
-* Meta descripcion
-**/
-
+ * Meta descripcion
+ **/
 function ekiline_meta_description() {
-	// la descripcion general, default: is_home()
+
+	// La descripcion general, default: is_home().
 	$desc_head = get_bloginfo( 'description' );
-	// si es pagina o post
+
+	// Si es pagina o post.
 	if ( is_singular() ) {
 		global $post;
 		if ( $post->post_content ) {
@@ -23,7 +23,8 @@ function ekiline_meta_description() {
 			}
 		}
 	}
-	// si es archivo o categoria
+
+	// Si es archivo o categoria.
 	if ( is_archive() ) {
 		if ( category_description() ) {
 			$desc_head = wp_strip_all_tags( category_description() );
@@ -40,6 +41,9 @@ function ekiline_meta_description() {
 	return $desc_head;
 }
 
+/**
+ * Meta descripcion, incorporar.
+ **/
 function ekiline_print_meta_description() {
 	echo '<meta name="description" content="' . esc_attr( ekiline_meta_description() ) . '" />' . "\n";
 }
@@ -47,17 +51,20 @@ add_action( 'wp_head', 'ekiline_print_meta_description', 0, 0 );
 
 
 /**
-* Meta KeyWords, extender, permitirlas en la páginas.
-* meta keywords, extend this to use in pages.
-**/
-
+ * Meta KeyWords, extender, permitirlas en la páginas.
+ * meta keywords, extend this to use in pages.
+ **/
 function tags_support_all() {
 	// phpcs:ignore WPThemeReview.PluginTerritory.ForbiddenFunctions.plugin_territory_register_taxonomy_for_object_type
 	register_taxonomy_for_object_type( 'post_tag', 'page' );
 }
 add_action( 'init', 'tags_support_all' );
 
-// Incluir todas // ensure all tags are included in queries
+/**
+ * Incluir todas // ensure all tags are included in queries
+ *
+ * @param string $wp_query setup.
+ */
 function tags_support_query( $wp_query ) {
 	if ( $wp_query->get( 'tag' ) ) {
 		$wp_query->set( 'post_type', 'any' );
@@ -65,9 +72,11 @@ function tags_support_query( $wp_query ) {
 }
 add_action( 'pre_get_posts', 'tags_support_query' );
 
-
+/**
+ * Funcion: Obtener Keywords segun el tipo de contenido.
+ **/
 function ekiline_meta_keywords() {
-	// etiqueta por default
+
 	$keywords = '';
 
 	if ( is_single() || is_page() ) {
@@ -114,6 +123,9 @@ function ekiline_meta_keywords() {
 
 }
 
+/**
+ * Meta Keywords, incorporar.
+ **/
 function ekiline_print_meta_keywords() {
 	echo '<meta name="keywords" content="' . esc_attr( ekiline_meta_keywords() ) . '" />' . "\n";
 }
@@ -121,9 +133,9 @@ add_action( 'wp_head', 'ekiline_print_meta_keywords', 0, 0 );
 
 
 /**
-* Meta Image url, extender para redes sociales.
-* meta image url, extend this to use in socialmedia.
-**/
+ * Meta Image url, extender para usar URL redes sociales.
+ * meta image url, extend this to use URL in socialmedia.
+ */
 function ekiline_meta_image() {
 
 	$img_url = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
@@ -142,8 +154,8 @@ function ekiline_meta_image() {
 
 
 /**
-* Meta social, itemprop, twitter y facebook.
-**/
+ * Meta social, itemprop, twitter y facebook.
+ */
 function ekiline_meta_social() {
 	global $wp;
 	$meta_social = '';
@@ -153,20 +165,20 @@ function ekiline_meta_social() {
 	$meta_imgs   = ekiline_meta_image();
 	$ttr_link    = 'twitter.com';
 	$meta_type   = 'website';
-	$current_url = home_url( add_query_arg( array(), $wp->request ) ); //global $wp
+	$current_url = home_url( add_query_arg( array(), $wp->request ) );
 
-	//Google
+	// Google, Browsers.
 	$meta_social .= '<meta itemprop="name" content="' . $meta_title . '">' . "\n";
 	$meta_social .= '<meta itemprop="description" content="' . $meta_desc . '">' . "\n";
 	$meta_social .= '<meta itemprop="image" content="' . $meta_imgs . '">' . "\n";
-	//twitter
+	// Twitter.
 	$meta_social .= '<meta name="twitter:card" content="summary">' . "\n";
 	$meta_social .= '<meta name="twitter:site" content="' . $ttr_link . '">' . "\n";
 	$meta_social .= '<meta name="twitter:title" content="' . $meta_title . '">' . "\n";
 	$meta_social .= '<meta name="twitter:description" content="' . $meta_desc . '">' . "\n";
 	$meta_social .= '<meta name="twitter:creator" content="' . $ttr_link . '">' . "\n";
 	$meta_social .= '<meta name="twitter:image" content="' . $meta_imgs . '">' . "\n";
-	//facebook
+	// Facebook, OG.
 	$meta_social .= '<meta property="og:title" content="' . $meta_title . '"/>' . "\n";
 	$meta_social .= '<meta property="og:type" content="' . $meta_type . '"/>' . "\n";
 	$meta_social .= '<meta property="og:url" content="' . $current_url . '"/>' . "\n";

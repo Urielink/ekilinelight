@@ -1,27 +1,28 @@
 <?php
 /**
-* ekiline Theme Customizer.
-*
-* @package ekiline
-*/
+ * Ekiline Theme Customizer.
+ *
+ * @package ekiline
+ */
 
 /**
-*  Los controladores del personalizador
-*  https://codex.wordpress.org/Theme_Customization_API
-*  https://codex.wordpress.org/Validating_Sanitizing_and_Escaping_User_Data
-*  https://codex.wordpress.org/Data_Validation
-*  https://github.com/WPTRT/code-examples/blob/master/customizer/sanitization-callbacks.php
-**/
-
+ * Los controladores del personalizador
+ *
+ * @link https://codex.wordpress.org/Theme_Customization_API
+ * @link https://codex.wordpress.org/Validating_Sanitizing_and_Escaping_User_Data
+ * @link https://codex.wordpress.org/Data_Validation
+ * @link https://github.com/WPTRT/code-examples/blob/master/customizer/sanitization-callbacks.php
+ *
+ * @param string $wp_customize setup control.
+ */
 function ekiline_theme_customizer( $wp_customize ) {
 
-	/*
-	* Identidad, logo en navbar || Navbar brand
-	* Uso: themeMeta.php, themeNavbars.php
-	* Logo personalizado
-	* https://developer.wordpress.org/reference/classes/WP_Customize_Cropped_Image_Control/
-	*/
-
+	/**
+	 * Identidad, logo en navbar || Navbar brand
+	 * Uso: themeMeta.php, themeNavbars.php
+	 * Logo personalizado
+	 * https://developer.wordpress.org/reference/classes/WP_Customize_Cropped_Image_Control/
+	 */
 	$wp_customize->add_setting(
 		'ekiline_logo_max',
 		array(
@@ -57,12 +58,11 @@ function ekiline_theme_customizer( $wp_customize ) {
 		)
 	);
 
-	/*
-	* Identidad, ocupar favicon como identidad responsiva
-	* Use favicon as responsive logo.
-	* Uso: themeNavbars.php
-	*/
-
+	/**
+	 * Identidad, ocupar favicon como identidad responsiva
+	 * Use favicon as responsive logo.
+	 * Uso: themeNavbars.php
+	 */
 	$wp_customize->add_setting(
 		'ekiline_minilogo',
 		array(
@@ -82,12 +82,11 @@ function ekiline_theme_customizer( $wp_customize ) {
 		)
 	);
 
-	/*
-	* Diseño, Navbar con opciones de visualizacion
-	* "primary" Menu behaviors.
-	* Uso: themeNavwalker.php, themeNavbars.php
-	*/
-
+	/**
+	 * Diseño, Navbar con opciones de visualizacion
+	 * "primary" Menu behaviors.
+	 * Uso: themeNavwalker.php, themeNavbars.php
+	 */
 	$wp_customize->add_setting(
 		'ekiline_primarymenuSettings',
 		array(
@@ -143,12 +142,13 @@ function ekiline_theme_customizer( $wp_customize ) {
 		)
 	);
 
-	/*
-	* Diseño, ajuste de elementos y paginas
-	* Layout design
-	* Uso: themeLayout.php, themeElements.php, index.php, search.php
-	*/
-	// Page wide
+	/**
+	 * Diseño, ajuste de elementos y paginas
+	 * Layout design
+	 * Uso: themeLayout.php, themeElements.php, index.php, search.php
+	 */
+
+	// Page wide.
 	$wp_customize->add_section(
 		'ekiline_vista_section',
 		array(
@@ -158,7 +158,7 @@ function ekiline_theme_customizer( $wp_customize ) {
 		)
 	);
 
-	// Layout control and full width
+	// Layout control and full width.
 	$wlayout   = array();
 	$wlayout[] = array(
 		'name'  => 'Home',
@@ -217,8 +217,7 @@ function ekiline_theme_customizer( $wp_customize ) {
 
 	}
 
-	// List grid items
-
+	// List grid items.
 	$wp_customize->add_setting(
 		'ekiline_Columns',
 		array(
@@ -247,17 +246,31 @@ function ekiline_theme_customizer( $wp_customize ) {
 }
 add_action( 'customize_register', 'ekiline_theme_customizer' );
 
-
-/* Asegurar la informacion de cada campo antes de ingresa a la BD */
-
+/**
+ * Asegurar la informacion de cada campo antes de ingresa a la BD
+ * Escape Checkbox
+ *
+ * @param boolean $checked set value.
+ */
 function ekiline_sanitize_checkbox( $checked ) {
 	return ( ( isset( $checked ) && true === $checked ) ? true : false );
 }
 
+/**
+ * Escape HTML
+ *
+ * @param string $html set value.
+ */
 function ekiline_sanitize_html( $html ) {
 	return wp_filter_post_kses( $html );
 }
 
+/**
+ * Escape Image URL
+ *
+ * @param string $image set value.
+ * @param string $setting set attributes.
+ */
 function ekiline_sanitize_image( $image, $setting ) {
 
 	$mimes = array(
@@ -273,6 +286,12 @@ function ekiline_sanitize_image( $image, $setting ) {
 	return ( $file['ext'] ? $image : $setting->default );
 }
 
+/**
+ * Escape Video URL
+ *
+ * @param string $video set url value.
+ * @param string $setting set attributes.
+ */
 function ekiline_sanitize_video( $video, $setting ) {
 
 	$mimes = array(
@@ -296,7 +315,12 @@ function ekiline_sanitize_video( $video, $setting ) {
 	return ( $file['ext'] ? $video : $setting->default );
 }
 
-
+/**
+ * Escape Range control
+ *
+ * @param string $number set value.
+ * @param string $setting set attributes.
+ */
 function ekiline_sanitize_number_range( $number, $setting ) {
 	$number = absint( $number );
 	$atts   = $setting->manager->get_control( $setting->id )->input_attrs;
@@ -306,12 +330,24 @@ function ekiline_sanitize_number_range( $number, $setting ) {
 	return ( $min <= $number && $number <= $max && is_int( $number / $step ) ? $number : $setting->default );
 }
 
+/**
+ * Escape Range control
+ *
+ * @param string $input set values.
+ * @param string $setting set attributes.
+ */
 function ekiline_sanitize_select( $input, $setting ) {
 	$input   = sanitize_key( $input );
 	$choices = $setting->manager->get_control( $setting->id )->choices;
 	return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
 }
 
+/**
+ * Escape Dropdown control
+ *
+ * @param string $page_id values for pages.
+ * @param string $setting set attributes.
+ */
 function ekiline_sanitize_dropdown_pages( $page_id, $setting ) {
 	$page_id = absint( $page_id );
 	return ( 'publish' === get_post_status( $page_id ) ? $page_id : $setting->default );

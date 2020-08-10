@@ -1,22 +1,25 @@
 <?php
 /**
-* Functions which enhance the theme by hooking into WordPress
-*
-* @package ekiline
-*/
+ * Ekiline administration info
+ *
+ * Admin bar button
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Action_Reference/wp_before_admin_bar_render
+ * @link https://codex.wordpress.org/Javascript_Reference/ThickBox
+ *
+ * Y con estilos agregados.
+ *
+ * @link https://codex.wordpress.org/Function_Reference/wp_add_inline_style
+ * @link https://gist.github.com/corvannoorloos/43980115659cb5aee571
+ * @link https://wordpress.stackexchange.com/questions/36394/wp-3-3-how-to-add-menu-items-to-the-admin-bar
+ * @link https://wordpress.stackexchange.com/questions/266318/how-to-add-custom-submenu-links-in-wp-admin-menus
+ *
+ * @package ekiline
+ */
 
 /**
-* Theming Admin theme page
-* Admin bar button
-* https://codex.wordpress.org/Plugin_API/Action_Reference/wp_before_admin_bar_render
-* https://codex.wordpress.org/Javascript_Reference/ThickBox
-* Y con estilos agregados.
-* https://codex.wordpress.org/Function_Reference/wp_add_inline_style
-* https://gist.github.com/corvannoorloos/43980115659cb5aee571
-* https://wordpress.stackexchange.com/questions/36394/wp-3-3-how-to-add-menu-items-to-the-admin-bar
-* https://wordpress.stackexchange.com/questions/266318/how-to-add-custom-submenu-links-in-wp-admin-menus
-*/
-
+ * Ekiline, adminbar "fundme" button.
+ */
 function ekiline_bar() {
 	global $wp_admin_bar;
 	$wp_admin_bar->add_menu(
@@ -34,6 +37,9 @@ function ekiline_bar() {
 }
 add_action( 'admin_bar_menu', 'ekiline_bar', 0 );
 
+/**
+ * Ekiline, side menu button.
+ */
 function ekiline_theme_page() {
 	add_theme_page(
 		'Ekiline Menu Page Title',
@@ -45,7 +51,9 @@ function ekiline_theme_page() {
 }
 add_action( 'admin_menu', 'ekiline_theme_page' );
 
-
+/**
+ * Ekiline, info.
+ */
 function theme_html_page() { ?>
 
 <div class="wrap">
@@ -133,18 +141,25 @@ function theme_html_page() { ?>
 }
 
 
-/*
-* Noticias para el suscriptor de Ekiline
-* https://developer.wordpress.org/reference/functions/the_widget/ */
+/**
+ * Noticias para el suscriptor de Ekiline, con widget
+ *
+ * @link https://developer.wordpress.org/reference/functions/the_widget/
+ */
 
+// Verificar paginas de administracion.
 global $pagenow;
 $adminpages = array( 'index.php', 'edit.php', 'post.php', 'themes.php', 'tools.php', 'plugins.php' );
 
 if ( in_array( $pagenow, $adminpages, true ) ) {
-	add_action( 'admin_footer', 'ekiline_docs_feed_set' );
 	add_action( 'admin_notices', 'ekiline_docs_feed' );
+	add_action( 'admin_footer', 'ekiline_docs_feed_set' );
 }
 
+/**
+ * 1) Obtener noticias de Ekiline mediante feed.
+ * Setup Feed #155
+ */
 function ekiline_docs_feed() {
 	?>
 	<div class="notice notice-success is-dismissible ekiline-notice" style="display: none;">
@@ -176,8 +191,11 @@ function ekiline_docs_feed() {
 
 	<?php
 }
-// Se declaran en #143 add_action( 'admin_notices', 'ekiline_docs_feed' );
 
+/**
+ * 2) Agregar comportaminetos JS.
+ * Setup JS in Notice #156
+ */
 function ekiline_docs_feed_set() {
 	?>
 <script type='text/javascript'>
@@ -189,8 +207,11 @@ function ekiline_docs_feed_set() {
 </script>
 	<?php
 }
-// Se declaran en #143 add_action( 'admin_footer', 'ekiline_docs_feed_set' );
 
+/**
+ * 3) Agregar estilos CSS.
+ * Setup CSS styles in Notice.
+ */
 function ekiline_admin_styles() {
 	$extracss  = '.gold a::before { content: "\f511";} .gold a{ background-color: #58aa03 !important; } .gold:hover a{ background-color: #ffb900 !important; color: #fff !important; } .gold:hover a::before { content: "\f339"; color: #fff !important; }';
 	$extracss .= '.advice a::before { content: "\f325";} .advice a { background-color: #ff7e00 !important; } .advice:hover a { background-color: #ff7e00 !important; color: #fff !important; } .advice:hover a::before { content: "\f325"; color: #fff !important; }';

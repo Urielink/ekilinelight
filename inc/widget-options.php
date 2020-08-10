@@ -1,20 +1,21 @@
 <?php
 /**
-* Custom functions that act independently of the theme templates
-*
-* Eventually, some of the functionality here could be replaced by core features
-*
-* @package ekiline
-*/
+ * Mas opciones para los widgets, estilo css y formato de muestra.
+ *
+ * @link http://wordpress.stackexchange.com/questions/134539/how-to-add-custom-fields-to-settings-in-widget-options-for-all-registered-widget
+ * @link https://github.com/lowhow/Whitecoat/blob/master/whitecoat2/functions-theme.php
+ *
+ * @package ekiline
+ */
 
 /**
-* Extender funciones de widget, añadir CSS por cada item
-* Extend widget functions
-* @link http://wordpress.stackexchange.com/questions/134539/how-to-add-custom-fields-to-settings-in-widget-options-for-all-registered-widget
-* @link https://github.com/lowhow/Whitecoat/blob/master/whitecoat2/functions-theme.php
-*/
-
-function ekiline_in_widget_form( $t, $return, $instance ) {
+ * 1) Extender opciones de widget, añadir CSS por cada item. Extend widget options, add CSS.
+ *
+ * @param string $input field name.
+ * @param string $return value.
+ * @param string $instance midget.
+ */
+function ekiline_in_widget_form( $input, $return, $instance ) {
 	$instance = wp_parse_args(
 		(array) $instance,
 		array(
@@ -28,25 +29,37 @@ function ekiline_in_widget_form( $t, $return, $instance ) {
 	}
 	?>
 	<p>
-		<label for="<?php echo esc_attr( $t->get_field_id( 'css_style' ) ); ?>">
+		<label for="<?php echo esc_attr( $input->get_field_id( 'css_style' ) ); ?>">
 			<?php esc_html_e( 'CSS custom class (Ekiline)', 'ekiline' ); ?>
 		</label>
 		<input
 			class="widefat" type="text"
-			id="<?php echo esc_attr( $t->get_field_id( 'css_style' ) ); ?>"
-			name="<?php echo esc_attr( $t->get_field_name( 'css_style' ) ); ?>"
+			id="<?php echo esc_attr( $input->get_field_id( 'css_style' ) ); ?>"
+			name="<?php echo esc_attr( $input->get_field_name( 'css_style' ) ); ?>"
 			value="<?php echo esc_attr( $instance['css_style'] ); ?>" />
 	</p>
 	<?php
 	$retrun = null;
-	return array( $t, $return, $instance );
+	return array( $input, $return, $instance );
 }
 
+/**
+ * Update widget CSS.
+ *
+ * @param string $instance .
+ * @param string $new_instance .
+ * @param string $old_instance .
+ */
 function ekiline_in_widget_form_update( $instance, $new_instance, $old_instance ) {
 	$instance['css_style'] = wp_strip_all_tags( $new_instance['css_style'] );
 	return $instance;
 }
 
+/**
+ * Widget params widget CSS.
+ *
+ * @param string $params .
+ */
 function ekiline_dynamic_sidebar_params( $params ) {
 	global $wp_registered_widgets;
 	$widget_id  = $params[0]['widget_id'];
@@ -68,31 +81,31 @@ function ekiline_dynamic_sidebar_params( $params ) {
 
 	return $params;
 }
-
-/* callbacks y actualizacion */
-
-// Agregar el input: prioridad 5 y 3 parametros
+// Agregar el input: prioridad 5 y 3 parametros.
 add_action( 'in_widget_form', 'ekiline_in_widget_form', 5, 3 );
-// Callback para actualización de parametros
+// Callback para actualización de parametros.
 add_filter( 'widget_update_callback', 'ekiline_in_widget_form_update', 5, 3 );
 // Agregar los CSS con reemplazo.
 add_filter( 'dynamic_sidebar_params', 'ekiline_dynamic_sidebar_params' );
 
 
-/*
-* Mejor es agregar un filtro de selección de presentación del widget.
-* http://themefoundation.com/custom-widget-options/
-* https://wordpress.stackexchange.com/questions/134539/how-to-add-custom-fields-to-settings-in-widget-options-for-all-registered-widget
-* https://stackoverflow.com/questions/41113890/retrieve-value-widget-form-option-wordpress
-*/
-
+/**
+ * 2) Extender opciones de widget, añadir nueva presentacion por cada item. Extend widget options, add view/format options.
+ *
+ * @link http://themefoundation.com/custom-widget-options/
+ * @link https://wordpress.stackexchange.com/questions/134539/how-to-add-custom-fields-to-settings-in-widget-options-for-all-registered-widget
+ * @link https://stackoverflow.com/questions/41113890/retrieve-value-widget-form-option-wordpress
+ *
+ * @param string $widget .
+ * @param string $return .
+ * @param string $instance midget .
+ */
 function ekiline_widget_view( $widget, $return, $instance ) {
 
 	$instance = wp_parse_args( (array) $instance, array( 'viewFormat' => 'none' ) );
 	if ( ! isset( $instance['viewFormat'] ) ) {
 		$instance['viewFormat'] = null;
 	}
-
 	?>
 	<p>
 		<label for="<?php echo esc_attr( $widget->get_field_id( 'viewFormat' ) ); ?>"><?php esc_html_e( 'Format (Ekiline)', 'ekiline' ); ?></label>
@@ -107,6 +120,13 @@ function ekiline_widget_view( $widget, $return, $instance ) {
 }
 add_action( 'in_widget_form', 'ekiline_widget_view', 5, 3 );
 
+/**
+ * Update widget format.
+ *
+ * @param string $instance .
+ * @param string $new_instance .
+ * @param string $old_instance .
+ */
 function ekiline_widget_view_save( $instance, $new_instance, $old_instance ) {
 
 	$instance['viewFormat'] = $new_instance['viewFormat'];
@@ -115,6 +135,11 @@ function ekiline_widget_view_save( $instance, $new_instance, $old_instance ) {
 }
 add_filter( 'widget_update_callback', 'ekiline_widget_view_save', 5, 3 );
 
+/**
+ * Widget params format.
+ *
+ * @param string $params .
+ */
 function ekiline_widget_show( $params ) {
 
 	global $wp_registered_widgets;
@@ -123,7 +148,7 @@ function ekiline_widget_show( $params ) {
 	$widget_opt = get_option( $widget_obj['callback'][0]->option_name );
 	$widget_num = $widget_obj['params'][0]['number'];
 
-	// variables para modificar la estructura del widget
+	// Variables para modificar la estructura del widget.
 	$view_format = '';
 
 	$bef_wdg = $params[0]['before_widget'];
@@ -164,7 +189,7 @@ function ekiline_widget_show( $params ) {
 			$aft_wdg  = '</div></div></div></div>' . $aft_wdg;
 		}
 	}
-	// Agrega etiquetas
+	// Agrega etiquetas.
 	$params[0]['before_widget'] = $bef_wdg;
 	$params[0]['before_title']  = $bef_ttl;
 	$params[0]['after_title']   = $aft_ttl;

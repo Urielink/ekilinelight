@@ -1,12 +1,13 @@
 <?php
 /**
-* Template Name: No sidebars fullwidth
-*
-* @package WordPress
-* @subpackage ekiline
-*
-*/
-get_header(); ?>
+ * Template Name: No sidebars fullwidth
+ *
+ * @package WordPress
+ * @subpackage ekiline
+ */
+
+get_header();
+?>
 
 <main id="primary" class="container-fluid">
 

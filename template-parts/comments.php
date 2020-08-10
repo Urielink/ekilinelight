@@ -1,11 +1,11 @@
 <?php
 /**
-* Plantilla de comentarios.
-*
-* https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
-*
-* @package ekiline
-*/
+ * Plantilla de comentarios.
+ *
+ * @link https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
+ *
+ * @package ekiline
+ */
 
 if ( post_password_required() ) {
 	return;
@@ -79,12 +79,16 @@ if ( post_password_required() ) {
 	<?php endif; ?>
 
 <?php
-/*
-* Personalizar el formulario geenral de comentarios.
-* Custom comments forms
-* https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
-*/
-
+/**
+ * Personalizar el formulario general de comentarios, version simple
+ * Custom comments forms
+ *
+ * @link https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
+ *
+ * @param string $comment contenido.
+ * @param string $args reglas.
+ * @param string $depth profundidad.
+ */
 function ekiline_comments_simple( $comment, $args, $depth ) {
 
 	if ( 'div' === $args['style'] ) {
@@ -139,6 +143,16 @@ function ekiline_comments_simple( $comment, $args, $depth ) {
 
 }
 
+/**
+ * Personalizar el formulario general de comentarios, version extensa (default)
+ * Custom comments forms
+ *
+ * @link https://developer.wordpress.org/themes/template-files-section/partial-and-miscellaneous-template-files/comment-template/
+ *
+ * @param string $comment contenido.
+ * @param string $args reglas.
+ * @param string $depth profundidad.
+ */
 function ekiline_comments_extended( $comment, $args, $depth ) {
 
 	if ( 'div' === $args['style'] ) {
@@ -224,13 +238,13 @@ function ekiline_comments_extended( $comment, $args, $depth ) {
 
 }
 
-/*
-* Personalizar el formulario de comentarios
-* Customizing comments form
-* https://developer.wordpress.org/reference/functions/comment_form/
-* https://premium.wpmudev.org/blog/customizing-wordpress-comment-form/
-*/
-
+/**
+ * Personalizar los campos del formulario.
+ * Custom form fields
+ *
+ * @link https://developer.wordpress.org/reference/functions/comment_form/
+ * @link https://premium.wpmudev.org/blog/customizing-wordpress-comment-form/
+ */
 $args = array(
 	'comment_field' => '<div class="form-group">' .
 							'<label for="comment">' . __( 'Comment', 'ekiline' ) . '</label>' .
@@ -267,9 +281,6 @@ $args = array(
 );
 
 	comment_form( $args );
-
-
-/***/
 
 ?>
 </div><!-- #comments -->

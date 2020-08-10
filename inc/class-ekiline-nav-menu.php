@@ -1,15 +1,21 @@
 <?php
 /**
-* ekiline functions and definitions.
-*
-* @link https://developer.wordpress.org/reference/classes/walker_nav_menu/
-* https://www.ibenic.com/how-to-create-wordpress-custom-menu-walker-nav-menu-class/
-* http://cesarhdz.com/articulos/personalizar-menus-en-wordpress-con-un-walker#creacion-del-walker
-* https://www.wpbeginner.com/wp-themes/how-to-add-menu-descriptions-in-your-wordpress-themes/
-*
-* @package ekiline
-*/
+ * Ekiline navwalker extended for bootstrap.
+ *
+ * @link https://developer.wordpress.org/reference/classes/walker_nav_menu/
+ *
+ * @package ekiline
+ */
 
+/**
+ * Manejador de navegacion
+ *
+ * @link https://www.ibenic.com/how-to-create-wordpress-custom-menu-walker-nav-menu-class/
+ * @link http://cesarhdz.com/articulos/personalizar-menus-en-wordpress-con-un-walker#creacion-del-walker
+ * @link https://www.wpbeginner.com/wp-themes/how-to-add-menu-descriptions-in-your-wordpress-themes/
+ *
+ * @param string $wp_customize setup control.
+ */
 class Ekiline_Nav_Menu extends Walker_Nav_Menu {
 	/**
 	 * What the class handles.
@@ -56,7 +62,7 @@ class Ekiline_Nav_Menu extends Walker_Nav_Menu {
 		}
 		$indent = str_repeat( $t, $depth );
 
-		// Default class + Bootstrap
+		// 1) EKB4CSS: Default class + Bootstrap.
 		$classes = array( 'dropdown-menu', 'sub-menu' );
 
 		/**
@@ -122,13 +128,9 @@ class Ekiline_Nav_Menu extends Walker_Nav_Menu {
 		$indent    = ( $depth ) ? str_repeat( $t, $depth ) : '';
 		$classes   = empty( $item->classes ) ? array() : (array) $item->classes;
 		$classes[] = 'menu-item-' . $item->ID;
-		//1) B4CSS: agregar clases a cada item (ul>li).
+		// 2) EKB4CSS: agregar clases a cada item (ul>li).
 		$classes[] .= 'nav-item';
-		//2) ANULADO* B4CSS: auxiliar, al separar el dropdown, se agrega la clase btn-group, el experimento solo es para el nivel 1.
-		// if ( $args->walker->has_children && $depth == 0 ) {
-			// $classes[] .= 'btn-group align-items-center';
-		// }
-		//3) B4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
+		// 3) EKB4CSS: Posicion de menu: dropdown/dropup en los hijos, aplicar dropdown en objetos profundidad de nivel 1 en adelante.
 		if ( $args->walker->has_children ) {
 			$drop = ' dropdown item-' . $depth;
 			if ( get_theme_mod( 'ekiline_primarymenuSettings' ) === '2' ) {
@@ -138,8 +140,7 @@ class Ekiline_Nav_Menu extends Walker_Nav_Menu {
 			}
 			$classes[] .= $drop;
 		}
-
-		//4) B4CSS: el link está activo.
+		// 4) EKB4CSS: el link está activo.
 		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
 			$classes[] .= ' active';
 		}
@@ -190,23 +191,9 @@ class Ekiline_Nav_Menu extends Walker_Nav_Menu {
 		$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 		$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
 		$atts['href']   = ! empty( $item->url ) ? $item->url : '';
-		//5) B4CSS: agregar clases a cada item (ul>li>a).
+		// 5) EKB4CSS: agregar clases a cada item (ul>li>a).
 		$atts['class'] = 'nav-link';
-		//6) B4HTML: agregar atributos a cada item (ul>li>a).
-		// Ya no es necesario por hacer uso de "dropdown-toggle-split"
-		// if ( $args->walker->has_children ) {
-		// 	$atts['class']	= 'nav-link dropdown-toggle';
-		//     $atts['href']   = '#';
-		// 	$atts['data-toggle']	= 'dropdown';
-		// 	$atts['aria-haspopup']	= 'true';
-		// 	$atts['aria-expanded']	= 'false';
-		// 	$atts['id']				= 'menu-item-dropdown-' . $item->ID;
-		// }
-		//7) B4CSS: agregar clases a cada item padre submenu (ul.sub-menu>li>a).
-		// if ( $args->walker->has_children && $depth > 0 ) {
-		// 	$atts['class']	= 'pl-2 dropdown-item nav-link dropdown-toggle';
-		// }
-		//8) B4CSS: agregar clases a cada item hijo (ul.sub-menu>li>ul>li>a).
+		// 6) EKB4CSS: agregar clases a cada item hijo (ul.sub-menu>li>ul>li>a).
 		if ( $depth > 0 ) {
 			$link_css = 'dropdown-item';
 			if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) || in_array( 'current-menu-ancestor', $classes, true ) ) {
@@ -246,7 +233,7 @@ class Ekiline_Nav_Menu extends Walker_Nav_Menu {
 		/** This filter is documented in wp-includes/post-template.php */
 		$title = apply_filters( 'the_title', $item->title, $item->ID );
 
-		//Ekiline description
+		// 7) EKB4CSS: Ekiline description
 		$linkdesc = '<br><small class="small link-description">' . $item->description . '</small>';
 		$linkdesc = ! empty( $item->description ) ? $linkdesc : '';
 		$title   .= $linkdesc;
@@ -267,7 +254,7 @@ class Ekiline_Nav_Menu extends Walker_Nav_Menu {
 		$item_output .= '<a' . $attributes . '>';
 		$item_output .= $args->link_before . $title . $args->link_after;
 		$item_output .= '</a>';
-		//Bootstrap nuevo item
+		// 8) EKB4CSS: Bootstrap nuevo item
 		if ( $args->walker->has_children ) {
 			$split        = ( 0 === $depth ) ? 'nav-link' : 'dropdown-item';
 			$item_output .= '<a class="' . $split . ' dropdown-toggle dropdown-toggle-split" href="#" data-toggle="dropdown" data-reference="parent">&nbsp;</a>';

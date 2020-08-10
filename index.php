@@ -10,7 +10,6 @@
  * @link https://developer.wordpress.org/themes/basics/template-files/
  *
  * @package ekiline
- *
  */
 
 get_header();
@@ -31,9 +30,11 @@ get_header();
 			ekiline_show_columns( 'open' );
 
 			while ( have_posts() ) :
+
 				the_post();
+
 				/*
-				* repasar este tema
+				* Referencias para condicionar las partes de contenido.
 				* https://developer.wordpress.org/reference/functions/get_post_type/
 				* https://cybmeta.com/como-utilizar-get_template_part
 				* https://wordpress.stackexchange.com/questions/260998/get-template-part-based-on-get-post-type-for-a-custom-post-type-instead-of-g

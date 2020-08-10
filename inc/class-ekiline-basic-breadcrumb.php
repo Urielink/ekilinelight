@@ -28,8 +28,8 @@ class Ekiline_Basic_Breadcrumb extends WP_Widget {
 	/**
 	 * Contenido de widget
 	 *
-	 * @param array $args .
-	 * @param array $instance .
+	 * @param array $args envelope of item.
+	 * @param array $instance the widget.
 	 */
 	public function widget( $args, $instance ) {
 		/**

@@ -1,21 +1,21 @@
 <?php
 /**
-* Custom Color CSS Bootstrap feature
-*
-* @package ekiline
-*/
+ * Custom Color CSS Bootstrap feature
+ *
+ * @package ekiline
+ */
 
 /**
-* 1. Customizer, controles para cada color.
-*/
-
+ * 1. Customizer, controles para cada color.
+ *
+ * @param string $wp_customize setup control.
+ */
 function ekiline_custom_color_controls( $wp_customize ) {
 
 	// Colores, reemplazar el controlador de color de fondo.
 	$wp_customize->remove_control( 'background_color' ); // se remueve el controlador.
 
-	// Colores, agregar un panel con subsecciones:
-	// https://developer.wordpress.org/themes/customize-api/customizer-objects/
+	// Colores, agregar un panel con subsecciones: https://developer.wordpress.org/themes/customize-api/customizer-objects/.
 	$wp_customize->add_panel(
 		'ekiline_ThemeColors',
 		array(
@@ -41,9 +41,10 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		)
 	);
 
-	// Colores base
+	// Colores base.
 	$colors = array();
-	//pagina
+
+	// Pagina.
 	$colors[] = array(
 		'slug'        => 'back_color',
 		'default'     => '#ffffff',
@@ -60,7 +61,8 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		'priority'    => 20,
 		'section'     => 'colors_extended',
 	);
-	// contenedor main
+
+	// Contenedor main.
 	$colors[] = array(
 		'slug'        => 'main_color',
 		'default'     => '#f8f9fa',
@@ -69,7 +71,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		'priority'    => 20,
 		'section'     => 'colors_extended',
 	);
-	//navbar
+	// Navbar.
 	$colors[] = array(
 		'slug'        => 'menu_color',
 		'default'     => '#343a40',
@@ -78,7 +80,8 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		'priority'    => 30,
 		'section'     => 'colors_extended',
 	);
-	//footer-bar
+
+	// footer-bar.
 	$colors[] = array(
 		'slug'        => 'fbar_color',
 		'default'     => '#6c757d',
@@ -103,7 +106,8 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		'priority'    => 40,
 		'section'     => 'colors_extended',
 	);
-	//footer
+
+	// Footer.
 	$colors[] = array(
 		'slug'        => 'footer_color',
 		'default'     => '#343a40',
@@ -128,7 +132,8 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		'priority'    => 40,
 		'section'     => 'colors_extended',
 	);
-	//bootstrap
+
+	// Bootstrap.
 	$colors[] = array(
 		'slug'        => 'b4_primary',
 		'default'     => '#007bff',
@@ -194,8 +199,12 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		'section'     => 'colors',
 	);
 
+	/**
+	 * Loop, seetings and controls
+	*/
 	foreach ( $colors as $color ) {
-		// add settings
+
+		// add settings.
 		$wp_customize->add_setting(
 			$color['slug'],
 			array(
@@ -207,7 +216,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
 			)
 		);
 
-		// add controls
+		// add controls.
 		$wp_customize->add_control(
 			new WP_Customize_Color_Control(
 				$wp_customize,
@@ -223,7 +232,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		);
 	}
 
-	// Bootstrap inverse menu
+	// Bootstrap inverse menu (checkbox).
 	$wp_customize->add_setting(
 		'ekiline_inversemenu',
 		array(
@@ -244,7 +253,7 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		)
 	);
 
-	//input para guardar css con colores generados desde script
+	// Input para guardar css con colores generados desde script. Save string and CSS info.
 	$wp_customize->add_setting(
 		'ekiline_textarea_css',
 		array(
@@ -267,8 +276,8 @@ function ekiline_custom_color_controls( $wp_customize ) {
 add_action( 'customize_register', 'ekiline_custom_color_controls' );
 
 /**
-* 2. Regsitro de script auxiliar en personalizador.
-*/
+ * 2. Regsitro de script auxiliar en personalizador.
+ */
 function ekiline_themecustomizer_js() {
 	wp_enqueue_script( 'ekiline-themecustomizer', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.min.js', array( 'jquery' ), '1', true );
 }
@@ -276,9 +285,9 @@ add_action( 'customize_controls_enqueue_scripts', 'ekiline_themecustomizer_js' )
 
 
 /**
-* 3. Estilos especificos por objeto de la pagina:
-* main, menu, footerbar y footer.
-*/
+ * 3. Estilos especificos por objeto de la pagina:
+ * main, menu, footerbar y footer.
+ */
 function ekiline_page_elements() {
 
 	$ekiline_lmnt  = '';
@@ -304,17 +313,16 @@ function ekiline_page_elements() {
 	return $ekiline_lmnt;
 }
 
-/*
-* 4. Sobreescribir el uso de background image
-* Override background image.
-* https://codex.wordpress.org/Custom_Backgrounds
-* https://developer.wordpress.org/reference/functions/_custom_background_cb/
-*/
-
+/**
+ * 4. Sobreescribir el uso de background image
+ * Override background image.
+ * https://codex.wordpress.org/Custom_Backgrounds
+ * https://developer.wordpress.org/reference/functions/_custom_background_cb/
+ */
 function ekiline_custom_background_cb() {
-	// Imagen de fondo
+	// Imagen de fondo.
 	$background = set_url_scheme( get_background_image() );
-	// Color de fondo Ekiline, reemplaza a default $color = get_background_color();
+	// Color de fondo Ekiline, reemplaza a default ( $color = get_background_color();).
 	$color = get_option( 'back_color' );
 
 	if ( get_theme_support( 'custom-background', 'default-color' ) === $color ) {
@@ -374,17 +382,16 @@ function ekiline_custom_background_cb() {
 	return 'body.custom-background{' . trim( $style ) . '}';
 }
 
-/*
-* 5. incluir los estilos CSS de Customizer
-* https://developer.wordpress.org/reference/functions/wp_custom_css_cb/
-* https://codex.wordpress.org/Function_Reference/is_customize_preview
-* En caso de ocuparlo, se cancela el uso de la etiqueta.
-*/
-
+/**
+ * 5. incluir los estilos CSS de Customizer
+ * https://developer.wordpress.org/reference/functions/wp_custom_css_cb/
+ * https://codex.wordpress.org/Function_Reference/is_customize_preview
+ * En caso de ocuparlo, se cancela el uso de la etiqueta.
+ */
 function ekiline_custom_css_cb() {
-	//1) remover los estilos css que se modifican en customizer para agruparlos en una sola cadena.
+	// 1) remover los estilos css que se modifican en customizer para agruparlos en una sola cadena.
 	remove_action( 'wp_head', 'wp_custom_css_cb', 101 );
-	//2) y permitir su ejecución solo en el preview.
+	// 2) y permitir su ejecución solo en el preview.
 	if ( is_customize_preview() ) {
 		add_action( 'wp_head', 'wp_custom_css_cb', 101 );
 	}
@@ -399,16 +406,20 @@ function ekiline_custom_css_cb() {
 }
 
 
-/*
-* Integrar todos los estilos css en wp_head.
-* https://developer.wordpress.org/reference/functions/wp_add_inline_style/
-*/
+/**
+ * Integrar todos los estilos css en wp_head.
+ * https://developer.wordpress.org/reference/functions/wp_add_inline_style/
+ */
 function ekiline_get_all_styles() {
-	$group_styles  = '';
-	$group_styles .= get_theme_mod( 'ekiline_textarea_css' ); //de mi script js (1)
-	$group_styles .= ekiline_page_elements(); // de los elementos (3)
-	$group_styles .= ekiline_custom_background_cb(); // de custom background (4)
-	$group_styles .= ekiline_custom_css_cb(); // de custom CSS (5)
+	$group_styles = '';
+	// de mi script js (1&2).
+	$group_styles .= get_theme_mod( 'ekiline_textarea_css' );
+	// de los elementos (3).
+	$group_styles .= ekiline_page_elements();
+	// de custom background (4).
+	$group_styles .= ekiline_custom_background_cb();
+	// de custom CSS (5).
+	$group_styles .= ekiline_custom_css_cb();
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $group_styles;
 }

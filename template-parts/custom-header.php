@@ -1,11 +1,12 @@
 <?php
 /**
-* Custom header.
-*
-* @link https://developer.wordpress.org/themes/basics/template-hierarchy/
-*
-* @package ekiline
-*/
+ * Custom header.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package ekiline
+ */
+
 ?>
 
 <?php if ( get_header_image() ) { ?>

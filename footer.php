@@ -23,9 +23,9 @@
 	<p>
 		<?php
 		/* translators: %1$s is replaced with date */
-			printf( esc_html__( '&copy; Copyright %1$s.', 'ekiline' ), esc_attr( date( 'Y' ) . ' ' . get_bloginfo( 'name', 'display' ) ) );
+			printf( esc_html__( '&copy; Copyright %1$s. ', 'ekiline' ), esc_attr( date( 'Y' ) . ' ' . get_bloginfo( 'name', 'display' ) ) );
 		/* translators: %1$s and %2$s are replaced with link url */
-			printf( esc_html__( 'Proudly powered by %1$s and %2$s.', 'ekiline' ), '<a href="' . esc_url( 'https://wordpress.org/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'WordPress', 'ekiline' ) . '</a>', '<a href="' . esc_url( 'http://ekiline.com' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Ekiline', 'ekiline' ) . '</a>' );
+			printf( esc_html__( 'Proudly powered by %1$s and %2$s. ', 'ekiline' ), '<a href="' . esc_url( 'https://wordpress.org/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'WordPress', 'ekiline' ) . '</a>', '<a href="' . esc_url( 'http://ekiline.com' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Ekiline', 'ekiline' ) . '</a>' );
 		?>
 		<a class="goTop float-right" href="#top"><span>&uarr;</span><?php esc_html_e( 'Back', 'ekiline' ); ?></a>
 	</p>

@@ -1,19 +1,21 @@
 <?php
 /**
-* Template part for displaying archive, category or author data.
-*
-* @link https://codex.wordpress.org/Template_Hierarchy
-*
-* @package ekiline
-*/
+ * Template part for displaying archive, category or author data.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package ekiline
+ */
+
 ?>
 
 <?php if ( ! is_singular() ) { ?>
 
 	<?php
+
 	/*
-	* Mostrar diversos formatos en cada listado, segun el tipo (pagina de entradas, categoria o las entradas de autor).
-	*/
+	 * Mostrar diversos formatos en cada listado, segun el tipo (pagina de entradas, categoria o las entradas de autor).
+	 */
 	?>
 
 	<h1 class="archive-title">
@@ -35,6 +37,7 @@
 			/**
 			 * Obtener los datos del autor.
 			 * https://developer.wordpress.org/reference/functions/get_the_author_meta/
+			 * Nombre seleccionado, correo y url.
 			 **/
 			?>
 			<div>
@@ -44,9 +47,9 @@
 				</p>
 
 				<p>
-					<?php echo wp_kses_post( __( 'User: ', 'ekiline' ) . get_the_author_meta( 'display_name' ) ); // to get selected name ?>
-					<br> <?php echo wp_kses_post( __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ) ); // to get  email ?>
-					<br> <?php echo wp_kses_post( __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ) ); // to get  url ?>
+					<?php echo wp_kses_post( __( 'User: ', 'ekiline' ) . get_the_author_meta( 'display_name' ) ); ?>
+					<br> <?php echo wp_kses_post( __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ) ); ?>
+					<br> <?php echo wp_kses_post( __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ) ); ?>
 				</p>
 
 			</div>

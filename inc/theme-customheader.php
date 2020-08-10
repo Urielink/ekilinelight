@@ -1,22 +1,25 @@
 <?php
 /**
-* Custom Header feature
-*
-* @package ekiline
-*/
+ * Custom Header feature
+ *
+ * @package ekiline
+ */
 
 /**
-* Agregar a customizer
-*/
-
-// Usar el contenido de home y frontpage
+ * Customizer, controles para cada color.
+ * Usar el contenido de home y frontpage
+ *
+ * @param string $wp_customize setup control.
+ */
 function ekiline_custom_header_controls( $wp_customize ) {
 
-	// Colores, reemplazar el controlador de color de fondo.
-	$wp_customize->remove_control( 'header_textcolor' ); // se remueve el controlador.
-	$wp_customize->remove_control( 'display_header_text' ); // No es necesario ocultar los textos.
+	// Accion: Reemplazar el controlador de color de fondo.
+	// Remueve el controlador.
+	$wp_customize->remove_control( 'header_textcolor' );
+	// No es necesario ocultar los textos.
+	$wp_customize->remove_control( 'display_header_text' );
 
-	// Colores
+	// Colores.
 	$colors   = array();
 	$colors[] = array(
 		'slug'        => 'chdr_color',
@@ -43,8 +46,11 @@ function ekiline_custom_header_controls( $wp_customize ) {
 		'section'     => 'header_image',
 	);
 
+	/**
+	 * Loop, seetings and controls
+	*/
 	foreach ( $colors as $color ) {
-		// add settings
+		// Add settings.
 		$wp_customize->add_setting(
 			$color['slug'],
 			array(
@@ -55,7 +61,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 			)
 		);
 
-		// add controls
+		// Add controls.
 		$wp_customize->add_control(
 			new WP_Customize_Color_Control(
 				$wp_customize,
@@ -71,7 +77,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 		);
 	}
 
-	// Mostrar datos Home/Blog
+	// Mostrar datos Home/Blog.
 	$wp_customize->add_setting(
 		'ekiline_headerCustomText',
 		array(
@@ -92,7 +98,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 		)
 	);
 
-	// Controlar el ancho del header
+	// Controlar el ancho del header.
 	$wp_customize->add_setting(
 		'ekiline_headerCustomWidth',
 		array(
@@ -113,7 +119,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 		)
 	);
 
-	// Altura de header
+	// Altura de header.
 	$wp_customize->add_setting(
 		'ekiline_range_header',
 		array(
@@ -138,7 +144,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 		)
 	);
 
-	// Video
+	// Setup de Video.
 	$wp_customize->add_setting(
 		'ekiline_video',
 		array(
@@ -165,10 +171,10 @@ function ekiline_custom_header_controls( $wp_customize ) {
 add_action( 'customize_register', 'ekiline_custom_header_controls' );
 
 /**
-	* Controladores con callback: ekiline_custom_header_style()
-	* https://developer.wordpress.org/themes/functionality/custom-headers/
-	* Ocupar si fuera necesario: 'wp-head-callback' => 'ekiline_custom_header_style',
-	*/
+ * Controladores con callback: ekiline_custom_header_style()
+ * https://developer.wordpress.org/themes/functionality/custom-headers/
+ * Ocupar si fuera necesario: 'wp-head-callback' => 'ekiline_custom_header_style',
+ */
 function ekiline_custom_header_setup() {
 
 	add_theme_support(
@@ -184,7 +190,7 @@ function ekiline_custom_header_setup() {
 			)
 		)
 	);
-	// registrar una imagen default, primero se declara en los filtros
+	// Registrar una imagen default, primero se declara en los filtros.
 		register_default_headers(
 			array(
 				'default-image' => array(
@@ -198,10 +204,9 @@ function ekiline_custom_header_setup() {
 add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 
 /**
-* Cancelar callback: ekiline_custom_header_style(), aparecerá en el header.
-* Por las caracteristicas del tema, lo agrupamos en themeCustomColors.php
-*/
-
+ * Cancelar callback: ekiline_custom_header_style(), aparecerá en el header.
+ * Por las caracteristicas del tema, lo agrupamos en themeCustomColors.php
+ */
 function ekiline_custom_header_style() {
 
 	if ( ! get_header_image() ) {
@@ -229,9 +234,12 @@ add_action( 'group_inline_css', 'ekiline_custom_header_style', 4 );
 
 
 /**
-	* Clases CSS de apoyo en body_class().
-	* https://developer.wordpress.org/reference/functions/body_class/
-	*/
+ * Clases CSS de apoyo en body_class().
+ *
+ * @link https://developer.wordpress.org/reference/functions/body_class/
+ *
+ * @param string $classes add new css class to body.
+ */
 function ekiline_custom_header_css( $classes ) {
 	if ( ! get_header_image() ) {
 		return $classes;
@@ -243,14 +251,16 @@ function ekiline_custom_header_css( $classes ) {
 add_filter( 'body_class', 'ekiline_custom_header_css' );
 
 /**
-	* Crear un header dinamico y personalizable.
-	* the_header_image_tag() : llama la etiqueta completa.
-	* header_image(); : llama la url.
-	* https://developer.wordpress.org/reference/functions/get_header_image/
-	* https://developer.wordpress.org/reference/functions/header_image/
-	* https://developer.wordpress.org/reference/functions/the_header_image_tag/
-	**/
-
+ * Crear un header dinamico y personalizable.
+ * the_header_image_tag() : llama la etiqueta completa.
+ * header_image(); : llama la url.
+ * 
+ * @link https://developer.wordpress.org/reference/functions/get_header_image/
+ * @link https://developer.wordpress.org/reference/functions/header_image/
+ * @link https://developer.wordpress.org/reference/functions/the_header_image_tag/
+ *
+ * @param string $size set image size.
+ **/
 function ekiline_header_image( $size = null ) {
 
 	$size = ( ! $size ) ? 'medium_large' : '';
@@ -265,12 +275,12 @@ function ekiline_header_image( $size = null ) {
 	* otra documentacion: https://premium.wpmudev.org/blog/wordpress-image-sizes/
 	*/
 
-	/* Condicion: en caso de ser la imagen de muestra, o ser una imagen nueva */
+	// Condicion: en caso de ser la imagen de muestra, o ser una imagen nueva.
 	if ( get_header_image() !== get_parent_theme_file_uri( '/assets/img/ekiline-pattern.png' ) ) {
 		$url = wp_get_attachment_image_url( get_custom_header()->attachment_id, $size, false, '' );
 	}
 
-	/* Condicion: si es una entrada o pagina */
+	// Condicion: si es una entrada o pagina.
 	if ( is_singular() && ! is_front_page() || is_home() || is_front_page() ) {
 		global $post;
 		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, $size ) : $url;
@@ -279,6 +289,13 @@ function ekiline_header_image( $size = null ) {
 	return $url;
 }
 
+/**
+ * Crear variables de contenido para ../template-parts/custom-header.php
+ *
+ * @link https://developer.wordpress.org/reference/functions/body_class/
+ *
+ * @param string $content_type setup if is text or title.
+ */
 function custom_header_content( $content_type = null ) {
 
 	$custom_header_title = get_bloginfo( 'name' );
@@ -307,7 +324,7 @@ function custom_header_content( $content_type = null ) {
 			$custom_header_title = get_the_title( get_option( 'page_for_posts', true ) );
 			$contentfield        = get_post_field( 'post_content', get_option( 'page_for_posts' ) );
 			$custom_header_text  = wp_trim_words( $contentfield, 24 );
-			//Si existe un punto antes cortar
+			// Si existe un punto antes cortar.
 			$punto = strpos( $custom_header_text, '.' );
 			if ( $punto ) {
 				$custom_header_text = substr( $custom_header_text, 0, strpos( $custom_header_text, '.' ) ) . '.';

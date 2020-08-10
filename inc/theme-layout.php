@@ -1,17 +1,16 @@
 <?php
 /**
-* Orden del tema || Theme Layout
-*
-* Funciones complementarias para el personalizador.
-* Customizer complementary functions.
-*
-* @package ekiline
-*/
-
+ * Orden del tema || Theme Layout
+ *
+ * Funciones complementarias para el personalizador.
+ * Customizer complementary functions.
+ *
+ * @package ekiline
+ */
 
 /**
-	* Ancho de layout | Layout width
-	*/
+ * Ancho de layout | Layout width
+ */
 function ekiline_width_control() {
 	$container = 'container';
 	$fluid     = '-fluid';
@@ -29,9 +28,11 @@ function ekiline_width_control() {
 	return $container;
 }
 
-/*
-* Layout sin sidebars | No sidebars layout
-*/
+/**
+ * Layout sin sidebars | No sidebars layout
+ *
+ * @param string $width_sb_ctrl setip sidebar view.
+ */
 function view_sidebar_filter( $width_sb_ctrl ) {
 
 	$opt = '';
@@ -67,15 +68,17 @@ function view_sidebar_filter( $width_sb_ctrl ) {
 add_filter( 'sidebars_widgets', 'view_sidebar_filter' );
 
 
-/*
-* 1) Orden de columnas | Columns order
-* agregar contenedor a index.php
-*/
+/**
+ * 1) Orden de columnas | Columns order
+ * agregar contenedor a index.php
+ *
+ * @param string $tag setup open/close tag.
+ */
 function ekiline_main_columns( $tag ) {
 	if ( ! is_active_sidebar( 'sidebar-1' ) && ! is_active_sidebar( 'sidebar-2' ) ) {
 		return;
 	}
-	// En caso de existir barras laterales agregar envoltorio
+	// En caso de existir barras laterales agregar envoltorio.
 	if ( 'open' === $tag ) {
 		echo '<div id="maincolumns" class="row mx-0 ' . esc_attr( ekiline_width_control() ) . ' mx-auto px-0">';
 	}
@@ -83,20 +86,28 @@ function ekiline_main_columns( $tag ) {
 		echo '</div><!-- #maincolumns -->';
 	}
 }
-/*
-* 2) Agregar clases CSS a cada columna index.php y sidebar.php
-*/
+
+/**
+ * 2) Agregar clases CSS a cada columna index.php y sidebar.php
+ *
+ * @param string $css retrieve css width each column.
+ */
 function sort_cols( $css ) {
-	$css_main = ekiline_width_control();//'container ';
+
+	$css_main = ekiline_width_control();
+
 	if ( is_active_sidebar( 'sidebar-1' ) || is_active_sidebar( 'sidebar-2' ) ) {
-		// sidebars.
+
+		// Sidebars.
 		$sblft = is_active_sidebar( 'sidebar-1' );
 		$sbrgt = is_active_sidebar( 'sidebar-2' );
-		// orden de columnas.
+
+		// Orden de columnas.
 		$css_main  = 'col-md-6 order-md-2';
 		$css_left  = ' col-md-3 order-md-1';
 		$css_right = ' col-md-3 order-md-3';
-		// aparicion de columnas
+
+		// Aparicion de columnas.
 		if ( $sblft && ! $sbrgt ) {
 			$css_main = 'col-md-9 order-md-2';
 			$css_left = ' col-md-3 order-md-1';
@@ -105,7 +116,7 @@ function sort_cols( $css ) {
 			$css_right = ' col-md-3';
 		}
 	}
-	// imprimir
+	// Imprimir.
 	if ( 'main' === $css ) {
 		echo esc_attr( $css_main );
 	}
@@ -117,10 +128,12 @@ function sort_cols( $css ) {
 	}
 }
 
-/*
-* 1) Vista de columnas | Columns view
-* // loop_start, loop_end, podria romper la vista.
-*/
+/**
+ * 1) Vista de columnas | Columns view
+ * loop_start, loop_end, podria romper la vista.
+ * 
+ * @param string $tag setup open/close tag.
+ */
 function ekiline_show_columns( $tag ) {
 	if ( is_singular() ) {
 		return;
@@ -138,9 +151,12 @@ function ekiline_show_columns( $tag ) {
 		}
 	}
 }
-/*
-* 2) Agregar clase a cada post para complementar la vista.
-*/
+
+/**
+ * 2) Agregar clase a cada post para complementar la vista.
+ *
+ * @param string $classes add container post class.
+ */
 function ekiline_show_columns_item( $classes ) {
 
 	if ( is_singular() ) {
