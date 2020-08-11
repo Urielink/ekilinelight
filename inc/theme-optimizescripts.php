@@ -168,7 +168,7 @@ add_action( 'customize_register', 'ekiline_reload_libraries' );
  * 3) Filtros:
  * Obtener cada libreria, registrada en el campo de customizer.
  * Indice de librerias segun descritos por el usuario
- * 
+ *
  * @param string $kind set type of content: css/js.
  */
 function ctmzr_array_handlers( $kind = null ) {
@@ -232,7 +232,7 @@ if ( is_login_page() || is_admin() || is_user_logged_in() ) {
  * Change CSS tags and load method
  * Ejecutar solo cuando exista informacion en el campo.
  */
-if ( get_theme_mod( 'ekiline_css_handler_array' ) !== '' ) {
+if ( get_theme_mod( 'ekiline_css_handler_array' ) ) {
 	add_filter( 'style_loader_tag', 'ekiline_change_css_tag', 10, 4 ); // 5.1
 	add_action( 'wp_footer', 'ekiline_load_all_csstojs', 100 ); // 5.2 y 5.3
 }
@@ -332,7 +332,7 @@ function ekiline_load_all_csstojs() {
  * Ejecutar solo cuando exista informacion en el campo
  * Orden: 6.1, 6.3, 6.2 + 6.4.
  */
-if ( get_theme_mod( 'ekiline_js_handler_array' ) !== '' ) {
+if ( get_theme_mod( 'ekiline_js_handler_array' ) ) {
 	add_filter( 'script_loader_tag', 'override_scripts', 10, 2 );
 	add_filter( 'script_loader_tag', 'ekiline_change_js_tag', 10, 4 );
 	add_action( 'wp_footer', 'ekiline_load_all_jstojs', 100 );
