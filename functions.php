@@ -178,19 +178,21 @@ add_action( 'widgets_init', 'ekiline_widgets_init' );
  * @link https://developer.wordpress.org/reference/functions/wp_enqueue_style/
  * @link https://developer.wordpress.org/reference/functions/wp_enqueue_script/
  * @link https://developer.wordpress.org/reference/functions/wp_script_add_data/
+ * @link https://developer.wordpress.org/resource/dashicons/
  */
 function ekiline_scripts() {
-	// estilos.
+	// Estilos.
 	wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4', 'all' );
-	wp_enqueue_style( 'layout', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '4', 'all' );
+	wp_enqueue_style( 'ekiline-features', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '4', 'all' );
 	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri(), array(), '4', 'all' );
-	// scripts.
+	wp_enqueue_style( 'dashicons' );
+	// Scripts.
 	wp_enqueue_script( 'jquery-core' );
 	wp_enqueue_script( 'popper-script', get_template_directory_uri() . '/assets/js/popper.min.js', array( 'jquery' ), '1', true );
 	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array( 'jquery' ), '4', true );
 	wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array( 'jquery' ), '20150716', true );
 	wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array( 'jquery' ), '20151226', true );
-	// comentarios.
+	// Comentarios.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
