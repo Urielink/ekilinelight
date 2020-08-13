@@ -48,11 +48,6 @@
 
 	</main><!-- #primary -->
 
-
-	</body>
-</html>
-
-
 <footer class="site-footer pt-4 pb-2 bg-dark text-white">
 	<div class="container">
 		<p>
