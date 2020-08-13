@@ -406,3 +406,35 @@ function ekiline_category_transient_flusher() {
 }
 add_action( 'edit_category', 'ekiline_category_transient_flusher' );
 add_action( 'save_post', 'ekiline_category_transient_flusher' );
+
+
+/**
+ * Extension servir contenido sin formato por medio de url (1).
+ *
+ * @link https://developer.wordpress.org/reference/hooks/query_vars/.
+ * @param string $vars url variables.
+ */
+function ekiline_themeslug_query_vars( $vars ) {
+	return array( 'show' ) + $vars;
+}
+add_filter( 'query_vars', 'ekiline_themeslug_query_vars' );
+
+/**
+ * Extension servir contenido sin formato por medio de url (2).
+ *
+ * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/single_template
+ * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/page_template
+ * @param string $template cambia la plantilla pre establecida.
+ */
+function ekiline_serve_template( $template ) {
+	global $wp;
+	if ( isset( $wp->query_vars['show'] ) ) {
+		if ( 'blank' === $wp->query_vars['show'] ) {
+			return get_template_directory() . '/singular-blank.php';
+		}
+	} else {
+		return $template;
+	}
+}
+add_filter( 'single_template', 'ekiline_serve_template' );
+add_filter( 'page_template', 'ekiline_serve_template' );
