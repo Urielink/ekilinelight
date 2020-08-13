@@ -2,6 +2,9 @@
 /**
  * Template Name: No sidebars
  *
+ * Muestra el contenido sin sidebars.
+ * Show content without sidebars.
+ *
  * @package WordPress
  * @subpackage ekiline
  */

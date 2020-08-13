@@ -92,7 +92,7 @@ function ekiline_main_columns( $tag ) {
  *
  * @param string $css retrieve css width each column.
  */
-function sort_cols( $css ) {
+function ekiline_sort_cols( $css ) {
 
 	$css_main = ekiline_width_control();
 

@@ -84,11 +84,11 @@
   * En caso de habilitar custom header, oculta el título del post.
   * En caso de habilitar la descripcion del sitio, 
   */
- .has-custom-header .archive-title, 
+ /* .has-custom-header .archive-title, 
  .has-custom-header.single .entry-title, 
  .has-custom-header.page .entry-title{position: absolute; clip: rect(1px, 1px, 1px, 1px);}
    .custom-header.container .wp-block-cover.has-background-dim::before{z-index: 0;opacity: .3 !important;}
- 
+  */
  /* ------------------------------------------------
   * PLUGINS
   * ----------------------------------------------*/
