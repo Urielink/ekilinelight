@@ -24,7 +24,7 @@
  Ekiline for WordPress Theme bundles the following third-party resources:
  Bootstrap Bootstrap v4.5.0 (https://getbootstrap.com), Copyright 2011-2018 Twitter, Inc.
  Bootstrap are licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- Source: https://getbootstrap.com 
+ Source: https://getbootstrap.com
  */
 
 /* ------------------------------------------------
@@ -54,45 +54,42 @@
  .sticky{display:block;}
  .bypostauthor{display:block;}
  #user_switching_switch_on{position:fixed;left:0;padding:0.4rem;margin:0px;bottom:0px;z-index:3000;background-color:#343A40;font-size:0.8rem;}
- 
+
  /* Gutenberg: alineacion amplia || wide alignments */
  .container > .hentry .alignwide{ margin-left:-10%; margin-right:-10%; width:120%;}
  .container > .hentry .alignfull{margin-left: calc( -100vw / 2 + 100% / 2 - 8px);margin-right: calc( -100vw / 2 + 100% / 2 - 8px);width: 100vw;}
  .container > .hentry .wp-block-image.alignfull,.container > .hentry .wp-block-image.alignwide{max-width: 100vw;text-align: center;}
  .hentry .alignfull iframe,.hentry .alignwide iframe{width: 100%;height: calc(100vw / 3);min-height: 400px;}
  .hentry .alignfull video,.hentry .alignwide video{width: 100%;min-height: 400px;}
- 
+
  /*Estilos en caso de ser Admin*/
  /* body.admin-bar .navbar.fixed-top{margin-top:30px;}
  @media only screen and (max-width:768px){
    body.admin-bar .navbar.fixed-top{margin-top:46px;}
    body.admin-bar .navbar-collapse.offcanvas.show {top: 46px;}
  } */
- 
- 
- 
- 
+
  /* ------------------------------------------------
   * WIDGETS
   * ----------------------------------------------*/
- 
+
  /* Widget de galeria */
  .gallery[class*="gallery-columns"]:not([class*="gallery-columns-1"]){display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;}
  .gallery[class*="gallery-columns"] .gallery-item {-ms-flex-preferred-size: 0;flex-basis: 0;-ms-flex-positive: 1;flex-grow: 1;max-width: 100%;text-align: center;}
- 
+
  /* Clases auxiliares para objetos en el tema.
   * En caso de habilitar custom header, oculta el título del post.
-  * En caso de habilitar la descripcion del sitio, 
+  * En caso de habilitar la descripcion del sitio,
   */
- /* .has-custom-header .archive-title, 
- .has-custom-header.single .entry-title, 
+ /* .has-custom-header .archive-title,
+ .has-custom-header.single .entry-title,
  .has-custom-header.page .entry-title{position: absolute; clip: rect(1px, 1px, 1px, 1px);}
    .custom-header.container .wp-block-cover.has-background-dim::before{z-index: 0;opacity: .3 !important;}
   */
  /* ------------------------------------------------
   * PLUGINS
   * ----------------------------------------------*/
- 
+
  /*.woocommerce img,.woocommerce-page img{height:inherit !important;}*/
  /* WooCommerce 3.0 Gallery */
  /* .woocommerce-product-gallery{position:relative;margin-bottom:3em}
@@ -115,43 +112,43 @@
  /*WooCommerce Checkout*/
  /* .woocommerce .col2-set .col-1, .woocommerce-page .col2-set .col-1{max-width: inherit;}
  .woocommerce .col2-set .col-2, .woocommerce-page .col2-set .col-2{max-width: inherit;} */
- 
+
  /* ------------------------------------------------
   * Ekiline CUSTOM STYLES tus estilos || your styles
   * ----------------------------------------------*/
- 
+
  /* Logo en navbar || Brand in navbar */
  .navbar-brand img{margin-top:-5px;margin-bottom:-5px;}
  /* Clearfix en articulos*/
  article::after{content: "";clear: both;display: table;}
  article footer, article .page-links{clear: both;}
- 
- 
+
+
  /*--------------------------------------------------------------------------------
   * CSS RESPONSIVO || RESPONSIVE (Mobile to Desk)
   *------------------------------------------------------------------------------*/
- 
+
  /* TERCER CAMBIO Smartphones verticales */
  @media only screen and (max-width:576px){
    .container > .hentry .alignwide {
      margin-left: -15px;
      margin-right: -15px;
      width: auto;
-   }	
+   }
  }
- 
+
  /* SEGUNDO CAMBIO Tablets y smartphones horizontales || Tablets or smartphone horizontal */
  @media only screen and (max-width:768px){}
- 
+
  /* PRIMER CAMBIO Escritorio || Desktop */
  @media only screen and (max-width:992px){}
- 
+
  @media only screen and (max-width:1200px){
  /* Comportamiento liquido,  */
   /* .container { max-width: 100%;} */
   /* .container > .hentry .alignwide{margin-left: calc( -100vw / 2 + 100% / 2 - 8px);margin-right: calc( -100vw / 2 + 100% / 2 - 8px);width: 100vw;} */
  }
- 
+
  /* developer */
  /* #primarySiteNavigation{display:none;} */
  /* .container{border: 1px dotted #ccc;} */
