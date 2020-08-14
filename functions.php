@@ -263,7 +263,6 @@ function ekiline_above_fold_styles() {
 	$file = get_template_directory_uri() . '/style.css';
 	$file = wp_remote_get( $file );
 	$data = wp_remote_retrieve_body( $file );
-	// $data = ekiline_get_string_between( $data, '/*[ekiline-atfcss-start]*/', '/*[ekiline-atfcss-end]*/' );
 	$data = ekiline_get_string_between( $data, '/*[ekiline-atfcss-start]*/@media(max-width:0px){', '}/*[ekiline-atfcss-end]*/' );
 	// Quitar comentarios.
 	$data = preg_replace( '#/\*.*?\*/#s', '', $data );
