@@ -254,7 +254,7 @@ add_filter( 'body_class', 'ekiline_custom_header_css' );
  * Crear un header dinamico y personalizable.
  * the_header_image_tag() : llama la etiqueta completa.
  * header_image(); : llama la url.
- * 
+ *
  * @link https://developer.wordpress.org/reference/functions/get_header_image/
  * @link https://developer.wordpress.org/reference/functions/header_image/
  * @link https://developer.wordpress.org/reference/functions/the_header_image_tag/

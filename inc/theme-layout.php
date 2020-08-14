@@ -131,7 +131,7 @@ function ekiline_sort_cols( $css ) {
 /**
  * 1) Vista de columnas | Columns view
  * loop_start, loop_end, podria romper la vista.
- * 
+ *
  * @param string $tag setup open/close tag.
  */
 function ekiline_show_columns( $tag ) {
