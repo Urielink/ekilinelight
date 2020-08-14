@@ -183,7 +183,6 @@ add_action( 'widgets_init', 'ekiline_widgets_init' );
 function ekiline_scripts() {
 	// Estilos.
 	wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4', 'all' );
-	// TEST: wp_enqueue_style( 'ekiline-features', get_template_directory_uri() . '/assets/css/ekiline.css', array(), '4', 'all' ); .
 	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri(), array(), '4', 'all' );
 	wp_enqueue_style( 'dashicons' );
 	// Scripts.
