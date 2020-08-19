@@ -534,6 +534,10 @@ img{vertical-align:middle;border-style:none}
 .d-none{display:none!important}
 .d-block{display:block!important}
 .d-flex{display:-ms-flexbox!important;display:flex!important}
+@media (min-width:768px){
+.d-md-none{display:none!important}
+.d-md-block{display:block!important}
+}
 .flex-row{-ms-flex-direction:row!important;flex-direction:row!important}
 
 .justify-content-start{-ms-flex-pack:start!important;justify-content:flex-start!important}
