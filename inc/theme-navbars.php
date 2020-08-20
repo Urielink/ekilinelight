@@ -71,7 +71,7 @@ function ekiline_navbar_menu( $nav_position ) {
 	} elseif ( '2' === $actions ) {
 		$nav_action = 'fixed-bottom';
 	} elseif ( '3' === $actions ) {
-		$nav_action = 'navbar-sticky';
+		$nav_action = 'fixed-top navbar-sticky';
 	}
 
 	// Clases css por estilo de menu.

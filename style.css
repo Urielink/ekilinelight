@@ -162,30 +162,34 @@
 .nav-scroller .nav {-ms-flex-wrap: nowrap;flex-wrap: nowrap;overflow-x: auto;white-space: nowrap;-webkit-overflow-scrolling: touch;}
 .nav-scroller .nav-link {padding: .5rem;}
 
-/* Estilos de navegación que solo necesitan ejecutarse en móviles */
+/* Sticky navbar */
+.navbar-sticky.scrolled-down{ transform:translateY(-100%); transition: all 0.3s ease-in-out; }
+.navbar-sticky.scrolled-up{ transform:translateY(0); transition: all 0.3s ease-in-out; }
+
+/* Estilos de navegación que solo necesitan ejecutarse en desktop */
 @media only screen and (min-width : 768px) {
-  /*scroll-menu*/
-  .navbar-collapse:not(.order-first) .scroll-menu.dropdown.show, .navbar-collapse:not(.order-first) .scroll-menu.dropup.show{position: inherit;}
-  .navbar-collapse:not(.order-first) .scroll-menu.show > .dropdown-menu{max-width: 100%;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;overflow-x: scroll;/*white-space: nowrap;*/}
-  .navbar-collapse:not(.order-first) .scroll-menu.dropdown.show .dropdown,.navbar-collapse:not(.order-first) .scroll-menu.dropdown.show .dropright{display: flex;}
-  .navbar-collapse:not(.order-first) .scroll-menu.dropdown .dropdown .dropdown-menu,.navbar-collapse:not(.order-first) .scroll-menu.dropdown .dropright .dropdown-menu{position: static;padding: 0px;display: flex;}
-  /*en caso de modal D: */
-    .modal .navbar-collapse .scroll-menu.show .dropdown-menu{display: block;overflow: auto;flex-direction: column;}
-    .modal .navbar-collapse .scroll-menu.dropdown.show .dropdown,.modal .navbar-collapse .scroll-menu.dropdown.show .dropright{display: block;}
-  /*mega-menu*/
-  .navbar-collapse:not(.order-first) .mega-menu.show.dropdown, .navbar-collapse:not(.order-first) .mega-menu.show.dropup{position: inherit;}
-  .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu{max-width: 1120px;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;flex-wrap: wrap;}
-  .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 20%;}
-  .navbar-collapse:not(.order-first) .mega-menu.show .dropdown a, .navbar-collapse:not(.order-first) .mega-menu.show .dropright a {display: block;}
-  .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li > ul.dropdown-menu {display: block;position: static;border-bottom:none;}
-  .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > .menu-item > a.dropdown-item:first-child{text-transform: uppercase;font-size: .875rem;white-space: normal;}
-  .navbar-collapse:not(.order-first) .mega-menu.show.dropdown .sub-menu .dropdown-toggle-split {position: absolute;top: 0px;right: 0;}
-  /*en caso de modal D: */
-      .modal .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 100%;}
-  /*Offcanvas nav*/
-  .offcanvas.navbar-collapse{ background-color: transparent !important; }
-  /* Scroller nav */
-  .nav-scroller {height: 2rem;}
+ /*scroll-menu*/
+ .navbar-collapse:not(.order-first) .scroll-menu.dropdown.show, .navbar-collapse:not(.order-first) .scroll-menu.dropup.show{position: inherit;}
+ .navbar-collapse:not(.order-first) .scroll-menu.show > .dropdown-menu{max-width: 100%;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;overflow-x: scroll;/*white-space: nowrap;*/}
+ .navbar-collapse:not(.order-first) .scroll-menu.dropdown.show .dropdown,.navbar-collapse:not(.order-first) .scroll-menu.dropdown.show .dropright{display: flex;}
+ .navbar-collapse:not(.order-first) .scroll-menu.dropdown .dropdown .dropdown-menu,.navbar-collapse:not(.order-first) .scroll-menu.dropdown .dropright .dropdown-menu{position: static;padding: 0px;display: flex;}
+ /*en caso de modal D: */
+   .modal .navbar-collapse .scroll-menu.show .dropdown-menu{display: block;overflow: auto;flex-direction: column;}
+   .modal .navbar-collapse .scroll-menu.dropdown.show .dropdown,.modal .navbar-collapse .scroll-menu.dropdown.show .dropright{display: block;}
+ /*mega-menu*/
+ .navbar-collapse:not(.order-first) .mega-menu.show.dropdown, .navbar-collapse:not(.order-first) .mega-menu.show.dropup{position: inherit;}
+ .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu{max-width: 1120px;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;flex-wrap: wrap;}
+ .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 20%;}
+ .navbar-collapse:not(.order-first) .mega-menu.show .dropdown a, .navbar-collapse:not(.order-first) .mega-menu.show .dropright a {display: block;}
+ .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li > ul.dropdown-menu {display: block;position: static;border-bottom:none;}
+ .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > .menu-item > a.dropdown-item:first-child{text-transform: uppercase;font-size: .875rem;white-space: normal;}
+ .navbar-collapse:not(.order-first) .mega-menu.show.dropdown .sub-menu .dropdown-toggle-split {position: absolute;top: 0px;right: 0;}
+ /*en caso de modal D: */
+ .modal .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 100%;}
+ /*Offcanvas nav*/
+ .navbar-collapse.offcanvas{ background-color: transparent !important; }
+ /* Scroller nav */
+ .nav-scroller {height: 2rem;}
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -366,6 +370,8 @@
 .navbar-collapse.offcanvas.collapsing{height:auto;}
 .navbar-collapse.offcanvas.show{left:0;visibility:visible;}
   .fixed-bottom .navbar-collapse.offcanvas{top:0;bottom:0;}
+ /* Offcanvas + Sticky navbar */
+ .navbar-sticky .navbar-collapse.offcanvas.show{min-height: 100vh;}
 
 /* Carrusel extendido || Carousel extended */
  .carousel-multiple .carousel-item > *:nth-child(n+2){display:none;}
@@ -504,7 +510,6 @@ img{vertical-align:middle;border-style:none}
 .navbar-toggler:not(:disabled):not(.disabled){cursor:pointer}
 .navbar-toggler-icon{display:inline-block;width:1.5em;height:1.5em;vertical-align:middle;content:"";background:no-repeat center center;background-size:100% 100%}
 
-
 @media (max-width:767.98px){
 .navbar-expand-md>.container,.navbar-expand-md>.container-fluid{padding-right:0;padding-left:0}
 }
@@ -534,10 +539,12 @@ img{vertical-align:middle;border-style:none}
 .d-none{display:none!important}
 .d-block{display:block!important}
 .d-flex{display:-ms-flexbox!important;display:flex!important}
+
 @media (min-width:768px){
 .d-md-none{display:none!important}
 .d-md-block{display:block!important}
 }
+
 .flex-row{-ms-flex-direction:row!important;flex-direction:row!important}
 
 .justify-content-start{-ms-flex-pack:start!important;justify-content:flex-start!important}

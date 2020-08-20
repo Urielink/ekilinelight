@@ -33,6 +33,21 @@ jQuery(document).ready(function( $ ) {
 	  $('html, body').animate({ scrollTop:0 }, 'slow');
 	});
 
+	/* Navegacion con scroll */
+	if ( $('#primarySiteNavigation.navbar-sticky').length > 0 ) {
+		var last_scroll_top = 0;
+		$(window).on('scroll', function() {
+			scroll_top = $(this).scrollTop();
+			console.log(scroll_top);
+			if( scroll_top < last_scroll_top ) {
+				$('#primarySiteNavigation.navbar-sticky').removeClass('scrolled-down').addClass('scrolled-up');
+			} else {
+				$('#primarySiteNavigation.navbar-sticky').removeClass('scrolled-up').addClass('scrolled-down');
+			}
+			last_scroll_top = scroll_top;
+		});
+	}
+
 	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 *
 	 *	Bootstrap
