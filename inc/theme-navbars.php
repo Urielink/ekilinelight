@@ -174,6 +174,9 @@ function ekiline_navbar_menu( $nav_position ) {
 					'walker'          => new Ekiline_Nav_Menu(),
 				)
 			);
+
+			dynamic_sidebar( 'navbar-w1' );
+
 			?>
 
 			</div>
@@ -262,6 +265,9 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 						'walker'          => new Ekiline_Nav_Menu(),
 					)
 				);
+
+				dynamic_sidebar( 'navbar-w1' );
+
 				?>
 				</div>
 
@@ -278,6 +284,10 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 /**
  * Se invoca debajo de nav, pero puede necesitarse en la parte baja del sitio
  * add_action( 'wp_footer', 'ekiline_modal_menu_bottom', 0, 1 );
+ */
+
+/**
+ * En caso de no existir un menu, default.
  */
 function ekiline_nav_fallback() {
 	if ( is_user_logged_in() ) {

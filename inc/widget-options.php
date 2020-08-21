@@ -184,7 +184,7 @@ function ekiline_widget_show( $params ) {
 			$bef_wdg  = $bef_wdg;
 			$bef_ttl  = '<button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#wdgModal-' . $widget_id . '">';
 			$aft_ttl  = '</button><div class="modal fade" id="wdgModal-' . $widget_id . '">';
-			$aft_ttl .= '<div class="modal-dialog"><div class="modal-content">';
+			$aft_ttl .= '<div class="modal-dialog modal-dialog-centered"><div class="modal-content">';
 			$aft_ttl .= '<div class="modal-header">' . $widget_ttl . '<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button></div><div class="modal-body">';
 			$aft_wdg  = '</div></div></div></div>' . $aft_wdg;
 		}

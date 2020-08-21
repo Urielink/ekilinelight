@@ -79,7 +79,7 @@ if ( ! isset( $content_width ) ) {
  */
 function ekiline_widgets_init() {
 
-	// Default sidebar.
+	// Sidebar izquierdo y derecho. Default sidebar and right.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Left sidebar', 'ekiline' ),
@@ -92,7 +92,6 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Right sidebar.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Right sidebar', 'ekiline' ),
@@ -105,7 +104,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Widgets between content and footer.
+	// Sidebar entre contenido y footer. Sidebar between content and footer.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Bottom aside', 'ekiline' ),
@@ -118,7 +117,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Footer widgets.
+	// Widgets en footer. Footer widgets.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Footer', 'ekiline' ),
@@ -131,7 +130,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Widgets at top of content.
+	// Widgets antes de todo el contenido. Widgets at top of content.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'Top before all content', 'ekiline' ),
@@ -144,7 +143,7 @@ function ekiline_widgets_init() {
 		)
 	);
 
-	// Widget in content.
+	// Widgets antes y despues del contenido. Widgets before and after content.
 	register_sidebar(
 		array(
 			'name'          => esc_html__( 'In page top content', 'ekiline' ),
@@ -166,6 +165,19 @@ function ekiline_widgets_init() {
 			'after_widget'  => '</div>',
 			'before_title'  => '<p class="lead font-weight-bold widget-title">',
 			'after_title'   => '</p>',
+		)
+	);
+
+	// Widgets en el navbar. Widgets in navbar.
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'In navbar', 'ekiline' ),
+			'id'            => 'navbar-w1',
+			'description'   => '',
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<label class="widget-title screen-reader-text">',
+			'after_title'   => '</label>',
 		)
 	);
 

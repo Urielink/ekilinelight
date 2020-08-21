@@ -165,6 +165,9 @@
 /* Sticky navbar */
 .navbar-sticky.scrolled-down{ transform:translateY(-100%); transition: all 0.3s ease-in-out; }
 .navbar-sticky.scrolled-up{ transform:translateY(0); transition: all 0.3s ease-in-out; }
+ /* Modal + Sticky navbar */
+ .modal-open .navbar-sticky{z-index: 1100;}
+ .modal-open .navbar-sticky.scrolled-down, .modal-open .navbar-sticky.scrolled-up{transform: none;top: -100px;}
 
 /* Estilos de navegación que solo necesitan ejecutarse en desktop */
 @media only screen and (min-width : 768px) {
@@ -365,7 +368,7 @@
 @media only screen and (max-width : 768px) {
 
 /*Menu Offcanvas (solo responsivo)*/
-.navbar-collapse.offcanvas{position:fixed;z-index:100;top:0;bottom:0;left:100%;width:100%;padding:1rem;overflow-y:auto;visibility:hidden;transition-timing-function:ease-in-out;transition-duration:.2s;transition-property:left,visibility;}
+.navbar-collapse.offcanvas{position:fixed;z-index:1100;top:0;bottom:0;left:100%;width:100%;padding:1rem;overflow-y:auto;visibility:hidden;transition-timing-function:ease-in-out;transition-duration:.2s;transition-property:left,visibility;}
 .navbar-collapse.offcanvas .navbar-toggler{float:right;}
 .navbar-collapse.offcanvas.collapsing{height:auto;}
 .navbar-collapse.offcanvas.show{left:0;visibility:visible;}
