@@ -152,6 +152,48 @@ function ekiline_meta_image() {
 
 }
 
+/**
+ * Obtener de un menu la direccion url de una meta.
+ * Get url from nav
+ *
+ * @link https://developer.wordpress.org/reference/functions/get_term_by/
+ * @link https://developer.wordpress.org/reference/functions/wp_get_nav_menu_items/
+ *
+ * @param string $find_string direccion o dominio a verificar.
+ */
+function ekiline_find_in_nav( $find_string ) {
+	$array_menu = wp_get_nav_menu_items( 'Social Menu' );
+	$item       = $find_string;
+	if ( $array_menu ) {
+		foreach ( $array_menu as $m ) {
+			$url = $m->url;
+			if ( ! empty( $find_string ) && strpos( $url, $find_string ) !== false ) {
+				$item = $url;
+			}
+		}
+	}
+	return $item;
+}
+
+
+/**
+ * Obtener el username de una url de twitter
+ *
+ * @param string $url dominio a extraer.
+ */
+function ekiline_twitter_username( $url ) {
+	if ( 'twitter.com' === $url ) {
+		$url = str_replace( ' ', '', get_bloginfo( 'name' ) );
+	}
+	preg_match( '/[^\/]+$/', $url, $matches );
+	$last_word = $matches[0];
+	if ( strpos( $last_word, '@' ) !== false ) {
+		return $last_word;
+	} else {
+		return '@' . $last_word;
+	}
+}
+
 
 /**
  * Meta social, itemprop, twitter y facebook.
@@ -159,11 +201,11 @@ function ekiline_meta_image() {
 function ekiline_meta_social() {
 	global $wp;
 	$meta_social = '';
-
+	$find_url    = ekiline_find_in_nav( 'twitter.com' );
 	$meta_title  = get_bloginfo( 'name' );
 	$meta_desc   = ekiline_meta_description();
 	$meta_imgs   = ekiline_meta_image();
-	$ttr_link    = 'twitter.com';
+	$ttr_link    = ekiline_twitter_username( $find_url );
 	$meta_type   = 'website';
 	$current_url = home_url( add_query_arg( array(), $wp->request ) );
 

@@ -421,7 +421,8 @@ add_filter( 'query_vars', 'ekiline_themeslug_query_vars' );
 
 /**
  * Extension servir contenido sin formato por medio de url (2).
- *
+ * Usar: page-or-post-url/?show=blank
+ * 
  * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/single_template
  * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/page_template
  * @param string $template cambia la plantilla pre establecida.
@@ -438,3 +439,70 @@ function ekiline_serve_template( $template ) {
 }
 add_filter( 'single_template', 'ekiline_serve_template' );
 add_filter( 'page_template', 'ekiline_serve_template' );
+
+/**
+ * Incorporar datos a sitemap.
+ * Referencias:
+ *
+ * @link https://make.wordpress.org/core/2020/07/22/new-xml-sitemaps-functionality-in-wordpress-5-5/
+ * @link https://www.sitemaps.org/protocol.html
+ *
+ * @param string $entry publicacion.
+ * @param string $post tipo de publicacion.
+ */
+function ekiline_sitemap_more_atts( $entry, $post ) {
+	$entry['lastmod']    = $post->post_modified_gmt;
+	$entry['changefreq'] = 'monthly';
+	$entry['priority']   = '0.5';
+	return $entry;
+}
+add_filter( 'wp_sitemaps_posts_entry', 'ekiline_sitemap_more_atts', 10, 2 );
+
+/**
+ * Estilo personalizado en sitemap.
+ * Referencias:
+ *
+ * @param string $css estilos.
+ */
+function ekiline_sitemap_css( $css ) {
+	$css = '
+	body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+		color: #444;
+		font-size:.83rem;
+	}
+
+	#sitemap__table {
+		border: solid 1px #ccc;
+		border-collapse: collapse;
+	}
+
+	#sitemap__table tr td.loc {
+		direction: ltr;
+	}
+
+	#sitemap__table tr th {
+		text-align: left;
+	}
+
+	#sitemap__table tr td,
+	#sitemap__table tr th {
+		padding: 10px;
+	}
+
+	#sitemap__table tr:nth-child(odd) td {
+		background-color: #eee;
+	}
+
+	#sitemap__table tr:hover td {
+		background-color: #ddd;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+	';
+	return $css;
+}
+
+add_filter( 'wp_sitemaps_stylesheet_css', 'ekiline_sitemap_css', 0, 1 );
