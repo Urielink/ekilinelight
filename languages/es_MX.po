@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: Ekiline\n"
-"POT-Creation-Date: 2020-08-09 21:39-0500\n"
-"PO-Revision-Date: 2020-08-09 21:40-0500\n"
+"POT-Creation-Date: 2020-08-26 21:10-0500\n"
+"PO-Revision-Date: 2020-08-26 21:11-0500\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,26 +45,26 @@ msgstr "Buscar"
 msgid "Most used categories"
 msgstr "Categorías mas usadas"
 
-#: footer.php:26
+#: footer.php:26 singular-clean.php:56
 #, php-format
 msgid "&copy; Copyright %1$s. "
 msgstr "&copy; Copyright %1$s. "
 
-#: footer.php:28
+#: footer.php:28 singular-clean.php:58
 #, php-format
 msgid "Proudly powered by %1$s and %2$s. "
 msgstr "Realizado con %1$s y %2$s. "
 
-#: footer.php:28
+#: footer.php:28 singular-clean.php:58
 msgid "WordPress"
 msgstr "WordPress"
 
 #. Theme Name of the plugin/theme
-#: footer.php:28
+#: footer.php:28 singular-clean.php:58
 msgid "Ekiline"
 msgstr "Ekiline"
 
-#: footer.php:30
+#: footer.php:30 singular-clean.php:60
 msgid "Back"
 msgstr "Volver"
 
@@ -76,33 +76,37 @@ msgstr "Menú Primario"
 msgid "Left sidebar"
 msgstr "Sidebar izquierdo"
 
-#: functions.php:98
+#: functions.php:97
 msgid "Right sidebar"
 msgstr "Sidebar derecho"
 
-#: functions.php:111
+#: functions.php:110
 msgid "Bottom aside"
 msgstr "Sidebar inferior"
 
-#: functions.php:124 inc/theme-customcolors.php:114
+#: functions.php:123 inc/theme-customcolors.php:114
 msgid "Footer"
 msgstr "Pie de página"
 
-#: functions.php:137
+#: functions.php:136
 msgid "Top before all content"
 msgstr "Superior (antes del contenido)"
 
-#: functions.php:150
+#: functions.php:149
 msgid "In page top content"
 msgstr "Superior al contenido en página"
 
-#: functions.php:162
+#: functions.php:161
 msgid "In page bottom content"
 msgstr "Inferior al contenido en página"
 
+#: functions.php:174
+msgid "In navbar"
+msgstr "Barra de navegación"
+
 #: inc/class-ekiline-basic-breadcrumb.php:23
 msgid "Show breadcrumb module (Ekiline)"
-msgstr "Mostrar módulo de navegación (Ekiline)"
+msgstr "Mostrar módulo de ruta (Ekiline)"
 
 #: inc/class-ekiline-basic-breadcrumb.php:25
 msgid "Breadcrumb Nav"
@@ -193,7 +197,7 @@ msgstr "Fijar al scroll"
 
 #: inc/customizer.php:131
 msgid "Right"
-msgstr "Derecha"
+msgstr "A la derecha"
 
 #: inc/customizer.php:132
 msgid "Centered"
@@ -213,7 +217,7 @@ msgstr "Fuera de ventana (responsivo)"
 
 #: inc/customizer.php:136
 msgid "Top toggle"
-msgstr "Desplegado superior"
+msgstr "Desplegable"
 
 #: inc/customizer.php:137 inc/widget-options.php:116
 msgid "Modal"
@@ -365,7 +369,7 @@ msgstr "fondear el desarrollo"
 
 #: inc/info.php:95
 msgid "or"
-msgstr "o"
+msgstr "ó"
 
 #: inc/info.php:96
 msgid "earn money"
@@ -411,7 +415,7 @@ msgstr ""
 
 #: inc/info.php:111
 msgid "Documentation"
-msgstr "Documentación"
+msgstr "nuestra documentación"
 
 #: inc/info.php:113
 msgid "Installation"
@@ -448,7 +452,7 @@ msgstr "Gana dinero"
 
 #: inc/info.php:187
 msgid "Get more"
-msgstr "Consiga más"
+msgstr "Obtén más"
 
 #: inc/theme-customcolors.php:22 inc/theme-customheader.php:27
 msgid "Colors"
@@ -484,7 +488,7 @@ msgstr "Color de fondo barra de navegación"
 
 #: inc/theme-customcolors.php:88
 msgid "Bottom bar"
-msgstr "Barra inferior"
+msgstr ""
 
 #: inc/theme-customcolors.php:141
 msgid "Change Bootstrap color palette and use default classes"
@@ -603,7 +607,7 @@ msgstr ""
 
 #: inc/theme-customheader.php:199
 msgid "Default header image"
-msgstr "Imagen por defecto del encabezado"
+msgstr "Imagen del encabezado por defecto"
 
 #: inc/theme-customheader.php:307 template-parts/content-card.php:29
 #: template-parts/content.php:66
@@ -686,7 +690,7 @@ msgstr "Siguiente &rarr;"
 msgid "There are %1$s entries related to %2$s"
 msgstr "Hay%1$s entradas relacionadas con%2$s"
 
-#: inc/theme-navbars.php:293
+#: inc/theme-navbars.php:303
 msgid "Assign a menu!"
 msgstr "¡Asigna un menú!"
 
@@ -770,8 +774,8 @@ msgstr "Ocultar comentarios"
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] "%1$s comentario en &ldquo;%2$s&rdquo;"
-msgstr[1] "%1$s comentarios en &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s comentario sobre &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s comentarios sobre &ldquo;%2$s&rdquo;"
 
 #: template-parts/comments.php:43
 msgid "Comment navigation"
@@ -895,8 +899,8 @@ msgid "Comments are closed."
 msgstr "Comentarios cerrados."
 
 #: template-parts/searchform.php:20
-msgid "Search Results for:"
-msgstr "Buscar resultados para:"
+msgid "Find term"
+msgstr "Encontrar término"
 
 #. Theme URI of the plugin/theme
 msgid "http://www.ekiline.com/"

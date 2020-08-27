@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Ekiline\n"
-"POT-Creation-Date: 2020-08-09 21:21-0500\n"
-"PO-Revision-Date: 2020-08-09 21:21-0500\n"
+"POT-Creation-Date: 2020-08-26 21:11-0500\n"
+"PO-Revision-Date: 2020-08-26 20:51-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,26 +43,26 @@ msgstr ""
 msgid "Most used categories"
 msgstr ""
 
-#: footer.php:26
+#: footer.php:26 singular-clean.php:56
 #, php-format
 msgid "&copy; Copyright %1$s. "
 msgstr ""
 
-#: footer.php:28
+#: footer.php:28 singular-clean.php:58
 #, php-format
 msgid "Proudly powered by %1$s and %2$s. "
 msgstr ""
 
-#: footer.php:28
+#: footer.php:28 singular-clean.php:58
 msgid "WordPress"
 msgstr ""
 
 #. Theme Name of the plugin/theme
-#: footer.php:28
+#: footer.php:28 singular-clean.php:58
 msgid "Ekiline"
 msgstr ""
 
-#: footer.php:30
+#: footer.php:30 singular-clean.php:60
 msgid "Back"
 msgstr ""
 
@@ -74,28 +74,32 @@ msgstr ""
 msgid "Left sidebar"
 msgstr ""
 
-#: functions.php:98
+#: functions.php:97
 msgid "Right sidebar"
 msgstr ""
 
-#: functions.php:111
+#: functions.php:110
 msgid "Bottom aside"
 msgstr ""
 
-#: functions.php:124 inc/theme-customcolors.php:114
+#: functions.php:123 inc/theme-customcolors.php:114
 msgid "Footer"
 msgstr ""
 
-#: functions.php:137
+#: functions.php:136
 msgid "Top before all content"
 msgstr ""
 
-#: functions.php:150
+#: functions.php:149
 msgid "In page top content"
 msgstr ""
 
-#: functions.php:162
+#: functions.php:161
 msgid "In page bottom content"
+msgstr ""
+
+#: functions.php:174
+msgid "In navbar"
 msgstr ""
 
 #: inc/class-ekiline-basic-breadcrumb.php:23
@@ -638,7 +642,7 @@ msgstr ""
 msgid "There are %1$s entries related to %2$s"
 msgstr ""
 
-#: inc/theme-navbars.php:293
+#: inc/theme-navbars.php:303
 msgid "Assign a menu!"
 msgstr ""
 
@@ -841,7 +845,7 @@ msgid "Comments are closed."
 msgstr ""
 
 #: template-parts/searchform.php:20
-msgid "Search Results for:"
+msgid "Find term"
 msgstr ""
 
 #. Theme URI of the plugin/theme
