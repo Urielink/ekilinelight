@@ -446,14 +446,66 @@ add_filter( 'page_template', 'ekiline_serve_template' );
  *
  * @link https://make.wordpress.org/core/2020/07/22/new-xml-sitemaps-functionality-in-wordpress-5-5/
  * @link https://www.sitemaps.org/protocol.html
+ * @link https://developer.wordpress.org/reference/functions/get_the_date/
+ * @link https://developer.wordpress.org/reference/functions/current_time/
  *
  * @param string $entry publicacion.
  * @param string $post tipo de publicacion.
  */
 function ekiline_sitemap_more_atts( $entry, $post ) {
+
+	$frecuencia = 'never';
+	$prioridad  = '0.6';
+
+	$hoy    = current_time( 'Ymd', true );
+	$origen = get_the_date( 'Ymd', $post );
+	$cambio = get_the_modified_date( 'Ymd', $post );
+
+	$hoy_y    = current_time( 'Y', true );
+	$origen_y = get_the_date( 'Y', $post );
+	$cambio_y = get_the_modified_date( 'Y', $post );
+
+	$hoy_m    = current_time( 'm', true );
+	$origen_m = get_the_date( 'm', $post );
+	$cambio_m = get_the_modified_date( 'm', $post );
+
+	$hoy_d    = current_time( 'd', true );
+	$origen_d = get_the_date( 'd', $post );
+	$cambio_d = get_the_modified_date( 'd', $post );
+
+	$set_y = ( $hoy_y - $cambio_y );
+	$set_m = ( $hoy_m - $cambio_m );
+	$set_d = ( $hoy_d - $cambio_d );
+
+	if ( $set_y < 2 ) {
+		$frecuencia = 'yearly';
+		$prioridad  = '0.7';
+	}
+
+	if ( 0 === $set_y ) {
+		if ( $set_m < 2 ) {
+			$frecuencia = 'monthly';
+			$prioridad  = '0.8';
+		}
+		if ( 0 === $set_m ) {
+			if ( $set_d > 8 ) {
+				$frecuencia = 'weekly';
+				$prioridad  = '0.9';
+			} elseif ( $set_d < 7 ) {
+				$frecuencia = 'daily';
+				$prioridad  = '1.0';
+			}
+		}
+	}
+
+	if ( $set_y > 3 ) {
+		$prioridad = '0.5';
+	}
+
 	$entry['lastmod']    = $post->post_modified_gmt;
-	$entry['changefreq'] = 'monthly';
-	$entry['priority']   = '0.5';
+	$entry['changefreq'] = $frecuencia;
+	$entry['priority']   = $prioridad;
+
 	return $entry;
 }
 add_filter( 'wp_sitemaps_posts_entry', 'ekiline_sitemap_more_atts', 10, 2 );
