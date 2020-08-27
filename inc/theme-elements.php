@@ -454,57 +454,40 @@ add_filter( 'page_template', 'ekiline_serve_template' );
  */
 function ekiline_sitemap_more_atts( $entry, $post ) {
 
-	$frecuencia = 'never';
-	$prioridad  = '0.6';
+	$frec  = 'never';
+	$prior = '0.6';
+	$set_y = ( current_time( 'Y', true ) - get_the_modified_date( 'Y', $post ) );
+	$set_m = ( current_time( 'm', true ) - get_the_modified_date( 'm', $post ) );
+	$set_d = ( current_time( 'd', true ) - get_the_modified_date( 'd', $post ) );
 
-	$hoy    = current_time( 'Ymd', true );
-	$origen = get_the_date( 'Ymd', $post );
-	$cambio = get_the_modified_date( 'Ymd', $post );
-
-	$hoy_y    = current_time( 'Y', true );
-	$origen_y = get_the_date( 'Y', $post );
-	$cambio_y = get_the_modified_date( 'Y', $post );
-
-	$hoy_m    = current_time( 'm', true );
-	$origen_m = get_the_date( 'm', $post );
-	$cambio_m = get_the_modified_date( 'm', $post );
-
-	$hoy_d    = current_time( 'd', true );
-	$origen_d = get_the_date( 'd', $post );
-	$cambio_d = get_the_modified_date( 'd', $post );
-
-	$set_y = ( $hoy_y - $cambio_y );
-	$set_m = ( $hoy_m - $cambio_m );
-	$set_d = ( $hoy_d - $cambio_d );
-
-	if ( $set_y < 2 ) {
-		$frecuencia = 'yearly';
-		$prioridad  = '0.7';
+	if ( 2 > $set_y ) {
+		$frec  = 'yearly';
+		$prior = '0.7';
 	}
 
 	if ( 0 === $set_y ) {
-		if ( $set_m < 2 ) {
-			$frecuencia = 'monthly';
-			$prioridad  = '0.8';
+		if ( 2 > $set_m ) {
+			$frec  = 'monthly';
+			$prior = '0.8';
 		}
 		if ( 0 === $set_m ) {
-			if ( $set_d > 8 ) {
-				$frecuencia = 'weekly';
-				$prioridad  = '0.9';
-			} elseif ( $set_d < 7 ) {
-				$frecuencia = 'daily';
-				$prioridad  = '1.0';
+			if ( 8 < $set_d ) {
+				$frec  = 'weekly';
+				$prior = '0.9';
+			} elseif ( 7 > $set_d ) {
+				$frec  = 'daily';
+				$prior = '1.0';
 			}
 		}
 	}
 
-	if ( $set_y > 3 ) {
-		$prioridad = '0.5';
+	if ( 3 < $set_y ) {
+		$prior = '0.5';
 	}
 
 	$entry['lastmod']    = $post->post_modified_gmt;
-	$entry['changefreq'] = $frecuencia;
-	$entry['priority']   = $prioridad;
+	$entry['changefreq'] = $frec;
+	$entry['priority']   = $prior;
 
 	return $entry;
 }
