@@ -332,7 +332,7 @@ function custom_header_content( $content_type = null ) {
 		} else {
 			$custom_header_title = '<a href="' . esc_url( get_the_permalink() ) . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
 			$custom_header_text  = ekiline_content_out_the_loop() . '<br>';
-			$custom_header_text .= '<small>' . $categories_list . ' | ' . $tags_list . '</small>';
+			$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' | ' . $tags_list . '</small></span>';
 		}
 	}
 
@@ -357,7 +357,7 @@ function custom_header_content( $content_type = null ) {
 			$content             = get_the_archive_description();
 			$custom_header_text .= wp_strip_all_tags( substr( $content, 0, strpos( $content, '.' ) ) ) . '<br>';
 		}
-		$custom_header_text .= '<small>' . $categories_list . ' | ' . $tags_list . '</small>';
+		$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' | ' . $tags_list . '</small></span>';
 	}
 
 	if ( is_search() ) {

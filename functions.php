@@ -72,6 +72,7 @@ if ( ! isset( $content_width ) ) {
 	$content_width = '';
 }
 
+
 /**
  * Registrar widgets y sus areas // Register widget area.
  *
@@ -184,6 +185,57 @@ function ekiline_widgets_init() {
 }
 add_action( 'widgets_init', 'ekiline_widgets_init' );
 
+
+/**
+ * Estilos css, above the fold.
+ * Funcion: Obtener contenido entre 2 strings.
+ *
+ * @param string $string contenido.
+ * @param string $start etiqueta de abertura.
+ * @param string $end etiqueta de cierre.
+ */
+function ekiline_get_string_between( $string, $start, $end ) {
+	$string = ' ' . $string;
+	$ini    = strpos( $string, $start );
+	if ( 0 === $ini ) {
+		return '';
+	}
+	$ini += strlen( $start );
+	$len  = strpos( $string, $end, $ini ) - $ini;
+	return substr( $string, $ini, $len );
+}
+
+/**
+ * Estilos css, above the fold.
+ * Obtener los estilos de un css e imprimirlos en el head,
+ * debe aparecer al principio de cualquier css (0).
+ */
+function ekiline_above_fold_styles() {
+	// Estilos.
+	$file = get_template_directory_uri() . '/style.css';
+	$file = wp_remote_get( $file );
+	$data = wp_remote_retrieve_body( $file );
+	$data = ekiline_get_string_between( $data, '/*[ekiline-atfcss-start]*/@media(max-width:0px){', '}/*[ekiline-atfcss-end]*/' );
+	// Quitar comentarios.
+	$data = preg_replace( '#/\*.*?\*/#s', '', $data );
+	// Quitar saltos de linea y convertir en un string.
+	$data = str_replace( array( "\r", "\n" ), '', $data );
+	// HTML5.
+	$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
+	if ( $data ) {
+		printf(
+			'<style%1$sid="ekiline-atf">%2$s</style>' . "\n",
+			wp_kses_post( $type_attr ),
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			wp_strip_all_tags( $data )
+		);
+	} else {
+		printf( '<!-- Error en style.css: Falta la referencia a ekiline-atfcss-start, ekiline-atfcss-end -->' . "\n" );
+	}
+}
+add_action( 'wp_head', 'ekiline_above_fold_styles', 0 );
+
+
 /**
  * Estilos CSS // Javascript // Js con argumentos
  *
@@ -243,73 +295,6 @@ function ekiline_inline_css_tag() {
 	);
 }
 add_action( 'wp_head', 'ekiline_inline_css_tag', 100 );
-
-
-/**
- * Estilos css, above the fold.
- * Funcion: Obtener contenido entre 2 strings.
- *
- * @param string $string contenido.
- * @param string $start etiqueta de abertura.
- * @param string $end etiqueta de cierre.
- */
-function ekiline_get_string_between( $string, $start, $end ) {
-	$string = ' ' . $string;
-	$ini    = strpos( $string, $start );
-	if ( 0 === $ini ) {
-		return '';
-	}
-	$ini += strlen( $start );
-	$len  = strpos( $string, $end, $ini ) - $ini;
-	return substr( $string, $ini, $len );
-}
-
-/**
- * Estilos css, above the fold.
- * Obtener los estilos de un css e imprimirlos en el head,
- * debe aparecer al principio de cualquier css (0).
- */
-function ekiline_above_fold_styles() {
-	// Estilos.
-	$file = get_template_directory_uri() . '/style.css';
-	$file = wp_remote_get( $file );
-	$data = wp_remote_retrieve_body( $file );
-	$data = ekiline_get_string_between( $data, '/*[ekiline-atfcss-start]*/@media(max-width:0px){', '}/*[ekiline-atfcss-end]*/' );
-	// Quitar comentarios.
-	$data = preg_replace( '#/\*.*?\*/#s', '', $data );
-	// Quitar saltos de linea y convertir en un string.
-	$data = str_replace( array( "\r", "\n" ), '', $data );
-	// HTML5.
-	$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-	if ( $data ) {
-		printf(
-			'<style%1$sid="ekiline-atf">%2$s</style>' . "\n",
-			wp_kses_post( $type_attr ),
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			wp_strip_all_tags( $data )
-		);
-	} else {
-		printf( '<!-- Error en style.css: Falta la referencia a ekiline-atfcss-start, ekiline-atfcss-end -->' . "\n" );
-	}
-}
-add_action( 'wp_head', 'ekiline_above_fold_styles', 0 );
-
-
-/**
- * Ekiline no require jquery_migrate.
- *
- * @param string $scripts find handler and isset.
- */
-function remove_jquery_migrate( $scripts ) {
-	if ( ! is_admin() && isset( $scripts->registered['jquery'] ) ) {
-		$script = $scripts->registered['jquery'];
-		// verificar dependencias.
-		if ( $script->deps ) {
-			$script->deps = array_diff( $script->deps, array( 'jquery-migrate' ) );
-		}
-	}
-}
-add_action( 'wp_default_scripts', 'remove_jquery_migrate' );
 
 
 /* Ekiline adiciones */

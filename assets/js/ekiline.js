@@ -38,7 +38,7 @@ jQuery(document).ready(function( $ ) {
 		var last_scroll_top = 0;
 		$(window).on('scroll', function() {
 			scroll_top = $(this).scrollTop();
-			console.log(scroll_top);
+			//console.log(scroll_top);
 			if( scroll_top < last_scroll_top ) {
 				$('#primarySiteNavigation.navbar-sticky').removeClass('scrolled-down').addClass('scrolled-up');
 			} else {
@@ -54,10 +54,7 @@ jQuery(document).ready(function( $ ) {
 	 *
 	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
 	// inicializar popovers y tooltips
-	// $(this).one('mousemove', startPop() ).one('scroll', startPop() );
-	// function startPop(){
 		$('[data-toggle="tooltip"]').tooltip();
 		$('[data-toggle="popover"]').popover();
-	// }
 
 });
