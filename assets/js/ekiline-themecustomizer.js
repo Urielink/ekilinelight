@@ -311,7 +311,7 @@ jQuery(document).ready(function($){
 			cssall += '.table-dark.table-hover tbody tr:hover{background-color:' + extraccion.light.tabBgHv + ';}\n';
 
 			/**Formularios**/
-			cssall += '.form-control{color:' + extraccion.text.focusHv + ';background-color:' + extraccion.light.focus + ';border-color:' + extraccion.secondary.focus + ';}\n';
+			cssall += '.form-control{color:' + extraccion.text.puro + ';background-color:' + extraccion.light.focus + ';border-color:' + extraccion.secondary.focus + ';}\n';
 			cssall += '.form-control:focus{color:' + extraccion.info.alertTx + ';background-color:' + extraccion.light.focus + ';border-color:' + extraccion.info.focusHv + ';box-shadow:0 0 0.2rem 0.2rem ' + extraccion.info.focus + ';}\n';
 			cssall += '.form-control::-webkit-input-placeholder{color:' + extraccion.secondary.puro + ';}\n';
 			cssall += '.form-control::-moz-placeholder{color:' + extraccion.secondary.puro + ';}\n';
