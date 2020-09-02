@@ -273,12 +273,16 @@ function ekiline_styles_localize() {
 
 			$css_src = $wp_styles->registered[ $thehandler ];
 
+			// Fix: sobrescribir url de cada CSS en caso de solo ser relativa al sistema.
+			$src_url = ekiline_check_fix_url( $css_src->src );
+
 			if ( '1' === $theoption ) {
 				$the_styles[] = array(
 					'id'    => $thehandler,
-					'src'   => $css_src->src,
+					'src'   => $src_url,
 					'media' => $css_src->args,
 				);
+				
 			}
 		}
 	}
@@ -383,11 +387,14 @@ function ekiline_scripts_localize() {
 
 			$js_src = $wp_scripts->registered[ $thehandler ];
 
+			// Fix: sobrescribir url de cada CSS en caso de solo ser relativa al sistema.
+			$src_url = ekiline_check_fix_url( $js_src->src );
+
 			// Crear diccionario.
 			if ( '4' === $theoption ) {
 				$the_scripts[] = array(
 					'id'  => $thehandler,
-					'src' => $js_src->src,
+					'src' => $src_url,
 				);
 			}
 			/**
@@ -416,14 +423,16 @@ function ekiline_change_js_tag( $tag, $handle, $src ) {
 	$rplcs_comment = array( '<!-- script src=', '></script -->' );
 	$rplcs_preload = array( '<link rel="preload" as="script" href=', '/>' );
 	$rplcs_precomm = array( '<!-- link rel="preload" as="script" href=', '/ -->' );
+	$precomm_erase = preg_replace( '/<!--(.|\s)*?-->/', '', $tag );
 
 	foreach ( $load_jss_from as $pre_script ) {
 		if ( $pre_script['handler'] === $handle && '4' === $pre_script['option'] ) {
 			$tagwrd   = 'script';
 			$patterns = array( '/<' . $tagwrd . ' src=/', '/><\/' . $tagwrd . '>/' );
-			$tag      = preg_replace( $patterns, $rplcs_precomm, $tag );
+			$tag      = preg_replace( $patterns, $rplcs_preload, $tag );
 		}
 	}
+
 	return $tag;
 
 }
@@ -496,3 +505,42 @@ function footer_enqueue_scripts() {
 	add_action( 'wp_footer', 'wp_print_head_scripts', 5 );
 
 }
+
+
+/**
+ * FIX: Verificar la url de una libreria, si no cuenta con el dominio, es necesario agregarlo.
+ * Siempre y cuando sea un script CSS o JS alojado en el sistema. Ocupar: [scheme, host, path].
+ * Validate url from css or js queried.
+ *
+ * @link https://developer.wordpress.org/reference/functions/wp_parse_url/
+ *
+ * @param string $url ruta del item.
+ */
+function ekiline_check_fix_url( $url ) {
+
+	$siteurl  = get_site_url();
+	$src_url  = $url;
+	$urlparse = wp_parse_url( $src_url );
+
+	if ( ! isset( $urlparse['scheme'] ) && ! isset( $urlparse['host'] ) ) {
+		$src_url = $siteurl . $src_url;
+	}
+
+	return $src_url;
+}
+
+/**
+ * FIX: Remover la version para mantener uniformidad en preload.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/style_loader_src/
+ *
+ * @param string $src ruta del item.
+ */
+function ekiline_remove_version_jscss( $src ) {
+	if ( strpos( $src, '?ver=' ) ) {
+		$src = remove_query_arg( 'ver', $src );
+	}
+	return $src;
+}
+add_filter( 'style_loader_src', 'ekiline_remove_version_jscss' );
+add_filter( 'script_loader_src', 'ekiline_remove_version_jscss' );

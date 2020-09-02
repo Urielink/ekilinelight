@@ -831,6 +831,25 @@ jQuery(document).ready(function($){
 			// cssall += '.text-black-50{color:' + extraccion.text.navHov + ' !important;}\n';
 			// cssall += '.text-white-50{color:' + extraccion.light.navHov + ' !important;}\n';
 
+			/**Block Editor**/
+			cssall += '.has-primary-color{color:' + extraccion.primary.puro + ' !important;}\n';
+			cssall += '.has-primary-background-color{background-color:' + extraccion.primary.puro + ' !important;}\n';
+			cssall += '.has-secondary-color{color:' + extraccion.secondary.puro + ' !important;}\n';
+			cssall += '.has-secondary-background-color{background-color:' + extraccion.secondary.puro + ' !important;}\n';
+			cssall += '.has-success-color{color:' + extraccion.success.puro + ' !important;}\n';
+			cssall += '.has-success-background-color{background-color:' + extraccion.success.puro + ' !important;}\n';
+			cssall += '.has-info-color{color:' + extraccion.info.puro + ' !important;}\n';
+			cssall += '.has-info-background-color{background-color:' + extraccion.info.puro + ' !important;}\n';
+			cssall += '.has-warning-color{color:' + extraccion.warning.puro + ' !important;}\n';
+			cssall += '.has-warning-background-color{background-color:' + extraccion.warning.puro + ' !important;}\n';
+			cssall += '.has-danger-color{color:' + extraccion.danger.puro + ' !important;}\n';
+			cssall += '.has-danger-background-color{background-color:' + extraccion.danger.puro + ' !important;}\n';
+			cssall += '.has-light-color{color:' + extraccion.light.puro + ' !important;}\n';
+			cssall += '.has-light-background-color{background-color:' + extraccion.light.puro + ' !important;}\n';
+			cssall += '.has-dark-color{color:' + extraccion.dark.puro + ' !important;}\n';
+			cssall += '.has-dark-background-color{background-color:' + extraccion.dark.puro + ' !important;}\n';
+
+
 		console.log(cssall);
 
         return cssall;

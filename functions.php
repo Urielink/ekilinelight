@@ -246,7 +246,7 @@ add_action( 'wp_head', 'ekiline_above_fold_styles', 0 );
  */
 function ekiline_scripts() {
 	// Estilos.
-	wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4', 'all' );
+	wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4.5', 'all' );
 	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri(), array(), '4', 'all' );
 	wp_enqueue_style( 'dashicons' );
 	// Scripts.
@@ -314,3 +314,57 @@ require get_template_directory() . '/inc/theme-customheader.php';
 require get_template_directory() . '/inc/theme-optimizescripts.php';
 /* Ekiline info admin */
 require get_template_directory() . '/inc/info.php';
+
+/**
+ * Ekiline block editor
+ * Personalizar colores
+ */
+function ekiline_block_editor_colors() {
+
+	$block_colors = array(
+		array(
+			'name'  => __( 'Primary', 'ekiline' ),
+			'slug'  => 'primary',
+			'color' => get_option( 'b4_primary' ),
+		),
+		array(
+			'name'  => __( 'Secondary', 'ekiline' ),
+			'slug'  => 'secondary',
+			'color' => get_option( 'b4_secondary' ),
+		),
+		array(
+			'name'  => __( 'Success', 'ekiline' ),
+			'slug'  => 'success',
+			'color' => get_option( 'b4_success' ),
+		),
+		array(
+			'name'  => __( 'Danger', 'ekiline' ),
+			'slug'  => 'danger',
+			'color' => get_option( 'b4_danger' ),
+		),
+		array(
+			'name'  => __( 'Warning', 'ekiline' ),
+			'slug'  => 'warning',
+			'color' => get_option( 'b4_warning' ),
+		),
+		array(
+			'name'  => __( 'Info', 'ekiline' ),
+			'slug'  => 'info',
+			'color' => get_option( 'b4_info' ),
+		),
+		array(
+			'name'  => __( 'Light', 'ekiline' ),
+			'slug'  => 'light',
+			'color' => get_option( 'b4_light' ),
+		),
+		array(
+			'name'  => __( 'Dark', 'ekiline' ),
+			'slug'  => 'dark',
+			'color' => get_option( 'b4_dark' ),
+		),
+	);
+
+	add_theme_support( 'editor-color-palette', $block_colors );
+}
+
+add_action( 'after_setup_theme', 'ekiline_block_editor_colors' );
