@@ -33,7 +33,6 @@
  * 2) Ekiline: Personalizaciones, y extensiones.
  * 3) Above the fold.
  */
-
 /* ------------------------------------------------
  * 1) WordPress: escencial || core items
  * ----------------------------------------------*/
@@ -62,16 +61,21 @@
  #user_switching_switch_on{position:fixed;left:0;padding:0.4rem;margin:0px;bottom:0px;z-index:3000;background-color:#343A40;font-size:0.8rem;}
 
  /* ------------------------------------------------
-  * 1.1) Gutenberg:
+  * 1.1) Gutenberg, Block editor:
   * ----------------------------------------------*/
-
  /* alineacion amplia || wide alignments */
  .container > .hentry .alignwide{ margin-left:-10%; margin-right:-10%; width:120%;}
  .container > .hentry .alignfull{margin-left: calc( -100vw / 2 + 100% / 2 - 8px);margin-right: calc( -100vw / 2 + 100% / 2 - 8px);width: 100vw;}
  .container > .hentry .wp-block-image.alignfull,.container > .hentry .wp-block-image.alignwide{max-width: 100vw;text-align: center;}
  .hentry .alignfull iframe,.hentry .alignwide iframe{width: 100%;height: calc(100vw / 3);min-height: 400px;}
  .hentry .alignfull video,.hentry .alignwide video{width: 100%;min-height: 400px;}
- .wp-block-pullquote {border-top:4px solid;border-bottom:4px solid;}
+ /* Coincidencias con bootstrap || Bootstrap coincidences */
+ .has-display-1-font-size, .has-display-2-font-size, .has-display-3-font-size, .has-display-4-font-size {font-weight: 300;line-height: 1.2;}
+ .has-display-1-font-size {font-size: 6rem;}
+ .has-display-2-font-size {font-size: 5.5rem;}
+ .has-display-3-font-size {font-size: 4.5rem;}
+ .has-display-4-font-size {font-size: 3.5rem;}
+
  /* ------------------------------------------------
   * 1.2) WIDGETS
   * ----------------------------------------------*/

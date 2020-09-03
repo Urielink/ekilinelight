@@ -52,9 +52,6 @@ function ekiline_setup() {
 			'primary' => esc_html__( 'Primary Menu', 'ekiline' ),
 		)
 	);
-
-	// Gutenberg: alineaciones a todo lo ancho.
-	add_theme_support( 'align-wide' );
 }
 add_action( 'after_setup_theme', 'ekiline_setup' );
 
@@ -312,59 +309,7 @@ require get_template_directory() . '/inc/theme-meta.php';
 require get_template_directory() . '/inc/theme-customheader.php';
 /* Ekiline optimizacion */
 require get_template_directory() . '/inc/theme-optimizescripts.php';
+/* Ekiline Block Editor */
+require get_template_directory() . '/inc/theme-blockeditor.php';
 /* Ekiline info admin */
 require get_template_directory() . '/inc/info.php';
-
-/**
- * Ekiline block editor
- * Personalizar colores
- */
-function ekiline_block_editor_colors() {
-
-	$block_colors = array(
-		array(
-			'name'  => __( 'Primary', 'ekiline' ),
-			'slug'  => 'primary',
-			'color' => get_option( 'b4_primary' ),
-		),
-		array(
-			'name'  => __( 'Secondary', 'ekiline' ),
-			'slug'  => 'secondary',
-			'color' => get_option( 'b4_secondary' ),
-		),
-		array(
-			'name'  => __( 'Success', 'ekiline' ),
-			'slug'  => 'success',
-			'color' => get_option( 'b4_success' ),
-		),
-		array(
-			'name'  => __( 'Danger', 'ekiline' ),
-			'slug'  => 'danger',
-			'color' => get_option( 'b4_danger' ),
-		),
-		array(
-			'name'  => __( 'Warning', 'ekiline' ),
-			'slug'  => 'warning',
-			'color' => get_option( 'b4_warning' ),
-		),
-		array(
-			'name'  => __( 'Info', 'ekiline' ),
-			'slug'  => 'info',
-			'color' => get_option( 'b4_info' ),
-		),
-		array(
-			'name'  => __( 'Light', 'ekiline' ),
-			'slug'  => 'light',
-			'color' => get_option( 'b4_light' ),
-		),
-		array(
-			'name'  => __( 'Dark', 'ekiline' ),
-			'slug'  => 'dark',
-			'color' => get_option( 'b4_dark' ),
-		),
-	);
-
-	add_theme_support( 'editor-color-palette', $block_colors );
-}
-
-add_action( 'after_setup_theme', 'ekiline_block_editor_colors' );

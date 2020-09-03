@@ -282,7 +282,6 @@ function ekiline_styles_localize() {
 					'src'   => $src_url,
 					'media' => $css_src->args,
 				);
-				
 			}
 		}
 	}
