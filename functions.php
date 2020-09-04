@@ -192,14 +192,15 @@ add_action( 'widgets_init', 'ekiline_widgets_init' );
  * @param string $end etiqueta de cierre.
  */
 function ekiline_get_string_between( $string, $start, $end ) {
-	$string = ' ' . $string;
-	$ini    = strpos( $string, $start );
-	if ( 0 === $ini ) {
-		return '';
+	// Verificar la existencia de strings.
+	$find_start = strpos( $string, $start );
+	$find_end   = strpos( $string, $end );
+	// Extraer el contenido.
+	if ( false !== $find_start && false !== $find_end ) {
+		$extract = explode( $start, $string );
+		$extract = explode( $end, $extract[1] );
+		return $extract[0];
 	}
-	$ini += strlen( $start );
-	$len  = strpos( $string, $end, $ini ) - $ini;
-	return substr( $string, $ini, $len );
 }
 
 /**

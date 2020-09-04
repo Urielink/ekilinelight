@@ -9,6 +9,20 @@
  */
 
 /**
+ * Diccionario alternativo para traducciones.
+ * Template names - Localization
+ *
+ * @link https://developer.wordpress.org/apis/handbook/internationalization/localization/
+ */
+function ekiline_localize_extra_terms() {
+	$words = array();
+	// Nuevas plantillas / Template Name.
+	$words[] = __( 'Simple page', 'ekiline' );
+	$words[] = __( 'No sidebars', 'ekiline' );
+	$words[] = __( 'Blank page', 'ekiline' );
+}
+
+/**
  * Reemplazar el marcado para el enlace de leer mas
  * Custom read more link
  */

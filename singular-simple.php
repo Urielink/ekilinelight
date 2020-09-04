@@ -1,9 +1,9 @@
 <?php
 /**
- * Template Name: Clean
+ * Template Name: Simple page
  *
- * Plantilla basica, sin titulo, sin widgets, sin comentarios.
- * Basic template, no title, no widgets, no comments.
+ * Plantilla basica con formato, sin titulo, sin widgets, sin comentarios.
+ * Basic template with format, no title, no widgets, no comments.
  *
  * @link https://developer.wordpress.org/themes/template-files-section/page-template-files/
  *
@@ -23,8 +23,6 @@
 	</head>
 	<body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
-
-	<?php dynamic_sidebar( 'toppage-w1' ); ?>
 
 	<?php ekiline_navbar_menu( 'primary' ); ?>
 

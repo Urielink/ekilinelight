@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Ekiline\n"
-"POT-Creation-Date: 2020-08-26 21:11-0500\n"
-"PO-Revision-Date: 2020-08-26 20:51-0500\n"
+"POT-Creation-Date: 2020-09-04 15:13-0500\n"
+"PO-Revision-Date: 2020-09-04 15:12-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "Try looking in the monthly archives. %1$s"
 msgstr ""
 
-#: 404.php:43 template-parts/searchform.php:23
+#: 404.php:43 template-parts/searchform.php:31
 msgid "Search"
 msgstr ""
 
@@ -43,26 +43,26 @@ msgstr ""
 msgid "Most used categories"
 msgstr ""
 
-#: footer.php:26 singular-clean.php:56
+#: footer.php:26 singular-simple.php:54
 #, php-format
 msgid "&copy; Copyright %1$s. "
 msgstr ""
 
-#: footer.php:28 singular-clean.php:58
+#: footer.php:28 singular-simple.php:56
 #, php-format
 msgid "Proudly powered by %1$s and %2$s. "
 msgstr ""
 
-#: footer.php:28 singular-clean.php:58
+#: footer.php:28 singular-simple.php:56
 msgid "WordPress"
 msgstr ""
 
 #. Theme Name of the plugin/theme
-#: footer.php:28 singular-clean.php:58
+#: footer.php:28 singular-simple.php:56
 msgid "Ekiline"
 msgstr ""
 
-#: footer.php:30 singular-clean.php:60
+#: footer.php:30 singular-simple.php:58
 msgid "Back"
 msgstr ""
 
@@ -70,35 +70,35 @@ msgstr ""
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:85
+#: functions.php:83
 msgid "Left sidebar"
 msgstr ""
 
-#: functions.php:97
+#: functions.php:95
 msgid "Right sidebar"
 msgstr ""
 
-#: functions.php:110
+#: functions.php:108
 msgid "Bottom aside"
 msgstr ""
 
-#: functions.php:123 inc/theme-customcolors.php:114
+#: functions.php:121 inc/theme-customcolors.php:114
 msgid "Footer"
 msgstr ""
 
-#: functions.php:136
+#: functions.php:134
 msgid "Top before all content"
 msgstr ""
 
-#: functions.php:149
+#: functions.php:147
 msgid "In page top content"
 msgstr ""
 
-#: functions.php:161
+#: functions.php:159
 msgid "In page bottom content"
 msgstr ""
 
-#: functions.php:174
+#: functions.php:172
 msgid "In navbar"
 msgstr ""
 
@@ -433,6 +433,118 @@ msgstr ""
 msgid "Get more"
 msgstr ""
 
+#: inc/theme-blockeditor.php:34
+msgid "Primary"
+msgstr ""
+
+#: inc/theme-blockeditor.php:39
+msgid "Secondary"
+msgstr ""
+
+#: inc/theme-blockeditor.php:44
+msgid "Success"
+msgstr ""
+
+#: inc/theme-blockeditor.php:49
+msgid "Danger"
+msgstr ""
+
+#: inc/theme-blockeditor.php:54
+msgid "Warning"
+msgstr ""
+
+#: inc/theme-blockeditor.php:59
+msgid "Info"
+msgstr ""
+
+#: inc/theme-blockeditor.php:64
+msgid "Light"
+msgstr ""
+
+#: inc/theme-blockeditor.php:69
+msgid "Dark"
+msgstr ""
+
+#: inc/theme-blockeditor.php:79
+msgid "Vivid cyan blue to vivid purple"
+msgstr ""
+
+#: inc/theme-blockeditor.php:84
+msgid "Vivid green cyan to vivid cyan blue"
+msgstr ""
+
+#: inc/theme-blockeditor.php:89
+msgid "Light green cyan to vivid green cyan"
+msgstr ""
+
+#: inc/theme-blockeditor.php:94
+msgid "Luminous vivid amber to luminous vivid orange"
+msgstr ""
+
+#: inc/theme-blockeditor.php:99
+msgid "Luminous vivid orange to vivid red"
+msgstr ""
+
+#: inc/theme-blockeditor.php:109
+msgid "Small"
+msgstr ""
+
+#: inc/theme-blockeditor.php:114
+msgid "Regular"
+msgstr ""
+
+#: inc/theme-blockeditor.php:119
+msgid "Medium"
+msgstr ""
+
+#: inc/theme-blockeditor.php:124
+msgid "Large"
+msgstr ""
+
+#: inc/theme-blockeditor.php:129
+msgid "Huge"
+msgstr ""
+
+#: inc/theme-blockeditor.php:135
+msgid "H1"
+msgstr ""
+
+#: inc/theme-blockeditor.php:140
+msgid "H2"
+msgstr ""
+
+#: inc/theme-blockeditor.php:145
+msgid "H3"
+msgstr ""
+
+#: inc/theme-blockeditor.php:150
+msgid "H4"
+msgstr ""
+
+#: inc/theme-blockeditor.php:155
+msgid "H5"
+msgstr ""
+
+#: inc/theme-blockeditor.php:160
+msgid "H6"
+msgstr ""
+
+#: inc/theme-blockeditor.php:166
+msgid "D1"
+msgstr ""
+
+#: inc/theme-blockeditor.php:171
+msgid "D2"
+msgstr ""
+
+#: inc/theme-blockeditor.php:176
+msgid "D3"
+msgstr ""
+
+#: inc/theme-blockeditor.php:181
+msgid "D4"
+msgstr ""
+
 #: inc/theme-customcolors.php:22 inc/theme-customheader.php:27
 msgid "Colors"
 msgstr ""
@@ -588,7 +700,7 @@ msgid "%s results found."
 msgstr ""
 
 #: inc/theme-customheader.php:368 search.php:28
-#: template-parts/searchform.php:16
+#: template-parts/searchform.php:24
 #, php-format
 msgid "Search Results for: %s"
 msgstr ""
@@ -601,39 +713,51 @@ msgstr ""
 msgid "Maybe try one of the links below or a search?"
 msgstr ""
 
-#: inc/theme-elements.php:17 inc/theme-elements.php:138
+#: inc/theme-elements.php:20
+msgid "Simple page"
+msgstr ""
+
+#: inc/theme-elements.php:21
+msgid "No sidebars"
+msgstr ""
+
+#: inc/theme-elements.php:22
+msgid "Blank page"
+msgstr ""
+
+#: inc/theme-elements.php:31 inc/theme-elements.php:152
 #, php-format
 msgid "Continue reading %s"
 msgstr ""
 
-#: inc/theme-elements.php:17 inc/theme-elements.php:138
+#: inc/theme-elements.php:31 inc/theme-elements.php:152
 msgid "Read more"
 msgstr ""
 
-#: inc/theme-elements.php:198
+#: inc/theme-elements.php:212
 msgid "Continue reading:"
 msgstr ""
 
-#: inc/theme-elements.php:227
+#: inc/theme-elements.php:241
 msgid ""
 "This content is password protected. To view it please enter your password "
 "below:"
 msgstr ""
 
-#: inc/theme-elements.php:228
+#: inc/theme-elements.php:242
 msgid "Password:"
 msgstr ""
 
-#: inc/theme-elements.php:230
+#: inc/theme-elements.php:244
 msgctxt "post password form"
 msgid "Enter"
 msgstr ""
 
-#: inc/theme-elements.php:328
+#: inc/theme-elements.php:342
 msgid "&larr; Previous"
 msgstr ""
 
-#: inc/theme-elements.php:329
+#: inc/theme-elements.php:343
 msgid "Next &rarr;"
 msgstr ""
 
@@ -844,7 +968,7 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: template-parts/searchform.php:20
+#: template-parts/searchform.php:28
 msgid "Find term"
 msgstr ""
 

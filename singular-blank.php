@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Blank
+ * Template Name: Blank page
  *
  * Para uso en casos de mostrar contenido personalizado, sin formato.
  * For use in cases of displaying custom content, without formatting.

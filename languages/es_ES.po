@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: Ekiline\n"
-"POT-Creation-Date: 2020-08-26 20:52-0500\n"
-"PO-Revision-Date: 2020-08-26 21:11-0500\n"
+"POT-Creation-Date: 2020-09-04 15:13-0500\n"
+"PO-Revision-Date: 2020-09-04 15:23-0500\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "Try looking in the monthly archives. %1$s"
 msgstr "Intenta buscar en los archivos mensuales. %1$s"
 
-#: 404.php:43 template-parts/searchform.php:23
+#: 404.php:43 template-parts/searchform.php:31
 msgid "Search"
 msgstr "Buscar"
 
@@ -45,26 +45,26 @@ msgstr "Buscar"
 msgid "Most used categories"
 msgstr "Categorías mas usadas"
 
-#: footer.php:26 singular-clean.php:56
+#: footer.php:26 singular-simple.php:54
 #, php-format
 msgid "&copy; Copyright %1$s. "
 msgstr "&copy; Copyright %1$s. "
 
-#: footer.php:28 singular-clean.php:58
+#: footer.php:28 singular-simple.php:56
 #, php-format
 msgid "Proudly powered by %1$s and %2$s. "
 msgstr "Realizado con %1$s y %2$s. "
 
-#: footer.php:28 singular-clean.php:58
+#: footer.php:28 singular-simple.php:56
 msgid "WordPress"
 msgstr "WordPress"
 
 #. Theme Name of the plugin/theme
-#: footer.php:28 singular-clean.php:58
+#: footer.php:28 singular-simple.php:56
 msgid "Ekiline"
 msgstr "Ekiline"
 
-#: footer.php:30 singular-clean.php:60
+#: footer.php:30 singular-simple.php:58
 msgid "Back"
 msgstr "Volver"
 
@@ -72,35 +72,35 @@ msgstr "Volver"
 msgid "Primary Menu"
 msgstr "Menú Primario"
 
-#: functions.php:85
+#: functions.php:83
 msgid "Left sidebar"
 msgstr "Sidebar izquierdo"
 
-#: functions.php:97
+#: functions.php:95
 msgid "Right sidebar"
 msgstr "Sidebar derecho"
 
-#: functions.php:110
+#: functions.php:108
 msgid "Bottom aside"
 msgstr "Sidebar inferior"
 
-#: functions.php:123 inc/theme-customcolors.php:114
+#: functions.php:121 inc/theme-customcolors.php:114
 msgid "Footer"
 msgstr "Pie de página"
 
-#: functions.php:136
+#: functions.php:134
 msgid "Top before all content"
 msgstr "Superior (antes del contenido)"
 
-#: functions.php:149
+#: functions.php:147
 msgid "In page top content"
 msgstr "Superior al contenido en página"
 
-#: functions.php:161
+#: functions.php:159
 msgid "In page bottom content"
 msgstr "Inferior al contenido en página"
 
-#: functions.php:174
+#: functions.php:172
 msgid "In navbar"
 msgstr "Barra de navegación"
 
@@ -122,7 +122,7 @@ msgstr "&not;&not;"
 
 #: inc/class-ekiline-basic-breadcrumb.php:205
 msgid "Search "
-msgstr "Buscar"
+msgstr "Buscar "
 
 #: inc/class-ekiline-basic-breadcrumb.php:209
 msgid "Not found "
@@ -452,7 +452,119 @@ msgstr "Gana dinero"
 
 #: inc/info.php:187
 msgid "Get more"
-msgstr "Obtén más"
+msgstr "Consiga más"
+
+#: inc/theme-blockeditor.php:34
+msgid "Primary"
+msgstr "Primary (Azúl)"
+
+#: inc/theme-blockeditor.php:39
+msgid "Secondary"
+msgstr "Secondary (Gris)"
+
+#: inc/theme-blockeditor.php:44
+msgid "Success"
+msgstr "Success (Verde)"
+
+#: inc/theme-blockeditor.php:49
+msgid "Danger"
+msgstr "Danger (Rojo)"
+
+#: inc/theme-blockeditor.php:54
+msgid "Warning"
+msgstr "Warning (Amarilo)"
+
+#: inc/theme-blockeditor.php:59
+msgid "Info"
+msgstr "Info (Cyan)"
+
+#: inc/theme-blockeditor.php:64
+msgid "Light"
+msgstr "Light (Blanco)"
+
+#: inc/theme-blockeditor.php:69
+msgid "Dark"
+msgstr "Dark (Negro)"
+
+#: inc/theme-blockeditor.php:79
+msgid "Vivid cyan blue to vivid purple"
+msgstr "Azul cian vivo a púrpura vivo"
+
+#: inc/theme-blockeditor.php:84
+msgid "Vivid green cyan to vivid cyan blue"
+msgstr "Cian verde intenso a azul cian intenso"
+
+#: inc/theme-blockeditor.php:89
+msgid "Light green cyan to vivid green cyan"
+msgstr "Cian verde claro a cian verde vivo"
+
+#: inc/theme-blockeditor.php:94
+msgid "Luminous vivid amber to luminous vivid orange"
+msgstr "Luminoso ámbar vivo a naranja vivo luminoso"
+
+#: inc/theme-blockeditor.php:99
+msgid "Luminous vivid orange to vivid red"
+msgstr "Luminoso naranja vivo a rojo vivo"
+
+#: inc/theme-blockeditor.php:109
+msgid "Small"
+msgstr "Pequeño"
+
+#: inc/theme-blockeditor.php:114
+msgid "Regular"
+msgstr "Regular"
+
+#: inc/theme-blockeditor.php:119
+msgid "Medium"
+msgstr "Medio"
+
+#: inc/theme-blockeditor.php:124
+msgid "Large"
+msgstr "Grande"
+
+#: inc/theme-blockeditor.php:129
+msgid "Huge"
+msgstr "Extra grande"
+
+#: inc/theme-blockeditor.php:135
+msgid "H1"
+msgstr "H1"
+
+#: inc/theme-blockeditor.php:140
+msgid "H2"
+msgstr "H2"
+
+#: inc/theme-blockeditor.php:145
+msgid "H3"
+msgstr "H3"
+
+#: inc/theme-blockeditor.php:150
+msgid "H4"
+msgstr "H4"
+
+#: inc/theme-blockeditor.php:155
+msgid "H5"
+msgstr "H5"
+
+#: inc/theme-blockeditor.php:160
+msgid "H6"
+msgstr "H6"
+
+#: inc/theme-blockeditor.php:166
+msgid "D1"
+msgstr "D1"
+
+#: inc/theme-blockeditor.php:171
+msgid "D2"
+msgstr "D2"
+
+#: inc/theme-blockeditor.php:176
+msgid "D3"
+msgstr "D3"
+
+#: inc/theme-blockeditor.php:181
+msgid "D4"
+msgstr "D4"
 
 #: inc/theme-customcolors.php:22 inc/theme-customheader.php:27
 msgid "Colors"
@@ -488,7 +600,7 @@ msgstr "Color de fondo barra de navegación"
 
 #: inc/theme-customcolors.php:88
 msgid "Bottom bar"
-msgstr ""
+msgstr "Barra inferior"
 
 #: inc/theme-customcolors.php:141
 msgid "Change Bootstrap color palette and use default classes"
@@ -633,7 +745,7 @@ msgid "%s results found."
 msgstr "%s resultados encontrados."
 
 #: inc/theme-customheader.php:368 search.php:28
-#: template-parts/searchform.php:16
+#: template-parts/searchform.php:24
 #, php-format
 msgid "Search Results for: %s"
 msgstr "Resultados para: %s"
@@ -647,20 +759,32 @@ msgid "Maybe try one of the links below or a search?"
 msgstr ""
 "¿Que tal si pruebas con los links que aparecen abajo o haz una búsqueda?"
 
-#: inc/theme-elements.php:17 inc/theme-elements.php:138
+#: inc/theme-elements.php:20
+msgid "Simple page"
+msgstr "Página simple"
+
+#: inc/theme-elements.php:21
+msgid "No sidebars"
+msgstr "Sin sidebars"
+
+#: inc/theme-elements.php:22
+msgid "Blank page"
+msgstr "Página en blanco"
+
+#: inc/theme-elements.php:31 inc/theme-elements.php:152
 #, php-format
 msgid "Continue reading %s"
 msgstr "Continuar leyendo %s"
 
-#: inc/theme-elements.php:17 inc/theme-elements.php:138
+#: inc/theme-elements.php:31 inc/theme-elements.php:152
 msgid "Read more"
 msgstr "Leer mas"
 
-#: inc/theme-elements.php:198
+#: inc/theme-elements.php:212
 msgid "Continue reading:"
 msgstr "Continuar leyendo:"
 
-#: inc/theme-elements.php:227
+#: inc/theme-elements.php:241
 msgid ""
 "This content is password protected. To view it please enter your password "
 "below:"
@@ -668,20 +792,20 @@ msgstr ""
 "Este contenido está protegido con contraseña. Para verlo, ingrese su "
 "contraseña a continuación:"
 
-#: inc/theme-elements.php:228
+#: inc/theme-elements.php:242
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: inc/theme-elements.php:230
+#: inc/theme-elements.php:244
 msgctxt "post password form"
 msgid "Enter"
 msgstr "Ingresar"
 
-#: inc/theme-elements.php:328
+#: inc/theme-elements.php:342
 msgid "&larr; Previous"
 msgstr "&larr; Anterior"
 
-#: inc/theme-elements.php:329
+#: inc/theme-elements.php:343
 msgid "Next &rarr;"
 msgstr "Siguiente &rarr;"
 
@@ -774,8 +898,8 @@ msgstr "Ocultar comentarios"
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] "%1$s comentario sobre &ldquo;%2$s&rdquo;"
-msgstr[1] "%1$s comentarios sobre &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s comentario en &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s comentarios en &ldquo;%2$s&rdquo;"
 
 #: template-parts/comments.php:43
 msgid "Comment navigation"
@@ -898,7 +1022,7 @@ msgstr "% Comentarios"
 msgid "Comments are closed."
 msgstr "Comentarios cerrados."
 
-#: template-parts/searchform.php:20
+#: template-parts/searchform.php:28
 msgid "Find term"
 msgstr "Encontrar término"
 
