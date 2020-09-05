@@ -314,3 +314,5 @@ require get_template_directory() . '/inc/theme-optimizescripts.php';
 require get_template_directory() . '/inc/theme-blockeditor.php';
 /* Ekiline info admin */
 require get_template_directory() . '/inc/info.php';
+/* Ekiline Compatibilidad */
+require get_template_directory() . '/inc/jetpack.php';
