@@ -208,6 +208,7 @@ function ekiline_meta_social() {
 	$ttr_link    = ekiline_twitter_username( $find_url );
 	$meta_type   = 'website';
 	$current_url = home_url( add_query_arg( array(), $wp->request ) );
+	$meta_locale = get_locale();
 
 	// Google, Browsers.
 	$meta_social .= '<meta itemprop="name" content="' . $meta_title . '">' . "\n";
@@ -227,6 +228,7 @@ function ekiline_meta_social() {
 	$meta_social .= '<meta property="og:image" content="' . $meta_imgs . '"/>' . "\n";
 	$meta_social .= '<meta property="og:description" content="' . $meta_desc . '"/>' . "\n";
 	$meta_social .= '<meta property="og:site_name" content="' . $meta_title . '"/>' . "\n";
+	$meta_social .= '<meta property="og:locale" content="' . $meta_locale . '"/>' . "\n";
 
 	$allowed_html = array(
 		'meta' => array(
