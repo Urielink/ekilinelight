@@ -42,7 +42,7 @@ function ekiline_infinite_scroll_render() {
 	if ( class_exists( 'woocommerce' ) && is_shop() ) {
 		return;
 	}
-	// wordpress loop.
+	// Loop.
 	while ( have_posts() ) {
 		the_post();
 		$post_style = ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card' : get_post_format();

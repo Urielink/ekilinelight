@@ -20,12 +20,12 @@ get_header();
 	 * Necesary for jetpack infinite scroll.
 	 */
 	$wrapper = 'primary';
-	if ( is_shop() ){
+	if ( is_shop() ) {
 		$wrapper = ( get_theme_mod( 'ekiline_Columns' ) > '0' ) ? 'viewcolumns' : 'primary';
 	}
 	?>
 
-	<main id="<?php esc_attr_e( $wrapper ); ?>" class="<?php ekiline_sort_cols( 'main' ); ?>">
+	<main id="<?php echo esc_attr( $wrapper ); ?>" class="<?php ekiline_sort_cols( 'main' ); ?>">
 
 	<?php dynamic_sidebar( 'content-w1' ); ?>
 

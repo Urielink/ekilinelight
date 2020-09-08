@@ -16,7 +16,7 @@
  * Habilitar opciones de compatibilidad woocommerce.
  */
 function ekiline_add_woocommerce_support() {
-    add_theme_support( 'woocommerce' );
+	add_theme_support( 'woocommerce' );
 	add_theme_support( 'wc-product-gallery-zoom' );
 	add_theme_support( 'wc-product-gallery-lightbox' );
 	add_theme_support( 'wc-product-gallery-slider' );
@@ -29,9 +29,9 @@ add_action( 'after_setup_theme', 'ekiline_add_woocommerce_support' );
  * Open div.
  */
 function ekiline_card_item_open() {
-	$class = ( is_product() ) ? 'card ' : '' ;
+	$class = ( is_product() ) ? 'card ' : '';
 	if ( '4' === get_theme_mod( 'ekiline_Columns' ) ) {
-		echo '<div class="'. $class .'card-body text-center">';
+		echo '<div class="' . esc_attr( $class ) . 'card-body text-center">';
 	}
 }
 add_action( 'woocommerce_before_shop_loop_item', 'ekiline_card_item_open', 0 );
