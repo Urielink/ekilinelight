@@ -172,6 +172,13 @@ function ekiline_theme_customizer( $wp_customize ) {
 		'name'  => 'Single',
 		'label' => __( 'Entries and single pages', 'ekiline' ),
 	);
+	// En caso de woocommerce.
+	if ( class_exists( 'woocommerce' ) ) {
+		$wlayout[] = array(
+			'name'  => 'Shop',
+			'label' => __( 'Shop page', 'ekiline' ),
+		);
+	}
 
 	foreach ( $wlayout as $value ) {
 

@@ -315,4 +315,5 @@ require get_template_directory() . '/inc/theme-blockeditor.php';
 /* Ekiline info admin */
 require get_template_directory() . '/inc/info.php';
 /* Ekiline Compatibilidad */
-require get_template_directory() . '/inc/jetpack.php';
+require get_template_directory() . '/inc/theme-jetpack.php';
+require get_template_directory() . '/inc/theme-woocommerce.php';

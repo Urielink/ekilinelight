@@ -24,6 +24,13 @@ function ekiline_width_control() {
 	if ( is_singular() && ! is_front_page() ) {
 		$container .= ( true === get_theme_mod( 'ekiline_anchoSingle' ) ) ? $fluid : '';
 	}
+	// En caso de woocommerce.
+	if ( class_exists( 'woocommerce' ) ) {
+		if ( is_shop() ) {
+			$container .= ( true === get_theme_mod( 'ekiline_anchoShop' ) ) ? $fluid : '';
+		}
+	}
+
 
 	return $container;
 }
@@ -47,6 +54,12 @@ function view_sidebar_filter( $width_sb_ctrl ) {
 
 	if ( is_singular() && ! is_front_page() ) {
 		$opt = get_theme_mod( 'ekiline_disableSbSingle' );
+	}
+	// En caso de woocommerce.
+	if ( class_exists( 'woocommerce' ) ) {
+		if ( is_shop() ) {
+			$opt = get_theme_mod( 'ekiline_disableSbShop' );
+		}
 	}
 
 	switch ( $opt ) {
