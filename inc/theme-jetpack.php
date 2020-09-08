@@ -12,7 +12,6 @@
  * Jetpack setup.
  */
 function ekiline_jetpack_setup() {
-
 	// Scroll infinito.
 	$args_infinite_scroll = array(
 		'container'      => ekiline_infinite_scroll_wrapper(),
@@ -22,7 +21,6 @@ function ekiline_jetpack_setup() {
 		'footer_widgets' => array( 'footer-w1', 'footer-w2' ),
 	);
 	add_theme_support( 'infinite-scroll', $args_infinite_scroll );
-
 }
 add_action( 'after_setup_theme', 'ekiline_jetpack_setup' );
 
@@ -40,9 +38,11 @@ function ekiline_infinite_scroll_wrapper() {
  * Custom render function for Infinite Scroll.
  */
 function ekiline_infinite_scroll_render() {
-	if ( class_exists( 'woocommerce' ) && is_shop) {
+	// en caso de woocommerce ocupar loop original de plugin.
+	if ( class_exists( 'woocommerce' ) && is_shop() ) {
 		return;
 	}
+	// wordpress loop.
 	while ( have_posts() ) {
 		the_post();
 		$post_style = ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card' : get_post_format();

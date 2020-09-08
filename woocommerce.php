@@ -14,15 +14,26 @@ get_header();
 
 <?php ekiline_main_columns( 'open' ); ?>
 
-	<main id="primary" class="<?php ekiline_sort_cols( 'main' ); ?>">
+	<?php
+	/**
+	 * Hacer coincidir el scroll infinito con jetpack.
+	 * Necesary for jetpack infinite scroll.
+	 */
+	$wrapper = 'primary';
+	if ( is_shop() ){
+		$wrapper = ( get_theme_mod( 'ekiline_Columns' ) > '0' ) ? 'viewcolumns' : 'primary';
+	}
+	?>
 
-	<?php // dynamic_sidebar( 'content-w1' ); ?>
+	<main id="<?php esc_attr_e( $wrapper ); ?>" class="<?php ekiline_sort_cols( 'main' ); ?>">
+
+	<?php dynamic_sidebar( 'content-w1' ); ?>
 
 	<?php woocommerce_content(); ?>
 
-	<?php // dynamic_sidebar( 'content-w2' ); ?>
+	<?php dynamic_sidebar( 'content-w2' ); ?>
 
-	</main><!-- #primary -->
+	</main><!-- #primary/viewcolumns -->
 
 	<?php get_sidebar(); ?>
 

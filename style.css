@@ -92,13 +92,15 @@
 body.home.infinite-scroll #page-navigation,
 body.archive.infinite-scroll #page-navigation,
 body.blog.infinite-scroll #page-navigation{clip:rect(1px,1px,1px,1px);position:absolute !important;white-space:nowrap;height:1px;width:1px;overflow:hidden;}
-.infinite-scroll #infinite-handle{text-align: center;margin: 1rem;}
+.infinite-scroll #infinite-handle{text-align: center;margin: 1rem auto; width: 100%;}
 .infinite-scroll #infinite-handle span button{font-size:1rem;}
 
- /*WooCommerce Checkout*/
- .woocommerce .col2-set .col-1, .woocommerce-page .col2-set .col-1{max-width: inherit;}
- .woocommerce .col2-set .col-2, .woocommerce-page .col2-set .col-2{max-width: inherit;}
- .woocommerce form .form-row label, .woocommerce-page form .form-row label,.woocommerce-input-wrapper {width: 100%;}
+/*WooCommerce Checkout*/
+.woocommerce .col2-set .col-1, .woocommerce-page .col2-set .col-1{max-width: inherit;}
+.woocommerce .col2-set .col-2, .woocommerce-page .col2-set .col-2{max-width: inherit;}
+.woocommerce form .form-row label, .woocommerce-page form .form-row label,.woocommerce-input-wrapper{width: 100%;}
+/*WooCommerce Shop grid*/
+.woocommerce ul.products li.product, .woocommerce-page ul.products li.product{max-width: 100%;}
 
  /* ------------------------------------------------
   * 2) Ekiline: CUSTOM STYLES tus estilos || write here your styles

@@ -31,7 +31,6 @@ function ekiline_width_control() {
 		}
 	}
 
-
 	return $container;
 }
 
