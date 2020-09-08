@@ -18,7 +18,7 @@ jQuery(document).ready(function($){
 	];
 
 	function proColores(tonos){
-					
+
 		var objTonoExt = {};
 
 		$.each( tonos , function( index, value ) {
@@ -37,10 +37,10 @@ jQuery(document).ready(function($){
 			var nvLigNvTxc = rgbaToHexOp(hexToRgbA(absoluto,.5)); // light texto. borde HR y borde thumbnail
 			var nvLigNvHTxc = rgbaToHexOp(hexToRgbA(absoluto,.7)); // light hover
 			var nvLigNvDisTxc = rgbaToHexOp(hexToRgbA(absoluto,.3)); // light disabled y fondo de tarjetas, box shadow input
-			// Varios fondos y bordes dependen del color del texto						
-			var thLigBgc = rgbaToHexOp(hexToRgbA( HexAHslvar(absoluto, 0, 0, 20) , .20)); //fondo de breadcrub						
+			// Varios fondos y bordes dependen del color del texto
+			var thLigBgc = rgbaToHexOp(hexToRgbA( HexAHslvar(absoluto, 0, 0, 20) , .20)); //fondo de breadcrub
 			// fondo de tablas
-			var tabBgc05 = rgbaToHexOp(hexToRgbA(absoluto,.05)); 
+			var tabBgc05 = rgbaToHexOp(hexToRgbA(absoluto,.05));
 			var tabBgc075 = rgbaToHexOp(hexToRgbA(absoluto,.075));
 			var crdBdc = rgbaToHexOp(hexToRgbA(absoluto,.1));
 
@@ -242,7 +242,7 @@ jQuery(document).ready(function($){
 	// function cssOrders(extraccion){
 	// 	var cssall = '';
 	// 		/**General**/
-	// 		cssall += 'body{color:' + extraccion.text.puro + ';background-color:' + extraccion.background.puro + ';}';								
+	// 		cssall += 'body{color:' + extraccion.text.puro + ';background-color:' + extraccion.background.puro + ';}';
 	// 	return cssall;
 	// }
 
@@ -273,7 +273,7 @@ jQuery(document).ready(function($){
 			cssall += '.table .table{background-color:' + extraccion.background.puro + ';}\n';
 			cssall += '.table-bordered{border-color:' + extraccion.text.tabBd + ';}\n';
 			cssall += '.table-bordered th,.table-bordered td{border-color:' + extraccion.text.tabBd + ';}\n';
-			cssall += '.table-striped tbody tr:nth-of-type(odd){background-color:' + extraccion.text.tabBg + ';}\n';        
+			cssall += '.table-striped tbody tr:nth-of-type(odd){background-color:' + extraccion.text.tabBg + ';}\n';
 			cssall += '.table-hover tbody tr:hover{background-color:' + extraccion.text.tabBgHv + ';}\n';
 
 			cssall += '.table-primary,.table-primary > th,.table-primary > td{background-color:' + extraccion.primary.navDis + ';}\n';
@@ -311,7 +311,7 @@ jQuery(document).ready(function($){
 			cssall += '.table-dark.table-hover tbody tr:hover{background-color:' + extraccion.light.tabBgHv + ';}\n';
 
 			/**Formularios**/
-			cssall += '.form-control{color:' + extraccion.secondary.focusHv + ';background-color:' + extraccion.light.focus + ';border-color:' + extraccion.secondary.focus + ';}\n';
+			cssall += '.form-control{color:' + extraccion.text.puro + ';background-color:' + extraccion.light.focus + ';border-color:' + extraccion.secondary.focus + ';}\n';
 			cssall += '.form-control:focus{color:' + extraccion.info.alertTx + ';background-color:' + extraccion.light.focus + ';border-color:' + extraccion.info.focusHv + ';box-shadow:0 0 0.2rem 0.2rem ' + extraccion.info.focus + ';}\n';
 			cssall += '.form-control::-webkit-input-placeholder{color:' + extraccion.secondary.puro + ';}\n';
 			cssall += '.form-control::-moz-placeholder{color:' + extraccion.secondary.puro + ';}\n';
@@ -520,7 +520,7 @@ jQuery(document).ready(function($){
 			/**Dropdowns**/
 			cssall += '.dropdown-menu{color:' + extraccion.secondary.puro + ';background-color:' + extraccion.light.focus + ';border-color:' + extraccion.secondary.breadBg + ';}\n';
 			cssall += '.dropdown-divider{border-top-color:' + extraccion.dark.breadBg + ';}\n';
-			cssall += '.dropdown-item{color:' + extraccion.secondary.alertLk + ';}\n';        
+			cssall += '.dropdown-item{color:' + extraccion.secondary.alertLk + ';}\n';
 			cssall += '.dropdown-item:hover,.dropdown-item:focus{color:' + extraccion.primary.puro + ';background-color:' + extraccion.primary.breadBg + ';}\n';
 			cssall += '.dropdown-item.active,.dropdown-item:active{color:' + extraccion.primary.puro + ';background-color:' + extraccion.primary.breadBg + ';}\n';
 			cssall += '.dropdown-item.disabled,.dropdown-item:disabled{color:' + extraccion.secondary.navDis + ';}\n';
@@ -831,6 +831,25 @@ jQuery(document).ready(function($){
 			// cssall += '.text-black-50{color:' + extraccion.text.navHov + ' !important;}\n';
 			// cssall += '.text-white-50{color:' + extraccion.light.navHov + ' !important;}\n';
 
+			/**Block Editor**/
+			cssall += '.has-primary-color{color:' + extraccion.primary.puro + ' !important;}\n';
+			cssall += '.has-primary-background-color{background-color:' + extraccion.primary.puro + ' !important;}\n';
+			cssall += '.has-secondary-color{color:' + extraccion.secondary.puro + ' !important;}\n';
+			cssall += '.has-secondary-background-color{background-color:' + extraccion.secondary.puro + ' !important;}\n';
+			cssall += '.has-success-color{color:' + extraccion.success.puro + ' !important;}\n';
+			cssall += '.has-success-background-color{background-color:' + extraccion.success.puro + ' !important;}\n';
+			cssall += '.has-info-color{color:' + extraccion.info.puro + ' !important;}\n';
+			cssall += '.has-info-background-color{background-color:' + extraccion.info.puro + ' !important;}\n';
+			cssall += '.has-warning-color{color:' + extraccion.warning.puro + ' !important;}\n';
+			cssall += '.has-warning-background-color{background-color:' + extraccion.warning.puro + ' !important;}\n';
+			cssall += '.has-danger-color{color:' + extraccion.danger.puro + ' !important;}\n';
+			cssall += '.has-danger-background-color{background-color:' + extraccion.danger.puro + ' !important;}\n';
+			cssall += '.has-light-color{color:' + extraccion.light.puro + ' !important;}\n';
+			cssall += '.has-light-background-color{background-color:' + extraccion.light.puro + ' !important;}\n';
+			cssall += '.has-dark-color{color:' + extraccion.dark.puro + ' !important;}\n';
+			cssall += '.has-dark-background-color{background-color:' + extraccion.dark.puro + ' !important;}\n';
+
+
 		console.log(cssall);
 
         return cssall;
@@ -848,8 +867,7 @@ jQuery(document).ready(function($){
 			field1.bind( function( item ) {
 
 				item = cssOrders( proColores( misColores ) );
-				
-				field2.set( item );							
+				field2.set( item );
 
 			} );
 
@@ -858,4 +876,3 @@ jQuery(document).ready(function($){
 	});
 
 }); // jQuery(document)
-

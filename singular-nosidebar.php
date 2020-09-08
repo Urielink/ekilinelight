@@ -1,26 +1,31 @@
 <?php
-/** 
+/**
  * Template Name: No sidebars
- * 
+ *
+ * Muestra el contenido sin sidebars.
+ * Show content without sidebars.
+ *
  * @package WordPress
  * @subpackage ekiline
- * 
- */ 
-get_header(); ?>
+ */
 
-<main id="primary" class="<?php echo ekiline_widthControl();?>">
+get_header();
+?>
 
-	<?php dynamic_sidebar( 'content-w1' );?>				
+<main id="primary" class="<?php echo esc_attr( ekiline_width_control() ); ?>">
+
+	<?php dynamic_sidebar( 'content-w1' ); ?>
 
 		<?php
-			while ( have_posts() ) : the_post();
-				get_template_part( 'template-parts/content', get_post_format() );	
-			endwhile;	
+		while ( have_posts() ) :
+			the_post();
+			get_template_part( 'template-parts/content', get_post_format() );
+		endwhile;
 		?>
 
-	<?php dynamic_sidebar( 'content-w2' ); ?>		
+	<?php dynamic_sidebar( 'content-w2' ); ?>
 
-	<?php comments_template('/template-parts/comments.php'); ?>
+	<?php comments_template( '/template-parts/comments.php' ); ?>
 
 </main><!-- #primary -->
 

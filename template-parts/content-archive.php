@@ -6,49 +6,54 @@
  *
  * @package ekiline
  */
+
 ?>
 
-<?php if ( is_singular() ) return; ?>
+<?php if ( ! is_singular() ) { ?>
 
-<?php 
- /* 
-  * Mostrar diversos formatos en cada listado, segun el tipo (pagina de entradas, categoria o las entradas de autor).
-  */
-?>
+	<?php
 
-<h1 class="archive-title">
-	<?php echo ( is_home() && !is_front_page() ) ? get_the_title( get_option('page_for_posts', true) ) : get_the_archive_title() ; ?>
-</h1>
-	
-	<?php if ( is_home() && !is_front_page() ) { ?>
+	/*
+	 * Mostrar diversos formatos en cada listado, segun el tipo (pagina de entradas, categoria o las entradas de autor).
+	 */
+	?>
 
-		<div>
-			<?php echo get_post_field( 'post_content', get_option('page_for_posts') );?>
-		</div>
+	<h1 class="archive-title">
+		<?php echo wp_kses_post( ( is_home() && ! is_front_page() ) ? get_the_title( get_option( 'page_for_posts', true ) ) : get_the_archive_title() ); ?>
+	</h1>
 
-	<?php } else if ( is_category() ) { ?>
+		<?php if ( is_home() && ! is_front_page() ) { ?>
 
-		<div> <?php echo category_description(); ?> </div>
+			<div>
+				<?php echo wp_kses_post( get_post_field( 'post_content', get_option( 'page_for_posts' ) ) ); ?>
+			</div>
 
-	<?php } else if ( is_author() ) { ?>
-		<?php
-		/**
-		 * Obtener los datos del autor.
-		 * https://developer.wordpress.org/reference/functions/get_the_author_meta/ 
-		 **/	
-		?>
-		<div> 
+		<?php } elseif ( is_category() ) { ?>
 
-			<p>
-				<?php echo nl2br( get_the_author_meta('description') ); ?>
-			</p>
+			<div> <?php echo category_description(); ?> </div>
 
-			<p>
-				<?php echo __( 'User: ', 'ekiline' ) . get_the_author_meta( 'nickname' ); // to get  nicename ?>						
-				<br> <?php echo __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ); // to get  email ?>						
-				<br> <?php echo __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ); // to get  url ?>						
-			</p>
+		<?php } elseif ( is_author() ) { ?>
+			<?php
+			/**
+			 * Obtener los datos del autor.
+			 * https://developer.wordpress.org/reference/functions/get_the_author_meta/
+			 * Nombre seleccionado, correo y url.
+			 **/
+			?>
+			<div>
 
-		</div>
-		
-	<?php } ?>
+				<p>
+					<?php echo wp_kses_post( nl2br( get_the_author_meta( 'description' ) ) ); ?>
+				</p>
+
+				<p>
+					<?php echo wp_kses_post( __( 'User: ', 'ekiline' ) . get_the_author_meta( 'display_name' ) ); ?>
+					<br> <?php echo wp_kses_post( __( 'Email: ', 'ekiline' ) . get_the_author_meta( 'email' ) ); ?>
+					<br> <?php echo wp_kses_post( __( 'Web: ', 'ekiline' ) . get_the_author_meta( 'url' ) ); ?>
+				</p>
+
+			</div>
+
+		<?php } ?>
+
+<?php } ?>

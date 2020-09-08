@@ -1,38 +1,38 @@
 <?php
 /**
- * El footer de ekiline contiene espacios para jugar con widgets.
+ * Footer
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- * @link https://codex.wordpress.org/Function_Reference/is_active_sidebar
+ * @link https://developer.wordpress.org/reference/functions/get_footer/
  *
  * @package ekiline
- *
- */ 
+ */
+
 ?>
 
 <?php if ( is_active_sidebar( 'footer-w2' ) ) { ?>
-
-  <div class="footer-bar bg-secondary text-white">
-    <div class="pt-4 pb-2 container">  	
-      <?php ekiline_countWidgets('footer-w2'); ?>  	         
-    </div>
-  </div><!-- .footer-bar -->
-
+	<div class="footer-bar bg-secondary text-white">
+		<div class="pt-4 pb-2 container">
+			<?php ekiline_count_widgets( 'footer-w2' ); ?>
+		</div>
+	</div><!-- .footer-bar -->
 <?php } ?>
 
-
 <footer class="site-footer pt-4 pb-2 bg-dark text-white">
-  <div class="container">  	
-    <?php ekiline_countWidgets('footer-w1'); ?>  	         
-    <p>
-      <?php echo ekiline_notes('copyright'); ?>
-      <?php echo ekiline_notes('poweredby'); ?>
-      <a class="goTop float-right" href="#top"><span>&uarr;</span><?php echo __( 'Back', 'ekiline' ); ?></a>
-    </p>
-  </div>
+	<div class="container">
+		<?php ekiline_count_widgets( 'footer-w1' ); ?>
+	<p>
+		<?php
+		/* translators: %1$s is replaced with date */
+			printf( esc_html__( '&copy; Copyright %1$s. ', 'ekiline' ), esc_attr( date( 'Y' ) . ' ' . get_bloginfo( 'name', 'display' ) ) );
+		/* translators: %1$s and %2$s are replaced with link url */
+			printf( esc_html__( 'Proudly powered by %1$s and %2$s. ', 'ekiline' ), '<a href="' . esc_url( 'https://wordpress.org/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'WordPress', 'ekiline' ) . '</a>', '<a href="' . esc_url( 'http://ekiline.com' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Ekiline', 'ekiline' ) . '</a>' );
+		?>
+		<a class="goTop float-right" href="#top"><span>&uarr;</span><?php esc_html_e( 'Back', 'ekiline' ); ?></a>
+	</p>
+</div>
 </footer><!-- .site-footer -->
 
 <?php wp_footer(); ?>
 
-	</body>
+</body>
 </html>
