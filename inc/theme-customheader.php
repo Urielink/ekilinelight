@@ -177,19 +177,18 @@ add_action( 'customize_register', 'ekiline_custom_header_controls' );
  */
 function ekiline_custom_header_setup() {
 
-	add_theme_support(
-		'custom-header',
-		apply_filters(
-			'ekiline_custom_header_args',
-			array(
-				'default-image'      => '',
-				'default-text-color' => '000000',
-				'width'              => '',
-				'height'             => '',
-				'flex-height'        => true,
-			)
+	$new_args = apply_filters(
+		'ekiline_custom_header_args',
+		array(
+			'default-image'      => '',
+			'default-text-color' => '000000',
+			'width'              => '',
+			'height'             => '',
+			'flex-height'        => true,
 		)
 	);
+	add_theme_support( 'custom-header', $new_args );
+	
 	// Registrar una imagen default, primero se declara en los filtros.
 		register_default_headers(
 			array(
