@@ -20,9 +20,3 @@
 	</head>
 	<body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-
-<?php dynamic_sidebar( 'toppage-w1' ); ?>
-
-<?php ekiline_navbar_menu( 'primary' ); ?>
-
-<?php get_template_part( 'template-parts/custom-header' ); ?>

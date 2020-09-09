@@ -22,7 +22,6 @@
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?>>
-	<?php wp_body_open(); ?>
 
 	<?php ekiline_navbar_menu( 'primary' ); ?>
 

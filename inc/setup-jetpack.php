@@ -39,8 +39,10 @@ function ekiline_infinite_scroll_wrapper() {
  */
 function ekiline_infinite_scroll_render() {
 	// en caso de woocommerce ocupar loop original de plugin.
-	if ( class_exists( 'woocommerce' ) && is_shop() ) {
-		return;
+	if ( class_exists( 'woocommerce' ) ) {
+		if ( is_shop() ) {
+			return;
+		}
 	}
 	// Loop.
 	while ( have_posts() ) {

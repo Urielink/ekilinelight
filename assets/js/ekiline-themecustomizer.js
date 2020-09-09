@@ -850,7 +850,7 @@ jQuery(document).ready(function($){
 			cssall += '.has-dark-background-color{background-color:' + extraccion.dark.puro + ' !important;}\n';
 
 
-		console.log(cssall);
+		// console.log(cssall);
 
         return cssall;
 

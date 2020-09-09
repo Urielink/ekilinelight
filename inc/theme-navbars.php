@@ -306,3 +306,13 @@ function ekiline_nav_fallback() {
 
 	<?php
 } // ekiline_nav_fallback
+
+
+/**
+ * Agregar a wp_body_open, menu a la pagina, en la parte superior.
+ * Add nav at top of page.
+ */
+function ekiline_top_navbar() {
+	ekiline_navbar_menu( 'primary' );
+}
+add_action( 'wp_body_open', 'ekiline_top_navbar', 2 );

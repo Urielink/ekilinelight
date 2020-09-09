@@ -24,6 +24,25 @@ function ekiline_add_woocommerce_support() {
 add_action( 'after_setup_theme', 'ekiline_add_woocommerce_support' );
 
 /**
+ * 1) Container open tag.
+ * Hacer coincidir el scroll infinito con jetpack.
+ * Necesary for jetpack infinite scroll.
+ */
+function ekiline_contanier_open() {
+	ekiline_show_columns( 'open' );
+}
+add_action( 'woocommerce_before_shop_loop', 'ekiline_contanier_open', 100 );
+
+/**
+ * 2) Container close tag.
+ */
+function ekiline_contanier_close() {
+	ekiline_show_columns( 'close' );
+}
+add_action( 'woocommerce_after_shop_loop', 'ekiline_contanier_close', 100 );
+
+
+/**
  * Si se ocupa el formato de tarjetas en customizer agregar un contenedor al item.
  * If use card layout from customizer.
  * Open div.

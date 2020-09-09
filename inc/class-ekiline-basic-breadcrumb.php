@@ -147,8 +147,10 @@ function create_breadcrumb() {
 			$cat  = array_shift( $cats );
 
 			// En caso de woocommerce.
-			if ( class_exists( 'woocommerce' ) && get_post_type( get_the_ID() ) !== 'product' ) {
-				$breadcrumb .= '<li class="breadcrumb-item single-category">' . get_category_parents( $cat, true, '</li><!--.single-category--><li class="breadcrumb-item single-category-child">' );
+			if ( class_exists( 'woocommerce' ) ) {
+				if ( get_post_type( get_the_ID() ) !== 'product' ) {
+					$breadcrumb .= '<li class="breadcrumb-item single-category">' . get_category_parents( $cat, true, '</li><!--.single-category--><li class="breadcrumb-item single-category-child">' );
+				}
 			} else {
 				$breadcrumb .= '<li class="breadcrumb-item single-category">';
 			}
