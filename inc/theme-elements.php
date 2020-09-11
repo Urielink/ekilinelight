@@ -62,12 +62,14 @@ function ekiline_count_widgets( $widget_area ) {
  * Custom thumbnail markup
  *
  * @link https://developer.wordpress.org/reference/functions/the_post_thumbnail/
+ *
+ * @param string $args thumbnail size and css class vaiables.
  */
 function ekiline_thumbnail( $args = null ) {
 	if ( 'size' === $args ) {
 		// thumbnail size.
 		$thumb_size = ( is_search() ) ? 'thumbnail' : 'medium';
-		$args = $thumb_size;
+		$args       = $thumb_size;
 	}
 	if ( 'css' === $args ) {
 		// clase css varia por tipo de contenido.
@@ -75,7 +77,7 @@ function ekiline_thumbnail( $args = null ) {
 		$img_class .= ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card-img-top ' : 'img-thumbnail ';
 		// en caso de header ocultar.
 		$img_class .= ( get_header_image() ) ? 'd-none ' : '';
-		$args = array( 'class' => $img_class );
+		$args       = array( 'class' => $img_class );
 	}
 	return $args;
 }
