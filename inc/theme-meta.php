@@ -84,12 +84,10 @@ function ekiline_meta_keywords() {
 		global $post;
 		$tags = get_the_tags( $post->ID );
 
-		if ( $tags ) {
-			foreach ( $tags as $tag ) :
-				$sep       = ( empty( $keywords ) ) ? '' : ', ';
-				$keywords .= $sep . $tag->name;
-			endforeach;
-			$keywords = $keywords;
+		if ( $tags && ! is_wp_error( $tags ) ) {
+			$keywords = ekiline_collect_tags( $tags );
+		} else {
+			$keywords = 'hola';
 		}
 	} elseif ( is_tag() ) {
 
@@ -102,25 +100,28 @@ function ekiline_meta_keywords() {
 	} elseif ( is_home() || is_front_page() ) {
 
 		$tags = get_tags();
-		if ( $tags ) {
-			$i = 0;
-			foreach ( $tags as $tag ) :
-				$sep       = ( empty( $keywords ) ) ? '' : ', ';
-				$keywords .= $sep . $tag->name;
-
-				$i++;
-				if ( 10 === $i ) {
-					break;
-				}
-			endforeach;
-			$keywords = $keywords;
+		$tags = array_slice( $tags, 0, 10 );
+		if ( $tags && ! is_wp_error( $tags ) ) {
+			$keywords = ekiline_collect_tags( $tags );
 		}
 	}
 
 	if ( $keywords ) {
 		return $keywords;
 	}
+}
 
+/**
+ * Funcion para obtener etiquetas y ocupar como keywords
+ *
+ * @param array $tags obtener etiquetas de posts.
+ */
+function ekiline_collect_tags( $tags ) {
+	$kwds = array();
+	foreach ( $tags as $kwd ) {
+		$kwds[] = $kwd->name;
+	}
+	return join( ',', $kwds );
 }
 
 /**
@@ -197,12 +198,14 @@ function ekiline_twitter_username( $url ) {
 
 /**
  * Meta social, itemprop, twitter y facebook.
+ *
+ * @link https://developer.wordpress.org/reference/hooks/wp_title/;
  */
 function ekiline_meta_social() {
 	global $wp;
 	$meta_social = '';
 	$find_url    = ekiline_find_in_nav( 'twitter.com' );
-	$meta_title  = get_bloginfo( 'name' );
+	$meta_title  = ( ! wp_title( '', false, 'left' ) ) ? get_bloginfo( 'name' ) : ltrim( wp_title( '', false, 'left' ) );
 	$meta_desc   = ekiline_meta_description();
 	$meta_imgs   = ekiline_meta_image();
 	$ttr_link    = ekiline_twitter_username( $find_url );
@@ -227,7 +230,7 @@ function ekiline_meta_social() {
 	$meta_social .= '<meta property="og:url" content="' . $current_url . '"/>' . "\n";
 	$meta_social .= '<meta property="og:image" content="' . $meta_imgs . '"/>' . "\n";
 	$meta_social .= '<meta property="og:description" content="' . $meta_desc . '"/>' . "\n";
-	$meta_social .= '<meta property="og:site_name" content="' . $meta_title . '"/>' . "\n";
+	$meta_social .= '<meta property="og:site_name" content="' . get_bloginfo( 'name' ) . '"/>' . "\n";
 	$meta_social .= '<meta property="og:locale" content="' . $meta_locale . '"/>' . "\n";
 
 	$allowed_html = array(
