@@ -214,7 +214,6 @@ function agregar_scripts() {
 	<?php
 }
 
-
 /**
  * 4) Control para ejecucion:
  * Solo cuando el usuario no sea administrador
@@ -315,7 +314,6 @@ function ekiline_load_all_csstojs() {
 
 		$.each( styles, function( key, value ) {
 			var linkCss = $( '<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media } );
-			// console.log( value.id + ' ' + value.src );
 			if ( wpcss.length ) {
 				wpcss.before( linkCss );
 			} else if ( cssinline.length ) {
@@ -464,7 +462,6 @@ function ekiline_load_all_jstojs() {
 		var $ = jQuery.noConflict();
 		if (i < scripts.length ) {
 			$.getScript(scripts[i].src, function () {
-				// console.log( 'Loaded: ' + scripts[i].src );
 				i++;
 				loadScriptsOrdered(scripts,i );
 			} );

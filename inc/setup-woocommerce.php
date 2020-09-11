@@ -65,3 +65,66 @@ function ekiline_card_item_close() {
 	}
 }
 add_action( 'woocommerce_after_shop_loop_item', 'ekiline_card_item_close', 100 );
+
+
+/**
+ * Adiciones en Woocommerce.
+ * Organizacion A1: Crear opcion de orden aleatorio a la presentacion de los productos.
+ *
+ * @link https://docs.woocommerce.com/document/custom-sorting-options-ascdesc/
+ *
+ * @param array $args parametros de opcion.
+ */
+function ekiline_wc_get_catalog_ordering_args( $args ) {
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$orderby_value = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+	if ( 'random_list' === $orderby_value ) {
+		$args['orderby']  = 'rand';
+		$args['order']    = '';
+		$args['meta_key'] = '';
+	}
+	return $args;
+}
+add_filter( 'woocommerce_get_catalog_ordering_args', 'ekiline_wc_get_catalog_ordering_args' );
+
+/**
+ * Organizacion A2: Agregar opcion en herramintas de selección (customizer).
+ * Si se desea la opcion para que el usuario lo establezca ocupar:
+ * add_filter( 'woocommerce_catalog_orderby', 'ekiline_wc_catalog_orderby' );
+ *
+ * @link https://docs.woocommerce.com/document/custom-sorting-options-ascdesc/
+ *
+ * @param array $sortby regresa un campo de opcion en el control de customizer.
+ */
+function ekiline_wc_catalog_orderby( $sortby ) {
+	$sortby['random_list'] = 'Random';
+	return $sortby;
+}
+add_filter( 'woocommerce_default_catalog_orderby_options', 'ekiline_wc_catalog_orderby' );
+
+/**
+ * Sobreescribir objetos, se agrega una acción con una función.
+ * https://businessbloomer.com/woocommerce-visual-hook-guide-single-product-page/
+ */
+function ekiline_wc_add_category_shop_items() {
+	global $post;
+	$terms   = get_the_terms( $post->ID, 'product_cat' );
+	$getcats = '';
+	// Obtener categorias a las que el producto pertenece.
+	if ( $terms && ! is_wp_error( $terms ) ) {
+		$cat_links = array();
+		foreach ( $terms as $term ) {
+			$cat_links[] = '<small><a href="' . get_site_url() . '/?product_cat=' . $term->slug . '" title="' . $term->name . '">' . $term->name . '</a></small>';
+		}
+		$getcats = join( ',', $cat_links );
+	}
+	$allowed_html = array(
+		'a'     => array(
+			'href'  => array(),
+			'title' => array(),
+		),
+		'small' => array(),
+	);
+	echo wp_kses( $getcats, $allowed_html );
+}
+add_action( 'woocommerce_before_shop_loop_item_title', 'ekiline_wc_add_category_shop_items', 20 );

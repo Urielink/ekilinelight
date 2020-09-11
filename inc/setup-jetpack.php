@@ -16,7 +16,7 @@ function ekiline_jetpack_setup() {
 	$args_infinite_scroll = array(
 		'container'      => ekiline_infinite_scroll_wrapper(),
 		'render'         => 'ekiline_infinite_scroll_render',
-		'footer'         => 'page',
+		'footer'         => false,
 		'wrapper'        => false,
 		'footer_widgets' => array( 'footer-w1', 'footer-w2' ),
 	);
