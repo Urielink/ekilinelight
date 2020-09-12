@@ -47,7 +47,7 @@ function view_sidebar_filter( $width_sb_ctrl ) {
 		$opt = get_theme_mod( 'ekiline_disableSbHome' );
 	}
 
-	if ( is_archive() || is_category() ) {
+	if ( is_archive() || is_category() || ! is_singular() ) {
 		$opt = get_theme_mod( 'ekiline_disableSbArchive' );
 	}
 
@@ -155,10 +155,8 @@ function ekiline_show_columns( $tag ) {
 	$colcontain = ( '4' === $colset ) ? 'card-columns' : 'row';
 
 	// En caso de woocommerce.
-	if ( class_exists( 'woocommerce' ) ) {
-		if ( is_shop() || is_product_category() || is_product_tag() ) {
-			$colcontain = 'product-list-container';
-		}
+	if ( class_exists( 'woocommerce' ) && is_shop() || is_product_category() || is_product_tag() ) {
+		$colcontain = 'product-list-container';
 	}
 
 	if ( $colset > '0' ) {
