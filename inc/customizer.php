@@ -176,7 +176,7 @@ function ekiline_theme_customizer( $wp_customize ) {
 	if ( class_exists( 'woocommerce' ) ) {
 		$wlayout[] = array(
 			'name'  => 'Shop',
-			'label' => __( 'Shop page', 'ekiline' ),
+			'label' => __( 'WooCommerce pages', 'ekiline' ),
 		);
 	}
 

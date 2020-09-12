@@ -88,7 +88,7 @@ function theme_html_page() { ?>
 						</ul>
 						<p>
 							<?php printf( '<a class="button button-primary button-hero" href="%1$s" target="_blank"><span class="dashicons dashicons-cart"></span> %2$s</a>', esc_url( 'https://ekiline.com/compra/' ), esc_html__( 'Buy and download', 'ekiline' ) ); ?>
-							<?php printf( '<a class="button button-primary button-hero gold" href="%1$s" target="_blank"><span class="dashicons dashicons-carrot"></span> %2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'FondeaMe', 'ekiline' ) ); ?>
+							<?php printf( '<a class="button button-primary button-hero gold" href="%1$s" target="_blank"><span class="dashicons dashicons-carrot"></span> %2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'FundMe', 'ekiline' ) ); ?>
 						</p>
 						<p>
 							<span class="dashicons dashicons-carrot"></span> <?php esc_html_e( 'You can also', 'ekiline' ); ?>

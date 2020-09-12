@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Project-Id-Version: Ekiline\n"
-"POT-Creation-Date: 2020-09-04 15:13-0500\n"
-"PO-Revision-Date: 2020-09-04 15:23-0500\n"
+"POT-Creation-Date: 2020-09-12 17:39-0500\n"
+"PO-Revision-Date: 2020-09-12 17:55-0500\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,26 +45,26 @@ msgstr "Buscar"
 msgid "Most used categories"
 msgstr "Categorías mas usadas"
 
-#: footer.php:26 singular-simple.php:54
+#: footer.php:26 singular-simple.php:53
 #, php-format
 msgid "&copy; Copyright %1$s. "
 msgstr "&copy; Copyright %1$s. "
 
-#: footer.php:28 singular-simple.php:56
+#: footer.php:28 singular-simple.php:55
 #, php-format
 msgid "Proudly powered by %1$s and %2$s. "
 msgstr "Realizado con %1$s y %2$s. "
 
-#: footer.php:28 singular-simple.php:56
+#: footer.php:28 singular-simple.php:55
 msgid "WordPress"
 msgstr "WordPress"
 
 #. Theme Name of the plugin/theme
-#: footer.php:28 singular-simple.php:56
+#: footer.php:28 inc/info.php:28 singular-simple.php:55
 msgid "Ekiline"
 msgstr "Ekiline"
 
-#: footer.php:30 singular-simple.php:58
+#: footer.php:30 singular-simple.php:57
 msgid "Back"
 msgstr "Volver"
 
@@ -116,15 +116,15 @@ msgstr "Ruta de navegación"
 msgid "Home"
 msgstr "Inicio"
 
-#: inc/class-ekiline-basic-breadcrumb.php:158
+#: inc/class-ekiline-basic-breadcrumb.php:179
 msgid "&not;&not;"
 msgstr "&not;&not;"
 
-#: inc/class-ekiline-basic-breadcrumb.php:205
+#: inc/class-ekiline-basic-breadcrumb.php:226
 msgid "Search "
 msgstr "Buscar "
 
-#: inc/class-ekiline-basic-breadcrumb.php:209
+#: inc/class-ekiline-basic-breadcrumb.php:230
 msgid "Not found "
 msgstr "No encontrado"
 
@@ -157,7 +157,7 @@ msgid "Remove"
 msgstr "Remover"
 
 #: inc/customizer.php:52 inc/customizer.php:107 inc/customizer.php:130
-#: inc/customizer.php:237 inc/widget-options.php:114
+#: inc/customizer.php:244 inc/widget-options.php:114
 msgid "Default"
 msgstr "Default"
 
@@ -259,53 +259,53 @@ msgstr "Categorías y páginas de archivo"
 msgid "Entries and single pages"
 msgstr "Entradas y páginas"
 
-#: inc/customizer.php:193
+#: inc/customizer.php:179
+msgid "WooCommerce pages"
+msgstr "Páginas de WooCommerce"
+
+#: inc/customizer.php:200
 msgid "Enabled sidebars"
 msgstr "Sidebars habilitadas"
 
-#: inc/customizer.php:194
+#: inc/customizer.php:201
 msgid "Disable left"
 msgstr "Deshabilitar sidebar izquierda"
 
-#: inc/customizer.php:195
+#: inc/customizer.php:202
 msgid "Disable right"
 msgstr "Deshabilitar sidebar derecha"
 
-#: inc/customizer.php:196
+#: inc/customizer.php:203
 msgid "Disable both"
 msgstr "Deshabilitar sidebars"
 
-#: inc/customizer.php:213
+#: inc/customizer.php:220
 msgid "Show full width layout"
 msgstr "Ver a todo lo ancho"
 
-#: inc/customizer.php:233
+#: inc/customizer.php:240
 msgid "Columns"
 msgstr "Columnas"
 
-#: inc/customizer.php:234
+#: inc/customizer.php:241
 msgid "Show your lists in columns"
 msgstr "Muestra tus listados en columnas"
 
-#: inc/customizer.php:238
+#: inc/customizer.php:245
 msgid "2 columns"
 msgstr "2 columnas"
 
-#: inc/customizer.php:239
+#: inc/customizer.php:246
 msgid "3 columns"
 msgstr "3 columnas"
 
-#: inc/customizer.php:240
+#: inc/customizer.php:247
 msgid "4 columns"
 msgstr "4 columnas"
 
-#: inc/customizer.php:241
+#: inc/customizer.php:248
 msgid "Cards grid"
 msgstr "Cuadrícula de tarjetas"
-
-#: inc/info.php:28
-msgid "FundMe"
-msgstr "FondeaMe"
 
 #: inc/info.php:46
 msgid "About Ekiline"
@@ -359,31 +359,35 @@ msgstr "Tema completo, sin enlaces externos, anuncios o tips."
 msgid "Buy and download"
 msgstr "Comprar y descargar"
 
-#: inc/info.php:93
+#: inc/info.php:91
+msgid "FondeaMe"
+msgstr "FondeaMe"
+
+#: inc/info.php:94
 msgid "You can also"
 msgstr "También puedes"
 
-#: inc/info.php:94
+#: inc/info.php:95
 msgid "fund the development"
 msgstr "fondear el desarrollo"
 
-#: inc/info.php:95
+#: inc/info.php:96
 msgid "or"
 msgstr "ó"
 
-#: inc/info.php:96
+#: inc/info.php:97
 msgid "earn money"
 msgstr "ganar dinero"
 
-#: inc/info.php:97
+#: inc/info.php:98
 msgid "by helping."
 msgstr "ayudando."
 
-#: inc/info.php:103 inc/info.php:188
+#: inc/info.php:104 inc/info.php:187
 msgid "About"
 msgstr "Acerca"
 
-#: inc/info.php:104
+#: inc/info.php:105
 msgid ""
 "Ekiline simplifies the creation of a website with WordPress, it is a working "
 "method that brings together the standard practices of the internet industry, "
@@ -395,11 +399,11 @@ msgstr ""
 "para facilitar las tareas de planeación, diseño, desarrollo y optimización. "
 "Para mayor información visita ekiline.com"
 
-#: inc/info.php:105
+#: inc/info.php:106
 msgid "Limited liability"
 msgstr "Responsabilidad limitada"
 
-#: inc/info.php:106
+#: inc/info.php:107
 msgid ""
 "As a courtesy, we provide information on how to use certain third-party "
 "products, but we do not directly support their use and we are not "
@@ -413,46 +417,46 @@ msgstr ""
 "productos. Los nombres, marcas y logotipos de terceros son marcas "
 "registradas de sus respectivos propietarios."
 
-#: inc/info.php:111
+#: inc/info.php:112
 msgid "Documentation"
-msgstr "nuestra documentación"
+msgstr "Documentación"
 
-#: inc/info.php:113
+#: inc/info.php:114
 msgid "Installation"
 msgstr "Instalación"
 
-#: inc/info.php:114
+#: inc/info.php:115
 msgid "Personalization"
 msgstr "Personalización"
 
-#: inc/info.php:115
+#: inc/info.php:116
 msgid "Elements and shortcodes"
 msgstr "Elementos y shortcodes"
 
-#: inc/info.php:116
+#: inc/info.php:117
 msgid "Compatibility"
 msgstr "Compatibilidad"
 
-#: inc/info.php:132
+#: inc/info.php:133
 #, php-format
 msgid "&copy; Copyright %1$s Ekiline"
 msgstr "&copy; Copyright %1$s Ekiline"
 
-#: inc/info.php:134
+#: inc/info.php:135
 msgid "All rights reserved. Ekiline developed by"
 msgstr "Todos los derechos reservados. Ekiline desarrollado por"
 
-#: inc/info.php:135
+#: inc/info.php:136
 msgid "B I X N I A"
 msgstr "B I X N I A"
 
-#: inc/info.php:186
-msgid "Make money"
-msgstr "Gana dinero"
-
-#: inc/info.php:187
+#: inc/info.php:188
 msgid "Get more"
 msgstr "Consiga más"
+
+#: inc/info.php:189
+msgid "FundMe"
+msgstr "FondeaMe"
 
 #: inc/theme-blockeditor.php:34
 msgid "Primary"
@@ -717,44 +721,44 @@ msgstr ""
 "Formatos recomendados: MP4, WEBM or OGV, la imagen de cabecera se conserva "
 "como fondo del video"
 
-#: inc/theme-customheader.php:199
+#: inc/theme-customheader.php:198
 msgid "Default header image"
 msgstr "Imagen del encabezado por defecto"
 
-#: inc/theme-customheader.php:307 template-parts/content-card.php:29
+#: inc/theme-customheader.php:320 template-parts/content-card.php:29
 #: template-parts/content.php:66
 #, php-format
 msgid "Categories: %s"
 msgstr "Categorías: %s"
 
-#: inc/theme-customheader.php:313 template-parts/content-card.php:34
+#: inc/theme-customheader.php:326 template-parts/content-card.php:34
 #: template-parts/content.php:71
 #, php-format
 msgid "Tags: %s"
 msgstr "Etiquetas: %s"
 
-#: inc/theme-customheader.php:344 template-parts/content.php:24
+#: inc/theme-customheader.php:357 template-parts/content.php:24
 #, php-format
 msgctxt "post authors"
 msgid "Written by %s"
 msgstr "Escrito por %s"
 
-#: inc/theme-customheader.php:366 search.php:34
+#: inc/theme-customheader.php:379 template-parts/content-headline.php:68
 #, php-format
 msgid "%s results found."
 msgstr "%s resultados encontrados."
 
-#: inc/theme-customheader.php:368 search.php:28
+#: inc/theme-customheader.php:381 template-parts/content-headline.php:62
 #: template-parts/searchform.php:24
 #, php-format
 msgid "Search Results for: %s"
 msgstr "Resultados para: %s"
 
-#: inc/theme-customheader.php:372
+#: inc/theme-customheader.php:385
 msgid "It looks like nothing was found at this location."
 msgstr "Parece que no encontramos nada en esta ubicación."
 
-#: inc/theme-customheader.php:373
+#: inc/theme-customheader.php:386
 msgid "Maybe try one of the links below or a search?"
 msgstr ""
 "¿Que tal si pruebas con los links que aparecen abajo o haz una búsqueda?"
@@ -771,20 +775,20 @@ msgstr "Sin sidebars"
 msgid "Blank page"
 msgstr "Página en blanco"
 
-#: inc/theme-elements.php:31 inc/theme-elements.php:152
+#: inc/theme-elements.php:31 inc/theme-elements.php:157
 #, php-format
 msgid "Continue reading %s"
 msgstr "Continuar leyendo %s"
 
-#: inc/theme-elements.php:31 inc/theme-elements.php:152
+#: inc/theme-elements.php:31 inc/theme-elements.php:157
 msgid "Read more"
 msgstr "Leer mas"
 
-#: inc/theme-elements.php:212
+#: inc/theme-elements.php:217
 msgid "Continue reading:"
 msgstr "Continuar leyendo:"
 
-#: inc/theme-elements.php:241
+#: inc/theme-elements.php:246
 msgid ""
 "This content is password protected. To view it please enter your password "
 "below:"
@@ -792,20 +796,20 @@ msgstr ""
 "Este contenido está protegido con contraseña. Para verlo, ingrese su "
 "contraseña a continuación:"
 
-#: inc/theme-elements.php:242
+#: inc/theme-elements.php:247
 msgid "Password:"
 msgstr "Contraseña:"
 
-#: inc/theme-elements.php:244
+#: inc/theme-elements.php:249
 msgctxt "post password form"
 msgid "Enter"
 msgstr "Ingresar"
 
-#: inc/theme-elements.php:342
+#: inc/theme-elements.php:347
 msgid "&larr; Previous"
 msgstr "&larr; Anterior"
 
-#: inc/theme-elements.php:343
+#: inc/theme-elements.php:348
 msgid "Next &rarr;"
 msgstr "Siguiente &rarr;"
 
@@ -959,15 +963,15 @@ msgstr "Al comentar acepta la"
 msgid "Privacy Policy"
 msgstr "Politica de Privacidad"
 
-#: template-parts/content-archive.php:50
+#: template-parts/content-headline.php:44
 msgid "User: "
 msgstr "Usuario:"
 
-#: template-parts/content-archive.php:51
+#: template-parts/content-headline.php:45
 msgid "Email: "
 msgstr "Email: "
 
-#: template-parts/content-archive.php:52
+#: template-parts/content-headline.php:46
 msgid "Web: "
 msgstr "Web:"
 
