@@ -67,7 +67,7 @@ function ekiline_count_widgets( $widget_area ) {
  */
 function ekiline_img( $args = null ) {
 	if ( 'size' === $args ) {
-		// thumbnail size.
+		// Thumbnail size.
 		$thumb_size = 'medium';
 		if ( is_singular() ) {
 			$thumb_size = 'large';
@@ -77,9 +77,9 @@ function ekiline_img( $args = null ) {
 		$args = $thumb_size;
 	}
 	if ( 'css' === $args ) {
-		// clase css varia por tipo de contenido.
-		$img_class  = 'img-fluid ';
-		if ( !is_singular() ){
+		// Clase css varia por tipo de contenido.
+		$img_class = 'img-fluid ';
+		if ( ! is_singular() ) {
 			$img_class .= ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card-img-top ' : 'img-thumbnail ';
 		}
 		$args = $img_class;
@@ -99,7 +99,7 @@ function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
 	if ( ! is_singular() ) {
 		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '">' . $html . '</a>';
 	}
-	$html = ( is_singular() && get_header_image() ) ? '' : $html ;
+	$html = ( is_singular() && get_header_image() ) ? '' : $html;
 	return $html;
 }
 add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );

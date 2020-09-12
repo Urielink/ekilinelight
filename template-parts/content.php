@@ -51,7 +51,7 @@
 
 	</header>
 
-	<?php the_post_thumbnail( ekiline_img('size'), ['class' => ekiline_img('css')] ); ?>
+	<?php the_post_thumbnail( ekiline_img( 'size' ), [ 'class' => ekiline_img( 'css' ) ] ); ?>
 
 	<?php the_content(); ?>
 
