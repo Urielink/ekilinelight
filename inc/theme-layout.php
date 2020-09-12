@@ -26,7 +26,7 @@ function ekiline_width_control() {
 	}
 	// En caso de woocommerce.
 	if ( class_exists( 'woocommerce' ) ) {
-		if ( is_shop() ) {
+		if ( is_shop() || is_product_category() || is_product_tag() ) {
 			$container .= ( true === get_theme_mod( 'ekiline_anchoShop' ) ) ? $fluid : '';
 		}
 	}
@@ -47,7 +47,7 @@ function view_sidebar_filter( $width_sb_ctrl ) {
 		$opt = get_theme_mod( 'ekiline_disableSbHome' );
 	}
 
-	if ( is_archive() || is_category() ) {
+	if ( is_archive() || is_category() || ! is_singular() ) {
 		$opt = get_theme_mod( 'ekiline_disableSbArchive' );
 	}
 
@@ -56,7 +56,7 @@ function view_sidebar_filter( $width_sb_ctrl ) {
 	}
 	// En caso de woocommerce.
 	if ( class_exists( 'woocommerce' ) ) {
-		if ( is_shop() ) {
+		if ( is_shop() || is_product_category() || is_product_tag() ) {
 			$opt = get_theme_mod( 'ekiline_disableSbShop' );
 		}
 	}
@@ -153,6 +153,11 @@ function ekiline_show_columns( $tag ) {
 
 	$colset     = get_theme_mod( 'ekiline_Columns' );
 	$colcontain = ( '4' === $colset ) ? 'card-columns' : 'row';
+
+	// En caso de woocommerce.
+	if ( class_exists( 'woocommerce' ) && is_shop() || is_product_category() || is_product_tag() ) {
+		$colcontain = 'product-list-container';
+	}
 
 	if ( $colset > '0' ) {
 		if ( 'open' === $tag ) {

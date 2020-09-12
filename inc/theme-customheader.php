@@ -177,19 +177,18 @@ add_action( 'customize_register', 'ekiline_custom_header_controls' );
  */
 function ekiline_custom_header_setup() {
 
-	add_theme_support(
-		'custom-header',
-		apply_filters(
-			'ekiline_custom_header_args',
-			array(
-				'default-image'      => '',
-				'default-text-color' => '000000',
-				'width'              => '',
-				'height'             => '',
-				'flex-height'        => true,
-			)
+	$new_args = apply_filters(
+		'ekiline_custom_header_args',
+		array(
+			'default-image'      => '',
+			'default-text-color' => '000000',
+			'width'              => '',
+			'height'             => '',
+			'flex-height'        => true,
 		)
 	);
+	add_theme_support( 'custom-header', $new_args );
+	
 	// Registrar una imagen default, primero se declara en los filtros.
 		register_default_headers(
 			array(
@@ -286,6 +285,20 @@ function ekiline_header_image( $size = null ) {
 		$url = ( has_post_thumbnail() ) ? get_the_post_thumbnail_url( $post->ID, $size ) : $url;
 	}
 
+	// Condicion: si existe woocommerce.
+	if ( class_exists( 'woocommerce' ) ) {
+		if ( is_shop() ) {
+			$shop_page_id = wc_get_page_id( 'shop' );
+			$url          = ( has_post_thumbnail( $shop_page_id ) ) ? get_the_post_thumbnail_url( $shop_page_id, $size ) : $url;
+		}
+		if ( is_product_category() ) {
+			global $wp_query;
+			$cat          = $wp_query->get_queried_object();
+			$thumbnail_id = get_term_meta( $cat->term_id, 'thumbnail_id', true );
+			$url          = ( $thumbnail_id ) ? wp_get_attachment_image_url( $thumbnail_id, $size, false, '' ) : $url;
+		}
+	}
+
 	return $url;
 }
 
@@ -373,6 +386,45 @@ function custom_header_content( $content_type = null ) {
 		$custom_header_text  = esc_html__( 'Maybe try one of the links below or a search?', 'ekiline' );
 	}
 
+	// En caso de woocommerce.
+	if ( class_exists( 'woocommerce' ) ) {
+
+		if ( is_shop() ) {
+			$custom_header_title = woocommerce_page_title( false );
+			// Texto de pagina.
+			$shop_id      = wc_get_page_id( 'shop' );
+			$shop_post    = get_page( $shop_id );
+			$shop_content = $shop_post->post_content;
+			// Recortar texto y limpiar.
+			$custom_header_text = wp_trim_words( $shop_content, 24 );
+			// En caso de existir un punto, recortar.
+			$punto = strpos( $custom_header_text, '.' );
+			if ( $punto ) {
+				$custom_header_text = substr( $custom_header_text, 0, strpos( $custom_header_text, '.' ) ) . '.';
+			}
+		}
+
+		if ( is_product_category() || is_product_tag() ) {
+			$custom_header_title = get_the_archive_title();
+			$custom_header_text  = get_the_archive_description();
+		}
+
+		if ( is_product() ) {
+			$terms   = get_the_terms( $post->ID, 'product_cat' );
+			$getcats = '';
+			// Obtener categorias a las que el producto pertenece.
+			if ( $terms && ! is_wp_error( $terms ) ) {
+				$cat_links = array();
+				foreach ( $terms as $term ) {
+					$cat_links[] = '<a href="' . get_site_url() . '/?product_cat=' . $term->slug . '" title="' . $term->name . '">' . $term->name . '</a>';
+				}
+				$getcats = join( ',', $cat_links );
+			}
+			$custom_header_title = get_the_title();
+			$custom_header_text  = $getcats;
+		}
+	}
+
 	if ( 'title' === $content_type ) {
 		$content_type = $custom_header_title;
 	} elseif ( 'text' === $content_type ) {
@@ -381,3 +433,18 @@ function custom_header_content( $content_type = null ) {
 
 	return $content_type;
 }
+
+/**
+ * Agregar a wp_body_open, header a las paginas, en la parte superior.
+ * Add custom header at top of page.
+ */
+function ekiline_top_page_custom_header() {
+	// En caso de woocommerce.
+	if ( class_exists( 'woocommerce' ) ) {
+		if ( is_cart() || is_checkout() || is_account_page() ) {
+			return;
+		}
+	}
+	get_template_part( 'template-parts/custom-header' );
+}
+add_action( 'wp_body_open', 'ekiline_top_page_custom_header', 3 );

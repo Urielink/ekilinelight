@@ -182,6 +182,27 @@ function ekiline_widgets_init() {
 }
 add_action( 'widgets_init', 'ekiline_widgets_init' );
 
+/**
+ * Compatibilidad para wp_body_open
+ * Compatibility wp_body_open
+ */
+if ( ! function_exists( 'wp_body_open' ) ) {
+	/**
+	 * Asegurar su uso WordPress anteriores a v 5.2.
+	 */
+	function wp_body_open() {
+		do_action( 'wp_body_open' );
+	}
+}
+
+/**
+ * Agregar a wp_body_open, area de widgets superior
+ * Add widget area at top of page.
+ */
+function ekiline_top_page_widget_area() {
+	dynamic_sidebar( 'toppage-w1' );
+}
+add_action( 'wp_body_open', 'ekiline_top_page_widget_area', 0 );
 
 /**
  * Estilos css, above the fold.
@@ -315,5 +336,5 @@ require get_template_directory() . '/inc/theme-blockeditor.php';
 /* Ekiline info admin */
 require get_template_directory() . '/inc/info.php';
 /* Ekiline Compatibilidad */
-require get_template_directory() . '/inc/theme-jetpack.php';
-require get_template_directory() . '/inc/theme-woocommerce.php';
+require get_template_directory() . '/inc/setup-jetpack.php';
+require get_template_directory() . '/inc/setup-woocommerce.php';

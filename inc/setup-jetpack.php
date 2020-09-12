@@ -16,7 +16,7 @@ function ekiline_jetpack_setup() {
 	$args_infinite_scroll = array(
 		'container'      => ekiline_infinite_scroll_wrapper(),
 		'render'         => 'ekiline_infinite_scroll_render',
-		'footer'         => 'page',
+		'footer'         => false,
 		'wrapper'        => false,
 		'footer_widgets' => array( 'footer-w1', 'footer-w2' ),
 	);
@@ -39,8 +39,10 @@ function ekiline_infinite_scroll_wrapper() {
  */
 function ekiline_infinite_scroll_render() {
 	// en caso de woocommerce ocupar loop original de plugin.
-	if ( class_exists( 'woocommerce' ) && is_shop() ) {
-		return;
+	if ( class_exists( 'woocommerce' ) ) {
+		if ( is_shop() ) {
+			return;
+		}
 	}
 	// Loop.
 	while ( have_posts() ) {

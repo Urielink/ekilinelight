@@ -94,22 +94,12 @@ function create_breadcrumb() {
 	if ( is_home() || is_front_page() ) {
 		return;
 	}
-
+	// Comienzo de breadcrumb. Breadcrumb start.
 	$breadcrumb = '<li class="breadcrumb-item home"><a href="' . home_url() . '"> ' . __( 'Home', 'ekiline' ) . ' </a></li><!--.home-->';
 
-	if ( is_page() || is_single() ) {
+	if ( is_singular() ) {
 
-		if ( is_attachment() ) {
-			// variables para los attachments.
-			$attach_post   = get_post( get_the_ID() );
-			$attach_url    = get_permalink( $attach_post->post_parent );
-			$attach_parent = get_the_title( $attach_post->post_parent );
-
-			// si es un adjunto, muestra el titulo de donde viene.
-			$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="' . $attach_url . '" title="Volver a  ' . $attach_parent . '" rel="gallery">' . $attach_parent . '</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
-
-		} elseif ( is_page() ) {
-
+		if ( is_page() ) {
 			/**
 			 * Si es pagina y tiene herencia, padres.
 			 * info: https://wordpress.stackexchange.com/questions/140362/wordpress-breadcrumb-depth
@@ -135,27 +125,58 @@ function create_breadcrumb() {
 				foreach ( $breadcrumbs as $crumb ) {
 					$breadcrumb .= $crumb;
 				}
-				// Cierro el HTML.
+				// Cierro el HTML. Continua breadcrumb.
 				$breadcrumb .= '<li class="breadcrumb-item post-childB">';
 			} else {
-				// 3) Final de loop
+				// 3) Final de loop. Continua breadcrumb.
 				$breadcrumb .= '<li class="breadcrumb-item post-childA">';
 			}
-		} elseif ( is_single() ) {
-
-			$cats = get_the_category( get_the_ID() );
-			$cat  = array_shift( $cats );
-
-			// En caso de woocommerce.
-			if ( class_exists( 'woocommerce' ) && get_post_type( get_the_ID() ) !== 'product' ) {
-				$breadcrumb .= '<li class="breadcrumb-item single-category">' . get_category_parents( $cat, true, '</li><!--.single-category--><li class="breadcrumb-item single-category-child">' );
-			} else {
-				$breadcrumb .= '<li class="breadcrumb-item single-category">';
-			}
 		}
+
+		if ( is_single() && ! is_attachment() ) {
+
+			global $post;
+			// En caso de woocommerce: product_cat.
+			$find_type = ( class_exists( 'woocommerce' ) && is_product() ) ? 'product_cat' : 'category';
+			$terms     = get_the_terms( $post->ID, $find_type );
+			$getcats   = '';
+
+			if ( $terms && ! is_wp_error( $terms ) ) {
+				$cat_links = array();
+				foreach ( $terms as $term ) {
+					// Link por medio de id.
+					$category_link = get_term_link( $term->term_id, $find_type );
+					// Link para categorias.
+					$cat_links[] = '<a href="' . esc_url( $category_link ) . '">' . $term->name . '</a>';
+				}
+				$getcats = join( ',', $cat_links );
+			}
+
+			$count_cat = count( $terms );
+			$more_cats = $terms[0]->name . ' +' . ( $count_cat - '1' );
+
+			if ( $count_cat > '1' ) {
+				// Continua breadcrumb. Agregar popover.
+				$addcats = '<a href="#has-categories" data-toggle="popover" data-html="true" data-content="' . esc_html( $getcats ) . '">' . $more_cats . '</a>';
+			} else {
+				$addcats = $getcats;
+			}
+
+			// Finaliza breadcrumb.
+			$breadcrumb .= '<li class="breadcrumb-item single-category">' . $addcats . '</li><!--.single-category--><li class="breadcrumb-item single-category">';
+		}
+
+		if ( is_attachment() ) {
+			$attach_post = get_post( get_the_ID() );
+			$attach_name = get_the_title( $attach_post->post_parent );
+			$find_this   = get_search_link( $attach_name );
+			// Continua breadcrumb.
+			$breadcrumb .= '<li class="breadcrumb-item single-attachment"><a href="' . $find_this . '" rel="search">' . $attach_name . '</a></li><!--.single-attachment--><li class="breadcrumb-item single-category-child">';
+		}
+
 		// en caso de no tener titulo.
-		if ( ! get_the_title() ) {
-			$breadcrumb .= __( '&not;&not;', 'ekiline' ) . '</li><!--.single-category-child.post-child-->';
+		if ( ! get_the_title() || is_attachment() ) {
+			$breadcrumb .= __( '&not;&not;', 'ekiline' ) . '<!--no-title--></li><!--.single-category-child.post-child-->';
 		} else {
 			$breadcrumb .= the_title( '', '</li><!--.single-category-child.post-child-->', false );
 		}
@@ -210,5 +231,4 @@ function create_breadcrumb() {
 	}
 
 	echo wp_kses_post( '<ul class="breadcrumb">' . $breadcrumb . '</ul>' );
-
 }

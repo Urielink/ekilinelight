@@ -279,7 +279,7 @@ add_action( 'customize_register', 'ekiline_custom_color_controls' );
  * 2. Regsitro de script auxiliar en personalizador.
  */
 function ekiline_themecustomizer_js() {
-	wp_enqueue_script( 'ekiline-themecustomizer', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.js', array( 'jquery' ), '1', true );
+	wp_enqueue_script( 'ekiline-themecustomizer', get_template_directory_uri() . '/assets/js/ekiline-themecustomizer.min.js', array( 'jquery' ), '1', true );
 }
 add_action( 'customize_controls_enqueue_scripts', 'ekiline_themecustomizer_js' );
 

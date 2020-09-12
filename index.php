@@ -1,11 +1,6 @@
 <?php
 /**
- * Plantilla principal del Frontend.
- *
- * Esta es la vista principal de un sitio, aqui se mostraran cada una de sus partes.
- * El consejo es que no ocupes caracteres especiales.
- * Y organices bien tus archivos.
- * Ekiline esta hecho para tener control sobre elementos de diseno.
+ * Index template.
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/
  *
@@ -21,7 +16,7 @@ get_header();
 
 		<?php dynamic_sidebar( 'content-w1' ); ?>
 
-		<?php get_template_part( 'template-parts/content', 'archive' ); ?>
+		<?php get_template_part( 'template-parts/content', 'headline' ); ?>
 
 		<?php
 		/** Loop https://developer.wordpress.org/themes/basics/the-loop/ **/

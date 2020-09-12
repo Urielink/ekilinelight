@@ -1,13 +1,11 @@
 /* Ekiline for WordPress Theme, Copyright 2018 Uri Lazcano. Ekiline is distributed under the terms of the GNU GPL. http://ekiline.com */
 jQuery(document).ready(function( $ ) {
 
-	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 *
-	 *	Addons Ekiline
-	 *
-	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
+	/**
+	 * Addons Ekiline
+	 */
 
-    // Ajuste en dropdown de widgets dentro de navbar
+    /* Ajuste en dropdown de widgets dentro de navbar */
 	$('.dropdown-menu a.dropdown-toggle').on('click', function(e){
 	    $(this).next('ul').toggle();
 	    e.stopPropagation();
@@ -38,7 +36,6 @@ jQuery(document).ready(function( $ ) {
 		var last_scroll_top = 0;
 		$(window).on('scroll', function() {
 			scroll_top = $(this).scrollTop();
-			//console.log(scroll_top);
 			if( scroll_top < last_scroll_top ) {
 				$('#primarySiteNavigation.navbar-sticky').removeClass('scrolled-down').addClass('scrolled-up');
 			} else {
@@ -48,13 +45,12 @@ jQuery(document).ready(function( $ ) {
 		});
 	}
 
-	/** * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 *
-	 *	Bootstrap
-	 *
-	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * **/
-	// inicializar popovers y tooltips
-		$('[data-toggle="tooltip"]').tooltip();
-		$('[data-toggle="popover"]').popover();
+	/**
+	 * Bootstrap
+	 */
+
+	/* inicializar popovers y tooltips */
+	$('[data-toggle="tooltip"]').tooltip();
+	$('[data-toggle="popover"]').popover();
 
 });

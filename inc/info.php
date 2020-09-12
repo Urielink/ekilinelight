@@ -25,11 +25,11 @@ function ekiline_bar() {
 	$wp_admin_bar->add_menu(
 		array(
 			'id'     => 'goekiline',
-			'title'  => __( 'FundMe', 'ekiline' ),
-			'href'   => 'http://ekiline.com/fondeo/',
+			'title'  => __( 'Ekiline', 'ekiline' ),
+			'href'   => esc_url( 'themes.php?page=ekiline_options' ),
 			'meta'   => array(
 				'class'  => 'gold',
-				'target' => '_blank',
+				'target' => '_self',
 			),
 			'parent' => 'top-secondary',
 		)
@@ -87,13 +87,14 @@ function theme_html_page() { ?>
 								<?php esc_html_e( 'Complete theme, without external links, ads or tips.', 'ekiline' ); ?></li>
 						</ul>
 						<p>
-							<?php printf( '<a class="button button-primary button-hero" href="%1$s" target="_blank"><span class="dashicons dashicons-cart"></span>%2$s</a>', esc_url( 'http://ekiline.com/compra/' ), esc_html__( 'Buy and download', 'ekiline' ) ); ?>
+							<?php printf( '<a class="button button-primary button-hero" href="%1$s" target="_blank"><span class="dashicons dashicons-cart"></span> %2$s</a>', esc_url( 'https://ekiline.com/compra/' ), esc_html__( 'Buy and download', 'ekiline' ) ); ?>
+							<?php printf( '<a class="button button-primary button-hero gold" href="%1$s" target="_blank"><span class="dashicons dashicons-carrot"></span> %2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'FondeaMe', 'ekiline' ) ); ?>
 						</p>
 						<p>
 							<span class="dashicons dashicons-carrot"></span> <?php esc_html_e( 'You can also', 'ekiline' ); ?>
-							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/fondeo/' ), esc_html__( 'fund the development', 'ekiline' ) ); ?>
+							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'fund the development', 'ekiline' ) ); ?>
 							<?php esc_html_e( 'or', 'ekiline' ); ?>
-							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/gana/' ), esc_html__( 'earn money', 'ekiline' ) ); ?>
+							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/gana/' ), esc_html__( 'earn money', 'ekiline' ) ); ?>
 							<?php esc_html_e( 'by helping.', 'ekiline' ); ?>
 						</p>
 					</div>
@@ -110,10 +111,10 @@ function theme_html_page() { ?>
 					<div style="padding:4px;">
 						<h3><?php esc_html_e( 'Documentation', 'ekiline' ); ?></h3>
 						<ul>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/instala/' ), esc_html__( 'Installation', 'ekiline' ) ); ?></li>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/personaliza/' ), esc_html__( 'Personalization', 'ekiline' ) ); ?></li>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/elementos/' ), esc_html__( 'Elements and shortcodes', 'ekiline' ) ); ?></li>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/compatible/' ), esc_html__( 'Compatibility', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/instala/' ), esc_html__( 'Installation', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/personaliza/' ), esc_html__( 'Personalization', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/elementos/' ), esc_html__( 'Elements and shortcodes', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/compatible/' ), esc_html__( 'Compatibility', 'ekiline' ) ); ?></li>
 						</ul>
 					</div>
 				</div>
@@ -149,7 +150,7 @@ function theme_html_page() { ?>
 
 // Verificar paginas de administracion.
 global $pagenow;
-$adminpages = array( 'index.php', 'edit.php', 'post.php', 'themes.php', 'tools.php', 'plugins.php' );
+$adminpages = array( 'index.php', 'themes.php', 'tools.php', 'plugins.php' );
 
 if ( in_array( $pagenow, $adminpages, true ) ) {
 	add_action( 'admin_notices', 'ekiline_docs_feed' );
@@ -167,7 +168,7 @@ function ekiline_docs_feed() {
 		<?php
 		$rss_instance = array(
 			'title'        => 'Ekiline Tips',
-			'url'          => 'http://ekiline.com/feed/',
+			'url'          => 'https://ekiline.com/feed/',
 			'items'        => 10,
 			'show_summary' => 0,
 			'show_author'  => 0,
@@ -183,9 +184,9 @@ function ekiline_docs_feed() {
 		the_widget( 'WP_Widget_RSS', $rss_instance, $rss_args );
 		?>
 		<div>
-			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/gana/' ), esc_html__( 'Make money', 'ekiline' ) ); ?>
-			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'http://ekiline.com/compra/' ), esc_html__( 'Get more', 'ekiline' ) ); ?>
-			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'themes.php?page=ekiline_options' ), esc_html__( 'About', 'ekiline' ) ); ?>
+			<?php printf( '<a class="button button-secondary"  href="%1$s">%2$s</a>', esc_url( 'themes.php?page=ekiline_options' ), esc_html__( 'About', 'ekiline' ) ); ?>
+			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/compra/' ), esc_html__( 'Get more', 'ekiline' ) ); ?>
+			<?php printf( '<a class="button button-primary gold"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'FundMe', 'ekiline' ) ); ?>
 		</div>
 	</div>
 
@@ -215,7 +216,7 @@ function ekiline_docs_feed_set() {
 function ekiline_admin_styles() {
 	$extracss  = '.gold a::before { content: "\f511";} .gold a{ background-color: #58aa03 !important; } .gold:hover a{ background-color: #ffb900 !important; color: #fff !important; } .gold:hover a::before { content: "\f339"; color: #fff !important; }';
 	$extracss .= '.advice a::before { content: "\f325";} .advice a { background-color: #ff7e00 !important; } .advice:hover a { background-color: #ff7e00 !important; color: #fff !important; } .advice:hover a::before { content: "\f325"; color: #fff !important; }';
-	$extracss .= 'a.gold{ background-color: #58aa03 !important; } a.gold:hover{ background-color: #ffb900 !important; color: #fff !important; } a.gold:hover .dashicons-carrot::before {content: "\f339";color: #fff !important;}';
+	$extracss .= 'a.gold{ background-color: #58aa03 !important;border:none !important; } a.gold:hover{ background-color: #ffb900 !important; color: #fff !important; } a.gold:hover .dashicons-carrot::before {content: "\f339";color: #fff !important;}';
 	$extracss .= '.dash-note{margin: 0px 10px 0px 0px;float: left;font-size: 20px;}';
 	$extracss .= '.ekiline-notice { display:flex;justify-content: space-between;align-items: center; padding:10px; }';
 	$extracss .= '.ekiline-notice h2, .ekiline-notice ul, .ekiline-notice li{ margin:0px; }';
