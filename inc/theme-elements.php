@@ -65,19 +65,24 @@ function ekiline_count_widgets( $widget_area ) {
  *
  * @param string $args thumbnail size and css class vaiables.
  */
-function ekiline_thumbnail( $args = null ) {
+function ekiline_img( $args = null ) {
 	if ( 'size' === $args ) {
 		// thumbnail size.
-		$thumb_size = ( is_search() ) ? 'thumbnail' : 'medium';
-		$args       = $thumb_size;
+		$thumb_size = 'medium';
+		if ( is_singular() ) {
+			$thumb_size = 'large';
+		} elseif ( is_search() ) {
+			$thumb_size = 'thumbnail';
+		}
+		$args = $thumb_size;
 	}
 	if ( 'css' === $args ) {
 		// clase css varia por tipo de contenido.
 		$img_class  = 'img-fluid ';
-		$img_class .= ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card-img-top ' : 'img-thumbnail ';
-		// en caso de header ocultar.
-		$img_class .= ( get_header_image() ) ? 'd-none ' : '';
-		$args       = array( 'class' => $img_class );
+		if ( !is_singular() ){
+			$img_class .= ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card-img-top ' : 'img-thumbnail ';
+		}
+		$args = $img_class;
 	}
 	return $args;
 }
@@ -91,13 +96,10 @@ function ekiline_thumbnail( $args = null ) {
  * @param string $post_image_id content image.
  */
 function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
-	if ( is_single() ) {
-		return $html;
+	if ( ! is_singular() ) {
+		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '">' . $html . '</a>';
 	}
-	// si es search, se agrega una clase.
-	$thumb_class = ( is_search() ) ? ' class="search-link"' : '';
-
-	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '"' . $thumb_class . '>' . $html . '</a>';
+	$html = ( is_singular() && get_header_image() ) ? '' : $html ;
 	return $html;
 }
 add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );

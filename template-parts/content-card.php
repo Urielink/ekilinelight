@@ -11,7 +11,7 @@
 
 <article <?php post_class(); ?>>
 
-	<?php the_post_thumbnail( ekiline_thumbnail( 'size' ), ekiline_thumbnail( 'css' ) ); ?>
+	<?php the_post_thumbnail( ekiline_img('size'), ['class' => ekiline_img('css')] ); ?>
 
 	<div class="card-body">
 
