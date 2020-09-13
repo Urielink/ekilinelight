@@ -156,8 +156,10 @@ function ekiline_show_columns( $tag = null, $css = null ) {
 	$colcontain = ( '4' === $colset ) ? 'card-columns' : 'row';
 
 	// En caso de woocommerce.
-	if ( class_exists( 'woocommerce' ) && is_shop() || is_product_category() || is_product_tag() ) {
-		$colcontain = 'product-list-container';
+	if ( class_exists( 'woocommerce' ) ) {
+		if ( is_shop() || is_product_category() || is_product_tag() ) {
+			$colcontain = 'product-list-container';
+		}
 	}
 	// En caso de agregar una clases css.
 	if ( $css ) {

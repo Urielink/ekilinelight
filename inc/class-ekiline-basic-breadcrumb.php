@@ -137,7 +137,13 @@ function create_breadcrumb() {
 
 			global $post;
 			// En caso de woocommerce: product_cat.
-			$find_type = ( class_exists( 'woocommerce' ) && is_product() ) ? 'product_cat' : 'category';
+			$find_type = 'category';
+			if ( class_exists( 'woocommerce' ) ) {
+				if ( is_product() ) {
+					$find_type = 'product_cat';
+				}
+			}
+
 			$terms     = get_the_terms( $post->ID, $find_type );
 			$getcats   = '';
 
