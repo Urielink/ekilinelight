@@ -143,9 +143,8 @@ function create_breadcrumb() {
 					$find_type = 'product_cat';
 				}
 			}
-
-			$terms     = get_the_terms( $post->ID, $find_type );
-			$getcats   = '';
+			$terms   = get_the_terms( $post->ID, $find_type );
+			$getcats = '';
 
 			if ( $terms && ! is_wp_error( $terms ) ) {
 				$cat_links = array();
