@@ -11,7 +11,7 @@
 
 <article class="border rounded p-2 mb-2 media">
 
-	<?php the_post_thumbnail( 'thumbnail' , ['class'=>'mr-3'] ); ?>
+	<?php the_post_thumbnail( 'thumbnail', [ 'class' => 'mr-3' ] ); ?>
 
 	<div class="media-body">
 

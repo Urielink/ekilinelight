@@ -159,7 +159,7 @@ function ekiline_show_columns( $tag = null, $css = null ) {
 	if ( class_exists( 'woocommerce' ) && is_shop() || is_product_category() || is_product_tag() ) {
 		$colcontain = 'product-list-container';
 	}
-	// En caso de agregar una clases css
+	// En caso de agregar una clases css.
 	if ( $css ) {
 		$colcontain .= ' ' . $css;
 	}
