@@ -164,7 +164,6 @@ function ekiline_content_additions( $content ) {
 			$content = wp_trim_words( $content, 55, $link );
 		}
 	}
-
 	return $content;
 
 }

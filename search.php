@@ -21,15 +21,14 @@ get_header();
 		<?php
 
 		if ( have_posts() ) {
-
-			ekiline_show_columns( 'open' );
+			// Ejemplo: en caso de personalizar los indices.
+			ekiline_show_columns( 'open', 'd-flex flex-column mx-0' );
 
 			while ( have_posts() ) :
 				the_post();
 				// en caso de ocupar 'cards'.
 				$post_style = ( ! is_singular() && get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card' : get_post_type();
 				get_template_part( 'template-parts/content', $post_style );
-
 			endwhile;
 
 			ekiline_show_columns( 'close' );

@@ -145,8 +145,9 @@ function ekiline_sort_cols( $css ) {
  * loop_start, loop_end, podria romper la vista.
  *
  * @param string $tag setup open/close tag.
+ * @param string $css if user need new css class.
  */
-function ekiline_show_columns( $tag ) {
+function ekiline_show_columns( $tag = null, $css = null ) {
 	if ( is_singular() ) {
 		return;
 	}
@@ -157,6 +158,10 @@ function ekiline_show_columns( $tag ) {
 	// En caso de woocommerce.
 	if ( class_exists( 'woocommerce' ) && is_shop() || is_product_category() || is_product_tag() ) {
 		$colcontain = 'product-list-container';
+	}
+	// En caso de agregar una clases css
+	if ( $css ) {
+		$colcontain .= ' ' . $css;
 	}
 
 	if ( $colset > '0' ) {

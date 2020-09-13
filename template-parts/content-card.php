@@ -9,6 +9,11 @@
 
 ?>
 
+<?php if ( is_search() ) {
+	get_template_part( 'template-parts/content', 'search' );
+	return;
+} ?>
+
 <article <?php post_class(); ?>>
 
 	<?php the_post_thumbnail( ekiline_img( 'size' ), [ 'class' => ekiline_img( 'css' ) ] ); ?>
