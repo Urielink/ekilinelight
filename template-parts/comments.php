@@ -246,6 +246,7 @@ function ekiline_comments_extended( $comment, $args, $depth ) {
  * @link https://premium.wpmudev.org/blog/customizing-wordpress-comment-form/
  */
 $args = array(
+	'title_reply'   => __( 'Write a comment', 'ekiline' ),
 	'comment_field' => '<div class="form-group">' .
 							'<label for="comment">' . __( 'Comment', 'ekiline' ) . '</label>' .
 							'<textarea id="comment" name="comment" class="form-control mb-2"></textarea>' .

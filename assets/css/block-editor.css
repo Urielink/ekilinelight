@@ -1,0 +1,14 @@
+/**
+ * Ajuste de estilos css para el editor de bloques, coincidencias con bootstrap.
+ * @link: https://developer.wordpress.org/block-editor/developers/themes/theme-support/#changing-the-width-of-the-editor
+ */
+/* Mostrar grid */
+/* .wp-block{border:1px dotted #ccc;padding:.25em;} */
+
+/* Mostrar elementos acorde a bootstrap */
+.wp-block{max-width: 86%;}
+.wp-block[data-align="wide"]{max-width: 94%;}
+.wp-block[data-align="full"]{max-width: none;}
+
+/* Ajustar colores */
+.wp-block p.has-text-color a { color: inherit; }

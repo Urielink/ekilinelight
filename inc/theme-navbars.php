@@ -48,10 +48,11 @@ function ekiline_navbar_menu( $nav_position ) {
 	$nav_inverse = ( true === get_theme_mod( 'ekiline_inversemenu' ) ) ? 'navbar-light bg-light ' : 'navbar-dark bg-dark ';
 
 	// Clase CSS auxiliar alineación de items, transformar a header.
-	$nav_align = '';
-	$nav_head  = '';
-	$nav_help  = '';
-	$modal_css = '';
+	$nav_align  = '';
+	$nav_head   = '';
+	$nav_help   = '';
+	$modal_css  = '';
+	$nav_action = '';
 
 	// Variables para boton modal.
 	$datatoggle = 'collapse';

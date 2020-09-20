@@ -22,11 +22,11 @@ function ekiline_block_editor_setup() {
 	add_theme_support( 'custom-line-height' );
 
 	// Unidades de medida.
-	add_theme_support( 'custom-units', 'rem', 'em' );
+	add_theme_support( 'custom-units', 'rem', 'em', 'px' );
 
 	// Estilos de apoyo.
 	add_theme_support( 'editor-styles' );
-	add_editor_style( 'assets/css/bootstrap.min.css' );
+	add_editor_style( [ 'assets/css/bootstrap.min.css', 'assets/css/block-editor.css' ] );
 
 	// Colores base.
 	$block_colors = array(
@@ -194,15 +194,15 @@ add_action( 'after_setup_theme', 'ekiline_block_editor_setup' );
 /**
  * Estilos de apoyo
  */
-function ekiline_customizer_styles() {
+function ekiline_custom_colors_styles() {
 	global $pagenow;
 	if ( 'post.php' === $pagenow && get_theme_mod( 'ekiline_textarea_css' ) !== '' ) {
 		$css      = get_theme_mod( 'ekiline_textarea_css' );
 		$xchange  = str_replace( '}', '}.block-editor .editor-styles-wrapper', $css );
-		$csstag   = '<style id="ekiline-from-customizer">' . $xchange . '</style>';
+		$csstag   = '<style id="ekiline-from-custom-colors">' . $xchange . '</style>';
 		$tagclean = str_replace( '.block-editor .editor-styles-wrapper</style>', '</style>', $csstag );
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo $tagclean;
 	}
 }
-add_action( 'admin_head', 'ekiline_customizer_styles', 100 );
+add_action( 'admin_head', 'ekiline_custom_colors_styles', 100 );

@@ -12,19 +12,21 @@
 
 <?php if ( ! is_singular() && ! is_search() ) { ?>
 
-	<h1 class="archive-title">
+	<h1 class="archive-title headline">
 		<?php echo wp_kses_post( ( is_home() && ! is_front_page() ) ? get_the_title( get_option( 'page_for_posts', true ) ) : get_the_archive_title() ); ?>
 	</h1>
 
 		<?php if ( is_home() && ! is_front_page() ) { ?>
 
-			<div>
+			<div class="headline-description">
 				<?php echo wp_kses_post( get_post_field( 'post_content', get_option( 'page_for_posts' ) ) ); ?>
 			</div>
 
 		<?php } elseif ( is_category() ) { ?>
 
-			<div> <?php echo category_description(); ?> </div>
+			<div class="headline-description">
+				<?php echo category_description(); ?>
+			</div>
 
 		<?php } elseif ( is_author() ) { ?>
 			<?php
@@ -34,7 +36,7 @@
 			 * Nombre seleccionado, correo y url.
 			 **/
 			?>
-			<div>
+			<div class="headline-description">
 
 				<p>
 					<?php echo wp_kses_post( nl2br( get_the_author_meta( 'description' ) ) ); ?>
