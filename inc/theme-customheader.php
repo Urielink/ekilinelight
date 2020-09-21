@@ -447,4 +447,4 @@ function ekiline_top_page_custom_header() {
 	}
 	get_template_part( 'template-parts/custom-header' );
 }
-add_action( 'wp_body_open', 'ekiline_top_page_custom_header', 3 );
+add_action( 'wp_body_open', 'ekiline_top_page_custom_header', 1 );
