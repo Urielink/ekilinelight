@@ -17,7 +17,7 @@
 	</header>
 
 	<?php // Archive, featured image with link. ?>
-	<a href="<?php the_permalink();?>" title="<?php the_title();?>">
+	<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 		<?php the_post_thumbnail( 'medium', array( 'class' => 'w-100 img-fluid' ) ); ?>
 	</a>
 

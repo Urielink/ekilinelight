@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying posts.
+ * Template part for displaying posts in search page.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -11,7 +11,7 @@
 
 <article class="bg-white border rounded p-2 mb-2 media">
 
-	<a href="<?php the_permalink();?>" title="<?php the_title();?>">
+	<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
 		<?php the_post_thumbnail( 'thumbnail', array( 'class' => 'img-thumbnail mr-3' ) ); ?>
 	</a>
 
