@@ -202,7 +202,7 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 function ekiline_top_page_widget_area() {
 	dynamic_sidebar( 'toppage-w1' );
 }
-add_action( 'wp_body_open', 'ekiline_top_page_widget_area', 0 );
+add_action( 'wp_body_open', 'ekiline_top_page_widget_area', 1 );
 
 /**
  * Estilos css, above the fold.

@@ -26,9 +26,7 @@ get_header();
 
 			while ( have_posts() ) :
 				the_post();
-				// en caso de ocupar 'cards'.
-				$post_style = ( ! is_singular() && get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card' : get_post_type();
-				get_template_part( 'template-parts/content', $post_style );
+				get_template_part( 'template-parts/content', get_post_type() );
 			endwhile;
 
 			ekiline_show_columns( 'close' );

@@ -34,9 +34,7 @@ get_header();
 				* https://cybmeta.com/como-utilizar-get_template_part
 				* https://wordpress.stackexchange.com/questions/260998/get-template-part-based-on-get-post-type-for-a-custom-post-type-instead-of-g
 				*/
-				// en caso de ocupar 'cards'.
-				$post_style = ( ! is_singular() && get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card' : get_post_type();
-				get_template_part( 'template-parts/content', $post_style );
+				get_template_part( 'template-parts/content', get_post_type() );
 
 			endwhile;
 

@@ -447,4 +447,19 @@ function ekiline_top_page_custom_header() {
 	}
 	get_template_part( 'template-parts/custom-header' );
 }
-add_action( 'wp_body_open', 'ekiline_top_page_custom_header', 3 );
+add_action( 'wp_body_open', 'ekiline_top_page_custom_header', 1 );
+
+
+/**
+ * Manipular el marcado en el thumbnail, desactivar en publicación si hay header.
+ * Custom thumbnail markup, replace it if has header.
+ *
+ * @param string $html content.
+ * @param string $post_id content id.
+ * @param string $post_image_id content image.
+ */
+function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
+	$html = ( is_singular() && get_header_image() ) ? '' : $html;
+	return $html;
+}
+add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );

@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying posts.
+ * Template part for displaying archive posts as card.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -9,16 +9,11 @@
 
 ?>
 
-<?php
-if ( is_search() ) {
-	get_template_part( 'template-parts/content', 'search' );
-	return;
-}
-?>
-
 <article <?php post_class(); ?>>
 
-	<?php the_post_thumbnail( ekiline_img( 'size' ), [ 'class' => ekiline_img( 'css' ) ] ); ?>
+	<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">
+		<?php the_post_thumbnail( 'medium', array( 'class' => 'img-fluid card-img-top' ) ); ?>
+	</a>
 
 	<div class="card-body">
 
@@ -29,16 +24,11 @@ if ( is_search() ) {
 	</div>
 
 	<footer class="card-footer">
-		<p class="entry-meta small mark">
+		<p class="entry-meta small my-0">
 			<?php
 			if ( ! is_page() || get_the_category_list() !== '' ) {
 				/* translators: %s is replaced with category title */
 				printf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
-			}
-
-			if ( get_the_tag_list() !== '' ) {
-				/* translators: %s is replaced with tags */
-				printf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ' ) ) );
 			}
 			?>
 		</p><!-- .entry-meta -->

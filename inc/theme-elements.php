@@ -56,54 +56,6 @@ function ekiline_count_widgets( $widget_area ) {
 	endif;
 }
 
-
-/**
- * 1) Manipular el marcado en el thumbnail
- * Custom thumbnail markup
- *
- * @link https://developer.wordpress.org/reference/functions/the_post_thumbnail/
- *
- * @param string $args thumbnail size and css class vaiables.
- */
-function ekiline_img( $args = null ) {
-	if ( 'size' === $args ) {
-		// Thumbnail size.
-		$thumb_size = 'medium';
-		if ( is_singular() ) {
-			$thumb_size = 'large';
-		} elseif ( is_search() ) {
-			$thumb_size = 'thumbnail';
-		}
-		$args = $thumb_size;
-	}
-	if ( 'css' === $args ) {
-		// Clase css varia por tipo de contenido.
-		$img_class = 'img-fluid ';
-		if ( ! is_singular() ) {
-			$img_class .= ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card-img-top ' : 'img-thumbnail ';
-		}
-		$args = $img_class;
-	}
-	return $args;
-}
-
-/**
- * 2) Agregar enlace a todas las miniaturas.
- * Link all post thumbnails to the post permalink.
- *
- * @param string $html content.
- * @param string $post_id content id.
- * @param string $post_image_id content image.
- */
-function ekiline_link_thumbnail( $html, $post_id, $post_image_id ) {
-	if ( ! is_singular() ) {
-		$html = '<a href="' . get_permalink( $post_id ) . '" title="' . wp_strip_all_tags( get_the_title( $post_id ) ) . '">' . $html . '</a>';
-	}
-	$html = ( is_singular() && get_header_image() ) ? '' : $html;
-	return $html;
-}
-add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
-
 /**
  * Manipular el titulo de listados (archive) con filtros.
  * Custom Title markup.
@@ -112,7 +64,7 @@ add_filter( 'post_thumbnail_html', 'ekiline_link_thumbnail', 10, 3 );
  *
  * @param string $title archive page title.
  */
-function my_theme_archive_title( $title ) {
+function ekiline_archive_title( $title ) {
 
 	if ( is_category() ) {
 		$title = single_cat_title( '', false );
@@ -133,7 +85,7 @@ function my_theme_archive_title( $title ) {
 	return $title;
 
 }
-add_filter( 'get_the_archive_title', 'my_theme_archive_title' );
+add_filter( 'get_the_archive_title', 'ekiline_archive_title' );
 
 
 /**
@@ -153,8 +105,12 @@ function ekiline_content_additions( $content ) {
 
 	if ( is_home() || is_front_page() || is_archive() || is_search() ) {
 		global $post;
+		$css_class = 'more-link';
+		if ( get_theme_mod( 'ekiline_Columns' ) === '4' ) {
+			$css_class = 'more-link btn btn-primary btn-block mt-2';
+		}
 		/* translators: screenread only %s is replaced with title */
-		$link = '... <a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
+		$link = '... <a class="' . $css_class . '" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
 
 		if ( strpos( $post->post_content, '<!--more-->' ) ) {
 			$content = $content;
@@ -440,7 +396,7 @@ add_filter( 'query_vars', 'ekiline_themeslug_query_vars' );
 /**
  * Extension servir contenido sin formato por medio de url (2).
  * Usar: page-or-post-url/?show=blank
- * 
+ *
  * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/single_template
  * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/page_template
  * @param string $template cambia la plantilla pre establecida.

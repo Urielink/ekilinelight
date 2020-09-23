@@ -316,4 +316,4 @@ function ekiline_nav_fallback() {
 function ekiline_top_navbar() {
 	ekiline_navbar_menu( 'primary' );
 }
-add_action( 'wp_body_open', 'ekiline_top_navbar', 2 );
+add_action( 'wp_body_open', 'ekiline_top_navbar', 0 );
