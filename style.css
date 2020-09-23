@@ -61,7 +61,7 @@
  #user_switching_switch_on{position:fixed;left:0;padding:0.4rem;margin:0px;bottom:0px;z-index:3000;background-color:#343A40;font-size:0.8rem;}
 
  /* ------------------------------------------------
-  * 1.1) Gutenberg, Block editor:
+  * 1.1) Gutenberg, Block editor frontend:
   * ----------------------------------------------*/
  /* alineacion amplia || wide alignments */
  .container > .hentry .alignwide{ margin-left:-10%; margin-right:-10%; width:120%;}
@@ -103,7 +103,7 @@
  /* ------------------------------------------------
   * 2) Ekiline: CUSTOM STYLES tus estilos || write here your styles
   * ----------------------------------------------*/
-
+ body {-ms-word-wrap: break-word;word-wrap: break-word;}
  /* Clearfix en articulos */
  article::after{content: "";clear: both;display: table;}
  article footer, article .page-links{clear: both;}

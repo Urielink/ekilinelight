@@ -26,7 +26,11 @@ function ekiline_block_editor_setup() {
 
 	// Estilos de apoyo.
 	add_theme_support( 'editor-styles' );
-	add_editor_style( [ 'assets/css/bootstrap.min.css', 'assets/css/block-editor.css' ] );
+	$block_styles = array(
+		'assets/css/bootstrap.min.css',
+		'assets/css/block-editor.css',
+	);
+	add_editor_style( $block_styles );
 
 	// Colores base.
 	$block_colors = array(

@@ -47,8 +47,7 @@ function ekiline_infinite_scroll_render() {
 	// Loop.
 	while ( have_posts() ) {
 		the_post();
-		$post_style = ( get_theme_mod( 'ekiline_Columns' ) === '4' ) ? 'card' : get_post_format();
-		get_template_part( 'template-parts/content', $post_style );
+		get_template_part( 'template-parts/content', get_post_type() );
 	}
 }
 
