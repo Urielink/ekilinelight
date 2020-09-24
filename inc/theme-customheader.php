@@ -31,7 +31,7 @@ function ekiline_custom_header_controls( $wp_customize ) {
 	);
 	$colors[] = array(
 		'slug'        => 'chdrtxt_color',
-		'default'     => '#6c757d',
+		'default'     => '#FFFFFF',
 		'label'       => '',
 		'description' => __( 'Text color', 'ekiline' ),
 		'priority'    => 20,
@@ -213,7 +213,7 @@ function ekiline_custom_header_style() {
 	}
 
 	$hdr_bgc    = get_option( 'chdr_color', '#000000' );
-	$hdr_txc    = get_option( 'chdrtxt_color', '#6c757d' );
+	$hdr_txc    = get_option( 'chdrtxt_color', '#FFFFFF' );
 	$hdr_lkc    = get_option( 'chdrlks_color', '#007bff' );
 	$range_head = get_theme_mod( 'ekiline_range_header' );
 
@@ -345,7 +345,7 @@ function custom_header_content( $content_type = null ) {
 		} else {
 			$custom_header_title = '<a href="' . esc_url( get_the_permalink() ) . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
 			$custom_header_text  = ekiline_content_out_the_loop() . '<br>';
-			$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' | ' . $tags_list . '</small></span>';
+			$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' <br> ' . $tags_list . '</small></span>';
 		}
 	}
 
@@ -359,7 +359,7 @@ function custom_header_content( $content_type = null ) {
 		);
 
 		$custom_header_title = get_the_title();
-		$add_categories      = ( ! is_page() ) ? ' | ' . $categories_list : '';
+		$add_categories      = ( ! is_page() ) ? ' <br> ' . $categories_list : '';
 		$custom_header_text  = '<small>' . $author_item . $add_categories . '</small>';
 	}
 
@@ -370,7 +370,7 @@ function custom_header_content( $content_type = null ) {
 			$content             = get_the_archive_description();
 			$custom_header_text .= wp_strip_all_tags( substr( $content, 0, strpos( $content, '.' ) ) ) . '<br>';
 		}
-		$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' | ' . $tags_list . '</small></span>';
+		$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' <br> ' . $tags_list . '</small></span>';
 	}
 
 	if ( is_search() ) {
