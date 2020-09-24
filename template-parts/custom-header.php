@@ -20,9 +20,9 @@
 	<?php } ?>
 
 		<div class="headline position-relative <?php echo ( ! get_theme_mod( 'ekiline_headerCustomWidth' ) ) ? 'container px-4' : 'w-100'; ?>">
-			<p class="title display-4">
+			<h1 class="title display-4">
 				<?php echo wp_kses_post( custom_header_content( 'title' ) ); ?>
-			</p>
+			</h1>
 			<p class="lead">
 				<?php echo wp_kses_post( custom_header_content( 'text' ) ); ?>
 			</p>

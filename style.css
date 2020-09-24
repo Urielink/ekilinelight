@@ -591,7 +591,7 @@ img{vertical-align:middle;border-style:none}
  #custom_header_module > .alignfull {margin-left: calc( -100vw / 2 + 100% / 2 - 9px);margin-right: calc( -100vw / 2 + 100% / 2 - 9px);width: 100vw;}
  #custom_header_module .wp-block-cover.has-background-dim::before{z-index: 1;opacity: .3 !important;}
  #custom_header_module .wp-block-cover .headline {z-index: 1;}
- #custom_header_module p.lead a {padding: 0px 5px;}
+ #custom_header_module .headline a {padding: 0px 5px;}
 
 @media only screen and (max-width:576px){
  #custom_header_module > .alignfull {margin-left: calc( -100vw / 2 + 100% / 2 );margin-right: calc( -100vw / 2 + 100% / 2); }
