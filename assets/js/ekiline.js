@@ -33,7 +33,7 @@ jQuery(document).ready(function( $ ) {
 
 	/* Navegacion con scroll */
 	if ( $('#primarySiteNavigation.navbar-sticky').length > 0 ) {
-		var last_scroll_top = 0;
+		var last_scroll_top = 0, scroll_top;
 		$(window).on('scroll', function() {
 			scroll_top = $(this).scrollTop();
 			if( scroll_top < last_scroll_top ) {
@@ -52,5 +52,43 @@ jQuery(document).ready(function( $ ) {
 	/* inicializar popovers y tooltips */
 	$('[data-toggle="tooltip"]').tooltip();
 	$('[data-toggle="popover"]').popover();
+
+	/* Ekiline: carrusel extendido */
+	if ( $('.carousel-multiple').length > 0 ) {
+		$('.carousel-multiple').each(function(){
+			// Vistas, columnas y grupo.
+			var params = [ ['x2','6','0'],['x3','4','1'],['x4','3','2'],['x6','2','4'] ];
+			var view, item;
+			// Envoltorio extra para agrupar.
+			for ( var i = 0; i < params.length; i++ ) {
+				if ( $(this).hasClass( params[i][0] ) ){
+					item = params[i][1];
+					view = params[i][2];
+				}
+			}
+			// Items envoltorio.
+			$(this).find('.carousel-item').each(function(){
+				$(this).children().wrapAll('<figure class="col-md-' + item + '">','</figure>');
+			});
+			// Loop grupos.
+			$(this).find( '.carousel-item').each(function(){
+				// Copiar el primer slide y agregarlo.
+				var next = $(this).next();
+				if ( !next.length ) {
+					next = $(this).siblings(':first');
+				}
+				next.children(':first-child').clone().appendTo( $(this) );
+				// Agrupar slides (view).
+				for ( var i=0;i<view;i++ ) {
+					next = next.next();
+					if ( !next.length ) {
+						next = $(this).siblings(':first');
+					}
+					next.children(':first-child').clone().appendTo( $(this) );
+				}
+			});
+
+		});
+	}
 
 });

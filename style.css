@@ -224,7 +224,9 @@
 .carousel-thumbs .carousel-control-next{right:0;}
 /* Regla general: posición de objetos || Rule: object position */
 .carousel-multiple .carousel-inner .active.carousel-item-left,.carousel-multiple .carousel-inner .active.carousel-item-right{left:0%;-webkit-transition:all .6s ease 0s;-moz-transition:all .6s ease 0s;-o-transition:all .6s ease 0s;-ms-transition:all .6s ease 0s;transition:all .6s ease 0s;}
-.carousel-multiple .carousel-inner .carousel-item > *{display:inline-block;}
+/* .carousel-multiple .carousel-inner .carousel-item.active {display: flex;} */
+.carousel-multiple .carousel-caption {z-index: 0;}
+.carousel-multiple .carousel-inner .carousel-item > *{float:left;min-height: 200px;}
 /* variable por 2 thumbs (col-sm-6) || 2 thumbs */
 .carousel-multiple.x2 .carousel-inner .active.carousel-item-left{-webkit-transform:translate3d(-50%,0,0);-moz-transform:translate3d(-50%,0,0);-ms-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0);}
 .carousel-multiple.x2 .carousel-inner .active.carousel-item-right{-webkit-transform:translate3d(50%,0,0);-moz-transform:translate3d(50%,0,0);-ms-transform:translate3d(50%,0,0);transform:translate3d(50%,0,0);}

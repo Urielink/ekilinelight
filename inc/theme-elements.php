@@ -153,6 +153,8 @@ function ekiline_content_out_the_loop() {
 		}
 	}
 
+	$content = strip_shortcodes( $content );
+
 	return wp_strip_all_tags( $content );
 }
 
