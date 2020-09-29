@@ -12,11 +12,12 @@
  *
  * Default posts, solo agregar ids, limites y columnas opcionales.
  * Extraer bloque con ubicacion y nombre.
- * [ekiline-carousel id=category amount=n columns=1,2,3,4,o 6 block=location/name]
+ * [ekiline-carousel id=category amount=n columns=1,2,3,4,o 6 block=location/name sort=@REF]
  *
  * Opcional solo imagenes, agregar id, limites y columnas opcionales.
  * [ekiline-carousel id=image amount=n columns=1,2,3,4,o 6]
  *
+ * @link ref: https://developer.wordpress.org/reference/classes/wp_query/#properties-and-methods
  * @param array $atts Shortcode attributes. Default empty.
  * @return string Full html.
  */
@@ -27,6 +28,7 @@ function ekiline_shortcode_carousel( $atts = [] ) {
 			'type'    => 'posts', // Default posts, or images.
 			'id'      => null, // Default none, image ids, category ids.
 			'amount'  => '3', // Default 3.
+			'orderby' => null, // Default 3.
 			'columns' => null, // Default single view.
 			'block'   => null, // Find a block.
 		),
@@ -37,7 +39,7 @@ function ekiline_shortcode_carousel( $atts = [] ) {
 	// Obtener ids.
 	$id_arr = explode( ',', $atts['id'] );
 	// Default posts.
-	$carousel = ekiline_carousel_posts( $atts['amount'], $id_arr, $atts['block'] );
+	$carousel = ekiline_carousel_posts( $atts['amount'], $id_arr, $atts['block'], $atts['orderby'] );
 	// Condicion para images.
 	if ( 'images' === $atts['type'] ) {
 		$carousel = ekiline_carousel_images( $id_arr );
@@ -61,14 +63,16 @@ add_shortcode( 'ekiline-carousel', 'ekiline_shortcode_carousel' );
  *
  * @param string $ppp number, of posts to show.
  * @param array  $cat category ids or slug.
- * @param string $findblock block/name, to faind and parse in slide.
+ * @param string $findblock block/name, to find and parse in slide.
+ * @param string $orderby date/rand/etc, sort slides.
  * @return array query data.
  */
-function ekiline_carousel_posts( $ppp = 3, $cat = array(), $findblock = null ) {
+function ekiline_carousel_posts( $ppp = 3, $cat = array(), $findblock = null, $orderby = 'date' ) {
 
 	$carousel = array();
 
 	$args = array(
+		'orderby'        => $orderby,
 		'posts_per_page' => $ppp,
 		'cat'            => $cat,
 	);
