@@ -89,6 +89,61 @@ add_filter( 'get_the_archive_title', 'ekiline_archive_title' );
 
 
 /**
+ * Manipular el contenido por medio de los Bloques.
+ * Funcion para seleccionar bloques con una clase asignada en editor
+ * if ( ekiline_featured_blocks() ) {
+ *  foreach ( ekiline_featured_blocks() as $block ) {
+ *   echo render_block( $block );
+ *  }
+ * }
+ *
+ * @link https://developer.wordpress.org/reference/functions/parse_blocks/
+ * @link https://developer.wordpress.org/reference/functions/render_block/
+ * @link https://awhitepixel.com/blog/wordpress-gutenberg-access-parse-blocks-with-php/
+ *
+ * @return array with selected blocks.
+ */
+function ekiline_featured_blocks() {
+
+	$blocks        = parse_blocks( get_the_content() );
+	$find_block    = ekiline_search_in_array( $blocks, 'blockName', 0 );
+	$choose_blocks = array();
+
+	foreach ( $find_block as $block ) {
+		if ( ! empty( $block['attrs']['className'] ) ) {
+			if ( 'ekiline-featured-content' === $block['attrs']['className'] ) {
+				$choose_blocks[] = $block;
+			}
+		}
+	}
+	return $choose_blocks;
+}
+
+/**
+ * Funcion para buscar en una array multidimensional
+ *
+ * @link ref: https://www.php.net/manual/en/function.array-search.php
+ * @param array  $array conjunto donde se va a buscar.
+ * @param string $key referencia a encontrar.
+ * @param string $value apuntador.
+ */
+function ekiline_search_in_array( $array, $key, $value ) {
+	$results = array();
+	if ( is_array( $array ) ) {
+		// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison
+		if ( isset( $array[ $key ] ) && $array[ $key ] == $value ) {
+			$results[] = $array;
+		}
+		foreach ( $array as $subarray ) {
+			$results = array_merge( $results, ekiline_search_in_array( $subarray, $key, $value ) );
+		}
+	}
+	return $results;
+}
+
+
+
+/**
  * 1) Manipular el contenido con filtros. Markup content, add filters.
  *
  * @link https://developer.wordpress.org/reference/hooks/the_content/
