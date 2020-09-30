@@ -111,7 +111,7 @@ function ekiline_featured_blocks() {
 
 	foreach ( $find_block as $block ) {
 		if ( ! empty( $block['attrs']['className'] ) ) {
-			if ( 'ekiline-featured-content' === $block['attrs']['className'] ) {
+			if ( 'ekiline-featured-blocks' === $block['attrs']['className'] ) {
 				$choose_blocks[] = $block;
 			}
 		}
