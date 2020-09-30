@@ -165,7 +165,7 @@ function ekiline_carousel_html( $carousel, $columns ) {
 
 		<div id="<?php echo esc_attr( $uniq_id ); ?>" class="carousel slide<?php echo esc_attr( $columns ); ?>" data-ride="false">
 
-			<ol class="carousel-indicators bg-dark">
+			<ol class="carousel-indicators">
 				<?php foreach ( $carousel as $indicator ) { ?>
 					<li data-target="#<?php echo esc_html( $uniq_id ); ?>" data-slide-to="<?php echo esc_attr( $indicator['number'] ); ?>" class="<?php echo esc_attr( $indicator['active'] ); ?>"></li>
 				<?php } ?>
@@ -216,11 +216,11 @@ function ekiline_carousel_html( $carousel, $columns ) {
 				<?php } ?>
 			</div>
 
-			<a class="carousel-control-prev bg-dark" href="#<?php echo esc_html( $uniq_id ); ?>" role="button" data-slide="prev">
+			<a class="carousel-control-prev" href="#<?php echo esc_html( $uniq_id ); ?>" role="button" data-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				<span class="sr-only">Previous</span>
 			</a>
-			<a class="carousel-control-next bg-dark" href="#<?php echo esc_html( $uniq_id ); ?>" role="button" data-slide="next">
+			<a class="carousel-control-next" href="#<?php echo esc_html( $uniq_id ); ?>" role="button" data-slide="next">
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="sr-only">Next</span>
 			</a>
