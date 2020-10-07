@@ -173,6 +173,7 @@ add_action( 'customize_register', 'ekiline_custom_header_controls' );
 /**
  * Controladores con callback: ekiline_custom_header_style()
  * https://developer.wordpress.org/themes/functionality/custom-headers/
+ * https://codex.wordpress.org/Custom_Headers
  * Ocupar si fuera necesario: 'wp-head-callback' => 'ekiline_custom_header_style',
  */
 function ekiline_custom_header_setup() {
@@ -182,8 +183,9 @@ function ekiline_custom_header_setup() {
 		array(
 			'default-image'      => '',
 			'default-text-color' => '000000',
-			'width'              => '',
-			'height'             => '',
+			'width'              => '1600',
+			'height'             => '900',
+			'flex-width'         => true,
 			'flex-height'        => true,
 		)
 	);

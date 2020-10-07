@@ -12,7 +12,7 @@
 function ekiline_logo_theme() {
 	// Variables de logotipo.
 	$brand_icon = get_theme_mod( 'ekiline_minilogo' );
-	$brand_hor  = wp_get_attachment_url( get_theme_mod( 'ekiline_logo_max' ) );
+	$brand_hor  = wp_get_attachment_image_url( get_theme_mod( 'ekiline_logo_max' ), 'medium' );
 
 	if ( $brand_hor && ! $brand_icon ) {
 		echo '<img class="img-fluid" src="' . esc_url( $brand_hor ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" loading="lazy"/>';
