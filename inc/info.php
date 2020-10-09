@@ -168,8 +168,8 @@ function ekiline_docs_feed() {
 		<?php
 		$rss_instance = array(
 			'title'        => 'Ekiline Tips',
-			'url'          => 'https://ekiline.com/feed/',
-			'items'        => 10,
+			'url'          => 'http://ekiline.com/feed/',
+			'items'        => 5,
 			'show_summary' => 0,
 			'show_author'  => 0,
 			'show_date'    => 0,
