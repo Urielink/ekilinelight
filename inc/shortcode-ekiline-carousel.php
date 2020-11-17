@@ -15,7 +15,7 @@
  * [ekiline-carousel id=category amount=n columns=1,2,3,4,o 6 block=location/name sort=@REF]
  *
  * Opcional solo imagenes, agregar id, limites y columnas opcionales.
- * [ekiline-carousel id=image amount=n columns=1,2,3,4,o 6]
+ * [ekiline-carousel type="images" id=image amount=n columns=1,2,3,4,o 6]
  *
  * @link ref: https://developer.wordpress.org/reference/classes/wp_query/#properties-and-methods
  * @param array $atts Shortcode attributes. Default empty.
