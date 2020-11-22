@@ -85,10 +85,7 @@ function ekiline_carousel_posts( $ppp = 3, $cat = array(), $findblock = null, $o
 
 			$carousel_query->the_post();
 
-			$info = array();
-
-			$info['number']  = $carousel_query->current_post;
-			$info['active']  = ( 0 === $carousel_query->current_post ) ? 'active' : '';
+			$info            = array();
 			$info['title']   = get_the_title();
 			$info['plink']   = get_the_permalink();
 			$info['excerpt'] = get_the_excerpt();
@@ -107,20 +104,24 @@ function ekiline_carousel_posts( $ppp = 3, $cat = array(), $findblock = null, $o
 				foreach ( $blocks as $block ) {
 					if ( $block['blockName'] === $findblock ) {
 						$info['block'] = render_block( $block );
+					} else {
+						// Si no tiene ninguna imagen blanquear el array, definir mejor el caso de uso.
+						if ( ! has_post_thumbnail() ) {
+							$info = array();
+						}
 					}
 				}
 			}
 
-			$carousel[] = $info;
-
+			if ( $info ) {
+				$carousel[] = $info;
+			}
 		}
 		wp_reset_postdata();
 	}
 
 	return $carousel;
 }
-
-
 
 /**
  * Funcion para carrusel de entradas, por default, ocupa 7 slides y todas las categorias.
@@ -139,8 +140,6 @@ function ekiline_carousel_images( $ids = array() ) {
 	$carousel = array();
 	foreach ( $ids as $index => $image ) {
 		$info            = array();
-		$info['number']  = $index;
-		$info['active']  = ( 0 === $index ) ? 'active' : '';
 		$info['title']   = get_the_title( $image );
 		$info['image']   = wp_get_attachment_image_src( $image, 'full', true )[0];
 		$info['alt']     = get_post_meta( $image, '_wp_attachment_image_alt', true );
@@ -166,15 +165,21 @@ function ekiline_carousel_html( $carousel, $columns ) {
 		<div id="<?php echo esc_attr( $uniq_id ); ?>" class="carousel slide<?php echo esc_attr( $columns ); ?>" data-ride="false">
 
 			<ol class="carousel-indicators">
-				<?php foreach ( $carousel as $indicator ) { ?>
-					<li data-target="#<?php echo esc_html( $uniq_id ); ?>" data-slide-to="<?php echo esc_attr( $indicator['number'] ); ?>" class="<?php echo esc_attr( $indicator['active'] ); ?>"></li>
+				<?php
+				foreach ( $carousel as $index => $indicator ) {
+					$active = ( 0 === $index ) ? 'active' : '';
+					?>
+					<li data-target="#<?php echo esc_html( $uniq_id ); ?>" data-slide-to="<?php echo esc_attr( $index ); ?>" class="<?php echo esc_attr( $active ); ?>"></li>
 				<?php } ?>
 			</ol>
 
 			<div class="carousel-inner">
-				<?php foreach ( $carousel as $slide ) { ?>
+				<?php
+				foreach ( $carousel as $index => $slide ) {
+					$active = ( 0 === $index ) ? 'active' : '';
+					?>
 
-					<div class="carousel-item <?php echo esc_attr( $slide['active'] ); ?>">
+					<div class="carousel-item <?php echo esc_attr( $active ); ?>">
 
 						<?php if ( isset( $slide['block'] ) ) { ?>
 
