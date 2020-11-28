@@ -20,9 +20,11 @@
 
 <footer class="site-footer pt-4 pb-2 bg-dark text-white">
 	<div class="container">
-		<?php if ( ! is_page_template( 'singular-simple.php' ) ) {
+		<?php
+		if ( ! is_page_template( 'singular-simple.php' ) ) {
 			ekiline_count_widgets( 'footer-w1' );
-		} ?>
+		}
+		?>
 	<p>
 		<?php
 		/* translators: %1$s is replaced with date */

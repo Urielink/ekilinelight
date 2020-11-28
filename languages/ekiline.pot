@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Ekiline\n"
-"POT-Creation-Date: 2020-09-19 18:53-0500\n"
+"POT-Creation-Date: 2020-11-27 22:36-0600\n"
 "PO-Revision-Date: 2020-09-19 18:53-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -100,6 +100,10 @@ msgstr ""
 
 #: functions.php:172
 msgid "In navbar"
+msgstr ""
+
+#: functions.php:184
+msgid "In navbar menu"
 msgstr ""
 
 #: inc/class-ekiline-basic-breadcrumb.php:23
