@@ -170,7 +170,7 @@ function ekiline_widget_show( $params ) {
 
 		if ( 'dropdown' === $view_format ) {
 
-			$widget_ttl = ( '' !== $widget_ttl ) ? '<h6 class="dropdown-header">' . $widget_ttl . '</h6>' : '';
+			$widget_ttl = ( '' !== $widget_ttl ) ? '<p class="h5" class="dropdown-header">' . $widget_ttl . '</p>' : '';
 
 			$bef_wdg = preg_replace( '/class="/', 'class="' . $view_format . ' ', $params[0]['before_widget'], 1 );
 			$bef_ttl = '<button class="btn btn-secondary btn-block dropdown-toggle" type="button" data-toggle="dropdown">';
@@ -179,7 +179,7 @@ function ekiline_widget_show( $params ) {
 
 		} elseif ( 'modal' === $view_format ) {
 
-			$widget_ttl = ( '' !== $widget_ttl ) ? '<h5>' . $widget_ttl . '</h5>' : '';
+			$widget_ttl = ( '' !== $widget_ttl ) ? '<p class="h5">' . $widget_ttl . '</p>' : '';
 
 			$bef_wdg  = $bef_wdg;
 			$bef_ttl  = '<button class="btn btn-primary btn-block" type="button" data-toggle="modal" data-target="#wdgModal-' . $widget_id . '">';

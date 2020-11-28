@@ -12,10 +12,15 @@
  *
  * Default posts, solo agregar ids, limites y columnas opcionales.
  * Extraer bloque con ubicacion y nombre.
- * [ekiline-carousel id=category amount=n columns=1,2,3,4,o 6 block=location/name sort=@REF mixed=true]
+ * [ekiline-carousel id=category amount=n block=location/name sort=@REF mixed=true]
  *
  * Opcional solo imagenes, agregar id, limites y columnas opcionales.
- * [ekiline-carousel type="images" id=image amount=n columns=1,2,3,4,o 6]
+ * [ekiline-carousel type="images" id=image amount=n]
+ *
+ * Columnas: columns = 1,2,3,4 o 6
+ * Controles de carrusel: control,indicators,auto = false
+ * Transicion: time = 5000 (number)
+ * Animacion: animation = vertical o fade
  *
  * @link ref: https://developer.wordpress.org/reference/classes/wp_query/#properties-and-methods
  * @param array $atts Shortcode attributes. Default empty.

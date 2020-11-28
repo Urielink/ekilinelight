@@ -16,6 +16,10 @@
 <?php
 $post_style = 'article';
 
+if ( is_front_page() ) {
+	$post_style = 'frontpage';
+}
+
 if ( ! is_singular() ) {
 	// Formato para listados.
 	$post_style = 'archive';
@@ -26,6 +30,12 @@ if ( ! is_singular() ) {
 	// Formato personalizado para la busqueda no se afecta por columnas.
 	if ( is_search() ) {
 		$post_style = 'search';
+	}
+}
+
+if ( class_exists( 'woocommerce' ) ) {
+	if ( is_cart() || is_checkout() || is_account_page() ) {
+		$post_style = 'user';
 	}
 }
 

@@ -9,7 +9,7 @@
 
 ?>
 
-<?php if ( is_active_sidebar( 'footer-w2' ) ) { ?>
+<?php if ( is_active_sidebar( 'footer-w2' ) && ! is_page_template( 'singular-simple.php' ) ) { ?>
 	<div class="footer-bar bg-secondary text-white">
 		<div class="pt-4 pb-2 container">
 			<?php ekiline_count_widgets( 'footer-w2' ); ?>
@@ -17,9 +17,12 @@
 	</div><!-- .footer-bar -->
 <?php } ?>
 
+
 <footer class="site-footer pt-4 pb-2 bg-dark text-white">
 	<div class="container">
-		<?php ekiline_count_widgets( 'footer-w1' ); ?>
+		<?php if ( ! is_page_template( 'singular-simple.php' ) ) {
+			ekiline_count_widgets( 'footer-w1' );
+		} ?>
 	<p>
 		<?php
 		/* translators: %1$s is replaced with date */

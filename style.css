@@ -115,7 +115,7 @@
  * ----------------------------------------------------------------------------------------------*/
 
 /* Animaciones || Animations */
-.navbar,.navbar .navbar-brand,.navbar-nav li a, a:hover, .btn:hover,.icon-bar{-webkit-transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-ms-transition:all 0.4s ease-out;-o-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out;}
+.navbar, .navbar .navbar-brand, .navbar-nav li a, a:hover, .btn:hover, .icon-bar{-webkit-transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-ms-transition:all 0.4s ease-out;-o-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out;}
 
 /* Animacion de toggle btn en menu || Toggle navbar btn animation */
 .navbar-toggler .icon-bar{background-color:#888;display:block;width:22px;height:2px;border-radius:1px;margin:4px 0px;}
@@ -200,22 +200,23 @@
 .carousel-multiple {height: inherit;}
 .carousel-multiple .carousel-item {height: inherit;}
 /* Efectos para carrusel: fade y vertical || Carousel effects: fade and vertical */
-.carousel-fade .carousel-inner .carousel-item{opacity:0;-webkit-transition-property:opacity;-moz-transition-property:opacity;-o-transition-property:opacity;transition-property:opacity;}
-.carousel-fade .carousel-inner .active{opacity:1;}
-.carousel-fade .carousel-inner .active.carousel-item-left,.carousel-fade .carousel-inner .active.carousel-item-right{left:0;opacity:0;z-index:1;}
-.carousel-fade .carousel-inner .carousel-item-next.carousel-item-left,.carousel-fade .carousel-inner .carousel-item-prev.carousel-item-right{opacity:1;}
-.carousel-fade .carousel-control{z-index:2;}
+.carousel-fade .carousel-item {opacity:0;transition-duration:.6s;transition-property:opacity;}
+.carousel-fade .carousel-item.active,.carousel-fade .carousel-item-next.carousel-item-left,.carousel-fade .carousel-item-prev.carousel-item-right {opacity:1;}
+.carousel-fade .active.carousel-item-left,.carousel-fade .active.carousel-item-right {opacity:0;}
+.carousel-fade .carousel-item-next,.carousel-fade .carousel-item-prev,.carousel-fade .carousel-item.active,.carousel-fade .active.carousel-item-left,.carousel-fade .active.carousel-item-prev {transform: translateX(0);transform: translate3d(0, 0, 0);}
 /* Vertical FX */
-.carousel-vertical .carousel-inner{height:100%;}
-.carousel-vertical .carousel-item{-webkit-transition:0.6s ease-in-out top;-moz-transition:0.6s ease-in-out top;-ms-transition:0.6s ease-in-out top;-o-transition:0.6s ease-in-out top;transition:0.6s ease-in-out top;}
-.carousel-vertical .active{top:0;}
-.carousel-vertical .carousel-item-next{top:-400px;}
-.carousel-vertical .carousel-item-prev{top:400px;}
-.carousel-vertical .carousel-item-next.carousel-item-left,.carousel-vertical .carousel-item-prev.carousel-item-right{top:0;}
-.carousel-vertical .active.carousel-item-left{top:-400px;}
-.carousel-vertical .active.carousel-item-right{top:400px;}
-.carousel-vertical .carousel-item{left:0;}
-
+.carousel-vertical .carousel-inner{height:100%}
+.carousel-vertical .carousel-inner > .carousel-item{-webkit-transition:.6s ease-in-out top;-o-transition:.6s ease-in-out top;transition:.6s ease-in-out top}
+@media all and (transform-3d),(-webkit-transform-3d) {
+ .carousel-vertical .carousel-inner > .carousel-item{-webkit-transition:-webkit-transform .6s ease-in-out;-o-transition:-o-transform .6s ease-in-out;transition:transform .6s ease-in-out;-webkit-backface-visibility:hidden;backface-visibility:hidden;-webkit-perspective:1000;perspective:1000px}
+ .carousel-vertical .carousel-inner > .carousel-item.carousel-item-next,.carousel-vertical .carousel-inner > .carousel-item.active.carousel-item-right{top:0;-webkit-transform:translate3d(0,100%,0);transform:translate3d(0,100%,0)}
+ .carousel-vertical .carousel-inner > .carousel-item.carousel-item-prev,.carousel-vertical .carousel-inner > .carousel-item.active.carousel-item-left{top:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}
+ .carousel-vertical .carousel-inner > .carousel-item.carousel-item-next.carousel-item-left,.carousel-vertical .carousel-inner > .carousel-item.carousel-item-prev.carousel-item-right,.carousel-vertical .carousel-inner > .carousel-item.active{top:0;-webkit-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
+}
+.carousel-vertical .carousel-inner > .carousel-item-next,.carousel-vertical .carousel-inner > .carousel-item-prev{top:0;height:100%}
+.carousel-vertical .carousel-inner > .active,.carousel-vertical .carousel-inner > .carousel-item-next.carousel-item-left,.carousel-vertical .carousel-inner > .carousel-item-prev.carousel-item-right{top:0}
+.carousel-vertical .carousel-inner > .carousel-item-prev,.carousel-vertical .carousel-inner > .active.carousel-item-left{left:0;top:-100%}
+.carousel-vertical .carousel-inner > .carousel-item-next,.carousel-vertical .carousel-inner > .active.carousel-item-right{left:0;top:100%}
 /* Carousel con minuaturas, multiples. || Thumbnails in crausel multiples*/
 .carousel-thumbs{height:auto;}
 .carousel-thumbs .thumbnails.list{margin:0px;}
