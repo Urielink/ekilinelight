@@ -179,6 +179,18 @@ function ekiline_widgets_init() {
 		)
 	);
 
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'In navbar menu', 'ekiline' ),
+			'id'            => 'navbar-w2',
+			'description'   => '',
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<label class="widget-title screen-reader-text">',
+			'after_title'   => '</label>',
+		)
+	);
+
 }
 add_action( 'widgets_init', 'ekiline_widgets_init' );
 

@@ -146,6 +146,8 @@ function ekiline_navbar_menu( $nav_position ) {
 			<span class="navbar-text d-none d-md-block site-description"><?php echo esc_html( get_bloginfo( 'description' ) ); ?></span>
 			<?php } ?>
 
+			<?php dynamic_sidebar( 'navbar-w1' ); ?>
+
 			<button class="<?php echo esc_attr( $toggle_btn ); ?>" type="button" data-toggle="<?php echo esc_attr( $datatoggle ); ?>" data-target="#<?php echo esc_attr( $datatarget ); ?>" aria-label="Toggle navigation">
 				<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 			</button>
@@ -176,7 +178,7 @@ function ekiline_navbar_menu( $nav_position ) {
 				)
 			);
 
-			dynamic_sidebar( 'navbar-w1' );
+			dynamic_sidebar( 'navbar-w2' );
 
 			?>
 
