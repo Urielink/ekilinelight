@@ -218,7 +218,7 @@ function ekiline_carousel_html( $carousel, $columns, $control, $indicators, $aut
 
 							<div class="carousel-caption text-dark">
 
-								<?php if ( isset( $slide['title'] ) ) { ?>
+								<?php if ( isset( $slide['title'] ) && $slide['title'] ) { ?>
 									<h3>
 										<?php if ( isset( $slide['plink'] ) ) { ?>
 											<a href="<?php echo esc_html( $slide['plink'] ); ?>">
@@ -233,7 +233,7 @@ function ekiline_carousel_html( $carousel, $columns, $control, $indicators, $aut
 									</h3>
 								<?php } ?>
 
-								<?php if ( isset( $slide['excerpt'] ) ) { ?>
+								<?php if ( isset( $slide['excerpt'] ) && $slide['excerpt'] ) { ?>
 									<p><?php echo esc_html( $slide['excerpt'] ); ?></p>
 								<?php } ?>
 
