@@ -48,22 +48,24 @@
 
 	<?php ekiline_link_pages(); ?>
 
-	<footer class="border-top pt-2">
-		<p class="entry-meta small m-0">
-			<?php
-			if ( ! is_page() || get_the_category_list() !== '' ) {
-				/* translators: %s is replaced with category title */
-				printf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
-			}
-			?>
-			<br>
-			<?php
-			if ( ( get_theme_mod( 'ekiline_show_meta' ) && is_page() ) && get_the_tag_list() ) {
-				/* translators: %s is replaced with tags */
-				printf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ' ) ) );
-			}
-			?>
-		</p><!-- .entry-meta -->
-	</footer>
+	<?php if ( get_theme_mod( 'ekiline_show_meta' ) && is_page() || is_single() ) { ?>
+		<footer class="border-top pt-2">
+			<p class="entry-meta small m-0">
+				<?php
+				if ( ! is_page() || get_the_category_list() !== '' ) {
+					/* translators: %s is replaced with category title */
+					printf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
+				}
+				?>
+				<br>
+				<?php
+				if ( get_the_tag_list() ) {
+					/* translators: %s is replaced with tags */
+					printf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ' ) ) );
+				}
+				?>
+			</p><!-- .entry-meta -->
+		</footer>
+	<?php } ?>
 
 </article><!-- #post-## -->
