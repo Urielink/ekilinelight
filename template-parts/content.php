@@ -20,6 +20,10 @@ if ( is_front_page() ) {
 	$post_style = 'frontpage';
 }
 
+if ( is_page() && ! get_theme_mod( 'ekiline_show_meta' ) ) {
+	$post_style = 'nometa';
+}
+
 if ( ! is_singular() ) {
 	// Formato para listados.
 	$post_style = 'archive';
