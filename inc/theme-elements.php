@@ -315,7 +315,7 @@ function ekiline_pagination() {
 	$prev_link = '';
 	$next_link = '';
 
-	if ( is_page() ) {
+	if ( is_page() && get_theme_mod( 'ekiline_show_pagination' ) ) {
 
 		$pagelist = get_pages( 'sort_column=menu_order&sort_order=asc' );
 		$pages    = array();

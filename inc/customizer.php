@@ -250,6 +250,44 @@ function ekiline_theme_customizer( $wp_customize ) {
 		)
 	);
 
+	// Mostrar metadatos en paginas.
+	$wp_customize->add_setting(
+		'ekiline_show_meta',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'ekiline_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		'ekiline_show_meta',
+		array(
+			'type'    => 'checkbox',
+			'label'   => __( 'In page meta', 'ekiline' ),
+			'description'   => __( 'Show meta data in pages, author, date, tags.', 'ekiline' ),
+			'section' => 'ekiline_vista_section',
+		)
+	);
+
+	// Mostrar paginador en paginas.
+	$wp_customize->add_setting(
+		'ekiline_show_pagination',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'ekiline_sanitize_checkbox',
+		)
+	);
+
+	$wp_customize->add_control(
+		'ekiline_show_pagination',
+		array(
+			'type'    => 'checkbox',
+			'label'   => __( 'In page pagination', 'ekiline' ),
+			'description'   => __( 'Enable pagination between pages.', 'ekiline' ),
+			'section' => 'ekiline_vista_section',
+		)
+	);
+
 }
 add_action( 'customize_register', 'ekiline_theme_customizer' );
 
