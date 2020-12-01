@@ -300,7 +300,7 @@ add_filter( 'post_password_expires', 'ekiline_expire_cookie' );
  */
 function ekiline_pagination() {
 
-	if ( is_front_page() && ! is_home() ) {
+	if ( is_front_page() && ! is_home() || is_page() && ! get_theme_mod( 'ekiline_show_pagination' ) ) {
 		return;
 	}
 
@@ -315,7 +315,7 @@ function ekiline_pagination() {
 	$prev_link = '';
 	$next_link = '';
 
-	if ( is_page() && get_theme_mod( 'ekiline_show_pagination' ) ) {
+	if ( is_page() ) {
 
 		$pagelist = get_pages( 'sort_column=menu_order&sort_order=asc' );
 		$pages    = array();
