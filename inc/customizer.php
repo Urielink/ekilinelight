@@ -262,10 +262,10 @@ function ekiline_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control(
 		'ekiline_show_meta',
 		array(
-			'type'    => 'checkbox',
-			'label'   => __( 'In page meta', 'ekiline' ),
-			'description'   => __( 'Show meta data in pages, author, date, tags.', 'ekiline' ),
-			'section' => 'ekiline_vista_section',
+			'type'        => 'checkbox',
+			'label'       => __( 'In page meta', 'ekiline' ),
+			'description' => __( 'Show meta data in pages, author, date, tags.', 'ekiline' ),
+			'section'     => 'ekiline_vista_section',
 		)
 	);
 
@@ -281,10 +281,10 @@ function ekiline_theme_customizer( $wp_customize ) {
 	$wp_customize->add_control(
 		'ekiline_show_pagination',
 		array(
-			'type'    => 'checkbox',
-			'label'   => __( 'In page pagination', 'ekiline' ),
-			'description'   => __( 'Enable pagination between pages.', 'ekiline' ),
-			'section' => 'ekiline_vista_section',
+			'type'        => 'checkbox',
+			'label'       => __( 'In page pagination', 'ekiline' ),
+			'description' => __( 'Enable pagination between pages.', 'ekiline' ),
+			'section'     => 'ekiline_vista_section',
 		)
 	);
 
