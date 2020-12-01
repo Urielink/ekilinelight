@@ -11,7 +11,9 @@
 
 <article <?php post_class(); ?>>
 
-	<header class="border-bottom pb-2">
+	<?php if ( ( get_theme_mod( 'ekiline_show_meta' ) && is_page() ) || is_single() ) { ?>
+		<header class="border-bottom pb-2">
+	<?php } ?>
 
 		<?php // Page & post title. ?>
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
@@ -40,7 +42,9 @@
 			</p><!-- .entry-meta -->
 		<?php } ?>
 
-	</header>
+	<?php if ( ( get_theme_mod( 'ekiline_show_meta' ) && is_page() ) || is_single() ) { ?>
+		</header>
+	<?php } ?>
 
 	<?php the_post_thumbnail( 'full', array( 'class' => 'img-fluid' ) ); ?>
 
