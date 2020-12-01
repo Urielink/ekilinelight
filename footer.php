@@ -9,7 +9,7 @@
 
 ?>
 
-<?php if ( is_active_sidebar( 'footer-w2' ) && ! is_page_template( 'singular-simple.php' ) ) { ?>
+<?php if ( is_active_sidebar( 'footer-w2' ) ) { ?>
 	<div class="footer-bar bg-secondary text-white">
 		<div class="pt-4 pb-2 container">
 			<?php ekiline_count_widgets( 'footer-w2' ); ?>
@@ -21,9 +21,7 @@
 <footer class="site-footer pt-4 pb-2 bg-dark text-white">
 	<div class="container">
 		<?php
-		if ( ! is_page_template( 'singular-simple.php' ) ) {
 			ekiline_count_widgets( 'footer-w1' );
-		}
 		?>
 	<p>
 		<?php

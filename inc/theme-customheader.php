@@ -441,10 +441,6 @@ function custom_header_content( $content_type = null ) {
  * Add custom header at top of page.
  */
 function ekiline_top_page_custom_header() {
-	// En caso de ser la plantilla simple, remover.
-	if ( is_page_template( 'singular-simple.php' ) ) {
-		return;
-	}
 	// En caso de woocommerce.
 	if ( class_exists( 'woocommerce' ) ) {
 		if ( is_cart() || is_checkout() || is_account_page() ) {

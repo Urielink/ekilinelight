@@ -212,9 +212,6 @@ if ( ! function_exists( 'wp_body_open' ) ) {
  * Add widget area at top of page.
  */
 function ekiline_top_page_widget_area() {
-	if ( is_page_template( 'singular-simple.php' ) ) {
-		return;
-	}
 	dynamic_sidebar( 'toppage-w1' );
 }
 add_action( 'wp_body_open', 'ekiline_top_page_widget_area', 1 );
