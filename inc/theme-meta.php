@@ -83,12 +83,11 @@ function ekiline_meta_keywords() {
 
 		global $post;
 		$tags = get_the_tags( $post->ID );
-
+		
 		if ( $tags && ! is_wp_error( $tags ) ) {
 			$keywords = ekiline_collect_tags( $tags );
-		} else {
-			$keywords = 'hola';
 		}
+
 	} elseif ( is_tag() ) {
 
 		$keywords = single_tag_title( '', false );
