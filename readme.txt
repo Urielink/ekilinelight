@@ -1,4 +1,4 @@
-=== Ekiline ===
+=== Ekiline === 
 Contributors: urielink
 Donate link: https://www.paypal.com/paypalme/urielink
 Tags: one-column, two-columns, three-columns, left-sidebar, right-sidebar, grid-layout, flexible-header, custom-background, custom-colors, custom-header, custom-menu, custom-logo, featured-image-header, featured-images, footer-widgets, full-width-template, microformats, theme-options, translation-ready, blog, e-commerce, portfolio

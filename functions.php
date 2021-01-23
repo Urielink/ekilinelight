@@ -136,7 +136,7 @@ function ekiline_widgets_init() {
 			'description'   => '',
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
-			'before_title'  => '<p>',
+			'before_title'  => '<p class="widget-title">',
 			'after_title'   => '</p>',
 		)
 	);

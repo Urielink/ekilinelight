@@ -87,7 +87,6 @@ function ekiline_meta_keywords() {
 		if ( $tags && ! is_wp_error( $tags ) ) {
 			$keywords = ekiline_collect_tags( $tags );
 		}
-
 	} elseif ( is_tag() ) {
 
 		$keywords = single_tag_title( '', false );
