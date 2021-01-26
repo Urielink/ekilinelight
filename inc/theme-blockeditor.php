@@ -213,10 +213,9 @@ add_action( 'admin_head', 'ekiline_custom_colors_styles', 100 );
 
 
 /**
- * Scripts de apoyo
+ * Scripts de apoyo: bootstrap.
  */
 function ekiline_add_editor_scripts() {
-	// bootstrap
 	wp_enqueue_script( 'bootstrap-script-editor', get_template_directory_uri() . '/assets/js/bootstrap.bundle.min.js', array( 'jquery' ), '4', true );
 }
 add_action( 'enqueue_block_editor_assets', 'ekiline_add_editor_scripts' );
