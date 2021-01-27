@@ -1,6 +1,7 @@
 <?php
 /**
  * Template Name: Blank page
+ * Template Post Type: post, page, product
  *
  * Para uso en casos de mostrar contenido personalizado, sin formato.
  * For use in cases of displaying custom content, without formatting.
