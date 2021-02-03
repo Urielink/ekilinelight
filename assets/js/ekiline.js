@@ -54,41 +54,64 @@ jQuery(document).ready(function( $ ) {
 	$('[data-toggle="popover"]').popover();
 
 	/* Ekiline: carrusel extendido */
-	if ( $('.carousel-multiple').length > 0 ) {
-		$('.carousel-multiple').each(function(){
-			// Vistas, columnas y grupo.
-			var params = [ ['x2','6','0'],['x3','4','1'],['x4','3','2'],['x6','2','4'] ];
-			var view, item;
-			// Envoltorio extra para agrupar.
-			for ( var i = 0; i < params.length; i++ ) {
-				if ( $(this).hasClass( params[i][0] ) ){
-					item = params[i][1];
-					view = params[i][2];
+	function transformarCarrusel(carrusel){
+
+		if ( $(carrusel).length > 0 ) {
+
+			$(carrusel).each(function(){
+				// Vistas, columnas y grupo.
+				var params = [ ['x2','6','0'],['x3','4','1'],['x4','3','2'],['x6','2','4'] ];
+				var view, item;
+				// Envoltorio extra para agrupar.
+				for ( var i = 0; i < params.length; i++ ) {
+					if ( $(this).hasClass( params[i][0] ) ){
+						item = params[i][1];
+						view = params[i][2];
+					}
 				}
-			}
-			// Items envoltorio.
-			$(this).find('.carousel-item').each(function(){
-				$(this).children().wrapAll('<figure class="col-md-' + item + '">','</figure>');
-			});
-			// Loop grupos.
-			$(this).find( '.carousel-item').each(function(){
-				// Copiar el primer slide y agregarlo.
-				var next = $(this).next();
-				if ( !next.length ) {
-					next = $(this).siblings(':first');
-				}
-				next.children(':first-child').clone().appendTo( $(this) );
-				// Agrupar slides (view).
-				for ( var i=0;i<view;i++ ) {
-					next = next.next();
+				// Items envoltorio.
+				$(this).find('.carousel-item').each(function(){
+					$(this).children().wrapAll('<figure class="col-md-' + item + '">','</figure>');
+				});
+				// Loop grupos.
+				$(this).find( '.carousel-item').each(function(){
+					// Copiar el primer slide y agregarlo.
+					var next = $(this).next();
 					if ( !next.length ) {
 						next = $(this).siblings(':first');
 					}
 					next.children(':first-child').clone().appendTo( $(this) );
-				}
-			});
+					// Agrupar slides (view).
+					for ( var i=0;i<view;i++ ) {
+						next = next.next();
+						if ( !next.length ) {
+							next = $(this).siblings(':first');
+						}
+						next.children(':first-child').clone().appendTo( $(this) );
+					}
+				});
 
-		});
+			});
+		} 
 	}
+	transformarCarrusel('.carousel-multiple');
 
 });
+
+
+// function transformar( objeto ){
+
+// 	if ( document.querySelectorAll( objeto ).length <= 0 ) {
+// 		console.log('no hay carrusel');
+// 		return;
+// 	}
+// 	console.log('si hay carrusel = ' + (document.querySelectorAll( objeto ).length + 1) );
+
+// 	for (let step = 0; step < objeto.length; step++) {
+// 		console.log('carrusel = ' + step );
+// 	  }
+
+
+// }
+
+// transformar( '.carousel-multiple' );

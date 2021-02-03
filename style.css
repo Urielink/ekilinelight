@@ -194,8 +194,9 @@
  * ----------------------------------------------------------------------------------------------*/
 
 /* Carousel base */
+.carousel,.carousel-item{min-height:200px;}
 .carousel .carousel-item{overflow:hidden;}
-.no-thumb .carousel-caption{position:relative;left:0;right:0;bottom:0px;}
+.no-thumb .carousel-caption{position:relative;left:0;right:0;bottom:0px;z-index: initial;}
 /* Carousel multiple */
 .carousel-multiple {height: inherit;}
 .carousel-multiple .carousel-item {height: inherit;}

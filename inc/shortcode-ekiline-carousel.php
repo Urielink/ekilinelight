@@ -201,7 +201,8 @@ function ekiline_carousel_html( $carousel, $columns, $control, $indicators, $aut
 			<div class="carousel-inner">
 				<?php
 				foreach ( $carousel as $index => $slide ) {
-					$active = ( 0 === $index ) ? 'active' : '';
+					$active = ( isset( $slide['image'] ) ) ? '' : 'no-thumb';
+					$active .= ( 0 === $index ) ? ' active' : '';
 					?>
 
 					<div class="carousel-item <?php echo esc_attr( $active ); ?>">
