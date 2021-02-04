@@ -92,7 +92,7 @@ jQuery(document).ready(function( $ ) {
 				});
 
 			});
-		} 
+		}
 	}
 	transformarCarrusel('.carousel-multiple');
 
