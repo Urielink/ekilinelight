@@ -97,21 +97,3 @@ jQuery(document).ready(function( $ ) {
 	transformarCarrusel('.carousel-multiple');
 
 });
-
-
-// function transformar( objeto ){
-
-// 	if ( document.querySelectorAll( objeto ).length <= 0 ) {
-// 		console.log('no hay carrusel');
-// 		return;
-// 	}
-// 	console.log('si hay carrusel = ' + (document.querySelectorAll( objeto ).length + 1) );
-
-// 	for (let step = 0; step < objeto.length; step++) {
-// 		console.log('carrusel = ' + step );
-// 	  }
-
-
-// }
-
-// transformar( '.carousel-multiple' );
