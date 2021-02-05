@@ -54,46 +54,80 @@ jQuery(document).ready(function( $ ) {
 	$('[data-toggle="popover"]').popover();
 
 	/* Ekiline: carrusel extendido */
-	function transformarCarrusel(carrusel){
+	// function transformarCarrusel(carrusel){
+	// cambiar la declaracion, para poder hacer uso en el editor .
+	window.transformarCarrusel = function(carrusel){
 
-		if ( $(carrusel).length > 0 ) {
+		// Condiciones si no hay carrusel,
+		// O saber que ya fue intervenido, no hacer nada.
+		if ( 0 === $(carrusel).length || 0 < $(carrusel).find('figure').length ) {
+			return;
+		}
 
-			$(carrusel).each(function(){
-				// Vistas, columnas y grupo.
-				var params = [ ['x2','6','0'],['x3','4','1'],['x4','3','2'],['x6','2','4'] ];
-				var view, item;
-				// Envoltorio extra para agrupar.
-				for ( var i = 0; i < params.length; i++ ) {
-					if ( $(this).hasClass( params[i][0] ) ){
-						item = params[i][1];
-						view = params[i][2];
-					}
+		$(carrusel).each(function(){
+
+			// Vistas, columnas y grupo.
+			var params = [ ['x2','6','0'],['x3','4','1'],['x4','3','2'],['x6','2','4'] ];
+			var view, item;
+			// Envoltorio extra para agrupar.
+			for ( var i = 0; i < params.length; i++ ) {
+				if ( $(this).hasClass( params[i][0] ) ){
+					item = params[i][1];
+					view = params[i][2];
 				}
-				// Items envoltorio.
-				$(this).find('.carousel-item').each(function(){
-					$(this).children().wrapAll('<figure class="col-md-' + item + '">','</figure>');
-				});
-				// Loop grupos.
-				$(this).find( '.carousel-item').each(function(){
-					// Copiar el primer slide y agregarlo.
-					var next = $(this).next();
+			}
+			// Items envoltorio.
+			$(this).find('.carousel-item').each(function(){
+				$(this).children().wrapAll('<figure class="col-md-' + item + '">','</figure>');
+			});
+			// Loop grupos.
+			$(this).find( '.carousel-item').each(function(){
+				// Copiar el primer slide y agregarlo.
+				var next = $(this).next();
+				if ( !next.length ) {
+					next = $(this).siblings(':first');
+				}
+				next.children(':first-child').clone().appendTo( $(this) );
+				// Agrupar slides (view).
+				for ( var i=0;i<view;i++ ) {
+					next = next.next();
 					if ( !next.length ) {
 						next = $(this).siblings(':first');
 					}
 					next.children(':first-child').clone().appendTo( $(this) );
-					// Agrupar slides (view).
-					for ( var i=0;i<view;i++ ) {
-						next = next.next();
-						if ( !next.length ) {
-							next = $(this).siblings(':first');
-						}
-						next.children(':first-child').clone().appendTo( $(this) );
-					}
-				});
-
+				}
 			});
-		}
+
+		});
+
 	}
 	transformarCarrusel('.carousel-multiple');
+
+	// /* Auxiliar para el admin */
+	// var isAdmin = $('.wp-admin.block-editor-page');
+
+	// if ( 0 < $(isAdmin).length ){
+	// 	console.log('si es admin');
+	// 		// ejecutar script al refresh, despues de 2 segundos.
+	// 		// averiguar como invocar desde editor.
+	// 		setTimeout( function(){
+	// 			// validar que exista carrusel.
+	// 			var hasCarousel = $('.carousel-multiple');
+
+	// 			if ( 0 < $(hasCarousel).length ){
+	// 				console.log('si tiene carrusel');
+	// 				transformarCarrusel('.carousel-multiple');
+	// 			} else {
+	// 				console.log('no tiene carrusel');
+	// 			}
+
+	// 			// $( ".carousel-multiple" ).one('click',function() {
+	// 			// 	transformarCarrusel('.carousel-multiple');
+	// 			// });
+
+	// 		}, 2000 );
+	// } else {
+	// 	console.log('no es admin');
+	// }
 
 });

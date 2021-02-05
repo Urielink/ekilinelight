@@ -12,3 +12,9 @@
 
 /* Ajustar colores */
 .wp-block p.has-text-color a { color: inherit; }
+
+/* Auxiliar editor UI */
+.carousel-multiple figure{
+    background-color: #f8f8f8;
+    border:1px solid #ffffff;
+}
