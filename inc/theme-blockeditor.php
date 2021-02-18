@@ -47,12 +47,12 @@ function ekiline_block_editor_setup() {
 		),
 		array(
 			'name'  => __( 'Success', 'ekiline' ),
-			'color' => get_option( 'b4_success', 'b4_success' ),
+			'color' => get_option( 'b4_success', '#28a745' ),
 			'slug'  => 'success',
 		),
 		array(
 			'name'  => __( 'Danger', 'ekiline' ),
-			'color' => get_option( 'b4_danger', '#dc3545', ),
+			'color' => get_option( 'b4_danger', '#dc3545' ),
 			'slug'  => 'danger',
 		),
 		array(
