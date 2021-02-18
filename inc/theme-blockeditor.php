@@ -37,42 +37,42 @@ function ekiline_block_editor_setup() {
 	$block_colors = array(
 		array(
 			'name'  => __( 'Primary', 'ekiline' ),
-			'color' => get_option( 'b4_primary' ),
+			'color' => get_option( 'b4_primary', '#007bff' ),
 			'slug'  => 'primary',
 		),
 		array(
 			'name'  => __( 'Secondary', 'ekiline' ),
-			'color' => get_option( 'b4_secondary' ),
+			'color' => get_option( 'b4_secondary', '#6c757d' ),
 			'slug'  => 'secondary',
 		),
 		array(
 			'name'  => __( 'Success', 'ekiline' ),
-			'color' => get_option( 'b4_success' ),
+			'color' => get_option( 'b4_success', 'b4_success' ),
 			'slug'  => 'success',
 		),
 		array(
 			'name'  => __( 'Danger', 'ekiline' ),
-			'color' => get_option( 'b4_danger' ),
+			'color' => get_option( 'b4_danger', '#dc3545', ),
 			'slug'  => 'danger',
 		),
 		array(
 			'name'  => __( 'Warning', 'ekiline' ),
-			'color' => get_option( 'b4_warning' ),
+			'color' => get_option( 'b4_warning', '#ffc107' ),
 			'slug'  => 'warning',
 		),
 		array(
 			'name'  => __( 'Info', 'ekiline' ),
-			'color' => get_option( 'b4_info' ),
+			'color' => get_option( 'b4_info', '#17a2b8' ),
 			'slug'  => 'info',
 		),
 		array(
 			'name'  => __( 'Light', 'ekiline' ),
-			'color' => get_option( 'b4_light' ),
+			'color' => get_option( 'b4_light', '#f8f9fa' ),
 			'slug'  => 'light',
 		),
 		array(
 			'name'  => __( 'Dark', 'ekiline' ),
-			'color' => get_option( 'b4_dark' ),
+			'color' => get_option( 'b4_dark', '#343a40' ),
 			'slug'  => 'dark',
 		),
 	);
