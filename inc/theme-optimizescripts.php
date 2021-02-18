@@ -201,20 +201,6 @@ function ctmzr_handlers_options( $kind = null ) {
 }
 
 /**
- * Comprobacion de arrays: add_action( 'wp_head', 'agregar_scripts' );
- */
-function agregar_scripts() {
-	?>
-	<script id="note">
-		console.log( '<?php echo wp_json_encode( ctmzr_array_handlers( 'css' ) ); ?>' );
-		console.log( '<?php echo wp_json_encode( ctmzr_handlers_options( 'css' ) ); ?>' );
-		console.log( '<?php echo wp_json_encode( ctmzr_array_handlers( 'js' ) ); ?>' );
-		console.log( '<?php echo wp_json_encode( ctmzr_handlers_options( 'js' ) ); ?>' );
-	</script>
-	<?php
-}
-
-/**
  * 4) Control para ejecucion:
  * Solo cuando el usuario no sea administrador
  * Execute only in frontend, when user logged out.

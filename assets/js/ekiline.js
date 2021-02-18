@@ -103,31 +103,4 @@ jQuery(document).ready(function( $ ) {
 	}
 	transformarCarrusel('.carousel-multiple');
 
-	// /* Auxiliar para el admin */
-	// var isAdmin = $('.wp-admin.block-editor-page');
-
-	// if ( 0 < $(isAdmin).length ){
-	// 	console.log('si es admin');
-	// 		// ejecutar script al refresh, despues de 2 segundos.
-	// 		// averiguar como invocar desde editor.
-	// 		setTimeout( function(){
-	// 			// validar que exista carrusel.
-	// 			var hasCarousel = $('.carousel-multiple');
-
-	// 			if ( 0 < $(hasCarousel).length ){
-	// 				console.log('si tiene carrusel');
-	// 				transformarCarrusel('.carousel-multiple');
-	// 			} else {
-	// 				console.log('no tiene carrusel');
-	// 			}
-
-	// 			// $( ".carousel-multiple" ).one('click',function() {
-	// 			// 	transformarCarrusel('.carousel-multiple');
-	// 			// });
-
-	// 		}, 2000 );
-	// } else {
-	// 	console.log('no es admin');
-	// }
-
 });
