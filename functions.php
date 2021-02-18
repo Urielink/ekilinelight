@@ -333,7 +333,6 @@ require get_template_directory() . '/inc/class-ekiline-nav-menu.php';
 require get_template_directory() . '/inc/class-ekiline-control-multiple-select.php';
 require get_template_directory() . '/inc/class-ekiline-basic-breadcrumb.php';
 require get_template_directory() . '/inc/widget-options.php';
-require get_template_directory() . '/inc/shortcode-ekiline-carousel.php';
 /* Ekiline modificadores de tema */
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/theme-customcolors.php';
