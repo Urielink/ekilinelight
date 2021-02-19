@@ -50,6 +50,8 @@
 		<p class="entry-meta small m-0">
 			<?php
 			if ( ! is_page() || get_the_category_list() !== '' ) {
+				// Post format.
+				( get_post_format() ) ? printf( '<span class="badge badge-secondary">%1$s</span><br>', esc_html( get_post_format() ) ) : '';
 				/* translators: %s is replaced with category title */
 				printf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
 			}
