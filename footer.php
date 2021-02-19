@@ -30,8 +30,12 @@
 		?>
 		<span class="signature">
 			<?php
-			/* translators: %1$s and %2$s are replaced with link url */
+			if ( ! get_theme_mod( 'ekiline_custom_signature' ) ) {
+				/* translators: %1$s and %2$s are replaced with link url */
 				printf( esc_html__( 'Proudly powered by %1$s and %2$s. ', 'ekiline' ), '<a href="' . esc_url( 'https://wordpress.org/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'WordPress', 'ekiline' ) . '</a>', '<a href="' . esc_url( 'http://ekiline.com' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Ekiline', 'ekiline' ) . '</a>' );
+			} else {
+				echo esc_html( get_theme_mod( 'ekiline_custom_signature' ) );
+			}
 			?>
 		</span>
 		<a class="goTop float-right" href="#top"><span>&uarr;</span><?php esc_html_e( 'Back', 'ekiline' ); ?></a>

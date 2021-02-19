@@ -83,6 +83,30 @@ function ekiline_theme_customizer( $wp_customize ) {
 	);
 
 	/**
+	 * Diseño, Personalizar la firma en footer.
+	 * Footer signature.
+	 * Uso: footer.php
+	 */
+	$wp_customize->add_setting(
+		'ekiline_custom_signature',
+		array(
+			'default'           => '',
+			'sanitize_callback' => 'sanitize_text_field',
+		)
+	);
+
+	$wp_customize->add_control(
+		'ekiline_custom_signature',
+		array(
+			'type'        => 'text',
+			'label'       => __( 'Firma personalizada', 'ekiline' ),
+			'description' => __( 'Reemplaza u oculta los enlaces de manufactura.', 'ekiline' ),
+			'section'     => 'title_tagline',
+			'priority'    => 100,
+		)
+	);
+
+	/**
 	 * Diseño, Navbar con opciones de visualizacion
 	 * "primary" Menu behaviors.
 	 * Uso: themeNavwalker.php, themeNavbars.php
