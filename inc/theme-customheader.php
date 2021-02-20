@@ -181,7 +181,7 @@ function ekiline_custom_header_setup() {
 	$new_args = apply_filters(
 		'ekiline_custom_header_args',
 		array(
-			'default-image'      => '',
+			'default-image'      => get_parent_theme_file_uri( '/assets/img/ekiline-pattern.png' ),
 			'default-text-color' => '000000',
 			'width'              => '1600',
 			'height'             => '900',
@@ -347,7 +347,7 @@ function custom_header_content( $content_type = null ) {
 		} else {
 			$custom_header_title = '<a href="' . esc_url( get_the_permalink() ) . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
 			$custom_header_text  = ekiline_content_out_the_loop() . '<br>';
-			$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' <br> ' . $tags_list . '</small></span>';
+			$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' <br> ' . ( ( get_the_tag_list() ) ? $tags_list : '' ) . '</small></span>';
 		}
 	}
 
