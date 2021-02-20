@@ -94,7 +94,8 @@ function ekiline_navbar_menu( $nav_position ) {
 			$nav_head  = ' flex-md-column';
 			break;
 		case 4:
-			$nav_help  = ' nav-scroller w-100 show';
+			// $nav_help  = ' nav-scroller w-100 show';
+			$nav_help  = ' nav-scroller show';
 			$nav_align = ' nav flex-row';
 			$nav_head  = ' flex-md-column';
 			break;
@@ -247,7 +248,7 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 					</button>
 				</div>
 
-				<div class="navbar p-0">
+				<div class="navbar p-0 w-100">
 
 				<?php if ( get_bloginfo( 'description' ) ) { ?>
 					<span class="navbar-text site-description"><?php echo esc_html( get_bloginfo( 'description' ) ); ?></span>

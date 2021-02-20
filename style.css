@@ -104,7 +104,7 @@
  /* ------------------------------------------------
   * 2) Ekiline: CUSTOM STYLES tus estilos || write here your styles
   * ----------------------------------------------*/
- body {word-wrap: break-word;overflow-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;-ms-hyphens: auto;hyphens: auto;}
+ main{word-wrap: break-word;overflow-wrap: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;-ms-hyphens: auto;hyphens: auto;}
  /* Clearfix en articulos */
  article::after{content: "";clear: both;display: table;}
  article footer, article .page-links{clear: both;}
@@ -152,9 +152,11 @@
   .navbar-nav .dropup .dropdown-menu .dropdown-menu{position: static;}
 
 /* Scroller nav */
-.nav-scroller {height: 3rem;overflow-y: hidden;line-height: 2;}
+/* .nav-scroller {height: 3rem;overflow-y: hidden;line-height: 2;} */
+/* .nav-scroller {line-height: 2;width: 100%;}
 .nav-scroller .nav {-ms-flex-wrap: nowrap;flex-wrap: nowrap;overflow-x: auto;white-space: nowrap;-webkit-overflow-scrolling: touch;}
-.nav-scroller .nav-link {padding: .5rem;}
+.nav-scroller .nav-link:not(.dropdown-toggle-split) {padding: .5rem;padding-right: 2rem;} 
+*/
 
 /* Sticky navbar */
 .navbar-sticky.scrolled-down{ transform:translateY(-100%); transition: all 0.3s ease-in-out; }
@@ -165,6 +167,10 @@
 
 /* Estilos de navegación que solo necesitan ejecutarse en desktop */
 @media only screen and (min-width : 768px) {
+ /*Links con dropdown, dropup */
+ .navbar-nav > .dropdown, .navbar-nav > .dropup{display: flex;}
+ .navbar-collapse.show .navbar-nav > .dropdown, .navbar-collapse.show .navbar-nav > .dropup{display: block;}
+
  /*scroll-menu*/
  .navbar-collapse:not(.order-first) .scroll-menu.dropdown.show, .navbar-collapse:not(.order-first) .scroll-menu.dropup.show{position: inherit;}
  .navbar-collapse:not(.order-first) .scroll-menu.show > .dropdown-menu{max-width: 100%;left: 0;right: 0;margin: 0 auto;border-radius: 0px;display:flex;overflow-x: scroll;/*white-space: nowrap;*/}
@@ -186,7 +192,7 @@
  /*Offcanvas nav*/
  .navbar-collapse.offcanvas{ background-color: transparent !important; }
  /* Scroller nav */
- .nav-scroller {height: 2rem;}
+ /* .nav-scroller {height: 2rem;} */
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -366,14 +372,23 @@
 
 @media only screen and (max-width : 768px) {
 
+/*Flecha dropdown*/
+.navbar-collapse a.dropdown-toggle-split,
+.navbar-collapse.show a.dropdown-toggle-split{position: absolute;right: 0;top: 0px;width: 40px;z-index: 100;text-align: center;}
+
 /*Menu Offcanvas (solo responsivo)*/
 .navbar-collapse.offcanvas{position:fixed;z-index:1100;top:0;bottom:0;left:100%;width:100%;padding:1rem;overflow-y:auto;visibility:hidden;transition-timing-function:ease-in-out;transition-duration:.2s;transition-property:left,visibility;}
-.navbar-collapse.offcanvas .navbar-toggler{float:right;}
+.navbar-collapse.offcanvas .navbar-toggler{margin-left: calc(100% - 50px);display: block;}
 .navbar-collapse.offcanvas.collapsing{height:auto;}
 .navbar-collapse.offcanvas.show{left:0;visibility:visible;}
   .fixed-bottom .navbar-collapse.offcanvas{top:0;bottom:0;}
  /* Offcanvas + Sticky navbar */
  .navbar-sticky .navbar-collapse.offcanvas.show{min-height: 100vh;}
+
+/* Scroller nav */
+ .nav-scroller {line-height: 2;width: 100%;}
+ .nav-scroller .nav {-ms-flex-wrap: nowrap;flex-wrap: nowrap;overflow-x: auto;white-space: nowrap;-webkit-overflow-scrolling: touch;}
+ .nav-scroller .nav-link:not(.dropdown-toggle-split) {padding: .5rem;padding-right: 2rem;}
 
 /* Carrusel extendido || Carousel extended */
  .carousel-multiple .carousel-item > *:nth-child(n+2){display:none;}
@@ -406,7 +421,6 @@
      margin-right: -15px;
      width: auto;
    }
-
 /*Utilidades para grid de listados*/
 .card-columns{-webkit-column-count: 1;-moz-column-count: 1;column-count: 1;}
   /*En caso de habilitar sidebars 2 o 1*/
@@ -526,7 +540,7 @@ img{vertical-align:middle;border-style:none}
 .navbar-expand-md .navbar-toggler{display:none}
 }
 
-.card{position:relative;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}
+.card{position:relative;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;min-width:0;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem}
 .card-deck{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}
 .card-deck .card{margin-bottom:15px}
 .card-group{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}
@@ -595,7 +609,7 @@ img{vertical-align:middle;border-style:none}
 .bg-deep, .wp-block-cover.bg-deep div{background-size: 1px;background-repeat: no-repeat;-webkit-transition:all 0.4s ease-in-out;-moz-transition:all 0.4s ease-in-out;-ms-transition:all 0.4s ease-out;-o-transition:all 0.4s ease-in-out;transition:all 0.4s ease-in-out;}
  #custom_header_module .wp-block-cover, #custom_header_module .wp-block-cover.has-background-dim::before{display:flex;align-items:flex-end;}
  #custom_header_module > .alignfull {margin-left: calc( -100vw / 2 + 100% / 2 - 9px);margin-right: calc( -100vw / 2 + 100% / 2 - 9px);width: 100vw;}
- #custom_header_module .wp-block-cover.has-background-dim::before{z-index: 1;opacity: .3 !important;}
+ #custom_header_module .wp-block-cover.has-background-dim::before{z-index: 1;opacity: .2 !important;}
  #custom_header_module .wp-block-cover .headline {z-index: 1;}
  #custom_header_module .headline a {padding: 0px 5px;}
 
