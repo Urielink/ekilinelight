@@ -94,7 +94,6 @@ function ekiline_navbar_menu( $nav_position ) {
 			$nav_head  = ' flex-md-column';
 			break;
 		case 4:
-			// $nav_help  = ' nav-scroller w-100 show';
 			$nav_help  = ' nav-scroller show';
 			$nav_align = ' nav flex-row';
 			$nav_head  = ' flex-md-column';
