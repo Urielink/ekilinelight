@@ -181,7 +181,7 @@ function ekiline_custom_header_setup() {
 	$new_args = apply_filters(
 		'ekiline_custom_header_args',
 		array(
-			'default-image'      => get_parent_theme_file_uri( '/assets/img/ekiline-pattern.png' ),
+			'default-image'      => get_parent_theme_file_uri( '/assets/img/ekiline-media.png' ),
 			'default-text-color' => '000000',
 			'width'              => '1600',
 			'height'             => '900',
@@ -192,15 +192,42 @@ function ekiline_custom_header_setup() {
 	add_theme_support( 'custom-header', $new_args );
 
 	// Registrar una imagen default, primero se declara en los filtros.
-		register_default_headers(
-			array(
-				'default-image' => array(
-					'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-pattern.png' ),
-					'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/ekiline-pattern.png' ),
-					'description'   => __( 'Default header image', 'ekiline' ),
-				),
-			)
-		);
+	register_default_headers(
+		array(
+			'background1' => array(
+				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-alimento.png' ),
+				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-alimento.png' ),
+			),
+			'background2' => array(
+				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-arte.png' ),
+				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-arte.png' ),
+			),
+			'background3' => array(
+				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-aventura.png' ),
+				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-aventura.png' ),
+			),
+			'background4' => array(
+				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-blog.png' ),
+				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-blog.png' ),
+			),
+			'background5' => array(
+				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-ciudad.png' ),
+				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-ciudad.png' ),
+			),
+			'background6' => array(
+				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-cultura.png' ),
+				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-cultura.png' ),
+			),
+			'background7' => array(
+				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-media.png' ),
+				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-media.png' ),
+			),
+			'background8' => array(
+				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-patron.png' ),
+				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-patron.png' ),
+			),
+		)
+	);
 }
 add_action( 'after_setup_theme', 'ekiline_custom_header_setup' );
 
@@ -276,8 +303,14 @@ function ekiline_header_image( $size = null ) {
 	* otra documentacion: https://premium.wpmudev.org/blog/wordpress-image-sizes/
 	*/
 
+	$theme_images = array( 'alimento', 'arte', 'aventura', 'blog', 'ciudad', 'cultura', 'media', 'patron' );
+	$header_img   = array();
+	foreach ( $theme_images as $imagen ) {
+		$header_img[] = get_parent_theme_file_uri( '/assets/img/ekiline-' . $imagen . '.png' );
+	}
+
 	// Condicion: en caso de ser la imagen de muestra, o ser una imagen nueva.
-	if ( get_header_image() !== get_parent_theme_file_uri( '/assets/img/ekiline-pattern.png' ) ) {
+	if ( ! in_array( $url, $header_img, true ) ) {
 		$url = wp_get_attachment_image_url( get_custom_header()->attachment_id, $size, false, '' );
 	}
 
