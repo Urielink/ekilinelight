@@ -195,34 +195,10 @@ function ekiline_custom_header_setup() {
 	register_default_headers(
 		array(
 			'background1' => array(
-				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-alimento.png' ),
-				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-alimento.png' ),
-			),
-			'background2' => array(
-				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-arte.png' ),
-				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-arte.png' ),
-			),
-			'background3' => array(
-				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-aventura.png' ),
-				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-aventura.png' ),
-			),
-			'background4' => array(
-				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-blog.png' ),
-				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-blog.png' ),
-			),
-			'background5' => array(
-				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-ciudad.png' ),
-				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-ciudad.png' ),
-			),
-			'background6' => array(
-				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-cultura.png' ),
-				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-cultura.png' ),
-			),
-			'background7' => array(
 				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-media.png' ),
 				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-media.png' ),
 			),
-			'background8' => array(
+			'background2' => array(
 				'url'           => get_parent_theme_file_uri( '/assets/img/ekiline-patron.png' ),
 				'thumbnail_url' => get_parent_theme_file_uri( '/assets/img/thumb-ekiline-patron.png' ),
 			),
@@ -303,7 +279,7 @@ function ekiline_header_image( $size = null ) {
 	* otra documentacion: https://premium.wpmudev.org/blog/wordpress-image-sizes/
 	*/
 
-	$theme_images = array( 'alimento', 'arte', 'aventura', 'blog', 'ciudad', 'cultura', 'media', 'patron' );
+	$theme_images = array( 'media', 'patron' );
 	$header_img   = array();
 	foreach ( $theme_images as $imagen ) {
 		$header_img[] = get_parent_theme_file_uri( '/assets/img/ekiline-' . $imagen . '.png' );
