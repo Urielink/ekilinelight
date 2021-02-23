@@ -41,6 +41,11 @@ function ekiline_width_control() {
  */
 function view_sidebar_filter( $width_sb_ctrl ) {
 
+	// No ejecutar en admin.
+	if ( is_admin() ) {
+		return $width_sb_ctrl;
+	}
+
 	$opt = '';
 
 	if ( is_front_page() || is_home() ) {
