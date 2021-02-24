@@ -200,11 +200,18 @@ function ekiline_docs_feed() {
 function ekiline_docs_feed_set() {
 	?>
 <script type='text/javascript'>
-	jQuery(document).ready(function( $ ) {
-		$( '.ekiline-notice' ).delay(2000).show(100 );
-		var random = Math.floor(Math.random() * 10) + 1;;
-		$( '.ekiline-notice ul li:nth-child( '+random+' )' ).delay(3000).show(100 );
-	});
+	var notice = document.querySelector('.ekiline-notice');
+	var random = Math.floor(Math.random() * 5) + 1;
+	var noticeChild = document.querySelector( '.ekiline-notice ul li:nth-child( ' + random + ' )' );
+	function showNotices(el,css,time){
+		setTimeout(
+			function(){
+				el.style.display = css;
+			}, time
+		);
+	}
+	showNotices(notice,'flex','2000');
+	showNotices(noticeChild,'block','3000');
 </script>
 	<?php
 }
