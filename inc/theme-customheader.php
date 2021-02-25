@@ -470,11 +470,11 @@ add_action( 'wp_body_open', 'ekiline_top_page_custom_header', 1 );
  * @param string $html content.
  */
 function ekiline_hide_thumbnail( $html ) {
-    if ( get_header_image() && ( is_singular() && in_the_loop() ) ) {
-        $html = '';
+	if ( get_header_image() && ( is_singular() && in_the_loop() ) ) {
+		$html = '';
 		remove_filter( 'post_thumbnail_html', 'ekiline_hide_thumbnail', 10, 3 );
-    }
-    return $html;
+	}
+	return $html;
 }
 add_filter( 'post_thumbnail_html', 'ekiline_hide_thumbnail', 10, 3 );
 
@@ -485,10 +485,10 @@ add_filter( 'post_thumbnail_html', 'ekiline_hide_thumbnail', 10, 3 );
  * @param string $title content.
  */
 function ekiline_hide_title( $title ) {
-    if ( get_header_image() && ( is_singular() && in_the_loop() ) ) {
-        $title = '';
+	if ( get_header_image() && ( is_singular() && in_the_loop() ) ) {
+		$title = '';
 		remove_filter( 'the_title', 'ekiline_hide_title' );
-    }
-    return $title;
+	}
+	return $title;
 }
 add_filter( 'the_title', 'ekiline_hide_title' );
