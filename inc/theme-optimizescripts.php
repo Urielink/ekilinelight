@@ -316,6 +316,7 @@ function ekiline_load_all_csstojs() {
 				linkCss.id    = value.id;
 				linkCss.rel   = 'stylesheet';
 				linkCss.href  = value.src;
+				linkCss.media  = (!value.media)?'all':value.media;
 			if (wpcss){
 				wpcss.insertAdjacentElement('beforebegin', linkCss);
 			} else if (cssinline){
