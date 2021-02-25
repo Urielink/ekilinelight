@@ -397,8 +397,8 @@ function ekiline_custom_css_cb() {
 	}
 
 	$custom_styles = wp_get_custom_css();
-	$custom_styles = str_replace( array( "\r", "\n" ), '', $custom_styles );
-	$custom_styles = wp_strip_all_tags( $custom_styles );
+	// $custom_styles = str_replace( array( "\r", "\n" ), '', $custom_styles );
+	// $custom_styles = wp_strip_all_tags( $custom_styles );
 
 	if ( $custom_styles && ! is_customize_preview() ) :
 		return $custom_styles;

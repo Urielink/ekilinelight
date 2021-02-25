@@ -244,7 +244,7 @@ function ekiline_get_string_between( $string, $start, $end ) {
  */
 function ekiline_above_fold_styles() {
 	// Estilos.
-	$file = get_template_directory_uri() . '/style-atf.css';
+	$file = get_template_directory_uri() . '/assets/css/style-atf.css';
 	$file = wp_remote_get( $file );
 	$data = wp_remote_retrieve_body( $file );
 	// Quitar comentarios.
@@ -296,6 +296,10 @@ function group_inline_css_stored() {
 		do_action( 'group_inline_css' ); // accion predeterminada.
 		$stored_value = ob_get_contents(); // capturar los datos en una variable.
 	ob_end_clean(); // finalizar la captura.
+	// Quitar comentarios.
+	$stored_value = preg_replace( '#/\*.*?\*/#s', '', $stored_value );
+	// Quitar saltos de linea y convertir en un string.
+	$stored_value = wp_strip_all_tags( $stored_value, true );
 	return $stored_value; // variable.
 }
 
