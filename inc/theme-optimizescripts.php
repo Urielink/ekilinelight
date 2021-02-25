@@ -309,17 +309,16 @@ function ekiline_load_all_csstojs() {
 	// Carga de estilos CSS nativo.
 	function loadStylesNativo(styles){
 		var head = document.querySelector('head');
-		var wpcss = head.querySelector('style[id="ekiline-style-inline-css"]');
-		var cssinline = head.querySelector('style:last-child');
+		var wpcss = head.querySelector('#ekiline-style-inline-css');
+		var cssinline = head.getElementsByTagName('style')[head.getElementsByTagName('style').length - 1];
 		styles.forEach(function(value, key){
 			var linkCss = document.createElement('link');
 				linkCss.id    = value.id;
 				linkCss.rel   = 'stylesheet';
 				linkCss.href  = value.src;
-				linkCss.media = value.media;
-			if (wpcss.length){
+			if (wpcss){
 				wpcss.insertAdjacentElement('beforebegin', linkCss);
-			} else if (cssinline.length){
+			} else if (cssinline){
 				cssinline.insertAdjacentElement('beforebegin', linkCss);
 			}else{
 				head.appendChild(linkCss);
