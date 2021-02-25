@@ -283,66 +283,49 @@ function ekiline_styles_localize() {
 function ekiline_load_all_csstojs() {
 	?>
 	<script>
-
 	var allCss = <?php ekiline_styles_localize(); ?>;
-
 	if ( allCss !== null ) {
 		window.addEventListener( 'DOMContentLoaded', function () {
-			loadStyles(allCss );
+			loadStylesNativo(allCss );
 		} );
 	}
-
-	// function loadStyles(styles ) {
-	// 	var $ = jQuery.noConflict();
-	// 	var head = $( 'head' );
-	// 	var wpcss = head.find( 'style[id="ekiline-style-inline-css"]' );
-	// 	var cssinline = head.find( 'style:last' );
-
-	// 	$.each( styles, function( key, value ) {
-	// 		var linkCss = $( '<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media } );
-	// 		if ( wpcss.length ) {
-	// 			wpcss.before( linkCss );
-	// 		} else if ( cssinline.length ) {
-	// 			cssinline.before( linkCss );
-	// 		} else {
-	// 			head.append( linkCss );
-	// 		}
-	// 	} );
-	// }
-
-	function loadStyles(styles) {
-
-		console.log('hola');
-
-		styles = document.querySelectorAll(styles);
-		var head = document.querySelector('head'); // $( 'head' );
-		var wpcss = head.querySelectorAll( 'style[id="ekiline-style-inline-css"]' ); // head.find( 'style[id="ekiline-style-inline-css"]' );
-		var cssinline = head.querySelectorAll( 'style:last' ); // head.find( 'style:last' );
-
-		Array.prototype.forEach.call(styles, function(key, value){
-		// $.each( styles, function( key, value ) {
-			// var linkCss = $( '<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media } );
-			var linkCss  = document.createElement('link');
-			linkCss.id   = value.id;
-			linkCss.rel  = 'stylesheet';
-			linkCss.href = value.src;
-			linkCss.media = value.media;
-
+	// Carga de estilos CSS.
+	function loadStyles( styles ) {
+		var $ = jQuery.noConflict();
+		var head = $( 'head' );
+		var wpcss = head.find( 'style[id="ekiline-style-inline-css"]' );
+		var cssinline = head.find( 'style:last' );
+		$.each( styles, function( key, value ) {
+			var linkCss = $( '<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media } );
 			if ( wpcss.length ) {
-				// wpcss.before( linkCss );
-				wpcss.insertAdjacentElement('beforebegin', linkCss);
+				wpcss.before( linkCss );
 			} else if ( cssinline.length ) {
-				// cssinline.before( linkCss );
-				cssinline.insertAdjacentElement('beforebegin', linkCss);
+				cssinline.before( linkCss );
 			} else {
-				// head.append( linkCss );
-				head.appendChild(linkCss);
+				head.append( linkCss );
 			}
 		} );
-
 	}
-
-
+	// Carga de estilos CSS nativo.
+	function loadStylesNativo(styles){
+		var head = document.querySelector('head');
+		var wpcss = head.querySelector('style[id="ekiline-style-inline-css"]');
+		var cssinline = head.querySelector('style:last-child');
+		styles.forEach(function(value, key){
+			var linkCss = document.createElement('link');
+				linkCss.id    = value.id;
+				linkCss.rel   = 'stylesheet';
+				linkCss.href  = value.src;
+				linkCss.media = value.media;
+			if (wpcss.length){
+				wpcss.insertAdjacentElement('beforebegin', linkCss);
+			} else if (cssinline.length){
+				cssinline.insertAdjacentElement('beforebegin', linkCss);
+			}else{
+				head.appendChild(linkCss);
+			}
+		});
+	}
 	</script>
 	<?php
 }
@@ -462,32 +445,53 @@ function ekiline_change_js_tag( $tag, $handle, $src ) {
 function ekiline_load_all_jstojs() {
 	?>
 	<script>
-
 	var allJss = <?php ekiline_scripts_localize(); ?>;
-
 	if ( allJss !== null ) {
 		window.addEventListener( 'DOMContentLoaded', function () {
-			loadScriptsOrdered( allJss , 0 );
+			loadScriptsOrderedNative( allJss , 0 );
 		} );
 	}
-	// Random.
+	// Carga a discrecion.
 	function loadScripts(scripts ) {
 		var $ = jQuery.noConflict();
 		$.each( scripts, function( key, value ) {
 			$.getScript( value.src );
 		} );
 	}
-	// Ordenada.
+		// Carga a discrecion nativo.
+		function loadScriptsNative(scripts){
+			scripts.forEach(function(value, key){
+				var script = document.createElement('script');
+					script.src = value.src;
+					document.body.appendChild(script);
+			} );
+		}
+	// Carga ordenada.
 	function loadScriptsOrdered(scripts,i ) {
 		var $ = jQuery.noConflict();
 		if (i < scripts.length ) {
 			$.getScript(scripts[i].src, function () {
 				i++;
-				loadScriptsOrdered(scripts,i );
+				loadScriptsOrdered(scripts,i);
 			} );
 		}
 	}
+		// Carga ordenada nativo 2 funciones.
+		function getScriptNative(scriptUrl, callback) {
+			var script = document.createElement('script');
+			script.src = scriptUrl;
+			script.onload = callback;
+			document.body.appendChild(script);
+		}
 
+		function loadScriptsOrderedNative(scripts,i) {
+			if (i<scripts.length){
+				getScriptNative( scripts[i].src, function () {
+					i++;
+					loadScriptsOrderedNative(scripts,i);
+				});
+			}
+		}
 	</script>
 	<?php
 }
