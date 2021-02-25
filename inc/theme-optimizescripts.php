@@ -292,23 +292,57 @@ function ekiline_load_all_csstojs() {
 		} );
 	}
 
-	function loadStyles(styles ) {
-		var $ = jQuery.noConflict();
-		var head = $( 'head' );
-		var wpcss = head.find( 'style[id="ekiline-style-inline-css"]' );
-		var cssinline = head.find( 'style:last' );
+	// function loadStyles(styles ) {
+	// 	var $ = jQuery.noConflict();
+	// 	var head = $( 'head' );
+	// 	var wpcss = head.find( 'style[id="ekiline-style-inline-css"]' );
+	// 	var cssinline = head.find( 'style:last' );
 
-		$.each( styles, function( key, value ) {
-			var linkCss = $( '<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media } );
+	// 	$.each( styles, function( key, value ) {
+	// 		var linkCss = $( '<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media } );
+	// 		if ( wpcss.length ) {
+	// 			wpcss.before( linkCss );
+	// 		} else if ( cssinline.length ) {
+	// 			cssinline.before( linkCss );
+	// 		} else {
+	// 			head.append( linkCss );
+	// 		}
+	// 	} );
+	// }
+
+	function loadStyles(styles) {
+
+		console.log('hola');
+
+		styles = document.querySelectorAll(styles);
+		var head = document.querySelector('head'); // $( 'head' );
+		var wpcss = head.querySelectorAll( 'style[id="ekiline-style-inline-css"]' ); // head.find( 'style[id="ekiline-style-inline-css"]' );
+		var cssinline = head.querySelectorAll( 'style:last' ); // head.find( 'style:last' );
+
+		Array.prototype.forEach.call(styles, function(key, value){
+		// $.each( styles, function( key, value ) {
+			// var linkCss = $( '<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media } );
+			var linkCss  = document.createElement('link');
+			linkCss.id   = value.id;
+			linkCss.rel  = 'stylesheet';
+			linkCss.href = value.src;
+			linkCss.media = value.media;
+
 			if ( wpcss.length ) {
-				wpcss.before( linkCss );
+				// wpcss.before( linkCss );
+				wpcss.insertAdjacentElement('beforebegin', linkCss);
 			} else if ( cssinline.length ) {
-				cssinline.before( linkCss );
+				// cssinline.before( linkCss );
+				cssinline.insertAdjacentElement('beforebegin', linkCss);
 			} else {
-				head.append( linkCss );
+				// head.append( linkCss );
+				head.appendChild(linkCss);
 			}
 		} );
+
 	}
+
+
 	</script>
 	<?php
 }
