@@ -217,12 +217,13 @@ function ekiline_top_page_widget_area() {
 add_action( 'wp_body_open', 'ekiline_top_page_widget_area', 1 );
 
 /**
- * Estilos css, above the fold.
  * Funcion: Obtener contenido entre 2 strings.
+ * Se ocupo en los estilos, y puede ser necesario posteriormente.
+ * Ej: ekiline_get_string_between( $data, '[ekiline-atfcss-start]', '[ekiline-atfcss-end]' );
  *
  * @param string $string contenido.
- * @param string $start etiqueta de abertura.
- * @param string $end etiqueta de cierre.
+ * @param string $start elemento de abertura.
+ * @param string $end elemento de cierre.
  */
 function ekiline_get_string_between( $string, $start, $end ) {
 	// Verificar la existencia de strings.
@@ -243,29 +244,19 @@ function ekiline_get_string_between( $string, $start, $end ) {
  */
 function ekiline_above_fold_styles() {
 	// Estilos.
-	$file = get_template_directory_uri() . '/style.css';
+	$file = get_template_directory_uri() . '/style-atf.css';
 	$file = wp_remote_get( $file );
 	$data = wp_remote_retrieve_body( $file );
-	$data = ekiline_get_string_between( $data, '/*[ekiline-atfcss-start]*/@media(max-width:0px){', '}/*[ekiline-atfcss-end]*/' );
 	// Quitar comentarios.
 	$data = preg_replace( '#/\*.*?\*/#s', '', $data );
 	// Quitar saltos de linea y convertir en un string.
-	$data = str_replace( array( "\r", "\n" ), '', $data );
-	// HTML5.
-	$type_attr = current_theme_supports( 'html5', 'style' ) ? ' ' : ' type="text/css" ';
-	if ( $data ) {
-		printf(
-			'<style%1$sid="ekiline-atf">%2$s</style>' . "\n",
-			wp_kses_post( $type_attr ),
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			wp_strip_all_tags( $data )
-		);
-	} else {
-		printf( '<!-- Error en style.css: Falta la referencia a ekiline-atfcss-start, ekiline-atfcss-end -->' . "\n" );
-	}
+	$data = wp_strip_all_tags( $data, true );
+	$data = ( ! $data ) ? '/*' . __( 'No styles found, check file', 'ekiline' ) . '*/' : $data;
+	wp_register_style( 'ekiline-atf', false, '', '2.0', 'all' );
+	wp_enqueue_style( 'ekiline-atf' );
+	wp_add_inline_style( 'ekiline-atf', $data );
 }
-add_action( 'wp_head', 'ekiline_above_fold_styles', 0 );
-
+add_action( 'wp_enqueue_scripts', 'ekiline_above_fold_styles', 0 );
 
 /**
  * Estilos CSS // Javascript // Js con argumentos
@@ -290,7 +281,7 @@ function ekiline_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
-add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 0 );
+add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 1 );
 
 
 /**
