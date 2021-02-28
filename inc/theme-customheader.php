@@ -226,10 +226,10 @@ function ekiline_custom_header_style() {
 		$range_head = '30';
 	}
 
-	$hdr_style  = '#custom_header_module .wp-block-cover, #custom_header_module .wp-block-cover.has-background-dim::before{ background-color:' . esc_attr( $hdr_bgc ) . '; min-height:' . $range_head . 'vh; }';
-	$hdr_style .= '#custom_header_module .headline { color:' . esc_attr( $hdr_txc ) . '; }';
-	$hdr_style .= '#custom_header_module .headline a { color:' . esc_attr( $hdr_lkc ) . '; }';
-	$hdr_style .= '@media only screen and (min-width:960px ) { #custom_header_module .wp-block-cover{ background-image: url("' . ekiline_header_image( 'full' ) . '") !important; } }';
+	$hdr_style  = '#custom_header_module .wp-block-cover, #custom_header_module .wp-block-cover.has-background-dim::before{ background-color:' . esc_attr( $hdr_bgc ) . ';min-height:' . $range_head . 'vh; }';
+	$hdr_style .= '#custom_header_module .headline{color:' . esc_attr( $hdr_txc ) . ';}';
+	$hdr_style .= '#custom_header_module .headline a{color:' . esc_attr( $hdr_lkc ) . ';}';
+	$hdr_style .= '@media only screen and (min-width:960px){#custom_header_module .wp-block-cover{background-image:url("' . ekiline_header_image( 'full' ) . '") !important;}}';
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $hdr_style;
 
@@ -470,11 +470,11 @@ add_action( 'wp_body_open', 'ekiline_top_page_custom_header', 1 );
  * @param string $html content.
  */
 function ekiline_hide_thumbnail( $html ) {
-    if ( get_header_image() && ( is_singular() && in_the_loop() ) ) {
-        $html = '';
+	if ( get_header_image() && ( is_singular() && in_the_loop() ) ) {
+		$html = '';
 		remove_filter( 'post_thumbnail_html', 'ekiline_hide_thumbnail', 10, 3 );
-    }
-    return $html;
+	}
+	return $html;
 }
 add_filter( 'post_thumbnail_html', 'ekiline_hide_thumbnail', 10, 3 );
 
@@ -485,10 +485,10 @@ add_filter( 'post_thumbnail_html', 'ekiline_hide_thumbnail', 10, 3 );
  * @param string $title content.
  */
 function ekiline_hide_title( $title ) {
-    if ( get_header_image() && ( is_singular() && in_the_loop() ) ) {
-        $title = '';
+	if ( get_header_image() && ( is_singular() && in_the_loop() ) ) {
+		$title = '';
 		remove_filter( 'the_title', 'ekiline_hide_title' );
-    }
-    return $title;
+	}
+	return $title;
 }
 add_filter( 'the_title', 'ekiline_hide_title' );

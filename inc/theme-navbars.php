@@ -17,13 +17,13 @@ function ekiline_logo_theme() {
 	if ( $brand_hor && ! $brand_icon ) {
 		echo '<img class="img-fluid" src="' . esc_url( $brand_hor ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" loading="lazy"/>';
 	} elseif ( ! $brand_hor && $brand_icon ) {
-		echo '<img class="brand-icon" src="' . esc_url( get_site_icon_url() ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" loading="lazy"/>
+		echo '<img class="brand-icon" src="' . esc_url( get_site_icon_url() ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" height="50" width="auto" loading="lazy"/>
 			' . esc_html( get_bloginfo( 'name' ) );
 	} elseif ( $brand_hor && $brand_icon ) {
 		echo '
 		<img class="img-fluid d-none d-md-block" src="' . esc_url( $brand_hor ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" loading="lazy"/>
 		<span class="d-block d-md-none">
-			<img class="brand-icon" src="' . esc_url( get_site_icon_url( '150' ) ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" loading="lazy"/>
+			<img class="brand-icon" src="' . esc_url( get_site_icon_url( '150' ) ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" height="50" width="auto" loading="lazy"/>
 			' . esc_html( get_bloginfo( 'name' ) ) . '
 		</span>';
 	} else {
@@ -40,6 +40,7 @@ function ekiline_logo_theme() {
  */
 function ekiline_navbar_menu( $nav_position ) {
 
+	// No mostrar un menu.
 	if ( ! has_nav_menu( $nav_position ) ) {
 		return;
 	}
@@ -295,15 +296,17 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 function ekiline_nav_fallback() {
 	if ( is_user_logged_in() ) {
 		$link = '/wp-admin/nav-menus.php';
+		$text = __( 'Assign a menu!', 'ekiline' );
 	} else {
 		$link = '/wp-login.php';
+		$text = __( 'Login', 'ekiline' );
 	}
-	$link = home_url( null, $link );
+	$link = home_url( $link );
 	?>
 
 	<ul id="SetNavMenu" class="navbar-nav mr-auto">
 		<li class="nav-item">
-			<a class="nav-link" href="<?php echo esc_url( $link ); ?>"><?php esc_html_e( 'Assign a menu!', 'ekiline' ); ?></a>
+			<a class="nav-link" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $text ); ?></a>
 		</li>
 	</ul>
 

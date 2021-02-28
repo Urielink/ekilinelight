@@ -395,11 +395,8 @@ function ekiline_custom_css_cb() {
 	if ( is_customize_preview() ) {
 		add_action( 'wp_head', 'wp_custom_css_cb', 101 );
 	}
-
+	// 3) Obtener los estilos de customizer e imprimir.
 	$custom_styles = wp_get_custom_css();
-	$custom_styles = str_replace( array( "\r", "\n" ), '', $custom_styles );
-	$custom_styles = wp_strip_all_tags( $custom_styles );
-
 	if ( $custom_styles && ! is_customize_preview() ) :
 		return $custom_styles;
 	endif;
