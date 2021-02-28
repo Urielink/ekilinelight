@@ -23,7 +23,7 @@
 		<?php
 			ekiline_count_widgets( 'footer-w1' );
 		?>
-	<p>
+	<p id="authorship">
 		<?php
 		/* translators: %1$s is replaced with date */
 			printf( esc_html__( '&copy; Copyright %1$s. ', 'ekiline' ), esc_attr( date( 'Y' ) . ' ' . get_bloginfo( 'name', 'display' ) ) );
@@ -38,7 +38,7 @@
 			}
 			?>
 		</span>
-		<a class="goTop float-right" href="#top"><span>&uarr;</span><?php esc_html_e( 'Back', 'ekiline' ); ?></a>
+		<a class="smooth float-right" href="#primary"><span>&uarr;</span><?php esc_html_e( 'Back', 'ekiline' ); ?></a>
 	</p>
 </div>
 </footer><!-- .site-footer -->
