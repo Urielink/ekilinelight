@@ -6,6 +6,7 @@
 * Estas lineas se ocupan como identificadores para extraer los estilos y colocarlos como primera carga.
 * functions.php, #260, ekiline_above_fold_styles().
 */
+html {scroll-behavior:smooth;}
 
 /* Bootstrap default */
 *,::after,::before{box-sizing:border-box}

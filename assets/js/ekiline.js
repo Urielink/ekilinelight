@@ -4,26 +4,42 @@ window.onload = function() {
 		ekilineJQueryGroup();
     } else {
 		transformarCarruselNativo('.carousel-multiple');
+		smoothNavigation('.smooth');
     }
-	smoothNavigation('.smooth');
 }
 
 function ekilineJQueryGroup(){
 	// Compatibilidad de jquery.
 	jQuery(document).ready(function( $ ) {
+
+		/* Scroll suave */
+		var $root = $('html, body');
+		$('.smooth').click(function() {
+			var href = $.attr(this, 'href');
+			$root.animate({
+				scrollTop: $(href).offset().top
+			}, 500, function () {
+				window.location.hash = href;
+			});
+			return false;
+		});
+
 		/* Ajuste en dropdown de widgets dentro de navbar */
 		$('.dropdown-menu a.dropdown-toggle').on('click', function(e){
 			$(this).next('ul').toggle();
 			e.stopPropagation();
 			e.preventDefault();
 		});
+
 		/* animar el boton del menu modal */
 		$('.modal-toggler').on('click',function(){
 			$(this).removeClass('collapsed');
 		});
+
 		$('.modal-nav').on('hidden.bs.modal', function(){
 			$('.modal-toggler').addClass('collapsed');
 		});
+
 		/* cambiar el tamaño de una ventana modal */
 		$( '.modal-resize' ).click(function(){
 			$( '.modal-open' ).toggleClass('modal-full');
@@ -108,22 +124,16 @@ function ekilineJQueryGroup(){
  * @param {string} item Clase en link para ejecutar scroll.
  */
 function smoothNavigation(item = null){
-	// Declarar el nombre de link.
-	const links = document.querySelectorAll(item);
-	// Loop para ejecutar el efecto en cada item.
-	for (const link of links) {
-	link.addEventListener("click", clickHandler);
-	}
-	// Funcion.
-	function clickHandler(e) {
-	e.preventDefault();
-	const href = this.getAttribute("href");
-	const offsetTop = document.querySelector(href).offsetTop;
-	scroll({
-		top: offsetTop,
-		behavior: "smooth"
+	document.querySelectorAll('.smooth').forEach(anchor => {
+		var href = anchor.getAttribute('href');
+		anchor.addEventListener('click', function (e) {
+			e.preventDefault();
+			document.querySelector(this.getAttribute('href')).scrollIntoView({
+				behavior: 'smooth'
+			});
+			window.location.hash = href;
+		});
 	});
-	}
 }
 
 /**
