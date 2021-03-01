@@ -40,8 +40,8 @@ function ekiline_logo_theme() {
  */
 function ekiline_navbar_menu( $nav_position ) {
 
-	// No mostrar un menu.
-	if ( ! has_nav_menu( $nav_position ) ) {
+	// No mostrar un menu vacio.
+	if ( wp_nav_menu( array( 'theme_location' => $nav_position, 'echo' => false ) ) === false ) {
 		return;
 	}
 
@@ -304,11 +304,14 @@ function ekiline_nav_fallback() {
 	$link = home_url( $link );
 	?>
 
-	<ul id="SetNavMenu" class="navbar-nav mr-auto">
+	<ul id="SetNavMenu" class="navbar-nav">
 		<li class="nav-item">
 			<a class="nav-link" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $text ); ?></a>
 		</li>
 	</ul>
+	<div class="navbar-text ml-auto">
+		<a target="_blank" class="btn btn-sm btn-outline-warning" href="<?php echo esc_url( 'https://ekiline.com/docs/' ); ?>"><?php esc_html_e( 'Theme help', 'ekiline' ); ?></a>
+	</div>
 
 	<?php
 } // ekiline_nav_fallback
