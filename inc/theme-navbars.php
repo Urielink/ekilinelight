@@ -40,8 +40,10 @@ function ekiline_logo_theme() {
  */
 function ekiline_navbar_menu( $nav_position ) {
 
+	// No mostrar un menu 'if(!has_nav_menu($nav_position)){return;}'.
 	// No mostrar un menu vacio.
-	if ( wp_nav_menu( array( 'theme_location' => $nav_position, 'echo' => false ) ) === false ) {
+	// phpcs:ignore WordPress.Arrays.ArrayDeclarationSpacing.AssociativeArrayFound
+	if ( false === wp_nav_menu( array( 'theme_location' => $nav_position, 'echo' => false ) ) ) {
 		return;
 	}
 
