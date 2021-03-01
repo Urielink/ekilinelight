@@ -183,10 +183,6 @@
  .modal .navbar-collapse:not(.order-first) .mega-menu.show > .dropdown-menu > li {width: 100%;}
  /*Offcanvas nav*/
  .navbar-collapse.offcanvas{ background-color: transparent !important; }
-  /* Sticky footer */
-  html{position: relative;min-height: 100%;}
-  body{margin-bottom: 60px;}
-  footer.site-footer{position: absolute;bottom: 0;width: 100%;min-height: 60px;}
 }
 
 /* ------------------------------------------------------------------------------------------------
