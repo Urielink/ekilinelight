@@ -221,11 +221,6 @@ function ekiline_custom_header_style() {
 	$hdr_txc    = get_option( 'chdrtxt_color', '#FFFFFF' );
 	$hdr_lkc    = get_option( 'chdrlks_color', '#FFFFFF' );
 	$range_head = get_theme_mod( 'ekiline_range_header', '40' );
-
-	// if ( '0' === $range_head ) {
-	// 	$range_head = '40';
-	// }
-
 	$hdr_style  = '#custom_header_module .wp-block-cover, #custom_header_module .wp-block-cover.has-background-dim::before{ background-color:' . esc_attr( $hdr_bgc ) . ';min-height:' . $range_head . 'vh; }';
 	$hdr_style .= '#custom_header_module .headline{color:' . esc_attr( $hdr_txc ) . ';}';
 	$hdr_style .= '#custom_header_module .headline a{color:' . esc_attr( $hdr_lkc ) . ';}';
