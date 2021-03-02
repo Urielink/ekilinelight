@@ -69,53 +69,71 @@ function theme_html_page() { ?>
 			<h2><?php esc_html_e( 'Thanks for using this theme!', 'ekiline' ); ?></h2>
 			<hr>
 			<p class="about-description">
-				<?php esc_html_e( 'Find more information to improve your skills in the personalization of your site.', 'ekiline' ); ?>
+				<?php esc_html_e( 'Find more information to improve your skills in customizing your site.', 'ekiline' ); ?>
 			</p>
 
 			<div class="welcome-panel-column-container">
 				<div class="welcome-panel-column">
 					<div style="padding:4px;">
-						<h3><?php esc_html_e( 'Get the definitive version, with more benefits for the distribution of your projects:', 'ekiline' ); ?></h3>
+						<h3><?php esc_html_e( 'Add an extra to the creation and delivery of your projects.', 'ekiline' ); ?></h3>
 						<ul>
 							<li><span class="dashicons dashicons-book dash-note"></span>
-								<?php esc_html_e( 'Quick use guide for your clients, in Keynote and Power Point format for editing.', 'ekiline' ); ?></li>
+								<?php esc_html_e( 'Quick use guide in Keynote or Powerpoint to freely customize and deliver to your clients.', 'ekiline' ); ?></li>
 							<li><span class="dashicons dashicons-edit dash-note"></span>
-								<?php esc_html_e( 'CSS complementary designs for general theme.', 'ekiline' ); ?></li>
+								<?php esc_html_e( 'More design elements, CSS, HTML and JS available to grow your project.', 'ekiline' ); ?></li>
 							<li><span class="dashicons dashicons-layout dash-note"></span>
-								<?php esc_html_e( 'HTML structures preloaded for use in publications.', 'ekiline' ); ?></li>
+								<?php esc_html_e( 'Ekiline Blocks, plugin with carousel and more options in page editor.', 'ekiline' ); ?></li>
 							<li><span class="dashicons dashicons-welcome-view-site dash-note"></span>
-								<?php esc_html_e( 'Complete theme, without external links, ads or tips.', 'ekiline' ); ?></li>
+								<?php esc_html_e( 'Complete clean theme, no warnings or messages.', 'ekiline' ); ?></li>
 						</ul>
 						<p>
 							<?php printf( '<a class="button button-primary button-hero" href="%1$s" target="_blank"><span class="dashicons dashicons-cart"></span> %2$s</a>', esc_url( 'https://ekiline.com/compra/' ), esc_html__( 'Buy and download', 'ekiline' ) ); ?>
 							<?php printf( '<a class="button button-primary button-hero gold" href="%1$s" target="_blank"><span class="dashicons dashicons-carrot"></span> %2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'FundMe', 'ekiline' ) ); ?>
 						</p>
 						<p>
-							<span class="dashicons dashicons-carrot"></span> <?php esc_html_e( 'You can also', 'ekiline' ); ?>
-							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'fund the development', 'ekiline' ) ); ?>
-							<?php esc_html_e( 'or', 'ekiline' ); ?>
-							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/gana/' ), esc_html__( 'earn money', 'ekiline' ) ); ?>
-							<?php esc_html_e( 'by helping.', 'ekiline' ); ?>
+							<?php 
+							printf( 
+								esc_html__( '%1$s with Ekiline and %2$s, %3$s.', 'ekiline' ),
+								'<a href="' . esc_url( 'https://ekiline.com/gana/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Make money', 'ekiline' ) . '</a>',
+								'<a href="' . esc_url( 'https://ekiline.com/fondeo/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'fund its development', 'ekiline' ) . '</a>',
+								'<a href="' . esc_url( 'https://ekiline.com/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'discover how', 'ekiline' ) . '</a>'
+							);
+							?>
 						</p>
 					</div>
 				</div>
 				<div class="welcome-panel-column">
 					<div style="padding:4px;">
-						<h3><?php esc_html_e( 'About', 'ekiline' ); ?></h3>
+						<h3><?php esc_html_e( 'About Ekiline', 'ekiline' ); ?></h3>
 						<p><?php esc_html_e( 'Ekiline simplifies the creation of a website with WordPress, it is a working method that brings together the standard practices of the internet industry, to facilitate the tasks of planning, design, development and optimization. For more information visit ekiline.com', 'ekiline' ); ?></p>
-						<p><strong><?php esc_html_e( 'Limited liability', 'ekiline' ); ?></strong></p>
-						<p><small><?php esc_html_e( 'As a courtesy, we provide information on how to use certain third-party products, but we do not directly support their use and we are not responsible for the functions, reliability or compatibility of such products. The names, trademarks and logos of third parties are registered trademarks of their respective owners.', 'ekiline' ); ?></small></p>
+						<h3><?php esc_html_e( 'About Uri Lazcano', 'ekiline' ); ?></h3>
+						<p>
+							<span style="float:left;"><?php echo ( function_exists('get_avatar') ) ? get_avatar( 'uriel@bixnia.com', $size = '60', $default = '' ) : ''; ?></span>
+							<?php esc_html_e( 'Frontend designer established in Mexico City. 10 years developing websites and 10 more years of experience in graphic design for advertising. Check my career and work.', 'ekiline' ); ?>
+						</p>
+						<p>
+							<?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://profiles.wordpress.org/urielink/' ), esc_html__( 'WordPress', 'ekiline' ) ); ?>
+							| <?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://github.com/Urielink' ), esc_html__( 'Github', 'ekiline' ) ); ?>
+							| <?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://www.linkedin.com/in/urielink/' ), esc_html__( 'Linkedin', 'ekiline' ) ); ?>
+							| <?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://www.behance.net/Urielink' ), esc_html__( 'Behance', 'ekiline' ) ); ?>
+							| <?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://bixnia.com' ), esc_html__( 'B I X N I A', 'ekiline' ) ); ?>
+						</p>
 					</div>
 				</div>
 				<div class="welcome-panel-column welcome-panel-last">
 					<div style="padding:4px;">
-						<h3><?php esc_html_e( 'Documentation', 'ekiline' ); ?></h3>
+						<h3>
+							<span class="dashicons dashicons-book dash-note"></span>
+							<?php esc_html_e( 'Ekiline docs', 'ekiline' ); ?>
+						</h3>
 						<ul>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/instala/' ), esc_html__( 'Installation', 'ekiline' ) ); ?></li>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/personaliza/' ), esc_html__( 'Personalization', 'ekiline' ) ); ?></li>
-							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/elementos/' ), esc_html__( 'Elements and shortcodes', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/instala/' ), esc_html__( 'Install', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/personaliza/' ), esc_html__( 'Customize', 'ekiline' ) ); ?></li>
+							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/elementos/' ), esc_html__( 'Elements and blocks', 'ekiline' ) ); ?></li>
 							<li><?php printf( '<a href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/compatible/' ), esc_html__( 'Compatibility', 'ekiline' ) ); ?></li>
 						</ul>
+						<p><small><strong><?php esc_html_e( 'Limited liability:', 'ekiline' ); ?></strong>
+						<?php esc_html_e( 'As a courtesy, we provide information on how to use certain third-party products, but we do not directly support their use and we are not responsible for the functions, reliability or compatibility of such products. The names, trademarks and logos of third parties are registered trademarks of their respective owners.', 'ekiline' ); ?></small></p>
 					</div>
 				</div>
 			</div>
@@ -184,7 +202,7 @@ function ekiline_docs_feed() {
 		the_widget( 'WP_Widget_RSS', $rss_instance, $rss_args );
 		?>
 		<div>
-			<?php printf( '<a class="button button-secondary"  href="%1$s">%2$s</a>', esc_url( 'themes.php?page=ekiline_options' ), esc_html__( 'About', 'ekiline' ) ); ?>
+			<?php printf( '<a class="button button-primary"  href="%1$s">%2$s</a>', esc_url( 'themes.php?page=ekiline_options' ), esc_html__( 'About', 'ekiline' ) ); ?>
 			<?php printf( '<a class="button button-primary"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/compra/' ), esc_html__( 'Get more', 'ekiline' ) ); ?>
 			<?php printf( '<a class="button button-primary gold"  href="%1$s" target="_blank">%2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'FundMe', 'ekiline' ) ); ?>
 		</div>
@@ -221,8 +239,10 @@ function ekiline_admin_styles() {
 	$extracss .= '.ekiline-notice { display:flex;justify-content: space-between;align-items: center; padding:10px; }';
 	$extracss .= '.ekiline-notice h2, .ekiline-notice ul, .ekiline-notice li{ margin:0px; }';
 	$extracss .= '.ekiline-notice h2{ margin-right:10px; }';
-	$extracss .= '.rss-admin-notice { margin:0px;display:flex;justify-content: space-between;align-items: center; }';
-	$extracss .= '.rss-admin-notice ul li { display:none; }';
+	$extracss .= '.rss-admin-notice{ margin:0px;display:flex;justify-content: space-between;align-items: center; }';
+	$extracss .= '.rss-admin-notice ul li{ display:none; }';
+	$extracss .= 'a[href^="themes.php?page=ekiline_options"]{background-color:#58aa03;color:#ffffff !important;}';
+	$extracss .= 'a[href^="themes.php?page=ekiline_options"]:hover{background-color:#ffb900 !important;}';
 	wp_add_inline_style( 'wp-admin', $extracss );
 }
 add_action( 'admin_enqueue_scripts', 'ekiline_admin_styles' );
