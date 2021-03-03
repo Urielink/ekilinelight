@@ -1,4 +1,4 @@
-=== Ekiline === 
+=== Ekiline ===
 Contributors: urielink
 Requires at least: 4.8
 Tested up to: 5.6
@@ -29,8 +29,6 @@ Also, I do not need regular updates, just your attention and dedication.
     4.6 Site View, set pages design. 1, 2 or 3 columns, per page or category.
 5. Extra: Ekiline has a script organizer, you decide which style or javascript files to load synchronously or asynchronously.
 
-
-
 == Frequently Asked Questions ==
 https://ekiline.com/faq
 
@@ -47,10 +45,8 @@ Ekiline includes support for Woocommerce.
 * Initial release
 
 == Upgrade Notice ==
-
 Ekiline includes support for Infinite Scroll in Jetpack.
 Ready translations, English and Spanish.
-
 
 == Copyright ==
 
