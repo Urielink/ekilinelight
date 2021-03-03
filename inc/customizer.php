@@ -99,8 +99,8 @@ function ekiline_theme_customizer( $wp_customize ) {
 		'ekiline_custom_signature',
 		array(
 			'type'        => 'text',
-			'label'       => __( 'Firma personalizada', 'ekiline' ),
-			'description' => __( 'Reemplaza u oculta los enlaces de manufactura.', 'ekiline' ),
+			'label'       => __( 'Custom signature', 'ekiline' ),
+			'description' => __( 'Replace links in footer copyright.', 'ekiline' ),
 			'section'     => 'title_tagline',
 			'priority'    => 100,
 		)

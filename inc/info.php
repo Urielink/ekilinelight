@@ -91,8 +91,9 @@ function theme_html_page() { ?>
 							<?php printf( '<a class="button button-primary button-hero gold" href="%1$s" target="_blank"><span class="dashicons dashicons-carrot"></span> %2$s</a>', esc_url( 'https://ekiline.com/fondeo/' ), esc_html__( 'FundMe', 'ekiline' ) ); ?>
 						</p>
 						<p>
-							<?php 
-							printf( 
+							<?php
+							printf(
+								/* translators: %1$s is replaced with links data */
 								esc_html__( '%1$s with Ekiline and %2$s, %3$s.', 'ekiline' ),
 								'<a href="' . esc_url( 'https://ekiline.com/gana/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'Make money', 'ekiline' ) . '</a>',
 								'<a href="' . esc_url( 'https://ekiline.com/fondeo/' ) . '" target="_blank" rel="noopener">' . esc_html__( 'fund its development', 'ekiline' ) . '</a>',
@@ -108,7 +109,7 @@ function theme_html_page() { ?>
 						<p><?php esc_html_e( 'Ekiline simplifies the creation of a website with WordPress, it is a working method that brings together the standard practices of the internet industry, to facilitate the tasks of planning, design, development and optimization. For more information visit ekiline.com', 'ekiline' ); ?></p>
 						<h3><?php esc_html_e( 'About Uri Lazcano', 'ekiline' ); ?></h3>
 						<p>
-							<span style="float:left;"><?php echo ( function_exists('get_avatar') ) ? get_avatar( 'uriel@bixnia.com', $size = '60', $default = '' ) : ''; ?></span>
+							<span style="float:left;"><?php echo ( function_exists( 'get_avatar' ) ) ? get_avatar( 'uriel@bixnia.com', $size = '60', $default = '' ) : ''; ?></span>
 							<?php esc_html_e( 'Frontend designer established in Mexico City. 10 years developing websites and 10 more years of experience in graphic design for advertising. Check my career and work.', 'ekiline' ); ?>
 						</p>
 						<p>

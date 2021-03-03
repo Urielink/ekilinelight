@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Ekiline\n"
-"POT-Creation-Date: 2020-11-30 22:03-0600\n"
-"PO-Revision-Date: 2020-11-30 21:55-0600\n"
+"POT-Creation-Date: 2021-03-02 21:08-0600\n"
+"PO-Revision-Date: 2021-03-02 20:46-0600\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -48,21 +48,21 @@ msgstr ""
 msgid "&copy; Copyright %1$s. "
 msgstr ""
 
-#: footer.php:31
+#: footer.php:35
 #, php-format
 msgid "Proudly powered by %1$s and %2$s. "
 msgstr ""
 
-#: footer.php:31
+#: footer.php:35 inc/info.php:116
 msgid "WordPress"
 msgstr ""
 
 #. Theme Name of the plugin/theme
-#: footer.php:31 inc/info.php:28
+#: footer.php:35 inc/info.php:28
 msgid "Ekiline"
 msgstr ""
 
-#: footer.php:33
+#: footer.php:41
 msgid "Back"
 msgstr ""
 
@@ -104,6 +104,10 @@ msgstr ""
 
 #: functions.php:184
 msgid "In navbar menu"
+msgstr ""
+
+#: functions.php:254
+msgid "No styles found, check file"
 msgstr ""
 
 #: inc/class-ekiline-basic-breadcrumb.php:23
@@ -158,8 +162,8 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: inc/customizer.php:52 inc/customizer.php:107 inc/customizer.php:130
-#: inc/customizer.php:244 inc/widget-options.php:114
+#: inc/customizer.php:52 inc/customizer.php:131 inc/customizer.php:154
+#: inc/customizer.php:268 inc/widget-options.php:114
 msgid "Default"
 msgstr ""
 
@@ -176,152 +180,160 @@ msgid "Replace navbar brand with site icon in small devices"
 msgstr ""
 
 #: inc/customizer.php:102
-msgid "Primary menu settings"
+msgid "Custom signature"
 msgstr ""
 
 #: inc/customizer.php:103
+msgid "Replace links in footer copyright."
+msgstr ""
+
+#: inc/customizer.php:126
+msgid "Primary menu settings"
+msgstr ""
+
+#: inc/customizer.php:127
 msgid "Assign positions to the menu: top, fixed or bottom"
 msgstr ""
 
-#: inc/customizer.php:108
+#: inc/customizer.php:132
 msgid "Fixed top"
 msgstr ""
 
-#: inc/customizer.php:109
+#: inc/customizer.php:133
 msgid "Fixed bottom"
 msgstr ""
 
-#: inc/customizer.php:110
+#: inc/customizer.php:134
 msgid "Fixed with scroll"
 msgstr ""
 
-#: inc/customizer.php:131
+#: inc/customizer.php:155
 msgid "Right"
 msgstr ""
 
-#: inc/customizer.php:132
+#: inc/customizer.php:156
 msgid "Centered"
 msgstr ""
 
-#: inc/customizer.php:133
+#: inc/customizer.php:157
 msgid "Centered between"
 msgstr ""
 
-#: inc/customizer.php:134
+#: inc/customizer.php:158
 msgid "Scroller"
 msgstr ""
 
-#: inc/customizer.php:135
+#: inc/customizer.php:159
 msgid "Offcanvas (responsive)"
 msgstr ""
 
-#: inc/customizer.php:136
+#: inc/customizer.php:160
 msgid "Top toggle"
 msgstr ""
 
-#: inc/customizer.php:137 inc/widget-options.php:116
+#: inc/customizer.php:161 inc/widget-options.php:116
 msgid "Modal"
 msgstr ""
 
-#: inc/customizer.php:138
+#: inc/customizer.php:162
 msgid "Modal from bottom"
 msgstr ""
 
-#: inc/customizer.php:139
+#: inc/customizer.php:163
 msgid "Modal from left"
 msgstr ""
 
-#: inc/customizer.php:140
+#: inc/customizer.php:164
 msgid "Modal from right"
 msgstr ""
 
-#: inc/customizer.php:155
+#: inc/customizer.php:179
 msgid "Site view"
 msgstr ""
 
-#: inc/customizer.php:157
+#: inc/customizer.php:181
 msgid ""
 "Allow fullwidth of your website by content type: homepage, categories or "
 "single content"
 msgstr ""
 
-#: inc/customizer.php:165
+#: inc/customizer.php:189
 msgid "Home and blog page"
 msgstr ""
 
-#: inc/customizer.php:169
+#: inc/customizer.php:193
 msgid "Categories and archive pages"
 msgstr ""
 
-#: inc/customizer.php:173
+#: inc/customizer.php:197
 msgid "Entries and single pages"
 msgstr ""
 
-#: inc/customizer.php:179
+#: inc/customizer.php:203
 msgid "WooCommerce pages"
 msgstr ""
 
-#: inc/customizer.php:200
+#: inc/customizer.php:224
 msgid "Enabled sidebars"
 msgstr ""
 
-#: inc/customizer.php:201
+#: inc/customizer.php:225
 msgid "Disable left"
 msgstr ""
 
-#: inc/customizer.php:202
+#: inc/customizer.php:226
 msgid "Disable right"
 msgstr ""
 
-#: inc/customizer.php:203
+#: inc/customizer.php:227
 msgid "Disable both"
 msgstr ""
 
-#: inc/customizer.php:220
+#: inc/customizer.php:244
 msgid "Show full width layout"
 msgstr ""
 
-#: inc/customizer.php:240
+#: inc/customizer.php:264
 msgid "Columns"
 msgstr ""
 
-#: inc/customizer.php:241
+#: inc/customizer.php:265
 msgid "Show your lists in columns"
 msgstr ""
 
-#: inc/customizer.php:245
+#: inc/customizer.php:269
 msgid "2 columns"
 msgstr ""
 
-#: inc/customizer.php:246
+#: inc/customizer.php:270
 msgid "3 columns"
 msgstr ""
 
-#: inc/customizer.php:247
+#: inc/customizer.php:271
 msgid "4 columns"
 msgstr ""
 
-#: inc/customizer.php:248
+#: inc/customizer.php:272
 msgid "Cards grid"
 msgstr ""
 
-#: inc/customizer.php:266
+#: inc/customizer.php:290
 msgid "In page meta"
 msgstr ""
 
-#: inc/customizer.php:267
+#: inc/customizer.php:291
 msgid "Show meta data in pages, author, date, tags."
 msgstr ""
 
-#: inc/customizer.php:285
+#: inc/customizer.php:309
 msgid "In page pagination"
 msgstr ""
 
-#: inc/customizer.php:286
+#: inc/customizer.php:310
 msgid "Enable pagination between pages."
 msgstr ""
 
-#: inc/info.php:46
+#: inc/info.php:46 inc/info.php:108
 msgid "About Ekiline"
 msgstr ""
 
@@ -334,68 +346,57 @@ msgid "Thanks for using this theme!"
 msgstr ""
 
 #: inc/info.php:72
-msgid ""
-"Find more information to improve your skills in the personalization of your "
-"site."
+msgid "Find more information to improve your skills in customizing your site."
 msgstr ""
 
 #: inc/info.php:78
-msgid ""
-"Get the definitive version, with more benefits for the distribution of your "
-"projects:"
+msgid "Add an extra to the creation and delivery of your projects."
 msgstr ""
 
 #: inc/info.php:81
 msgid ""
-"Quick use guide for your clients, in Keynote and Power Point format for "
-"editing."
+"Quick use guide in Keynote or Powerpoint to freely customize and deliver to "
+"your clients."
 msgstr ""
 
 #: inc/info.php:83
-msgid "CSS complementary designs for general theme."
+msgid "More design elements, CSS, HTML and JS available to grow your project."
 msgstr ""
 
 #: inc/info.php:85
-msgid "HTML structures preloaded for use in publications."
+msgid "Ekiline Blocks, plugin with carousel and more options in page editor."
 msgstr ""
 
 #: inc/info.php:87
-msgid "Complete theme, without external links, ads or tips."
+msgid "Complete clean theme, no warnings or messages."
 msgstr ""
 
 #: inc/info.php:90
 msgid "Buy and download"
 msgstr ""
 
-#: inc/info.php:91 inc/info.php:189
+#: inc/info.php:91 inc/info.php:208
 msgid "FundMe"
 msgstr ""
 
-#: inc/info.php:94
-msgid "You can also"
-msgstr ""
-
-#: inc/info.php:95
-msgid "fund the development"
-msgstr ""
-
-#: inc/info.php:96
-msgid "or"
-msgstr ""
-
 #: inc/info.php:97
-msgid "earn money"
+#, php-format
+msgid "%1$s with Ekiline and %2$s, %3$s."
 msgstr ""
 
 #: inc/info.php:98
-msgid "by helping."
+msgid "Make money"
 msgstr ""
 
-#: inc/info.php:104 inc/info.php:187
-msgid "About"
+#: inc/info.php:99
+msgid "fund its development"
 msgstr ""
 
-#: inc/info.php:105
+#: inc/info.php:100
+msgid "discover how"
+msgstr ""
+
+#: inc/info.php:109
 msgid ""
 "Ekiline simplifies the creation of a website with WordPress, it is a working "
 "method that brings together the standard practices of the internet industry, "
@@ -403,11 +404,58 @@ msgid ""
 "For more information visit ekiline.com"
 msgstr ""
 
-#: inc/info.php:106
-msgid "Limited liability"
+#: inc/info.php:110
+msgid "About Uri Lazcano"
 msgstr ""
 
-#: inc/info.php:107
+#: inc/info.php:113
+msgid ""
+"Frontend designer established in Mexico City. 10 years developing websites "
+"and 10 more years of experience in graphic design for advertising. Check my "
+"career and work."
+msgstr ""
+
+#: inc/info.php:117
+msgid "Github"
+msgstr ""
+
+#: inc/info.php:118
+msgid "Linkedin"
+msgstr ""
+
+#: inc/info.php:119
+msgid "Behance"
+msgstr ""
+
+#: inc/info.php:120 inc/info.php:155
+msgid "B I X N I A"
+msgstr ""
+
+#: inc/info.php:128
+msgid "Ekiline docs"
+msgstr ""
+
+#: inc/info.php:131
+msgid "Install"
+msgstr ""
+
+#: inc/info.php:132
+msgid "Customize"
+msgstr ""
+
+#: inc/info.php:133
+msgid "Elements and blocks"
+msgstr ""
+
+#: inc/info.php:134
+msgid "Compatibility"
+msgstr ""
+
+#: inc/info.php:136
+msgid "Limited liability:"
+msgstr ""
+
+#: inc/info.php:137
 msgid ""
 "As a courtesy, we provide information on how to use certain third-party "
 "products, but we do not directly support their use and we are not "
@@ -416,152 +464,132 @@ msgid ""
 "trademarks of their respective owners."
 msgstr ""
 
-#: inc/info.php:112
-msgid "Documentation"
-msgstr ""
-
-#: inc/info.php:114
-msgid "Installation"
-msgstr ""
-
-#: inc/info.php:115
-msgid "Personalization"
-msgstr ""
-
-#: inc/info.php:116
-msgid "Elements and shortcodes"
-msgstr ""
-
-#: inc/info.php:117
-msgid "Compatibility"
-msgstr ""
-
-#: inc/info.php:133
+#: inc/info.php:152
 #, php-format
 msgid "&copy; Copyright %1$s Ekiline"
 msgstr ""
 
-#: inc/info.php:135
+#: inc/info.php:154
 msgid "All rights reserved. Ekiline developed by"
 msgstr ""
 
-#: inc/info.php:136
-msgid "B I X N I A"
+#: inc/info.php:206
+msgid "About"
 msgstr ""
 
-#: inc/info.php:188
+#: inc/info.php:207
 msgid "Get more"
 msgstr ""
 
-#: inc/theme-blockeditor.php:38
+#: inc/theme-blockeditor.php:39
 msgid "Primary"
 msgstr ""
 
-#: inc/theme-blockeditor.php:43
+#: inc/theme-blockeditor.php:44
 msgid "Secondary"
 msgstr ""
 
-#: inc/theme-blockeditor.php:48
+#: inc/theme-blockeditor.php:49
 msgid "Success"
 msgstr ""
 
-#: inc/theme-blockeditor.php:53
+#: inc/theme-blockeditor.php:54
 msgid "Danger"
 msgstr ""
 
-#: inc/theme-blockeditor.php:58
+#: inc/theme-blockeditor.php:59
 msgid "Warning"
 msgstr ""
 
-#: inc/theme-blockeditor.php:63
+#: inc/theme-blockeditor.php:64
 msgid "Info"
 msgstr ""
 
-#: inc/theme-blockeditor.php:68
+#: inc/theme-blockeditor.php:69
 msgid "Light"
 msgstr ""
 
-#: inc/theme-blockeditor.php:73
+#: inc/theme-blockeditor.php:74
 msgid "Dark"
 msgstr ""
 
-#: inc/theme-blockeditor.php:83
+#: inc/theme-blockeditor.php:84
 msgid "Vivid cyan blue to vivid purple"
 msgstr ""
 
-#: inc/theme-blockeditor.php:88
+#: inc/theme-blockeditor.php:89
 msgid "Vivid green cyan to vivid cyan blue"
 msgstr ""
 
-#: inc/theme-blockeditor.php:93
+#: inc/theme-blockeditor.php:94
 msgid "Light green cyan to vivid green cyan"
 msgstr ""
 
-#: inc/theme-blockeditor.php:98
+#: inc/theme-blockeditor.php:99
 msgid "Luminous vivid amber to luminous vivid orange"
 msgstr ""
 
-#: inc/theme-blockeditor.php:103
+#: inc/theme-blockeditor.php:104
 msgid "Luminous vivid orange to vivid red"
 msgstr ""
 
-#: inc/theme-blockeditor.php:113
+#: inc/theme-blockeditor.php:114
 msgid "Small"
 msgstr ""
 
-#: inc/theme-blockeditor.php:118
+#: inc/theme-blockeditor.php:119
 msgid "Regular"
 msgstr ""
 
-#: inc/theme-blockeditor.php:123
+#: inc/theme-blockeditor.php:124
 msgid "Medium"
 msgstr ""
 
-#: inc/theme-blockeditor.php:128
+#: inc/theme-blockeditor.php:129
 msgid "Large"
 msgstr ""
 
-#: inc/theme-blockeditor.php:133
+#: inc/theme-blockeditor.php:134
 msgid "Huge"
 msgstr ""
 
-#: inc/theme-blockeditor.php:139
+#: inc/theme-blockeditor.php:140
 msgid "H1"
 msgstr ""
 
-#: inc/theme-blockeditor.php:144
+#: inc/theme-blockeditor.php:145
 msgid "H2"
 msgstr ""
 
-#: inc/theme-blockeditor.php:149
+#: inc/theme-blockeditor.php:150
 msgid "H3"
 msgstr ""
 
-#: inc/theme-blockeditor.php:154
+#: inc/theme-blockeditor.php:155
 msgid "H4"
 msgstr ""
 
-#: inc/theme-blockeditor.php:159
+#: inc/theme-blockeditor.php:160
 msgid "H5"
 msgstr ""
 
-#: inc/theme-blockeditor.php:164
+#: inc/theme-blockeditor.php:165
 msgid "H6"
 msgstr ""
 
-#: inc/theme-blockeditor.php:170
+#: inc/theme-blockeditor.php:171
 msgid "D1"
 msgstr ""
 
-#: inc/theme-blockeditor.php:175
+#: inc/theme-blockeditor.php:176
 msgid "D2"
 msgstr ""
 
-#: inc/theme-blockeditor.php:180
+#: inc/theme-blockeditor.php:181
 msgid "D3"
 msgstr ""
 
-#: inc/theme-blockeditor.php:185
+#: inc/theme-blockeditor.php:186
 msgid "D4"
 msgstr ""
 
@@ -692,43 +720,39 @@ msgid ""
 "Recommended formats: MP4, WEBM or OGV, your header image conserves as poster"
 msgstr ""
 
-#: inc/theme-customheader.php:200
-msgid "Default header image"
-msgstr ""
-
-#: inc/theme-customheader.php:322 template-parts/content-article.php:56
-#: template-parts/content-card.php:31
+#: inc/theme-customheader.php:326 template-parts/content-article.php:56
+#: template-parts/content-card.php:33
 #, php-format
 msgid "Categories: %s"
 msgstr ""
 
-#: inc/theme-customheader.php:328 template-parts/content-article.php:63
+#: inc/theme-customheader.php:332 template-parts/content-article.php:63
 #, php-format
 msgid "Tags: %s"
 msgstr ""
 
-#: inc/theme-customheader.php:359 template-parts/content-article.php:23
+#: inc/theme-customheader.php:363 template-parts/content-article.php:22
 #, php-format
 msgctxt "post authors"
 msgid "Written by %s"
 msgstr ""
 
-#: inc/theme-customheader.php:381 template-parts/content-headline.php:70
+#: inc/theme-customheader.php:385 template-parts/content-headline.php:70
 #, php-format
 msgid "%s results found."
 msgstr ""
 
-#: inc/theme-customheader.php:383 template-parts/content-headline.php:64
+#: inc/theme-customheader.php:387 template-parts/content-headline.php:64
 #: template-parts/searchform.php:24
 #, php-format
 msgid "Search Results for: %s"
 msgstr ""
 
-#: inc/theme-customheader.php:387
+#: inc/theme-customheader.php:391
 msgid "It looks like nothing was found at this location."
 msgstr ""
 
-#: inc/theme-customheader.php:388
+#: inc/theme-customheader.php:392
 msgid "Maybe try one of the links below or a search?"
 msgstr ""
 
@@ -785,8 +809,16 @@ msgstr ""
 msgid "There are %1$s entries related to %2$s"
 msgstr ""
 
-#: inc/theme-navbars.php:306
+#: inc/theme-navbars.php:301
 msgid "Assign a menu!"
+msgstr ""
+
+#: inc/theme-navbars.php:304
+msgid "Login"
+msgstr ""
+
+#: inc/theme-navbars.php:315
+msgid "Theme help"
 msgstr ""
 
 #: inc/theme-optimizescripts.php:26
@@ -932,34 +964,34 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: template-parts/content-article.php:28
+#: template-parts/content-article.php:27
 #, php-format
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr ""
 
-#: template-parts/content-article.php:28 template-parts/content-article.php:33
+#: template-parts/content-article.php:27 template-parts/content-article.php:32
 msgid "F j, Y"
 msgstr ""
 
-#: template-parts/content-article.php:33
+#: template-parts/content-article.php:32
 #, php-format
 msgid "Updated on %s"
 msgstr ""
 
-#: template-parts/content-article.php:37
+#: template-parts/content-article.php:36
 msgid "No comments yet"
 msgstr ""
 
-#: template-parts/content-article.php:37
+#: template-parts/content-article.php:36
 msgid "1 Comment"
 msgstr ""
 
-#: template-parts/content-article.php:37
+#: template-parts/content-article.php:36
 msgid "% Comments"
 msgstr ""
 
-#: template-parts/content-article.php:37
+#: template-parts/content-article.php:36
 msgid "Comments are closed."
 msgstr ""
 
@@ -1011,5 +1043,5 @@ msgid "Uri Lazcano (Urielink)"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://www.linkedin.com/in/urielink"
+msgid "https://profiles.wordpress.org/urielink/"
 msgstr ""
