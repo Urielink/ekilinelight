@@ -1,27 +1,35 @@
 === Ekiline === 
 Contributors: urielink
-Donate link: https://www.paypal.com/paypalme/urielink
-Tags: one-column, two-columns, three-columns, left-sidebar, right-sidebar, grid-layout, flexible-header, custom-background, custom-colors, custom-header, custom-menu, custom-logo, featured-image-header, featured-images, footer-widgets, full-width-template, microformats, theme-options, translation-ready, blog, e-commerce, portfolio
-Requires at least: WordPress 4.8
-Tested up to: WordPress 5.4
+Requires at least: 4.8
+Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: trunk
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/license-list.html#GPLv2
+Donate link: https://www.paypal.com/paypalme/urielink
 
 A starter theme called ekiline.
 
 == Description ==
 Hello! I am ekiline, a wordpress theme created the easy development of a website.
 My developer and designer (@Urielink) has used all his experience and enthusiasm to facilitate the process of customizing a site using WordPress.
-With me you can build from a simple site to a very robust one like news blog or e-commerce, without saturating your wordpress installation with plugins.
-All my components are coordinated to become a site optimized for search engines, I am responsive, fast loading and I have galleries and many tools that you will love.
+With me you can build from a simple site to a very robust one like news blog or e-commerce.
+All my components are coordinated to become a site optimized for search engines, responsive, fast loading and I have galleries and many tools that you will love.
 Also, I do not need regular updates, just your attention and dedication.
 
 == Installation ==
 1. In your admin panel, go to Appearance > Themes and click the Add New button.
 2. Click Upload Theme and Choose File, then select the theme's .zip file. Click Install Now.
 3. Click Activate to use your new theme right away.
+4. Go to the customizer and configure website layout:
+    4.1 Homepage Settings, select your home page.
+    4.2 Site Identity, add your brand and brand icon.
+    4.3 Colors, set site color palette or choose colors by elements. These colors will also be shown in the block editor.
+    4.4 Header Image, Ekiline has 2 preloaded images.
+    4.5 Menus, choose how to display it there are many combinations for your design.
+    4.6 Site View, set pages design. 1, 2 or 3 columns, per page or category.
+5. Extra: Ekiline has a script organizer, you decide which style or javascript files to load synchronously or asynchronously.
+
+
 
 == Frequently Asked Questions ==
 https://ekiline.com/faq
@@ -32,21 +40,16 @@ Ekiline includes support for Woocommerce.
 
 == Changelog ==
 
-= 4.0 - August 01, 2020 =
+= 1.1 - March 02, 2021 =
 * New release
 
-= 1.0 - May 01 2017 =
+= 1.0 - February 07, 2021 =
 * Initial release
 
 == Upgrade Notice ==
 
 Ekiline includes support for Infinite Scroll in Jetpack.
-
-== Screenshots ==
-
-1. Image 01. https://ekiline.com/wp-content/uploads/2017/05/customizer-imagen-de-cabecera-seleccion.png
-2. Image 02.
-
+Ready translations, English and Spanish.
 
 
 == Copyright ==
