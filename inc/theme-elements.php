@@ -165,7 +165,8 @@ function ekiline_content_additions( $content ) {
 			$css_class = 'more-link btn btn-primary btn-block mt-2';
 		}
 		/* translators: screenread only %s is replaced with title */
-		$link = '... <a class="' . $css_class . '" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
+		$tittle = sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) );
+		$link   = '... <a class="' . $css_class . '" href="' . get_permalink() . '" aria-label="' . $tittle . '">' . $tittle . '</a>';
 
 		if ( strpos( $post->post_content, '<!--more-->' ) ) {
 			$content = $content;
