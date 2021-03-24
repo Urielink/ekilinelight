@@ -287,16 +287,16 @@
 .modal.right-aside .modal-content{height:100%;overflow-y:auto;}
 .modal.left-aside .modal-body,
 .modal.right-aside .modal-body{padding:15px 15px 80px;}
-.modal.left-aside.fade .modal-dialog{left:-320px;-webkit-transition:opacity 0.3s linear,left 0.3s ease-out;-moz-transition:opacity 0.3s linear,left 0.3s ease-out;-o-transition:opacity 0.3s linear,left 0.3s ease-out;transition:opacity 0.3s linear,left 0.3s ease-out;}
+.modal.left-aside.fade .modal-dialog{left:-320px;-webkit-transition:opacity 0.3s linear,left 0.3s ease-out;-moz-transition:opacity 0.3s linear,left 0.3s ease-out;-o-transition:opacity 0.3s linear,left 0.3s ease-out;transition:opacity 0.3s linear,left 0.3s ease-out;transform: translate(0,0px);}
 .modal.left-aside.fade.show .modal-dialog{left:0;}
-.modal.right-aside.fade .modal-dialog{right:-320px;-webkit-transition:opacity 0.3s linear,right 0.3s ease-out;-moz-transition:opacity 0.3s linear,right 0.3s ease-out;-o-transition:opacity 0.3s linear,right 0.3s ease-out;transition:opacity 0.3s linear,right 0.3s ease-out;}
+.modal.right-aside.fade .modal-dialog{right:-320px;-webkit-transition:opacity 0.3s linear,right 0.3s ease-out;-moz-transition:opacity 0.3s linear,right 0.3s ease-out;-o-transition:opacity 0.3s linear,right 0.3s ease-out;transition:opacity 0.3s linear,right 0.3s ease-out;transform: translate(0,0px);}
 .modal.right-aside.fade.show .modal-dialog{right:0;}
 /** Modal inferior **/
-.modal.move-from-bottom .modal-dialog{position:fixed;left:0;right:0;bottom:0;margin:0px auto;height:60%;}
+.modal.move-from-bottom .modal-dialog{position:fixed;left:0;right:0;bottom:0;margin:0px auto;height:60%;transform: translate(0,50px) !important;}
+.modal.move-from-bottom.fade.show .modal-dialog{transform: translate(0,0px) !important;}
 .modal.move-from-bottom .modal-content{height:100%;overflow-y:auto;}
   /*Full modal*/
   .modal,.modal-dialog,.modal-content,.modal-body{-webkit-transition:all .6s ease-in-out !important;-moz-transition:all .6s ease-in-out !important;-ms-transition:all .6s ease-out !important;-o-transition:all .6s ease-in-out !important;transition:all .6s ease-in-out !important;}
-  /* .modal-full .modal,.modal-full .modal-body{padding:0px !important;} */
   .modal-full .modal-dialog{width:100%;max-width:100%;margin:0px auto;}
   .modal-full .modal,.modal-full .modal .modal-dialog,.modal-full .modal .modal-content,.modal-full .modal .modal-body{height:100%;}
   .modal-full .modal-backdrop{opacity:.9;}
