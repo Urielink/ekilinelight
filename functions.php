@@ -274,7 +274,6 @@ function ekiline_scripts() {
 	// Scripts.
 	wp_enqueue_script( 'jquery-core' );
 	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.bundle.min.js', array( 'jquery' ), '4', true );
-	wp_enqueue_script( 'ekiline-swipe', get_template_directory_uri() . '/assets/js/carousel-swipe.min.js', array( 'jquery' ), '20150716', true );
 	wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array( 'jquery' ), '20151226', true );
 	// Comentarios.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
