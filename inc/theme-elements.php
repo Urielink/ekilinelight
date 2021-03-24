@@ -28,7 +28,7 @@ function ekiline_localize_extra_terms() {
  */
 function override_read_more_link() {
 	/* translators: screenread only %s is replaced with title */
-	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
+	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading %s: ', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
 }
 add_filter( 'the_content_more_link', 'override_read_more_link' );
 
@@ -165,7 +165,7 @@ function ekiline_content_additions( $content ) {
 			$css_class = 'more-link btn btn-primary btn-block mt-2';
 		}
 		/* translators: screenread only %s is replaced with title */
-		$tittle = sprintf( esc_html__( 'Continue reading %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) );
+		$tittle = sprintf( esc_html__( 'Continue reading %s: ', 'ekiline' ), wp_strip_all_tags( get_the_title() ) );
 		$link   = '... <a class="' . $css_class . '" href="' . get_permalink() . '" aria-label="' . $tittle . '">' . $tittle . '</a>';
 
 		if ( strpos( $post->post_content, '<!--more-->' ) ) {
@@ -383,7 +383,7 @@ function ekiline_pagination() {
 		}
 	}
 
-	$the_pages .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="Page navigation">';
+	$the_pages .= '<nav id="page-navigation" class="d-flex justify-content-center w-100" aria-label="' . esc_attr( 'Page navigation', 'ekiline' ) . '">';
 	$the_pages .= '<ul class="pagination justify-content-between">';
 	$the_pages .= $prev_link;
 	$the_pages .= $next_link;

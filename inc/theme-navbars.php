@@ -151,7 +151,7 @@ function ekiline_navbar_menu( $nav_position ) {
 
 			<?php dynamic_sidebar( 'navbar-w1' ); ?>
 
-			<button class="<?php echo esc_attr( $toggle_btn ); ?>" type="button" data-toggle="<?php echo esc_attr( $datatoggle ); ?>" data-target="#<?php echo esc_attr( $datatarget ); ?>" aria-label="Toggle navigation">
+			<button class="<?php echo esc_attr( $toggle_btn ); ?>" type="button" data-toggle="<?php echo esc_attr( $datatoggle ); ?>" data-target="#<?php echo esc_attr( $datatarget ); ?>" aria-label="<?php esc_attr_e( 'Toggle navigation' , 'ekiline' ); ?>">
 				<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 			</button>
 
@@ -160,7 +160,7 @@ function ekiline_navbar_menu( $nav_position ) {
 			<div id="<?php echo esc_attr( $datatarget ); ?>" class="<?php echo esc_attr( $collapse_css ); ?>">
 
 			<?php if ( '5' === $styles ) { ?>
-				<button class="<?php echo esc_attr( $toggle_btn ); ?>" type="button" data-toggle="<?php echo esc_attr( $datatoggle ); ?>" data-target="#<?php echo esc_attr( $datatarget ); ?>" aria-label="Toggle navigation">
+				<button class="<?php echo esc_attr( $toggle_btn ); ?>" type="button" data-toggle="<?php echo esc_attr( $datatoggle ); ?>" data-target="#<?php echo esc_attr( $datatarget ); ?>" aria-label="<?php esc_attr_e( 'Toggle navigation' , 'ekiline' ); ?>">
 					<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 				</button>
 			<?php } ?>
@@ -232,20 +232,20 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 <div id="<?php echo esc_attr( $modal_id ); ?>" class="<?php echo esc_attr( $modal_css ); ?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<!-- <div class="modal-header">
-				<h3 class="modal-title" id="navModalLabel"><?php echo esc_html( get_bloginfo( 'name', 'display' ) ); ?></h3>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<div class="modal-header d-none">
+				<strong class="modal-title" id="navModalLabel"><?php echo esc_html( get_bloginfo( 'name', 'display' ) ); ?></strong>
+				<button type="button" class="close" data-dismiss="modal" aria-label="<?php esc_attr_e( 'Close' , 'ekiline' ); ?>">
 					<span aria-hidden="true">&times;</span>
 				</button>
-			</div> -->
+			</div>
 			<div class="modal-body navbar-light bg-light">
 
 				<div class="btn-group float-right">
-					<button type="button" class="modal-resize btn btn-sm btn-outline-secondary" aria-label="Modal size">
+					<button type="button" class="modal-resize btn btn-sm btn-outline-secondary" aria-label="<?php esc_attr_e( 'Modal size' , 'ekiline' ); ?>">
 						<span>&leftarrow;</span>
 						<span>&rightarrow;</span>
 					</button>
-					<button type="button" class="navbar-toggler m-0 btn btn-sm btn-outline-secondary" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="navbar-toggler m-0 btn btn-sm btn-outline-secondary" data-dismiss="modal" aria-label="<?php esc_attr_e( 'Close' , 'ekiline' ); ?>">
 						<span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 					</button>
 				</div>
