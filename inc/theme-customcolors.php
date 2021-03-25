@@ -12,9 +12,6 @@
  */
 function ekiline_custom_color_controls( $wp_customize ) {
 
-	// Colores, reemplazar el controlador de color de fondo.
-	$wp_customize->remove_control( 'background_color' ); // se remueve el controlador.
-
 	// Colores, agregar un panel con subsecciones: https://developer.wordpress.org/themes/customize-api/customizer-objects/.
 	$wp_customize->add_panel(
 		'ekiline_ThemeColors',
@@ -41,18 +38,25 @@ function ekiline_custom_color_controls( $wp_customize ) {
 		)
 	);
 
+	// Colores, reasignar el controlador de color de fondo.
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'background_color',
+			array(
+				'label'      => __( 'Background color and text', 'ekiline' ),
+				'description' => '',
+				'priority'    => 20,
+				'section'    => 'colors_extended',
+				'settings'   => 'background_color',
+			)
+		)
+	);
+
 	// Colores base.
 	$colors = array();
 
 	// Pagina.
-	$colors[] = array(
-		'slug'        => 'back_color',
-		'default'     => '#ffffff',
-		'label'       => __( 'Background color and text', 'ekiline' ),
-		'description' => '',
-		'priority'    => 20,
-		'section'     => 'colors_extended',
-	);
 	$colors[] = array(
 		'slug'        => 'text_color',
 		'default'     => '#333333',
@@ -322,8 +326,8 @@ function ekiline_page_elements() {
 function ekiline_custom_background_cb() {
 	// Imagen de fondo.
 	$background = set_url_scheme( get_background_image() );
-	// Color de fondo Ekiline, reemplaza a default ( $color = get_background_color();).
-	$color = get_option( 'back_color' );
+	// Color de fondo 
+	$color = get_option( 'background_color' );
 
 	if ( get_theme_support( 'custom-background', 'default-color' ) === $color ) {
 		$color = false;

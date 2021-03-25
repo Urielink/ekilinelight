@@ -1,7 +1,7 @@
 /* Ekiline for WordPress Theme, Copyright 2018 Uri Lazcano. Ekiline is distributed under the terms of the GNU GPL. http://ekiline.com */
 jQuery(document).ready(function($){
 
-	// console.log('hola ' + wp.customize.value('back_color')() );
+	// console.log('hola ' + wp.customize.value('background_color')() );
 
 	// 1) renombrar cada color, segun el metodo de extracción.
 	var misColores = [
@@ -13,7 +13,7 @@ jQuery(document).ready(function($){
 		{txt:'info',id:'b4_info'},
 		{txt:'light',id:'b4_light'},
 		{txt:'dark',id:'b4_dark'},
-		{txt:'background',id:'back_color'},
+		{txt:'background',id:'background_color'},
 		{txt:'text',id:'text_color'}
 	];
 

@@ -13,12 +13,6 @@
  */
 function ekiline_custom_header_controls( $wp_customize ) {
 
-	// Accion: Reemplazar el controlador de color de fondo.
-	// Remueve el controlador.
-	$wp_customize->remove_control( 'header_textcolor' );
-	// No es necesario ocultar los textos.
-	$wp_customize->remove_control( 'display_header_text' );
-
 	// Colores.
 	$colors   = array();
 	$colors[] = array(
@@ -225,6 +219,12 @@ function ekiline_custom_header_style() {
 	$hdr_style .= '#custom_header_module .headline{color:' . esc_attr( $hdr_txc ) . ';}';
 	$hdr_style .= '#custom_header_module .headline a{color:' . esc_attr( $hdr_lkc ) . ';}';
 	$hdr_style .= '@media only screen and (min-width:960px){#custom_header_module .wp-block-cover{background-image:url("' . ekiline_header_image( 'full' ) . '") !important;}}';
+
+	// Mostrar la descripcion en navbar.
+	if ( !display_header_text() ) {
+		$hdr_style .= '.navbar-text.site-description {display:none !important;}';
+	}
+
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $hdr_style;
 
