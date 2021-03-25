@@ -44,11 +44,11 @@ function ekiline_custom_color_controls( $wp_customize ) {
 			$wp_customize,
 			'background_color',
 			array(
-				'label'      => __( 'Background color and text', 'ekiline' ),
+				'label'       => __( 'Background color and text', 'ekiline' ),
 				'description' => '',
 				'priority'    => 20,
-				'section'    => 'colors_extended',
-				'settings'   => 'background_color',
+				'section'     => 'colors_extended',
+				'settings'    => 'background_color',
 			)
 		)
 	);
@@ -326,7 +326,7 @@ function ekiline_page_elements() {
 function ekiline_custom_background_cb() {
 	// Imagen de fondo.
 	$background = set_url_scheme( get_background_image() );
-	// Color de fondo 
+	// Color de fondo.
 	$color = get_option( 'background_color' );
 
 	if ( get_theme_support( 'custom-background', 'default-color' ) === $color ) {

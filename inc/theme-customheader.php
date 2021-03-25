@@ -221,7 +221,7 @@ function ekiline_custom_header_style() {
 	$hdr_style .= '@media only screen and (min-width:960px){#custom_header_module .wp-block-cover{background-image:url("' . ekiline_header_image( 'full' ) . '") !important;}}';
 
 	// Mostrar la descripcion en navbar.
-	if ( !display_header_text() ) {
+	if ( ! display_header_text() ) {
 		$hdr_style .= '.navbar-text.site-description {display:none !important;}';
 	}
 
