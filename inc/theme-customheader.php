@@ -13,21 +13,28 @@
  */
 function ekiline_custom_header_controls( $wp_customize ) {
 
-	// Colores.
+	// Colores, reasignar el controlador de color de texto.
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control(
+			$wp_customize,
+			'header_textcolor',
+			array(
+				'label'       => __( 'Colors', 'ekiline' ),
+				'description' => __( 'Text color', 'ekiline' ),
+				'priority'    => 20,
+				'section'     => 'header_image',
+				'settings'    => 'header_textcolor',
+			)
+		)
+	);
+
+	// Colores en transaparencia y links.
 	$colors   = array();
 	$colors[] = array(
 		'slug'        => 'chdr_color',
 		'default'     => '#000000',
-		'label'       => __( 'Colors', 'ekiline' ),
-		'description' => __( 'Transparency color', 'ekiline' ),
-		'priority'    => 20,
-		'section'     => 'header_image',
-	);
-	$colors[] = array(
-		'slug'        => 'chdrtxt_color',
-		'default'     => '#FFFFFF',
 		'label'       => '',
-		'description' => __( 'Text color', 'ekiline' ),
+		'description' => __( 'Transparency color', 'ekiline' ),
 		'priority'    => 20,
 		'section'     => 'header_image',
 	);
@@ -176,7 +183,7 @@ function ekiline_custom_header_setup() {
 		'ekiline_custom_header_args',
 		array(
 			'default-image'      => get_parent_theme_file_uri( '/assets/img/ekiline-media.png' ),
-			'default-text-color' => '000000',
+			'default-text-color' => 'FFFFFF',
 			'width'              => '1600',
 			'height'             => '900',
 			'flex-width'         => true,
@@ -211,8 +218,8 @@ function ekiline_custom_header_style() {
 		return;
 	}
 
+	$hdr_txc    = '#' . get_header_textcolor();
 	$hdr_bgc    = get_option( 'chdr_color', '#000000' );
-	$hdr_txc    = get_option( 'chdrtxt_color', '#FFFFFF' );
 	$hdr_lkc    = get_option( 'chdrlks_color', '#FFFFFF' );
 	$range_head = get_theme_mod( 'ekiline_range_header', '40' );
 	$hdr_style  = '#custom_header_module .wp-block-cover, #custom_header_module .wp-block-cover.has-background-dim::before{ background-color:' . esc_attr( $hdr_bgc ) . ';min-height:' . $range_head . 'vh; }';
