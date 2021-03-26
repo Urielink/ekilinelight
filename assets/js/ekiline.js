@@ -1,14 +1,14 @@
 /* Ekiline for WordPress Theme, Copyright 2018 Uri Lazcano. Ekiline is distributed under the terms of the GNU GPL. http://ekiline.com */
 window.onload = function() {
     if (window.jQuery) {
-		ekilineJQueryGroup();
+		ekiline_JQueryGroup();
     } else {
-		transformarCarruselNativo('.carousel-multiple');
-		smoothNavigation('.smooth');
+		ekiline_transformarCarruselNativo('.carousel-multiple');
+		ekiline_smoothNavigation('.smooth');
     }
 }
 
-function ekilineJQueryGroup(){
+function ekiline_JQueryGroup(){
 	// Compatibilidad de jquery.
 	jQuery(document).ready(function( $ ) {
 
@@ -69,9 +69,9 @@ function ekilineJQueryGroup(){
 		$('[data-toggle="popover"]').popover();
 
 		/* Ekiline: carrusel extendido */
-		// function transformarCarrusel(carrusel){
+		// function ekiline_transformarCarrusel(carrusel){
 		// cambiar la declaracion, para poder hacer uso en el editor .
-		window.transformarCarrusel = function(carrusel){
+		window.ekiline_transformarCarrusel = function(carrusel){
 
 			// Condiciones si no hay carrusel,
 			// O saber que ya fue intervenido, no hacer nada.
@@ -115,7 +115,7 @@ function ekilineJQueryGroup(){
 				});
 			});
 		}
-		transformarCarrusel('.carousel-multiple');
+		ekiline_transformarCarrusel('.carousel-multiple');
 	});
 }
 
@@ -123,7 +123,7 @@ function ekilineJQueryGroup(){
  * Scroll suave, aplica a enlaces con clase (.smooth).
  * @param {string} item Clase en link para ejecutar scroll.
  */
-function smoothNavigation(item = null){
+function ekiline_smoothNavigation(item = null){
 	document.querySelectorAll('.smooth').forEach(anchor => {
 		var href = anchor.getAttribute('href');
 		anchor.addEventListener('click', function (e) {
@@ -141,7 +141,7 @@ function smoothNavigation(item = null){
  * Se ocupa en el Editor de bloques también.
  * @param {string} carrusel Idendifica la clase para reajustar el diseno.
  */
-window.transformarCarruselNativo = function(carrusel){
+window.ekiline_transformarCarruselNativo = function(carrusel){
 
 	// Si no hay carrusel cancelar todo.
 	var loaditem = document.querySelector(carrusel);

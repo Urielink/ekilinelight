@@ -50,7 +50,7 @@ class Ekiline_Basic_Breadcrumb extends WP_Widget {
 
 		// Widget con nuevos datos.
 		echo wp_kses_post( $args['before_widget'] );
-		echo wp_kses_post( create_breadcrumb() );
+		echo wp_kses_post( ekiline_create_breadcrumb() );
 		echo wp_kses_post( $args['after_widget'] );
 	}
 
@@ -89,7 +89,7 @@ add_action( 'widgets_init', 'ekiline_breadcrumb_register_widgets' );
 /**
  * Breadcrumb elements
  */
-function create_breadcrumb() {
+function ekiline_create_breadcrumb() {
 
 	if ( is_home() || is_front_page() ) {
 		return;

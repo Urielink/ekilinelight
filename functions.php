@@ -290,7 +290,7 @@ add_action( 'wp_enqueue_scripts', 'ekiline_scripts', 1 );
  * B) Invasivo, directo con etiqueta en head
  * cada nuevo estilo en linea se agrega con: add_action( 'group_inline_css', 'new_style', 0/100 );
  */
-function group_inline_css_stored() {
+function ekiline_group_inline_css_stored() {
 	ob_start(); // inicia captura de datos.
 		do_action( 'group_inline_css' ); // accion predeterminada.
 		$stored_value = ob_get_contents(); // capturar los datos en una variable.
@@ -305,7 +305,7 @@ function group_inline_css_stored() {
 /**
  * En caso de declarar como dependencia ocupar:
  * function ekiline_inline_css_handled() {
- *   wp_add_inline_style( 'ekiline-style', group_inline_css_stored() );
+ *   wp_add_inline_style( 'ekiline-style', ekiline_group_inline_css_stored() );
  * }
  * add_action( 'wp_enqueue_scripts', 'ekiline_inline_css_handled' );
  */
@@ -316,7 +316,7 @@ function ekiline_inline_css_tag() {
 		'<style%1$sid="ekiline-style-inline-css">%2$s</style>' . "\n",
 		wp_kses_post( $type_attr ),
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		wp_strip_all_tags( group_inline_css_stored() )
+		wp_strip_all_tags( ekiline_group_inline_css_stored() )
 	);
 }
 add_action( 'wp_head', 'ekiline_inline_css_tag', 100 );
