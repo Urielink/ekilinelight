@@ -7,7 +7,7 @@ License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/license-list.html#GPLv2
 Donate link: https://www.paypal.com/paypalme/urielink
 
-A starter theme called ekiline.
+A starter theme called Ekiline.
 
 == Description ==
 Hello! I am ekiline, a wordpress theme created the easy development of a website.
