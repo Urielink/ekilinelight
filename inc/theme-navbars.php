@@ -312,7 +312,7 @@ function ekiline_nav_fallback() {
 		</li>
 	</ul>
 	<div class="navbar-text ml-auto">
-		<a target="_blank" class="btn btn-sm btn-outline-warning" href="<?php echo esc_url( 'https://ekiline.com/docs/' ); ?>"><?php esc_html_e( 'Theme help', 'ekiline' ); ?></a>
+		<a target="_blank" class="btn btn-sm btn-outline-warning" href="<?php echo esc_url( 'https://ekiline.com/' ); ?>"><?php esc_html_e( 'Theme help', 'ekiline' ); ?></a>
 	</div>
 
 	<?php

@@ -315,7 +315,7 @@ function ekiline_header_image( $size = null ) {
  *
  * @param string $content_type setup if is text or title.
  */
-function custom_header_content( $content_type = null ) {
+function ekiline_custom_header_content( $content_type = null ) {
 
 	$custom_header_title = get_bloginfo( 'name' );
 	$custom_header_text  = get_bloginfo( 'description' );
