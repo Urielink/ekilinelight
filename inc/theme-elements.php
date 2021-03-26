@@ -26,11 +26,11 @@ function ekiline_localize_extra_terms() {
  * Reemplazar el marcado para el enlace de leer mas
  * Custom read more link
  */
-function override_read_more_link() {
+function ekiline_override_read_more_link() {
 	/* translators: screenread only %s is replaced with title */
 	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading: %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
 }
-add_filter( 'the_content_more_link', 'override_read_more_link' );
+add_filter( 'the_content_more_link', 'ekiline_override_read_more_link' );
 
 /**
  * Widgets en footer

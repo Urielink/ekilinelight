@@ -54,23 +54,23 @@ add_action( 'wp_head', 'ekiline_print_meta_description', 0, 0 );
  * Meta KeyWords, extender, permitirlas en la páginas.
  * meta keywords, extend this to use in pages.
  **/
-function tags_support_all() {
+function ekiline_tags_support_all() {
 	// phpcs:ignore WPThemeReview.PluginTerritory.ForbiddenFunctions.plugin_territory_register_taxonomy_for_object_type
 	register_taxonomy_for_object_type( 'post_tag', 'page' );
 }
-add_action( 'init', 'tags_support_all' );
+add_action( 'init', 'ekiline_tags_support_all' );
 
 /**
  * Incluir todas // ensure all tags are included in queries
  *
  * @param string $wp_query setup.
  */
-function tags_support_query( $wp_query ) {
+function ekiline_tags_support_query( $wp_query ) {
 	if ( $wp_query->get( 'tag' ) ) {
 		$wp_query->set( 'post_type', 'any' );
 	}
 }
-add_action( 'pre_get_posts', 'tags_support_query' );
+add_action( 'pre_get_posts', 'ekiline_tags_support_query' );
 
 /**
  * Funcion: Obtener Keywords segun el tipo de contenido.
@@ -83,7 +83,7 @@ function ekiline_meta_keywords() {
 
 		global $post;
 		$tags = get_the_tags( $post->ID );
-		
+
 		if ( $tags && ! is_wp_error( $tags ) ) {
 			$keywords = ekiline_collect_tags( $tags );
 		}
