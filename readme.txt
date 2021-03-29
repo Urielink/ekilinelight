@@ -38,6 +38,9 @@ Ekiline includes support for Woocommerce.
 
 == Changelog ==
 
+= 1.3 - March 29, 2021 =
+* CSS theme style improves, show/hide site description, add smooth scroll class.
+
 = 1.2 - March 26, 2021 =
 * SEO improves add title reference in read more buttons, declare size in navbar icon.
 * Corrections suggested by the theme review team have been made.
