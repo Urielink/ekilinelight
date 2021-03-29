@@ -229,7 +229,7 @@ function ekiline_custom_header_style() {
 
 	// Mostrar la descripcion en navbar.
 	if ( ! display_header_text() ) {
-		$hdr_style .= '.navbar-text.site-description {display:none !important;}';
+		$hdr_style .= '.site-description{position:absolute;clip:rect(1px, 1px, 1px, 1px);}';
 	}
 
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
