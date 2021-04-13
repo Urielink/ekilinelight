@@ -15,15 +15,15 @@ function ekiline_logo_theme() {
 	$brand_hor  = wp_get_attachment_image_url( get_theme_mod( 'ekiline_logo_max' ), 'medium' );
 
 	if ( $brand_hor && ! $brand_icon ) {
-		echo '<img class="img-fluid" src="' . esc_url( $brand_hor ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" loading="lazy"/>';
+		echo '<img class="img-fluid" src="' . esc_url( $brand_hor ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" loading="lazy"/>';
 	} elseif ( ! $brand_hor && $brand_icon ) {
-		echo '<img class="brand-icon" src="' . esc_url( get_site_icon_url() ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>
+		echo '<img class="brand-icon" src="' . esc_url( get_site_icon_url() ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>
 			' . esc_html( get_bloginfo( 'name' ) );
 	} elseif ( $brand_hor && $brand_icon ) {
 		echo '
-		<img class="img-fluid d-none d-md-block" src="' . esc_url( $brand_hor ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" loading="lazy"/>
+		<img class="img-fluid d-none d-md-block" src="' . esc_url( $brand_hor ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" loading="lazy"/>
 		<span class="d-block d-md-none">
-			<img class="brand-icon" src="' . esc_url( get_site_icon_url( '150' ) ) . '" alt="' . esc_html( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>
+			<img class="brand-icon" src="' . esc_url( get_site_icon_url( '150' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>
 			' . esc_html( get_bloginfo( 'name' ) ) . '
 		</span>';
 	} else {
