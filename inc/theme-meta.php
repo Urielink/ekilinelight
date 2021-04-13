@@ -49,17 +49,6 @@ function ekiline_print_meta_description() {
 }
 add_action( 'wp_head', 'ekiline_print_meta_description', 0, 0 );
 
-
-/**
- * Meta KeyWords, extender, permitirlas en la páginas.
- * meta keywords, extend this to use in pages.
- **/
-function ekiline_tags_support_all() {
-	// phpcs:ignore WPThemeReview.PluginTerritory.ForbiddenFunctions.plugin_territory_register_taxonomy_for_object_type
-	register_taxonomy_for_object_type( 'post_tag', 'page' );
-}
-add_action( 'init', 'ekiline_tags_support_all' );
-
 /**
  * Incluir todas // ensure all tags are included in queries
  *
@@ -86,7 +75,7 @@ function ekiline_meta_keywords() {
 
 		if ( $tags && ! is_wp_error( $tags ) ) {
 			$keywords = ekiline_collect_tags( $tags );
-		}
+		} 
 	} elseif ( is_tag() ) {
 
 		$keywords = single_tag_title( '', false );
@@ -126,7 +115,9 @@ function ekiline_collect_tags( $tags ) {
  * Meta Keywords, incorporar.
  **/
 function ekiline_print_meta_keywords() {
-	echo '<meta name="keywords" content="' . esc_attr( ekiline_meta_keywords() ) . '" />' . "\n";
+	if ( ekiline_meta_keywords() ){
+		echo '<meta name="keywords" content="' . esc_attr( ekiline_meta_keywords() ) . '" />' . "\n";
+	}
 }
 add_action( 'wp_head', 'ekiline_print_meta_keywords', 0, 0 );
 
