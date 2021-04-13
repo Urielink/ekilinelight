@@ -283,10 +283,10 @@ function ekiline_styles_localize() {
 function ekiline_load_all_csstojs() {
 	?>
 	<script>
-	var allCss = <?php ekiline_styles_localize(); ?>;
-	if ( allCss !== null ) {
+	var ekiline_all_css = <?php ekiline_styles_localize(); ?>;
+	if ( ekiline_all_css !== null ) {
 		window.addEventListener( 'DOMContentLoaded', function () {
-			ekiline_loadStylesNativo(allCss );
+			ekiline_loadStylesNativo(ekiline_all_css );
 		} );
 	}
 	// Carga de estilos CSS.
@@ -307,7 +307,7 @@ function ekiline_load_all_csstojs() {
 		} );
 	}
 	// Carga de estilos CSS nativo.
-	function ekiline_loadStylesNativo(styles){
+	function ekiline_loadStylesNativo( styles ){
 		var head = document.querySelector('head');
 		var wpcss = head.querySelector('#ekiline-style-inline-css');
 		var cssinline = head.getElementsByTagName('style')[head.getElementsByTagName('style').length - 1];
@@ -445,10 +445,10 @@ function ekiline_change_js_tag( $tag, $handle, $src ) {
 function ekiline_load_all_jstojs() {
 	?>
 	<script>
-	var allJss = <?php ekiline_scripts_localize(); ?>;
-	if ( allJss !== null ) {
+	var ekiline_all_jss = <?php ekiline_scripts_localize(); ?>;
+	if ( ekiline_all_jss !== null ) {
 		window.addEventListener( 'DOMContentLoaded', function () {
-			ekiline_loadScriptsOrderedNative( allJss , 0 );
+			ekiline_loadScriptsOrderedNative( ekiline_all_jss , 0 );
 		} );
 	}
 	// Carga a discrecion.
