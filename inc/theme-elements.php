@@ -300,10 +300,10 @@ function ekiline_pagination() {
 		$nexr_id = ( isset( $pages[ $current + 1 ] ) ) ? $pages[ $current + 1 ] : '';
 
 		if ( ! empty( $prev_id ) ) {
-			$prev_link .= '<li class="page-item page-link"><a href="' . esc_url( get_permalink( $prev_id ) ) . '" title="' . get_the_title( $prev_id ) . '"><span>&leftarrow;</span> ' . get_the_title( $prev_id ) . '</a></li>';
+			$prev_link .= '<li class="page-item page-link"><a href="' . esc_url( get_permalink( $prev_id ) ) . '" title="' . esc_attr( get_the_title( $prev_id ) ) . '"><span>&leftarrow;</span> ' . esc_attr( get_the_title( $prev_id ) ) . '</a></li>';
 		}
 		if ( ! empty( $nexr_id ) ) {
-			$next_link .= '<li class="page-item page-link"><a href="' . esc_url( get_permalink( $nexr_id ) ) . '" title="' . get_the_title( $nexr_id ) . '">' . get_the_title( $nexr_id ) . ' <span>&rightarrow;</span></a></li>';
+			$next_link .= '<li class="page-item page-link"><a href="' . esc_url( get_permalink( $nexr_id ) ) . '" title="' . esc_attr( get_the_title( $nexr_id ) ) . '">' . esc_attr( get_the_title( $nexr_id ) ) . ' <span>&rightarrow;</span></a></li>';
 		}
 	}
 
