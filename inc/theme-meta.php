@@ -75,7 +75,7 @@ function ekiline_meta_keywords() {
 
 		if ( $tags && ! is_wp_error( $tags ) ) {
 			$keywords = ekiline_collect_tags( $tags );
-		} 
+		}
 	} elseif ( is_tag() ) {
 
 		$keywords = single_tag_title( '', false );
@@ -115,7 +115,7 @@ function ekiline_collect_tags( $tags ) {
  * Meta Keywords, incorporar.
  **/
 function ekiline_print_meta_keywords() {
-	if ( ekiline_meta_keywords() ){
+	if ( ekiline_meta_keywords() ) {
 		echo '<meta name="keywords" content="' . esc_attr( ekiline_meta_keywords() ) . '" />' . "\n";
 	}
 }

@@ -28,7 +28,7 @@ function ekiline_localize_extra_terms() {
  */
 function ekiline_override_read_more_link() {
 	/* translators: screenread only %s is replaced with title */
-	return '<a class="more-link" href="' . get_permalink() . '" aria-label="' . sprintf( esc_html__( 'Continue reading: %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
+	return '<a class="more-link" href="' . esc_url( get_permalink() ) . '" aria-label="' . sprintf( esc_attr__( 'Continue reading: %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) ) . '">' . __( 'Read more', 'ekiline' ) . '</a>';
 }
 add_filter( 'the_content_more_link', 'ekiline_override_read_more_link' );
 
@@ -165,8 +165,8 @@ function ekiline_content_additions( $content ) {
 			$css_class = 'more-link btn btn-primary btn-block mt-2';
 		}
 		/* translators: screenread only %s is replaced with title */
-		$tittle = sprintf( esc_html__( 'Continue reading: %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) );
-		$link   = '... <a class="' . $css_class . '" href="' . get_permalink() . '" aria-label="' . $tittle . '">' . $tittle . '</a>';
+		$tittle = sprintf( esc_attr__( 'Continue reading: %s', 'ekiline' ), wp_strip_all_tags( get_the_title() ) );
+		$link   = '... <a class="' . $css_class . '" href="' . esc_url( get_permalink() ) . '" aria-label="' . $tittle . '">' . $tittle . '</a>';
 
 		if ( strpos( $post->post_content, '<!--more-->' ) ) {
 			$content = $content;
@@ -330,10 +330,10 @@ function ekiline_pagination() {
 		$nexr_id = ( isset( $pages[ $current + 1 ] ) ) ? $pages[ $current + 1 ] : '';
 
 		if ( ! empty( $prev_id ) ) {
-			$prev_link .= '<li class="page-item page-link"><a href="' . get_permalink( $prev_id ) . '" title="' . get_the_title( $prev_id ) . '"><span>&leftarrow;</span> ' . get_the_title( $prev_id ) . '</a></li>';
+			$prev_link .= '<li class="page-item page-link"><a href="' . esc_url( get_permalink( $prev_id ) ) . '" title="' . get_the_title( $prev_id ) . '"><span>&leftarrow;</span> ' . get_the_title( $prev_id ) . '</a></li>';
 		}
 		if ( ! empty( $nexr_id ) ) {
-			$next_link .= '<li class="page-item page-link"><a href="' . get_permalink( $nexr_id ) . '" title="' . get_the_title( $nexr_id ) . '">' . get_the_title( $nexr_id ) . ' <span>&rightarrow;</span></a></li>';
+			$next_link .= '<li class="page-item page-link"><a href="' . esc_url( get_permalink( $nexr_id ) ) . '" title="' . get_the_title( $nexr_id ) . '">' . get_the_title( $nexr_id ) . ' <span>&rightarrow;</span></a></li>';
 		}
 	}
 
