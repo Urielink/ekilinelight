@@ -38,6 +38,9 @@ Ekiline includes support for Woocommerce.
 
 == Changelog ==
 
+= 1.4 - April 16, 2021 =
+* CSS theme style improves, skip button in header, update of theme options, technical improvements of PHP code.
+
 = 1.3 - March 29, 2021 =
 * CSS theme style improves, show/hide site description, add smooth scroll class.
 
