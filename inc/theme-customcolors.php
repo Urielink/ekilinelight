@@ -54,153 +54,148 @@ function ekiline_custom_color_controls( $wp_customize ) {
 	);
 
 	// Colores base.
-	$colors = array();
-
-	// Pagina.
-	$colors[] = array(
-		'slug'        => 'text_color',
-		'default'     => '#333333',
-		'label'       => '',
-		'description' => '',
-		'priority'    => 20,
-		'section'     => 'colors_extended',
-	);
-
-	// Contenedor main.
-	$colors[] = array(
-		'slug'        => 'main_color',
-		'default'     => '#f8f9fa',
-		'label'       => '',
-		'description' => __( 'Color on main container', 'ekiline' ),
-		'priority'    => 20,
-		'section'     => 'colors_extended',
-	);
-	// Navbar.
-	$colors[] = array(
-		'slug'        => 'menu_color',
-		'default'     => '#343a40',
-		'label'       => __( 'Navbar background', 'ekiline' ),
-		'description' => '',
-		'priority'    => 30,
-		'section'     => 'colors_extended',
-	);
-
-	// footer-bar.
-	$colors[] = array(
-		'slug'        => 'fbar_color',
-		'default'     => '#6c757d',
-		'label'       => __( 'Bottom bar', 'ekiline' ),
-		'description' => '',
-		'priority'    => 40,
-		'section'     => 'colors_extended',
-	);
-	$colors[] = array(
-		'slug'        => 'fbartxt_color',
-		'default'     => '#ffffff',
-		'label'       => '',
-		'description' => '',
-		'priority'    => 40,
-		'section'     => 'colors_extended',
-	);
-	$colors[] = array(
-		'slug'        => 'fbarlks_color',
-		'default'     => '#007bff',
-		'label'       => '',
-		'description' => '',
-		'priority'    => 40,
-		'section'     => 'colors_extended',
-	);
-
-	// Footer.
-	$colors[] = array(
-		'slug'        => 'footer_color',
-		'default'     => '#343a40',
-		'label'       => __( 'Footer', 'ekiline' ),
-		'description' => '',
-		'priority'    => 40,
-		'section'     => 'colors_extended',
-	);
-	$colors[] = array(
-		'slug'        => 'ftext_color',
-		'default'     => '#ffffff',
-		'label'       => '',
-		'description' => '',
-		'priority'    => 40,
-		'section'     => 'colors_extended',
-	);
-	$colors[] = array(
-		'slug'        => 'flinks_color',
-		'default'     => '#007bff',
-		'label'       => '',
-		'description' => '',
-		'priority'    => 40,
-		'section'     => 'colors_extended',
-	);
-
-	// Bootstrap.
-	$colors[] = array(
-		'slug'        => 'b4_primary',
-		'default'     => '#007bff',
-		'label'       => '',
-		'description' => __( 'Change Bootstrap color palette and use default classes', 'ekiline' ) . __( '<br><code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-primary</code>', 'ekiline' ),
-		'priority'    => 10,
-		'section'     => 'colors',
-	);
-	$colors[] = array(
-		'slug'        => 'b4_secondary',
-		'default'     => '#6c757d',
-		'label'       => '',
-		'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-secondary</code>', 'ekiline' ),
-		'priority'    => 10,
-		'section'     => 'colors',
-	);
-	$colors[] = array(
-		'slug'        => 'b4_success',
-		'default'     => '#28a745',
-		'label'       => '',
-		'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-success</code>', 'ekiline' ),
-		'priority'    => 10,
-		'section'     => 'colors',
-	);
-	$colors[] = array(
-		'slug'        => 'b4_danger',
-		'default'     => '#dc3545',
-		'label'       => '',
-		'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-danger</code>', 'ekiline' ),
-		'priority'    => 10,
-		'section'     => 'colors',
-	);
-	$colors[] = array(
-		'slug'        => 'b4_warning',
-		'default'     => '#ffc107',
-		'label'       => '',
-		'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-warning</code>', 'ekiline' ),
-		'priority'    => 10,
-		'section'     => 'colors',
-	);
-	$colors[] = array(
-		'slug'        => 'b4_info',
-		'default'     => '#17a2b8',
-		'label'       => '',
-		'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-info</code>', 'ekiline' ),
-		'priority'    => 10,
-		'section'     => 'colors',
-	);
-	$colors[] = array(
-		'slug'        => 'b4_light',
-		'default'     => '#f8f9fa',
-		'label'       => '',
-		'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-light</code>', 'ekiline' ),
-		'priority'    => 10,
-		'section'     => 'colors',
-	);
-	$colors[] = array(
-		'slug'        => 'b4_dark',
-		'default'     => '#343a40',
-		'label'       => '',
-		'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-dark</code>', 'ekiline' ),
-		'priority'    => 10,
-		'section'     => 'colors',
+	$colors = array(
+		// Pagina.
+		array(
+			'slug'        => 'text_color',
+			'default'     => '#333333',
+			'label'       => '',
+			'description' => '',
+			'priority'    => 20,
+			'section'     => 'colors_extended',
+		),
+		// Contenedor main.
+		array(
+			'slug'        => 'main_color',
+			'default'     => '#f8f9fa',
+			'label'       => '',
+			'description' => __( 'Color on main container', 'ekiline' ),
+			'priority'    => 20,
+			'section'     => 'colors_extended',
+		),
+		// Navbar.
+		array(
+			'slug'        => 'menu_color',
+			'default'     => '#343a40',
+			'label'       => __( 'Navbar background', 'ekiline' ),
+			'description' => '',
+			'priority'    => 30,
+			'section'     => 'colors_extended',
+		),
+		// footer-bar.
+		array(
+			'slug'        => 'fbar_color',
+			'default'     => '#6c757d',
+			'label'       => __( 'Bottom bar', 'ekiline' ),
+			'description' => '',
+			'priority'    => 40,
+			'section'     => 'colors_extended',
+		),
+		array(
+			'slug'        => 'fbartxt_color',
+			'default'     => '#ffffff',
+			'label'       => '',
+			'description' => '',
+			'priority'    => 40,
+			'section'     => 'colors_extended',
+		),
+		array(
+			'slug'        => 'fbarlks_color',
+			'default'     => '#007bff',
+			'label'       => '',
+			'description' => '',
+			'priority'    => 40,
+			'section'     => 'colors_extended',
+		),
+		array(
+			'slug'        => 'footer_color',
+			'default'     => '#343a40',
+			'label'       => __( 'Footer', 'ekiline' ),
+			'description' => '',
+			'priority'    => 40,
+			'section'     => 'colors_extended',
+		),
+		array(
+			'slug'        => 'ftext_color',
+			'default'     => '#ffffff',
+			'label'       => '',
+			'description' => '',
+			'priority'    => 40,
+			'section'     => 'colors_extended',
+		),
+		array(
+			'slug'        => 'flinks_color',
+			'default'     => '#007bff',
+			'label'       => '',
+			'description' => '',
+			'priority'    => 40,
+			'section'     => 'colors_extended',
+		),
+		// Bootstrap.
+		array(
+			'slug'        => 'b4_primary',
+			'default'     => '#007bff',
+			'label'       => '',
+			'description' => __( 'Change Bootstrap color palette and use default classes', 'ekiline' ) . __( '<br><code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-primary</code>', 'ekiline' ),
+			'priority'    => 10,
+			'section'     => 'colors',
+		),
+		array(
+			'slug'        => 'b4_secondary',
+			'default'     => '#6c757d',
+			'label'       => '',
+			'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-secondary</code>', 'ekiline' ),
+			'priority'    => 10,
+			'section'     => 'colors',
+		),
+		array(
+			'slug'        => 'b4_success',
+			'default'     => '#28a745',
+			'label'       => '',
+			'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-success</code>', 'ekiline' ),
+			'priority'    => 10,
+			'section'     => 'colors',
+		),
+		array(
+			'slug'        => 'b4_danger',
+			'default'     => '#dc3545',
+			'label'       => '',
+			'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-danger</code>', 'ekiline' ),
+			'priority'    => 10,
+			'section'     => 'colors',
+		),
+		array(
+			'slug'        => 'b4_warning',
+			'default'     => '#ffc107',
+			'label'       => '',
+			'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-warning</code>', 'ekiline' ),
+			'priority'    => 10,
+			'section'     => 'colors',
+		),
+		array(
+			'slug'        => 'b4_info',
+			'default'     => '#17a2b8',
+			'label'       => '',
+			'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-info</code>', 'ekiline' ),
+			'priority'    => 10,
+			'section'     => 'colors',
+		),
+		array(
+			'slug'        => 'b4_light',
+			'default'     => '#f8f9fa',
+			'label'       => '',
+			'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-light</code>', 'ekiline' ),
+			'priority'    => 10,
+			'section'     => 'colors',
+		),
+		array(
+			'slug'        => 'b4_dark',
+			'default'     => '#343a40',
+			'label'       => '',
+			'description' => __( '<code style="float: right;margin: 6px 4px 0px 0px;width: 90px;">*-dark</code>', 'ekiline' ),
+			'priority'    => 10,
+			'section'     => 'colors',
+		),
 	);
 
 	/**

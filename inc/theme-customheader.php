@@ -29,22 +29,23 @@ function ekiline_custom_header_controls( $wp_customize ) {
 	);
 
 	// Colores en transaparencia y links.
-	$colors   = array();
-	$colors[] = array(
-		'slug'        => 'chdr_color',
-		'default'     => '#000000',
-		'label'       => '',
-		'description' => __( 'Transparency color', 'ekiline' ),
-		'priority'    => 20,
-		'section'     => 'header_image',
-	);
-	$colors[] = array(
-		'slug'        => 'chdrlks_color',
-		'default'     => '#FFFFFF',
-		'label'       => '',
-		'description' => __( 'Links color', 'ekiline' ),
-		'priority'    => 20,
-		'section'     => 'header_image',
+	$colors = array(
+		array(
+			'slug'        => 'chdr_color',
+			'default'     => '#000000',
+			'label'       => '',
+			'description' => __( 'Transparency color', 'ekiline' ),
+			'priority'    => 20,
+			'section'     => 'header_image',
+		),
+		array(
+			'slug'        => 'chdrlks_color',
+			'default'     => '#FFFFFF',
+			'label'       => '',
+			'description' => __( 'Links color', 'ekiline' ),
+			'priority'    => 20,
+			'section'     => 'header_image',
+		),
 	);
 
 	/**
