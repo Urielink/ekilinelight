@@ -22,7 +22,7 @@
 		<div class="headline position-relative <?php echo ( ! get_theme_mod( 'ekiline_headerCustomWidth' ) ) ? 'container' : 'w-100'; ?>">
 			<h1 class="title display-3">
 				<?php echo wp_kses_post( ekiline_custom_header_content( 'title' ) ); ?>
-				<a href="#primary" class="skip-link smooth blink btn btn-lg btn-outline-light px-1" alt="<?php esc_attr_e( 'Skip to content', 'ekiline' ); ?>" title="<?php esc_attr_e( 'Skip to content', 'ekiline' ); ?>">&#8595;</a>
+				<a href="#primary" class="skip-link smooth blink btn btn-lg btn-outline-light px-1" title="<?php esc_attr_e( 'Skip to content', 'ekiline' ); ?>">&#8595;</a>
 			</h1>
 			<p class="lead">
 				<?php echo wp_kses_post( ekiline_custom_header_content( 'text' ) ); ?>

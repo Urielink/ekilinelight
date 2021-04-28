@@ -17,18 +17,14 @@ function ekiline_logo_theme() {
 	if ( $brand_hor && ! $brand_icon ) {
 		echo '<img class="img-fluid" src="' . esc_url( $brand_hor ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" loading="lazy"/>';
 	} elseif ( ! $brand_hor && $brand_icon ) {
-		echo '<img class="brand-icon" src="' . esc_url( get_site_icon_url() ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>
-			' . esc_html( get_bloginfo( 'name' ) );
+		echo '<img class="brand-icon" src="' . esc_url( get_site_icon_url() ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>';
 	} elseif ( $brand_hor && $brand_icon ) {
 		echo '
-		<img class="img-fluid d-none d-md-block" src="' . esc_url( $brand_hor ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" loading="lazy"/>
-		<span class="d-block d-md-none">
-			<img class="brand-icon" src="' . esc_url( get_site_icon_url( '150' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>
-			' . esc_html( get_bloginfo( 'name' ) ) . '
-		</span>';
-	} else {
-		echo esc_html( get_bloginfo( 'name' ) );
+		<img class="img-fluid d-none d-md-inline" src="' . esc_url( $brand_hor ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" loading="lazy"/>
+		<img class="brand-icon d-inline d-md-none" src="' . esc_url( get_site_icon_url( '150' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>';
 	}
+
+	echo '<span class="site-title">' . esc_html( get_bloginfo( 'name' ) ) . '</span>';
 }
 
 /**
