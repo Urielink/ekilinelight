@@ -38,6 +38,9 @@ Ekiline includes support for Woocommerce.
 
 == Changelog ==
 
+= 1.4.1 - April 16, 2021 =
+* Improved "Show site title and tagline" in its markup, customizer controls, and CSS.
+
 = 1.4 - April 16, 2021 =
 * CSS theme style improves, skip button in header, update of theme options, technical improvements of PHP code.
 
@@ -76,4 +79,7 @@ Bootstrap are licensed under MIT (https://github.com/twbs/bootstrap/blob/master/
 Source: https://getbootstrap.com
 
 Digital art by Uri Lazcano ( ekiline-media.png, ekiline-patron.png ).
+License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
+
+Image for theme screenshot, Copyright Uri Lazcano
 License: Creative Commons Zero (CC0), https://creativecommons.org/publicdomain/zero/1.0/
