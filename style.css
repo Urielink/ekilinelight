@@ -60,6 +60,7 @@
  .sticky{display:block;}
  .bypostauthor{display:block;}
  #user_switching_switch_on{position:fixed;left:0;padding:0.4rem;margin:0px;bottom:0px;z-index:3000;background-color:#343A40;font-size:0.8rem;}
+ .widget_nav_menu .current-menu-item{border:1px dotted #21759b;}
 
  /* ------------------------------------------------
   * 1.1) Gutenberg, Block editor frontend:
