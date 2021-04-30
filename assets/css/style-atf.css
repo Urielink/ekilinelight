@@ -183,8 +183,6 @@ img{vertical-align:middle;border-style:none}
 
 @media only screen and (max-width:576px){
 #custom_header_module > .alignfull {margin-left: calc( -100vw / 2 + 100% / 2 );margin-right: calc( -100vw / 2 + 100% / 2); }
-.scroll-x{display:block;overflow-x:scroll;}
-.scroll-x small {display:flex;width:max-content;}
 }
 @keyframes bgresize { 0% { background-size: 150%; } 100% { background-size: 130%; } }
 .bg-deep, .wp-block-cover.bg-deep{animation: bgresize 5s ease;background-position: 50% 50%;background-repeat: no-repeat;background-size: 130%;}

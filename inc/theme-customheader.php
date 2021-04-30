@@ -329,14 +329,50 @@ function ekiline_custom_header_content( $content_type = null ) {
 
 	$categories_list = '';
 	if ( ! is_page() || get_the_category_list() !== '' ) {
+		/* Caso extremo, muchas categorias  */
+		$string_categories = wp_strip_all_tags( get_the_category_list( ',' ), true );
+		$array_string      = explode( ',', $string_categories );
+		$count_array       = count( $array_string );
+
 		/* translators: %s is replaced with category title */
-		$categories_list = sprintf( esc_html__( 'Categories: %s', 'ekiline' ), wp_kses_post( get_the_category_list( ', ' ) ) );
+		$categories_list = sprintf( '<small>' . esc_html__( 'Categories: %s', 'ekiline' ) . '</small><br>', wp_kses_post( get_the_category_list( ', ' ) ) );
+
+		if ( $count_array > 5 ) {
+			$categories_list = sprintf(
+				'<div class="dropdown">
+					<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownNavCategories" data-toggle="dropdown">
+						' . __( 'Categories:', 'ekiline' ) . '
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownNavCategories">
+						' . get_the_category_list() . '
+					</div>
+				</div>'
+			);
+		}
 	}
 
 	$tags_list = '';
 	if ( get_the_tag_list() !== '' ) {
+		/* Caso extremo, muchas etiquetas  */
+		$string_tags  = wp_strip_all_tags( get_the_tag_list( '', ',' ), true );
+		$array_string = explode( ',', $string_tags );
+		$count_array  = count( $array_string );
+
 		/* translators: %s is replaced with tags */
-		$tags_list = sprintf( esc_html__( 'Tags: %s', 'ekiline' ), wp_kses_post( get_the_tag_list( '', ', ' ) ) );
+		$tags_list = sprintf( '<small>' . esc_html__( 'Tags: %s', 'ekiline' ) . '</small><br>', wp_kses_post( get_the_tag_list( '', ', ' ) ) );
+
+		if ( $count_array > 5 ) {
+			$tags_list = sprintf(
+				'<div class="dropdown">
+					<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownNavTags" data-toggle="dropdown">
+						' . __( 'Tags:', 'ekiline' ) . '
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownNavTags">
+						' . get_the_tag_list( '<ul><li>', '</li><li>', '</li></ul>' ) . '
+					</div>
+				</div>'
+			);
+		}
 	}
 
 	if ( is_front_page() && get_theme_mod( 'ekiline_headerCustomText' ) ) {
@@ -358,7 +394,7 @@ function ekiline_custom_header_content( $content_type = null ) {
 		} else {
 			$custom_header_title = '<a href="' . esc_url( get_the_permalink() ) . '" title="' . get_the_title() . '">' . get_the_title() . '</a>';
 			$custom_header_text  = ekiline_content_out_the_loop() . '<br>';
-			$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' <br> ' . ( ( get_the_tag_list() ) ? $tags_list : '' ) . '</small></span>';
+			$custom_header_text .= $categories_list . ( ( get_the_tag_list() ) ? $tags_list : '' );
 		}
 	}
 
@@ -367,13 +403,13 @@ function ekiline_custom_header_content( $content_type = null ) {
 		$username    = get_userdata( $post->post_author );
 		$author_item = sprintf(
 			/* translators: %s are replaced with author name  */
-			esc_html_x( 'Written by %s', 'post authors', 'ekiline' ),
+			'<small>' . esc_html_x( 'Written by %s', 'post authors', 'ekiline' ) . '</small>',
 			'<a href="' . get_author_posts_url( $post->post_author ) . '" title="' . get_the_title() . '" rel="author">' . $username->display_name . '</a>'
 		);
 
 		$custom_header_title = get_the_title();
 		$add_categories      = ( ! is_page() ) ? ' <br> ' . $categories_list : '';
-		$custom_header_text  = '<small>' . $author_item . $add_categories . '</small>';
+		$custom_header_text  = $author_item . $add_categories;
 	}
 
 	if ( is_archive() || is_category() ) {
@@ -383,7 +419,7 @@ function ekiline_custom_header_content( $content_type = null ) {
 			$content             = get_the_archive_description();
 			$custom_header_text .= wp_strip_all_tags( substr( $content, 0, strpos( $content, '.' ) ) ) . '<br>';
 		}
-		$custom_header_text .= '<span class="scroll-x"><small>' . $categories_list . ' <br> ' . $tags_list . '</small></span>';
+		$custom_header_text .= $categories_list . ( ( get_the_tag_list() ) ? $tags_list : '' );
 	}
 
 	if ( is_search() ) {

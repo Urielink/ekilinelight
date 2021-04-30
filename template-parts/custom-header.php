@@ -24,9 +24,9 @@
 				<?php echo wp_kses_post( ekiline_custom_header_content( 'title' ) ); ?>
 				<button class="skip-link smooth blink btn btn-lg btn-outline-light px-2" data-skip="#primary" title="<?php esc_attr_e( 'Skip to content', 'ekiline' ); ?>">&#8595;</button>
 			</h1>
-			<p class="lead">
+			<div class="lead">
 				<?php echo wp_kses_post( ekiline_custom_header_content( 'text' ) ); ?>
-			</p>
+			</div>
 		</div>
 	</div>
 
