@@ -286,7 +286,7 @@ function ekiline_load_all_csstojs() {
 	var ekiline_all_css = <?php ekiline_styles_localize(); ?>;
 	if ( ekiline_all_css !== null ) {
 		window.addEventListener( 'DOMContentLoaded', function () {
-			ekiline_loadStylesNativo(ekiline_all_css );
+			ekiline_loadStylesNativo( ekiline_all_css );
 		} );
 	}
 	// Carga de estilos CSS.
@@ -467,7 +467,7 @@ function ekiline_load_all_jstojs() {
 			} );
 		}
 	// Carga ordenada.
-	function ekiline_loadScriptsOrdered(scripts,i ) {
+	function ekiline_loadScriptsOrdered(scripts,i) {
 		var $ = jQuery.noConflict();
 		if (i < scripts.length ) {
 			$.getScript(scripts[i].src, function () {
