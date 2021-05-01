@@ -16,15 +16,15 @@ function ekiline_logo_theme() {
 
 	if ( $brand_hor && ! $brand_icon ) {
 		echo '<img class="img-fluid" src="' . esc_url( $brand_hor ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" loading="lazy"/>';
-	} elseif ( ! $brand_hor && $brand_icon ) {
+	} elseif ( ! $brand_hor && ( $brand_icon && get_site_icon_url() ) ) {
 		echo '<img class="brand-icon" src="' . esc_url( get_site_icon_url() ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>';
-	} elseif ( $brand_hor && $brand_icon ) {
+	} elseif ( $brand_hor && ( $brand_icon && get_site_icon_url() ) ) {
 		echo '
 		<img class="img-fluid d-none d-md-inline" src="' . esc_url( $brand_hor ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" loading="lazy"/>
 		<img class="brand-icon d-inline d-md-none" src="' . esc_url( get_site_icon_url( '150' ) ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" height="32" width="32" loading="lazy"/>';
 	}
-
-	echo '<span class="site-title">' . esc_html( get_bloginfo( 'name' ) ) . '</span>';
+	$hide_title = ( $brand_hor && ( $brand_icon && get_site_icon_url() ) ) ? ' d-md-none' : '';
+	echo '<span class="site-title' . esc_attr( $hide_title ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</span>';
 }
 
 /**
