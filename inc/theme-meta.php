@@ -152,7 +152,7 @@ function ekiline_meta_image() {
  * @param string $find_string direccion o dominio a verificar.
  */
 function ekiline_find_in_nav( $find_string ) {
-	$array_menu = wp_get_nav_menu_items( 'Social Menu' );
+	$array_menu = wp_get_nav_menu_items( 'social' );
 	$item       = $find_string;
 	if ( $array_menu ) {
 		foreach ( $array_menu as $m ) {

@@ -114,6 +114,40 @@
 @keyframes doBlink {
   50% { opacity: 0; }
 }
+  /**
+  * Iconos de redes sociales ocupa dashicons.
+  * opt1: nombrar menu como "Social"
+  * opt2: agregar clases por enlace con opcion "menu-social icon-only"
+  */
+ [class*="menu-social"] a{text-decoration: none;}
+ [class*="menu-social"] a:before{font-family:'dashicons';display:inline-block;line-height:1;font-weight:400;font-style:normal;speak:never;text-decoration:inherit;text-transform:none;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;width:20px;height:20px;font-size:20px;vertical-align:top;text-align:center;transition:color .1s ease-in;}
+ .icon-only a{font-size:0px;}
+ [class*="menu-social"] a[href*="twitter"]:before {content:"\f301";}
+ [class*="menu-social"] a[href*="facebook"]:before {content:"\f304";}
+ [class*="menu-social"] a[href*="google"]:before{content:"\f18b";}
+ [class*="menu-social"] a[href*="instagram"]:before{content:"\f12d";}
+ [class*="menu-social"] a[href*="linkedin"]:before{content:"\f18d";}
+ [class*="menu-social"] a[href*="pinterest"]:before{content:"\f192";}
+ [class*="menu-social"] a[href*="reddit"]:before{content:"\f195";}
+ [class*="menu-social"] a[href*="spotify"]:before{content:"\f196";}
+ [class*="menu-social"] a[href*="twitch"]:before{content:"\f199";}
+ [class*="menu-social"] a[href*="whatsapp"]:before{content:"\f19a";}
+ [class*="menu-social"] a[href*="youtube"]:before{content:"\f19b";}
+ [class*="menu-social"] a[href*="wordpress"]:before{content:"\f120";}
+ [class*="menu-social"] a[href*="amazon"]:before{content:"\f162";}
+ [class*="menu-social"] a[href*="twitter"]{color:#1da1f2 !important;}
+ [class*="menu-social"] a[href*="facebook"]{color:#1877f2 !important;}
+ [class*="menu-social"] a[href*="google"]{color:#4285f4 !important;}
+ [class*="menu-social"] a[href*="instagram"]{color:#c32aa3 !important;}
+ [class*="menu-social"] a[href*="linkedin"]{color:#0a66c2 !important;}
+ [class*="menu-social"] a[href*="pinterest"]{color:#bd081c !important;}
+ [class*="menu-social"] a[href*="reddit"]{color:#ff4500 !important;}
+ [class*="menu-social"] a[href*="spotify"]{color:#1ed760 !important;}
+ [class*="menu-social"] a[href*="twitch"]{color:#9146ff !important;}
+ [class*="menu-social"] a[href*="whatsapp"]{color:#25d366 !important;}
+ [class*="menu-social"] a[href*="youtube"]{color:#ff0000 !important;}
+ [class*="menu-social"] a[href*="wordpress"]{color:#0073aa !important;}
+ [class*="menu-social"] a[href*="amazon"]{color:#ff9900 !important;}
 
 /* ------------------------------------------------------------------------------------------------
  * 2.1) Ekiline Extend B4 Navigation

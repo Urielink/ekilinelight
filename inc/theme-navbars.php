@@ -127,6 +127,16 @@ function ekiline_navbar_menu( $nav_position ) {
 		$toggle_btn = 'modal-toggler navbar-toggler collapsed';
 	}
 
+	// Mejora, obtener el nombre del menu y agregarlo como clase.
+	$menu_name = wp_get_nav_menu_name( $nav_position );
+	$menu_obj  = wp_get_nav_menu_object( $menu_name );
+	// Validar la existencia de objeto.
+	if ( $menu_obj ) {
+		$menu_slug = ' menu-' . $menu_obj->slug;
+		// Acumular a la clase principal.
+		$nav_align .= $menu_slug;
+	}
+
 	// Clases reunidas para <nav>.
 	$nav_class_css = 'navbar ' . $nav_inverse . $nav_position . '-navbar ' . $expand . $nav_action;
 
@@ -223,6 +233,12 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 			$modal_css = 'modal fade right-aside modal-nav';
 			break;
 	}
+
+	// Mejora, obtener el nombre del menu y agregarlo como clase.
+	$menu_name = wp_get_nav_menu_name( $nav_position );
+	$menu_obj  = wp_get_nav_menu_object( $menu_name );
+	// Validar la existencia de objeto.
+	$menu_slug = ( $menu_obj ) ? ' menu-' . $menu_obj->slug : '';
 	?>
 
 <div id="<?php echo esc_attr( $modal_id ); ?>" class="<?php echo esc_attr( $modal_css ); ?>" tabindex="-1" role="dialog" aria-labelledby="navModalLabel" aria-hidden="true">
@@ -261,7 +277,7 @@ function ekiline_modal_menu_bottom( $nav_position ) {
 						'container'       => 'div',
 						'container_class' => 'navbar-collapse collapse show',
 						'container_id'    => '',
-						'menu_class'      => 'navbar-nav',
+						'menu_class'      => 'navbar-nav ' . $menu_slug,
 						'menu_id'         => 'modal-menu',
 						'fallback_cb'     => 'ekiline_nav_fallback',
 						'walker'          => new Ekiline_Nav_Menu(),
