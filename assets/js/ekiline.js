@@ -15,7 +15,7 @@ function ekiline_JQueryGroup(){
 		/* Scroll suave */
 		var $root = $('html, body');
 		$('.smooth').click(function() {
-			var href = $.attr(this, 'href') || $.attr(this, 'data-skip');
+			var href = $.attr(this, 'href');
 			$root.animate({
 				scrollTop: $(href).offset().top
 			}, 500, function () {
@@ -125,10 +125,10 @@ function ekiline_JQueryGroup(){
  */
 function ekiline_smoothNavigation(item = null){
 	document.querySelectorAll('.smooth').forEach(anchor => {
-		var href = anchor.getAttribute('href') || anchor.getAttribute('data-skip');
+		var href = anchor.getAttribute('href');
 		anchor.addEventListener('click', function (e) {
 			e.preventDefault();
-			document.querySelector( this.getAttribute('href') || this.getAttribute('data-skip') ).scrollIntoView({
+			document.querySelector( this.getAttribute('href') ).scrollIntoView({
 				behavior: 'smooth'
 			});
 			window.location.hash = href;
