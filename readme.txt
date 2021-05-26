@@ -38,6 +38,9 @@ Ekiline includes support for Woocommerce.
 
 == Changelog ==
 
+= 1.4.2 - May 26, 2021 =
+* Focus Trapping for Accessibility: Navbar, when using the keyboard (tab + shif, esc || enter, cmd || ctrl), close navigation when focusing on an external element (focus-trap).
+
 = 1.4.1 - April 16, 2021 =
 * Improved "Show site title and tagline" in its markup, customizer controls, and CSS.
 

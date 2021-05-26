@@ -61,6 +61,15 @@ function ekiline_JQueryGroup(){
 		}
 
 		/**
+		 * Navegacion, cerrar al deseleccionar.
+		 */
+		$( '*' ).not( '.navbar *' ).focus( function() {
+			if ( $( '.navbar-collapse.show' ).length ){
+				$('.navbar-collapse').not( '.modal .navbar-collapse' ).collapse('hide');
+			}
+		} );
+
+		/**
 		 * Bootstrap
 		 */
 
