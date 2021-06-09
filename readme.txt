@@ -1,8 +1,8 @@
 === Ekiline ===
 Contributors: urielink
-Requires at least: 4.8
-Tested up to: 5.6
-Requires PHP: 5.6
+Requires at least: 5.0
+Tested up to: 5.7
+Requires PHP: 7.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/license-list.html#GPLv2
 Donate link: https://www.paypal.com/paypalme/urielink
@@ -37,6 +37,9 @@ Ekiline includes support for Infinite Scroll in Jetpack.
 Ekiline includes support for Woocommerce.
 
 == Changelog ==
+
+= 1.4.3 - Jun 8, 2021 =
+* Update check, all ok.
 
 = 1.4.2 - May 26, 2021 =
 * Focus Trapping for Accessibility: Navbar, when using the keyboard (tab + shif, esc || enter, cmd || ctrl), close navigation when focusing on an external element (focus-trap).
