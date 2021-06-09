@@ -52,7 +52,7 @@ function ekiline_view_sidebar_filter( $width_sb_ctrl ) {
 		$opt = get_theme_mod( 'ekiline_disableSbHome' );
 	}
 
-	if ( is_archive() || is_category() || ! is_singular() ) {
+	if ( is_archive() || is_category() ) {
 		$opt = get_theme_mod( 'ekiline_disableSbArchive' );
 	}
 
