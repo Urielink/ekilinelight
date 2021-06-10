@@ -227,11 +227,6 @@ function ekiline_custom_header_style() {
 	$hdr_style .= '#custom_header_module .headline a{color:' . esc_attr( $hdr_lkc ) . ';}';
 	$hdr_style .= '@media only screen and (min-width:960px){#custom_header_module .wp-block-cover{background-image:url("' . ekiline_header_image( 'full' ) . '") !important;}}';
 
-	// Mostrar la descripcion en navbar.
-	if ( ! display_header_text() ) {
-		$hdr_style .= '#primarySiteNavigation .site-title, #primarySiteNavigation .site-description{position:absolute !important;clip:rect(1px, 1px, 1px, 1px);}';
-	}
-
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	echo $hdr_style;
 

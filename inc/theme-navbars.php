@@ -330,7 +330,6 @@ function ekiline_nav_fallback() {
 	<?php
 } // ekiline_nav_fallback
 
-
 /**
  * Agregar a wp_body_open, menu a la pagina, en la parte superior.
  * Add nav at top of page.
@@ -339,3 +338,14 @@ function ekiline_top_navbar() {
 	ekiline_navbar_menu( 'primary' );
 }
 add_action( 'wp_body_open', 'ekiline_top_navbar', 0 );
+
+/**
+ * Mostrar/Ocultar la descripcion del sitio en navbar.
+ * Show/Hide site description from customizer options.
+ */
+function ekiline_display_header_text_by_css() {
+	if ( ! display_header_text() ) {
+		echo '#primarySiteNavigation .site-title, #primarySiteNavigation .site-description{position:absolute !important;clip:rect(1px, 1px, 1px, 1px);}';
+	}
+}
+add_action( 'group_inline_css', 'ekiline_display_header_text_by_css', 7 );
