@@ -194,7 +194,7 @@ function ekiline_meta_social() {
 	global $wp;
 	$meta_social = '';
 	$find_url    = ekiline_find_in_nav( 'twitter.com' );
-	$meta_title  = ( is_single() || ( is_home() && ! is_front_page() ) || ( is_page() && ! is_front_page() ) ) ? single_post_title( '', false ) : get_bloginfo( 'name' );
+	$meta_title  = wp_get_document_title();
 	$meta_desc   = ekiline_meta_description();
 	$meta_imgs   = ekiline_meta_image();
 	$ttr_link    = ekiline_twitter_username( $find_url );

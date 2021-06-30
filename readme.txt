@@ -38,8 +38,8 @@ Ekiline includes support for Woocommerce.
 
 == Changelog ==
 
-= 1.4.4 - Jun 29, 2021 =
-* Update: fix in CSS header styles.
+= 1.4.5 - Jun 29, 2021 =
+* Update: fix CSS header styles. Discard use of wp_title function.
 
 = 1.4.4 - Jun 10, 2021 =
 * Update: show and hide the text description; the display_header_text () function bundled with the ekiline script from the navigation bar.
