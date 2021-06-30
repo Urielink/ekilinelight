@@ -17,7 +17,7 @@
 $ekiline_uniq_id = wp_rand( 1, 99 );
 ?>
 
-<form role="search" method="get" id="searchform<?php echo esc_html( $ekiline_uniq_id ); ?>" class="searchform my-2" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+<form method="get" id="searchform<?php echo esc_html( $ekiline_uniq_id ); ?>" class="searchform my-2" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 	<label class="screen-reader-text" for="search<?php echo esc_html( $ekiline_uniq_id ); ?>">
 		<?php
 			/* translators: %s is replaced by searchquery */
