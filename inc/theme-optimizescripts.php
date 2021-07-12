@@ -42,7 +42,7 @@ function ekiline_print_styles_and_scripts_info() {
 		$ignore_js  = array( 'customize-preview', 'admin-bar', 'wp-mediaelement', 'mediaelement-vimeo', 'wp-playlist', 'customize-selective-refresh', 'customize-preview-widgets', 'customize-preview-nav-menus' );
 		// Mostrar modulo html.
 		$html_action  = '<div class="fixed-bottom" style="position:fixed;bottom:0px;left:0px;right:0px;z-index:100;">';
-		$html_action .= '<a class="btn btn-sm btn-primary show-handlers" data-toggle="collapse" href="#collapseHandlers">' . __( 'Sort Scripts ', 'ekiline' ) . '</a> ';
+		$html_action .= '<a class="btn btn-sm btn-primary show-handlers" data-bs-toggle="collapse" href="#collapseHandlers">' . __( 'Sort Scripts ', 'ekiline' ) . '</a> ';
 		$html_action .= '<div class="collapse" id="collapseHandlers" style="background:#eeeeee;color:#656a6f;padding:10px;">';
 		$html_action .= '<small>' . __( 'Choose and copy handlers in customizer "Ekiline Sort Scripts" option', 'ekiline' ) . '</small><br>';
 		$html_action .= __( 'Styles: ', 'ekiline' ) . '<code>' . ekiline_print_libs( 'css', $ignore_css ) . '</code><br>';
@@ -289,23 +289,6 @@ function ekiline_load_all_csstojs() {
 			ekiline_loadStylesNativo( ekiline_all_css );
 		} );
 	}
-	// Carga de estilos CSS.
-	function ekiline_loadStyles( styles ) {
-		var $ = jQuery.noConflict();
-		var head = $( 'head' );
-		var wpcss = head.find( 'style[id="ekiline-style-inline-css"]' );
-		var cssinline = head.find( 'style:last' );
-		$.each( styles, function( key, value ) {
-			var linkCss = $( '<link/>',{ 'rel':'stylesheet', 'id':value.id, 'href':value.src, 'media':value.media } );
-			if ( wpcss.length ) {
-				wpcss.before( linkCss );
-			} else if ( cssinline.length ) {
-				cssinline.before( linkCss );
-			} else {
-				head.append( linkCss );
-			}
-		} );
-	}
 	// Carga de estilos CSS nativo.
 	function ekiline_loadStylesNativo( styles ){
 		var head = document.querySelector('head');
@@ -451,47 +434,31 @@ function ekiline_load_all_jstojs() {
 			ekiline_loadScriptsOrderedNative( ekiline_all_jss , 0 );
 		} );
 	}
-	// Carga a discrecion.
-	function ekiline_loadScripts(scripts ) {
-		var $ = jQuery.noConflict();
-		$.each( scripts, function( key, value ) {
-			$.getScript( value.src );
+	// Carga a discrecion nativo.
+	function ekiline_loadScriptsNative(scripts){
+		scripts.forEach(function(value, key){
+			var script = document.createElement('script');
+				script.src = value.src;
+				document.body.appendChild(script);
 		} );
 	}
-		// Carga a discrecion nativo.
-		function ekiline_loadScriptsNative(scripts){
-			scripts.forEach(function(value, key){
-				var script = document.createElement('script');
-					script.src = value.src;
-					document.body.appendChild(script);
-			} );
-		}
-	// Carga ordenada.
-	function ekiline_loadScriptsOrdered(scripts,i) {
-		var $ = jQuery.noConflict();
-		if (i < scripts.length ) {
-			$.getScript(scripts[i].src, function () {
+
+	// Carga ordenada nativo 2 funciones.
+	function ekiline_getScriptNative(scriptUrl, callback) {
+		var script = document.createElement('script');
+		script.src = scriptUrl;
+		script.onload = callback;
+		document.body.appendChild(script);
+	}
+
+	function ekiline_loadScriptsOrderedNative(scripts,i) {
+		if (i<scripts.length){
+			ekiline_getScriptNative( scripts[i].src, function () {
 				i++;
-				ekiline_loadScriptsOrdered(scripts,i);
-			} );
+				ekiline_loadScriptsOrderedNative(scripts,i);
+			});
 		}
 	}
-		// Carga ordenada nativo 2 funciones.
-		function ekiline_getScriptNative(scriptUrl, callback) {
-			var script = document.createElement('script');
-			script.src = scriptUrl;
-			script.onload = callback;
-			document.body.appendChild(script);
-		}
-
-		function ekiline_loadScriptsOrderedNative(scripts,i) {
-			if (i<scripts.length){
-				ekiline_getScriptNative( scripts[i].src, function () {
-					i++;
-					ekiline_loadScriptsOrderedNative(scripts,i);
-				});
-			}
-		}
 	</script>
 	<?php
 }

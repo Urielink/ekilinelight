@@ -335,7 +335,7 @@ function ekiline_custom_header_content( $content_type = null ) {
 		if ( $count_array > 5 ) {
 			$categories_list = sprintf(
 				'<div class="dropdown">
-					<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownNavCategories" data-toggle="dropdown">
+					<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownNavCategories" data-bs-toggle="dropdown">
 						' . __( 'Categories:', 'ekiline' ) . '
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownNavCategories">
@@ -359,7 +359,7 @@ function ekiline_custom_header_content( $content_type = null ) {
 		if ( $count_array > 5 ) {
 			$tags_list = sprintf(
 				'<div class="dropdown">
-					<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownNavTags" data-toggle="dropdown">
+					<button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownNavTags" data-bs-toggle="dropdown">
 						' . __( 'Tags:', 'ekiline' ) . '
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownNavTags">

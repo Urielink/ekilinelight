@@ -162,7 +162,7 @@ function ekiline_create_breadcrumb() {
 
 			if ( $count_cat > '1' ) {
 				// Continua breadcrumb. Agregar popover.
-				$addcats = '<a href="#has-categories" data-toggle="popover" data-html="true" data-content="' . esc_html( $getcats ) . '">' . $more_cats . '</a>';
+				$addcats = '<a href="#has-categories" data-bs-toggle="popover" data-bs-html="true" data-bs-content="' . esc_html( $getcats ) . '">' . $more_cats . '</a>';
 			} else {
 				$addcats = $getcats;
 			}

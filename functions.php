@@ -268,12 +268,11 @@ add_action( 'wp_enqueue_scripts', 'ekiline_above_fold_styles', 0 );
  */
 function ekiline_scripts() {
 	// Estilos.
-	wp_enqueue_style( 'bootstrap-4', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '4.5', 'all' );
-	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri(), array(), '4', 'all' );
+	wp_enqueue_style( 'bootstrap-5', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5', 'all' );
+	wp_enqueue_style( 'ekiline-style', get_stylesheet_uri(), array(), '5', 'all' );
 	wp_enqueue_style( 'dashicons' );
 	// Scripts.
-	wp_enqueue_script( 'jquery-core' );
-	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.bundle.min.js', array( 'jquery' ), '4', true );
+	wp_enqueue_script( 'bootstrap-script', get_template_directory_uri() . '/assets/js/bootstrap.bundle.min.js', array( 'jquery' ), '5', true );
 	wp_enqueue_script( 'ekiline-layout', get_template_directory_uri() . '/assets/js/ekiline.js', array( 'jquery' ), '20151226', true );
 	// Comentarios.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
