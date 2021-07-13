@@ -38,8 +38,10 @@ Ekiline includes support for Woocommerce.
 
 == Changelog ==
 
-= 1.5 - Jul 10, 2021 =
-* Update: upgrade to B5
+= 2.0 - Jul 12, 2021 =
+* Update: upgrade to Bootstrap 5.0
+Enhance js scripts and css styles from v4 to the new v5.
+Next update: Customizer color palette for 100% compatibility when working with the new Bootstrap version.
 
 = 1.4.6 - Jul 06, 2021 =
 * Update: fix CSS block editor styles.
